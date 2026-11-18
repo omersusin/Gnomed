@@ -47,10 +47,10 @@ OVERRIDES = {
     "exteraless": {"face": "#ffe9e9", "flat": True, "keep_ground": True, "drop": ["#ffdbdb"], "merge_grad": [["#ff8291", "#ff75a1", "#ff937f", "#ffa865", "#ffbb4d"]],
                    "note": "soft pink glow dropped (no glows in GNOME); the chevron is ONE part with its measured pink->orange gradient (no bands)"},
     "bitchord": {"merge_grad": [["#edaeb8", "#f8e3e6"]], "note": "the waves are one white->pink gradient (measured), not two flat bands"},
-    "firefox_beta": {"merge_grad": [["#ffc041", "#ff692d", "#c6124b"], ["#962dcc", "#5f44b8"]],
+    "firefox_beta": {"merge_grad": [["#ffc041", "#ff692d", "#c6124b"], ["#962dcc", "#5f44b8"]], "holes_inlay": ["#2cecd3"],
                      "note": "fox flame = one yellow->red gradient, globe = one purple gradient (check_icon: stripes + low trace IoU); BETA badge kept"},
-    "firefox_nightly": {"merge_grad": [["#28baf6", "#25dfdf", "#4af2bf", "#5d84fe"]],
-                        "note": "the fox is one part with its measured cyan->blue gradient (no bands); globe keeps its two tones"},
+    "firefox_nightly": {"merge_grad": [["#28baf6", "#5d84fe", "#7a4ff4"]],
+                        "note": "the fox body is one cyan->violet gradient (no hard edge to the purple belly); tail and globe keep their tones"},
     "reddit": {"symbol": "margin", "note": "Symbol: white Snoo with an orange margin (Reddit's own logo use), not an orange Snoo"},
     "pentas": {"keep_ground": True, "note": "peach tile kept"},
     "stride": {"merge_grad": [["#83eca0", "#28c79b", "#1f916b"]], "note": "runner is one light-green->teal gradient; the dark track stays separate"},
@@ -126,6 +126,7 @@ class App:
         self.P, self.I = load(slug)
         self.o = OVERRIDES.get(slug, {})
         rep = self.o.get("regions", {})
+        self.I0 = self.I
         self.regs = [(self.P[r["name"]], snap(rep.get(r["fill"], r["fill"]))) for r in self.I["regions"]]
         # "split": [(fill, (x0, y0, x1, y1), new_fill)] - subpaths of a region that lie inside
         # the box become their own region (thin parts k-means folded into a bigger colour)
@@ -172,6 +173,10 @@ class App:
                     continue
                 if self._merge(gi, [r["fill"]], min_de=10.0):
                     gi += 1
+        # "holes_inlay": [fill]: the holes of these regions (letters cut out of a badge) are
+        # drawn on top in the tile colour - otherwise the region's own lift side fills them
+        names = {r["name"] for r in self.I0["regions"] if r["fill"] in self.o.get("holes_inlay", [])}
+        self.inlay_ds = {d for (d, _), r in zip(self.regs, self.I["regions"]) if r.get("name") in names}
         if self.o.get("drop"):
             self.regs = [(d, f) for (d, f), r in zip(self.regs, self.I["regions"]) if r["fill"] not in self.o["drop"]]
         if self.o.get("only_white"):
@@ -295,6 +300,20 @@ class App:
 
     def raised(self, ic, items, lift=2):
         fam.raised(ic, [(d, f, side_of(b)) for d, f, b in items], lift=lift)
+        self.inlays(ic, items)
+
+    def inlays(self, ic, items):
+        if not self.inlay_ds:
+            return
+        from build_weak import poly_of, d_of
+        from shapely.geometry import Polygon
+        from shapely.ops import unary_union
+        for i, (d, _f, _b) in enumerate(items):
+            if i < len(self.regs) and self.regs[i][0] in self.inlay_ds:
+                g = poly_of(d)
+                holes = [Polygon(r) for p in getattr(g, "geoms", [g]) for r in p.interiors]
+                if holes:
+                    ic.path(d_of(unary_union(holes)), snap(self.ground), layer_id=f"inlay-{i}", fill_rule="evenodd")
 
     # ---- styles
     def faithful(self):
@@ -391,6 +410,7 @@ class App:
                         layer_id=f"body-{i}-chin", fill_rule="evenodd")
             for i, (d, f, b) in enumerate(items):
                 ic.path(d, f, layer_id=f"body-{i}-face", fill_rule="evenodd")
+        self.inlays(ic, items)
         if (self.light or self.o.get("keep_ground")) and "holes" in self.P:
             ref = self.P["silhouette"]
             hd, _ = place([self.P["holes"], ref], self.box("symbol"), ref=[ref])
