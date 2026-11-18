@@ -31,5 +31,5 @@
     <item component="ComponentInfo{com.google.android.apps.photos/com.google.android.apps.photos.home.HomeActivity}" drawable="foto_raflar_alt3" />
     <item component="ComponentInfo{org.fossify.clock/org.fossify.clock.activities.SplashActivity.Green}" drawable="saat_alt3" />
     <item component="ComponentInfo{com.android.settings/com.android.settings.Settings}" drawable="ayarlar_alt3" />
-    <item component="ComponentInfo{com.openai.chatgpt/com.openai.chatgpt.MainActivity}" drawable="chatgpt" />
+    <item component="ComponentInfo{com.openai.chatgpt/com.openai.chatgpt.MainActivity}" drawable="chatgpt_alt3" />
 </resources>

@@ -59,7 +59,8 @@
     },
     "chatgpt": {
       "disc": "chatgpt_alt1",
-      "rimmed": "chatgpt_alt2"
+      "rimmed": "chatgpt_alt2",
+      "symbol": "chatgpt_alt3"
     }
   }
 }

@@ -18,7 +18,7 @@
 
 ## Review
 - lint: no FAIL · boards: review.png, legibility.png, work/_group1/launcher-<style>.png
-- Known weaknesses: NO Symbol: a colourless knot alone vanishes on one wallpaper type -> Symbol style falls back to Faithful; 32 px ssim 0.72-0.78 (knot strands thin) though still recognisable; a colour sweep (recolor.py) can add coloured variants if you want
+- Known weaknesses: fixed 2026-11-18 - the first build inverted the logo (only the black lines were used, shown white on dark). Now: white knot object (silhouette IoU 0.998) with the dark lines inlaid; side colour = the dark outline, so no light layer peeks out. Symbol added. 32 px: strands thin but recognisable.
 
 ## Android
 - drawable: chatgpt (+ _alt1.. for the other styles), ComponentInfo from the phone's IconRequest appfilter.xml (not adb/APK-verified)

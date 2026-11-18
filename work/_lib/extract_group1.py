@@ -194,6 +194,8 @@ def ayarlar(a, s, P, I):
 def chatgpt(a, s, P, I):
     knot = (luma(a) < 0.5) & gt.opaque(a)
     part(P, "knot", knot, s, opttolerance=0.25)
+    # the logo is WHITE strands outlined in black: the silhouette (outline + strands) is the object
+    part(P, "silhouette", gt.fill_holes(gt.components(knot)[0]), s)
     I["bbox"] = [round(v, 2) for v in gt.bbox(knot, s)]
 
 

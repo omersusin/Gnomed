@@ -69,4 +69,5 @@
     <item drawable="chatgpt" name="ChatGPT" />
     <item drawable="chatgpt_alt1" name="ChatGPT (Disc)" />
     <item drawable="chatgpt_alt2" name="ChatGPT (Rimmed)" />
+    <item drawable="chatgpt_alt3" name="ChatGPT (Symbol)" />
 </resources>

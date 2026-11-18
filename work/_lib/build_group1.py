@@ -373,29 +373,46 @@ def ayarlar():
 # ------------------------------------------------------------------ ChatGPT
 @build
 def chatgpt():
+    """The source is a WHITE knot whose strands are outlined in black. Every style keeps
+    that: a white knot object (silhouette, own chin/lift) with the dark lines inlaid flat."""
     P, I = fam.geo("chatgpt")
-    k = [P["knot"]]
-    INK = "#241f31"
+    INK = "#241f31"          # pure black -> Dark4
+
+    def knot(ic, box, lift=2, side="#3d3846", slab=False):
+        # the knot's outer edge is the dark outline, so its side is that dark (a light grey
+        # side would peek out under the outline like a stray layer)
+        ds, _ = place([P["silhouette"], P["knot"]], box, ref=[P["silhouette"]])
+        sil, lines = ds
+        with ic.group("knot"):
+            if slab:
+                x0, _, x1, _ = gk.bbox_d(sil)
+                c = ic.chin_gradient(INK, x0, x1, (x1 - x0) * 0.4,
+                                     colors={"edge": INK, "base": "#3d3846", "highlight": "#5e5c64"})
+                ic.path(gk.translate_d(sil, 0, lift), c, layer_id="knot-chin", fill_rule="evenodd")
+            elif lift:
+                ic.path(gk.translate_d(sil, 0, lift), side, layer_id="knot-side", fill_rule="evenodd")
+            ic.path(sil, "#ffffff", layer_id="knot-face", fill_rule="evenodd")
+            ic.path(lines, INK, layer_id="knot-lines", fill_rule="evenodd")
+
     out = {}
     ic = gk.Icon("ChatGPT - Faithful", fam.note("chatgpt"))
     fam.plate(ic, fam.PAPER)
-    ds, _ = place(k, box_c(64, 62, 88))
-    ic.glyph(ds[0], fill=INK, lift=1.5, engrave=True, face_hint=fam.PAPER, fill_rule="evenodd", layer="knot")
+    knot(ic, box_c(64, 61, 84))
     out["faithful"] = ic
 
     ic = gk.Icon("ChatGPT - Sound Disc", fam.note("chatgpt"))
     fam.disc(ic, INK, top_light=0.5)
-    ds, _ = place(k, box_c(64, 63, 86))
-    raised(ic, [(ds[0], "#ffffff", "#9a9996")], lift=1.5)
+    knot(ic, box_c(64, 62, 84))
     out["disc"] = ic
 
     ic = gk.Icon("ChatGPT - Rimmed", fam.note("chatgpt"))
     fam.rimmed(ic, INK)
-    ds, _ = place(k, box_c(64, 63, 80))
-    raised(ic, [(ds[0], "#ffffff", "#9a9996")], lift=1.5)
+    knot(ic, box_c(64, 62, 76))
     out["rimmed"] = ic
-    # no Symbol: a colourless knot alone vanishes on dark (ink) or light (white) wallpapers;
-    # the Symbol style falls back to Faithful for this app (see pack/styles.json).
+
+    ic = gk.Icon("ChatGPT - Free Symbol", fam.note("chatgpt"))
+    knot(ic, box_c(64, 61, 112), lift=3, slab=True)
+    out["symbol"] = ic
     return out
 
 
