@@ -12,6 +12,9 @@
     <!-- If you are using OneSignal then you need to uncomment this line -->
     <!--<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />-->
 
+    <!-- Icon style switch: Gnomed installs the chosen style's APK as an update of itself -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
     <supports-screens
         android:smallScreens="true"
         android:normalScreens="true"
@@ -229,6 +232,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
         </provider>
+
+        <receiver
+            android:name=".style.StyleInstallReceiver"
+            android:exported="false" />
 
     </application>
 

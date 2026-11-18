@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gnomed_style_title">Simge stili</string>
+    <string-array name="gnomed_style_labels">
+        <item>Faithful — kare plaka</item>
+        <item>Sound Disc — yuvarlak disk</item>
+        <item>Rimmed — açık çerçeve</item>
+        <item>Symbol — plakasız</item>
+    </string-array>
+    <string name="gnomed_style_keep">Mevcut kalsın</string>
+    <string name="gnomed_style_switch">Değiştir</string>
+    <string name="gnomed_style_confirm">Gnomed paketin %1$s sürümünü indirip kendini güncelleyecek. Güncellemeden sonra launcher simgeleri yeniden yükler. Bu stilde simgesi olmayan uygulamalar Faithful simgesini korur.</string>
+    <string name="gnomed_style_downloading">Stil indiriliyor…</string>
+    <string name="gnomed_style_failed">Stil değiştirilemedi: %1$s</string>
+    <string name="gnomed_style_permission_title">Gnomed güncellemelerine izin ver</string>
+    <string name="gnomed_style_permission">Stil değiştirmek için Gnomed kendi güncellemesini yükler. Gnomed için \"Bilinmeyen uygulamaları yükle\" iznini açın, sonra stili yeniden seçin.</string>
+    <string name="gnomed_style_open_settings">Ayarları aç</string>
+    <string name="gnomed_style_signature">güncelleme farklı bir anahtarla imzalanmış. Stil APK\'sını bir kez GitHub sürümünden yükleyin.</string>
+</resources>

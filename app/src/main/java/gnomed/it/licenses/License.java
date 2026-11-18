@@ -1,4 +1,4 @@
-package com.candybar.sample.licenses;
+package gnomed.it.licenses;
 
 import candybar.lib.items.InAppBilling;
 

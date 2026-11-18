@@ -1,0 +1,5 @@
+{
+  "_comment": "Primary drawable (as mapped in app/src/main appfilter = Faithful style) -> drawable to use in each other style. Missing style = the app keeps its Faithful icon in that style. Edited by hand / by the icon workflow; tools/gen_styles.py turns it into per-style appfilters.",
+  "styles": ["faithful", "disc", "rimmed", "symbol"],
+  "icons": {}
+}

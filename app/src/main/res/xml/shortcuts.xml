@@ -15,8 +15,8 @@
 
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.candybar.sample"
-            android:targetClass="com.candybar.sample.activities.MainActivity">
+            android:targetPackage="gnomed.it"
+            android:targetClass="gnomed.it.activities.MainActivity">
 
             <extra
                 android:name="position"
@@ -40,8 +40,8 @@
 
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.candybar.sample"
-            android:targetClass="com.candybar.sample.activities.MainActivity">
+            android:targetPackage="gnomed.it"
+            android:targetClass="gnomed.it.activities.MainActivity">
 
             <extra
                 android:name="position"
@@ -64,8 +64,8 @@
 
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.candybar.sample"
-            android:targetClass="com.candybar.sample.activities.MainActivity">
+            android:targetPackage="gnomed.it"
+            android:targetClass="gnomed.it.activities.MainActivity">
 
             <extra
                 android:name="position"
@@ -74,5 +74,24 @@
         </intent>
 
         <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <!-- Shortcut for the icon style picker (Gnomed) -->
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_apply"
+        android:shortcutId="gnomed_style"
+        android:shortcutShortLabel="@string/gnomed_style_title">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="gnomed.it"
+            android:targetClass="gnomed.it.activities.MainActivity">
+
+            <extra
+                android:name="gnomed_open"
+                android:value="style" />
+
+        </intent>
     </shortcut>
 </shortcuts>

@@ -1,4 +1,4 @@
-package com.candybar.sample.services;
+package gnomed.it.services;
 
 import candybar.lib.services.CandyBarWidgetService;
 

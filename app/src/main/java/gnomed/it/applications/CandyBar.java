@@ -1,11 +1,11 @@
-package com.candybar.sample.applications;
+package gnomed.it.applications;
 
 import androidx.annotation.NonNull;
 
 // TODO: Remove `//` below to enable OneSignal
 //import com.onesignal.OneSignal;
 
-import com.candybar.sample.R;
+import gnomed.it.R;
 
 import candybar.lib.applications.CandyBarApplication;
 
