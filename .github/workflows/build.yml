@@ -66,6 +66,17 @@ jobs:
           done
           ls -l dist
 
+      - name: Startup-crash guard (R8 kept WorkDatabase_Impl constructor)
+        run: |
+          AA="$ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer"
+          for f in dist/*.apk; do
+            if "$AA" dex packages --defined-only "$f" | grep -E "androidx\.work\.impl\.WorkDatabase_Impl.*<init>\(\)"; then
+              echo "OK $f"
+            else
+              echo "::error::$f: WorkDatabase_Impl.<init>() missing - the app would crash at startup"; exit 1
+            fi
+          done
+
       - name: Show signing certificate (SHA-256)
         run: |
           AS=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -n1)apksigner
