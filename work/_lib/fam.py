@@ -102,9 +102,15 @@ def offset_d(d, dist, samples=900):
     for sp in parse_path(d).continuous_subpaths():
         pts = [sp.point(i / samples) for i in range(samples)]
         polys.append(Polygon([(p.real, p.imag) for p in pts]).buffer(0))
-    poly = max(polys, key=lambda p: p.area).buffer(dist, join_style=1, resolution=24)
-    coords = list(poly.exterior.coords)
-    return "M" + "L".join(f"{x:.2f} {y:.2f}" for x, y in coords[:-1]) + "Z"
+    from shapely.ops import unary_union
+    # union of every piece (letters, brackets ...), not just the largest one
+    poly = unary_union([p for p in polys if p.area > 0.5]).buffer(dist, join_style=1, resolution=24)
+    geoms = getattr(poly, "geoms", [poly])
+    out = []
+    for g in geoms:
+        coords = list(g.exterior.coords)
+        out.append("M" + "L".join(f"{x:.2f} {y:.2f}" for x, y in coords[:-1]) + "Z")
+    return "".join(out)
 
 
 def save(ic, slug, alt):

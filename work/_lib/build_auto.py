@@ -36,6 +36,24 @@ OVERRIDES = {
                         "note": "wordmark only (tile waves are photographic shading); no Symbol: a white wordmark alone vanishes on light wallpapers"},
     # game posters (archetype H): no clean vector identity element in a 192 px poster
     "clash_royale": {"skip": ["symbol"], "note": "WEAK: posterised trace of the game poster, not a real GNOME conversion; needs a hand-drawn emblem (crown/king) from a better source"},
+    # blurry 192 px source: the pale green region is the blur halo + the semi-transparent mic
+    "bcr": {"note": "blurry source: halo around the handset dropped, the separate pale microphone kept (semi-transparent white in the source), traced with 1.6 u smoothing"},
+    "databackup": {"keep_ground": True, "note": "peach tile kept (it is the app's colour, not a neutral canvas)"},
+    "enpara": {"light": True, "note": "white tile; the colour bars are part of the mark"},
+    "exteraless": {"light": True, "drop": ["#ffdbdb"], "note": "soft pink glow dropped (no glows in GNOME); the gradient chevron is the mark"},
+    "pentas": {"keep_ground": True, "note": "peach tile kept"},
+    "pix_material_you_light_dark": {"symbol": "margin", "note": "dark mark on a dark slate tile: Symbol keeps a slate margin"},
+    "hesap_makinesi": {"skip": ["symbol"], "note": "two-tone tile + long shadow are tangled with the mark; no clean Symbol"},
+    "konabess": {"note": "WEAK: line drawing with small text, unreadable below 64 px (source limitation)"},
+    "plush_iconpack": {"keep_ground": True, "face": "#347ef3", "drop": ["#145be0", "#347ef3", "#509afc"],
+                       "note": "the blue squircle IS the app tile -> becomes the plate/disc colour (no squircle inside a plate); swirl is the mark"},
+    "scene": {"drop": ["#4b84db"], "note": "dark-blue fragments (stray edge line, strip under the robot) dropped"},
+    "recon": {"symbol": "margin", "note": "white brackets: Symbol keeps a dark tile margin"},
+    "shizuku": {"only_white": True, "note": "the white head is the mark; the lighter hexagon is tile decoration"},
+    "trendyolmilla": {"only_white": True, "skip": ["symbol"], "note": "white wordmark only (background blobs are tile decoration); no Symbol"},
+    "vortex": {"flat": True, "face": "#0d0e0d", "drop": ["#0d0e0d"], "note": "flat black tile (the spiral touching the edge skewed the gradient fit)"},
+    "wupp": {"flat": True, "face": "#131c23", "drop": ["#131c23"], "note": "flat dark tile behind the green bubble"},
+    "walpy": {"note": "blurry signature: only its core traced (threshold 0.5, 1.2 u smoothing)"},
     "survivor_io": {"skip": ["symbol"], "note": "WEAK: posterised trace of the game poster, not a real GNOME conversion"},
 }
 
@@ -87,11 +105,21 @@ class App:
         G = self.I["ground"]
         self.gk = G["kind"]
         self.ground = snap(self.o.get("face", G.get("color", "#ffffff")))
+        if self.o.get("flat"):
+            self.gk = "flat"
         L, C = lch(self.ground) if self.gk != "none" else (1, 0)
         self.light = self.gk == "none" or (L > 0.9 and C < 0.05)
         self.dark_neutral = (not self.light) and is_dark_neutral(self.ground) and self.gk != "gradient"
+        if self.o.get("flat"):
+            self.gk = "flat"
+        if self.o.get("light"):
+            self.light, self.gk = True, "flat"
+        if self.o.get("keep_ground"):
+            self.light = False
         if self.light:
             self.ground = "#ffffff"
+        if self.o.get("drop"):
+            self.regs = [(d, f) for (d, f), r in zip(self.regs, self.I["regions"]) if r["fill"] not in self.o["drop"]]
         if self.o.get("only_white"):
             self.regs = [(d, f) for d, f in self.regs if is_whiteish(f)]
         self.all_neutral = all(is_whiteish(f) or is_dark_neutral(f) for _, f in self.regs)
@@ -115,7 +143,7 @@ class App:
 
     def marks(self, box):
         ds = [d for d, _ in self.regs]
-        ref = ds if self.o.get("only_white") else [self.P["silhouette"]]
+        ref = ds if (self.o.get("only_white") or self.o.get("drop")) else [self.P["silhouette"]]
         out, s = place(ds + [self.P["silhouette"]], box, ref=ref)
         return [(d, f) for d, (_, f) in zip(out[:-1], self.regs)], out[-1], s
 
@@ -228,10 +256,10 @@ class App:
                         layer_id=f"body-{i}-chin", fill_rule="evenodd")
             for i, (d, f) in enumerate(items):
                 ic.path(d, f, layer_id=f"body-{i}-face", fill_rule="evenodd")
-        if self.light and "holes" in self.P:
+        if (self.light or self.o.get("keep_ground")) and "holes" in self.P:
             ref = self.P["silhouette"]
             hd, _ = place([self.P["holes"], ref], self.box("symbol"), ref=[ref])
-            ic.path(hd[0], "#ffffff", layer_id="counters", fill_rule="evenodd")
+            ic.path(hd[0], "#ffffff" if self.light else self.ground, layer_id="counters", fill_rule="evenodd")
         return ic
 
     def build(self):

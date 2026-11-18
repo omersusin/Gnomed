@@ -28,6 +28,13 @@ import gtrace as gt  # noqa: E402
 WORK = Path(__file__).resolve().parent.parent
 
 
+# blurry sources need stronger smoothing before tracing (128-units)
+SMOOTH = {"bcr": 1.6}
+HALO = {"bcr"}
+THRESH = {"walpy": 0.85}
+SMOOTH["walpy"] = 0.8
+
+
 def hexc(rgb):
     return "#%02x%02x%02x" % tuple(int(round(min(max(v, 0), 1) * 255)) for v in rgb)
 
@@ -132,7 +139,7 @@ def analyse(slug):
         mark = op
     else:
         resid = np.linalg.norm(a[..., :3] - model, axis=-1)
-        mark = op & (resid > 0.16)
+        mark = op & (resid > THRESH.get(slug, 0.16))
     # drop specks (< 0.05 % of the canvas) and the thin antialias rim at the tile edge
     lab, n = ndimage.label(mark, structure=np.ones((3, 3)))
     if n:
@@ -154,16 +161,36 @@ def analyse(slug):
     regs, _ = regions(a, mark)
     parts, info = {}, {"ground": g}
     plist = []
+    if slug in HALO:
+        # blurry source: the pale region is mostly the halo around the white mark; keep only
+        # its pieces that stand apart from the white core (e.g. BCR's microphone)
+        white = [m for m, c in regs if c.lower() in ("#ffffff", "#fefefe", "#fdfdfd")]
+        if white:
+            core = ndimage.binary_dilation(white[0], iterations=24)
+            new = []
+            for m, c in regs:
+                if m is white[0]:
+                    new.append((m, c))
+                    continue
+                lab3, n3 = ndimage.label(m, structure=np.ones((3, 3)))
+                keep = np.zeros_like(m)
+                for j in range(1, n3 + 1):
+                    comp = lab3 == j
+                    if (comp & core).sum() < 0.3 * comp.sum() and comp.sum() > 0.0008 * m.size:
+                        keep |= comp
+                if keep.any():
+                    new.append((keep, c))
+            regs = new
     for i, (m, col) in enumerate(regs):
         m2 = ndimage.binary_dilation(m, iterations=3)       # overlap seams between regions
-        d = gt.trace_mask(m2, s)
+        d = gt.trace_mask(m2, s, smooth_u=SMOOTH.get(slug, 0.45))
         if not d:
             continue
         name = f"r{i}"
         parts[name] = {"d": d, "iou": round(float(gt.iou_masks(gt.render_mask(d, m.shape[0]), m2)), 4)}
         plist.append({"name": name, "fill": col, "area": round(float(m.mean()), 4)})
     sil = ndimage.binary_fill_holes(mark)
-    parts["silhouette"] = {"d": gt.trace_mask(sil, s), "iou": 1.0}
+    parts["silhouette"] = {"d": gt.trace_mask(sil, s, smooth_u=SMOOTH.get(slug, 0.45)), "iou": 1.0}
     holes = sil & ~mark
     holes = ndimage.binary_opening(holes, iterations=2)
     if holes.sum() > 0.001 * holes.size:

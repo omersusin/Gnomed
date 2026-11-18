@@ -2,7 +2,7 @@ import sys, io, cairosvg
 from pathlib import Path
 from PIL import Image, ImageDraw
 work=Path(sys.argv[1]); out=sys.argv[2]; slugs=sys.argv[3].split(','); alts=sys.argv[4].split(',') if len(sys.argv)>4 else ['faithful','disc','rimmed','symbol']
-S=150; cols=1+len(alts)
+S=int(__import__("os").environ.get("GS","150")); cols=1+len(alts)
 W=Image.new('RGBA',(cols*S*2,len(slugs)*(S+14)),(255,255,255,255)); d=ImageDraw.Draw(W)
 for r,s in enumerate(slugs):
     y=r*(S+14)
