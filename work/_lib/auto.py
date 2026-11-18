@@ -31,7 +31,7 @@ WORK = Path(__file__).resolve().parent.parent
 # blurry sources need stronger smoothing before tracing (128-units)
 SMOOTH = {"bcr": 1.6}
 HALO = {"bcr"}
-THRESH = {"walpy": 0.85}
+THRESH = {"walpy": 0.85, "sd_maid_se": 0.07}   # sd_maid_se: dark-grey apron only dE~8 from the tile
 SMOOTH["walpy"] = 0.8
 
 
