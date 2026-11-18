@@ -106,4 +106,5 @@
     <item component="ComponentInfo{com.feresr.walpy/com.feresr.walpy.ui.MainActivity}" drawable="walpy" />
     <item component="ComponentInfo{gnomed.it/gnomed.it.activities.MainActivity}" drawable="gnomed" />
     <item component="ComponentInfo{co.aospa.dolby.xiaomi/co.aospa.dolby.xiaomi.DolbySettingsActivity}" drawable="dolby_atmos" />
+    <item component="ComponentInfo{com.duolingo/com.duolingo.app.LoginActivity}" drawable="duolingo" />
 </resources>
