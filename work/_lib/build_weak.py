@@ -185,6 +185,17 @@ def shizuku():
         d = clip(tile_to(hd, x0, y0, size), kind)
         ic.path(d, "#eef0fa", layer_id="head")
         out[st] = ic
+    # Symbol: the source's own decorative hexagon becomes the badge; the head peeks into it
+    import math
+    hexa = Polygon([(64 + 58 * math.cos(math.radians(60 * k)), 62 + 58 * math.sin(math.radians(60 * k))) for k in range(6)]).buffer(-4).buffer(4)
+    ic = gk.Icon("Shizuku - Free Symbol", note("shizuku", "hexagon badge with the head peeking in"))
+    hd_ = d_of(hexa)
+    x0, _, x1, _ = gk.bbox_d(hd_)
+    ic.path(gk.translate_d(hd_, 0, 4), ic.chin_gradient(BLUE1, x0, x1, 20), layer_id="hex-chin")
+    ic.path(hd_, ic.linear([(0, "#8e98d6"), (1, BLUE1)], 20, 110, 108, 14), layer_id="hex-face")
+    head = tile_to(hd, 6, 4, 116)
+    ic.path(d_of(poly_of(head).intersection(hexa)), "#eef0fa", layer_id="head")
+    out["symbol"] = ic
     return out
 
 
@@ -197,7 +208,8 @@ def pix_material_you_light_dark():
     a, s = gt.load(WORK / "pix_material_you_light_dark")
     ink = (lum(a) < 0.07) & gt.opaque(a)
     md = trace(gt.components(ink)[0] | ink, s)
-    SLATE, LINE, EDGE = "#243240", "#0b1016", "#56687a"
+    # free adaptation: the lines turn light (Material-You-like pale blue) on the slate for contrast
+    SLATE, LINE, EDGE = "#243240", "#b9c8e6", "#16202a"
     out = {}
 
     def mark(ic, box):
@@ -313,19 +325,33 @@ def konabess():
         ds, _ = place([bg, ring, slash, chip, text], box, ref=[bg])
         if slab_:
             x0, _, x1, _ = gk.bbox_d(ds[0])
-            c = ic.chin_gradient(INK, x0, x1, (x1 - x0) * 0.45, colors={"edge": INK, "base": "#3d3846", "highlight": "#5e5c64"})
+            c = ic.chin_gradient("#c0bfbc", x0, x1, (x1 - x0) * 0.45, colors={"edge": "#9a9996", "base": "#c0bfbc", "highlight": "#deddda"})
             ic.path(gk.translate_d(ds[0], 0, 3), c, layer_id="emblem-chin")
         ic.path(ds[0], "#ffffff", layer_id="emblem-face")
-        ic.path(ds[3], "#5e5c64", layer_id="chip", fill_rule="evenodd")
-        ic.path(ds[4], "#5e5c64", layer_id="chip-text", fill_rule="evenodd")
-        ic.path(ds[1], INK, layer_id="ring", fill_rule="evenodd")
-        ic.path(ds[2], INK, layer_id="slash")
+        # free adaptation: a GNOME chip (dark body, light pins) under a red prohibition sign
+        x0c, y0c, x1c, y1c = gk.bbox_d(ds[3])
+        cw = x1c - x0c
+        pins = []
+        for k in range(4):
+            f = 0.2 + 0.2 * k
+            for (px, py, w_, h_) in ((x0c + cw * f - cw * 0.04, y0c - cw * 0.07, cw * 0.08, cw * 0.09),
+                                     (x0c + cw * f - cw * 0.04, y1c - cw * 0.02, cw * 0.08, cw * 0.09),
+                                     (x0c - cw * 0.07, y0c + cw * f - cw * 0.04, cw * 0.09, cw * 0.08),
+                                     (x1c - cw * 0.02, y0c + cw * f - cw * 0.04, cw * 0.09, cw * 0.08)):
+                pins.append(sbox(px, py, px + w_, py + h_))
+        ic.path(d_of(unary_union(pins)), "#c0bfbc", layer_id="pins")
+        body = gk.rrect_d(x0c, y0c, cw, y1c - y0c, cw * 0.08)
+        ic.path(gk.translate_d(body, 0, 1.5), "#241f31", layer_id="chip-side")
+        ic.path(body, "#3d3846", layer_id="chip")
+        ic.path(ds[4], "#deddda", layer_id="chip-text", fill_rule="evenodd")
+        ic.path(ds[1], "#e01b24", layer_id="ring", fill_rule="evenodd")
+        ic.path(ds[2], "#e01b24", layer_id="slash")
 
     ic = gk.Icon("KonaBess - Faithful", note("konabess", "ring/slash/chip measured; scribble dropped")); fam.plate(ic, fam.PAPER)
     put(ic, box_c(64, 62, 84)); out["faithful"] = ic
     ic = gk.Icon("KonaBess - Sound Disc", note("konabess", "the white disc is the source's own"));
     ds, _ = place([bg, ring, slash, chip, text], box_c(64, 63, 118), ref=[bg])
-    c = ic.chin_gradient(INK, 5, 123, 53, colors={"edge": INK, "base": "#3d3846", "highlight": "#5e5c64"})
+    c = ic.chin_gradient("#c0bfbc", 5, 123, 53, colors={"edge": "#9a9996", "base": "#c0bfbc", "highlight": "#deddda"})
     ic.path(gk.circle_d(64, 65, 59), c, layer_id="disc-chin")
     put(ic, box_c(64, 63, 118)); out["disc"] = ic
     ic = gk.Icon("KonaBess - Rimmed", note("konabess", "emblem in the rim")); ic.rimmed_disc(inner="#ffffff", rim_face="#deddda", rim_chin="#c0bfbc")
@@ -552,42 +578,42 @@ def clash_royale():
 # ------------------------------------------------------------------ Survivor.io
 @build
 def survivor_io():
-    """Archetype H: the poster is reduced to its hero's head (witch hat, ears, face) - the
-    head region's colour regions traced flat (5 colours) on the measured purple, cut by the
-    face shape like an avatar. Dropped: coins, pumpkin, publisher badge. No Symbol."""
-    import auto
-    a, s = gt.load(WORK / "survivor_io")
-    H = a.shape[0]
-    Y, X = np.mgrid[0:H, 0:H] * s
-    g, model = auto.ground_model(a)
-    resid = np.linalg.norm(a[..., :3] - model, axis=-1)
-    crop = (X > 22) & (X < 106) & (Y < 82)
-    m = gt.opaque(a) & (resid > 0.20) & crop
-    m = gt.components(ndimage.binary_closing(m, iterations=2))[0]
-    regs, _ = auto.regions(a, m, max_k=5, merge_de=16)
-    parts = [(trace(ndimage.binary_dilation(mm, iterations=3), s), auto.hexc(np.median(a[mm][:, :3], 0)) if False else c)
-             for mm, c in regs]
-    P1, P2 = "#521874", "#2e0a4a"
+    """Free GNOME adaptation (user: 'does not have to match the game'): the hero's witch
+    hat + gold coins from the poster, drawn as GNOME objects. Colours measured from the
+    source: hat #4a3954, band #a838ac, gold #ffbd1f, background purples #521874 / #2e0a4a."""
+    HAT, BAND, GOLD, P1, P2 = "#4a3954", "#a838ac", "#ffbd1f", "#6a1f8f", "#2e0a4a"
+    cone = poly_of("M36 84C46 62 56 42 68 26C74 17 86 15 98 26C89 26 83 31 81 40C82 58 87 72 92 84Z")
+    brim = Point(64, 86).buffer(1, resolution=48)
+    from shapely import affinity
+    brim = affinity.scale(brim, 47, 12)
+    band = cone.intersection(sbox(0, 70, 128, 82))
+    buckle = sbox(58, 70.5, 70, 81.5).buffer(1.2).difference(sbox(61.5, 73.5, 66.5, 78.5))
+    coin = lambda cx, cy, r: affinity.scale(Point(cx, cy).buffer(1, resolution=40), r, r * 0.42)  # noqa: E731
+    coins = [coin(92, 108, 15), coin(86, 101, 15), coin(98, 95, 13)]
+    HATS = [(d_of(brim), shade(HAT, 0.04)), (d_of(cone), HAT), (d_of(band), BAND), (d_of(buckle), GOLD)]
 
-    def snapc(c):
-        return INK if fam.gk.hex_to_oklab(c)[0] < 0.2 else c
+    def draw(ic, s_, dx, dy, depth=2):
+        m = lambda d: gk.xform_d(d, s_, dx, dy, about=(64, 64))  # noqa: E731
+        with ic.group("coins"):
+            for k, c in enumerate(coins):
+                d = m(d_of(c))
+                ic.path(gk.translate_d(d, 0, 2.5 * s_), shade(GOLD, -0.2), layer_id=f"coin{k}-edge")
+                ic.path(d, GOLD, layer_id=f"coin{k}-face")
+                ic.path(m(d_of(affinity.scale(c, 0.62, 0.62))), shade(GOLD, -0.08), layer_id=f"coin{k}-inner")
+        with ic.group("hat"):
+            ic.path(gk.translate_d(m(d_of(unary_union([cone, brim]))), 0, depth), shade(HAT, -0.06), layer_id="hat-side")
+            for k, (d, c) in enumerate(HATS):
+                ic.path(m(d), c, layer_id=f"hat{k}", fill_rule="evenodd")
 
     out = {}
-    for st, title, kind, (x0, y0, size) in (("faithful", "Faithful", "plate", (12 - 6, 12, 116)),
-                                            ("disc", "Sound Disc", "disc", (0, 6, 128)),
-                                            ("rimmed", "Rimmed", "rimmed", (8, 12, 112))):
-        ic = gk.Icon(f"Survivor.io - {title}", note("survivor_io", "hero head emblem"))
-        if kind == "plate":
-            fam.plate(ic, P1, ic.linear([(0, P2), (1, P1)], 0, 12, 0, 112), P1)
-        elif kind == "disc":
-            fam.disc(ic, P1, ic.linear([(0, P2), (1, P1)], 0, 4, 0, 122), P1, top_light=0)
-        else:
-            ic.rimmed_disc(inner=P1, inner_gradient=ic.linear([(0, P2), (1, P1)], 0, 10, 0, 117))
-        sc = size / 84.0
-        for i, (d, c) in enumerate(parts):
-            dd = gk.xform_d(d, sc, x0 - 22 * sc, y0, about=(0, 0))
-            ic.path(clip(dd, kind), snapc(c), layer_id=f"head{i}", fill_rule="evenodd")
-        out[st] = ic
+    ic = gk.Icon("Survivor.io - Faithful", note("survivor_io", "witch hat + coins")); fam.plate(ic, P1, ic.linear([(0, P2), (1, P1)], 0, 12, 0, 112), P1)
+    draw(ic, 0.82, -2, -4); out["faithful"] = ic
+    ic = gk.Icon("Survivor.io - Sound Disc", note("survivor_io", "witch hat + coins")); fam.disc(ic, P1, ic.linear([(0, P2), (1, P1)], 0, 4, 0, 122), P1, top_light=0.3)
+    draw(ic, 0.84, -2, -4); out["disc"] = ic
+    ic = gk.Icon("Survivor.io - Rimmed", note("survivor_io", "witch hat + coins")); ic.rimmed_disc(inner=P1, inner_gradient=ic.linear([(0, P2), (1, P1)], 0, 10, 0, 117))
+    draw(ic, 0.74, -2, -3); out["rimmed"] = ic
+    ic = gk.Icon("Survivor.io - Free Symbol", note("survivor_io", "witch hat + coins as objects"))
+    draw(ic, 1.0, -4, 0, depth=4); out["symbol"] = ic
     return out
 
 
