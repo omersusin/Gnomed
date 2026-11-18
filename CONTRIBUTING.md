@@ -107,6 +107,8 @@ docs/course/               the course: 7 lessons with pictures, recipes R1-R15, 
 docs/STATUS.md             gate results for every app, worst first
   gen_styles.py            regenerate the per-style appfilters from pack/styles.json
   pr_guard.py              additive-only check of a branch (run before your PR; CI runs it)
+  region_check.py          redraws the measured regions over the source: finds parts that
+                           were lost into the background or got a wrong colour
   hooks/                   git hooks: block commits/pushes on main, tags, [release]
 .github/workflows/build.yml     CI: builds the four style APKs, checks, releases
 .github/workflows/pr-guard.yml  CI: pr_guard.py on every pull request
@@ -431,7 +433,8 @@ no busy patterns, no generated images.
 * **CI** (`.github/workflows/build.yml`) on every push: checks the per-style files
   are up to date (`gen_styles.py --check`), builds the four style APKs, fails if
   R8 removed `WorkDatabase_Impl.<init>()` (a real startup crash we had), prints the
-  signing certificate, uploads the APKs as an artifact.
+  signing certificate, uploads each style's APK as its own artifact (a plain
+  `gnomed-<style>.apk`, no zip).
 * **Releases** are published when a pushed commit message contains `[release]`
   (or a `v*` tag / manual run). The in-app style switcher downloads
   `gnomed-<style>.apk` from the **latest** release. Only the maintainer releases.
@@ -509,4 +512,5 @@ Real mistakes from this project's history — do not repeat them:
 | Shell `$` in `Shell$HomeActivity` eaten by the shell | always single-quote ComponentInfos on the command line |
 | Release APK crashed at start (R8 removed a Room constructor) | keep `app/proguard-rules.pro`; CI guards it |
 | "Tests pass, so it's done" | only looking at the boards decides; report weaknesses honestly |
+| SD Maid's dark apron vanished into the dark tile; gradients flattened to one colour | `tools/region_check.py` finds lost/changed colours (fix: `THRESH`, `split`, `regions`); big regions with a clear source gradient now keep it automatically (`flat_regions` opts out), bands of one gradient → `merge_grad` |
 | `build_auto.py` run over every app replaced 6 hand-built icons (Shizuku, Clash Royale, …) in the pack with their automatic drafts | `work/_lib/builders.py` decides the builder; `build_auto.py` now refuses hand-built apps and `pack_refresh.py` rebuilds with the right builder first |

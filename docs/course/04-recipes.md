@@ -217,3 +217,14 @@ A white wordmark alone vanishes on light wallpapers and a margin makes it a stic
 3. R1: `"merge_grad": [["#3d8bfd", "#4a90fe", "#5a9bff", "#6aa6ff"]]`.
 4. R15: `"skip": ["symbol"]`.
 5. R7: `SMOOTH["slug"] = 1.6`, maybe `THRESH["slug"] = 0.7`, then `--remeasure`; keep the source's proportion.
+
+## Colour check (any app)
+
+`python3 tools/region_check.py <slug>` redraws the measured regions over the measured
+ground and compares them with `source.png`. A line like
+`source #525252 drawn as #424a42: 13.6% of tile` means a part of the source was taken
+for background (SD Maid's apron). Fixes: a lower `THRESH` for the slug in
+`work/_lib/auto.py` (then `make_icon.py <slug> --remeasure`), `split` for a small part
+folded into another colour, `regions` to correct a drifted colour. Big regions whose
+source has a clear gradient keep it automatically; use `merge_grad` (R1) when one
+gradient was cut into several bands.

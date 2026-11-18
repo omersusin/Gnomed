@@ -3,13 +3,13 @@
   <title>exteraless - Rimmed</title>
   <desc>geometry: exteraless IconRequest PNG, colour-mask potrace (work/_lib/gtrace.py, IoU &gt;= 0.99 per part); GNOME construction: Gnomed</desc>
   <defs>
-    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#adaca9"/><stop offset="0.225" stop-color="#deddda"/><stop offset="0.45" stop-color="#c0bfbc"/><stop offset="0.55" stop-color="#c0bfbc"/><stop offset="0.775" stop-color="#deddda"/><stop offset="1" stop-color="#adaca9"/></linearGradient>
-    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="9.5" x2="0" y2="116.5"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f2f2f2"/></linearGradient>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#c2c0bc"/><stop offset="0.225" stop-color="#deddda"/><stop offset="0.45" stop-color="#d5d3cf"/><stop offset="0.55" stop-color="#d5d3cf"/><stop offset="0.775" stop-color="#deddda"/><stop offset="1" stop-color="#c2c0bc"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="9.5" x2="0" y2="116.5"><stop offset="0" stop-color="#fff3f3"/><stop offset="1" stop-color="#f2dcdc"/></linearGradient>
     <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="83.35" y1="35.413" x2="56.834" y2="79.835"><stop offset="0" stop-color="#ffc348"/><stop offset="0.5" stop-color="#ff987a"/><stop offset="1" stop-color="#ff6eac"/></linearGradient>
   </defs>
   <g id="rim">
   <path id="rim-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g1)"/>
-  <path id="rim-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="#deddda"/>
+  <path id="rim-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="#f6f5f4"/>
   <path id="rim-inner" d="M10.5 63A53.5 53.5 0 1 1 117.5 63A53.5 53.5 0 1 1 10.5 63Z" fill="url(#g2)"/>
   <path id="rim-recess" d="M10.5 63A53.5 53.5 0 1 1 117.5 63A53.5 53.5 0 1 1 10.5 63ZM10.5 64.2A53.5 53.5 0 1 1 117.5 64.2A53.5 53.5 0 1 1 10.5 64.2Z" fill="#000000" opacity="0.1" fill-rule="evenodd"/>
   </g>

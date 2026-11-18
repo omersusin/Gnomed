@@ -326,6 +326,10 @@
     <item drawable="walpy_alt1" name="Walpy (Disc)" />
     <item drawable="walpy_alt2" name="Walpy (Rimmed)" />
     <item drawable="walpy_alt3" name="Walpy (Symbol)" />
+    <item drawable="quarry" name="Quarry" />
+    <item drawable="quarry_alt1" name="Quarry (Disc)" />
+    <item drawable="quarry_alt2" name="Quarry (Rimmed)" />
+    <item drawable="quarry_alt3" name="Quarry (Symbol)" />
 
     <category title="Browsers" />
     <item drawable="bare" name="Bare" />
@@ -383,4 +387,11 @@
     <item drawable="duolingo" name="Duolingo" />
     <item drawable="duolingo_alt1" name="Duolingo (Disc)" />
     <item drawable="duolingo_alt2" name="Duolingo (Rimmed)" />
+    <item drawable="duolingo_alt3" name="Duolingo (Symbol)" />
+
+    <category title="Shopping" />
+    <item drawable="hepsiburada" name="Hepsiburada" />
+    <item drawable="hepsiburada_alt1" name="Hepsiburada (Disc)" />
+    <item drawable="hepsiburada_alt2" name="Hepsiburada (Rimmed)" />
+    <item drawable="hepsiburada_alt3" name="Hepsiburada (Symbol)" />
 </resources>

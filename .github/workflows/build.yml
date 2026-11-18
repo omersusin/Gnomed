@@ -1,7 +1,7 @@
 name: Build Gnomed
 
 # Builds one APK per icon style (faithful, disc, rimmed, symbol).
-# - every push / PR: build + upload the APKs as a workflow artifact
+# - every push / PR: build + upload each style's APK as its own artifact (plain .apk, no zip)
 # - tag v*, manual run with "release" ticked, or a pushed commit whose message
 #   contains [release]: also publish a GitHub release (the action creates the tag);
 #   the in-app style switch downloads gnomed-<style>.apk from the latest release.
@@ -86,10 +86,32 @@ jobs:
             "$AS" verify --print-certs "$f" | grep -E 'SHA-256|DN'
           done
 
-      - uses: actions/upload-artifact@v4
+      # one artifact per style, uploaded as the plain .apk (no zip): download only the
+      # style you want from the run's "Artifacts" list
+      - name: Artifact gnomed-faithful.apk
+        uses: actions/upload-artifact@v7
         with:
-          name: gnomed-apks-${{ github.run_number }}
-          path: dist/*.apk
+          path: dist/gnomed-faithful.apk
+          archive: false
+          if-no-files-found: error
+      - name: Artifact gnomed-disc.apk
+        uses: actions/upload-artifact@v7
+        with:
+          path: dist/gnomed-disc.apk
+          archive: false
+          if-no-files-found: error
+      - name: Artifact gnomed-rimmed.apk
+        uses: actions/upload-artifact@v7
+        with:
+          path: dist/gnomed-rimmed.apk
+          archive: false
+          if-no-files-found: error
+      - name: Artifact gnomed-symbol.apk
+        uses: actions/upload-artifact@v7
+        with:
+          path: dist/gnomed-symbol.apk
+          archive: false
+          if-no-files-found: error
 
       - name: Publish release
         if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release) || (github.event_name == 'push' && contains(github.event.head_commit.message, '[release]'))

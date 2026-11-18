@@ -648,6 +648,97 @@ def dolby_atmos():
     return out
 
 
+# ------------------------------------------------------------------ Duolingo
+@build
+def duolingo():
+    """Faithful / Sound Disc / Rimmed: the automatic build, unchanged (build_auto.App).
+
+    Symbol (free adaptation): the owl's head as an object. In the source the head is cut
+    by the tile's left and right edges (straight vertical sides from y~46 to y~83), so a
+    free head would read as a mask. The sides are closed with ONE ellipse that meets the
+    measured contour above and below the cut (centre y=64.4, half-axes 64 x 82.2 units),
+    i.e. the head keeps every measured curve and only the two straight cuts become convex.
+    Eyes, pupils and beak are the traced source parts, moved with the head as one unit."""
+    import build_auto as ba
+    out = ba.App("duolingo").build()            # faithful, disc, rimmed (symbol skipped there)
+
+    a, s = gt.load(WORK / "duolingo")
+    H, W = a.shape[:2]
+    head = gt.fill_holes(gt.near(a, "#89e219", "#58cc02") & gt.opaque(a))
+    yy, xx = np.mgrid[0:H, 0:W]
+    cy, ax, by = 1030.0, W / 2, 1315.0           # px of the 4x source (2048): see docstring
+    ell = ((xx - W / 2) / ax) ** 2 + ((yy - cy) / by) ** 2 <= 1.0
+    head_src = trace(head & ell, s)
+    P, _ = fam.geo("duolingo")
+    parts = [P["r1"], P["r2"], P["r4"], P["r3"], P["r5"]]   # eyes, pupils, lower/upper beak, highlight
+    x0, y0, x1, y1 = gk.bbox_d([head_src])
+    w = 112.0
+    h = w * (y1 - y0) / (x1 - x0)
+    ds, _ = place([head_src] + parts, (64 - w / 2, 114 - h, 64 + w / 2, 114), ref=[head_src])
+    hd, eyes, pupils, beak_lo, beak_up, beak_hi = ds
+
+    ic = gk.Icon("Duolingo - Free Symbol", note("duolingo", "owl head as an object; the tile-cut sides closed by one ellipse"))
+    # the head as an object with a 4-unit side; under the beak the side is the beak's own
+    # dark orange (the beak hangs below the head contour there)
+    hx0, _, hx1, _ = gk.bbox_d(hd)
+    with ic.group("body"):
+        ic.path(gk.translate_d(hd, 0, 4), ic.chin_gradient("#89e219", hx0, hx1, (hx1 - hx0) * 0.3),
+                layer_id="body-chin", fill_rule="evenodd")
+        ic.path(gk.translate_d(beak_lo, 0, 4), shade("#f48000", -0.25), layer_id="beak-chin", fill_rule="evenodd")
+        ic.path(hd, "#89e219", layer_id="body-face", fill_rule="evenodd")
+    fam.raised(ic, [(eyes, "#ffffff", "#deddda"),
+                    (beak_lo, "#f48000", shade("#f48000", -0.18)),
+                    (beak_up, "#ffc200", shade("#ffc200", -0.18))], lift=1.5, layer="mark")
+    fam.raised(ic, [(pupils, "#4b4b4b", None), (beak_hi, "#ffde00", None)], lift=0, layer="inlay")
+    out["symbol"] = ic
+    return out
+
+
+# ------------------------------------------------------------------ Hepsiburada
+@build
+def hepsiburada():
+    """Faithful / Sound Disc / Rimmed: the automatic build of the official orange-square logo
+    (sent by the owner; the phone still shows an outdated poster icon, kept as phone-icon.png).
+
+    Symbol: the brand's own stacked layout (work/hepsiburada/brand/logo-stacked-bar.jpg):
+    the orange wordmark traced from it, and under it the six-colour bar with its segment
+    widths and colours measured from the same file. The bar is the object (slab with a
+    side); the wordmark stands on the page above it with a lift. Proportions as measured."""
+    import build_auto as ba
+    from PIL import Image
+    out = ba.App("hepsiburada").build()
+
+    src = np.asarray(Image.open(WORK / "hepsiburada/brand/logo-stacked-bar.jpg").convert("RGB")).astype(np.float32) / 255
+    big = np.asarray(Image.fromarray((src * 255).astype(np.uint8)).resize((1500, 1500), Image.LANCZOS)).astype(np.float32) / 255
+    k = 1500 / 375                                       # px of the 4x image per logo px
+    orange = (big[..., 0] > 0.75) & (big[..., 2] < 0.45) & (np.arange(1500)[:, None] < 280 * k)
+    su = 128 / 1500                                      # 128-unit tile = logo width
+    word = trace(orange, su)
+    ORANGE = hexc(np.median(src[(src[..., 0] > 0.85) & (src[..., 2] < 0.3) & (np.arange(375)[:, None] < 280)], axis=0))
+    # bar: y 292-336, segment edges (logo px) and colours measured on row 312
+    edges = [0, 48.5, 103.5, 219, 271, 320, 375]
+    cols = ["#7624e2", "#51bde4", "#f75f20", "#f09f2a", "#6d1f5d", "#39bf9e"]
+    by0, by1 = 292 * 128 / 375, 336 * 128 / 375
+    segs = [f"M{edges[i] * 128 / 375:.2f} {by0:.2f}H{edges[i + 1] * 128 / 375:.2f}V{by1:.2f}H{edges[i] * 128 / 375:.2f}Z"
+            for i in range(6)]
+    allp = [word] + segs
+    x0, y0, x1, y1 = gk.bbox_d(allp)
+    w = 112.0
+    h = w * (y1 - y0) / (x1 - x0)
+    ds, _ = place(allp, (64 - w / 2, 114 - h, 64 + w / 2, 114))
+    wd, sg = ds[0], ds[1:]
+
+    ic = gk.Icon("Hepsiburada - Free Symbol", note("hepsiburada", "brand layout: orange wordmark over the six-colour bar (measured)"))
+    with ic.group("bar"):
+        for i, (d, c) in enumerate(zip(sg, cols)):
+            ic.path(gk.translate_d(d, 0, 4), shade(c, -0.28), layer_id=f"bar-{i}-side")
+        for i, (d, c) in enumerate(zip(sg, cols)):
+            ic.path(d, c, layer_id=f"bar-{i}-face")
+    fam.raised(ic, [(wd, ORANGE, shade(ORANGE, -0.22))], lift=2, layer="word")
+    out["symbol"] = ic
+    return out
+
+
 # ------------------------------------------------------------------ Gnomed (our own logo)
 @build
 def gnomed():

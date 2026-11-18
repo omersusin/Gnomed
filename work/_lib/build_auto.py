@@ -37,22 +37,34 @@ OVERRIDES = {
     # face bleeds off the left/right edge of the source tile: a free symbol would be a
     # "mask" with straight cut sides (completing them would invent the head silhouette)
     "duolingo": {"skip": ["symbol"], "rimmed_scale": 1.1,
-                 "note": "no Symbol: the source face is cropped by the tile's left/right edges, so the free face stands on straight cut sides (a mask); Rimmed mark enlarged to fill the recess"},
+                 "note": "Symbol is hand-built (build_weak.duolingo closes the tile-cut sides); Rimmed mark enlarged to fill the recess"},
     # game posters (archetype H): no clean vector identity element in a 192 px poster
     "clash_royale": {"skip": ["symbol"], "note": "WEAK: posterised trace of the game poster, not a real GNOME conversion; needs a hand-drawn emblem (crown/king) from a better source"},
     # blurry 192 px source: the pale green region is the blur halo + the semi-transparent mic
     "bcr": {"note": "blurry source: halo around the handset dropped, the separate pale microphone kept (semi-transparent white in the source), traced with 1.6 u smoothing"},
     "databackup": {"keep_ground": True, "note": "peach tile kept (it is the app's colour, not a neutral canvas)"},
     "enpara": {"light": True, "note": "white tile; the colour bars are part of the mark"},
-    "exteraless": {"light": True, "drop": ["#ffdbdb"], "merge_grad": [["#ff8291", "#ff75a1", "#ff937f", "#ffa865", "#ffbb4d"]],
+    "exteraless": {"face": "#ffe9e9", "flat": True, "keep_ground": True, "drop": ["#ffdbdb"], "merge_grad": [["#ff8291", "#ff75a1", "#ff937f", "#ffa865", "#ffbb4d"]],
                    "note": "soft pink glow dropped (no glows in GNOME); the chevron is ONE part with its measured pink->orange gradient (no bands)"},
     "bitchord": {"merge_grad": [["#edaeb8", "#f8e3e6"]], "note": "the waves are one white->pink gradient (measured), not two flat bands"},
-    "firefox_beta": {"merge_grad": [["#ffc041", "#ff692d", "#c6124b"], ["#962dcc", "#5f44b8"]],
+    "firefox_beta": {"merge_grad": [["#ffc041", "#ff692d", "#c6124b"], ["#962dcc", "#5f44b8"]], "holes_inlay": ["#2cecd3"],
                      "note": "fox flame = one yellow->red gradient, globe = one purple gradient (check_icon: stripes + low trace IoU); BETA badge kept"},
-    "firefox_nightly": {"merge_grad": [["#28baf6", "#25dfdf", "#4af2bf", "#5d84fe"]],
-                        "note": "the fox is one part with its measured cyan->blue gradient (no bands); globe keeps its two tones"},
+    "firefox_nightly": {"merge_grad": [["#28baf6", "#5d84fe", "#7a4ff4"]],
+                        "note": "the fox body is one cyan->violet gradient (no hard edge to the purple belly); tail and globe keep their tones"},
     "reddit": {"symbol": "margin", "note": "Symbol: white Snoo with an orange margin (Reddit's own logo use), not an orange Snoo"},
     "pentas": {"keep_ground": True, "note": "peach tile kept"},
+    "stride": {"merge_grad": [["#83eca0", "#28c79b", "#1f916b"]], "note": "runner is one light-green->teal gradient; the dark track stays separate"},
+    "smart_launcher": {"merge_grad": [["#7cc8f7", "#5fbbff", "#668dfe", "#7171ff"]], "note": "the lower layer is one blue->violet gradient"},
+    "nuvio": {"merge_grad": [["#3cc3e2", "#2970c7", "#5059d2", "#7744d1", "#b04df0"]], "note": "the play shape is one cyan->violet gradient"},
+    "proton_drive": {"merge_grad": [["#754bfc", "#a353e7", "#cb59d6"]], "note": "front of the folder is one violet->magenta gradient; the lighter back flap stays separate"},
+    "morphe": {"merge_grad": [["#02afae", "#1085ab", "#1e5aa8"]], "note": "the M is one teal->blue gradient"},
+    "today_weather": {"merge_grad": [["#fb564e", "#fd7958", "#fea665"]], "note": "the arc and spiral are one red->orange gradient"},
+    "obtainx": {"regions": {"#aaa9d8": "#6a7fb7"}, "note": "the gear is blue-grey in the source (k-means median drifted to lavender)"},
+    "proton_vpn": {"merge_grad": [["#b3e9f3", "#46a2e0"]], "note": "the lower tip is one turquoise gradient (measured), not two flat bands"},
+    "sd_maid_se": {"symbol": "keep", "split": [("#fdd19d", (20, 10, 62, 52), "#fed73c")], "note": "dark apron measured as its own part (auto THRESH); Symbol keeps the white bow and collar (invert made them dark)"},
+    "quarry": {"symbol": "keep", "split": [("#2a91f2", (42, 44, 86, 83), "#303b56")],
+               "note": "chart bars are dark slate in the source (k-means folded them into the blue ring part); Symbol keeps the white folder (inverting made it navy)"},
+    "hepsiburada": {"skip": ["symbol"], "note": "source: official orange-square logo sent by the owner (the phone shows an outdated poster icon); Symbol hand-built in build_weak"},
     "pix_material_you_light_dark": {"symbol": "margin", "note": "dark mark on a dark slate tile: Symbol keeps a slate margin"},
     "hesap_makinesi": {"skip": ["symbol"], "note": "two-tone tile + long shadow are tangled with the mark; no clean Symbol"},
     "konabess": {"note": "WEAK: line drawing with small text, unreadable below 64 px (source limitation)"},
@@ -114,7 +126,24 @@ class App:
         self.P, self.I = load(slug)
         self.o = OVERRIDES.get(slug, {})
         rep = self.o.get("regions", {})
+        self.I0 = self.I
         self.regs = [(self.P[r["name"]], snap(rep.get(r["fill"], r["fill"]))) for r in self.I["regions"]]
+        # "split": [(fill, (x0, y0, x1, y1), new_fill)] - subpaths of a region that lie inside
+        # the box become their own region (thin parts k-means folded into a bigger colour)
+        for fill, (bx0, by0, bx1, by1), new in self.o.get("split", []):
+            out = []
+            for d, f in self.regs:
+                if f != snap(fill):
+                    out.append((d, f))
+                    continue
+                subs = ["M" + x for x in d.split("M") if x.strip()]
+                inside = [x for x in subs if (lambda b: b[0] >= bx0 and b[1] >= by0 and b[2] <= bx1 and b[3] <= by1)(gk.bbox_d([x]))]
+                rest = [x for x in subs if x not in inside]
+                if rest:
+                    out.append(("".join(rest), f))
+                if inside:
+                    out.append(("".join(inside), snap(new)))
+            self.regs = out
         G = self.I["ground"]
         self.gk = G["kind"]
         self.ground = snap(self.o.get("face", G.get("color", "#ffffff")))
@@ -134,16 +163,30 @@ class App:
         self.grads = {}
         for gi, group in enumerate(self.o.get("merge_grad", [])):
             self._merge(gi, group)
+        # every other big region whose own source pixels change colour clearly (a gradient in
+        # the source) keeps that gradient instead of being flattened to its median colour
+        if not self.o.get("flat_regions"):
+            gi = len(self.o.get("merge_grad", []))
+            for r in list(self.I["regions"]):
+                if (r["fill"] in self.grads or r.get("area", 0) < 0.02 or r["fill"] in self.o.get("drop", [])
+                        or is_whiteish(r["fill"])):       # white marks stay clean white (GNOME)
+                    continue
+                if self._merge(gi, [r["fill"]], min_de=10.0):
+                    gi += 1
+        # "holes_inlay": [fill]: the holes of these regions (letters cut out of a badge) are
+        # drawn on top in the tile colour - otherwise the region's own lift side fills them
+        names = {r["name"] for r in self.I0["regions"] if r["fill"] in self.o.get("holes_inlay", [])}
+        self.inlay_ds = {d for (d, _), r in zip(self.regs, self.I["regions"]) if r.get("name") in names}
         if self.o.get("drop"):
             self.regs = [(d, f) for (d, f), r in zip(self.regs, self.I["regions"]) if r["fill"] not in self.o["drop"]]
         if self.o.get("only_white"):
-            self.regs = [(d, f) for d, f in self.regs if is_whiteish(f)]
+            self.regs = [(d, f) for d, f in self.regs if is_whiteish(self.base(f))]
         bs = [self.base(f) for _, f in self.regs]
         self.all_neutral = all(is_whiteish(f) or is_dark_neutral(f) for f in bs)
         self.has_white = any(is_whiteish(f) for f in bs)
         self.all_dark = all(is_dark_neutral(f) for f in bs)
 
-    def _merge(self, gi, group):
+    def _merge(self, gi, group, min_de=None):
         """Regions that are bands of ONE source gradient -> one part with a linear gradient
         fitted (least squares, RGB plane over x,y) to the source pixels it covers."""
         import numpy as np
@@ -152,7 +195,7 @@ class App:
         import gtrace as gt
         idx = [i for i, r in enumerate(self.I["regions"]) if r["fill"] in group]
         if not idx:
-            return
+            return False
         union = d_of(unary_union([poly_of(self.regs[i][0]) for i in idx]).buffer(0))
         a, s = gt.load(WORK / self.slug)
         m = gt.render_mask(union, a.shape[0]) & (a[..., 3] > 0.5)
@@ -171,12 +214,26 @@ class App:
         col = lambda p: np.clip(coef[0] * p[0] + coef[1] * p[1] + coef[2], 0, 1)  # noqa: E731
         hexc = lambda c: "#%02x%02x%02x" % tuple(int(round(v * 255)) for v in c)  # noqa: E731
         stops = [(0, hexc(col(p0))), (0.5, hexc(col(((p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2)))), (1, hexc(col(p1)))]
+        if min_de is not None:
+            if any(snap(c) != c for _, c in stops):
+                return False        # near-black: GNOME's Dark4 rule wins over the source gradient
+            from skimage.color import rgb2lab
+            l0, l1 = rgb2lab(np.array([[col(p0), col(p1)]]))[0]
+            if np.linalg.norm(l0 - l1) < min_de:
+                return False        # (nearly) flat in the source: keep the measured colour
         key = f"grad{gi}"
         self.grads[key] = {"stops": stops, "p0": p0, "p1": p1, "base": stops[1][1]}
+        merged = {"name": "merged", "fill": key, "area": sum(self.I["regions"][i].get("area", 0) for i in idx)}
+        self.I = dict(self.I)
+        if min_de is not None and len(idx) == 1:          # one region: keep its drawing order
+            i = idx[0]
+            self.regs = self.regs[:i] + [(self.regs[i][0], key)] + self.regs[i + 1:]
+            self.I["regions"] = self.I["regions"][:i] + [dict(self.I["regions"][i], fill=key)] + self.I["regions"][i + 1:]
+            return True
         keep = [r for i, r in enumerate(self.regs) if i not in idx]
         self.regs = [(union, key)] + keep
-        self.I = dict(self.I)
-        self.I["regions"] = [{"name": "merged", "fill": key}] + [r for i, r in enumerate(self.I["regions"]) if i not in idx]
+        self.I["regions"] = [merged] + [r for i, r in enumerate(self.I["regions"]) if i not in idx]
+        return True
 
     def base(self, f):
         return self.grads[f]["base"] if f in self.grads else f
@@ -243,6 +300,20 @@ class App:
 
     def raised(self, ic, items, lift=2):
         fam.raised(ic, [(d, f, side_of(b)) for d, f, b in items], lift=lift)
+        self.inlays(ic, items)
+
+    def inlays(self, ic, items):
+        if not self.inlay_ds:
+            return
+        from build_weak import poly_of, d_of
+        from shapely.geometry import Polygon
+        from shapely.ops import unary_union
+        for i, (d, _f, _b) in enumerate(items):
+            if i < len(self.regs) and self.regs[i][0] in self.inlay_ds:
+                g = poly_of(d)
+                holes = [Polygon(r) for p in getattr(g, "geoms", [g]) for r in p.interiors]
+                if holes:
+                    ic.path(d_of(unary_union(holes)), snap(self.ground), layer_id=f"inlay-{i}", fill_rule="evenodd")
 
     # ---- styles
     def faithful(self):
@@ -339,6 +410,7 @@ class App:
                         layer_id=f"body-{i}-chin", fill_rule="evenodd")
             for i, (d, f, b) in enumerate(items):
                 ic.path(d, f, layer_id=f"body-{i}-face", fill_rule="evenodd")
+        self.inlays(ic, items)
         if (self.light or self.o.get("keep_ground")) and "holes" in self.P:
             ref = self.P["silhouette"]
             hd, _ = place([self.P["holes"], ref], self.box("symbol"), ref=[ref])
