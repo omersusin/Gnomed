@@ -40,7 +40,12 @@ OVERRIDES = {
     "bcr": {"note": "blurry source: halo around the handset dropped, the separate pale microphone kept (semi-transparent white in the source), traced with 1.6 u smoothing"},
     "databackup": {"keep_ground": True, "note": "peach tile kept (it is the app's colour, not a neutral canvas)"},
     "enpara": {"light": True, "note": "white tile; the colour bars are part of the mark"},
-    "exteraless": {"light": True, "drop": ["#ffdbdb"], "note": "soft pink glow dropped (no glows in GNOME); the gradient chevron is the mark"},
+    "exteraless": {"light": True, "drop": ["#ffdbdb"], "merge_grad": [["#ff8291", "#ff75a1", "#ff937f", "#ffa865", "#ffbb4d"]],
+                   "note": "soft pink glow dropped (no glows in GNOME); the chevron is ONE part with its measured pink->orange gradient (no bands)"},
+    "bitchord": {"merge_grad": [["#edaeb8", "#f8e3e6"]], "note": "the waves are one white->pink gradient (measured), not two flat bands"},
+    "firefox_nightly": {"merge_grad": [["#28baf6", "#25dfdf", "#4af2bf", "#5d84fe"]],
+                        "note": "the fox is one part with its measured cyan->blue gradient (no bands); globe keeps its two tones"},
+    "reddit": {"symbol": "margin", "note": "Symbol: white Snoo with an orange margin (Reddit's own logo use), not an orange Snoo"},
     "pentas": {"keep_ground": True, "note": "peach tile kept"},
     "pix_material_you_light_dark": {"symbol": "margin", "note": "dark mark on a dark slate tile: Symbol keeps a slate margin"},
     "hesap_makinesi": {"skip": ["symbol"], "note": "two-tone tile + long shadow are tangled with the mark; no clean Symbol"},
@@ -119,13 +124,72 @@ class App:
             self.light = False
         if self.light:
             self.ground = "#ffffff"
+        self.grads = {}
+        for gi, group in enumerate(self.o.get("merge_grad", [])):
+            self._merge(gi, group)
         if self.o.get("drop"):
             self.regs = [(d, f) for (d, f), r in zip(self.regs, self.I["regions"]) if r["fill"] not in self.o["drop"]]
         if self.o.get("only_white"):
             self.regs = [(d, f) for d, f in self.regs if is_whiteish(f)]
-        self.all_neutral = all(is_whiteish(f) or is_dark_neutral(f) for _, f in self.regs)
-        self.has_white = any(is_whiteish(f) for _, f in self.regs)
-        self.all_dark = all(is_dark_neutral(f) for _, f in self.regs)
+        bs = [self.base(f) for _, f in self.regs]
+        self.all_neutral = all(is_whiteish(f) or is_dark_neutral(f) for f in bs)
+        self.has_white = any(is_whiteish(f) for f in bs)
+        self.all_dark = all(is_dark_neutral(f) for f in bs)
+
+    def _merge(self, gi, group):
+        """Regions that are bands of ONE source gradient -> one part with a linear gradient
+        fitted (least squares, RGB plane over x,y) to the source pixels it covers."""
+        import numpy as np
+        from build_weak import poly_of, d_of
+        from shapely.ops import unary_union
+        import gtrace as gt
+        idx = [i for i, r in enumerate(self.I["regions"]) if r["fill"] in group]
+        if not idx:
+            return
+        union = d_of(unary_union([poly_of(self.regs[i][0]) for i in idx]).buffer(0))
+        a, s = gt.load(WORK / self.slug)
+        m = gt.render_mask(union, a.shape[0]) & (a[..., 3] > 0.5)
+        ys, xs = np.nonzero(m)
+        X, Y = xs * s, ys * s
+        A = np.c_[X, Y, np.ones_like(X)]
+        coef = np.linalg.lstsq(A, a[ys, xs, :3], rcond=None)[0]          # 3x3
+        J = coef[:2].T                                                     # 3x2 colour change per x,y
+        u = np.linalg.svd(J, full_matrices=False)[2][0]
+        tproj = X * u[0] + Y * u[1]
+        lo, hi = np.percentile(tproj, 2), np.percentile(tproj, 98)
+        cxm, cym = X.mean(), Y.mean()
+        base_t = cxm * u[0] + cym * u[1]
+        p0 = (cxm + (lo - base_t) * u[0], cym + (lo - base_t) * u[1])
+        p1 = (cxm + (hi - base_t) * u[0], cym + (hi - base_t) * u[1])
+        col = lambda p: np.clip(coef[0] * p[0] + coef[1] * p[1] + coef[2], 0, 1)  # noqa: E731
+        hexc = lambda c: "#%02x%02x%02x" % tuple(int(round(v * 255)) for v in c)  # noqa: E731
+        stops = [(0, hexc(col(p0))), (0.5, hexc(col(((p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2)))), (1, hexc(col(p1)))]
+        key = f"grad{gi}"
+        self.grads[key] = {"stops": stops, "p0": p0, "p1": p1, "base": stops[1][1]}
+        keep = [r for i, r in enumerate(self.regs) if i not in idx]
+        self.regs = [(union, key)] + keep
+        self.I = dict(self.I)
+        self.I["regions"] = [{"name": "merged", "fill": key}] + [r for i, r in enumerate(self.I["regions"]) if i not in idx]
+
+    def base(self, f):
+        return self.grads[f]["base"] if f in self.grads else f
+
+    def resolve(self, ic, items, s, src_box, box):
+        """turn merged-gradient keys into url(#..) placed like the paths (same transform)."""
+        out = []
+        for d, f in items:
+            if f in self.grads:
+                g = self.grads[f]
+                ref = [self.P["silhouette"]] if not (self.o.get("only_white") or self.o.get("drop")) else None
+                mk = lambda p: f"M{p[0]:.2f} {p[1]:.2f}h0.01v0.01h-0.01Z"  # noqa: E731
+                ds = [d for d, _ in self.regs] + [self.P["silhouette"], mk(g["p0"]), mk(g["p1"])]
+                rr = ref or [d for d, _ in self.regs]
+                placed, _ = place(ds, box, ref=rr)
+                q0, q1 = gk.bbox_d(placed[-2])[:2], gk.bbox_d(placed[-1])[:2]
+                out.append((d, ic.linear(g["stops"], q0[0], q0[1], q1[0], q1[1]), g["base"]))
+            else:
+                out.append((d, f, f))
+        return out
 
     # ---- faces
     def grad(self, ic, box, dark=0.0):
@@ -142,11 +206,16 @@ class App:
         G = self.I["ground"]
         return G["c1"] if G["p1"][1] >= G["p0"][1] else G["c0"]
 
-    def marks(self, box):
+    def marks(self, box, ic=None):
         ds = [d for d, _ in self.regs]
         ref = ds if (self.o.get("only_white") or self.o.get("drop")) else [self.P["silhouette"]]
         out, s = place(ds + [self.P["silhouette"]], box, ref=ref)
-        return [(d, f) for d, (_, f) in zip(out[:-1], self.regs)], out[-1], s
+        items = [(d, f) for d, (_, f) in zip(out[:-1], self.regs)]
+        if ic is not None:
+            items = self.resolve(ic, items, s, None, box)
+        else:
+            items = [(d, f, self.base(f)) for d, f in items]
+        return items, out[-1], s
 
     def box(self, kind):
         x0, y0, x1, y1 = self.I["mark_bbox"]
@@ -164,7 +233,7 @@ class App:
         return box_c(cx, cy, bw, bh)
 
     def raised(self, ic, items, lift=2):
-        fam.raised(ic, [(d, f, side_of(f)) for d, f in items], lift=lift)
+        fam.raised(ic, [(d, f, side_of(b)) for d, f, b in items], lift=lift)
 
     # ---- styles
     def faithful(self):
@@ -173,7 +242,7 @@ class App:
             fam.plate(ic, self.ground, self.grad(ic, (12, 12, 116, 112)), self.bottom_color())
         else:
             fam.plate(ic, self.ground)
-        items, _, _ = self.marks(self.box("faithful"))
+        items, _, _ = self.marks(self.box("faithful"), ic)
         self.raised(ic, items)
         return ic
 
@@ -183,7 +252,7 @@ class App:
             fam.disc(ic, self.ground, self.grad(ic, (5, 4, 123, 122)), self.bottom_color())
         else:
             fam.disc(ic, self.ground, top_light=0 if self.light else 0.6)
-        items, _, _ = self.marks(self.box("disc"))
+        items, _, _ = self.marks(self.box("disc"), ic)
         self.raised(ic, items)
         return ic
 
@@ -195,7 +264,7 @@ class App:
             ic.rimmed_disc(inner=self.ground, inner_gradient=self.grad(ic, (10.5, 9.5, 117.5, 116.5)))
         else:
             ic.rimmed_disc(inner=self.ground)
-        items, _, _ = self.marks(self.box("rimmed"))
+        items, _, _ = self.marks(self.box("rimmed"), ic)
         self.raised(ic, items)
         return ic
 
@@ -211,7 +280,7 @@ class App:
     def symbol(self):
         mode = self.symbol_mode()
         ic = gk.Icon(f"{self.slug} - Free Symbol", fam.note(self.slug) + f" | symbol mode: {mode}")
-        items, sil, s = self.marks(self.box("symbol"))
+        items, sil, s = self.marks(self.box("symbol"), ic)
         if mode == "margin":
             body = fam.offset_d(sil, 3.5)
             if self.light:
@@ -236,8 +305,8 @@ class App:
                 x0, y0, x1, y1 = gk.bbox_d(sil)
                 gfill = self.grad(ic, (x0, y0, x1, y1))
             faces = []
-            for d, f in items:
-                faces.append((d, (self.ground if is_whiteish(f) else f), (gfill if is_whiteish(f) else None)))
+            for d, f, b in items:
+                faces.append((d, (self.ground if is_whiteish(b) else b), (gfill if is_whiteish(b) else (f if f != b else None))))
             with ic.group("body"):
                 for i, (d, f, _g) in enumerate(faces):
                     x0, _, x1, _ = gk.bbox_d(d)
@@ -255,11 +324,11 @@ class App:
             return ic
         # keep: the mark's own colours, every region extruded (all chins first)
         with ic.group("body"):
-            for i, (d, f) in enumerate(items):
+            for i, (d, f, b) in enumerate(items):
                 x0, _, x1, _ = gk.bbox_d(d)
-                ic.path(gk.translate_d(d, 0, 4), ic.chin_gradient(f, x0, x1, (x1 - x0) * 0.25),
+                ic.path(gk.translate_d(d, 0, 4), ic.chin_gradient(b, x0, x1, (x1 - x0) * 0.25),
                         layer_id=f"body-{i}-chin", fill_rule="evenodd")
-            for i, (d, f) in enumerate(items):
+            for i, (d, f, b) in enumerate(items):
                 ic.path(d, f, layer_id=f"body-{i}-face", fill_rule="evenodd")
         if (self.light or self.o.get("keep_ground")) and "holes" in self.P:
             ref = self.P["silhouette"]

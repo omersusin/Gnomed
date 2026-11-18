@@ -84,18 +84,35 @@ VARIANTS = {
         (plane(300, 420, False), "#38383f")])),
 }
 
+def grain(png_path, out_path, size=None, sigma=1.6, seed=0, quality=92):
+    """Fine monochrome film grain (gaussian, ~1.6 of 255 levels): breaks the 8-bit steps of
+    the soft gradients (banding) without being visible as texture. JPEG, because grain does
+    not compress in PNG."""
+    import numpy as np
+    im = Image.open(png_path).convert("RGB")
+    if size:
+        im = im.resize(size, Image.LANCZOS)
+    a = np.asarray(im).astype(np.float32)
+    n = np.random.default_rng(seed).normal(0, sigma, a.shape[:2])[..., None]
+    Image.fromarray(np.clip(a + n, 0, 255).round().astype(np.uint8)).save(out_path, quality=quality, subsampling=0)
+
+
 if __name__ == "__main__":
     (ASSETS / "wallpapers/thumbs").mkdir(parents=True, exist_ok=True)
     index = []
     for name, (title, s) in VARIANTS.items():
         (HERE / f"{name}.svg").write_text(s)
-        cairosvg.svg2png(bytestring=s.encode(), write_to=str(HERE / f"{name}-1080x2400.png"), output_width=1080, output_height=2400)
-        cairosvg.svg2png(bytestring=s.encode(), write_to=str(HERE / f"{name}-1440x3200.png"), output_width=1440, output_height=3200)
-        # embedded copies: full PNG for apply/download, small JPEG thumb for the grid
-        Image.open(HERE / f"{name}-1080x2400.png").convert("RGB").save(ASSETS / f"wallpapers/{name}.png", optimize=True)
-        Image.open(HERE / f"{name}-1080x2400.png").convert("RGB").resize((360, 800), Image.LANCZOS).save(
+        big = HERE / f".{name}-3200.png"
+        cairosvg.svg2png(bytestring=s.encode(), write_to=str(big), output_width=1440, output_height=3200)
+        grain(big, HERE / f"{name}-1440x3200.jpg")
+        grain(big, HERE / f"{name}-1080x2400.jpg", size=(1080, 2400), seed=1)
+        big.unlink()
+        # embedded copies: grained JPEG for apply/download, small JPEG thumb for the grid
+        (HERE / f"{name}-1080x2400.jpg").replace(ASSETS / f"wallpapers/{name}.jpg") if False else \
+            Image.open(HERE / f"{name}-1080x2400.jpg").save(ASSETS / f"wallpapers/{name}.jpg", quality=92, subsampling=0)
+        Image.open(HERE / f"{name}-1080x2400.jpg").resize((360, 800), Image.LANCZOS).save(
             ASSETS / f"wallpapers/thumbs/{name}.jpg", quality=88)
         index.append({"name": title, "author": "Gnomed",
-                      "url": f"assets://wallpapers/{name}.png", "thumbUrl": f"assets://wallpapers/thumbs/{name}.jpg"})
+                      "url": f"assets://wallpapers/{name}.jpg", "thumbUrl": f"assets://wallpapers/thumbs/{name}.jpg"})
         print(name)
     (ASSETS / "wallpapers.json").write_text(json.dumps(index, indent=1))

@@ -2,49 +2,49 @@
  {
   "name": "Adwaita Light",
   "author": "Gnomed",
-  "url": "assets://wallpapers/gnomed-light.png",
+  "url": "assets://wallpapers/gnomed-light.jpg",
   "thumbUrl": "assets://wallpapers/thumbs/gnomed-light.jpg"
  },
  {
   "name": "Adwaita Dark",
   "author": "Gnomed",
-  "url": "assets://wallpapers/gnomed-dark.png",
+  "url": "assets://wallpapers/gnomed-dark.jpg",
   "thumbUrl": "assets://wallpapers/thumbs/gnomed-dark.jpg"
  },
  {
   "name": "Sand Hills",
   "author": "Gnomed",
-  "url": "assets://wallpapers/gnomed-sand.png",
+  "url": "assets://wallpapers/gnomed-sand.jpg",
   "thumbUrl": "assets://wallpapers/thumbs/gnomed-sand.jpg"
  },
  {
   "name": "Sage Rings",
   "author": "Gnomed",
-  "url": "assets://wallpapers/gnomed-sage.png",
+  "url": "assets://wallpapers/gnomed-sage.jpg",
   "thumbUrl": "assets://wallpapers/thumbs/gnomed-sage.jpg"
  },
  {
   "name": "Lavender Planes",
   "author": "Gnomed",
-  "url": "assets://wallpapers/gnomed-lavender.png",
+  "url": "assets://wallpapers/gnomed-lavender.jpg",
   "thumbUrl": "assets://wallpapers/thumbs/gnomed-lavender.jpg"
  },
  {
   "name": "Dusk Hills",
   "author": "Gnomed",
-  "url": "assets://wallpapers/gnomed-dusk.png",
+  "url": "assets://wallpapers/gnomed-dusk.jpg",
   "thumbUrl": "assets://wallpapers/thumbs/gnomed-dusk.jpg"
  },
  {
   "name": "Ocean Rings",
   "author": "Gnomed",
-  "url": "assets://wallpapers/gnomed-ocean.png",
+  "url": "assets://wallpapers/gnomed-ocean.jpg",
   "thumbUrl": "assets://wallpapers/thumbs/gnomed-ocean.jpg"
  },
  {
   "name": "Graphite Planes",
   "author": "Gnomed",
-  "url": "assets://wallpapers/gnomed-graphite.png",
+  "url": "assets://wallpapers/gnomed-graphite.jpg",
   "thumbUrl": "assets://wallpapers/thumbs/gnomed-graphite.jpg"
  }
 ]
