@@ -1,0 +1,38 @@
+{
+ "file": "/home/user/Gnomed/work/telefon/source.png",
+ "bbox_px_at_512": [
+  0,
+  0,
+  512,
+  512
+ ],
+ "aspect_w_over_h": 1.0,
+ "fill_ratio": 1.0,
+ "circularity": 0.788,
+ "mirror_symmetry_iou": 1.0,
+ "enclosed_holes": 0,
+ "silhouette_class": "square (sharp)",
+ "suggested_template": "square",
+ "dominant_colours": [
+  {
+   "hex": "#126e21",
+   "share": 0.74,
+   "nearest_hig": "green5",
+   "hig_hex": "#26a269",
+   "dE": 24.1
+  },
+  {
+   "hex": "#f9fcfa",
+   "share": 0.26,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 1.8
+  }
+ ],
+ "thinnest_feature_px": {
+  "at_64": 5.0,
+  "at_48": 3.75,
+  "at_32": 2.5
+ },
+ "warnings": []
+}

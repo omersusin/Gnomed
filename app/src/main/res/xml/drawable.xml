@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <version>1</version>
+
+    <category title="Group 1" />
+    <item drawable="icon_1" />
+    <item drawable="icon_2" />
+    <item drawable="icon_3" />
+    <item drawable="icon_4" />
+    <item drawable="icon_5" />
+
+    <category title="Group 2" />
+    <item drawable="icon_6" />
+    <item drawable="icon_7" />
+    <item drawable="icon_8" />
+    <item drawable="icon_9" />
+    <item drawable="icon_10" />
+
+
+    <category title="Security" />
+    <item drawable="bitwarden" name="Bitwarden" />
+    <item drawable="bitwarden_alt1" name="Bitwarden (Disc)" />
+    <item drawable="bitwarden_alt2" name="Bitwarden (Rimmed)" />
+    <item drawable="bitwarden_alt3" name="Bitwarden (Symbol)" />
+    <item drawable="twofas_auth" name="2FAS Auth" />
+    <item drawable="twofas_auth_alt1" name="2FAS Auth (Disc)" />
+    <item drawable="twofas_auth_alt2" name="2FAS Auth (Rimmed)" />
+    <item drawable="twofas_auth_alt3" name="2FAS Auth (Symbol)" />
+    <item drawable="proton_vpn" name="Proton VPN" />
+    <item drawable="proton_vpn_alt1" name="Proton VPN (Disc)" />
+    <item drawable="proton_vpn_alt2" name="Proton VPN (Rimmed)" />
+    <item drawable="proton_vpn_alt3" name="Proton VPN (Symbol)" />
+
+    <category title="Social" />
+    <item drawable="whatsapp" name="WhatsApp" />
+    <item drawable="whatsapp_alt1" name="WhatsApp (Disc)" />
+    <item drawable="whatsapp_alt2" name="WhatsApp (Rimmed)" />
+    <item drawable="whatsapp_alt3" name="WhatsApp (Symbol)" />
+    <item drawable="instagram" name="Instagram" />
+    <item drawable="instagram_alt1" name="Instagram (Disc)" />
+    <item drawable="instagram_alt2" name="Instagram (Rimmed)" />
+    <item drawable="instagram_alt3" name="Instagram (Symbol)" />
+    <item drawable="discord" name="Discord" />
+    <item drawable="discord_alt1" name="Discord (Disc)" />
+    <item drawable="discord_alt2" name="Discord (Rimmed)" />
+    <item drawable="discord_alt3" name="Discord (Symbol)" />
+    <item drawable="exteraless" name="exteraless" />
+    <item drawable="exteraless_alt1" name="exteraless (Disc)" />
+    <item drawable="exteraless_alt2" name="exteraless (Rimmed)" />
+    <item drawable="exteraless_alt3" name="exteraless (Symbol)" />
+    <item drawable="reddit" name="Reddit" />
+    <item drawable="reddit_alt1" name="Reddit (Disc)" />
+    <item drawable="reddit_alt2" name="Reddit (Rimmed)" />
+    <item drawable="reddit_alt3" name="Reddit (Symbol)" />
+    <item drawable="tiktok_lite" name="TikTok Lite" />
+    <item drawable="tiktok_lite_alt1" name="TikTok Lite (Disc)" />
+    <item drawable="tiktok_lite_alt2" name="TikTok Lite (Rimmed)" />
+    <item drawable="tiktok_lite_alt3" name="TikTok Lite (Symbol)" />
+    <item drawable="wupp" name="Wupp" />
+    <item drawable="wupp_alt1" name="Wupp (Disc)" />
+    <item drawable="wupp_alt2" name="Wupp (Rimmed)" />
+    <item drawable="wupp_alt3" name="Wupp (Symbol)" />
+
+    <category title="Media" />
+    <item drawable="youtube" name="YouTube" />
+    <item drawable="youtube_alt1" name="YouTube (Disc)" />
+    <item drawable="youtube_alt2" name="YouTube (Rimmed)" />
+    <item drawable="youtube_alt3" name="YouTube (Symbol)" />
+    <item drawable="anker_soundcore" name="Anker soundcore" />
+    <item drawable="anker_soundcore_alt1" name="Anker soundcore (Disc)" />
+    <item drawable="anker_soundcore_alt2" name="Anker soundcore (Rimmed)" />
+    <item drawable="apple_music" name="Apple Music" />
+    <item drawable="apple_music_alt1" name="Apple Music (Disc)" />
+    <item drawable="apple_music_alt2" name="Apple Music (Rimmed)" />
+    <item drawable="apple_music_alt3" name="Apple Music (Symbol)" />
+    <item drawable="bitchord" name="BitChord" />
+    <item drawable="bitchord_alt1" name="BitChord (Disc)" />
+    <item drawable="bitchord_alt2" name="BitChord (Rimmed)" />
+    <item drawable="bitchord_alt3" name="BitChord (Symbol)" />
+    <item drawable="cloudstream" name="CloudStream" />
+    <item drawable="cloudstream_alt1" name="CloudStream (Disc)" />
+    <item drawable="cloudstream_alt2" name="CloudStream (Rimmed)" />
+    <item drawable="cloudstream_alt3" name="CloudStream (Symbol)" />
+    <item drawable="jamesdsp" name="JamesDSP" />
+    <item drawable="jamesdsp_alt1" name="JamesDSP (Disc)" />
+    <item drawable="jamesdsp_alt2" name="JamesDSP (Rimmed)" />
+    <item drawable="jamesdsp_alt3" name="JamesDSP (Symbol)" />
+    <item drawable="mochy" name="Mochy" />
+    <item drawable="mochy_alt1" name="Mochy (Disc)" />
+    <item drawable="mochy_alt2" name="Mochy (Rimmed)" />
+    <item drawable="mochy_alt3" name="Mochy (Symbol)" />
+    <item drawable="nuvio" name="Nuvio" />
+    <item drawable="nuvio_alt1" name="Nuvio (Disc)" />
+    <item drawable="nuvio_alt2" name="Nuvio (Rimmed)" />
+    <item drawable="nuvio_alt3" name="Nuvio (Symbol)" />
+    <item drawable="qobuz" name="Qobuz" />
+    <item drawable="qobuz_alt1" name="Qobuz (Disc)" />
+    <item drawable="qobuz_alt2" name="Qobuz (Rimmed)" />
+    <item drawable="qobuz_alt3" name="Qobuz (Symbol)" />
+
+    <category title="System" />
+    <item drawable="telefon" name="Telefon" />
+    <item drawable="telefon_alt1" name="Telefon (Disc)" />
+    <item drawable="telefon_alt2" name="Telefon (Rimmed)" />
+    <item drawable="telefon_alt3" name="Telefon (Symbol)" />
+    <item drawable="mesajlar" name="Mesajlar" />
+    <item drawable="mesajlar_alt1" name="Mesajlar (Disc)" />
+    <item drawable="mesajlar_alt2" name="Mesajlar (Rimmed)" />
+    <item drawable="mesajlar_alt3" name="Mesajlar (Symbol)" />
+    <item drawable="kamera" name="Kamera" />
+    <item drawable="kamera_alt1" name="Kamera (Disc)" />
+    <item drawable="kamera_alt2" name="Kamera (Rimmed)" />
+    <item drawable="kamera_alt3" name="Kamera (Symbol)" />
+    <item drawable="foto_raflar" name="Fotoğraflar" />
+    <item drawable="foto_raflar_alt1" name="Fotoğraflar (Disc)" />
+    <item drawable="foto_raflar_alt2" name="Fotoğraflar (Rimmed)" />
+    <item drawable="foto_raflar_alt3" name="Fotoğraflar (Symbol)" />
+    <item drawable="saat" name="Saat" />
+    <item drawable="saat_alt1" name="Saat (Disc)" />
+    <item drawable="saat_alt2" name="Saat (Rimmed)" />
+    <item drawable="saat_alt3" name="Saat (Symbol)" />
+    <item drawable="ayarlar" name="Ayarlar" />
+    <item drawable="ayarlar_alt1" name="Ayarlar (Disc)" />
+    <item drawable="ayarlar_alt2" name="Ayarlar (Rimmed)" />
+    <item drawable="ayarlar_alt3" name="Ayarlar (Symbol)" />
+
+    <category title="AI" />
+    <item drawable="chatgpt" name="ChatGPT" />
+    <item drawable="chatgpt_alt1" name="ChatGPT (Disc)" />
+    <item drawable="chatgpt_alt2" name="ChatGPT (Rimmed)" />
+    <item drawable="chatgpt_alt3" name="ChatGPT (Symbol)" />
+    <item drawable="claude" name="Claude" />
+    <item drawable="claude_alt1" name="Claude (Disc)" />
+    <item drawable="claude_alt2" name="Claude (Rimmed)" />
+    <item drawable="claude_alt3" name="Claude (Symbol)" />
+    <item drawable="opencode_mobile" name="OpenCode Mobile" />
+    <item drawable="opencode_mobile_alt1" name="OpenCode Mobile (Disc)" />
+    <item drawable="opencode_mobile_alt2" name="OpenCode Mobile (Rimmed)" />
+    <item drawable="opencode_mobile_alt3" name="OpenCode Mobile (Symbol)" />
+    <item drawable="qwen" name="Qwen" />
+    <item drawable="qwen_alt1" name="Qwen (Disc)" />
+    <item drawable="qwen_alt2" name="Qwen (Rimmed)" />
+    <item drawable="qwen_alt3" name="Qwen (Symbol)" />
+
+    <category title="Tools" />
+    <item drawable="onedm" name="1DM+" />
+    <item drawable="onedm_alt1" name="1DM+ (Disc)" />
+    <item drawable="onedm_alt2" name="1DM+ (Rimmed)" />
+    <item drawable="onedm_alt3" name="1DM+ (Symbol)" />
+    <item drawable="ashell_you" name="aShell You" />
+    <item drawable="ashell_you_alt1" name="aShell You (Disc)" />
+    <item drawable="ashell_you_alt2" name="aShell You (Rimmed)" />
+    <item drawable="ashell_you_alt3" name="aShell You (Symbol)" />
+    <item drawable="colorblendr" name="ColorBlendr" />
+    <item drawable="colorblendr_alt1" name="ColorBlendr (Disc)" />
+    <item drawable="colorblendr_alt2" name="ColorBlendr (Rimmed)" />
+    <item drawable="colorblendr_alt3" name="ColorBlendr (Symbol)" />
+    <item drawable="databackup" name="DataBackup" />
+    <item drawable="databackup_alt1" name="DataBackup (Disc)" />
+    <item drawable="databackup_alt2" name="DataBackup (Rimmed)" />
+    <item drawable="databackup_alt3" name="DataBackup (Symbol)" />
+    <item drawable="f_droid" name="F-Droid" />
+    <item drawable="f_droid_alt1" name="F-Droid (Disc)" />
+    <item drawable="f_droid_alt2" name="F-Droid (Rimmed)" />
+    <item drawable="f_droid_alt3" name="F-Droid (Symbol)" />
+    <item drawable="ffupdater" name="FFUpdater" />
+    <item drawable="ffupdater_alt1" name="FFUpdater (Disc)" />
+    <item drawable="ffupdater_alt2" name="FFUpdater (Rimmed)" />
+    <item drawable="ffupdater_alt3" name="FFUpdater (Symbol)" />
+    <item drawable="frostkeys" name="FrostKeys" />
+    <item drawable="frostkeys_alt1" name="FrostKeys (Disc)" />
+    <item drawable="frostkeys_alt2" name="FrostKeys (Rimmed)" />
+    <item drawable="frostkeys_alt3" name="FrostKeys (Symbol)" />
+    <item drawable="gboardwu" name="GboardWu" />
+    <item drawable="gboardwu_alt1" name="GboardWu (Disc)" />
+    <item drawable="gboardwu_alt2" name="GboardWu (Rimmed)" />
+    <item drawable="gboardwu_alt3" name="GboardWu (Symbol)" />
+    <item drawable="iconrequest" name="IconRequest" />
+    <item drawable="iconrequest_alt1" name="IconRequest (Disc)" />
+    <item drawable="iconrequest_alt2" name="IconRequest (Rimmed)" />
+    <item drawable="iconrequest_alt3" name="IconRequest (Symbol)" />
+    <item drawable="installerx_revived" name="InstallerX Revived" />
+    <item drawable="installerx_revived_alt1" name="InstallerX Revived (Disc)" />
+    <item drawable="installerx_revived_alt2" name="InstallerX Revived (Rimmed)" />
+    <item drawable="installerx_revived_alt3" name="InstallerX Revived (Symbol)" />
+    <item drawable="kadraj" name="Kadraj" />
+    <item drawable="kadraj_alt1" name="Kadraj (Disc)" />
+    <item drawable="kadraj_alt2" name="Kadraj (Rimmed)" />
+    <item drawable="kadraj_alt3" name="Kadraj (Symbol)" />
+    <item drawable="kernelsu_next" name="KernelSU-Next" />
+    <item drawable="kernelsu_next_alt1" name="KernelSU-Next (Disc)" />
+    <item drawable="kernelsu_next_alt2" name="KernelSU-Next (Rimmed)" />
+    <item drawable="kernelsu_next_alt3" name="KernelSU-Next (Symbol)" />
+    <item drawable="ki_iler" name="Kişiler" />
+    <item drawable="ki_iler_alt1" name="Kişiler (Disc)" />
+    <item drawable="ki_iler_alt2" name="Kişiler (Rimmed)" />
+    <item drawable="ki_iler_alt3" name="Kişiler (Symbol)" />
+    <item drawable="mix" name="MiX" />
+    <item drawable="mix_alt1" name="MiX (Disc)" />
+    <item drawable="mix_alt2" name="MiX (Rimmed)" />
+    <item drawable="mix_alt3" name="MiX (Symbol)" />
+    <item drawable="mornye" name="Mornye" />
+    <item drawable="mornye_alt1" name="Mornye (Disc)" />
+    <item drawable="mornye_alt2" name="Mornye (Rimmed)" />
+    <item drawable="mornye_alt3" name="Mornye (Symbol)" />
+    <item drawable="morphe" name="Morphe" />
+    <item drawable="morphe_alt1" name="Morphe (Disc)" />
+    <item drawable="morphe_alt2" name="Morphe (Rimmed)" />
+    <item drawable="morphe_alt3" name="Morphe (Symbol)" />
+    <item drawable="obtainx" name="ObtainX" />
+    <item drawable="obtainx_alt1" name="ObtainX (Disc)" />
+    <item drawable="obtainx_alt2" name="ObtainX (Rimmed)" />
+    <item drawable="obtainx_alt3" name="ObtainX (Symbol)" />
+    <item drawable="payload_dumper" name="Payload Dumper" />
+    <item drawable="payload_dumper_alt1" name="Payload Dumper (Disc)" />
+    <item drawable="payload_dumper_alt2" name="Payload Dumper (Rimmed)" />
+    <item drawable="payload_dumper_alt3" name="Payload Dumper (Symbol)" />
+    <item drawable="pentas" name="Pentas" />
+    <item drawable="pentas_alt1" name="Pentas (Disc)" />
+    <item drawable="pentas_alt2" name="Pentas (Rimmed)" />
+    <item drawable="pentas_alt3" name="Pentas (Symbol)" />
+    <item drawable="play_store" name="Play Store" />
+    <item drawable="play_store_alt1" name="Play Store (Disc)" />
+    <item drawable="play_store_alt2" name="Play Store (Rimmed)" />
+    <item drawable="play_store_alt3" name="Play Store (Symbol)" />
+    <item drawable="plush_iconpack" name="Plush Iconpack" />
+    <item drawable="plush_iconpack_alt1" name="Plush Iconpack (Disc)" />
+    <item drawable="plush_iconpack_alt2" name="Plush Iconpack (Rimmed)" />
+    <item drawable="plush_iconpack_alt3" name="Plush Iconpack (Symbol)" />
+    <item drawable="proton_drive" name="Proton Drive" />
+    <item drawable="proton_drive_alt1" name="Proton Drive (Disc)" />
+    <item drawable="proton_drive_alt2" name="Proton Drive (Rimmed)" />
+    <item drawable="proton_drive_alt3" name="Proton Drive (Symbol)" />
+    <item drawable="recon" name="Recon" />
+    <item drawable="recon_alt1" name="Recon (Disc)" />
+    <item drawable="recon_alt2" name="Recon (Rimmed)" />
+    <item drawable="recon_alt3" name="Recon (Symbol)" />
+    <item drawable="scene" name="Scene" />
+    <item drawable="scene_alt1" name="Scene (Disc)" />
+    <item drawable="scene_alt2" name="Scene (Rimmed)" />
+    <item drawable="scene_alt3" name="Scene (Symbol)" />
+    <item drawable="sd_maid_se" name="SD Maid SE" />
+    <item drawable="sd_maid_se_alt1" name="SD Maid SE (Disc)" />
+    <item drawable="sd_maid_se_alt2" name="SD Maid SE (Rimmed)" />
+    <item drawable="sd_maid_se_alt3" name="SD Maid SE (Symbol)" />
+    <item drawable="smart_launcher" name="Smart Launcher" />
+    <item drawable="smart_launcher_alt1" name="Smart Launcher (Disc)" />
+    <item drawable="smart_launcher_alt2" name="Smart Launcher (Rimmed)" />
+    <item drawable="smart_launcher_alt3" name="Smart Launcher (Symbol)" />
+    <item drawable="stride" name="Stride" />
+    <item drawable="stride_alt1" name="Stride (Disc)" />
+    <item drawable="stride_alt2" name="Stride (Rimmed)" />
+    <item drawable="stride_alt3" name="Stride (Symbol)" />
+    <item drawable="swift_backup" name="Swift Backup" />
+    <item drawable="swift_backup_alt1" name="Swift Backup (Disc)" />
+    <item drawable="swift_backup_alt2" name="Swift Backup (Rimmed)" />
+    <item drawable="swift_backup_alt3" name="Swift Backup (Symbol)" />
+    <item drawable="termux_api" name="Termux:API" />
+    <item drawable="termux_api_alt1" name="Termux:API (Disc)" />
+    <item drawable="termux_api_alt2" name="Termux:API (Rimmed)" />
+    <item drawable="termux_api_alt3" name="Termux:API (Symbol)" />
+    <item drawable="termux_boot" name="Termux:Boot" />
+    <item drawable="termux_boot_alt1" name="Termux:Boot (Disc)" />
+    <item drawable="termux_boot_alt2" name="Termux:Boot (Rimmed)" />
+    <item drawable="termux_boot_alt3" name="Termux:Boot (Symbol)" />
+    <item drawable="termux_widget" name="Termux:Widget" />
+    <item drawable="termux_widget_alt1" name="Termux:Widget (Disc)" />
+    <item drawable="termux_widget_alt2" name="Termux:Widget (Rimmed)" />
+    <item drawable="termux_widget_alt3" name="Termux:Widget (Symbol)" />
+    <item drawable="thunderbird" name="Thunderbird" />
+    <item drawable="thunderbird_alt1" name="Thunderbird (Disc)" />
+    <item drawable="thunderbird_alt2" name="Thunderbird (Rimmed)" />
+    <item drawable="thunderbird_alt3" name="Thunderbird (Symbol)" />
+    <item drawable="trendyolmilla" name="Trendyolmilla" />
+    <item drawable="trendyolmilla_alt1" name="Trendyolmilla (Disc)" />
+    <item drawable="trendyolmilla_alt2" name="Trendyolmilla (Rimmed)" />
+    <item drawable="trestle" name="Trestle" />
+    <item drawable="trestle_alt1" name="Trestle (Disc)" />
+    <item drawable="trestle_alt2" name="Trestle (Rimmed)" />
+    <item drawable="trestle_alt3" name="Trestle (Symbol)" />
+    <item drawable="t_rk_telekom" name="Türk Telekom" />
+    <item drawable="t_rk_telekom_alt1" name="Türk Telekom (Disc)" />
+    <item drawable="t_rk_telekom_alt2" name="Türk Telekom (Rimmed)" />
+    <item drawable="t_rk_telekom_alt3" name="Türk Telekom (Symbol)" />
+    <item drawable="vortex" name="vortex" />
+    <item drawable="vortex_alt1" name="vortex (Disc)" />
+    <item drawable="vortex_alt2" name="vortex (Rimmed)" />
+    <item drawable="vortex_alt3" name="vortex (Symbol)" />
+    <item drawable="bcr" name="BCR" />
+    <item drawable="bcr_alt1" name="BCR (Disc)" />
+    <item drawable="bcr_alt2" name="BCR (Rimmed)" />
+    <item drawable="bcr_alt3" name="BCR (Symbol)" />
+    <item drawable="hesap_makinesi" name="Hesap Makinesi" />
+    <item drawable="hesap_makinesi_alt1" name="Hesap Makinesi (Disc)" />
+    <item drawable="hesap_makinesi_alt2" name="Hesap Makinesi (Rimmed)" />
+    <item drawable="hesap_makinesi_alt3" name="Hesap Makinesi (Symbol)" />
+    <item drawable="konabess" name="KonaBess" />
+    <item drawable="konabess_alt1" name="KonaBess (Disc)" />
+    <item drawable="konabess_alt2" name="KonaBess (Rimmed)" />
+    <item drawable="konabess_alt3" name="KonaBess (Symbol)" />
+    <item drawable="mt_manager" name="MT Manager" />
+    <item drawable="mt_manager_alt1" name="MT Manager (Disc)" />
+    <item drawable="mt_manager_alt2" name="MT Manager (Rimmed)" />
+    <item drawable="mt_manager_alt3" name="MT Manager (Symbol)" />
+    <item drawable="pix_material_you_light_dark" name="Pix Material You Light/Dark" />
+    <item drawable="pix_material_you_light_dark_alt1" name="Pix Material You Light/Dark (Disc)" />
+    <item drawable="pix_material_you_light_dark_alt2" name="Pix Material You Light/Dark (Rimmed)" />
+    <item drawable="pix_material_you_light_dark_alt3" name="Pix Material You Light/Dark (Symbol)" />
+    <item drawable="shizuku" name="Shizuku" />
+    <item drawable="shizuku_alt1" name="Shizuku (Disc)" />
+    <item drawable="shizuku_alt2" name="Shizuku (Rimmed)" />
+    <item drawable="shizuku_alt3" name="Shizuku (Symbol)" />
+    <item drawable="terminal_em_lat_r" name="Terminal Emülatörü" />
+    <item drawable="terminal_em_lat_r_alt1" name="Terminal Emülatörü (Disc)" />
+    <item drawable="terminal_em_lat_r_alt2" name="Terminal Emülatörü (Rimmed)" />
+    <item drawable="terminal_em_lat_r_alt3" name="Terminal Emülatörü (Symbol)" />
+    <item drawable="walpy" name="Walpy" />
+    <item drawable="walpy_alt1" name="Walpy (Disc)" />
+    <item drawable="walpy_alt2" name="Walpy (Rimmed)" />
+    <item drawable="walpy_alt3" name="Walpy (Symbol)" />
+
+    <category title="Browsers" />
+    <item drawable="bare" name="Bare" />
+    <item drawable="bare_alt1" name="Bare (Disc)" />
+    <item drawable="bare_alt2" name="Bare (Rimmed)" />
+    <item drawable="bare_alt3" name="Bare (Symbol)" />
+    <item drawable="firefox_beta" name="Firefox Beta" />
+    <item drawable="firefox_beta_alt1" name="Firefox Beta (Disc)" />
+    <item drawable="firefox_beta_alt2" name="Firefox Beta (Rimmed)" />
+    <item drawable="firefox_beta_alt3" name="Firefox Beta (Symbol)" />
+    <item drawable="firefox_nightly" name="Firefox Nightly" />
+    <item drawable="firefox_nightly_alt1" name="Firefox Nightly (Disc)" />
+    <item drawable="firefox_nightly_alt2" name="Firefox Nightly (Rimmed)" />
+    <item drawable="firefox_nightly_alt3" name="Firefox Nightly (Symbol)" />
+    <item drawable="weblibre" name="WebLibre" />
+    <item drawable="weblibre_alt1" name="WebLibre (Disc)" />
+    <item drawable="weblibre_alt2" name="WebLibre (Rimmed)" />
+    <item drawable="weblibre_alt3" name="WebLibre (Symbol)" />
+
+    <category title="Finance" />
+    <item drawable="binance_tr" name="Binance TR" />
+    <item drawable="binance_tr_alt1" name="Binance TR (Disc)" />
+    <item drawable="binance_tr_alt2" name="Binance TR (Rimmed)" />
+    <item drawable="binance_tr_alt3" name="Binance TR (Symbol)" />
+    <item drawable="enpara" name="Enpara" />
+    <item drawable="enpara_alt1" name="Enpara (Disc)" />
+    <item drawable="enpara_alt2" name="Enpara (Rimmed)" />
+    <item drawable="enpara_alt3" name="Enpara (Symbol)" />
+    <item drawable="midas" name="Midas" />
+    <item drawable="midas_alt1" name="Midas (Disc)" />
+    <item drawable="midas_alt2" name="Midas (Rimmed)" />
+    <item drawable="midas_alt3" name="Midas (Symbol)" />
+
+    <category title="Weather" />
+    <item drawable="today_weather" name="Today Weather" />
+    <item drawable="today_weather_alt1" name="Today Weather (Disc)" />
+    <item drawable="today_weather_alt2" name="Today Weather (Rimmed)" />
+    <item drawable="today_weather_alt3" name="Today Weather (Symbol)" />
+    <item drawable="y_hava_durumu" name="Y.Hava durumu" />
+    <item drawable="y_hava_durumu_alt1" name="Y.Hava durumu (Disc)" />
+    <item drawable="y_hava_durumu_alt2" name="Y.Hava durumu (Rimmed)" />
+    <item drawable="y_hava_durumu_alt3" name="Y.Hava durumu (Symbol)" />
+
+    <category title="Games" />
+    <item drawable="clash_royale" name="Clash Royale" />
+    <item drawable="clash_royale_alt1" name="Clash Royale (Disc)" />
+    <item drawable="clash_royale_alt2" name="Clash Royale (Rimmed)" />
+    <item drawable="clash_royale_alt3" name="Clash Royale (Symbol)" />
+    <item drawable="survivor_io" name="Survivor.io" />
+    <item drawable="survivor_io_alt1" name="Survivor.io (Disc)" />
+    <item drawable="survivor_io_alt2" name="Survivor.io (Rimmed)" />
+    <item drawable="survivor_io_alt3" name="Survivor.io (Symbol)" />
+</resources>

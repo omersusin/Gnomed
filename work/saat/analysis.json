@@ -1,0 +1,38 @@
+{
+ "file": "/home/user/Gnomed/work/saat/source.png",
+ "bbox_px_at_512": [
+  0,
+  0,
+  512,
+  512
+ ],
+ "aspect_w_over_h": 1.0,
+ "fill_ratio": 1.0,
+ "circularity": 0.788,
+ "mirror_symmetry_iou": 1.0,
+ "enclosed_holes": 0,
+ "silhouette_class": "square (sharp)",
+ "suggested_template": "square",
+ "dominant_colours": [
+  {
+   "hex": "#136f22",
+   "share": 0.713,
+   "nearest_hig": "green5",
+   "hig_hex": "#26a269",
+   "dE": 23.8
+  },
+  {
+   "hex": "#f7faf8",
+   "share": 0.287,
+   "nearest_hig": "light2",
+   "hig_hex": "#f6f5f4",
+   "dE": 2.2
+  }
+ ],
+ "thinnest_feature_px": {
+  "at_64": 4.5,
+  "at_48": 3.38,
+  "at_32": 2.25
+ },
+ "warnings": []
+}

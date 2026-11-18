@@ -1,0 +1,52 @@
+{
+ "file": "/home/user/Gnomed/work/chatgpt/source.png",
+ "bbox_px_at_512": [
+  0,
+  0,
+  512,
+  508
+ ],
+ "aspect_w_over_h": 1.008,
+ "fill_ratio": 0.735,
+ "circularity": 0.771,
+ "mirror_symmetry_iou": 0.864,
+ "enclosed_holes": 0,
+ "silhouette_class": "free silhouette",
+ "suggested_template": "free (fit visual weight)",
+ "dominant_colours": [
+  {
+   "hex": "#fcfcfc",
+   "share": 0.441,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 1.0
+  },
+  {
+   "hex": "#040404",
+   "share": 0.419,
+   "nearest_hig": "dark5",
+   "hig_hex": "#000000",
+   "dE": 1.0
+  },
+  {
+   "hex": "#555555",
+   "share": 0.071,
+   "nearest_hig": "dark2",
+   "hig_hex": "#5e5c64",
+   "dE": 5.9
+  },
+  {
+   "hex": "#aeaeae",
+   "share": 0.07,
+   "nearest_hig": "light4",
+   "hig_hex": "#c0bfbc",
+   "dE": 6.5
+  }
+ ],
+ "thinnest_feature_px": {
+  "at_64": 3.0,
+  "at_48": 2.25,
+  "at_32": 1.5
+ },
+ "warnings": []
+}

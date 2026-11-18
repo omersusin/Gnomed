@@ -1,0 +1,45 @@
+{
+ "file": "/home/user/Gnomed/work/kamera/source.png",
+ "bbox_px_at_512": [
+  0,
+  4,
+  512,
+  508
+ ],
+ "aspect_w_over_h": 1.008,
+ "fill_ratio": 0.751,
+ "circularity": 0.635,
+ "mirror_symmetry_iou": 0.887,
+ "enclosed_holes": 0,
+ "silhouette_class": "circle",
+ "suggested_template": "circle",
+ "dominant_colours": [
+  {
+   "hex": "#010101",
+   "share": 0.643,
+   "nearest_hig": "dark5",
+   "hig_hex": "#000000",
+   "dE": 0.3
+  },
+  {
+   "hex": "#705353",
+   "share": 0.176,
+   "nearest_hig": "dark2",
+   "hig_hex": "#5e5c64",
+   "dE": 13.2
+  },
+  {
+   "hex": "#363636",
+   "share": 0.174,
+   "nearest_hig": "dark3",
+   "hig_hex": "#3d3846",
+   "dE": 9.8
+  }
+ ],
+ "thinnest_feature_px": {
+  "at_64": 3.0,
+  "at_48": 2.25,
+  "at_32": 1.5
+ },
+ "warnings": []
+}

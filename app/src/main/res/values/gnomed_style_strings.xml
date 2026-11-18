@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Where the per-style APKs are published (GitHub Actions release, see .github/workflows/build.yml). %1$s = style -->
+    <string name="gnomed_release_url" translatable="false">https://github.com/omersusin/Gnomed/releases/latest/download/gnomed-%1$s.apk</string>
+
+    <string name="gnomed_style_title">Icon style</string>
+    <string-array name="gnomed_style_labels">
+        <item>Faithful — square plate</item>
+        <item>Sound Disc — round disc</item>
+        <item>Rimmed — light rim</item>
+        <item>Symbol — no plate</item>
+    </string-array>
+    <string name="gnomed_style_keep">Keep current</string>
+    <string name="gnomed_style_switch">Switch</string>
+    <string name="gnomed_style_confirm">Gnomed will download the %1$s version of the pack and update itself. Your launcher reloads the icons after the update. Apps that have no icon in this style keep the Faithful one.</string>
+    <string name="gnomed_style_downloading">Downloading style…</string>
+    <string name="gnomed_style_failed">Style change failed: %1$s</string>
+    <string name="gnomed_style_permission_title">Allow updates from Gnomed</string>
+    <string name="gnomed_style_permission">To switch styles, Gnomed installs an update of itself. Allow \"Install unknown apps\" for Gnomed, then choose the style again.</string>
+    <string name="gnomed_style_open_settings">Open settings</string>
+    <string name="gnomed_style_signature">the update is signed with a different key. Install the style APK from the GitHub release once.</string>
+</resources>

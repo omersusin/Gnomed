@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Marti (source logo)</title>
+  <desc>original artwork made for the gnome-android-icons skill demo | licence: CC0-1.0</desc>
+  <path id="tile" d="M32 4H96A28 28 0 0 1 124 32V96A28 28 0 0 1 96 124H32A28 28 0 0 1 4 96V32A28 28 0 0 1 32 4Z" fill="#ff6b57"/>
+  <path id="bubble" d="M55 32H73A25 25 0 0 1 98 57A25 25 0 0 1 73 82H58L42.5 94.2Q36.6 98.6 37.1 91.5L37.3 74.7A25 25 0 0 1 30 57A25 25 0 0 1 55 32Z" fill="#ffffff"/>
+  <path id="gull" d="M38 60C44 49 56 46 64 57C72 46 84 49 90 60C83 55 73 56 64 66C55 56 45 55 38 60Z" fill="#ff6b57"/>
+</svg>

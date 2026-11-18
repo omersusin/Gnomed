@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Kamera - Rimmed</title>
+  <desc>geometry: kamera IconRequest PNG, colour-mask potrace (work/_lib/gtrace.py, IoU &gt;= 0.99 per part); GNOME construction: Gnomed</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#c2c0bc"/><stop offset="0.225" stop-color="#deddda"/><stop offset="0.45" stop-color="#d5d3cf"/><stop offset="0.55" stop-color="#d5d3cf"/><stop offset="0.775" stop-color="#deddda"/><stop offset="1" stop-color="#c2c0bc"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="9.5" x2="0" y2="116.5"><stop offset="0" stop-color="#2b2639"/><stop offset="1" stop-color="#1b1627"/></linearGradient>
+    <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="96" y1="0" x2="114" y2="0"><stop offset="0" stop-color="#950828"/><stop offset="0.225" stop-color="#e33038"/><stop offset="0.45" stop-color="#b71834"/><stop offset="0.55" stop-color="#b71834"/><stop offset="0.775" stop-color="#e33038"/><stop offset="1" stop-color="#950828"/></linearGradient>
+  </defs>
+  <g id="rim">
+  <path id="rim-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g1)"/>
+  <path id="rim-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="#f6f5f4"/>
+  <path id="rim-inner" d="M10.5 63A53.5 53.5 0 1 1 117.5 63A53.5 53.5 0 1 1 10.5 63Z" fill="url(#g2)"/>
+  <path id="rim-recess" d="M10.5 63A53.5 53.5 0 1 1 117.5 63A53.5 53.5 0 1 1 10.5 63ZM10.5 64.2A53.5 53.5 0 1 1 117.5 64.2A53.5 53.5 0 1 1 10.5 64.2Z" fill="#000000" opacity="0.1" fill-rule="evenodd"/>
+  </g>
+  <g id="rings">
+  <path id="ring1" d="M24.171 62.626A40.229 40.229 0 1 1 104.629 62.626A40.229 40.229 0 1 1 24.171 62.626ZM29.241 63.026A34.751 34.751 0 1 1 98.742 63.026A34.751 34.751 0 1 1 29.241 63.026Z" fill="#3d3846" fill-rule="evenodd"/>
+  <path id="ring2" d="M35.954 62.661A28.402 28.402 0 1 1 92.759 62.661A28.402 28.402 0 1 1 35.954 62.661ZM45.651 62.226A19.149 19.149 0 1 1 83.949 62.226A19.149 19.149 0 1 1 45.651 62.226Z" fill="#5e5c64" fill-rule="evenodd"/>
+  </g>
+  <g id="dot">
+  <path id="dot-chin" d="M96 23.5A9 9 0 1 1 114 23.5A9 9 0 1 1 96 23.5Z" fill="url(#g3)"/>
+  <path id="dot-face" d="M96 22A9 9 0 1 1 114 22A9 9 0 1 1 96 22Z" fill="#ed333b"/>
+  </g>
+</svg>

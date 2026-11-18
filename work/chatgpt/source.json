@@ -1,0 +1,71 @@
+{
+ "input": "/tmp/claude-0/-home-user-Gnomed/40d9f5d6-2e5b-5e89-9471-629963fd4223/scratchpad/iconreq/icons/chatgpt.png",
+ "input_size": [
+  192,
+  192
+ ],
+ "viewer_bg": "#ffffff",
+ "content_rect": [
+  32,
+  32,
+  128,
+  127
+ ],
+ "content_detection": "component",
+ "canvas_color": "#ffffff",
+ "canvas_uniformity": 1.0,
+ "canvas_saturation": 0.0,
+ "background": "removed (neutral canvas)",
+ "removed_fraction": 0.354,
+ "warning": "source is only 120px; upscaled x4.3 - use it as reference, not as artwork",
+ "output": "/home/user/Gnomed/work/chatgpt/source.png",
+ "trimmed_size_px": [
+  120,
+  119
+ ],
+ "aspect": 1.008,
+ "dominant_colors": [
+  {
+   "hex": "#ffffff",
+   "share": 0.384,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 0.1
+  },
+  {
+   "hex": "#010101",
+   "share": 0.378,
+   "nearest_hig": "dark5",
+   "hig_hex": "#000000",
+   "dE": 0.3
+  },
+  {
+   "hex": "#f7f7f7",
+   "share": 0.026,
+   "nearest_hig": "light2",
+   "hig_hex": "#f6f5f4",
+   "dE": 0.8
+  },
+  {
+   "hex": "#121212",
+   "share": 0.021,
+   "nearest_hig": "dark5",
+   "hig_hex": "#000000",
+   "dE": 5.3
+  },
+  {
+   "hex": "#eaeaea",
+   "share": 0.015,
+   "nearest_hig": "light2",
+   "hig_hex": "#f6f5f4",
+   "dE": 4.0
+  },
+  {
+   "hex": "#1d1d1d",
+   "share": 0.014,
+   "nearest_hig": "dark5",
+   "hig_hex": "#000000",
+   "dE": 10.8
+  }
+ ]
+}

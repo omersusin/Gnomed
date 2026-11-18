@@ -1,0 +1,70 @@
+{
+ "input": "/tmp/claude-0/-home-user-Gnomed/40d9f5d6-2e5b-5e89-9471-629963fd4223/scratchpad/iconreq/icons/bitwarden.png",
+ "input_size": [
+  192,
+  192
+ ],
+ "viewer_bg": "#175ddc",
+ "content_rect": [
+  0,
+  0,
+  192,
+  192
+ ],
+ "content_detection": "component",
+ "canvas_color": "#175ddc",
+ "canvas_uniformity": 0.81,
+ "canvas_saturation": 0.895,
+ "background": "kept",
+ "warning": "source is only 192px; upscaled x2.7 - use it as reference, not as artwork",
+ "output": "/home/user/Gnomed/work/bitwarden/source.png",
+ "trimmed_size_px": [
+  192,
+  192
+ ],
+ "aspect": 1.0,
+ "dominant_colors": [
+  {
+   "hex": "#175ddc",
+   "share": 0.544,
+   "nearest_hig": "blue4",
+   "hig_hex": "#1c71d8",
+   "dE": 18.6
+  },
+  {
+   "hex": "#ffffff",
+   "share": 0.179,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 0.0
+  },
+  {
+   "hex": "#1555c8",
+   "share": 0.07,
+   "nearest_hig": "blue4",
+   "hig_hex": "#1c71d8",
+   "dE": 15.8
+  },
+  {
+   "hex": "#1658cf",
+   "share": 0.063,
+   "nearest_hig": "blue4",
+   "hig_hex": "#1c71d8",
+   "dE": 16.6
+  },
+  {
+   "hex": "#1452c3",
+   "share": 0.049,
+   "nearest_hig": "blue4",
+   "hig_hex": "#1c71d8",
+   "dE": 15.8
+  },
+  {
+   "hex": "#144fbc",
+   "share": 0.023,
+   "nearest_hig": "blue4",
+   "hig_hex": "#1c71d8",
+   "dE": 15.6
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Marti - Free Symbol</title>
+  <desc>original artwork made for the gnome-android-icons skill demo | licence: CC0-1.0</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="12" y1="0" x2="116" y2="0"><stop offset="0" stop-color="#aa403f"/><stop offset="0.163" stop-color="#f56754"/><stop offset="0.327" stop-color="#cc504b"/><stop offset="0.673" stop-color="#cc504b"/><stop offset="0.837" stop-color="#f56754"/><stop offset="1" stop-color="#aa403f"/></linearGradient>
+  </defs>
+  <g id="bubble">
+  <path id="bubble-chin" d="M53.5 18L80.5 18A37.5 37.5 0 0 1 118 55.5A37.5 37.5 0 0 1 80.5 93L58 93L34.75 111.3Q25.9 117.9 26.65 107.25L26.95 82.05A37.5 37.5 0 0 1 16 55.5A37.5 37.5 0 0 1 53.5 18" fill="url(#g1)"/>
+  <path id="bubble-face" d="M 53.5,14 L 80.5,14 A 37.5,37.5 0 0,1 118,51.5 A 37.5,37.5 0 0,1 80.5,89 L 58,89 L 34.75,107.3 Q 25.9,113.9 26.65,103.25 L 26.95,78.05 A 37.5,37.5 0 0,1 16,51.5 A 37.5,37.5 0 0,1 53.5,14" fill="#ff6b57"/>
+  </g>
+  <g id="gull">
+  <path id="gull-lift" d="M28 58C37 41.5 55 37 67 53.5C79 37 97 41.5 106 58C95.5 50.5 80.5 52 67 67C53.5 52 38.5 50.5 28 58" fill="#c0bfbc"/>
+  <path id="gull-face" d="M 28,56 C 37,39.5 55,35 67,51.5 C 79,35 97,39.5 106,56 C 95.5,48.5 80.5,50 67,65 C 53.5,50 38.5,48.5 28,56" fill="#ffffff"/>
+  </g>
+</svg>

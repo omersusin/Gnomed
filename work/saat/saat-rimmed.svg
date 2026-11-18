@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Saat - Rimmed</title>
+  <desc>geometry: saat IconRequest PNG, colour-mask potrace (work/_lib/gtrace.py, IoU &gt;= 0.99 per part); GNOME construction: Gnomed</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#c2c0bc"/><stop offset="0.225" stop-color="#deddda"/><stop offset="0.45" stop-color="#d5d3cf"/><stop offset="0.55" stop-color="#d5d3cf"/><stop offset="0.775" stop-color="#deddda"/><stop offset="1" stop-color="#c2c0bc"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="15.731" x2="0" y2="110.269"><stop offset="0" stop-color="#1e7628"/><stop offset="1" stop-color="#006111"/></linearGradient>
+  </defs>
+  <g id="rim">
+  <path id="rim-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g1)"/>
+  <path id="rim-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="#f6f5f4"/>
+  <path id="rim-inner" d="M16.731 63A47.269 47.269 0 1 1 111.269 63A47.269 47.269 0 1 1 16.731 63Z" fill="url(#g2)"/>
+  <path id="rim-recess" d="M16.731 63A47.269 47.269 0 1 1 111.269 63A47.269 47.269 0 1 1 16.731 63ZM16.731 64.2A47.269 47.269 0 1 1 111.269 64.2A47.269 47.269 0 1 1 16.731 64.2Z" fill="#000000" opacity="0.1" fill-rule="evenodd"/>
+  </g>
+  <g id="mark">
+  <path id="mark-0-side" d="M82.499 90.108C81.477 90.009 80.494 89.573 79.561 88.828C78.906 88.292 60.517 69.793 59.742 68.88C59.355 68.424 58.601 67.183 58.462 66.776C58.214 66.032 58.214 66.002 58.214 53.309C58.214 38.859 58.145 40.09 59.028 38.542C60.159 36.567 62.095 35.495 64.318 35.624C65.578 35.694 66.402 35.961 67.196 36.547C68.188 37.271 68.744 37.956 69.359 39.177C69.875 40.189 69.855 39.733 69.895 51.721L69.935 62.301L70.084 62.608C70.203 62.866 71.84 64.524 78.817 71.481C87.62 80.244 87.908 80.541 88.434 81.544C89.763 84.065 89.317 87.28 87.421 88.838C86.092 89.93 84.573 90.327 82.499 90.108" fill="#deddda" fill-rule="evenodd"/>
+  <path id="mark-0-face" d="M 82.499,88.108 C 81.477,88.009 80.494,87.573 79.561,86.828 C 78.906,86.292 60.517,67.793 59.742,66.88 C 59.355,66.424 58.601,65.183 58.462,64.776 C 58.214,64.032 58.214,64.002 58.214,51.309 C 58.214,36.859 58.145,38.09 59.028,36.542 C 60.159,34.567 62.095,33.495 64.318,33.624 C 65.578,33.694 66.402,33.961 67.196,34.547 C 68.188,35.271 68.744,35.956 69.359,37.177 C 69.875,38.189 69.855,37.733 69.895,49.721 L 69.935,60.301 L 70.084,60.608 C 70.203,60.866 71.84,62.524 78.817,69.481 C 87.62,78.244 87.908,78.541 88.434,79.544 C 89.763,82.065 89.317,85.28 87.421,86.838 C 86.092,87.93 84.573,88.327 82.499,88.108" fill="#ffffff" fill-rule="evenodd"/>
+  </g>
+</svg>

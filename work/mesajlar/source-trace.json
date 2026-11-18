@@ -1,0 +1,16 @@
+{
+ "source": "/home/user/Gnomed/work/mesajlar/source.png",
+ "work_size": 768,
+ "noise_rgb": 0.0,
+ "detail_pass": null,
+ "gradient_parts": [],
+ "missed_details": [],
+ "smooth_shading": [],
+ "shapes": 16,
+ "colours": [
+  "#116e20",
+  "#599a63",
+  "#afceb4",
+  "#fefefe"
+ ]
+}

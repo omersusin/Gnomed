@@ -1,0 +1,59 @@
+{
+ "file": "/home/user/Gnomed/work/foto_raflar/source.png",
+ "bbox_px_at_512": [
+  0,
+  0,
+  512,
+  512
+ ],
+ "aspect_w_over_h": 1.0,
+ "fill_ratio": 1.0,
+ "circularity": 0.788,
+ "mirror_symmetry_iou": 1.0,
+ "enclosed_holes": 0,
+ "silhouette_class": "square (sharp)",
+ "suggested_template": "square",
+ "dominant_colours": [
+  {
+   "hex": "#fefefe",
+   "share": 0.754,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 0.3
+  },
+  {
+   "hex": "#589ef4",
+   "share": 0.077,
+   "nearest_hig": "blue2",
+   "hig_hex": "#62a0ea",
+   "dE": 7.0
+  },
+  {
+   "hex": "#fed713",
+   "share": 0.059,
+   "nearest_hig": "yellow3",
+   "hig_hex": "#f6d32d",
+   "dE": 7.1
+  },
+  {
+   "hex": "#fd526c",
+   "share": 0.059,
+   "nearest_hig": "red1",
+   "hig_hex": "#f66151",
+   "dE": 18.9
+  },
+  {
+   "hex": "#14925b",
+   "share": 0.052,
+   "nearest_hig": "green5",
+   "hig_hex": "#26a269",
+   "dE": 5.7
+  }
+ ],
+ "thinnest_feature_px": {
+  "at_64": 8.25,
+  "at_48": 6.19,
+  "at_32": 4.12
+ },
+ "warnings": []
+}

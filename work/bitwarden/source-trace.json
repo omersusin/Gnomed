@@ -1,0 +1,22 @@
+{
+ "source": "/home/user/Gnomed/work/bitwarden/source.png",
+ "work_size": 768,
+ "noise_rgb": 0.0,
+ "detail_pass": {
+  "regions": 1,
+  "colours_added": [
+   "#134eb9"
+  ]
+ },
+ "gradient_parts": [],
+ "missed_details": [],
+ "smooth_shading": [],
+ "shapes": 6,
+ "colours": [
+  "#020914",
+  "#134eb9",
+  "#175bd6",
+  "#8aace9",
+  "#fefeff"
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "file": "/home/user/Gnomed/work/bitwarden/source.png",
+ "bbox_px_at_512": [
+  0,
+  0,
+  512,
+  512
+ ],
+ "aspect_w_over_h": 1.0,
+ "fill_ratio": 1.0,
+ "circularity": 0.788,
+ "mirror_symmetry_iou": 1.0,
+ "enclosed_holes": 0,
+ "silhouette_class": "square (sharp)",
+ "suggested_template": "square",
+ "dominant_colours": [
+  {
+   "hex": "#175ad4",
+   "share": 0.802,
+   "nearest_hig": "blue4",
+   "hig_hex": "#1c71d8",
+   "dE": 16.8
+  },
+  {
+   "hex": "#fbfcfe",
+   "share": 0.198,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 1.4
+  }
+ ],
+ "thinnest_feature_px": {
+  "at_64": 4.25,
+  "at_48": 3.19,
+  "at_32": 2.12
+ },
+ "warnings": []
+}

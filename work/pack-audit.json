@@ -1,0 +1,4716 @@
+{
+ "summary": {
+  "components": 86,
+  "appfilter_drawables": 86,
+  "gallery": 304,
+  "categories": 11,
+  "resources": 312
+ },
+ "issues": [
+  [
+   "ERROR",
+   "appfilter: drawable 'app_drawer' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'browser' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'calculator' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'calendar' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'camera' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'clock' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'contacts' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'email' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'gallery' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'messaging' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'phone' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'some_app' has no resource file"
+  ],
+  [
+   "WARN",
+   "orphan resource (in no XML): nav_head.png"
+  ],
+  [
+   "WARN",
+   "orphan resource (in no XML): profile_picture.png"
+  ],
+  [
+   "WARN",
+   "icon_1.png: heavy visual mass 0.93 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_1.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_1.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_2.png: heavy visual mass 1.00 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_2.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_2.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_3.png: heavy visual mass 0.83 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_3.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_3.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_4.png: heavy visual mass 0.83 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_4.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_4.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_5.png: heavy visual mass 0.79 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_5.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_5.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_6.png: heavy visual mass 1.00 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_6.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_6.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_7.png: heavy visual mass 0.93 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_7.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_7.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_8.png: heavy visual mass 1.00 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_8.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_8.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_9.png: heavy visual mass 0.93 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_9.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_9.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_10.png: heavy visual mass 0.79 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_10.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_10.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "instagram_alt3.png: light visual mass 0.34 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "discord_alt3.png: bottom edge y=106 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "tiktok_lite_alt3.png: light visual mass 0.34 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "apple_music_alt3.png: light visual mass 0.34 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "bitchord_alt3.png: light visual mass 0.32 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "bitchord_alt3.png: bottom edge y=103 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "cloudstream_alt3.png: light visual mass 0.29 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "cloudstream_alt3.png: bottom edge y=92 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "jamesdsp_alt3.png: light visual mass 0.29 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "qobuz_alt3.png: light visual mass 0.24 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "qobuz_alt3.png: bottom edge y=91 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "telefon_alt3.png: light visual mass 0.23 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "onedm_alt3.png: bottom edge y=109 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "databackup_alt3.png: light visual mass 0.24 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "databackup_alt3.png: bottom edge y=106 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "frostkeys_alt3.png: bottom edge y=106 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "kadraj_alt3.png: light visual mass 0.26 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "mix_alt3.png: light visual mass 0.29 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "mix_alt3.png: bottom edge y=102 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "mornye_alt3.png: light visual mass 0.26 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "payload_dumper_alt3.png: light visual mass 0.32 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "pentas_alt3.png: bottom edge y=103 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "proton_drive_alt3.png: bottom edge y=110 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "scene_alt3.png: light visual mass 0.31 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "scene_alt3.png: bottom edge y=108 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "smart_launcher_alt3.png: light visual mass 0.31 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "stride_alt3.png: light visual mass 0.26 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "termux_api_alt3.png: light visual mass 0.24 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "termux_boot_alt3.png: light visual mass 0.24 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "termux_widget_alt3.png: light visual mass 0.24 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "t_rk_telekom_alt3.png: light visual mass 0.24 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "vortex_alt3.png: light visual mass 0.31 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "weblibre_alt3.png: bottom edge y=106 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "binance_tr_alt3.png: light visual mass 0.19 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "midas_alt3.png: light visual mass 0.25 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "midas_alt3.png: bottom edge y=99 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "today_weather_alt3.png: light visual mass 0.20 (official 0.38-0.71)"
+  ],
+  [
+   "INFO",
+   "appfilter fallback: <iconback img1=\"iconback\" /> (affects only unthemed apps)"
+  ],
+  [
+   "INFO",
+   "appfilter fallback: <iconmask img1=\"iconmask\" /> (affects only unthemed apps)"
+  ],
+  [
+   "INFO",
+   "appfilter fallback: <scale factor=\"0.64\" /> (affects only unthemed apps)"
+  ],
+  [
+   "INFO",
+   "230 gallery-only drawables (220 are _altN alternatives): anker_soundcore_alt1, anker_soundcore_alt2, apple_music_alt1, apple_music_alt2, apple_music_alt3, ashell_you_alt1, ashell_you_alt2, ashell_you_alt3, ayarlar_alt1, ayarlar_alt2, ayarlar_alt3, bare_alt1 ..."
+  ]
+ ],
+ "icons": [
+  {
+   "name": "icon_1",
+   "file": "app/src/main/res/drawable-nodpi/icon_1.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.93 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.925,
+   "chin": null
+  },
+  {
+   "name": "icon_2",
+   "file": "app/src/main/res/drawable-nodpi/icon_2.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 1.00 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.996,
+   "chin": null
+  },
+  {
+   "name": "icon_3",
+   "file": "app/src/main/res/drawable-nodpi/icon_3.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.83 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.831,
+   "chin": 125.8
+  },
+  {
+   "name": "icon_4",
+   "file": "app/src/main/res/drawable-nodpi/icon_4.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.83 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.831,
+   "chin": 125.2
+  },
+  {
+   "name": "icon_5",
+   "file": "app/src/main/res/drawable-nodpi/icon_5.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.79 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.787,
+   "chin": 124.5
+  },
+  {
+   "name": "icon_6",
+   "file": "app/src/main/res/drawable-nodpi/icon_6.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 1.00 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.996,
+   "chin": null
+  },
+  {
+   "name": "icon_7",
+   "file": "app/src/main/res/drawable-nodpi/icon_7.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.93 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.925,
+   "chin": null
+  },
+  {
+   "name": "icon_8",
+   "file": "app/src/main/res/drawable-nodpi/icon_8.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 1.00 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.996,
+   "chin": null
+  },
+  {
+   "name": "icon_9",
+   "file": "app/src/main/res/drawable-nodpi/icon_9.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.93 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.925,
+   "chin": null
+  },
+  {
+   "name": "icon_10",
+   "file": "app/src/main/res/drawable-nodpi/icon_10.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.79 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.787,
+   "chin": null
+  },
+  {
+   "name": "bitwarden",
+   "file": "app/src/main/res/drawable-nodpi/bitwarden.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "bitwarden_alt1",
+   "file": "app/src/main/res/drawable-nodpi/bitwarden_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "bitwarden_alt2",
+   "file": "app/src/main/res/drawable-nodpi/bitwarden_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "bitwarden_alt3",
+   "file": "app/src/main/res/drawable-nodpi/bitwarden_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 89.0,
+   "h": 110.5,
+   "b": 119.2,
+   "area": 0.512,
+   "chin": 3.8
+  },
+  {
+   "name": "twofas_auth",
+   "file": "app/src/main/res/drawable-nodpi/twofas_auth.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "twofas_auth_alt1",
+   "file": "app/src/main/res/drawable-nodpi/twofas_auth_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "twofas_auth_alt2",
+   "file": "app/src/main/res/drawable-nodpi/twofas_auth_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "twofas_auth_alt3",
+   "file": "app/src/main/res/drawable-nodpi/twofas_auth_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 88.5,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.486,
+   "chin": 3.8
+  },
+  {
+   "name": "proton_vpn",
+   "file": "app/src/main/res/drawable-nodpi/proton_vpn.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "proton_vpn_alt1",
+   "file": "app/src/main/res/drawable-nodpi/proton_vpn_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "proton_vpn_alt2",
+   "file": "app/src/main/res/drawable-nodpi/proton_vpn_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "proton_vpn_alt3",
+   "file": "app/src/main/res/drawable-nodpi/proton_vpn_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 106.5,
+   "h": 101.0,
+   "b": 113.8,
+   "area": 0.395,
+   "chin": 3.8
+  },
+  {
+   "name": "whatsapp",
+   "file": "app/src/main/res/drawable-nodpi/whatsapp.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "whatsapp_alt1",
+   "file": "app/src/main/res/drawable-nodpi/whatsapp_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.9
+  },
+  {
+   "name": "whatsapp_alt2",
+   "file": "app/src/main/res/drawable-nodpi/whatsapp_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "whatsapp_alt3",
+   "file": "app/src/main/res/drawable-nodpi/whatsapp_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 110.5,
+   "h": 114.5,
+   "b": 120.2,
+   "area": 0.632,
+   "chin": 3.8
+  },
+  {
+   "name": "instagram",
+   "file": "app/src/main/res/drawable-nodpi/instagram.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 3.8
+  },
+  {
+   "name": "instagram_alt1",
+   "file": "app/src/main/res/drawable-nodpi/instagram_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "instagram_alt2",
+   "file": "app/src/main/res/drawable-nodpi/instagram_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "instagram_alt3",
+   "file": "app/src/main/res/drawable-nodpi/instagram_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.34 (official 0.38-0.71)"
+   ],
+   "w": 106.5,
+   "h": 110.5,
+   "b": 118.2,
+   "area": 0.339,
+   "chin": 3.8
+  },
+  {
+   "name": "discord",
+   "file": "app/src/main/res/drawable-nodpi/discord.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "discord_alt1",
+   "file": "app/src/main/res/drawable-nodpi/discord_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "discord_alt2",
+   "file": "app/src/main/res/drawable-nodpi/discord_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "discord_alt3",
+   "file": "app/src/main/res/drawable-nodpi/discord_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "bottom edge y=106 (official 116-126)"
+   ],
+   "w": 107.2,
+   "h": 85.5,
+   "b": 105.8,
+   "area": 0.447,
+   "chin": 3.8
+  },
+  {
+   "name": "exteraless",
+   "file": "app/src/main/res/drawable-nodpi/exteraless.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "exteraless_alt1",
+   "file": "app/src/main/res/drawable-nodpi/exteraless_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "exteraless_alt2",
+   "file": "app/src/main/res/drawable-nodpi/exteraless_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "exteraless_alt3",
+   "file": "app/src/main/res/drawable-nodpi/exteraless_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 106.5,
+   "h": 96.5,
+   "b": 111.2,
+   "area": 0.342,
+   "chin": 3.8
+  },
+  {
+   "name": "reddit",
+   "file": "app/src/main/res/drawable-nodpi/reddit.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "reddit_alt1",
+   "file": "app/src/main/res/drawable-nodpi/reddit_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "reddit_alt2",
+   "file": "app/src/main/res/drawable-nodpi/reddit_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "reddit_alt3",
+   "file": "app/src/main/res/drawable-nodpi/reddit_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 107.0,
+   "h": 97.5,
+   "b": 111.8,
+   "area": 0.394,
+   "chin": 3.8
+  },
+  {
+   "name": "tiktok_lite",
+   "file": "app/src/main/res/drawable-nodpi/tiktok_lite.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "tiktok_lite_alt1",
+   "file": "app/src/main/res/drawable-nodpi/tiktok_lite_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 22.0
+  },
+  {
+   "name": "tiktok_lite_alt2",
+   "file": "app/src/main/res/drawable-nodpi/tiktok_lite_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "tiktok_lite_alt3",
+   "file": "app/src/main/res/drawable-nodpi/tiktok_lite_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.34 (official 0.38-0.71)"
+   ],
+   "w": 94.5,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.34,
+   "chin": 3.8
+  },
+  {
+   "name": "wupp",
+   "file": "app/src/main/res/drawable-nodpi/wupp.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "wupp_alt1",
+   "file": "app/src/main/res/drawable-nodpi/wupp_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 20.5
+  },
+  {
+   "name": "wupp_alt2",
+   "file": "app/src/main/res/drawable-nodpi/wupp_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "wupp_alt3",
+   "file": "app/src/main/res/drawable-nodpi/wupp_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 106.5,
+   "h": 110.5,
+   "b": 118.2,
+   "area": 0.585,
+   "chin": 3.8
+  },
+  {
+   "name": "youtube",
+   "file": "app/src/main/res/drawable-nodpi/youtube.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "youtube_alt1",
+   "file": "app/src/main/res/drawable-nodpi/youtube_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "youtube_alt2",
+   "file": "app/src/main/res/drawable-nodpi/youtube_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "youtube_alt3",
+   "file": "app/src/main/res/drawable-nodpi/youtube_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 114.5,
+   "h": 83.0,
+   "b": 115.5,
+   "area": 0.547,
+   "chin": null
+  },
+  {
+   "name": "anker_soundcore",
+   "file": "app/src/main/res/drawable-nodpi/anker_soundcore.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "anker_soundcore_alt1",
+   "file": "app/src/main/res/drawable-nodpi/anker_soundcore_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "anker_soundcore_alt2",
+   "file": "app/src/main/res/drawable-nodpi/anker_soundcore_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "apple_music",
+   "file": "app/src/main/res/drawable-nodpi/apple_music.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "apple_music_alt1",
+   "file": "app/src/main/res/drawable-nodpi/apple_music_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 30.4
+  },
+  {
+   "name": "apple_music_alt2",
+   "file": "app/src/main/res/drawable-nodpi/apple_music_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "apple_music_alt3",
+   "file": "app/src/main/res/drawable-nodpi/apple_music_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.34 (official 0.38-0.71)"
+   ],
+   "w": 86.8,
+   "h": 117.5,
+   "b": 121.8,
+   "area": 0.34,
+   "chin": 4.0
+  },
+  {
+   "name": "bitchord",
+   "file": "app/src/main/res/drawable-nodpi/bitchord.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "bitchord_alt1",
+   "file": "app/src/main/res/drawable-nodpi/bitchord_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "bitchord_alt2",
+   "file": "app/src/main/res/drawable-nodpi/bitchord_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "bitchord_alt3",
+   "file": "app/src/main/res/drawable-nodpi/bitchord_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.32 (official 0.38-0.71)",
+    "bottom edge y=103 (official 116-126)"
+   ],
+   "w": 113.0,
+   "h": 80.0,
+   "b": 103.0,
+   "area": 0.318,
+   "chin": 3.8
+  },
+  {
+   "name": "cloudstream",
+   "file": "app/src/main/res/drawable-nodpi/cloudstream.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "cloudstream_alt1",
+   "file": "app/src/main/res/drawable-nodpi/cloudstream_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 38.0
+  },
+  {
+   "name": "cloudstream_alt2",
+   "file": "app/src/main/res/drawable-nodpi/cloudstream_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "cloudstream_alt3",
+   "file": "app/src/main/res/drawable-nodpi/cloudstream_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.29 (official 0.38-0.71)",
+    "bottom edge y=92 (official 116-126)"
+   ],
+   "w": 112.8,
+   "h": 59.0,
+   "b": 92.5,
+   "area": 0.293,
+   "chin": 3.8
+  },
+  {
+   "name": "jamesdsp",
+   "file": "app/src/main/res/drawable-nodpi/jamesdsp.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "jamesdsp_alt1",
+   "file": "app/src/main/res/drawable-nodpi/jamesdsp_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.9
+  },
+  {
+   "name": "jamesdsp_alt2",
+   "file": "app/src/main/res/drawable-nodpi/jamesdsp_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "jamesdsp_alt3",
+   "file": "app/src/main/res/drawable-nodpi/jamesdsp_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.29 (official 0.38-0.71)"
+   ],
+   "w": 94.8,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.287,
+   "chin": 2.2
+  },
+  {
+   "name": "mochy",
+   "file": "app/src/main/res/drawable-nodpi/mochy.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "mochy_alt1",
+   "file": "app/src/main/res/drawable-nodpi/mochy_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "mochy_alt2",
+   "file": "app/src/main/res/drawable-nodpi/mochy_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "mochy_alt3",
+   "file": "app/src/main/res/drawable-nodpi/mochy_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 100.2,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.498,
+   "chin": null
+  },
+  {
+   "name": "nuvio",
+   "file": "app/src/main/res/drawable-nodpi/nuvio.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "nuvio_alt1",
+   "file": "app/src/main/res/drawable-nodpi/nuvio_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 30.6
+  },
+  {
+   "name": "nuvio_alt2",
+   "file": "app/src/main/res/drawable-nodpi/nuvio_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "nuvio_alt3",
+   "file": "app/src/main/res/drawable-nodpi/nuvio_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 97.2,
+   "h": 110.8,
+   "b": 118.5,
+   "area": 0.404,
+   "chin": 3.8
+  },
+  {
+   "name": "qobuz",
+   "file": "app/src/main/res/drawable-nodpi/qobuz.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "qobuz_alt1",
+   "file": "app/src/main/res/drawable-nodpi/qobuz_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 50.0
+  },
+  {
+   "name": "qobuz_alt2",
+   "file": "app/src/main/res/drawable-nodpi/qobuz_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "qobuz_alt3",
+   "file": "app/src/main/res/drawable-nodpi/qobuz_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.24 (official 0.38-0.71)",
+    "bottom edge y=91 (official 116-126)"
+   ],
+   "w": 119.5,
+   "h": 56.5,
+   "b": 91.2,
+   "area": 0.24,
+   "chin": 4.0
+  },
+  {
+   "name": "telefon",
+   "file": "app/src/main/res/drawable-nodpi/telefon.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "telefon_alt1",
+   "file": "app/src/main/res/drawable-nodpi/telefon_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "telefon_alt2",
+   "file": "app/src/main/res/drawable-nodpi/telefon_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "telefon_alt3",
+   "file": "app/src/main/res/drawable-nodpi/telefon_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.23 (official 0.38-0.71)"
+   ],
+   "w": 104.5,
+   "h": 108.5,
+   "b": 117.2,
+   "area": 0.231,
+   "chin": 3.8
+  },
+  {
+   "name": "mesajlar",
+   "file": "app/src/main/res/drawable-nodpi/mesajlar.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "mesajlar_alt1",
+   "file": "app/src/main/res/drawable-nodpi/mesajlar_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "mesajlar_alt2",
+   "file": "app/src/main/res/drawable-nodpi/mesajlar_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "mesajlar_alt3",
+   "file": "app/src/main/res/drawable-nodpi/mesajlar_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 110.5,
+   "h": 106.5,
+   "b": 116.2,
+   "area": 0.626,
+   "chin": 3.8
+  },
+  {
+   "name": "kamera",
+   "file": "app/src/main/res/drawable-nodpi/kamera.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "kamera_alt1",
+   "file": "app/src/main/res/drawable-nodpi/kamera_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.5
+  },
+  {
+   "name": "kamera_alt2",
+   "file": "app/src/main/res/drawable-nodpi/kamera_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.689,
+   "chin": 1.8
+  },
+  {
+   "name": "kamera_alt3",
+   "file": "app/src/main/res/drawable-nodpi/kamera_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 109.5,
+   "h": 111.5,
+   "b": 123.2,
+   "area": 0.563,
+   "chin": 1.5
+  },
+  {
+   "name": "foto_raflar",
+   "file": "app/src/main/res/drawable-nodpi/foto_raflar.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "foto_raflar_alt1",
+   "file": "app/src/main/res/drawable-nodpi/foto_raflar_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "foto_raflar_alt2",
+   "file": "app/src/main/res/drawable-nodpi/foto_raflar_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "foto_raflar_alt3",
+   "file": "app/src/main/res/drawable-nodpi/foto_raflar_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 110.5,
+   "h": 114.5,
+   "b": 121.2,
+   "area": 0.364,
+   "chin": 3.8
+  },
+  {
+   "name": "saat",
+   "file": "app/src/main/res/drawable-nodpi/saat.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "saat_alt1",
+   "file": "app/src/main/res/drawable-nodpi/saat_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.9
+  },
+  {
+   "name": "saat_alt2",
+   "file": "app/src/main/res/drawable-nodpi/saat_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "saat_alt3",
+   "file": "app/src/main/res/drawable-nodpi/saat_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 116.5,
+   "h": 119.5,
+   "b": 123.2,
+   "area": 0.666,
+   "chin": 2.8
+  },
+  {
+   "name": "ayarlar",
+   "file": "app/src/main/res/drawable-nodpi/ayarlar.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "ayarlar_alt1",
+   "file": "app/src/main/res/drawable-nodpi/ayarlar_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "ayarlar_alt2",
+   "file": "app/src/main/res/drawable-nodpi/ayarlar_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "ayarlar_alt3",
+   "file": "app/src/main/res/drawable-nodpi/ayarlar_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 105.0,
+   "h": 114.5,
+   "b": 120.2,
+   "area": 0.382,
+   "chin": 3.8
+  },
+  {
+   "name": "chatgpt",
+   "file": "app/src/main/res/drawable-nodpi/chatgpt.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "chatgpt_alt1",
+   "file": "app/src/main/res/drawable-nodpi/chatgpt_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 19.2
+  },
+  {
+   "name": "chatgpt_alt2",
+   "file": "app/src/main/res/drawable-nodpi/chatgpt_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "chatgpt_alt3",
+   "file": "app/src/main/res/drawable-nodpi/chatgpt_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 112.5,
+   "h": 114.5,
+   "b": 119.8,
+   "area": 0.584,
+   "chin": 2.5
+  },
+  {
+   "name": "claude",
+   "file": "app/src/main/res/drawable-nodpi/claude.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "claude_alt1",
+   "file": "app/src/main/res/drawable-nodpi/claude_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "claude_alt2",
+   "file": "app/src/main/res/drawable-nodpi/claude_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "claude_alt3",
+   "file": "app/src/main/res/drawable-nodpi/claude_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 107.0,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.371,
+   "chin": 3.8
+  },
+  {
+   "name": "opencode_mobile",
+   "file": "app/src/main/res/drawable-nodpi/opencode_mobile.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "opencode_mobile_alt1",
+   "file": "app/src/main/res/drawable-nodpi/opencode_mobile_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 20.0
+  },
+  {
+   "name": "opencode_mobile_alt2",
+   "file": "app/src/main/res/drawable-nodpi/opencode_mobile_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "opencode_mobile_alt3",
+   "file": "app/src/main/res/drawable-nodpi/opencode_mobile_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 107.0,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.348,
+   "chin": 3.8
+  },
+  {
+   "name": "qwen",
+   "file": "app/src/main/res/drawable-nodpi/qwen.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "qwen_alt1",
+   "file": "app/src/main/res/drawable-nodpi/qwen_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 2.0
+  },
+  {
+   "name": "qwen_alt2",
+   "file": "app/src/main/res/drawable-nodpi/qwen_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "qwen_alt3",
+   "file": "app/src/main/res/drawable-nodpi/qwen_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 105.5,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.404,
+   "chin": 3.8
+  },
+  {
+   "name": "onedm",
+   "file": "app/src/main/res/drawable-nodpi/onedm.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "onedm_alt1",
+   "file": "app/src/main/res/drawable-nodpi/onedm_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "onedm_alt2",
+   "file": "app/src/main/res/drawable-nodpi/onedm_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "onedm_alt3",
+   "file": "app/src/main/res/drawable-nodpi/onedm_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "bottom edge y=109 (official 116-126)"
+   ],
+   "w": 107.0,
+   "h": 91.5,
+   "b": 108.8,
+   "area": 0.362,
+   "chin": 1.2
+  },
+  {
+   "name": "ashell_you",
+   "file": "app/src/main/res/drawable-nodpi/ashell_you.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "ashell_you_alt1",
+   "file": "app/src/main/res/drawable-nodpi/ashell_you_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "ashell_you_alt2",
+   "file": "app/src/main/res/drawable-nodpi/ashell_you_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "ashell_you_alt3",
+   "file": "app/src/main/res/drawable-nodpi/ashell_you_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 77.5,
+   "h": 117.5,
+   "b": 121.8,
+   "area": 0.465,
+   "chin": 3.5
+  },
+  {
+   "name": "colorblendr",
+   "file": "app/src/main/res/drawable-nodpi/colorblendr.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "colorblendr_alt1",
+   "file": "app/src/main/res/drawable-nodpi/colorblendr_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "colorblendr_alt2",
+   "file": "app/src/main/res/drawable-nodpi/colorblendr_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "colorblendr_alt3",
+   "file": "app/src/main/res/drawable-nodpi/colorblendr_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 107.0,
+   "h": 97.5,
+   "b": 111.8,
+   "area": 0.343,
+   "chin": 3.5
+  },
+  {
+   "name": "databackup",
+   "file": "app/src/main/res/drawable-nodpi/databackup.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "databackup_alt1",
+   "file": "app/src/main/res/drawable-nodpi/databackup_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "databackup_alt2",
+   "file": "app/src/main/res/drawable-nodpi/databackup_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "databackup_alt3",
+   "file": "app/src/main/res/drawable-nodpi/databackup_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.24 (official 0.38-0.71)",
+    "bottom edge y=106 (official 116-126)"
+   ],
+   "w": 107.0,
+   "h": 86.5,
+   "b": 105.8,
+   "area": 0.237,
+   "chin": 3.5
+  },
+  {
+   "name": "f_droid",
+   "file": "app/src/main/res/drawable-nodpi/f_droid.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "f_droid_alt1",
+   "file": "app/src/main/res/drawable-nodpi/f_droid_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 21.2
+  },
+  {
+   "name": "f_droid_alt2",
+   "file": "app/src/main/res/drawable-nodpi/f_droid_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "f_droid_alt3",
+   "file": "app/src/main/res/drawable-nodpi/f_droid_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 106.5,
+   "h": 109.2,
+   "b": 117.8,
+   "area": 0.543,
+   "chin": null
+  },
+  {
+   "name": "ffupdater",
+   "file": "app/src/main/res/drawable-nodpi/ffupdater.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "ffupdater_alt1",
+   "file": "app/src/main/res/drawable-nodpi/ffupdater_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "ffupdater_alt2",
+   "file": "app/src/main/res/drawable-nodpi/ffupdater_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "ffupdater_alt3",
+   "file": "app/src/main/res/drawable-nodpi/ffupdater_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.349,
+   "chin": 1.2
+  },
+  {
+   "name": "frostkeys",
+   "file": "app/src/main/res/drawable-nodpi/frostkeys.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "frostkeys_alt1",
+   "file": "app/src/main/res/drawable-nodpi/frostkeys_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "frostkeys_alt2",
+   "file": "app/src/main/res/drawable-nodpi/frostkeys_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "frostkeys_alt3",
+   "file": "app/src/main/res/drawable-nodpi/frostkeys_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "bottom edge y=106 (official 116-126)"
+   ],
+   "w": 113.0,
+   "h": 84.8,
+   "b": 105.5,
+   "area": 0.558,
+   "chin": 3.8
+  },
+  {
+   "name": "gboardwu",
+   "file": "app/src/main/res/drawable-nodpi/gboardwu.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "gboardwu_alt1",
+   "file": "app/src/main/res/drawable-nodpi/gboardwu_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "gboardwu_alt2",
+   "file": "app/src/main/res/drawable-nodpi/gboardwu_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "gboardwu_alt3",
+   "file": "app/src/main/res/drawable-nodpi/gboardwu_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 86.5,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.425,
+   "chin": 3.8
+  },
+  {
+   "name": "iconrequest",
+   "file": "app/src/main/res/drawable-nodpi/iconrequest.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "iconrequest_alt1",
+   "file": "app/src/main/res/drawable-nodpi/iconrequest_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 21.0
+  },
+  {
+   "name": "iconrequest_alt2",
+   "file": "app/src/main/res/drawable-nodpi/iconrequest_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "iconrequest_alt3",
+   "file": "app/src/main/res/drawable-nodpi/iconrequest_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 79.5,
+   "h": 110.5,
+   "b": 118.2,
+   "area": 0.466,
+   "chin": null
+  },
+  {
+   "name": "installerx_revived",
+   "file": "app/src/main/res/drawable-nodpi/installerx_revived.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "installerx_revived_alt1",
+   "file": "app/src/main/res/drawable-nodpi/installerx_revived_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "installerx_revived_alt2",
+   "file": "app/src/main/res/drawable-nodpi/installerx_revived_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "installerx_revived_alt3",
+   "file": "app/src/main/res/drawable-nodpi/installerx_revived_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 107.0,
+   "h": 99.2,
+   "b": 112.5,
+   "area": 0.359,
+   "chin": 3.5
+  },
+  {
+   "name": "kadraj",
+   "file": "app/src/main/res/drawable-nodpi/kadraj.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "kadraj_alt1",
+   "file": "app/src/main/res/drawable-nodpi/kadraj_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 20.2
+  },
+  {
+   "name": "kadraj_alt2",
+   "file": "app/src/main/res/drawable-nodpi/kadraj_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "kadraj_alt3",
+   "file": "app/src/main/res/drawable-nodpi/kadraj_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.26 (official 0.38-0.71)"
+   ],
+   "w": 107.0,
+   "h": 110.8,
+   "b": 118.2,
+   "area": 0.261,
+   "chin": null
+  },
+  {
+   "name": "kernelsu_next",
+   "file": "app/src/main/res/drawable-nodpi/kernelsu_next.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "kernelsu_next_alt1",
+   "file": "app/src/main/res/drawable-nodpi/kernelsu_next_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "kernelsu_next_alt2",
+   "file": "app/src/main/res/drawable-nodpi/kernelsu_next_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "kernelsu_next_alt3",
+   "file": "app/src/main/res/drawable-nodpi/kernelsu_next_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 113.5,
+   "h": 117.5,
+   "b": 121.8,
+   "area": 0.639,
+   "chin": 3.5
+  },
+  {
+   "name": "ki_iler",
+   "file": "app/src/main/res/drawable-nodpi/ki_iler.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "ki_iler_alt1",
+   "file": "app/src/main/res/drawable-nodpi/ki_iler_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 2.0
+  },
+  {
+   "name": "ki_iler_alt2",
+   "file": "app/src/main/res/drawable-nodpi/ki_iler_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "ki_iler_alt3",
+   "file": "app/src/main/res/drawable-nodpi/ki_iler_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 107.0,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.443,
+   "chin": 3.8
+  },
+  {
+   "name": "mix",
+   "file": "app/src/main/res/drawable-nodpi/mix.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "mix_alt1",
+   "file": "app/src/main/res/drawable-nodpi/mix_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "mix_alt2",
+   "file": "app/src/main/res/drawable-nodpi/mix_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "mix_alt3",
+   "file": "app/src/main/res/drawable-nodpi/mix_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.29 (official 0.38-0.71)",
+    "bottom edge y=102 (official 116-126)"
+   ],
+   "w": 113.2,
+   "h": 77.0,
+   "b": 101.5,
+   "area": 0.286,
+   "chin": 3.8
+  },
+  {
+   "name": "mornye",
+   "file": "app/src/main/res/drawable-nodpi/mornye.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": null
+  },
+  {
+   "name": "mornye_alt1",
+   "file": "app/src/main/res/drawable-nodpi/mornye_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 26.0
+  },
+  {
+   "name": "mornye_alt2",
+   "file": "app/src/main/res/drawable-nodpi/mornye_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "mornye_alt3",
+   "file": "app/src/main/res/drawable-nodpi/mornye_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.26 (official 0.38-0.71)"
+   ],
+   "w": 81.5,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.262,
+   "chin": 4.0
+  },
+  {
+   "name": "morphe",
+   "file": "app/src/main/res/drawable-nodpi/morphe.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "morphe_alt1",
+   "file": "app/src/main/res/drawable-nodpi/morphe_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "morphe_alt2",
+   "file": "app/src/main/res/drawable-nodpi/morphe_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "morphe_alt3",
+   "file": "app/src/main/res/drawable-nodpi/morphe_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 106.8,
+   "h": 96.5,
+   "b": 111.2,
+   "area": 0.405,
+   "chin": 3.5
+  },
+  {
+   "name": "obtainx",
+   "file": "app/src/main/res/drawable-nodpi/obtainx.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "obtainx_alt1",
+   "file": "app/src/main/res/drawable-nodpi/obtainx_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "obtainx_alt2",
+   "file": "app/src/main/res/drawable-nodpi/obtainx_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "obtainx_alt3",
+   "file": "app/src/main/res/drawable-nodpi/obtainx_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 107.0,
+   "h": 94.2,
+   "b": 110.2,
+   "area": 0.376,
+   "chin": 3.5
+  },
+  {
+   "name": "payload_dumper",
+   "file": "app/src/main/res/drawable-nodpi/payload_dumper.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "payload_dumper_alt1",
+   "file": "app/src/main/res/drawable-nodpi/payload_dumper_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 21.1
+  },
+  {
+   "name": "payload_dumper_alt2",
+   "file": "app/src/main/res/drawable-nodpi/payload_dumper_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "payload_dumper_alt3",
+   "file": "app/src/main/res/drawable-nodpi/payload_dumper_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.32 (official 0.38-0.71)"
+   ],
+   "w": 102.5,
+   "h": 110.5,
+   "b": 118.2,
+   "area": 0.321,
+   "chin": 3.8
+  },
+  {
+   "name": "pentas",
+   "file": "app/src/main/res/drawable-nodpi/pentas.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "pentas_alt1",
+   "file": "app/src/main/res/drawable-nodpi/pentas_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "pentas_alt2",
+   "file": "app/src/main/res/drawable-nodpi/pentas_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "pentas_alt3",
+   "file": "app/src/main/res/drawable-nodpi/pentas_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "bottom edge y=103 (official 116-126)"
+   ],
+   "w": 113.5,
+   "h": 80.5,
+   "b": 103.2,
+   "area": 0.507,
+   "chin": 4.0
+  },
+  {
+   "name": "play_store",
+   "file": "app/src/main/res/drawable-nodpi/play_store.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "play_store_alt1",
+   "file": "app/src/main/res/drawable-nodpi/play_store_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "play_store_alt2",
+   "file": "app/src/main/res/drawable-nodpi/play_store_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "play_store_alt3",
+   "file": "app/src/main/res/drawable-nodpi/play_store_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 97.2,
+   "h": 110.8,
+   "b": 118.2,
+   "area": 0.423,
+   "chin": 3.8
+  },
+  {
+   "name": "plush_iconpack",
+   "file": "app/src/main/res/drawable-nodpi/plush_iconpack.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "plush_iconpack_alt1",
+   "file": "app/src/main/res/drawable-nodpi/plush_iconpack_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "plush_iconpack_alt2",
+   "file": "app/src/main/res/drawable-nodpi/plush_iconpack_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "plush_iconpack_alt3",
+   "file": "app/src/main/res/drawable-nodpi/plush_iconpack_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.0,
+   "h": 110.5,
+   "b": 118.2,
+   "area": 0.471,
+   "chin": 3.8
+  },
+  {
+   "name": "proton_drive",
+   "file": "app/src/main/res/drawable-nodpi/proton_drive.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "proton_drive_alt1",
+   "file": "app/src/main/res/drawable-nodpi/proton_drive_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "proton_drive_alt2",
+   "file": "app/src/main/res/drawable-nodpi/proton_drive_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "proton_drive_alt3",
+   "file": "app/src/main/res/drawable-nodpi/proton_drive_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "bottom edge y=110 (official 116-126)"
+   ],
+   "w": 107.0,
+   "h": 93.2,
+   "b": 109.5,
+   "area": 0.56,
+   "chin": 3.5
+  },
+  {
+   "name": "recon",
+   "file": "app/src/main/res/drawable-nodpi/recon.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "recon_alt1",
+   "file": "app/src/main/res/drawable-nodpi/recon_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": null
+  },
+  {
+   "name": "recon_alt2",
+   "file": "app/src/main/res/drawable-nodpi/recon_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "recon_alt3",
+   "file": "app/src/main/res/drawable-nodpi/recon_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 113.5,
+   "h": 117.5,
+   "b": 121.8,
+   "area": 0.344,
+   "chin": 4.0
+  },
+  {
+   "name": "scene",
+   "file": "app/src/main/res/drawable-nodpi/scene.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "scene_alt1",
+   "file": "app/src/main/res/drawable-nodpi/scene_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "scene_alt2",
+   "file": "app/src/main/res/drawable-nodpi/scene_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "scene_alt3",
+   "file": "app/src/main/res/drawable-nodpi/scene_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.31 (official 0.38-0.71)",
+    "bottom edge y=108 (official 116-126)"
+   ],
+   "w": 106.5,
+   "h": 91.0,
+   "b": 108.5,
+   "area": 0.306,
+   "chin": 3.5
+  },
+  {
+   "name": "sd_maid_se",
+   "file": "app/src/main/res/drawable-nodpi/sd_maid_se.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": null
+  },
+  {
+   "name": "sd_maid_se_alt1",
+   "file": "app/src/main/res/drawable-nodpi/sd_maid_se_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 46.5
+  },
+  {
+   "name": "sd_maid_se_alt2",
+   "file": "app/src/main/res/drawable-nodpi/sd_maid_se_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "sd_maid_se_alt3",
+   "file": "app/src/main/res/drawable-nodpi/sd_maid_se_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 105.5,
+   "h": 110.8,
+   "b": 118.2,
+   "area": 0.41,
+   "chin": 3.8
+  },
+  {
+   "name": "smart_launcher",
+   "file": "app/src/main/res/drawable-nodpi/smart_launcher.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "smart_launcher_alt1",
+   "file": "app/src/main/res/drawable-nodpi/smart_launcher_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 21.5
+  },
+  {
+   "name": "smart_launcher_alt2",
+   "file": "app/src/main/res/drawable-nodpi/smart_launcher_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "smart_launcher_alt3",
+   "file": "app/src/main/res/drawable-nodpi/smart_launcher_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.31 (official 0.38-0.71)"
+   ],
+   "w": 98.5,
+   "h": 110.5,
+   "b": 118.5,
+   "area": 0.312,
+   "chin": 3.8
+  },
+  {
+   "name": "stride",
+   "file": "app/src/main/res/drawable-nodpi/stride.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "stride_alt1",
+   "file": "app/src/main/res/drawable-nodpi/stride_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 27.0
+  },
+  {
+   "name": "stride_alt2",
+   "file": "app/src/main/res/drawable-nodpi/stride_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "stride_alt3",
+   "file": "app/src/main/res/drawable-nodpi/stride_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.26 (official 0.38-0.71)"
+   ],
+   "w": 99.5,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.255,
+   "chin": 1.2
+  },
+  {
+   "name": "swift_backup",
+   "file": "app/src/main/res/drawable-nodpi/swift_backup.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "swift_backup_alt1",
+   "file": "app/src/main/res/drawable-nodpi/swift_backup_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "swift_backup_alt2",
+   "file": "app/src/main/res/drawable-nodpi/swift_backup_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "swift_backup_alt3",
+   "file": "app/src/main/res/drawable-nodpi/swift_backup_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 97.5,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.555,
+   "chin": 4.0
+  },
+  {
+   "name": "termux_api",
+   "file": "app/src/main/res/drawable-nodpi/termux_api.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "termux_api_alt1",
+   "file": "app/src/main/res/drawable-nodpi/termux_api_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 27.5
+  },
+  {
+   "name": "termux_api_alt2",
+   "file": "app/src/main/res/drawable-nodpi/termux_api_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "termux_api_alt3",
+   "file": "app/src/main/res/drawable-nodpi/termux_api_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.24 (official 0.38-0.71)"
+   ],
+   "w": 113.5,
+   "h": 96.5,
+   "b": 111.2,
+   "area": 0.241,
+   "chin": 4.0
+  },
+  {
+   "name": "termux_boot",
+   "file": "app/src/main/res/drawable-nodpi/termux_boot.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "termux_boot_alt1",
+   "file": "app/src/main/res/drawable-nodpi/termux_boot_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 27.5
+  },
+  {
+   "name": "termux_boot_alt2",
+   "file": "app/src/main/res/drawable-nodpi/termux_boot_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "termux_boot_alt3",
+   "file": "app/src/main/res/drawable-nodpi/termux_boot_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.24 (official 0.38-0.71)"
+   ],
+   "w": 113.5,
+   "h": 96.5,
+   "b": 111.2,
+   "area": 0.241,
+   "chin": 4.0
+  },
+  {
+   "name": "termux_widget",
+   "file": "app/src/main/res/drawable-nodpi/termux_widget.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "termux_widget_alt1",
+   "file": "app/src/main/res/drawable-nodpi/termux_widget_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 27.5
+  },
+  {
+   "name": "termux_widget_alt2",
+   "file": "app/src/main/res/drawable-nodpi/termux_widget_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "termux_widget_alt3",
+   "file": "app/src/main/res/drawable-nodpi/termux_widget_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.24 (official 0.38-0.71)"
+   ],
+   "w": 113.5,
+   "h": 96.5,
+   "b": 111.2,
+   "area": 0.241,
+   "chin": 4.0
+  },
+  {
+   "name": "thunderbird",
+   "file": "app/src/main/res/drawable-nodpi/thunderbird.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "thunderbird_alt1",
+   "file": "app/src/main/res/drawable-nodpi/thunderbird_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "thunderbird_alt2",
+   "file": "app/src/main/res/drawable-nodpi/thunderbird_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "thunderbird_alt3",
+   "file": "app/src/main/res/drawable-nodpi/thunderbird_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 107.0,
+   "h": 106.0,
+   "b": 116.0,
+   "area": 0.48,
+   "chin": 3.5
+  },
+  {
+   "name": "trendyolmilla",
+   "file": "app/src/main/res/drawable-nodpi/trendyolmilla.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "trendyolmilla_alt1",
+   "file": "app/src/main/res/drawable-nodpi/trendyolmilla_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "trendyolmilla_alt2",
+   "file": "app/src/main/res/drawable-nodpi/trendyolmilla_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "trestle",
+   "file": "app/src/main/res/drawable-nodpi/trestle.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "trestle_alt1",
+   "file": "app/src/main/res/drawable-nodpi/trestle_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "trestle_alt2",
+   "file": "app/src/main/res/drawable-nodpi/trestle_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "trestle_alt3",
+   "file": "app/src/main/res/drawable-nodpi/trestle_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 107.5,
+   "h": 102.5,
+   "b": 114.2,
+   "area": 0.443,
+   "chin": 3.8
+  },
+  {
+   "name": "t_rk_telekom",
+   "file": "app/src/main/res/drawable-nodpi/t_rk_telekom.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "t_rk_telekom_alt1",
+   "file": "app/src/main/res/drawable-nodpi/t_rk_telekom_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 2.2
+  },
+  {
+   "name": "t_rk_telekom_alt2",
+   "file": "app/src/main/res/drawable-nodpi/t_rk_telekom_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "t_rk_telekom_alt3",
+   "file": "app/src/main/res/drawable-nodpi/t_rk_telekom_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.24 (official 0.38-0.71)"
+   ],
+   "w": 88.5,
+   "h": 110.8,
+   "b": 118.5,
+   "area": 0.243,
+   "chin": 3.8
+  },
+  {
+   "name": "vortex",
+   "file": "app/src/main/res/drawable-nodpi/vortex.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "vortex_alt1",
+   "file": "app/src/main/res/drawable-nodpi/vortex_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 27.8
+  },
+  {
+   "name": "vortex_alt2",
+   "file": "app/src/main/res/drawable-nodpi/vortex_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "vortex_alt3",
+   "file": "app/src/main/res/drawable-nodpi/vortex_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.31 (official 0.38-0.71)"
+   ],
+   "w": 106.5,
+   "h": 110.5,
+   "b": 118.2,
+   "area": 0.313,
+   "chin": 3.8
+  },
+  {
+   "name": "bare",
+   "file": "app/src/main/res/drawable-nodpi/bare.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "bare_alt1",
+   "file": "app/src/main/res/drawable-nodpi/bare_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "bare_alt2",
+   "file": "app/src/main/res/drawable-nodpi/bare_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "bare_alt3",
+   "file": "app/src/main/res/drawable-nodpi/bare_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 102.5,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.468,
+   "chin": 3.5
+  },
+  {
+   "name": "firefox_beta",
+   "file": "app/src/main/res/drawable-nodpi/firefox_beta.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "firefox_beta_alt1",
+   "file": "app/src/main/res/drawable-nodpi/firefox_beta_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 20.5
+  },
+  {
+   "name": "firefox_beta_alt2",
+   "file": "app/src/main/res/drawable-nodpi/firefox_beta_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "firefox_beta_alt3",
+   "file": "app/src/main/res/drawable-nodpi/firefox_beta_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 103.5,
+   "h": 110.5,
+   "b": 118.2,
+   "area": 0.505,
+   "chin": 4.0
+  },
+  {
+   "name": "firefox_nightly",
+   "file": "app/src/main/res/drawable-nodpi/firefox_nightly.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 17.0
+  },
+  {
+   "name": "firefox_nightly_alt1",
+   "file": "app/src/main/res/drawable-nodpi/firefox_nightly_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 20.8
+  },
+  {
+   "name": "firefox_nightly_alt2",
+   "file": "app/src/main/res/drawable-nodpi/firefox_nightly_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "firefox_nightly_alt3",
+   "file": "app/src/main/res/drawable-nodpi/firefox_nightly_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 103.8,
+   "h": 110.0,
+   "b": 118.5,
+   "area": 0.482,
+   "chin": 1.5
+  },
+  {
+   "name": "weblibre",
+   "file": "app/src/main/res/drawable-nodpi/weblibre.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "weblibre_alt1",
+   "file": "app/src/main/res/drawable-nodpi/weblibre_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 24.2
+  },
+  {
+   "name": "weblibre_alt2",
+   "file": "app/src/main/res/drawable-nodpi/weblibre_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "weblibre_alt3",
+   "file": "app/src/main/res/drawable-nodpi/weblibre_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "bottom edge y=106 (official 116-126)"
+   ],
+   "w": 112.8,
+   "h": 86.0,
+   "b": 106.0,
+   "area": 0.397,
+   "chin": 3.8
+  },
+  {
+   "name": "binance_tr",
+   "file": "app/src/main/res/drawable-nodpi/binance_tr.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.2
+  },
+  {
+   "name": "binance_tr_alt1",
+   "file": "app/src/main/res/drawable-nodpi/binance_tr_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 21.8
+  },
+  {
+   "name": "binance_tr_alt2",
+   "file": "app/src/main/res/drawable-nodpi/binance_tr_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "binance_tr_alt3",
+   "file": "app/src/main/res/drawable-nodpi/binance_tr_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.19 (official 0.38-0.71)"
+   ],
+   "w": 81.0,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.188,
+   "chin": 3.8
+  },
+  {
+   "name": "enpara",
+   "file": "app/src/main/res/drawable-nodpi/enpara.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "enpara_alt1",
+   "file": "app/src/main/res/drawable-nodpi/enpara_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "enpara_alt2",
+   "file": "app/src/main/res/drawable-nodpi/enpara_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "enpara_alt3",
+   "file": "app/src/main/res/drawable-nodpi/enpara_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 106.8,
+   "h": 99.5,
+   "b": 112.8,
+   "area": 0.565,
+   "chin": 3.8
+  },
+  {
+   "name": "midas",
+   "file": "app/src/main/res/drawable-nodpi/midas.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "midas_alt1",
+   "file": "app/src/main/res/drawable-nodpi/midas_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "midas_alt2",
+   "file": "app/src/main/res/drawable-nodpi/midas_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "midas_alt3",
+   "file": "app/src/main/res/drawable-nodpi/midas_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.25 (official 0.38-0.71)",
+    "bottom edge y=99 (official 116-126)"
+   ],
+   "w": 113.0,
+   "h": 71.8,
+   "b": 99.0,
+   "area": 0.249,
+   "chin": 3.8
+  },
+  {
+   "name": "today_weather",
+   "file": "app/src/main/res/drawable-nodpi/today_weather.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "today_weather_alt1",
+   "file": "app/src/main/res/drawable-nodpi/today_weather_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "today_weather_alt2",
+   "file": "app/src/main/res/drawable-nodpi/today_weather_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "today_weather_alt3",
+   "file": "app/src/main/res/drawable-nodpi/today_weather_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.20 (official 0.38-0.71)"
+   ],
+   "w": 101.0,
+   "h": 111.0,
+   "b": 118.5,
+   "area": 0.203,
+   "chin": 3.5
+  },
+  {
+   "name": "y_hava_durumu",
+   "file": "app/src/main/res/drawable-nodpi/y_hava_durumu.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "y_hava_durumu_alt1",
+   "file": "app/src/main/res/drawable-nodpi/y_hava_durumu_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "y_hava_durumu_alt2",
+   "file": "app/src/main/res/drawable-nodpi/y_hava_durumu_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "y_hava_durumu_alt3",
+   "file": "app/src/main/res/drawable-nodpi/y_hava_durumu_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 106.5,
+   "h": 110.8,
+   "b": 118.5,
+   "area": 0.381,
+   "chin": 4.2
+  }
+ ]
+}

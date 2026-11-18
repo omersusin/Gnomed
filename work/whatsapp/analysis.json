@@ -1,0 +1,45 @@
+{
+ "file": "/home/user/Gnomed/work/whatsapp/source.png",
+ "bbox_px_at_512": [
+  0,
+  0,
+  512,
+  512
+ ],
+ "aspect_w_over_h": 1.0,
+ "fill_ratio": 1.0,
+ "circularity": 0.788,
+ "mirror_symmetry_iou": 1.0,
+ "enclosed_holes": 0,
+ "silhouette_class": "square (sharp)",
+ "suggested_template": "square",
+ "dominant_colours": [
+  {
+   "hex": "#27d367",
+   "share": 0.663,
+   "nearest_hig": "green3",
+   "hig_hex": "#33d17a",
+   "dE": 11.0
+  },
+  {
+   "hex": "#fafefb",
+   "share": 0.279,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 2.1
+  },
+  {
+   "hex": "#92e9b3",
+   "share": 0.057,
+   "nearest_hig": "green1",
+   "hig_hex": "#8ff0a4",
+   "dE": 11.9
+  }
+ ],
+ "thinnest_feature_px": {
+  "at_64": 4.25,
+  "at_48": 3.19,
+  "at_32": 2.12
+ },
+ "warnings": []
+}

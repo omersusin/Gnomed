@@ -1,0 +1,16 @@
+{
+ "source": "/home/user/Gnomed/work/telefon/source.png",
+ "work_size": 768,
+ "noise_rgb": 0.0,
+ "detail_pass": null,
+ "gradient_parts": [],
+ "missed_details": [],
+ "smooth_shading": [],
+ "shapes": 6,
+ "colours": [
+  "#106d1f",
+  "#54975f",
+  "#aacbb0",
+  "#fefefe"
+ ]
+}

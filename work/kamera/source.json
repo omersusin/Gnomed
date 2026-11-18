@@ -1,0 +1,71 @@
+{
+ "input": "/tmp/claude-0/-home-user-Gnomed/40d9f5d6-2e5b-5e89-9471-629963fd4223/scratchpad/iconreq/icons/kamera.png",
+ "input_size": [
+  192,
+  192
+ ],
+ "viewer_bg": "#f4f5f6",
+ "content_rect": [
+  34,
+  34,
+  125,
+  124
+ ],
+ "content_detection": "component",
+ "canvas_color": "#f4f5f6",
+ "canvas_uniformity": 1.0,
+ "canvas_saturation": 0.008,
+ "background": "removed (neutral canvas)",
+ "removed_fraction": 0.341,
+ "warning": "source is only 117px; upscaled x4.4 - use it as reference, not as artwork",
+ "output": "/home/user/Gnomed/work/kamera/source.png",
+ "trimmed_size_px": [
+  117,
+  117
+ ],
+ "aspect": 1.0,
+ "dominant_colors": [
+  {
+   "hex": "#000000",
+   "share": 0.62,
+   "nearest_hig": "dark5",
+   "hig_hex": "#000000",
+   "dE": 0.1
+  },
+  {
+   "hex": "#5d5d5d",
+   "share": 0.131,
+   "nearest_hig": "dark2",
+   "hig_hex": "#5e5c64",
+   "dE": 5.0
+  },
+  {
+   "hex": "#383838",
+   "share": 0.124,
+   "nearest_hig": "dark3",
+   "hig_hex": "#3d3846",
+   "dE": 9.6
+  },
+  {
+   "hex": "#3e3e3e",
+   "share": 0.021,
+   "nearest_hig": "dark3",
+   "hig_hex": "#3d3846",
+   "dE": 9.7
+  },
+  {
+   "hex": "#111111",
+   "share": 0.019,
+   "nearest_hig": "dark5",
+   "hig_hex": "#000000",
+   "dE": 5.2
+  },
+  {
+   "hex": "#646464",
+   "share": 0.019,
+   "nearest_hig": "dark2",
+   "hig_hex": "#5e5c64",
+   "dE": 5.7
+  }
+ ]
+}

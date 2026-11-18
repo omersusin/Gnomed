@@ -1,0 +1,56 @@
+{
+ "input": "/tmp/claude-0/-home-user-Gnomed/40d9f5d6-2e5b-5e89-9471-629963fd4223/scratchpad/iconreq/icons/whatsapp.png",
+ "input_size": [
+  192,
+  192
+ ],
+ "viewer_bg": "#25d366",
+ "content_rect": [
+  28,
+  26,
+  138,
+  138
+ ],
+ "content_detection": "component",
+ "canvas_color": "#25d366",
+ "canvas_uniformity": 1.0,
+ "canvas_saturation": 0.825,
+ "background": "kept: canvas is a saturated full-bleed tile, probably part of the identity (use --remove-bg to strip)",
+ "warning": "source is only 138px; upscaled x3.7 - use it as reference, not as artwork",
+ "output": "/home/user/Gnomed/work/whatsapp/source.png",
+ "trimmed_size_px": [
+  138,
+  138
+ ],
+ "aspect": 1.0,
+ "dominant_colors": [
+  {
+   "hex": "#25d366",
+   "share": 0.614,
+   "nearest_hig": "green3",
+   "hig_hex": "#33d17a",
+   "dE": 11.5
+  },
+  {
+   "hex": "#ffffff",
+   "share": 0.219,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 0.1
+  },
+  {
+   "hex": "#f6fdf8",
+   "share": 0.02,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 3.8
+  },
+  {
+   "hex": "#35d671",
+   "share": 0.014,
+   "nearest_hig": "green3",
+   "hig_hex": "#33d17a",
+   "dE": 7.3
+  }
+ ]
+}

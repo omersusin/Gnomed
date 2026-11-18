@@ -1,0 +1,15 @@
+{
+ "source": "/home/user/Gnomed/work/ayarlar/source.png",
+ "work_size": 768,
+ "noise_rgb": 0.0,
+ "detail_pass": null,
+ "gradient_parts": [],
+ "missed_details": [],
+ "smooth_shading": [],
+ "shapes": 7,
+ "colours": [
+  "#834c2e",
+  "#b39c92",
+  "#f4f4f4"
+ ]
+}

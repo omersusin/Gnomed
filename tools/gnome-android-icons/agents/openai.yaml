@@ -1,0 +1,6 @@
+# Optional Codex UI metadata (ignored by other clients)
+interface:
+  display_name: "GNOME Android Icons"
+  short_description: "Convert app icons into GNOME/Adwaita-style SVG + PNG and add them to a CandyBar icon pack"
+policy:
+  allow_implicit_invocation: true

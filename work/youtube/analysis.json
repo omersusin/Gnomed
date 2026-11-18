@@ -1,0 +1,40 @@
+{
+ "file": "/home/user/Gnomed/work/youtube/source.png",
+ "bbox_px_at_512": [
+  0,
+  79,
+  512,
+  354
+ ],
+ "aspect_w_over_h": 1.446,
+ "fill_ratio": 0.939,
+ "circularity": 0.827,
+ "mirror_symmetry_iou": 0.999,
+ "enclosed_holes": 0,
+ "silhouette_class": "landscape",
+ "suggested_template": "landscape",
+ "dominant_colours": [
+  {
+   "hex": "#ff0235",
+   "share": 0.906,
+   "nearest_hig": "red3",
+   "hig_hex": "#e01b24",
+   "dE": 12.0
+  },
+  {
+   "hex": "#ffdbe2",
+   "share": 0.094,
+   "nearest_hig": "light3",
+   "hig_hex": "#deddda",
+   "dE": 14.3
+  }
+ ],
+ "thinnest_feature_px": {
+  "at_64": 0.75,
+  "at_48": 0.56,
+  "at_32": 0.38
+ },
+ "warnings": [
+  "some features are thinner than 1px at 32px: thicken them optically or accept loss at 32"
+ ]
+}

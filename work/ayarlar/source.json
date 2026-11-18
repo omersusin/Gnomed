@@ -1,0 +1,63 @@
+{
+ "input": "/tmp/claude-0/-home-user-Gnomed/40d9f5d6-2e5b-5e89-9471-629963fd4223/scratchpad/iconreq/icons/ayarlar.png",
+ "input_size": [
+  192,
+  192
+ ],
+ "viewer_bg": "#8b4e28",
+ "content_rect": [
+  28,
+  24,
+  139,
+  146
+ ],
+ "content_detection": "component",
+ "canvas_color": "#8b4e28",
+ "canvas_uniformity": 1.0,
+ "canvas_saturation": 0.709,
+ "background": "kept: canvas is a saturated full-bleed tile, probably part of the identity (use --remove-bg to strip)",
+ "warning": "source is only 146px; upscaled x3.5 - use it as reference, not as artwork",
+ "output": "/home/user/Gnomed/work/ayarlar/source.png",
+ "trimmed_size_px": [
+  139,
+  146
+ ],
+ "aspect": 0.952,
+ "dominant_colors": [
+  {
+   "hex": "#f5f5f5",
+   "share": 0.41,
+   "nearest_hig": "light2",
+   "hig_hex": "#f6f5f4",
+   "dE": 0.6
+  },
+  {
+   "hex": "#8a4d29",
+   "share": 0.293,
+   "nearest_hig": "brown4",
+   "hig_hex": "#865e3c",
+   "dE": 12.5
+  },
+  {
+   "hex": "#734634",
+   "share": 0.097,
+   "nearest_hig": "brown5",
+   "hig_hex": "#63452c",
+   "dE": 8.6
+  },
+  {
+   "hex": "#804a2d",
+   "share": 0.052,
+   "nearest_hig": "brown4",
+   "hig_hex": "#865e3c",
+   "dE": 9.9
+  },
+  {
+   "hex": "#7c4932",
+   "share": 0.031,
+   "nearest_hig": "brown4",
+   "hig_hex": "#865e3c",
+   "dE": 10.3
+  }
+ ]
+}

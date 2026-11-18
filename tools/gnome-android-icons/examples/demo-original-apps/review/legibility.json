@@ -1,0 +1,623 @@
+[
+ {
+  "file": "examples/demo-original-apps/svg/lale-disc.svg",
+  "sizes": {
+   "32": {
+    "gap_regions": 1,
+    "gap_area_units2": 7.2,
+    "gap_spots_xy": [
+     [
+      83.9,
+      74.0
+     ]
+    ],
+    "thin_area_units2": 59.1,
+    "ssim": 0.906
+   },
+   "48": {
+    "gap_regions": 1,
+    "gap_area_units2": 3.6,
+    "gap_spots_xy": [
+     [
+      84.5,
+      74.8
+     ]
+    ],
+    "thin_area_units2": 50.1,
+    "ssim": 0.941
+   }
+  }
+ },
+ {
+  "file": "examples/demo-original-apps/svg/lale-record.svg",
+  "sizes": {
+   "32": {
+    "gap_regions": 5,
+    "gap_area_units2": 287.4,
+    "gap_spots_xy": [
+     [
+      58.5,
+      41.9
+     ],
+     [
+      71.8,
+      41.9
+     ],
+     [
+      64.0,
+      93.1
+     ],
+     [
+      65.1,
+      70.5
+     ],
+     [
+      74.9,
+      68.2
+     ]
+    ],
+    "thin_area_units2": 248.4,
+    "ssim": 0.796
+   },
+   "48": {
+    "gap_regions": 2,
+    "gap_area_units2": 248.8,
+    "gap_spots_xy": [
+     [
+      64.0,
+      93.4
+     ],
+     [
+      75.2,
+      68.9
+     ]
+    ],
+    "thin_area_units2": 233.1,
+    "ssim": 0.865
+   }
+  }
+ },
+ {
+  "file": "examples/demo-original-apps/svg/lale-rimmed.svg",
+  "sizes": {
+   "32": {
+    "gap_regions": 2,
+    "gap_area_units2": 11.9,
+    "gap_spots_xy": [
+     [
+      76.6,
+      29.9
+     ],
+     [
+      80.9,
+      72.4
+     ]
+    ],
+    "thin_area_units2": 39.6,
+    "ssim": 0.838
+   },
+   "48": {
+    "gap_regions": 1,
+    "gap_area_units2": 3.2,
+    "gap_spots_xy": [
+     [
+      81.4,
+      73.1
+     ]
+    ],
+    "thin_area_units2": 16.4,
+    "ssim": 0.916
+   }
+  }
+ },
+ {
+  "file": "examples/demo-original-apps/svg/lale-symbol.svg",
+  "sizes": {
+   "32": {
+    "gap_regions": 0,
+    "gap_area_units2": 0.0,
+    "gap_spots_xy": [],
+    "thin_area_units2": 91.9,
+    "ssim": 0.959
+   },
+   "48": {
+    "gap_regions": 0,
+    "gap_area_units2": 0.0,
+    "gap_spots_xy": [],
+    "thin_area_units2": 30.7,
+    "ssim": 0.978
+   }
+  }
+ },
+ {
+  "file": "examples/demo-original-apps/svg/marti-disc.svg",
+  "sizes": {
+   "32": {
+    "gap_regions": 2,
+    "gap_area_units2": 18.2,
+    "gap_spots_xy": [
+     [
+      41.1,
+      56.1
+     ],
+     [
+      86.9,
+      56.1
+     ]
+    ],
+    "thin_area_units2": 46.8,
+    "ssim": 0.893
+   },
+   "48": {
+    "gap_regions": 2,
+    "gap_area_units2": 7.9,
+    "gap_spots_xy": [
+     [
+      40.0,
+      57.1
+     ],
+     [
+      88.0,
+      57.1
+     ]
+    ],
+    "thin_area_units2": 35.3,
+    "ssim": 0.942
+   }
+  }
+ },
+ {
+  "file": "examples/demo-original-apps/svg/marti-faithful.svg",
+  "sizes": {
+   "32": {
+    "gap_regions": 2,
+    "gap_area_units2": 17.3,
+    "gap_spots_xy": [
+     [
+      43.1,
+      55.5
+     ],
+     [
+      84.9,
+      55.5
+     ]
+    ],
+    "thin_area_units2": 24.1,
+    "ssim": 0.909
+   },
+   "48": {
+    "gap_regions": 2,
+    "gap_area_units2": 7.1,
+    "gap_spots_xy": [
+     [
+      42.0,
+      56.5
+     ],
+     [
+      86.0,
+      56.5
+     ]
+    ],
+    "thin_area_units2": 14.6,
+    "ssim": 0.936
+   }
+  }
+ },
+ {
+  "file": "examples/demo-original-apps/svg/marti-rimmed.svg",
+  "sizes": {
+   "32": {
+    "gap_regions": 2,
+    "gap_area_units2": 20.6,
+    "gap_spots_xy": [
+     [
+      44.5,
+      56.5
+     ],
+     [
+      83.5,
+      56.5
+     ]
+    ],
+    "thin_area_units2": 15.7,
+    "ssim": 0.828
+   },
+   "48": {
+    "gap_regions": 2,
+    "gap_area_units2": 6.6,
+    "gap_spots_xy": [
+     [
+      43.1,
+      57.6
+     ],
+     [
+      84.9,
+      57.6
+     ]
+    ],
+    "thin_area_units2": 5.9,
+    "ssim": 0.914
+   }
+  }
+ },
+ {
+  "file": "examples/demo-original-apps/svg/marti-symbol.svg",
+  "sizes": {
+   "32": {
+    "gap_regions": 2,
+    "gap_area_units2": 11.9,
+    "gap_spots_xy": [
+     [
+      30.0,
+      55.2
+     ],
+     [
+      104.0,
+      55.2
+     ]
+    ],
+    "thin_area_units2": 14.6,
+    "ssim": 0.928
+   },
+   "48": {
+    "gap_regions": 1,
+    "gap_area_units2": 2.5,
+    "gap_spots_xy": [
+     [
+      104.4,
+      56.5
+     ]
+    ],
+    "thin_area_units2": 7.2,
+    "ssim": 0.962
+   }
+  }
+ },
+ {
+  "file": "examples/demo-original-apps/svg/simit-character.svg",
+  "sizes": {
+   "32": {
+    "gap_regions": 13,
+    "gap_area_units2": 199.5,
+    "gap_spots_xy": [
+     [
+      64.0,
+      24.9
+     ],
+     [
+      50.6,
+      28.9
+     ],
+     [
+      77.4,
+      28.9
+     ],
+     [
+      57.6,
+      37.0
+     ],
+     [
+      70.4,
+      37.0
+     ],
+     [
+      41.6,
+      42.2
+     ],
+     [
+      86.4,
+      42.2
+     ],
+     [
+      34.9,
+      57.9
+     ],
+     [
+      93.1,
+      57.9
+     ],
+     [
+      42.8,
+      62.4
+     ],
+     [
+      84.1,
+      64.6
+     ],
+     [
+      52.9,
+      78.4
+     ]
+    ],
+    "thin_area_units2": 278.4,
+    "ssim": 0.889
+   },
+   "48": {
+    "gap_regions": 12,
+    "gap_area_units2": 60.3,
+    "gap_spots_xy": [
+     [
+      50.6,
+      28.9
+     ],
+     [
+      77.4,
+      28.9
+     ],
+     [
+      57.2,
+      35.5
+     ],
+     [
+      70.8,
+      35.5
+     ],
+     [
+      41.4,
+      42.8
+     ],
+     [
+      86.6,
+      42.8
+     ],
+     [
+      34.8,
+      59.8
+     ],
+     [
+      93.2,
+      59.8
+     ],
+     [
+      42.6,
+      63.6
+     ],
+     [
+      84.1,
+      65.8
+     ],
+     [
+      54.0,
+      77.8
+     ],
+     [
+      77.2,
+      77.2
+     ]
+    ],
+    "thin_area_units2": 224.6,
+    "ssim": 0.928
+   }
+  }
+ },
+ {
+  "file": "examples/demo-original-apps/svg/simit-disc.svg",
+  "sizes": {
+   "32": {
+    "gap_regions": 13,
+    "gap_area_units2": 106.5,
+    "gap_spots_xy": [
+     [
+      64.0,
+      34.6
+     ],
+     [
+      53.6,
+      37.5
+     ],
+     [
+      74.4,
+      37.5
+     ],
+     [
+      58.9,
+      42.8
+     ],
+     [
+      69.1,
+      42.8
+     ],
+     [
+      46.9,
+      47.9
+     ],
+     [
+      81.1,
+      47.9
+     ],
+     [
+      41.6,
+      60.0
+     ],
+     [
+      86.4,
+      60.0
+     ],
+     [
+      47.6,
+      63.4
+     ],
+     [
+      79.5,
+      65.1
+     ],
+     [
+      61.4,
+      84.6
+     ]
+    ],
+    "thin_area_units2": 113.1,
+    "ssim": 0.872
+   },
+   "48": {
+    "gap_regions": 11,
+    "gap_area_units2": 88.6,
+    "gap_spots_xy": [
+     [
+      64.0,
+      34.6
+     ],
+     [
+      53.6,
+      37.5
+     ],
+     [
+      74.4,
+      37.5
+     ],
+     [
+      58.9,
+      42.8
+     ],
+     [
+      69.1,
+      42.8
+     ],
+     [
+      46.9,
+      47.9
+     ],
+     [
+      81.1,
+      47.9
+     ],
+     [
+      41.6,
+      60.0
+     ],
+     [
+      86.4,
+      60.0
+     ],
+     [
+      47.6,
+      63.4
+     ],
+     [
+      79.5,
+      65.1
+     ]
+    ],
+    "thin_area_units2": 53.6,
+    "ssim": 0.916
+   }
+  }
+ },
+ {
+  "file": "examples/demo-original-apps/svg/simit-plate.svg",
+  "sizes": {
+   "32": {
+    "gap_regions": 16,
+    "gap_area_units2": 184.4,
+    "gap_spots_xy": [
+     [
+      64.6,
+      34.2
+     ],
+     [
+      54.5,
+      38.4
+     ],
+     [
+      73.5,
+      38.4
+     ],
+     [
+      59.2,
+      43.1
+     ],
+     [
+      68.8,
+      43.1
+     ],
+     [
+      48.0,
+      48.0
+     ],
+     [
+      80.0,
+      48.0
+     ],
+     [
+      43.2,
+      59.1
+     ],
+     [
+      84.8,
+      59.1
+     ],
+     [
+      48.8,
+      62.4
+     ],
+     [
+      78.5,
+      64.0
+     ],
+     [
+      89.2,
+      74.4
+     ]
+    ],
+    "thin_area_units2": 191.8,
+    "ssim": 0.762
+   },
+   "48": {
+    "gap_regions": 15,
+    "gap_area_units2": 98.4,
+    "gap_spots_xy": [
+     [
+      64.0,
+      35.6
+     ],
+     [
+      54.5,
+      38.4
+     ],
+     [
+      73.5,
+      38.4
+     ],
+     [
+      59.2,
+      43.1
+     ],
+     [
+      68.8,
+      43.1
+     ],
+     [
+      48.0,
+      48.0
+     ],
+     [
+      80.0,
+      48.0
+     ],
+     [
+      43.2,
+      59.1
+     ],
+     [
+      84.8,
+      59.1
+     ],
+     [
+      48.8,
+      62.4
+     ],
+     [
+      78.5,
+      64.0
+     ],
+     [
+      36.4,
+      68.6
+     ]
+    ],
+    "thin_area_units2": 124.4,
+    "ssim": 0.859
+   }
+  }
+ }
+]

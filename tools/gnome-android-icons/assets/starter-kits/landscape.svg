@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>landscape skeleton</title>
+  <desc>gnome-android-icons starter skeleton (CC0)</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="8" y1="0" x2="120" y2="0"><stop offset="0" stop-color="#134d90"/><stop offset="0.036" stop-color="#327eda"/><stop offset="0.071" stop-color="#2062b1"/><stop offset="0.929" stop-color="#2062b1"/><stop offset="0.964" stop-color="#327eda"/><stop offset="1" stop-color="#134d90"/></linearGradient>
+  </defs>
+  <g id="plate">
+  <path id="plate-chin" d="M16 32H112A8 8 0 0 1 120 40V108A8 8 0 0 1 112 116H16A8 8 0 0 1 8 108V40A8 8 0 0 1 16 32Z" fill="url(#g1)"/>
+  <path id="plate-face" d="M16 28H112A8 8 0 0 1 120 36V104A8 8 0 0 1 112 112H16A8 8 0 0 1 8 104V36A8 8 0 0 1 16 28Z" fill="#3584e4"/>
+  </g>
+  <g id="glyph">
+  <path id="glyph-lift" d="M52 50H76A8 8 0 0 1 84 58V86A8 8 0 0 1 76 94H52A8 8 0 0 1 44 86V58A8 8 0 0 1 52 50Z" fill="#c0bfbc"/>
+  <path id="glyph-face" d="M52 48H76A8 8 0 0 1 84 56V84A8 8 0 0 1 76 92H52A8 8 0 0 1 44 84V56A8 8 0 0 1 52 48Z" fill="#ffffff"/>
+  </g>
+</svg>

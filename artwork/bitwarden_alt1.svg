@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Bitwarden - Sound Disc</title>
+  <desc>geometry: trace of user's IconRequest PNG (192 px), curves fitted to the trace (fit_shield.py)</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#00287e"/><stop offset="0.225" stop-color="#1456cc"/><stop offset="0.45" stop-color="#013ba0"/><stop offset="0.55" stop-color="#013ba0"/><stop offset="0.775" stop-color="#1456cc"/><stop offset="1" stop-color="#00287e"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="4" x2="0" y2="122"><stop offset="0" stop-color="#2366e2"/><stop offset="0.55" stop-color="#175bd6"/><stop offset="1" stop-color="#0b51cc"/></linearGradient>
+    <radialGradient id="r3" gradientUnits="userSpaceOnUse" cx="64" cy="18.75" r="67.85"><stop offset="0" stop-color="#ffffff" stop-opacity="0.12"/><stop offset="0.6" stop-color="#ffffff" stop-opacity="0.036"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g id="disc">
+  <path id="disc-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g1)"/>
+  <path id="disc-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="url(#g2)"/>
+  <path id="disc-sheen" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="url(#r3)"/>
+  </g>
+  <g id="shield">
+  <path id="shield-lift" d="M36.545 36.08C36.545 34.932 37.477 34 38.625 34L89.375 34C90.523 34 91.455 34.932 91.455 36.08L91.455 69.425C91.455 83.46 77.836 94.168 64 100C50.164 94.168 36.545 83.46 36.545 69.425L36.545 36.08M64 41.188L84.217 41.188L84.217 68.868C84.217 78.527 74.375 86.406 64 91.93L64 41.188" fill="#deddda" fill-rule="evenodd"/>
+  <path id="shield-face" d="M 36.545,34.08 C 36.545,32.932 37.477,32 38.625,32 L 89.375,32 C 90.523,32 91.455,32.932 91.455,34.08 L 91.455,67.425 C 91.455,81.46 77.836,92.168 64,98 C 50.164,92.168 36.545,81.46 36.545,67.425 L 36.545,34.08M 64,39.188 L 84.217,39.188 L 84.217,66.868 C 84.217,76.527 74.375,84.406 64,89.93 L 64,39.188" fill="#ffffff" fill-rule="evenodd"/>
+  </g>
+</svg>

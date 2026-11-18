@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Lale - Free Symbol</title>
+  <desc>original artwork made for the gnome-android-icons skill demo | licence: CC0-1.0</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="30" y1="116" x2="100" y2="10"><stop offset="0" stop-color="#6a35d9"/><stop offset="1" stop-color="#d63a8f"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="30" y1="0" x2="104" y2="0"><stop offset="0" stop-color="#4c0973"/><stop offset="0.095" stop-color="#8333bb"/><stop offset="0.189" stop-color="#641c92"/><stop offset="0.811" stop-color="#641c92"/><stop offset="0.905" stop-color="#8333bb"/><stop offset="1" stop-color="#4c0973"/></linearGradient>
+  </defs>
+  <g id="note">
+  <path id="note-p0-chin" d="M44.75 23.15Q46 21.275 47.875 23.15L54.75 31.9L61.75 16.65Q63.5 13.9 65.25 16.65L72.25 31.9L79.125 23.15Q81 21.275 82.25 23.15L82.25 38.15C82.25 49.4 74.125 58.15 63.5 58.15C52.875 58.15 44.75 49.4 44.75 38.15L44.75 23.15" fill="url(#g2)"/>
+  <path id="note-p1-chin" d="M60.375 55.65L66.625 55.65L66.625 108.15L60.375 108.15L60.375 55.65" fill="url(#g2)"/>
+  <path id="note-p2-chin" d="M66.625 64.4C77.25 66.9 87.25 74.4 88.5 89.4C83.5 81.9 76 79.4 66.625 80.65L66.625 64.4" fill="url(#g2)"/>
+  <path id="note-p3-chin" d="M40.706 113.066A13.125 9.5 -22 1 1 65.044 103.234A13.125 9.5 -22 1 1 40.706 113.066" fill="url(#g2)"/>
+  <path id="note-p0-face" d="M 44.75,19.15 Q 46,17.275 47.875,19.15 L 54.75,27.9 L 61.75,12.65 Q 63.5,9.9 65.25,12.65 L 72.25,27.9 L 79.125,19.15 Q 81,17.275 82.25,19.15 L 82.25,34.15 C 82.25,45.4 74.125,54.15 63.5,54.15 C 52.875,54.15 44.75,45.4 44.75,34.15 L 44.75,19.15" fill="url(#g1)"/>
+  <path id="note-p1-face" d="M 60.375,51.65 L 66.625,51.65 L 66.625,104.15 L 60.375,104.15 L 60.375,51.65" fill="url(#g1)"/>
+  <path id="note-p2-face" d="M 66.625,60.4 C 77.25,62.9 87.25,70.4 88.5,85.4 C 83.5,77.9 76,75.4 66.625,76.65 L 66.625,60.4" fill="url(#g1)"/>
+  <path id="note-p3-face" d="M 40.706,109.066 A 13.125,9.5 -22 1,1 65.044,99.234 A 13.125,9.5 -22 1,1 40.706,109.066" fill="url(#g1)"/>
+  </g>
+</svg>
