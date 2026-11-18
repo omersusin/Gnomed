@@ -509,3 +509,4 @@ Real mistakes from this project's history — do not repeat them:
 | Shell `$` in `Shell$HomeActivity` eaten by the shell | always single-quote ComponentInfos on the command line |
 | Release APK crashed at start (R8 removed a Room constructor) | keep `app/proguard-rules.pro`; CI guards it |
 | "Tests pass, so it's done" | only looking at the boards decides; report weaknesses honestly |
+| `build_auto.py` run over every app replaced 6 hand-built icons (Shizuku, Clash Royale, …) in the pack with their automatic drafts | `work/_lib/builders.py` decides the builder; `build_auto.py` now refuses hand-built apps and `pack_refresh.py` rebuilds with the right builder first |

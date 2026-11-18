@@ -362,7 +362,13 @@ def slugs_all():
 
 
 if __name__ == "__main__":
+    import builders
+    hand = builders.hand_slugs()
     for slug in (sys.argv[1:] or slugs_all()):
+        if slug in hand:
+            # building these here would overwrite the redrawn icon with the automatic draft
+            print(slug, "SKIP: hand-built in", builders.builder_of(slug), "- use tools/make_icon.py", slug)
+            continue
         try:
             app = App(slug)
             for st, ic in app.build().items():
