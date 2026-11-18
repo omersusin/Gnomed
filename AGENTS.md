@@ -4,9 +4,15 @@ You are an AI agent working on **Gnomed**, an Android icon pack in the GNOME sty
 Follow this file **exactly**. It is written for every model, small or large. When this
 file and your own idea disagree, this file wins.
 
-Learn the job first: read [`docs/course/`](docs/course/README.md) lessons 1–5
-(lesson 4 and 6 when you need a fix). Background and rules for humans:
-[`CONTRIBUTING.md`](CONTRIBUTING.md).
+> **Icon design: [REDESIGN.md](REDESIGN.md) is binding and comes first.** The automatic
+> pipeline (`tools/make_icon.py` for an app without `work/<slug>/redesign.py`) only makes
+> a draft — the logo on a plate — and the gate FAILs it (`redesign` check). Steps C3–C6
+> below are the measuring/draft stage; the icon itself is designed with REDESIGN.md.
+
+Learn the job first: [REDESIGN.md](REDESIGN.md) and
+`docs/redesign/examples/build_examples.py`. [`docs/course/`](docs/course/README.md)
+explains the draft pipeline and its tools (recipes for measuring problems). Background
+and rules for humans: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 Talk to the human in **their** language. Keep messages short.
 
@@ -67,6 +73,7 @@ ask for it.
   look and what to ask for),
 * the gate still shows FAIL after you tried the recipe 3 times,
 * the source is a poster, a photo or a character (free adaptation needs their OK),
+* after the concept board (REDESIGN.md step 4) and after the final review (step 6),
 * before `tools/pack_add.py` without `--dry-run` (show the dry-run diff first),
 * anything would delete or overwrite.
 

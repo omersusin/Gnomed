@@ -39,6 +39,7 @@ Release signing needs four repository secrets: `GNOMED_KEYSTORE_BASE64`,
 **Only the maintainer touches `main`.** Everyone else — people and AI agents — works on
 a branch and opens a pull request; the maintainer merges or not.
 
-Everything about making icons, the design rules, the tools and how to send a pull
-request is in **[CONTRIBUTING.md](CONTRIBUTING.md)**. AI agents: read
+**How a Gnomed icon is designed: [REDESIGN.md](REDESIGN.md)** — the app's idea built as a
+GNOME object, never the logo on a plate. The tools and how to send a pull request are in
+**[CONTRIBUTING.md](CONTRIBUTING.md)**. AI agents: read
 **[AGENTS.md](AGENTS.md)** as well. Ask for an app with the *Icon request* issue template.
