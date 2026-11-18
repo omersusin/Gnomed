@@ -69,7 +69,9 @@ Change its build, `python3 tools/make_icon.py <slug>`, then
 python3 tools/pack_refresh.py <slug>
 ```
 
-It re-renders the existing PNGs; it never renames or removes anything.
+It first rebuilds the app with its own builder (`work/_lib/builders.py`: hand-built apps
+with `build_weak.py` / `build_group1.py`, the rest with `build_auto.py`), then re-renders the
+existing PNGs; it never renames or removes anything.
 
 ## 7.4 The pull request
 

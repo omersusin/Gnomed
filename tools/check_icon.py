@@ -122,6 +122,9 @@ def main():
             add(st, "legibility32", stt, ssim, "" if stt == "PASS" else "R11 (bigger mark, drop tiny details, thicker strokes)")
     # box inside the plate: a big single region whose colour differs from the plate
     gp = w / "geometry.json"
+    sys.path.insert(0, str(ROOT / "work/_lib"))
+    import builders
+    is_hand = builders.hand_built(slug)
     if gp.exists():
         g = json.loads(gp.read_text())
         regs = g["info"].get("regions", [])
@@ -134,10 +137,9 @@ def main():
             stt = "FAIL" if (biggest > 0.40 and span > 0.70) else "PASS"
             # an override that turned the region into the plate colour clears it
             ov = (ROOT / "work/_lib/build_auto.py").read_text()
-            hand = (ROOT / "work/_lib/build_weak.py").read_text()
             if f'"{slug}"' in ov and ('"face"' in ov.split(f'"{slug}"')[1].split("\n")[0] or "only_white" in ov.split(f'"{slug}"')[1].split("\n")[0]):
                 stt = "PASS"
-            if f"def {slug}(" in hand:
+            if is_hand:
                 stt = "PASS"
             del dropped
             add("faithful", "box_in_plate", stt, round(biggest, 2),
@@ -166,7 +168,7 @@ def main():
             add("app", "stripes", "PASS", 0)
         # thin parts (bands, lines) lose IoU to smoothing without visible harm: only a LARGE
         # part that matches badly is a failure; hand-built apps do not use these regions
-        if f"def {slug}(" in (ROOT / "work/_lib/build_weak.py").read_text():
+        if is_hand:
             add("app", "trace_iou", "PASS", "hand-built")
         else:
             sys.path.insert(0, str(ROOT / "work/_lib"))
