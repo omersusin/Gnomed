@@ -1,0 +1,73 @@
+onedm	1DM+	ComponentInfo{idm.internet.download.manager.plus/idm.internet.download.manager.LauncherDefault}	_1dm
+twofas_auth	2FAS Auth	ComponentInfo{com.twofasapp/com.twofasapp.ui.main.StartActivity}	_2fas_auth
+anker_soundcore	Anker soundcore	ComponentInfo{com.oceanwing.soundcore/com.oceanwing.soundcore.activity.WelcomeActivity}	anker_soundcore
+apple_music	Apple Music	ComponentInfo{com.apple.android.music/com.apple.android.music.common.MainActivity}	apple_music
+ashell_you	aShell You	ComponentInfo{in.hridayan.ashell/in.hridayan.ashell.activities.MainActivity}	ashell_you
+bare	Bare	ComponentInfo{org.barebrowser/com.google.android.apps.chrome.Main}	bare
+bcr	BCR	ComponentInfo{com.chiller3.bcr/com.chiller3.bcr.settings.SettingsActivityLauncher}	bcr
+binance_tr	Binance TR	ComponentInfo{com.cloud.tr/binance.app.main.module.StartActivity}	binance_tr
+bitchord	BitChord	ComponentInfo{com.music.bitchord/com.music.bitchord.LauncherGlassLight}	bitchord
+clash_royale	Clash Royale	ComponentInfo{com.supercell.clashroyale/com.supercell.titan.GameApp}	clash_royale
+claude	Claude	ComponentInfo{com.anthropic.claude/com.anthropic.claude.mainactivity.MainActivity}	claude
+cloudstream	CloudStream	ComponentInfo{com.lagradost.cloudstream3/com.lagradost.cloudstream3.ui.account.AccountSelectActivity}	cloudstream
+colorblendr	ColorBlendr	ComponentInfo{com.drdisagree.colorblendr/com.drdisagree.colorblendr.ui.activities.MainActivity}	colorblendr
+databackup	DataBackup	ComponentInfo{com.xayah.databackup.foss/com.xayah.databackup.SplashActivity}	databackup
+discord	Discord	ComponentInfo{com.discord/com.discord.main.MainDefault}	discord
+enpara	Enpara	ComponentInfo{com.enparabank.retail/finansbank.enpara.activities.dashboard.SplashActivity}	enpara
+exteraless	exteraless	ComponentInfo{com.exteraless.app/org.telegram.messenger.PlusIcon}	exteraless
+f_droid	F-Droid	ComponentInfo{org.fdroid.fdroid/org.fdroid.IconActivity}	f_droid
+ffupdater	FFUpdater	ComponentInfo{de.marmaro.krt.ffupdater/de.marmaro.krt.ffupdater.activity.main.MainActivity}	ffupdater
+firefox_beta	Firefox Beta	ComponentInfo{org.mozilla.firefox_beta/org.mozilla.firefox_beta.App}	firefox_beta
+firefox_nightly	Firefox Nightly	ComponentInfo{org.mozilla.fenix/org.mozilla.fenix.App}	firefox_nightly
+frostkeys	FrostKeys	ComponentInfo{com.orion.kboard/helium314.keyboard.settings.SettingsActivity}	frostkeys
+gboardwu	GboardWu	ComponentInfo{dev.jason.com.google.android.inputmethod.latin/com.google.android.libraries.inputmethod.launcher.LauncherActivity}	gboardwu
+hesap_makinesi	Hesap Makinesi	ComponentInfo{all.in.one.calculator/io.flutter.embedding.android.FlutterActivity}	hesap_makinesi
+iconrequest	IconRequest	ComponentInfo{de.kaiserdragon.iconrequest/de.kaiserdragon.iconrequest.MainActivity}	iconrequest
+installerx_revived	InstallerX Revived	ComponentInfo{com.rosan.installer.x.revived/com.rosan.installer.ui.activity.LauncherAlias}	installerx_revived
+jamesdsp	JamesDSP	ComponentInfo{james.dsp/me.timschneeberger.rootlessjamesdsp.activity.MainActivity}	jamesdsp
+kadraj	Kadraj	ComponentInfo{com.omersusin.kadraj/com.omersusin.kadraj.MainActivity}	kadraj
+kernelsu_next	KernelSU-Next	ComponentInfo{com.rifsxd.ksunext/com.rifsxd.ksunext.ui.MainActivity}	kernelsu_next
+ki_iler	Kişiler	ComponentInfo{org.fossify.contacts/org.fossify.contacts.activities.SplashActivity.Green}	ki_iler
+konabess	KonaBess	ComponentInfo{xzr.konabess/xzr.konabess.MainActivity}	konabess
+midas	Midas	ComponentInfo{com.getmidas.app/com.getmidas.app.MainActivity}	midas
+mix	MiX	ComponentInfo{com.mixplorer.beta/com.mixplorer.activities.BrowseActivity}	mix
+mochy	Mochy	ComponentInfo{com.mochyy.mochymusic/com.mochyy.mochymusic.IconMarkMaterial}	mochy
+mornye	Mornye	ComponentInfo{com.zarz.mornye/com.zarz.mornye.MainActivity}	mornye
+morphe	Morphe	ComponentInfo{app.morphe.manager/app.morphe.manager.MainActivity_Default}	morphe
+mt_manager	MT Manager	ComponentInfo{bin.mt.plus.canary/bin.mt.plus.MainLightIcon}	mt_manager
+nuvio	Nuvio	ComponentInfo{com.nuvio.app/com.nuvio.app.launcher.AppIconDefault}	nuvio
+obtainx	ObtainX	ComponentInfo{dev.bikram.obtainx/dev.imranr.obtainium.MainActivity}	obtainx
+opencode_mobile	OpenCode Mobile	ComponentInfo{io.github.eslamasabry.opencode_mobile/io.github.eslamasabry.opencode_mobile.MainActivity}	opencode_mobile
+payload_dumper	Payload Dumper	ComponentInfo{com.rhythmcache.payloaddumper/com.rhythmcache.payloaddumper.MainActivity}	payload_dumper
+pentas	Pentas	ComponentInfo{org.yasvara.pentas/org.yasvara.pentas.app.LibraryActivity}	pentas
+pix_material_you_light_dark	Pix Material You Light/Dark	ComponentInfo{com.pashapuma.pix.material.you.dark/com.pashapuma.pix.material.you.dark.activities.MainActivity}	pix_material_you_light_dark
+play_store	Play Store	ComponentInfo{com.android.vending/com.android.vending.AssetBrowserActivity}	play_store
+plush_iconpack	Plush Iconpack	ComponentInfo{com.stark.plush/com.stark.plush.activities.MainActivity}	plush_iconpack
+proton_drive	Proton Drive	ComponentInfo{me.proton.android.drive/me.proton.android.drive.ui.MainActivity}	proton_drive
+proton_vpn	Proton VPN	ComponentInfo{ch.protonvpn.android/ch.protonvpn.android.RoutingActivity}	proton_vpn
+qobuz	Qobuz	ComponentInfo{com.qobuz.music/com.qobuz.android.mobile.app.IconDark}	qobuz
+qwen	Qwen	ComponentInfo{com.tongyi.intl/ai.qwenlm.chat.android.MainActivity}	qwen
+recon	Recon	ComponentInfo{dev.wolzard.recon/dev.wolzard.recon.MainActivity}	recon
+reddit	Reddit	ComponentInfo{com.reddit.frontpage/launcher.default}	reddit
+scene	Scene	ComponentInfo{com.omarea.vtools/com.omarea.vtools.activities.ActivityMain}	scene
+sd_maid_se	SD Maid SE	ComponentInfo{eu.darken.sdmse/eu.darken.sdmse.main.ui.MainActivity}	sd_maid_se
+shizuku	Shizuku	ComponentInfo{moe.shizuku.privileged.api/moe.shizuku.manager.MainActivity}	shizuku
+smart_launcher	Smart Launcher	ComponentInfo{ginlemon.flowerfree/ginlemon.flower.HomeScreen}	smart_launcher
+stride	Stride	ComponentInfo{com.vythera.stride/com.vythera.stride.LauncherStride}	stride
+survivor_io	Survivor.io	ComponentInfo{com.dxx.firenow/com.unity3d.player.UnityPlayerActivityOverride}	survivor_io
+swift_backup	Swift Backup	ComponentInfo{org.swiftapps.swiftbackup/org.swiftapps.swiftbackup.intro.IntroActivity}	swift_backup
+terminal_em_lat_r	Terminal Emülatörü	ComponentInfo{com.termoneplus/com.termoneplus.TermActivity}	terminal_em_lat_r
+termux_api	Termux:API	ComponentInfo{com.termux.api/com.termux.api.activities.TermuxAPILauncherActivity}	termux_api
+termux_boot	Termux:Boot	ComponentInfo{com.termux.boot/com.termux.boot.BootActivity}	termux_boot
+termux_widget	Termux:Widget	ComponentInfo{com.termux.widget/com.termux.widget.activities.TermuxWidgetLauncherActivity}	termux_widget
+thunderbird	Thunderbird	ComponentInfo{net.thunderbird.android/net.thunderbird.app.common.MainActivity}	thunderbird
+tiktok_lite	TikTok Lite	ComponentInfo{com.zhiliaoapp.musically.go/com.zhiliaoapp.musically.go.mini.MainActivity}	tiktok_lite
+today_weather	Today Weather	ComponentInfo{mobi.lockdown.weather/mobi.lockdown.weather.activity.SplashActivity}	today_weather
+trendyolmilla	Trendyolmilla	ComponentInfo{com.trendyol.milla.android/com.trendyol.common.splash.impl.ui.MillaSplashActivity}	trendyolmilla
+trestle	Trestle	ComponentInfo{com.browserrelay.app/com.browserrelay.app.MainActivity}	trestle
+t_rk_telekom	Türk Telekom	ComponentInfo{com.tmob.AveaOIM/moim.android.DefaultMoimApplicationAlias}	t_rk_telekom
+vortex	vortex	ComponentInfo{com.example.vortex/com.example.vortex.MainActivity}	vortex
+walpy	Walpy	ComponentInfo{com.feresr.walpy/com.feresr.walpy.ui.MainActivity}	walpy
+weblibre	WebLibre	ComponentInfo{eu.weblibre.gecko/eu.weblibre.gecko.MainActivity}	weblibre
+wupp	Wupp	ComponentInfo{com.wupp.app/com.wa.beastclient.MainActivity}	wupp
+y_hava_durumu	Y.Hava durumu	ComponentInfo{ru.yandex.weatherplugin/ru.yandex.weatherplugin.ui.common.activity.SplashActivity}	y_hava_durumu
