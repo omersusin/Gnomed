@@ -2,7 +2,8 @@ name: Build Gnomed
 
 # Builds one APK per icon style (faithful, disc, rimmed, symbol).
 # - every push / PR: build + upload the APKs as a workflow artifact
-# - tag v* or manual run with "release" ticked: also publish a GitHub release;
+# - tag v*, manual run with "release" ticked, or a pushed commit whose message
+#   contains [release]: also publish a GitHub release (the action creates the tag);
 #   the in-app style switch downloads gnomed-<style>.apk from the latest release.
 on:
   push:
@@ -91,7 +92,7 @@ jobs:
           path: dist/*.apk
 
       - name: Publish release
-        if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release)
+        if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release) || (github.event_name == 'push' && contains(github.event.head_commit.message, '[release]'))
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || format('v1.0.{0}', github.run_number) }}
