@@ -53,7 +53,8 @@ OVERRIDES = {
     "trendyolmilla": {"only_white": True, "skip": ["symbol"], "note": "white wordmark only (background blobs are tile decoration); no Symbol"},
     "vortex": {"flat": True, "face": "#0d0e0d", "drop": ["#0d0e0d"], "note": "flat black tile (the spiral touching the edge skewed the gradient fit)"},
     "wupp": {"flat": True, "face": "#131c23", "drop": ["#131c23"], "note": "flat dark tile behind the green bubble"},
-    "walpy": {"note": "blurry signature: only its core traced (threshold 0.5, 1.2 u smoothing)"},
+    "walpy": {"scale": 0.76, "note": "blurry signature: only its sharp core traced (threshold 0.85); kept at the source's ~40 % proportion"},
+    "mt_manager": {"scale": 1.18, "note": "folder object larger on the plate (was a small box in a big plate)"},
     "survivor_io": {"skip": ["symbol"], "note": "WEAK: posterised trace of the game poster, not a real GNOME conversion"},
 }
 
@@ -150,7 +151,7 @@ class App:
     def box(self, kind):
         x0, y0, x1, y1 = self.I["mark_bbox"]
         asp = (x1 - x0) / max(y1 - y0, 1e-6)
-        sc = self.o.get("scale", 1.0)
+        sc = self.o.get("scale", 1.0) if kind != "symbol" else self.o.get("symbol_scale", 1.0)
         base = {"faithful": (64, 62, 72), "disc": (64, 63, 76), "rimmed": (64, 63, 64), "symbol": (64, 61, 106)}[kind]
         cx, cy, w = base
         w *= sc
