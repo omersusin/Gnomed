@@ -22,4 +22,51 @@
     <item drawable="bitwarden_alt1" name="Bitwarden (Disc)" />
     <item drawable="bitwarden_alt2" name="Bitwarden (Rimmed)" />
     <item drawable="bitwarden_alt3" name="Bitwarden (Symbol)" />
+
+    <category title="Social" />
+    <item drawable="whatsapp" name="WhatsApp" />
+    <item drawable="whatsapp_alt1" name="WhatsApp (Disc)" />
+    <item drawable="whatsapp_alt2" name="WhatsApp (Rimmed)" />
+    <item drawable="whatsapp_alt3" name="WhatsApp (Symbol)" />
+    <item drawable="instagram" name="Instagram" />
+    <item drawable="instagram_alt1" name="Instagram (Disc)" />
+    <item drawable="instagram_alt2" name="Instagram (Rimmed)" />
+    <item drawable="instagram_alt3" name="Instagram (Symbol)" />
+
+    <category title="Media" />
+    <item drawable="youtube" name="YouTube" />
+    <item drawable="youtube_alt1" name="YouTube (Disc)" />
+    <item drawable="youtube_alt2" name="YouTube (Rimmed)" />
+    <item drawable="youtube_alt3" name="YouTube (Symbol)" />
+
+    <category title="System" />
+    <item drawable="telefon" name="Telefon" />
+    <item drawable="telefon_alt1" name="Telefon (Disc)" />
+    <item drawable="telefon_alt2" name="Telefon (Rimmed)" />
+    <item drawable="telefon_alt3" name="Telefon (Symbol)" />
+    <item drawable="mesajlar" name="Mesajlar" />
+    <item drawable="mesajlar_alt1" name="Mesajlar (Disc)" />
+    <item drawable="mesajlar_alt2" name="Mesajlar (Rimmed)" />
+    <item drawable="mesajlar_alt3" name="Mesajlar (Symbol)" />
+    <item drawable="kamera" name="Kamera" />
+    <item drawable="kamera_alt1" name="Kamera (Disc)" />
+    <item drawable="kamera_alt2" name="Kamera (Rimmed)" />
+    <item drawable="kamera_alt3" name="Kamera (Symbol)" />
+    <item drawable="foto_raflar" name="Fotoğraflar" />
+    <item drawable="foto_raflar_alt1" name="Fotoğraflar (Disc)" />
+    <item drawable="foto_raflar_alt2" name="Fotoğraflar (Rimmed)" />
+    <item drawable="foto_raflar_alt3" name="Fotoğraflar (Symbol)" />
+    <item drawable="saat" name="Saat" />
+    <item drawable="saat_alt1" name="Saat (Disc)" />
+    <item drawable="saat_alt2" name="Saat (Rimmed)" />
+    <item drawable="saat_alt3" name="Saat (Symbol)" />
+    <item drawable="ayarlar" name="Ayarlar" />
+    <item drawable="ayarlar_alt1" name="Ayarlar (Disc)" />
+    <item drawable="ayarlar_alt2" name="Ayarlar (Rimmed)" />
+    <item drawable="ayarlar_alt3" name="Ayarlar (Symbol)" />
+
+    <category title="AI" />
+    <item drawable="chatgpt" name="ChatGPT" />
+    <item drawable="chatgpt_alt1" name="ChatGPT (Disc)" />
+    <item drawable="chatgpt_alt2" name="ChatGPT (Rimmed)" />
 </resources>

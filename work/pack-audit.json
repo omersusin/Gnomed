@@ -1,10 +1,10 @@
 {
  "summary": {
-  "components": 13,
-  "appfilter_drawables": 13,
-  "gallery": 14,
-  "categories": 3,
-  "resources": 22
+  "components": 23,
+  "appfilter_drawables": 23,
+  "gallery": 53,
+  "categories": 7,
+  "resources": 61
  },
  "issues": [
   [
@@ -184,6 +184,14 @@
    "icon_10.png: bottom edge y=128 (official 116-126)"
   ],
   [
+   "WARN",
+   "instagram_alt3.png: light visual mass 0.34 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "telefon_alt3.png: light visual mass 0.23 (official 0.38-0.71)"
+  ],
+  [
    "INFO",
    "appfilter fallback: <iconback img1=\"iconback\" /> (affects only unthemed apps)"
   ],
@@ -197,7 +205,7 @@
   ],
   [
    "INFO",
-   "13 gallery-only drawables (3 are _altN alternatives): bitwarden_alt1, bitwarden_alt2, bitwarden_alt3, icon_1, icon_10, icon_2, icon_3, icon_4, icon_5, icon_6, icon_7, icon_8 ..."
+   "42 gallery-only drawables (32 are _altN alternatives): ayarlar_alt1, ayarlar_alt2, ayarlar_alt3, bitwarden_alt1, bitwarden_alt2, bitwarden_alt3, chatgpt_alt1, chatgpt_alt2, foto_raflar_alt1, foto_raflar_alt2, foto_raflar_alt3, icon_1 ..."
   ]
  ],
  "icons": [
@@ -436,6 +444,556 @@
    "b": 119.2,
    "area": 0.512,
    "chin": 3.8
+  },
+  {
+   "name": "whatsapp",
+   "file": "app/src/main/res/drawable-nodpi/whatsapp.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "whatsapp_alt1",
+   "file": "app/src/main/res/drawable-nodpi/whatsapp_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.9
+  },
+  {
+   "name": "whatsapp_alt2",
+   "file": "app/src/main/res/drawable-nodpi/whatsapp_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "whatsapp_alt3",
+   "file": "app/src/main/res/drawable-nodpi/whatsapp_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 110.5,
+   "h": 114.5,
+   "b": 120.2,
+   "area": 0.632,
+   "chin": 3.8
+  },
+  {
+   "name": "instagram",
+   "file": "app/src/main/res/drawable-nodpi/instagram.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 3.8
+  },
+  {
+   "name": "instagram_alt1",
+   "file": "app/src/main/res/drawable-nodpi/instagram_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "instagram_alt2",
+   "file": "app/src/main/res/drawable-nodpi/instagram_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "instagram_alt3",
+   "file": "app/src/main/res/drawable-nodpi/instagram_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.34 (official 0.38-0.71)"
+   ],
+   "w": 106.5,
+   "h": 110.5,
+   "b": 118.2,
+   "area": 0.339,
+   "chin": 3.8
+  },
+  {
+   "name": "youtube",
+   "file": "app/src/main/res/drawable-nodpi/youtube.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "youtube_alt1",
+   "file": "app/src/main/res/drawable-nodpi/youtube_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "youtube_alt2",
+   "file": "app/src/main/res/drawable-nodpi/youtube_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "youtube_alt3",
+   "file": "app/src/main/res/drawable-nodpi/youtube_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 114.5,
+   "h": 83.0,
+   "b": 115.5,
+   "area": 0.547,
+   "chin": null
+  },
+  {
+   "name": "telefon",
+   "file": "app/src/main/res/drawable-nodpi/telefon.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "telefon_alt1",
+   "file": "app/src/main/res/drawable-nodpi/telefon_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "telefon_alt2",
+   "file": "app/src/main/res/drawable-nodpi/telefon_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "telefon_alt3",
+   "file": "app/src/main/res/drawable-nodpi/telefon_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [
+    "light visual mass 0.23 (official 0.38-0.71)"
+   ],
+   "w": 104.5,
+   "h": 108.5,
+   "b": 117.2,
+   "area": 0.231,
+   "chin": 3.8
+  },
+  {
+   "name": "mesajlar",
+   "file": "app/src/main/res/drawable-nodpi/mesajlar.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "mesajlar_alt1",
+   "file": "app/src/main/res/drawable-nodpi/mesajlar_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "mesajlar_alt2",
+   "file": "app/src/main/res/drawable-nodpi/mesajlar_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "mesajlar_alt3",
+   "file": "app/src/main/res/drawable-nodpi/mesajlar_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 110.5,
+   "h": 106.5,
+   "b": 116.2,
+   "area": 0.626,
+   "chin": 3.8
+  },
+  {
+   "name": "kamera",
+   "file": "app/src/main/res/drawable-nodpi/kamera.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "kamera_alt1",
+   "file": "app/src/main/res/drawable-nodpi/kamera_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.5
+  },
+  {
+   "name": "kamera_alt2",
+   "file": "app/src/main/res/drawable-nodpi/kamera_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.689,
+   "chin": 1.8
+  },
+  {
+   "name": "kamera_alt3",
+   "file": "app/src/main/res/drawable-nodpi/kamera_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 109.5,
+   "h": 111.5,
+   "b": 123.2,
+   "area": 0.563,
+   "chin": 1.5
+  },
+  {
+   "name": "foto_raflar",
+   "file": "app/src/main/res/drawable-nodpi/foto_raflar.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "foto_raflar_alt1",
+   "file": "app/src/main/res/drawable-nodpi/foto_raflar_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "foto_raflar_alt2",
+   "file": "app/src/main/res/drawable-nodpi/foto_raflar_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "foto_raflar_alt3",
+   "file": "app/src/main/res/drawable-nodpi/foto_raflar_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 110.5,
+   "h": 114.5,
+   "b": 121.2,
+   "area": 0.364,
+   "chin": 3.8
+  },
+  {
+   "name": "saat",
+   "file": "app/src/main/res/drawable-nodpi/saat.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "saat_alt1",
+   "file": "app/src/main/res/drawable-nodpi/saat_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.9
+  },
+  {
+   "name": "saat_alt2",
+   "file": "app/src/main/res/drawable-nodpi/saat_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "saat_alt3",
+   "file": "app/src/main/res/drawable-nodpi/saat_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 116.5,
+   "h": 119.5,
+   "b": 123.2,
+   "area": 0.666,
+   "chin": 2.8
+  },
+  {
+   "name": "ayarlar",
+   "file": "app/src/main/res/drawable-nodpi/ayarlar.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "ayarlar_alt1",
+   "file": "app/src/main/res/drawable-nodpi/ayarlar_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "ayarlar_alt2",
+   "file": "app/src/main/res/drawable-nodpi/ayarlar_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "ayarlar_alt3",
+   "file": "app/src/main/res/drawable-nodpi/ayarlar_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 105.0,
+   "h": 114.5,
+   "b": 120.2,
+   "area": 0.382,
+   "chin": 3.8
+  },
+  {
+   "name": "chatgpt",
+   "file": "app/src/main/res/drawable-nodpi/chatgpt.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "chatgpt_alt1",
+   "file": "app/src/main/res/drawable-nodpi/chatgpt_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 18.0
+  },
+  {
+   "name": "chatgpt_alt2",
+   "file": "app/src/main/res/drawable-nodpi/chatgpt_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
   }
  ]
 }

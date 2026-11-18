@@ -11,6 +11,55 @@
       "disc": "bitwarden_alt1",
       "rimmed": "bitwarden_alt2",
       "symbol": "bitwarden_alt3"
+    },
+    "whatsapp": {
+      "disc": "whatsapp_alt1",
+      "rimmed": "whatsapp_alt2",
+      "symbol": "whatsapp_alt3"
+    },
+    "instagram": {
+      "disc": "instagram_alt1",
+      "rimmed": "instagram_alt2",
+      "symbol": "instagram_alt3"
+    },
+    "youtube": {
+      "disc": "youtube_alt1",
+      "rimmed": "youtube_alt2",
+      "symbol": "youtube_alt3"
+    },
+    "telefon": {
+      "disc": "telefon_alt1",
+      "rimmed": "telefon_alt2",
+      "symbol": "telefon_alt3"
+    },
+    "mesajlar": {
+      "disc": "mesajlar_alt1",
+      "rimmed": "mesajlar_alt2",
+      "symbol": "mesajlar_alt3"
+    },
+    "kamera": {
+      "disc": "kamera_alt1",
+      "rimmed": "kamera_alt2",
+      "symbol": "kamera_alt3"
+    },
+    "foto_raflar": {
+      "disc": "foto_raflar_alt1",
+      "rimmed": "foto_raflar_alt2",
+      "symbol": "foto_raflar_alt3"
+    },
+    "saat": {
+      "disc": "saat_alt1",
+      "rimmed": "saat_alt2",
+      "symbol": "saat_alt3"
+    },
+    "ayarlar": {
+      "disc": "ayarlar_alt1",
+      "rimmed": "ayarlar_alt2",
+      "symbol": "ayarlar_alt3"
+    },
+    "chatgpt": {
+      "disc": "chatgpt_alt1",
+      "rimmed": "chatgpt_alt2"
     }
   }
 }

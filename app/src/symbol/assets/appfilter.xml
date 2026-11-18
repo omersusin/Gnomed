@@ -22,4 +22,14 @@
     <item component="ComponentInfo{some.app.sample/some.app.sample.MainActivity}" drawable="some_app" />
 
     <item component="ComponentInfo{com.x8bit.bitwarden/com.x8bit.bitwarden.MainActivity}" drawable="bitwarden_alt3" />
+    <item component="ComponentInfo{com.whatsapp/com.whatsapp.Main}" drawable="whatsapp_alt3" />
+    <item component="ComponentInfo{com.instagram.android/com.instagram.android.activity.MainTabActivity}" drawable="instagram_alt3" />
+    <item component="ComponentInfo{com.google.android.youtube/com.google.android.youtube.app.honeycomb.Shell$HomeActivity}" drawable="youtube_alt3" />
+    <item component="ComponentInfo{org.fossify.phone/org.fossify.phone.activities.SplashActivity.Green}" drawable="telefon_alt3" />
+    <item component="ComponentInfo{org.fossify.messages/org.fossify.messages.activities.SplashActivity.Green}" drawable="mesajlar_alt3" />
+    <item component="ComponentInfo{com.android.camera/com.android.camera.Camera}" drawable="kamera_alt3" />
+    <item component="ComponentInfo{com.google.android.apps.photos/com.google.android.apps.photos.home.HomeActivity}" drawable="foto_raflar_alt3" />
+    <item component="ComponentInfo{org.fossify.clock/org.fossify.clock.activities.SplashActivity.Green}" drawable="saat_alt3" />
+    <item component="ComponentInfo{com.android.settings/com.android.settings.Settings}" drawable="ayarlar_alt3" />
+    <item component="ComponentInfo{com.openai.chatgpt/com.openai.chatgpt.MainActivity}" drawable="chatgpt" />
 </resources>
