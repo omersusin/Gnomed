@@ -1,4 +1,23 @@
-# SVG construction with gnome_kit (v1.1)
+# SVG construction (v1.2): obj.py for objects, gnome_kit underneath
+
+## Objects (redesigns) — scripts/obj.py
+
+```python
+from obj import *                                   # gk, shapely shapes, solid, recess, hole, toplight
+ic = gk.Icon("App - GNOME redesign")
+body = rounded(box(18, 22, 110, 106), 12)           # shapes: box, circ, ellipse, poly(points, r), rounded(g, r)
+solid(ic, body, face=[(0, "#99c1f1"), (1, "#3584e4")], depth=8, layer="body")   # side + face + top light
+recess(ic, rounded(box(30, 34, 98, 80), 6), [(0, "#f6f5f4"), (1, "#deddda")])  # sunk label/screen
+hole(ic, circ(64, 96, 6))                            # real hole: dark, darker top wall
+solid(ic, circ(94, 96, 16), face="#ff7800", depth=4, layer="badge")             # secondary object in front
+ic.save("work/app/app.svg")
+```
+
+Boolean shapes (union, difference, offset) are shapely: `a.union(b)`, `a.difference(b)`,
+`a.buffer(-4)`; `move`, `scale`, `down`; `geom_d(g)` gives the path. Full examples:
+`examples/redesign/build_examples.py` (a cloud + arrow, a steel shield with enamel and keyhole).
+
+## Template treatments and measuring drafts — gnome_kit
 
 `new_icon.py` writes `work/<slug>/build.py`: one `build_<alt>()` per alternative,
 starting as an autodraft. Refine those functions with `scripts/gnome_kit.py`.

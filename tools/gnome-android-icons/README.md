@@ -1,4 +1,4 @@
-# gnome-android-icons (v1.1)
+# gnome-android-icons (v1.2)
 
 Herhangi bir Android uygulamasının simgesini, uygulamanın kimliğini bozmadan
 **gerçek GNOME/Adwaita tarzında** yeniden tasarlayan; düzenlenebilir SVG,
@@ -39,6 +39,14 @@ python3 scripts/doctor.py                      # eksik bir şey varsa nasıl kur
 MoreWaita / Adwaita++ arşivlerinizin yolu:
 `export GNOME_ICONS_MOREWAITA=~/arsiv/MoreWaita-main.zip GNOME_ICONS_ADWAITAPP=~/arsiv/adwaita-plus-master.zip`
 
+## v1.2'de yeni olanlar
+
+- **Önce yeniden tasarım:** simge artık "logo + plaka + gölge" değil; uygulamanın fikri bir GNOME nesnesi olarak çiziliyor. Örnek: `examples/redesign/target.png`.
+- **Konsept aşaması:** her uygulama için önce 3 kaba konsept, bir pano (`concepts.py`) ve çoktan seçmeli soru; sen seçmeden asıl çizime geçilmiyor. Alternatifler de senin seçtiğin konseptler.
+- **Nesne çizim kütüphanesi (`obj.py`):** kalınlık, üstten ışık, gömme yüzey, delik, öndeki ikinci nesne.
+- **Yöntem belgesi (`references/redesign.md`):** konsept merdiveni, kurallar, GNOME renk paleti, plan tasarrufu.
+- `new_icon.py` artık sadece ölçüm yapıyor: tek taslak (tasarım adayı değil), `concepts/`, `redesign.py` ve onay satırlı brief.
+
 ## v1.1'de yeni olanlar
 
 - **Tek komutla başlangıç:** `new_icon.py` artık ekran görüntüsü / PNG, SVG, VectorDrawable XML ve APK kabul ediyor; gerçek geometriyi çıkarıp her alternatif için GNOME yapısında **taslaklar** üretiyor, inceleme ve okunabilirlik panolarını çiziyor. Taslaklar başlangıç noktasıdır, bitmiş tasarım değildir.
@@ -53,7 +61,7 @@ MoreWaita / Adwaita++ arşivlerinizin yolu:
 
 ## Kullanım örnekleri (ajana yazılacak)
 
-- *"gnome-android-icons skill'ini kullan: ekteki ekran görüntüsündeki uygulamanın simgesini GNOME tarzına çevir, 3 alternatif yap, karşılaştırma panosunu göster."*
+- *"gnome-android-icons skill'ini kullan: ekteki ekran görüntüsündeki uygulamanın simgesini references/redesign.md'ye göre baştan tasarla. Önce 3 kaba konsept ve pano, bana çoktan seçmeli sor, onayımı bekle."*
 - *"Telefon USB'de bağlı. `org.example.app` paketinin APK'sından gerçek vektörü al, simgeyi dönüştür, CandyBar projeme 'Sosyal' kategorisine ekle (önce dry-run göster)."*
 - Codex'te açıkça çağırmak için: `$gnome-android-icons ...`
 
@@ -63,7 +71,8 @@ MoreWaita / Adwaita++ arşivlerinizin yolu:
 - `references/` - ölçülmüş GNOME stil rehberi, arketipler, alternatif sistemi, kimlik koruma, geçmiş dersler, inceleme protokolü, CandyBar, topluluk temaları, SVG yapımı, kaynaklar, kullanıcı gereksinimleri (TR)
 - `assets/reference-library/` - 134 gerçek, değiştirilmemiş GNOME referans SVG'si + `catalog.json` (kaynak repo, commit, lisans, ölçümler) + kontakt sayfaları
 - `assets/template/` - GNOME HIG şablonu ve 45 renkli palet
-- `scripts/` - 23 araç (ayıklama, analiz, potrace izleme, SVG düzleştirme, APK vektörü, taslak üretimi, gnome_kit, renk taraması, lint, ölçüm, okunabilirlik, inceleme panosu, launcher önizlemesi, paket denetimi, PNG, CandyBar, ortam kontrolü)
+- `scripts/` - 25 araç (yeni: `concepts.py`, `obj.py`; ayıklama, analiz, potrace izleme, SVG düzleştirme, APK vektörü, taslak üretimi, gnome_kit, renk taraması, lint, ölçüm, okunabilirlik, inceleme panosu, launcher önizlemesi, paket denetimi, PNG, CandyBar, ortam kontrolü)
+- `examples/redesign/` - yöntemin örneği: 2 uydurma uygulama için kaynak / plakadaki logo (yanlış) / nesne (hedef), kodu ve etiketli GNOME referans panosu
 - `examples/demo-original-apps/` - 3 uydurma uygulama (Martı, Lale, Simit) için kaynak logo + 11 GNOME alternatifi, PNG'ler, inceleme, okunabilirlik ve launcher panoları
 - `tests/` - `python3 -m unittest discover -s tests -v`
 

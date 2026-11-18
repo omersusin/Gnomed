@@ -17,6 +17,9 @@ The automatic builds (`tools/make_icon.py` for an app without `work/<slug>/redes
 `build_auto.py`, the skill's autodrafts) only **measure** shapes and colours. Their
 output is a draft. The gate fails it (`redesign` check) until the app is redesigned.
 
+The same method, without the repository parts, is in the vendored skill:
+`tools/gnome-android-icons/references/redesign.md` (v1.2).
+
 Real GNOME icons to study before every app: [docs/redesign/gnome-objects.png](docs/redesign/gnome-objects.png)
 (SVGs in `tools/gnome-android-icons/assets/reference-library/`).
 

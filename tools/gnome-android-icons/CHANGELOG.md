@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.2 (2026-11-18)
+- **Redesign-first.** A GNOME icon is the app's idea built as an object, not the app's logo
+  on a plate. Reason: an 89-app pack built with v1.1 (Gnomed) came out as the source logo
+  on plates/discs/rims with a chin, four copies each — the "logo + shadow" the user rejected.
+- New `references/redesign.md`: concept ladder (L1 the mark becomes an object, L2 a GNOME
+  object that carries the mark, L3 material tile), procedure (measure -> study -> 3 rough
+  concepts -> the user picks with a multiple-choice question -> build -> look -> ship),
+  construction rules (thickness, light from the top, recess, hole, secondary object,
+  materials), HIG palette, budget rules.
+- New `scripts/obj.py`: objects from shapely shapes — `solid` (side + face + top light),
+  `recess`, `hole`, `toplight`, `rounded`, `circ`, `poly`, `geom_d`.
+- New `scripts/concepts.py`: concept board (concepts vs source vs real GNOME object icons).
+- New `examples/redesign/`: two invented apps as source / logo on a plate (wrong) / object
+  (target), with code; `gnome-objects.png` labels the techniques of 8 official icons.
+- `new_icon.py` is now the MEASURE step: creates `concepts/`, `redesign.py` and a brief with
+  concepts and an `approved:` line; builds ONE measuring draft by default (`--alts faithful`),
+  titled as a draft, not a candidate.
+- SKILL.md workflow, alternatives.md (alternatives = other approved concepts), archetypes.md
+  (where to look for concepts first), review-protocol.md (question 0: is it a redesign?),
+  lessons-and-rejections.md (the Gnomed lesson), svg-construction.md (obj.py) updated.
+
 ## 1.1 (2026-11-07)
 - `new_icon.py` routes PNG/JPG/WebP screenshots, SVG, VectorDrawable XML and APK inputs, then builds autodrafts for every family and renders review + legibility boards in one command.
 - New: `autodraft.py` (ground/mark detection, source proportions on template shapes, figure/ground kept readable, ground gradients rebuilt, cut-outs -> real holes), `flatten_svg.py` (transforms baked, strokes -> outlines, masks/hidden layers removed, rgb()/hex gradient stops), `legibility_check.py` (+ official baseline in `assets/reference-library/legibility-baseline.json`), `launcher_preview.py`, `pack_audit.py`, `recolor.py`, `doctor.py`.

@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
-"""Scaffold a work folder for one app icon, run the deterministic first steps and
-produce first drafts + a review board.
+"""MEASURE step of references/redesign.md: scaffold a work folder for one app icon,
+get the real source geometry, and prepare the redesign (concepts/, redesign.py, brief.md).
+
+The autodraft it builds (default: one, "faithful") is the source logo placed on a
+GNOME template - a MEASURING DRAFT that checks geometry and colours. It is NOT a
+design candidate: the icon is designed as an object (concepts -> user approval ->
+redesign.py), see references/redesign.md.
 
 Input routing (--input):
   .png .jpg .jpeg .webp .bmp  screenshot / logo image -> extract_icon.py -> source.png
@@ -12,14 +17,16 @@ Input routing (--input):
 Always: analyze_source.py -> analysis.json + identity.md (TODO slots to fill by looking).
 
 Writes  <work>/<slug>/ :
-  build.py      one function per alternative; DRAFT bodies call autodraft.py -
-                refine them by hand with gnome_kit (geometry stays from the source)
-  brief.md      the decision record to fill in
-  <slug>-<alt>.svg + review.png   (unless --no-draft)
+  concepts/     put 3 rough concept SVGs here (A.svg B.svg C.svg) -> concepts.py
+  redesign.py   the real build (scripts/obj.py) - write the APPROVED concept here
+  brief.md      the decision record; its "approved:" line holds the user's choice
+  build.py      measuring drafts (autodraft.py): logo on template shapes
+  <slug>-<alt>.svg + review.png   measuring drafts (unless --no-draft)
 
 Usage:
   new_icon.py --slug example --app "Example" --input logo.png \
-      [--alts faithful,disc,rimmed,symbol,light,object] [--work work] [--no-trace] [--no-draft]
+      [--alts faithful] [--work work] [--no-trace] [--no-draft]
+      (--alts faithful,disc,rimmed,symbol,light: more measuring drafts on other templates)
 """
 import argparse
 import shutil
@@ -72,6 +79,37 @@ if __name__ == "__main__":
         path = OUT / f"{slug}-{{name}}.svg"
         icon.save(path)
         print(path)
+'''
+
+REDESIGN = '''#!/usr/bin/env python3
+"""{app} - GNOME redesign (references/redesign.md).
+Concept: <the APPROVED concept from brief.md, one line>.
+Run: python3 redesign.py   -> {slug}.svg (+ approved alternatives)"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, r"{scripts}")
+from obj import *  # noqa: F401,F403,E402
+
+OUT = Path(__file__).resolve().parent
+
+
+def design():
+    ic = gk.Icon("{app} - GNOME redesign")
+    # 1. the main object: its silhouette IS the icon - not a plate with the logo on it
+    body = rounded(box(18, 22, 110, 106), 12)
+    solid(ic, body, face=[(0, "#99c1f1"), (0.5, "#62a0ea"), (1, "#3584e4")], depth=8, layer="body")
+    # 2. what sits ON or IN it: recess (screen / label / inlay) or hole (lens / slot)
+    recess(ic, rounded(box(30, 34, 98, 80), 6), [(0, "#f6f5f4"), (1, "#deddda")], layer="label")
+    # 3. optional secondary object in front, lower and smaller, with its own side
+    # solid(ic, circ(94, 96, 16), face=[(0, "#ffbe6f"), (1, "#ff7800")], depth=4, layer="badge")
+    raise SystemExit("replace the placeholder shapes with the approved concept, then remove this line")
+    return ic
+
+
+if __name__ == "__main__":
+    design().save(OUT / "{slug}.svg")
+    print(OUT / "{slug}.svg")
 '''
 
 FUNC = '''
@@ -158,7 +196,7 @@ def main():
     ap.add_argument("--slug", required=True, help="drawable-style name: lowercase a-z0-9_")
     ap.add_argument("--app", required=True)
     ap.add_argument("--input")
-    ap.add_argument("--alts", default="faithful,disc,rimmed,symbol")
+    ap.add_argument("--alts", default="faithful", help="measuring drafts to build (not design candidates)")
     ap.add_argument("--work", default="work")
     ap.add_argument("--no-trace", action="store_true", help="raster input: skip potrace (no drafts possible)")
     ap.add_argument("--trace", action="store_true", help=argparse.SUPPRESS)  # v1.0 compatibility (now default)
@@ -182,10 +220,14 @@ def main():
     if not bp.exists():
         bp.write_text(BUILD.format(app=a.app, scripts=HERE, funcs=funcs, slug=a.slug,
                                    alt_list=", ".join(f'"{x}"' for x in alts)))
+    (d / "concepts").mkdir(exist_ok=True)
+    rp = d / "redesign.py"
+    if not rp.exists():
+        rp.write_text(REDESIGN.format(app=a.app, scripts=HERE, slug=a.slug))
     brief = d / "brief.md"
     trace_notes = _trace_notes(d / "source-trace.json")
     if not brief.exists():
-        rows = "\n".join(f"| {ALT_DOC[x].split(' - ')[0]} | {a.slug}-{x}.svg | TODO why this treatment fits | DRAFT |" for x in alts)
+        rows = "\n".join(f"| {ALT_DOC[x].split(' - ')[0]} | {a.slug}-{x}.svg |" for x in alts)
         brief.write_text(f"""# {a.app} - icon brief  (status: DRAFT)
 
 ## Source
@@ -202,10 +244,25 @@ def main():
 - GNOME references compared: TODO ids from assets/reference-library/catalog.json
 - Community refs looked at (not policy): TODO
 
-## Alternatives
-| Alternative | File | Rationale | Status |
-|---|---|---|---|
+## Function object
+- What the app does, as a physical thing: TODO
+
+## Concepts (concepts/*.svg -> concepts.png; references/redesign.md)
+- A (L1 the mark becomes an object): TODO
+- B (L2 a GNOME object that carries the mark): TODO
+- C (L3 material tile, only if A and B fail): TODO
+
+approved:
+alternatives (other approved concepts): -
+
+## Measuring drafts (logo on a template - NOT design candidates)
+| Draft | File |
+|---|---|
 {rows}
+
+## Build (redesign.py)
+- Techniques used (min. 3): TODO thickness / material / top light / recess / hole / secondary object / glass
+- Palette (HIG ramps): TODO
 
 ## Review (fill after review.png, legibility.png, launcher.png)
 - 32 px: TODO   - 48/64 px: TODO   - family fit: TODO   - launcher: TODO
@@ -221,10 +278,15 @@ def main():
         svgs = [str(d / f"{a.slug}-{x}.svg") for x in alts if (d / f"{a.slug}-{x}.svg").exists()]
         if svgs:
             extra = ["--ref-ids", a.ref_ids] if a.ref_ids else []
-            run(HERE / "preview_sheet.py", *svgs, "--source", d / "source.png", "--title", f"{a.app} - DRAFTS",
+            run(HERE / "preview_sheet.py", *svgs, "--source", d / "source.png", "--title", f"{a.app} - MEASURING DRAFT (logo on a template, not a design)",
                 "--out", d / "review.png", *extra, check=False)
             run(HERE / "legibility_check.py", *svgs, "--out", d / "legibility.png", check=False)
-    print(f"\nscaffolded {d}/ : LOOK at review.png, fill identity.md + brief.md, refine build.py, rerun it")
+    print(f"""
+scaffolded {d}/  - next (references/redesign.md):
+  2 STUDY     source.png + examples/redesign/gnome-objects.png; brief.md: anchors, function object
+  3 CONCEPTS  {d}/concepts/A.svg B.svg C.svg  ->  concepts.py {d}
+  4 ASK       the user picks (multiple choice); write "approved:" in brief.md
+  5 BUILD     the approved concept in {d}/redesign.py (scripts/obj.py)""")
 
 
 if __name__ == "__main__":
