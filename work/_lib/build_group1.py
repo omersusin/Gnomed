@@ -59,10 +59,12 @@ def whatsapp():
 
 
 # ------------------------------------------------------------------ Instagram
-def insta_grad(ic, x0, y0, x1, y1):
+def insta_grad(ic, x0, y0, x1, y1, dark=0.0):
     # measured: bottom #ffc800 / #ffb000, centre #ff2a79, top-right #f500cb, top-left #791cff
-    return ic.linear([(0, "#ffc300"), (0.42, "#ff2a79"), (0.78, "#d300d9"), (1, "#7a1cff")],
-                     x0 + (x1 - x0) * 0.62, y1, x0 + (x1 - x0) * 0.30, y0)
+    stops = [(0, "#ffc300"), (0.42, "#ff2a79"), (0.78, "#d300d9"), (1, "#7a1cff")]
+    if dark:   # side faces: the SAME ramp, darker, so an inner wall at the top is purple, not orange
+        stops = [(o, shade(c, -dark, 0.9)) for o, c in stops]
+    return ic.linear(stops, x0 + (x1 - x0) * 0.62, y1, x0 + (x1 - x0) * 0.30, y0)
 
 
 @build
@@ -94,7 +96,8 @@ def instagram():
     ic = gk.Icon("Instagram - Free Symbol", fam.note("instagram"))
     ds, _ = place(marks, box_c(64, 61, 106))
     g = insta_grad(ic, 11, 8, 117, 114)
-    ic.pieces(ds, face=chin_base, face_fill=g, depth=4, corner_r=26)
+    gd = insta_grad(ic, 11, 12, 117, 118, dark=0.16)   # same ramp moved down with the chin
+    ic.pieces(ds, face=chin_base, face_fill=g, chin=gd, depth=4, corner_r=26)
     out["symbol"] = ic
     return out
 

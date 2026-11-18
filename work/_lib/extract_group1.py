@@ -17,6 +17,24 @@ import gtrace as gt  # noqa: E402
 WORK = Path(__file__).resolve().parent.parent
 
 
+def superellipse_d(cx, cy, a, b, n, k=240):
+    import math
+    pts = []
+    for i in range(k):
+        th = 2 * math.pi * i / k
+        c, s_ = math.cos(th), math.sin(th)
+        x = cx + a * math.copysign(abs(c) ** (2 / n), c)
+        y = cy + b * math.copysign(abs(s_) ** (2 / n), s_)
+        pts.append(f"{x:.2f} {y:.2f}")
+    return "M" + "L".join(pts) + "Z"
+
+
+def gk_rounded_polygon(points, r):
+    sys.path.insert(0, "/root/.claude/skills/gnome-android-icons/scripts")
+    import gnome_kit
+    return gnome_kit.rounded_polygon_d(points, r)
+
+
 def luma(a):
     return a[..., :3] @ np.array([0.299, 0.587, 0.114], np.float32)
 
@@ -73,8 +91,19 @@ def youtube(a, s, P, I):
     red = gt.near(a, "#ff0033", "#ffffff") & gt.opaque(a)
     rect = gt.fill_holes(gt.components(red)[0])
     tri = rect & ~red
-    part(P, "rect", rect, s)
-    part(P, "triangle", gt.components(tri)[0], s)
+    # The play button is a superellipse with slightly convex sides; fit it instead of
+    # tracing so its edges are clean (the 192 px source gives a stair-stepped trace).
+    x0, y0, x1, y1 = gt.bbox(rect, s)
+    cx, cy, ax, by = (x0 + x1) / 2, (y0 + y1) / 2, (x1 - x0) / 2, (y1 - y0) / 2
+    best = None
+    for n in np.arange(2.5, 8.01, 0.1):
+        d = superellipse_d(cx, cy, ax, by, n)
+        iou = gt.iou_masks(gt.render_mask(d, rect.shape[0]), rect)
+        if best is None or iou > best[0]:
+            best = (iou, n, d)
+    P["rect"] = {"d": best[2], "iou": round(float(best[0]), 4)}
+    I["rect_superellipse_n"] = round(float(best[1]), 2)
+    part(P, "triangle", gt.components(tri)[0], s)   # smoothed trace (IoU ~0.998)
     I["red"] = median_hex(a, red)
     I["rect_bbox"] = [round(v, 2) for v in gt.bbox(rect, s)]
 

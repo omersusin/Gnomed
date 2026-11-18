@@ -52,8 +52,15 @@ def _f(v):
     return f"{v:.2f}".rstrip("0").rstrip(".")
 
 
-def trace_mask(mask, scale, turdsize=None, alphamax=1.0, opttolerance=0.4):
-    """Potrace a boolean mask -> SVG path d (even-odd compound) in 128 units."""
+def trace_mask(mask, scale, turdsize=None, alphamax=1.0, opttolerance=0.4, smooth_u=0.45):
+    """Potrace a boolean mask -> SVG path d (even-odd compound) in 128 units.
+
+    smooth_u: Gaussian smoothing (in 128-units, ~half a pixel of the 192 px source)
+    before thresholding - removes the source's pixel staircase that otherwise shows
+    up as wobbly edges at large sizes, without moving straight edges or curves."""
+    if smooth_u:
+        from scipy import ndimage
+        mask = ndimage.gaussian_filter(mask.astype(np.float32), smooth_u / scale) > 0.5
     if turdsize is None:
         turdsize = int((1.2 / scale) ** 2)  # drop specks smaller than ~1.2 u square
     bm = potrace.Bitmap(~mask.astype(bool))  # potracer traces the False pixels
