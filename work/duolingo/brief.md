@@ -13,10 +13,13 @@ Alternatives:
 * `duolingo-rimmed.svg` — Adwaita rim + recessed green disc, mark at 1.1× the default
   rimmed width so it does not look small in the recess.
 
-**No Symbol** (`skip: ["symbol"]`, falls back to Faithful): in the source the face
-bleeds off the tile's left/right edges, so a free face stands on straight cut sides and
-reads as a mask. Completing that silhouette would invent the shape of the head, which
-the project forbids; inverting it turned the white eyes into tile-green sockets.
+**Symbol** (`duolingo-symbol.svg`, hand-built in `work/_lib/build_weak.py`, free
+adaptation): the owl's head as an object. In the source the head is cut by the tile's
+left/right edges; the two straight cuts are closed by one ellipse that meets the measured
+contour above and below them, so every measured curve is kept and only the cuts become
+convex. Eyes, pupils and beak are the traced parts, moved with the head as one unit; under
+the beak the object's side is the beak's dark orange. (The first version shipped without a
+Symbol, so the Symbol APK showed Duolingo on a square plate.)
 
 Measured: ssim32 faithful 0.864 / disc 0.869 / rimmed 0.796 (official median 0.82); no
 fused gaps at 32 px; visual mass inside the pack's range.
@@ -29,9 +32,8 @@ Known weaknesses:
 * Repeating the mask problem of Shizuku: solved here by not shipping a Symbol.
 
 Not verified: not tested on a real launcher; the ComponentInfo
-`ComponentInfo{com.duolingo/com.duolingo.app.LoginActivity}` comes from published
-icon-pack appfilters (materialos/android-icon-pack, baitmooth/snow, varlesh/theia),
-not from the APK manifest — no APK was available on this device.
+`ComponentInfo{com.duolingo/com.duolingo.app.LoginActivity}` was verified on the owner's phone
+(`cmd package resolve-activity`: `com.duolingo/.app.LoginActivity`).
 
-Files: `duolingo-{faithful,disc,rimmed}.svg`, `png/duolingo-*-512.png` + `-256.png`,
+Files: `duolingo-{faithful,disc,rimmed,symbol}.svg`, `png/duolingo-*-512.png` + `-256.png`,
 `review.png`, `styles.png`.

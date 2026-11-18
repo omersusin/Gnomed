@@ -383,4 +383,5 @@
     <item drawable="duolingo" name="Duolingo" />
     <item drawable="duolingo_alt1" name="Duolingo (Disc)" />
     <item drawable="duolingo_alt2" name="Duolingo (Rimmed)" />
+    <item drawable="duolingo_alt3" name="Duolingo (Symbol)" />
 </resources>

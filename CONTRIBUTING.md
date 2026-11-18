@@ -431,7 +431,8 @@ no busy patterns, no generated images.
 * **CI** (`.github/workflows/build.yml`) on every push: checks the per-style files
   are up to date (`gen_styles.py --check`), builds the four style APKs, fails if
   R8 removed `WorkDatabase_Impl.<init>()` (a real startup crash we had), prints the
-  signing certificate, uploads the APKs as an artifact.
+  signing certificate, uploads each style's APK as its own artifact (a plain
+  `gnomed-<style>.apk`, no zip).
 * **Releases** are published when a pushed commit message contains `[release]`
   (or a `v*` tag / manual run). The in-app style switcher downloads
   `gnomed-<style>.apk` from the **latest** release. Only the maintainer releases.

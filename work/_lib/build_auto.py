@@ -37,7 +37,7 @@ OVERRIDES = {
     # face bleeds off the left/right edge of the source tile: a free symbol would be a
     # "mask" with straight cut sides (completing them would invent the head silhouette)
     "duolingo": {"skip": ["symbol"], "rimmed_scale": 1.1,
-                 "note": "no Symbol: the source face is cropped by the tile's left/right edges, so the free face stands on straight cut sides (a mask); Rimmed mark enlarged to fill the recess"},
+                 "note": "Symbol is hand-built (build_weak.duolingo closes the tile-cut sides); Rimmed mark enlarged to fill the recess"},
     # game posters (archetype H): no clean vector identity element in a 192 px poster
     "clash_royale": {"skip": ["symbol"], "note": "WEAK: posterised trace of the game poster, not a real GNOME conversion; needs a hand-drawn emblem (crown/king) from a better source"},
     # blurry 192 px source: the pale green region is the blur halo + the semi-transparent mic

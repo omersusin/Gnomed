@@ -437,7 +437,8 @@
     },
     "duolingo": {
       "disc": "duolingo_alt1",
-      "rimmed": "duolingo_alt2"
+      "rimmed": "duolingo_alt2",
+      "symbol": "duolingo_alt3"
     }
   }
 }

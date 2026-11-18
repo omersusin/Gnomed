@@ -13,7 +13,6 @@ Apps: 87 · with FAIL: 0 · with WARN: 39
 | `smart_launcher` | 0 | 3 | symbol · visible_light · 0.48 → R6; app · stripes · ['#7cc8f7', '#5fbbff', '#668dfe', '#7171 → R1; app · trace_iou · {'r2': 0.6499, 'r3': 0.8654, 'r4': 0.291 → R12 |
 | `ashell_you` | 0 | 2 | symbol · visible_dark · 0.32 → R6; symbol · baseline · 125.0 → R9 baseline |
 | `cloudstream` | 0 | 2 | app · stripes · ['#4186d5', '#4081e6', '#2148db', '#2009 → R1; app · trace_iou · {'r1': 0.8881} → R12 |
-| `duolingo` | 0 | 2 | app · stripes · ['#f48000', '#ffc200', '#ffde00'] → R1; app · trace_iou · {'r5': 0.6262} → R12 |
 | `frostkeys` | 0 | 2 | app · stripes · ['#b7e2ff', '#2673eb', '#8aa0ff'] → R1; app · trace_iou · {'r2': 0.8245} → R12 |
 | `nuvio` | 0 | 2 | app · stripes · ['#3cc3e2', '#2970c7', '#5059d2', '#7744 → R1; app · trace_iou · {'r1': 0.8882, 'r3': 0.8746} → R12 |
 | `obtainx` | 0 | 2 | app · stripes · ['#aaa9d8', '#5431a7', '#8051bf'] → R1; app · trace_iou · {'r2': 0.8216} → R12 |
@@ -23,6 +22,7 @@ Apps: 87 · with FAIL: 0 · with WARN: 39
 | `apple_music` | 0 | 1 | symbol · visible_light · 0.35 → R6 |
 | `bare` | 0 | 1 | app · stripes · ['#6bbcf8', '#55a0f6', '#4987f6', '#3e6d → R1 |
 | `binance_tr` | 0 | 1 | symbol · mass · 0.19 → R10 scale |
+| `duolingo` | 0 | 1 | app · stripes · ['#f48000', '#ffc200', '#ffde00'] → R1 |
 | `f_droid` | 0 | 1 | app · trace_iou · {'r2': 0.8843, 'r3': 0.7638} → R12 |
 | `ffupdater` | 0 | 1 | app · trace_iou · {'r2': 0.8682} → R12 |
 | `firefox_nightly` | 0 | 1 | app · trace_iou · {'r2': 0.8904} → R12 |
