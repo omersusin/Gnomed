@@ -47,6 +47,7 @@ earlier attempts. Treat them as requirements.
 | Original file-manager icon | the split-front folder read as a book/cabinet until the tab strip + front flap separation was drawn; chin highlights at a sharp inner corner looked wrong | metaphor icons need the object's *signature line* (folder tab); `chin_gradient(corners=...)` puts highlights only on rounded outer corners |
 | Review board | the user had to ask which icons the family row showed | every reference in the family row is now labelled; reports explain the board sections |
 | A requested reference (Adwaita folder) silently missing from the board | the board dropped Adwaita system icons even when asked by id | explicit `--ref-ids` are always honoured, in the given order |
+| **Gnomed pack (89 apps, built by Claude Code with v1.1)** | every app came out as the source logo on a plate/disc/rim with a chin, four copies each - exactly the "logo + shadow" the user rejected. Causes: autodrafts treated as designs, a procedure that said "follow exactly", a quality gate that measured fidelity to the source and hygiene but never "is it a redesign" | v1.2: references/redesign.md (object, not logo on a plate), concepts -> user picks -> build, `obj.py`, `concepts.py`, autodrafts only measure. In the Gnomed repo the gate fails apps without an approved redesign |
 | Tracer stress test (gradient tiles, a mascot with seeds/cheeks/eye highlights, JPEG copies) | gradients came out as 2-5 flat bands, so no ground was found and every draft broke; seeds, cheeks and highlights vanished; a third colour ringed the eye highlights | gradient pass + detail pass in `trace_source.py`; read the "Trace notes" in `brief.md` and redraw whatever is listed as NOT traced |
 | Mascot JPEG on a white page | the extractor took it for a photo-viewer band and kept only a strip of the picture | viewer bands must span the full screen width/height; plain-canvas icons are cut out whole with transparent corners. Still: open `source.png` before anything else |
 
@@ -64,6 +65,8 @@ earlier attempts. Treat them as requirements.
 - a dark plate whose chin vanishes on dark wallpapers
 - relative activity names (`pkg/.Main`) in appfilter
 - trusting the trace: it is flat reference geometry - gradients live in `data-gradient`, lost details are listed in the brief
+- shipping autodrafts / "0 FAIL" icons without a concept the user picked: that is the logo on a plate
+- four template versions of the same logo as "alternatives"
 
 ## Images of past outputs
 

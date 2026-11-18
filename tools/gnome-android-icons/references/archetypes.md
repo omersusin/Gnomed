@@ -8,6 +8,11 @@ holes, thinnest feature) plus your eyes.
 Reference ids are in `assets/reference-library/catalog.json`
 (`scripts/ref_search.py --kind ...` lists them).
 
+**v1.2:** the class helps you find *concepts* (references/redesign.md). The
+"Treatments" below that put the mark on a template (plate, disc, rim) are L3 — the
+last rung of the ladder, never the default. For every class, first look for L1 (the
+mark becomes an object) and L2 (a GNOME object carrying the mark).
+
 ---
 
 ## A. Brand glyph on a tile (white/flat mark on a coloured square or squircle)
@@ -111,22 +116,22 @@ Reference ids are in `assets/reference-library/catalog.json`
 
 ---
 
-## Choosing the primary alternative (default order)
+## Where to look for concepts first (then let the user choose)
 
-| Source class | Primary | Then |
+| Source class | L1 / L2 ideas to try first | L3 fallback |
 |---|---|---|
-| A tile glyph | Faithful plate | Disc, Rimmed, Symbol |
-| B circular mark | Sound Disc | Rimmed, Symbol, Object |
-| C free glyph | Free Symbol | Faithful plate, Disc |
-| D letterform | Free Symbol | Faithful plate, Disc |
-| E multicolour geometric | Faithful (own shape) | Disc, Rimmed |
-| F radial/abstract | Free Symbol or Faithful plate | Disc, Rimmed |
-| G mascot | Character | Disc/badge, Object |
-| H game art | Mascot/emblem element #1 | elements #2, #3 |
-| I object/UI | GNOME object | Faithful, Light |
-| J photo/3D | Faithful (flattened) | Disc, Symbol |
-| K lockup | Faithful (full lockup) | Free Symbol, symbol-only / letters-only variant, Disc |
-| L monochrome mark | Faithful (as used, e.g. white on dark) | Disc / Rimmed / Symbol in HIG colours (colour sweep) |
+| A tile glyph | the glyph as a thick object (L1); the function object that carries it (L2) | material plate |
+| B circular mark | the disc as a real object: lens, record, dial, coin of the brand's material (L2) | Sound Disc, Rimmed |
+| C free glyph | the glyph extruded with material and light (L1) | — |
+| D letterform | the letter as an object: tag, stamp, block, sign (L1/L2) | material plate |
+| E multicolour geometric | the pieces as stacked/overlapping physical parts (L1) | own shape on a plate |
+| F radial/abstract | a physical thing with that pattern: flower, sun, badge, coin (L2) | material plate |
+| G mascot | the character as an object, GNOME-simplified (Robots, Alpaca) | badge disc |
+| H game art | the strongest element #1 as an object (crown, weapon, helmet) | — |
+| I object/UI | the object itself, GNOME-drawn | — |
+| J photo/3D | the depicted object, flattened GNOME-style | material plate |
+| K lockup | symbol as object (L1); letters printed on an object (L2) | full lockup on a plate |
+| L monochrome mark | the mark as object in a HIG material/colour (colour sweep after) | Disc / Rimmed |
 
-The user may always override; record overrides in the brief and, if they are
-standing preferences, in `lessons-and-rejections.md` of the skill copy you use.
+The user always picks from the concept board; record his choice in `brief.md`
+(`approved:`) and standing preferences in `lessons-and-rejections.md`.

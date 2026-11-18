@@ -45,9 +45,10 @@ Answer, per alternative, in `brief.md`:
 
 | # | Question | Fail examples |
 |---|---|---|
+| 0 | **Is it a redesign?** Cover the plate/disc and the chin: if the original logo is what is left, it is not done (references/redesign.md). Also: was this concept approved by the user? | logo on a plate, logo + emboss, "approved" empty |
 | 1 | **Identity at 32 px** (review row 2 + legibility RED marks): would the user find the app instantly? | glyph mush, letters fused, colour order lost |
 | 2 | **Anchors intact** at 256 vs source: silhouette, angles, counts, negative spaces; every "NOT traced" detail from the brief's Trace notes redrawn or consciously dropped | extra/missing ray, limb, cut, eye highlight |
-| 3 | **GNOME construction**: chin at the bottom only, flat planes, gradients only on curved faces, no outer shadow | bevel, gloss arc, blur |
+| 3 | **GNOME construction**: an object with real thickness, light from the top, gradients on curved faces, no outer shadow | flat tile with a logo, bevel, gloss arc, blur |
 | 4 | **Visual weight** in the family row and the launcher grid | too small / large / light |
 | 5 | **Wallpapers**: readable on light, dark *and* colourful | dark icon disappears, white glyph vanishes |
 | 6 | **Layering**: nothing pokes out, no seams between face and chin | slivers, gaps under thin parts (use `sweep_chin_d`) |
