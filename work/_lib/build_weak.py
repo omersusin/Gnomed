@@ -446,6 +446,26 @@ def clash_royale():
     H = a.shape[0]
     Y, X = np.mgrid[0:H, 0:H] * s
     r, g_, b = a[..., 0], a[..., 1], a[..., 2]
+    def crown_of(side):
+        """gold crown + its band (blue on the left king, red on the right king), measured."""
+        xs = (X < 70) if side == "L" else (X > 58)
+        gold_all = (r > 0.70) & (g_ > 0.40) & (g_ < 0.92) & (b < 0.55) & xs & (Y < 55)
+        comps = gt.components(ndimage.binary_opening(gold_all, iterations=2))
+        gold = comps[0]
+        gx0, gy0, gx1, gy1 = gt.bbox(gold, s)
+        win = (X > gx0 - 3) & (X < gx1 + 3) & (Y > gy1 - 3) & (Y < gy1 + 13)
+        colour = ((b > r + 0.25) & (b > 0.55)) if side == "L" else ((r > 0.6) & (g_ < 0.30) & (b < 0.35))
+        band = gt.components(ndimage.binary_opening(ndimage.binary_fill_holes(colour & win), iterations=3))[0]
+        bc = "#3f6fd8" if side == "L" else hexc(np.median(a[band][:, :3], 0))
+        return trace(gold, s, smooth_u=0.8), d_of(poly_of(trace(band, s, smooth_u=1.0)).convex_hull), bc
+
+    # The right king wears the same crown, turned away from the viewer: mirror the measured
+    # left crown and give it the right king's band colour (measured ~#e04040 under the right
+    # crown), one step darker so it separates from the red half.
+    from shapely import affinity
+    lg, lb, _ = crown_of("L")
+    mir = lambda d: d_of(affinity.scale(poly_of(d), xfact=-1, yfact=1, origin=(64, 64)))  # noqa: E731
+    crowns = {"L": (lg, lb, "#3f6fd8"), "R": (mir(lg), mir(lb), shade("#e04040", -0.10))}
     gold_all = (r > 0.70) & (g_ > 0.40) & (g_ < 0.92) & (b < 0.55) & (X < 70) & (Y < 55)
     comps = gt.components(ndimage.binary_opening(gold_all, iterations=2))
     gold = comps[0]
@@ -479,6 +499,20 @@ def clash_royale():
         ic.path(d_of(shape.difference(left)), RD, layer_id="red")
         ic.path(d_of(LineString(line).buffer(1.8).intersection(shape)), "#d0fdff", layer_id="bolt")
 
+    def two_crowns(ic, box, depth=2):
+        """left (blue-band) crown over the blue side, right (red-band) crown over the red side"""
+        x0, y0, x1, y1 = box
+        mid = (x0 + x1) / 2
+        GOLD = "#f6b833"
+        for k, bx in (("L", (x0, y0, mid - 2, y1)), ("R", (mid + 2, y0, x1, y1))):
+            g, bnd, bc = crowns[k]
+            ds, _ = place([g, bnd], bx)
+            with ic.group(f"crown{k}"):
+                ic.path(gk.translate_d(ds[0], 0, depth), shade(GOLD, -0.18), layer_id=f"crown{k}-side", fill_rule="evenodd")
+                ic.path(gk.translate_d(ds[1], 0, depth), shade(bc, -0.14), layer_id=f"band{k}-side", fill_rule="evenodd")
+                ic.path(ds[0], GOLD, layer_id=f"crown{k}-gold", fill_rule="evenodd")
+                ic.path(ds[1], bc, layer_id=f"band{k}", fill_rule="evenodd")
+
     def crown(ic, box, depth=2):
         src = [crown_gold, crown_band] + ([crown_jewel] if crown_jewel else [])
         ds, _ = place(src, box, ref=[crown_gold, crown_band])
@@ -493,25 +527,25 @@ def clash_royale():
                 ic.path(ds[2], "#ffcf5c", layer_id="jewel")
 
     out = {}
-    ic = gk.Icon("Clash Royale - Faithful", note("clash_royale", "crown emblem on the blue/red split"))
+    ic = gk.Icon("Clash Royale - Faithful", note("clash_royale", "two crowns (blue king / red king) on the blue/red split"))
     chin = ic.chin_gradient(RD, 12, 116, 8)
     with ic.group("plate"):
         ic.path(gk.rrect_d(12, 16, 104, 100, 8), chin, layer_id="plate-chin")
     split(ic, face_shape("plate"), lambda x, y: (12 + x * 104 / 128, 12 + y * 100 / 128))
-    crown(ic, box_c(64, 60, 72, 56)); out["faithful"] = ic
+    two_crowns(ic, box_c(64, 62, 92, 50)); out["faithful"] = ic
     for st, title, kind in (("disc", "Sound Disc", "disc"), ("rimmed", "Rimmed", "rimmed")):
-        ic = gk.Icon(f"Clash Royale - {title}", note("clash_royale", "crown emblem on the blue/red split"))
+        ic = gk.Icon(f"Clash Royale - {title}", note("clash_royale", "two crowns (blue king / red king) on the blue/red split"))
         if kind == "disc":
             ic.path(gk.circle_d(64, 65, 59), ic.chin_gradient(RD, 5, 123, 53), layer_id="disc-chin")
             split(ic, face_shape("disc"), lambda x, y: (5 + x * 118 / 128, 4 + y * 118 / 128))
-            crown(ic, box_c(64, 60, 76, 58))
+            two_crowns(ic, box_c(64, 63, 96, 52))
         else:
             ic.rimmed_disc(inner=RD)
             split(ic, face_shape("rimmed"), lambda x, y: (10.5 + x * 107 / 128, 9.5 + y * 107 / 128))
-            crown(ic, box_c(64, 61, 66, 50))
+            two_crowns(ic, box_c(64, 63, 86, 46))
         out[st] = ic
-    ic = gk.Icon("Clash Royale - Free Symbol", note("clash_royale", "the crown alone"))
-    crown(ic, box_c(64, 70, 110, 90), depth=4); out["symbol"] = ic
+    ic = gk.Icon("Clash Royale - Free Symbol", note("clash_royale", "the two kings' crowns"))
+    two_crowns(ic, box_c(64, 86, 118, 64), depth=4); out["symbol"] = ic
     return out
 
 
