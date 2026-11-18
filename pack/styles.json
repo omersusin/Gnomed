@@ -61,6 +61,319 @@
       "disc": "chatgpt_alt1",
       "rimmed": "chatgpt_alt2",
       "symbol": "chatgpt_alt3"
+    },
+    "onedm": {
+      "disc": "onedm_alt1",
+      "rimmed": "onedm_alt2",
+      "symbol": "onedm_alt3"
+    },
+    "twofas_auth": {
+      "disc": "twofas_auth_alt1",
+      "rimmed": "twofas_auth_alt2",
+      "symbol": "twofas_auth_alt3"
+    },
+    "anker_soundcore": {
+      "disc": "anker_soundcore_alt1",
+      "rimmed": "anker_soundcore_alt2"
+    },
+    "apple_music": {
+      "disc": "apple_music_alt1",
+      "rimmed": "apple_music_alt2",
+      "symbol": "apple_music_alt3"
+    },
+    "ashell_you": {
+      "disc": "ashell_you_alt1",
+      "rimmed": "ashell_you_alt2",
+      "symbol": "ashell_you_alt3"
+    },
+    "bare": {
+      "disc": "bare_alt1",
+      "rimmed": "bare_alt2",
+      "symbol": "bare_alt3"
+    },
+    "binance_tr": {
+      "disc": "binance_tr_alt1",
+      "rimmed": "binance_tr_alt2",
+      "symbol": "binance_tr_alt3"
+    },
+    "bitchord": {
+      "disc": "bitchord_alt1",
+      "rimmed": "bitchord_alt2",
+      "symbol": "bitchord_alt3"
+    },
+    "claude": {
+      "disc": "claude_alt1",
+      "rimmed": "claude_alt2",
+      "symbol": "claude_alt3"
+    },
+    "cloudstream": {
+      "disc": "cloudstream_alt1",
+      "rimmed": "cloudstream_alt2",
+      "symbol": "cloudstream_alt3"
+    },
+    "colorblendr": {
+      "disc": "colorblendr_alt1",
+      "rimmed": "colorblendr_alt2",
+      "symbol": "colorblendr_alt3"
+    },
+    "databackup": {
+      "disc": "databackup_alt1",
+      "rimmed": "databackup_alt2",
+      "symbol": "databackup_alt3"
+    },
+    "discord": {
+      "disc": "discord_alt1",
+      "rimmed": "discord_alt2",
+      "symbol": "discord_alt3"
+    },
+    "enpara": {
+      "disc": "enpara_alt1",
+      "rimmed": "enpara_alt2",
+      "symbol": "enpara_alt3"
+    },
+    "exteraless": {
+      "disc": "exteraless_alt1",
+      "rimmed": "exteraless_alt2",
+      "symbol": "exteraless_alt3"
+    },
+    "f_droid": {
+      "disc": "f_droid_alt1",
+      "rimmed": "f_droid_alt2",
+      "symbol": "f_droid_alt3"
+    },
+    "ffupdater": {
+      "disc": "ffupdater_alt1",
+      "rimmed": "ffupdater_alt2",
+      "symbol": "ffupdater_alt3"
+    },
+    "firefox_beta": {
+      "disc": "firefox_beta_alt1",
+      "rimmed": "firefox_beta_alt2",
+      "symbol": "firefox_beta_alt3"
+    },
+    "firefox_nightly": {
+      "disc": "firefox_nightly_alt1",
+      "rimmed": "firefox_nightly_alt2",
+      "symbol": "firefox_nightly_alt3"
+    },
+    "frostkeys": {
+      "disc": "frostkeys_alt1",
+      "rimmed": "frostkeys_alt2",
+      "symbol": "frostkeys_alt3"
+    },
+    "gboardwu": {
+      "disc": "gboardwu_alt1",
+      "rimmed": "gboardwu_alt2",
+      "symbol": "gboardwu_alt3"
+    },
+    "iconrequest": {
+      "disc": "iconrequest_alt1",
+      "rimmed": "iconrequest_alt2",
+      "symbol": "iconrequest_alt3"
+    },
+    "installerx_revived": {
+      "disc": "installerx_revived_alt1",
+      "rimmed": "installerx_revived_alt2",
+      "symbol": "installerx_revived_alt3"
+    },
+    "jamesdsp": {
+      "disc": "jamesdsp_alt1",
+      "rimmed": "jamesdsp_alt2",
+      "symbol": "jamesdsp_alt3"
+    },
+    "kadraj": {
+      "disc": "kadraj_alt1",
+      "rimmed": "kadraj_alt2",
+      "symbol": "kadraj_alt3"
+    },
+    "kernelsu_next": {
+      "disc": "kernelsu_next_alt1",
+      "rimmed": "kernelsu_next_alt2",
+      "symbol": "kernelsu_next_alt3"
+    },
+    "ki_iler": {
+      "disc": "ki_iler_alt1",
+      "rimmed": "ki_iler_alt2",
+      "symbol": "ki_iler_alt3"
+    },
+    "midas": {
+      "disc": "midas_alt1",
+      "rimmed": "midas_alt2",
+      "symbol": "midas_alt3"
+    },
+    "mix": {
+      "disc": "mix_alt1",
+      "rimmed": "mix_alt2",
+      "symbol": "mix_alt3"
+    },
+    "mochy": {
+      "disc": "mochy_alt1",
+      "rimmed": "mochy_alt2",
+      "symbol": "mochy_alt3"
+    },
+    "mornye": {
+      "disc": "mornye_alt1",
+      "rimmed": "mornye_alt2",
+      "symbol": "mornye_alt3"
+    },
+    "morphe": {
+      "disc": "morphe_alt1",
+      "rimmed": "morphe_alt2",
+      "symbol": "morphe_alt3"
+    },
+    "nuvio": {
+      "disc": "nuvio_alt1",
+      "rimmed": "nuvio_alt2",
+      "symbol": "nuvio_alt3"
+    },
+    "obtainx": {
+      "disc": "obtainx_alt1",
+      "rimmed": "obtainx_alt2",
+      "symbol": "obtainx_alt3"
+    },
+    "opencode_mobile": {
+      "disc": "opencode_mobile_alt1",
+      "rimmed": "opencode_mobile_alt2",
+      "symbol": "opencode_mobile_alt3"
+    },
+    "payload_dumper": {
+      "disc": "payload_dumper_alt1",
+      "rimmed": "payload_dumper_alt2",
+      "symbol": "payload_dumper_alt3"
+    },
+    "pentas": {
+      "disc": "pentas_alt1",
+      "rimmed": "pentas_alt2",
+      "symbol": "pentas_alt3"
+    },
+    "play_store": {
+      "disc": "play_store_alt1",
+      "rimmed": "play_store_alt2",
+      "symbol": "play_store_alt3"
+    },
+    "plush_iconpack": {
+      "disc": "plush_iconpack_alt1",
+      "rimmed": "plush_iconpack_alt2",
+      "symbol": "plush_iconpack_alt3"
+    },
+    "proton_drive": {
+      "disc": "proton_drive_alt1",
+      "rimmed": "proton_drive_alt2",
+      "symbol": "proton_drive_alt3"
+    },
+    "proton_vpn": {
+      "disc": "proton_vpn_alt1",
+      "rimmed": "proton_vpn_alt2",
+      "symbol": "proton_vpn_alt3"
+    },
+    "qobuz": {
+      "disc": "qobuz_alt1",
+      "rimmed": "qobuz_alt2",
+      "symbol": "qobuz_alt3"
+    },
+    "qwen": {
+      "disc": "qwen_alt1",
+      "rimmed": "qwen_alt2",
+      "symbol": "qwen_alt3"
+    },
+    "recon": {
+      "disc": "recon_alt1",
+      "rimmed": "recon_alt2",
+      "symbol": "recon_alt3"
+    },
+    "reddit": {
+      "disc": "reddit_alt1",
+      "rimmed": "reddit_alt2",
+      "symbol": "reddit_alt3"
+    },
+    "scene": {
+      "disc": "scene_alt1",
+      "rimmed": "scene_alt2",
+      "symbol": "scene_alt3"
+    },
+    "sd_maid_se": {
+      "disc": "sd_maid_se_alt1",
+      "rimmed": "sd_maid_se_alt2",
+      "symbol": "sd_maid_se_alt3"
+    },
+    "smart_launcher": {
+      "disc": "smart_launcher_alt1",
+      "rimmed": "smart_launcher_alt2",
+      "symbol": "smart_launcher_alt3"
+    },
+    "stride": {
+      "disc": "stride_alt1",
+      "rimmed": "stride_alt2",
+      "symbol": "stride_alt3"
+    },
+    "swift_backup": {
+      "disc": "swift_backup_alt1",
+      "rimmed": "swift_backup_alt2",
+      "symbol": "swift_backup_alt3"
+    },
+    "termux_api": {
+      "disc": "termux_api_alt1",
+      "rimmed": "termux_api_alt2",
+      "symbol": "termux_api_alt3"
+    },
+    "termux_boot": {
+      "disc": "termux_boot_alt1",
+      "rimmed": "termux_boot_alt2",
+      "symbol": "termux_boot_alt3"
+    },
+    "termux_widget": {
+      "disc": "termux_widget_alt1",
+      "rimmed": "termux_widget_alt2",
+      "symbol": "termux_widget_alt3"
+    },
+    "thunderbird": {
+      "disc": "thunderbird_alt1",
+      "rimmed": "thunderbird_alt2",
+      "symbol": "thunderbird_alt3"
+    },
+    "tiktok_lite": {
+      "disc": "tiktok_lite_alt1",
+      "rimmed": "tiktok_lite_alt2",
+      "symbol": "tiktok_lite_alt3"
+    },
+    "today_weather": {
+      "disc": "today_weather_alt1",
+      "rimmed": "today_weather_alt2",
+      "symbol": "today_weather_alt3"
+    },
+    "trendyolmilla": {
+      "disc": "trendyolmilla_alt1",
+      "rimmed": "trendyolmilla_alt2"
+    },
+    "trestle": {
+      "disc": "trestle_alt1",
+      "rimmed": "trestle_alt2",
+      "symbol": "trestle_alt3"
+    },
+    "t_rk_telekom": {
+      "disc": "t_rk_telekom_alt1",
+      "rimmed": "t_rk_telekom_alt2",
+      "symbol": "t_rk_telekom_alt3"
+    },
+    "vortex": {
+      "disc": "vortex_alt1",
+      "rimmed": "vortex_alt2",
+      "symbol": "vortex_alt3"
+    },
+    "weblibre": {
+      "disc": "weblibre_alt1",
+      "rimmed": "weblibre_alt2",
+      "symbol": "weblibre_alt3"
+    },
+    "wupp": {
+      "disc": "wupp_alt1",
+      "rimmed": "wupp_alt2",
+      "symbol": "wupp_alt3"
+    },
+    "y_hava_durumu": {
+      "disc": "y_hava_durumu_alt1",
+      "rimmed": "y_hava_durumu_alt2",
+      "symbol": "y_hava_durumu_alt3"
     }
   }
 }

@@ -154,9 +154,13 @@ class App:
         base = {"faithful": (64, 62, 72), "disc": (64, 63, 76), "rimmed": (64, 63, 64), "symbol": (64, 61, 106)}[kind]
         cx, cy, w = base
         w *= sc
-        if asp > 1.35:                       # wordmarks / wide marks may use more width
-            return box_c(cx, cy, min(w * 1.22, 112 if kind == "symbol" else 96), w)
-        return box_c(cx, cy, w)
+        bw, bh = (min(w * 1.22, 112 if kind == "symbol" else 96), w) if asp > 1.35 else (w, w)
+        if kind == "symbol":
+            # free objects stand on the GNOME baseline (face bottom ~114 + 4 px chin),
+            # instead of floating in the middle when they are wider than tall
+            h = min(bh, bw / asp)
+            cy = 114 - h / 2
+        return box_c(cx, cy, bw, bh)
 
     def raised(self, ic, items, lift=2):
         fam.raised(ic, [(d, f, side_of(f)) for d, f in items], lift=lift)
