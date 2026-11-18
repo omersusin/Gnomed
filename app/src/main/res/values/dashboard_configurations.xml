@@ -247,7 +247,8 @@
         Now when "Wallpaper" section is selected in your icon pack app's navigation drawer,
         your wallpaper app will be launched if it's installed. If it's not installed, then the Play Store page
         will be opened to install your wallpaper app. -->
-    <string name="wallpaper_json">assets://wallpapers.json</string>
+    <!-- Gnomed: read from the repository (main branch), nothing embedded; built by wallpapers/make_wallpapers.py -->
+    <string name="wallpaper_json">https://raw.githubusercontent.com/omersusin/Gnomed/main/wallpapers/wallpapers.json</string>
 
     <!-- Enable wallpaper downloading
         If disabled, your users will only be able to apply wallpapers from the dashboard.

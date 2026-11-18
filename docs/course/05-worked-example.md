@@ -15,18 +15,38 @@ Expected last line: `result: READY`. If not, install what it names.
 
 ## Step 1 — Get the icon and the ComponentInfo
 
-From the user's icon-request zip: open `appfilter.xml`, find the app:
+Read the human's request (a zip, or a folder with `request.txt` + PNGs — whatever they
+could send you; see `AGENTS.md` section G):
+
+```bash
+python3 tools/import_request.py /path/to/request.zip
+```
+
+Expected (shortened):
+
+```
+IN-PACK    whatsapp   WhatsApp  ComponentInfo{com.whatsapp/com.whatsapp.Main}
+NEW        recon      Recon  ComponentInfo{dev.wolzard.recon/dev.wolzard.recon.MainActivity}
+summary: 1 NEW, 83 IN-PACK
+list only - nothing written. Register with --add (or --add --only slug1,slug2).
+```
+
+The line comes from the request's `appfilter.xml`:
 
 ```xml
 <!-- Recon -->
 <item component="ComponentInfo{dev.wolzard.recon/dev.wolzard.recon.MainActivity}" drawable="recon" />
 ```
 
-and the icon `icons/recon.png`. **Never type a ComponentInfo from memory.**
+and the icon is `recon.png` (`icons/recon.png` in an IconRequest zip). **Never type a
+ComponentInfo from memory, never copy one from another icon pack.** `NO-ICON` or no
+request at all → stop and ask the human.
 
 ## Step 2 — Register
 
 ```bash
+python3 tools/import_request.py /path/to/request.zip --add --only recon
+# the same by hand:
 python3 tools/add_source.py recon /path/to/icons/recon.png "Recon" 'ComponentInfo{dev.wolzard.recon/dev.wolzard.recon.MainActivity}'
 ```
 

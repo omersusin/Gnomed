@@ -233,6 +233,17 @@
                 android:resource="@xml/file_provider_paths" />
         </provider>
 
+        <!-- Gnomed: shares exported icon requests (images + text / zip) without e-mail -->
+        <provider
+            android:name=".request.ShareProvider"
+            android:authorities="${applicationId}.gnomed.share"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/gnomed_share_paths" />
+        </provider>
+
         <receiver
             android:name=".style.StyleInstallReceiver"
             android:exported="false" />

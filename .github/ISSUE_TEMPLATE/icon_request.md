@@ -7,7 +7,9 @@ labels: icon-request
 
 **App name:**
 
-**ComponentInfo** (from Gnomed's *Request* screen or an "Icon Request" app — please attach the exported zip):
+**ComponentInfo** (from Gnomed's *Request* screen → send → any way: attach the zip, or the
+`request.txt` + PNGs from *Share as images + text*, or paste *Copy the app list*; an
+"Icon Request" app zip works too. Rooted phone: `su -c 'cmd package resolve-activity --brief -c android.intent.category.LAUNCHER <package>'`):
 
 ```
 ComponentInfo{package/full.activity.Name}

@@ -25,9 +25,14 @@ the launcher. It must be **copied from the phone**, never guessed:
 
 | How | What you get |
 |---|---|
-| Gnomed → *Request* → select apps → export | a zip with `appfilter.xml` (real ComponentInfos) + icon PNGs — **best** |
+| Gnomed → *Request* → select apps → send → choose a way | a zip, or `request.txt` + icon PNGs (no zip), or the list as text — **best** |
+| the *IconRequest* app (de.kaiserdragon.iconrequest) | a zip with `appfilter.xml` + `icons/*.png` |
 | `su -c 'cmd package resolve-activity --brief -c android.intent.category.LAUNCHER <package>'` | e.g. `co.aospa.dolby.xiaomi/.DolbySettingsActivity` |
 | `tools/gnome-android-icons/scripts/find_component.py --adb <package>` or `--apk app.apk` | same, from a computer |
+
+All request formats are read by `python3 tools/import_request.py <zip | folder | request.txt | URL>`
+(lesson 5, step 1). **Not a source:** other icon packs' appfilter files, websites, memory —
+activity names change between app versions and builds.
 
 If the activity starts with a dot (`.DolbySettingsActivity`), put the package in front:
 `co.aospa.dolby.xiaomi/co.aospa.dolby.xiaomi.DolbySettingsActivity`.

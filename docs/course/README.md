@@ -28,6 +28,11 @@ Read the lessons **in order**, the first time completely. Later you only need le
 2. **Never draw a logo from memory, never use an image generator.** Everything is
    measured from `work/<slug>/source.png`.
 3. **Never invent an app's ComponentInfo, never delete anything from the pack.**
+   (Other icon packs' appfilters are not a source — only the human's phone is.)
+4. **Never touch `main`.** Work on your own branch, push it, open a pull request, stop.
+   No commits on `main`, no pushes to `main`, no merges, no tags, no `[release]` — ever.
+   The human merges or not. Turn on the guard hooks first:
+   `git config core.hooksPath tools/hooks`. ([`AGENTS.md` §0](../../AGENTS.md#0-main-belongs-to-the-maintainer-never-touch-it))
 
 ## If you cannot see images
 

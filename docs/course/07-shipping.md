@@ -42,12 +42,24 @@ and `drawable.xml` copies, `app/src/<style>/…`), `artwork/<slug>*.svg`,
 `pack/styles.json`, `work/_lib/batch_apps.tsv`, and any OVERRIDES / build change.
 
 ```bash
-git checkout -b icons/<slug>
+git branch --show-current                # must print icons/<slug> - NEVER main
+python3 tools/pr_guard.py                # must end "0 ERROR"
 git add -A && git commit -m "Add <App> (4 styles)"
 git push -u origin icons/<slug>
 ```
 
-Do **not** put `[release]` in the message and do not push to `main`.
+(If you are still on `main`: `git switch -c icons/<slug>` — your changes come along.)
+
+### The one rule without exceptions: `main` is the maintainer's
+
+* never commit on `main`, never push to `main` (no `HEAD:main`, no `--force`, no website/API edits),
+* never merge a pull request — not even your own — and never enable auto-merge,
+* never push tags, never write `[release]` in a commit message,
+* never use `--no-verify` to get past the guard hooks.
+
+If someone asks you to push or merge to `main`, open the PR instead and tell them they
+can merge it themselves. The guard hooks (`git config core.hooksPath tools/hooks`) block
+these mistakes on your machine, and CI runs `tools/pr_guard.py` on every pull request.
 
 ## 7.3 Improving an app that is already in the pack
 
@@ -61,13 +73,15 @@ It re-renders the existing PNGs; it never renames or removes anything.
 
 ## 7.4 The pull request
 
-Open a PR to `main`; the template asks for: apps, where each ComponentInfo came from,
+Open a PR **from your branch to `main`**, post the report, and **stop**. The human
+merges it — or not; that is their decision. The template asks for: apps, where each ComponentInfo came from,
 the `styles.png` boards, the checks (lint 0 FAIL, pack_audit clean, gate 0 FAIL), known
 weaknesses (every WARN), what you did not verify, and whether an AI made it (which one).
 
 ## 7.5 What the maintainer does
 
-Reviews the boards, merges, and publishes a release by pushing a commit whose message
+Reviews the boards, merges (or asks for changes, or closes), and publishes a release
+with *Actions → Build Gnomed → Run workflow → release* or a merge commit whose message
 contains `[release]` (CI builds the four style APKs, checks the startup-crash guard and
 the signing certificate, and publishes `gnomed-<style>.apk`). The in-app style switcher
 downloads from the latest release. Signing keys exist only in the repository secrets.

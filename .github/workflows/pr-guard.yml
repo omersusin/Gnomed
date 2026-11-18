@@ -1,0 +1,21 @@
+name: PR guard
+
+# Every pull request: the branch may only ADD to the pack (no deleted icons, no removed
+# appfilter/drawable items, no removed styles) and must not contain [release].
+# See tools/pr_guard.py and AGENTS.md section 0. Sensitive files only produce warnings.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Additive-only check
+        # HEAD is the PR merged into the current base; HEAD^1 = base, HEAD^2 = the PR branch
+        run: python3 tools/pr_guard.py HEAD^1 HEAD

@@ -9,6 +9,7 @@
 
 | Step | Command | Reads | Writes |
 |---|---|---|---|
+| Read the request | `python3 tools/import_request.py <request> [--add]` | zip / folder / `request.txt` / URL | (with `--add`) the same as Register, for every NEW app |
 | Register | `python3 tools/add_source.py <slug> <icon.png> "<Label>" '<ComponentInfo>'` | the icon PNG | `work/<slug>/source.png` (512 px), a line in `work/_lib/batch_apps.tsv` |
 | Measure | `python3 work/_lib/auto.py <slug>` | `source.png` | `work/<slug>/geometry.json` |
 | Build | `python3 work/_lib/build_auto.py <slug>` (or `build_weak.py` for hand-built apps) | `geometry.json` + OVERRIDES | `work/<slug>/<slug>-faithful.svg`, `-disc.svg`, `-rimmed.svg`, `-symbol.svg` |
