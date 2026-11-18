@@ -1,0 +1,10 @@
+#!/bin/sh
+# Gnomed: never commit on `main` (AGENTS.md section 0). Enable: git config core.hooksPath tools/hooks
+branch=$(git symbolic-ref --short -q HEAD)
+case "$branch" in
+    main | master)
+        echo "BLOCKED: do not commit on '$branch' (AGENTS.md section 0)." >&2
+        echo "         Create your branch first:  git switch -c icons/<slug>   (your changes come with you)" >&2
+        exit 1 ;;
+esac
+exit 0

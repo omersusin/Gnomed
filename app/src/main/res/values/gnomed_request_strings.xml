@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Icon request export (gnomed.it.request.RequestExport): for agents and chats without zip support -->
+    <string name="gnomed_request_title">Send icon request</string>
+    <string name="gnomed_request_email">E-mail draft (%1$s)</string>
+    <string name="gnomed_request_email_app">e-mail app</string>
+    <string name="gnomed_request_share_files">Share as images + text (no zip)</string>
+    <string name="gnomed_request_share_zip">Share or save the zip</string>
+    <string name="gnomed_request_copy">Copy the app list</string>
+    <string name="gnomed_request_copied">App list copied</string>
+    <string name="gnomed_request_none">No request yet. Select apps on the Request screen and send them first.</string>
+    <string name="gnomed_request_failed">Export failed: %1$s</string>
+    <!-- first line of request.txt (English on every phone: agents and tools/import_request.py read it); %1$d = apps, %2$d = icon files -->
+    <string name="gnomed_request_text_header" translatable="false">Gnomed icon request: %1$d apps, %2$d icon files. Each line: app | ComponentInfo | icon file</string>
+</resources>

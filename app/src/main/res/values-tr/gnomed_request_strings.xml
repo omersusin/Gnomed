@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gnomed_request_title">İkon isteğini gönder</string>
+    <string name="gnomed_request_email">E-posta taslağı (%1$s)</string>
+    <string name="gnomed_request_email_app">e-posta uygulaması</string>
+    <string name="gnomed_request_share_files">Görsel + metin olarak paylaş (zip yok)</string>
+    <string name="gnomed_request_share_zip">Zip\'i paylaş veya kaydet</string>
+    <string name="gnomed_request_copy">Uygulama listesini kopyala</string>
+    <string name="gnomed_request_copied">Uygulama listesi kopyalandı</string>
+    <string name="gnomed_request_none">Henüz istek yok. Önce İstek ekranında uygulamaları seçip gönderin.</string>
+    <string name="gnomed_request_failed">Dışa aktarma başarısız: %1$s</string>
+</resources>

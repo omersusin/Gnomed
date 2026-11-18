@@ -5,8 +5,10 @@ where the icon grid sits, stays a plain soft gradient so every icon reads.
 
     python3 wallpapers/make_wallpapers.py
 
-Writes wallpapers/<name>.svg + PNG 1080x2400 / 1440x3200, and embeds PNG + JPEG thumbs
-+ wallpapers.json into app/src/main/assets (CandyBar loads them via assets://).
+Writes wallpapers/<name>.svg, grained JPEGs 1080x2400 / 1440x3200, thumbs/<name>.jpg
+(360x800) and wallpapers.json. Nothing is embedded in the APK: the app reads
+wallpapers.json from the repository's main branch (res/values/dashboard_configurations.xml
+-> wallpaper_json) and loads the images from there, so new wallpapers need no app update.
 """
 import json
 import math
@@ -16,7 +18,8 @@ import cairosvg
 from PIL import Image
 
 HERE = Path(__file__).resolve().parent
-ASSETS = HERE.parent / "app/src/main/assets"
+# where the app downloads from (raw files of the main branch)
+RAW = "https://raw.githubusercontent.com/omersusin/Gnomed/main/wallpapers"
 W, H = 1080, 2400
 
 
@@ -98,7 +101,7 @@ def grain(png_path, out_path, size=None, sigma=1.6, seed=0, quality=92):
 
 
 if __name__ == "__main__":
-    (ASSETS / "wallpapers/thumbs").mkdir(parents=True, exist_ok=True)
+    (HERE / "thumbs").mkdir(exist_ok=True)
     index = []
     for name, (title, s) in VARIANTS.items():
         (HERE / f"{name}.svg").write_text(s)
@@ -107,12 +110,10 @@ if __name__ == "__main__":
         grain(big, HERE / f"{name}-1440x3200.jpg")
         grain(big, HERE / f"{name}-1080x2400.jpg", size=(1080, 2400), seed=1)
         big.unlink()
-        # embedded copies: grained JPEG for apply/download, small JPEG thumb for the grid
-        (HERE / f"{name}-1080x2400.jpg").replace(ASSETS / f"wallpapers/{name}.jpg") if False else \
-            Image.open(HERE / f"{name}-1080x2400.jpg").save(ASSETS / f"wallpapers/{name}.jpg", quality=92, subsampling=0)
+        # small JPEG thumb for the app's wallpaper grid
         Image.open(HERE / f"{name}-1080x2400.jpg").resize((360, 800), Image.LANCZOS).save(
-            ASSETS / f"wallpapers/thumbs/{name}.jpg", quality=88)
+            HERE / f"thumbs/{name}.jpg", quality=88)
         index.append({"name": title, "author": "Gnomed",
-                      "url": f"assets://wallpapers/{name}.jpg", "thumbUrl": f"assets://wallpapers/thumbs/{name}.jpg"})
+                      "url": f"{RAW}/{name}-1440x3200.jpg", "thumbUrl": f"{RAW}/thumbs/{name}.jpg"})
         print(name)
-    (ASSETS / "wallpapers.json").write_text(json.dumps(index, indent=1))
+    (HERE / "wallpapers.json").write_text(json.dumps(index, indent=1) + "\n")

@@ -19,23 +19,44 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent
 
 
+SLUG_RE = r"[a-z][a-z0-9_]*"
+COMP_RE = r"ComponentInfo\{[A-Za-z0-9_.]+/[A-Za-z0-9_.$]+\}"
+
+
+def registered_slugs():
+    tsv = ROOT / "work/_lib/batch_apps.tsv"
+    return {l.split("\t")[0] for l in tsv.read_text(encoding="utf-8").splitlines() if l.strip()}
+
+
+def register(slug, png, label, comp):
+    """Validate and register one app; returns an error string or None."""
+    if not re.fullmatch(SLUG_RE, slug):
+        return "slug must be lowercase a-z0-9_ and start with a letter"
+    if not re.fullmatch(COMP_RE, comp):
+        return "component must look like ComponentInfo{package/full.activity.Name}"
+    if "\t" in label or "\n" in label:
+        return "label must be one line"
+    if slug in registered_slugs():
+        return f"{slug} is already registered"
+    im = Image.open(png).convert("RGBA")
+    if min(im.size) < 48:
+        return f"icon is only {im.size[0]}x{im.size[1]} px - too small to trace"
+    out = ROOT / "work" / slug
+    out.mkdir(parents=True, exist_ok=True)
+    im.resize((512, 512), Image.LANCZOS).save(out / "source.png")
+    with (ROOT / "work/_lib/batch_apps.tsv").open("a", encoding="utf-8") as f:
+        f.write(f"{slug}\t{label}\t{comp}\t{slug}\n")
+    return None
+
+
 def main():
     if len(sys.argv) != 5:
         sys.exit(__doc__)
     slug, png, label, comp = sys.argv[1:]
-    if not re.fullmatch(r"[a-z][a-z0-9_]*", slug):
-        sys.exit("slug must be lowercase a-z0-9_ and start with a letter")
-    if not re.fullmatch(r"ComponentInfo\{[A-Za-z0-9_.]+/[A-Za-z0-9_.$]+\}", comp):
-        sys.exit("component must look like ComponentInfo{package/full.activity.Name}")
-    tsv = ROOT / "work/_lib/batch_apps.tsv"
-    if any(l.split("\t")[0] == slug for l in tsv.read_text(encoding="utf-8").splitlines()):
-        sys.exit(f"{slug} is already registered")
-    out = ROOT / "work" / slug
-    out.mkdir(parents=True, exist_ok=True)
-    Image.open(png).convert("RGBA").resize((512, 512), Image.LANCZOS).save(out / "source.png")
-    with tsv.open("a", encoding="utf-8") as f:
-        f.write(f"{slug}\t{label}\t{comp}\t{slug}\n")
-    print(f"ok: work/{slug}/source.png + batch_apps.tsv. Next: python3 work/_lib/auto.py {slug}")
+    err = register(slug, png, label, comp)
+    if err:
+        sys.exit(err)
+    print(f"ok: work/{slug}/source.png + batch_apps.tsv. Next: python3 tools/make_icon.py {slug}")
 
 
 if __name__ == "__main__":

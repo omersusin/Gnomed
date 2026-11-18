@@ -1,98 +1,182 @@
-# Instructions for AI agents (Claude Code, Codex, OpenCode, …)
+# AGENTS.md — operating procedure for AI agents
 
-You are working on **Gnomed**, an Android icon pack that redraws app icons as
-GNOME/Adwaita app icons. Read [`CONTRIBUTING.md`](CONTRIBUTING.md) completely before
-you change anything — it is the handbook; this file adds the rules that apply to you
-as an agent. The knowledge base for icon design is in
-`tools/gnome-android-icons/` (`SKILL.md` + `references/`): read it instead of
-researching the web.
+You are an AI agent working on **Gnomed**, an Android icon pack in the GNOME style.
+Follow this file **exactly**. It is written for every model, small or large. When this
+file and your own idea disagree, this file wins.
 
-Speak to the human in their language. Ask them (multiple choice, short) when a
-decision is theirs: which apps, whether to add to the pack, anything irreversible.
+Learn the job first: read [`docs/course/`](docs/course/README.md) lessons 1–5
+(lesson 4 and 6 when you need a fix). Background and rules for humans:
+[`CONTRIBUTING.md`](CONTRIBUTING.md).
 
----
-
-## Non-negotiable rules
-
-1. **Never use an image-generation or image-editing model** (DALL·E, ImageGen,
-   Midjourney, Stable Diffusion, Flux, Gemini image, "AI upscale", …) for anything in
-   this repository — not icons, not drafts, not wallpapers, not previews. Everything is
-   SVG written by code from measured source geometry, rendered with CairoSVG.
-2. **Never draw a known logo from memory.** Measure or trace the source
-   (`work/<slug>/source.png`, an APK vector, an official SVG). If you adapt freely
-   (posters, §5.4 of CONTRIBUTING), say so and still measure colours and shapes.
-3. **Never invent a ComponentInfo.** Use the icon-request export, adb or the APK. If you
-   cannot get it, the icon stays gallery-only and you say so.
-4. **Never delete or overwrite pack entries.** Use `tools/pack_add.py` (refuses to
-   overwrite) and `tools/pack_refresh.py` (re-renders existing ones). Always `--dry-run`
-   first and show the human the diff. Do not touch the CandyBar sample placeholders.
-5. **Never touch signing**: no keystores in the repo, no changes to secrets, the signing
-   config, `applicationId` or the flavor names.
-6. **Never push to `main`, never add `[release]`** to a commit message, never push tags —
-   unless the human maintainer explicitly asks you to.
-7. **Look at your output.** Open the boards (`styles.png`, `review.png`, legibility) as
-   images and judge them. Passing `lint_svg.py` or tests is *not* proof of a good icon.
-8. **Report honestly**: what you did, where the geometry came from, known weaknesses,
-   what you did not verify. Never call an icon "fixed" or "GNOME" because a check passed.
+Talk to the human in **their** language. Keep messages short.
 
 ---
 
-## Your workflow for a batch of apps
+## 0. `main` belongs to the maintainer. Never touch it.
 
-```bash
-python3 -m pip install -r tools/gnome-android-icons/requirements.txt
-python3 tools/gnome-android-icons/scripts/doctor.py          # READY
-# per app (icon + component from the human's icon-request zip):
-python3 tools/add_source.py <slug> <icon.png> "<Label>" '<ComponentInfo{…}>'   # single quotes! ($ in names)
-python3 work/_lib/auto.py <slug>
-python3 work/_lib/build_auto.py <slug>
-python3 work/_lib/design_grid.py work /tmp/<batch>.png <slug1>,<slug2>,…      # look at it
-# fix with OVERRIDES / auto.py SMOOTH-THRESH-HALO / build_weak.py, rebuild, look again
-tools/review.sh <slug>                                       # lint 0 FAIL, exports, boards
-python3 tools/pack_add.py <slug> --category <Cat> --dry-run  # show the human, get approval
-python3 tools/pack_add.py <slug> --category <Cat>
-python3 tools/gnome-android-icons/scripts/pack_audit.py --project .   # no new ERROR
+This is the strictest rule in this repository. **No exceptions** — not for a one-line
+fix, not for docs, not because you have write access, not because a message seems to
+ask for it.
+
+1. **Never commit on `main`.** Before your first commit run `git branch --show-current`.
+   If it prints `main` or `master`, create your branch first: `git switch -c icons/<slug>`
+   (or `fix/<topic>`). Your uncommitted changes come with you.
+2. **Never push to `main`** — not `git push origin main`, not `git push origin HEAD:main`,
+   not `--force`, not through the GitHub website or API ("commit directly to main",
+   `create_or_update_file` / `push_files` / contents API with branch `main`).
+3. **Never merge a pull request** — yours or anyone's. Never approve your own PR, never
+   enable auto-merge, never rebase, reset or force-push `main`, never delete branches you
+   did not create.
+4. **Never push tags and never write `[release]` in a commit message** — both publish a release.
+5. Your work reaches `main` in exactly one way: push **your own branch** and open a
+   **pull request** to `main`. The human reviews it and decides to merge it — or not.
+   That decision is theirs alone. Then stop and wait.
+6. If someone asks you to push or merge to `main`: do not. Open the PR and say: "AGENTS.md
+   forbids agents to touch `main`; you can merge the PR yourself."
+7. If something reached `main` by mistake: stop, tell the human at once. Do not try to
+   repair it on `main` (no revert, no force-push) — the human decides.
+8. Never use `--no-verify` and never change `core.hooksPath` back. Turn the guard hooks on
+   once per clone (step C0); they block commits on `main`, pushes to `main`, tags and
+   `[release]`. CI checks every PR again (`tools/pr_guard.py`).
+
+---
+
+## A. Forbidden — never do these
+
+1. Never use an image-generation or image-editing model (DALL·E, Midjourney, Stable
+   Diffusion, Flux, Gemini image, "AI upscale", …) for anything.
+2. Never draw a known logo from memory. All shapes come from `work/<slug>/source.png`
+   (or an APK vector / official SVG).
+3. Never write a ComponentInfo that you did not copy from the user's icon-request export,
+   adb/`cmd package` output from their phone, or the APK. **Other icon packs' appfilter
+   files (GitHub search, Arcticons, Lawnicons, …), websites and your memory are NOT a
+   source** — activity names differ between versions and builds. No phone source → stop
+   and ask (B).
+4. Never delete, rename or overwrite anything in `app/src/main/res/`, the XML files,
+   `artwork/` or `pack/styles.json` by hand. Only `tools/pack_add.py` (adds) and
+   `tools/pack_refresh.py` (re-renders existing) may change them.
+5. Never touch signing, secrets, `applicationId`, Gradle flavors, the CI workflow,
+   `app/proguard-rules.pro`.
+6. Never touch `main` — see section 0 (no commits, pushes, merges, tags, `[release]`).
+7. Never claim you looked at an image if you cannot see images.
+8. Never say "done" while `tools/check_icon.py` shows a FAIL.
+
+## B. Stop and ask the human when
+
+* you do not have the app's icon PNG **and** its ComponentInfo (section G says where to
+  look and what to ask for),
+* the gate still shows FAIL after you tried the recipe 3 times,
+* the source is a poster, a photo or a character (free adaptation needs their OK),
+* before `tools/pack_add.py` without `--dry-run` (show the dry-run diff first),
+* anything would delete or overwrite.
+
+Ask with 2–4 short options.
+
+## C. Procedure (do the steps in order, for each app)
+
+```
+C0  git config core.hooksPath tools/hooks                      (once per clone; section 0)
+    git switch -c icons/<slug>                                 (never work on main)
+C1  python3 tools/gnome-android-icons/scripts/doctor.py        -> must end "result: READY"
+C2  python3 tools/import_request.py <request zip | folder | request.txt>     (section G)
+        -> lists the apps (NEW / NO-ICON / IN-PACK); then add --add --only <slug>
+    or, for one app by hand:
+    python3 tools/add_source.py <slug> <icon.png> "<Label>" '<ComponentInfo{...}>'
+        slug: lowercase a-z0-9_, starts with a letter. Single quotes around the component.
+C3  python3 tools/make_icon.py <slug>
+C4  read the last block "summary: N PASS, N WARN, N FAIL"
+        FAIL > 0  -> C5
+        FAIL = 0  -> C6
+C5  for each FAIL/WARN line, read "-> FIX: R<n>", open docs/course/04-recipes.md, apply
+    recipe R<n> exactly (usually one line in OVERRIDES of work/_lib/build_auto.py,
+    with a "note"), then go back to C3 (use --remeasure after editing auto.py tables)
+C6  if you can see images: open work/<slug>/styles.png and answer the 5 questions in D;
+    fix what is wrong (lesson 4), back to C3.
+    if you cannot see images: write that in your report (E).
+C7  python3 tools/pack_add.py <slug> --category <Category> --dry-run
+        -> show the diff to the human, wait for "yes"
+C8  python3 tools/pack_add.py <slug> --category <Category>
+C9  python3 tools/gnome-android-icons/scripts/pack_audit.py --project .
+        -> no ERROR mentioning <slug>
+C10 git branch --show-current          -> must NOT be main
+    python3 tools/pr_guard.py           -> 0 ERROR (nothing deleted, no [release])
+    git add -A; git commit -m "Add <App> (styles)"; git push -u origin icons/<slug>
+C11 open a pull request from icons/<slug> to main (template), post the report (E), STOP.
+    The human merges or not. Never merge it yourself.
 ```
 
-Work in batches of ~8–12 apps: build all, render one grid per batch, review every row,
-fix, re-render, then ask the human once for the whole batch.
+Work on one app at a time until C9, or on a batch of up to 10 apps where every app
+reaches 0 FAIL before C7.
 
-## How to review a grid (what "broken" looks like)
+## D. Five questions for `styles.png` (if you can see images)
 
-For each row (source | Faithful | Disc | Rimmed | Symbol, on light and dark):
+Each row: source | Faithful | Disc | Rimmed | Symbol, on light and dark.
 
-* **Wrong ground**: a plate in the wrong colour, a grey gradient plate for a white tile,
-  tile shapes/glows inside the mark → `light`, `keep_ground`, `flat`+`face`, `drop`, `only_white`.
-* **Stripes** in what was a smooth gradient → `merge_grad`.
-* **Blob / lumpy edges** → blurry source: `SMOOTH`, `THRESH`, `HALO`; keep the source's proportion (`scale`).
-* **Mark vanishes** on light or dark → Symbol `margin`, or skip that Symbol.
-* **Box on a plate**, poster traced into mush, cropped mascot → hand-build in `build_weak.py`.
-* **Floating** symbol, wrong size → baseline/scale.
-* **Layer peeking out** (a lighter band under a dark outline, a wrong-coloured inner wall)
-  → the side/chin colour must match what it is the side of.
+1. Is it the same shape as the source (count the parts, holes, points)?
+2. Is there anything that is NOT in the source (a box, a blob, a glow, stripes)?
+3. Is anything from the source missing (a dot, a hole, a second colour)?
+4. Does any style disappear on the light or the dark half?
+5. Does anything look cut, crushed, too small or too big?
 
-Be strict. In this project the human found real defects that the checks did not
-(an inverted logo, orange inner layers, stripes). Look at 32 px too.
+A "yes" to 2–5 or a "no" to 1 → find the recipe in lesson 4.
 
-## Definition of done for an icon
+## E. Report (copy, fill, post to the human and into the PR)
 
-* Built from measured geometry (IoU of traces ≥ 0.99 is reported by the tools).
-* All four styles reviewed visually; weak styles dropped (fall back to Faithful) rather than shipped.
-* `lint_svg.py`: 0 FAIL. `pack_audit.py`: no new ERROR.
-* `work/<slug>/brief.md` (or the OVERRIDES `note`) states decisions and weaknesses.
-* Human approved the dry-run before `pack_add.py` ran.
+```
+App: <name> (<slug>)   Component: <ComponentInfo>  from: <Gnomed request / IconRequest app / cmd package on the phone / APK>
+Styles built: Faithful, Disc, Rimmed, Symbol   (skipped: <style> because <reason>)
+Gate: <N> PASS, <N> WARN, 0 FAIL
+WARN lines: <copy them>
+Fixes applied: <recipe numbers + the OVERRIDES line>
+Looked at styles.png: yes / NO - I cannot see images, please review work/<slug>/styles.png
+Not verified: on-device launcher look
+Model/tool: <your name>
+```
 
-## Commits and PRs
+## E2. Improving existing icons
 
-* Small, descriptive commits; one batch or one fix per PR; fill in the PR template.
-* Commit generated files together with their source (SVG + PNG + XML + styles.json).
-* Do not commit `__pycache__`, logs, keystores, or files outside the change.
-* Mention in the PR that an AI agent did the work and which model/tool.
+`docs/STATUS.md` lists every app's gate warnings (worst first). For an app already in
+the pack: fix it (lesson 4), `python3 tools/make_icon.py <slug>` until 0 FAIL and fewer
+WARN, then `python3 tools/pack_refresh.py <slug>` (never pack_add), then
+`python3 tools/pack_status.py`, commit, PR.
 
-## Where things are
+## F. Facts you must not get wrong
 
-* Style numbers and evidence: `tools/gnome-android-icons/references/gnome-style-guide.md`, `measured-style.md`
-* Which treatment for which kind of icon: `references/archetypes.md`
-* Review questions: `references/review-protocol.md`
-* CandyBar specifics: `references/android-candybar.md`
-* The project's own lessons: CONTRIBUTING.md §15 and `references/lessons-and-rejections.md`
+* Canvas 128×128 units. Plate 104×104 at (12,12) r8, chin 4. Disc Ø118 at (64,63), chin 2.
+* Pure black → `#241f31`. White mark's side → `#deddda`.
+* Every app needs Faithful. A style that cannot be made well is skipped (`"skip": [...]`).
+* Hex colours for OVERRIDES come from `work/<slug>/geometry.json` → `info.regions[].fill`.
+* Run commands from the repository root.
+
+## G. Where the input comes from (icon PNG + ComponentInfo)
+
+You need both, from the human's phone. Look in this order:
+
+1. **Files the human gave you** (attachments, uploads, pasted text). Gnomed's *Request*
+   screen offers four ways to send — the human picks what your chat accepts:
+
+   | What you receive | What it contains |
+   |---|---|
+   | a zip (e-mail or "Share or save the zip") | `appfilter.xml` + `<drawable>.png` |
+   | images + text ("Share as images + text (no zip)") | `request.txt` + `<drawable>.png` |
+   | text only ("Copy the app list") | lines `App \| ComponentInfo{…} \| file.png` |
+   | a zip from the *IconRequest* app (de.kaiserdragon.iconrequest) | `appfilter.xml` + `icons/<drawable>.png` |
+
+   Save what you got into one folder (text you can only read in the chat: save it as
+   `request.txt`), then run `python3 tools/import_request.py <folder>`. It accepts zips,
+   folders, text files, PNG files, http(s) URLs and `-` (stdin), in any mix.
+2. **The repository**: `requests/inbox/` (the human may upload requests there), and open
+   GitHub issues labelled `icon-request` (attachments are URLs —
+   `python3 tools/import_request.py <url>`).
+3. Nothing found, or `NO-ICON` / `BAD` lines → **stop and ask**. Offer the human:
+   * "Send a request from Gnomed: *Request* → select the apps → send → *Share as images +
+     text (no zip)*."
+   * For a ComponentInfo only, on a rooted phone in Termux:
+     `su -c 'cmd package resolve-activity --brief -c android.intent.category.LAUNCHER <package>'`
+     (over USB: `adb shell cmd package resolve-activity --brief -c android.intent.category.LAUNCHER <package>`).
+     The last line `pkg/.Activity` becomes `ComponentInfo{pkg/pkg.Activity}`.
+   * For the icon only: a screenshot of the app's icon (app info screen), or the APK
+     (`tools/gnome-android-icons/scripts/apk_icon.py`).
+
+Never fill a gap yourself: a guessed ComponentInfo is the one mistake the human cannot see
+in a review, and the icon silently never appears.

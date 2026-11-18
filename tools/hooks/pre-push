@@ -1,0 +1,16 @@
+#!/bin/sh
+# Gnomed: nobody but the maintainer touches `main`. Contributors and AI agents push their
+# own branch and open a pull request (AGENTS.md section 0). Tags publish releases.
+# Enable once per clone:  git config core.hooksPath tools/hooks
+while read -r local_ref local_sha remote_ref remote_sha; do
+    case "$remote_ref" in
+        refs/heads/main | refs/heads/master)
+            echo "BLOCKED: pushing to '${remote_ref#refs/heads/}' is forbidden (AGENTS.md section 0)." >&2
+            echo "         Push your own branch (git push -u origin <your-branch>) and open a pull request." >&2
+            exit 1 ;;
+        refs/tags/*)
+            echo "BLOCKED: pushing tags is forbidden - a tag publishes a release. Only the maintainer releases." >&2
+            exit 1 ;;
+    esac
+done
+exit 0

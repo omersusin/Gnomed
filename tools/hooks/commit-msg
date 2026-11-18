@@ -1,0 +1,8 @@
+#!/bin/sh
+# Gnomed: "[release]" in a commit message publishes a release - only the maintainer writes it.
+if grep -qi '\[release\]' "$1"; then
+    echo "BLOCKED: '[release]' in a commit message publishes a release (AGENTS.md section 0)." >&2
+    echo "         Remove it. Only the maintainer releases." >&2
+    exit 1
+fi
+exit 0

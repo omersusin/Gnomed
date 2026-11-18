@@ -1,0 +1,27 @@
+PASS  app       faithful       True
+PASS  faithful  lint           ok
+PASS  faithful  visible        light 0.89 / dark 0.14
+PASS  faithful  mass           0.66
+PASS  faithful  baseline       116.0
+PASS  faithful  legibility32   0.806
+PASS  disc      lint           ok
+PASS  disc      visible        light 0.89 / dark 0.26
+PASS  disc      mass           0.68
+PASS  disc      baseline       124.0
+PASS  disc      legibility32   0.821
+PASS  rimmed    lint           ok
+PASS  rimmed    visible        light 0.74 / dark 0.31
+PASS  rimmed    mass           0.68
+PASS  rimmed    baseline       124.0
+PASS  rimmed    legibility32   0.76
+PASS  symbol    lint           ok
+PASS  symbol    visible_light  0.59
+PASS  symbol    visible_dark   0.58
+PASS  symbol    mass           0.34
+PASS  symbol    baseline       121.5
+WARN  symbol    legibility32   0.717   -> FIX: R11 (bigger mark, drop tiny details, thicker strokes)
+PASS  faithful  box_in_plate   0.1
+PASS  app       stripes        0
+PASS  app       trace_iou      all >= 0.90
+
+summary: 24 PASS, 1 WARN, 0 FAIL  (OK to continue)

@@ -18,14 +18,26 @@ downloads `gnomed-<style>.apk` from the latest GitHub release and installs it as
 update of itself. Single icons can also be picked per app from the launcher's
 edit-icon dialog (CandyBar icon picker).
 
+## Wallpapers and icon requests
+
+- Wallpapers are not embedded: the dashboard reads `wallpapers/wallpapers.json` from the
+  `main` branch (raw GitHub), so new wallpapers arrive without an app update.
+- *Request* → send offers e-mail, the zip for any app, **images + text without zip**
+  (for AI agents and chats), or the app list as text. `tools/import_request.py` reads
+  every format, also IconRequest-app zips.
+
 ## Building
 
 GitHub Actions (`.github/workflows/build.yml`) builds all four APKs on every push.
-Tag `v*`, run the workflow manually with *release*, or push a commit whose message contains `[release]` to publish a release.
+The maintainer publishes a release (manual run with *release*, a `v*` tag, or a commit
+message with `[release]`); contributors and agents never do.
 Release signing needs four repository secrets: `GNOMED_KEYSTORE_BASE64`,
 `GNOMED_KEYSTORE_PASSWORD`, `GNOMED_KEY_ALIAS`, `GNOMED_KEY_PASSWORD`.
 
 ## Contributing
+
+**Only the maintainer touches `main`.** Everyone else — people and AI agents — works on
+a branch and opens a pull request; the maintainer merges or not.
 
 Everything about making icons, the design rules, the tools and how to send a pull
 request is in **[CONTRIBUTING.md](CONTRIBUTING.md)**. AI agents: read

@@ -343,7 +343,7 @@ def konabess():
         body = gk.rrect_d(x0c, y0c, cw, y1c - y0c, cw * 0.08)
         ic.path(gk.translate_d(body, 0, 1.5), "#241f31", layer_id="chip-side")
         ic.path(body, "#3d3846", layer_id="chip")
-        ic.path(ds[4], "#deddda", layer_id="chip-text", fill_rule="evenodd")
+        # chip lettering ('888 5G') dropped: unreadable below 64 px and it broke 32 px legibility
         ic.path(ds[1], "#e01b24", layer_id="ring", fill_rule="evenodd")
         ic.path(ds[2], "#e01b24", layer_id="slash")
 
@@ -638,7 +638,7 @@ def dolby_atmos():
         raised(ic, [(ds[0], INKD)], lift=2)
         out[st] = ic
     ic = gk.Icon("Dolby Atmos - Free Symbol", note("dolby_atmos", "double-D with a pale margin"))
-    ds, _ = place(ds_src, box_c(64, 80, 108, 76))
+    ds, _ = place(ds_src, box_c(64, 76, 104, 72))
     body = fam.offset_d(ds[0], 4.0)
     x0, _, x1, _ = gk.bbox_d(body)
     ic.path(gk.translate_d(body, 0, 4), ic.chin_gradient(PALE, x0, x1, 10), layer_id="body-chin")
