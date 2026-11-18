@@ -374,6 +374,56 @@
       "disc": "y_hava_durumu_alt1",
       "rimmed": "y_hava_durumu_alt2",
       "symbol": "y_hava_durumu_alt3"
+    },
+    "clash_royale": {
+      "disc": "clash_royale_alt1",
+      "rimmed": "clash_royale_alt2",
+      "symbol": "clash_royale_alt3"
+    },
+    "survivor_io": {
+      "disc": "survivor_io_alt1",
+      "rimmed": "survivor_io_alt2",
+      "symbol": "survivor_io_alt3"
+    },
+    "konabess": {
+      "disc": "konabess_alt1",
+      "rimmed": "konabess_alt2",
+      "symbol": "konabess_alt3"
+    },
+    "hesap_makinesi": {
+      "disc": "hesap_makinesi_alt1",
+      "rimmed": "hesap_makinesi_alt2",
+      "symbol": "hesap_makinesi_alt3"
+    },
+    "terminal_em_lat_r": {
+      "disc": "terminal_em_lat_r_alt1",
+      "rimmed": "terminal_em_lat_r_alt2",
+      "symbol": "terminal_em_lat_r_alt3"
+    },
+    "mt_manager": {
+      "disc": "mt_manager_alt1",
+      "rimmed": "mt_manager_alt2",
+      "symbol": "mt_manager_alt3"
+    },
+    "shizuku": {
+      "disc": "shizuku_alt1",
+      "rimmed": "shizuku_alt2",
+      "symbol": "shizuku_alt3"
+    },
+    "bcr": {
+      "disc": "bcr_alt1",
+      "rimmed": "bcr_alt2",
+      "symbol": "bcr_alt3"
+    },
+    "walpy": {
+      "disc": "walpy_alt1",
+      "rimmed": "walpy_alt2",
+      "symbol": "walpy_alt3"
+    },
+    "pix_material_you_light_dark": {
+      "disc": "pix_material_you_light_dark_alt1",
+      "rimmed": "pix_material_you_light_dark_alt2",
+      "symbol": "pix_material_you_light_dark_alt3"
     }
   }
 }

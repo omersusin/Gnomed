@@ -94,4 +94,14 @@
     <item component="ComponentInfo{eu.weblibre.gecko/eu.weblibre.gecko.MainActivity}" drawable="weblibre" />
     <item component="ComponentInfo{com.wupp.app/com.wa.beastclient.MainActivity}" drawable="wupp" />
     <item component="ComponentInfo{ru.yandex.weatherplugin/ru.yandex.weatherplugin.ui.common.activity.SplashActivity}" drawable="y_hava_durumu" />
+    <item component="ComponentInfo{com.chiller3.bcr/com.chiller3.bcr.settings.SettingsActivityLauncher}" drawable="bcr" />
+    <item component="ComponentInfo{com.supercell.clashroyale/com.supercell.titan.GameApp}" drawable="clash_royale" />
+    <item component="ComponentInfo{all.in.one.calculator/io.flutter.embedding.android.FlutterActivity}" drawable="hesap_makinesi" />
+    <item component="ComponentInfo{xzr.konabess/xzr.konabess.MainActivity}" drawable="konabess" />
+    <item component="ComponentInfo{bin.mt.plus.canary/bin.mt.plus.MainLightIcon}" drawable="mt_manager" />
+    <item component="ComponentInfo{com.pashapuma.pix.material.you.dark/com.pashapuma.pix.material.you.dark.activities.MainActivity}" drawable="pix_material_you_light_dark" />
+    <item component="ComponentInfo{moe.shizuku.privileged.api/moe.shizuku.manager.MainActivity}" drawable="shizuku" />
+    <item component="ComponentInfo{com.dxx.firenow/com.unity3d.player.UnityPlayerActivityOverride}" drawable="survivor_io" />
+    <item component="ComponentInfo{com.termoneplus/com.termoneplus.TermActivity}" drawable="terminal_em_lat_r" />
+    <item component="ComponentInfo{com.feresr.walpy/com.feresr.walpy.ui.MainActivity}" drawable="walpy" />
 </resources>

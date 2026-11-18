@@ -286,6 +286,38 @@
     <item drawable="vortex_alt1" name="vortex (Disc)" />
     <item drawable="vortex_alt2" name="vortex (Rimmed)" />
     <item drawable="vortex_alt3" name="vortex (Symbol)" />
+    <item drawable="bcr" name="BCR" />
+    <item drawable="bcr_alt1" name="BCR (Disc)" />
+    <item drawable="bcr_alt2" name="BCR (Rimmed)" />
+    <item drawable="bcr_alt3" name="BCR (Symbol)" />
+    <item drawable="hesap_makinesi" name="Hesap Makinesi" />
+    <item drawable="hesap_makinesi_alt1" name="Hesap Makinesi (Disc)" />
+    <item drawable="hesap_makinesi_alt2" name="Hesap Makinesi (Rimmed)" />
+    <item drawable="hesap_makinesi_alt3" name="Hesap Makinesi (Symbol)" />
+    <item drawable="konabess" name="KonaBess" />
+    <item drawable="konabess_alt1" name="KonaBess (Disc)" />
+    <item drawable="konabess_alt2" name="KonaBess (Rimmed)" />
+    <item drawable="konabess_alt3" name="KonaBess (Symbol)" />
+    <item drawable="mt_manager" name="MT Manager" />
+    <item drawable="mt_manager_alt1" name="MT Manager (Disc)" />
+    <item drawable="mt_manager_alt2" name="MT Manager (Rimmed)" />
+    <item drawable="mt_manager_alt3" name="MT Manager (Symbol)" />
+    <item drawable="pix_material_you_light_dark" name="Pix Material You Light/Dark" />
+    <item drawable="pix_material_you_light_dark_alt1" name="Pix Material You Light/Dark (Disc)" />
+    <item drawable="pix_material_you_light_dark_alt2" name="Pix Material You Light/Dark (Rimmed)" />
+    <item drawable="pix_material_you_light_dark_alt3" name="Pix Material You Light/Dark (Symbol)" />
+    <item drawable="shizuku" name="Shizuku" />
+    <item drawable="shizuku_alt1" name="Shizuku (Disc)" />
+    <item drawable="shizuku_alt2" name="Shizuku (Rimmed)" />
+    <item drawable="shizuku_alt3" name="Shizuku (Symbol)" />
+    <item drawable="terminal_em_lat_r" name="Terminal Emülatörü" />
+    <item drawable="terminal_em_lat_r_alt1" name="Terminal Emülatörü (Disc)" />
+    <item drawable="terminal_em_lat_r_alt2" name="Terminal Emülatörü (Rimmed)" />
+    <item drawable="terminal_em_lat_r_alt3" name="Terminal Emülatörü (Symbol)" />
+    <item drawable="walpy" name="Walpy" />
+    <item drawable="walpy_alt1" name="Walpy (Disc)" />
+    <item drawable="walpy_alt2" name="Walpy (Rimmed)" />
+    <item drawable="walpy_alt3" name="Walpy (Symbol)" />
 
     <category title="Browsers" />
     <item drawable="bare" name="Bare" />
@@ -328,4 +360,14 @@
     <item drawable="y_hava_durumu_alt1" name="Y.Hava durumu (Disc)" />
     <item drawable="y_hava_durumu_alt2" name="Y.Hava durumu (Rimmed)" />
     <item drawable="y_hava_durumu_alt3" name="Y.Hava durumu (Symbol)" />
+
+    <category title="Games" />
+    <item drawable="clash_royale" name="Clash Royale" />
+    <item drawable="clash_royale_alt1" name="Clash Royale (Disc)" />
+    <item drawable="clash_royale_alt2" name="Clash Royale (Rimmed)" />
+    <item drawable="clash_royale_alt3" name="Clash Royale (Symbol)" />
+    <item drawable="survivor_io" name="Survivor.io" />
+    <item drawable="survivor_io_alt1" name="Survivor.io (Disc)" />
+    <item drawable="survivor_io_alt2" name="Survivor.io (Rimmed)" />
+    <item drawable="survivor_io_alt3" name="Survivor.io (Symbol)" />
 </resources>

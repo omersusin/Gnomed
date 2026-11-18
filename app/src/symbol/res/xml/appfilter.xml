@@ -95,4 +95,14 @@
     <item component="ComponentInfo{eu.weblibre.gecko/eu.weblibre.gecko.MainActivity}" drawable="weblibre_alt3" />
     <item component="ComponentInfo{com.wupp.app/com.wa.beastclient.MainActivity}" drawable="wupp_alt3" />
     <item component="ComponentInfo{ru.yandex.weatherplugin/ru.yandex.weatherplugin.ui.common.activity.SplashActivity}" drawable="y_hava_durumu_alt3" />
+    <item component="ComponentInfo{com.chiller3.bcr/com.chiller3.bcr.settings.SettingsActivityLauncher}" drawable="bcr_alt3" />
+    <item component="ComponentInfo{com.supercell.clashroyale/com.supercell.titan.GameApp}" drawable="clash_royale_alt3" />
+    <item component="ComponentInfo{all.in.one.calculator/io.flutter.embedding.android.FlutterActivity}" drawable="hesap_makinesi_alt3" />
+    <item component="ComponentInfo{xzr.konabess/xzr.konabess.MainActivity}" drawable="konabess_alt3" />
+    <item component="ComponentInfo{bin.mt.plus.canary/bin.mt.plus.MainLightIcon}" drawable="mt_manager_alt3" />
+    <item component="ComponentInfo{com.pashapuma.pix.material.you.dark/com.pashapuma.pix.material.you.dark.activities.MainActivity}" drawable="pix_material_you_light_dark_alt3" />
+    <item component="ComponentInfo{moe.shizuku.privileged.api/moe.shizuku.manager.MainActivity}" drawable="shizuku_alt3" />
+    <item component="ComponentInfo{com.dxx.firenow/com.unity3d.player.UnityPlayerActivityOverride}" drawable="survivor_io_alt3" />
+    <item component="ComponentInfo{com.termoneplus/com.termoneplus.TermActivity}" drawable="terminal_em_lat_r_alt3" />
+    <item component="ComponentInfo{com.feresr.walpy/com.feresr.walpy.ui.MainActivity}" drawable="walpy_alt3" />
 </resources>
