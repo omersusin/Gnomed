@@ -105,7 +105,7 @@ def offset_d(d, dist, samples=900):
         polys.append(Polygon([(p.real, p.imag) for p in pts]).buffer(0))
     from shapely.ops import unary_union
     # union of every piece (letters, brackets ...), not just the largest one
-    poly = unary_union([p for p in polys if p.area > 0.5]).buffer(dist, join_style=1, resolution=24)
+    poly = unary_union([p for p in polys if p.area > 0.5]).buffer(dist, join_style=1, resolution=16).simplify(0.06)
     geoms = getattr(poly, "geoms", [poly])
     out = []
     for g in geoms:

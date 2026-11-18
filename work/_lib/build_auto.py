@@ -43,6 +43,8 @@ OVERRIDES = {
     "exteraless": {"light": True, "drop": ["#ffdbdb"], "merge_grad": [["#ff8291", "#ff75a1", "#ff937f", "#ffa865", "#ffbb4d"]],
                    "note": "soft pink glow dropped (no glows in GNOME); the chevron is ONE part with its measured pink->orange gradient (no bands)"},
     "bitchord": {"merge_grad": [["#edaeb8", "#f8e3e6"]], "note": "the waves are one white->pink gradient (measured), not two flat bands"},
+    "firefox_beta": {"merge_grad": [["#ffc041", "#ff692d", "#c6124b"], ["#962dcc", "#5f44b8"]],
+                     "note": "fox flame = one yellow->red gradient, globe = one purple gradient (check_icon: stripes + low trace IoU); BETA badge kept"},
     "firefox_nightly": {"merge_grad": [["#28baf6", "#25dfdf", "#4af2bf", "#5d84fe"]],
                         "note": "the fox is one part with its measured cyan->blue gradient (no bands); globe keeps its two tones"},
     "reddit": {"symbol": "margin", "note": "Symbol: white Snoo with an orange margin (Reddit's own logo use), not an orange Snoo"},
@@ -60,6 +62,7 @@ OVERRIDES = {
     "wupp": {"flat": True, "face": "#131c23", "drop": ["#131c23"], "note": "flat dark tile behind the green bubble"},
     "walpy": {"scale": 0.76, "note": "blurry signature: only its sharp core traced (threshold 0.85); kept at the source's ~40 % proportion"},
     "mt_manager": {"scale": 1.18, "note": "folder object larger on the plate (was a small box in a big plate)"},
+    "ashell_you": {"margin_w": 7.0, "note": "black robot: wide white margin so the Symbol still reads on dark wallpapers (check_icon visible_dark)"},
     "survivor_io": {"skip": ["symbol"], "note": "WEAK: posterised trace of the game poster, not a real GNOME conversion"},
 }
 
@@ -282,7 +285,7 @@ class App:
         ic = gk.Icon(f"{self.slug} - Free Symbol", fam.note(self.slug) + f" | symbol mode: {mode}")
         items, sil, s = self.marks(self.box("symbol"), ic)
         if mode == "margin":
-            body = fam.offset_d(sil, 3.5)
+            body = fam.offset_d(sil, self.o.get("margin_w", 3.5))
             if self.light:
                 x0, _, x1, _ = gk.bbox_d(body)
                 c = ic.chin_gradient("#c0bfbc", x0, x1, (x1 - x0) * 0.3,

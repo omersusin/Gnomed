@@ -14,6 +14,11 @@ pack and how to send it. If you use an AI agent (Claude, Codex, …), also read
 
 ---
 
+> **New here? Take the course first: [`docs/course/`](docs/course/README.md)** — seven short
+> lessons with pictures, real before/after examples and exercises. The two tools you will
+> use most: `python3 tools/make_icon.py <slug>` (measure, build, review, check in one go)
+> and `python3 tools/check_icon.py <slug>` (the quality gate: PASS/WARN/FAIL + the fix).
+
 ## Contents
 
 1. [Quick start](#1-quick-start)
@@ -50,10 +55,8 @@ Make one icon end to end (example: an app with slug `example`):
 
 ```bash
 python3 tools/add_source.py example icon.png "Example" "ComponentInfo{org.example/org.example.MainActivity}"
-python3 work/_lib/auto.py example          # measure: tile colour, mark, colour regions
-python3 work/_lib/build_auto.py example    # build the four styles
-tools/review.sh example                    # lint, PNG export, legibility, review boards
-#   -> LOOK at work/example/review.png and work/example/styles.png, fix, repeat
+python3 tools/make_icon.py example         # measure + build + review + quality gate
+#   -> fix every FAIL (docs/course/04-recipes.md), LOOK at work/example/styles.png, repeat
 python3 tools/pack_add.py example --category Tools --dry-run   # read the diff
 python3 tools/pack_add.py example --category Tools
 python3 tools/gnome-android-icons/scripts/pack_audit.py --project .
@@ -84,6 +87,11 @@ tools/                     contributor tools + the vendored GNOME icon toolkit
   review.sh                lint, export, legibility, boards for one app
   pack_add.py              add a reviewed app to the pack (additive, dry-run first)
   pack_refresh.py          re-render pack PNGs of an app that is already in the pack
+  make_icon.py             one command: measure, build, review, quality gate
+  check_icon.py            the quality gate: PASS/WARN/FAIL per style + the recipe to apply
+  pack_status.py           run the gate on every app -> docs/STATUS.md (what to improve next)
+docs/course/               the course: 7 lessons with pictures, recipes R1-R15, exercises
+docs/STATUS.md             gate results for every app, worst first
   gen_styles.py            regenerate the per-style appfilters from pack/styles.json
 .github/workflows/build.yml  CI: builds the four style APKs, checks, releases
 ```
@@ -387,6 +395,12 @@ the script, keep the set calm — no photos, no busy patterns, no generated imag
 * Do not change `applicationId`, the flavor names or the signing setup in a PR.
 
 ---
+
+## 12b. Where to help
+
+[`docs/STATUS.md`](docs/STATUS.md) lists every app with its gate warnings, worst first.
+Pick one, apply the recipe, `python3 tools/make_icon.py <slug>`, `python3 tools/pack_refresh.py <slug>`,
+re-run `python3 tools/pack_status.py`, send a PR.
 
 ## 13. Sending your contribution
 
