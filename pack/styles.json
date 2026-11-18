@@ -439,6 +439,16 @@
       "disc": "duolingo_alt1",
       "rimmed": "duolingo_alt2",
       "symbol": "duolingo_alt3"
+    },
+    "hepsiburada": {
+      "disc": "hepsiburada_alt1",
+      "rimmed": "hepsiburada_alt2",
+      "symbol": "hepsiburada_alt3"
+    },
+    "quarry": {
+      "disc": "quarry_alt1",
+      "rimmed": "quarry_alt2",
+      "symbol": "quarry_alt3"
     }
   }
 }

@@ -108,4 +108,6 @@
     <item component="ComponentInfo{gnomed.it/gnomed.it.activities.MainActivity}" drawable="gnomed_alt2" />
     <item component="ComponentInfo{co.aospa.dolby.xiaomi/co.aospa.dolby.xiaomi.DolbySettingsActivity}" drawable="dolby_atmos_alt2" />
     <item component="ComponentInfo{com.duolingo/com.duolingo.app.LoginActivity}" drawable="duolingo_alt2" />
+    <item component="ComponentInfo{com.pozitron.hepsiburada/com.hepsiburada.ui.startup.SplashActivity}" drawable="hepsiburada_alt2" />
+    <item component="ComponentInfo{app.quarry.tanvir.info/app.quarry.tanvir.info.MainActivity}" drawable="quarry_alt2" />
 </resources>

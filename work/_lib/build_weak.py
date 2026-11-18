@@ -694,6 +694,51 @@ def duolingo():
     return out
 
 
+# ------------------------------------------------------------------ Hepsiburada
+@build
+def hepsiburada():
+    """Faithful / Sound Disc / Rimmed: the automatic build of the official orange-square logo
+    (sent by the owner; the phone still shows an outdated poster icon, kept as phone-icon.png).
+
+    Symbol: the brand's own stacked layout (work/hepsiburada/brand/logo-stacked-bar.jpg):
+    the orange wordmark traced from it, and under it the six-colour bar with its segment
+    widths and colours measured from the same file. The bar is the object (slab with a
+    side); the wordmark stands on the page above it with a lift. Proportions as measured."""
+    import build_auto as ba
+    from PIL import Image
+    out = ba.App("hepsiburada").build()
+
+    src = np.asarray(Image.open(WORK / "hepsiburada/brand/logo-stacked-bar.jpg").convert("RGB")).astype(np.float32) / 255
+    big = np.asarray(Image.fromarray((src * 255).astype(np.uint8)).resize((1500, 1500), Image.LANCZOS)).astype(np.float32) / 255
+    k = 1500 / 375                                       # px of the 4x image per logo px
+    orange = (big[..., 0] > 0.75) & (big[..., 2] < 0.45) & (np.arange(1500)[:, None] < 280 * k)
+    su = 128 / 1500                                      # 128-unit tile = logo width
+    word = trace(orange, su)
+    ORANGE = hexc(np.median(src[(src[..., 0] > 0.85) & (src[..., 2] < 0.3) & (np.arange(375)[:, None] < 280)], axis=0))
+    # bar: y 292-336, segment edges (logo px) and colours measured on row 312
+    edges = [0, 48.5, 103.5, 219, 271, 320, 375]
+    cols = ["#7624e2", "#51bde4", "#f75f20", "#f09f2a", "#6d1f5d", "#39bf9e"]
+    by0, by1 = 292 * 128 / 375, 336 * 128 / 375
+    segs = [f"M{edges[i] * 128 / 375:.2f} {by0:.2f}H{edges[i + 1] * 128 / 375:.2f}V{by1:.2f}H{edges[i] * 128 / 375:.2f}Z"
+            for i in range(6)]
+    allp = [word] + segs
+    x0, y0, x1, y1 = gk.bbox_d(allp)
+    w = 112.0
+    h = w * (y1 - y0) / (x1 - x0)
+    ds, _ = place(allp, (64 - w / 2, 114 - h, 64 + w / 2, 114))
+    wd, sg = ds[0], ds[1:]
+
+    ic = gk.Icon("Hepsiburada - Free Symbol", note("hepsiburada", "brand layout: orange wordmark over the six-colour bar (measured)"))
+    with ic.group("bar"):
+        for i, (d, c) in enumerate(zip(sg, cols)):
+            ic.path(gk.translate_d(d, 0, 4), shade(c, -0.28), layer_id=f"bar-{i}-side")
+        for i, (d, c) in enumerate(zip(sg, cols)):
+            ic.path(d, c, layer_id=f"bar-{i}-face")
+    fam.raised(ic, [(wd, ORANGE, shade(ORANGE, -0.22))], lift=2, layer="word")
+    out["symbol"] = ic
+    return out
+
+
 # ------------------------------------------------------------------ Gnomed (our own logo)
 @build
 def gnomed():

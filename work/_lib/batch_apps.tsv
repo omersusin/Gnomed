@@ -74,3 +74,5 @@ y_hava_durumu	Y.Hava durumu	ComponentInfo{ru.yandex.weatherplugin/ru.yandex.weat
 gnomed	Gnomed	ComponentInfo{gnomed.it/gnomed.it.activities.MainActivity}	gnomed
 dolby_atmos	Dolby Atmos	ComponentInfo{co.aospa.dolby.xiaomi/co.aospa.dolby.xiaomi.DolbySettingsActivity}	dolby_atmos
 duolingo	Duolingo	ComponentInfo{com.duolingo/com.duolingo.app.LoginActivity}	duolingo
+hepsiburada	Hepsiburada	ComponentInfo{com.pozitron.hepsiburada/com.hepsiburada.ui.startup.SplashActivity}	hepsiburada
+quarry	Quarry	ComponentInfo{app.quarry.tanvir.info/app.quarry.tanvir.info.MainActivity}	quarry

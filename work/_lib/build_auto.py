@@ -53,6 +53,9 @@ OVERRIDES = {
                         "note": "the fox is one part with its measured cyan->blue gradient (no bands); globe keeps its two tones"},
     "reddit": {"symbol": "margin", "note": "Symbol: white Snoo with an orange margin (Reddit's own logo use), not an orange Snoo"},
     "pentas": {"keep_ground": True, "note": "peach tile kept"},
+    "quarry": {"symbol": "keep", "split": [("#2a91f2", (42, 44, 86, 83), "#303b56")],
+               "note": "chart bars are dark slate in the source (k-means folded them into the blue ring part); Symbol keeps the white folder (inverting made it navy)"},
+    "hepsiburada": {"skip": ["symbol"], "note": "source: official orange-square logo sent by the owner (the phone shows an outdated poster icon); Symbol hand-built in build_weak"},
     "pix_material_you_light_dark": {"symbol": "margin", "note": "dark mark on a dark slate tile: Symbol keeps a slate margin"},
     "hesap_makinesi": {"skip": ["symbol"], "note": "two-tone tile + long shadow are tangled with the mark; no clean Symbol"},
     "konabess": {"note": "WEAK: line drawing with small text, unreadable below 64 px (source limitation)"},
@@ -115,6 +118,22 @@ class App:
         self.o = OVERRIDES.get(slug, {})
         rep = self.o.get("regions", {})
         self.regs = [(self.P[r["name"]], snap(rep.get(r["fill"], r["fill"]))) for r in self.I["regions"]]
+        # "split": [(fill, (x0, y0, x1, y1), new_fill)] - subpaths of a region that lie inside
+        # the box become their own region (thin parts k-means folded into a bigger colour)
+        for fill, (bx0, by0, bx1, by1), new in self.o.get("split", []):
+            out = []
+            for d, f in self.regs:
+                if f != snap(fill):
+                    out.append((d, f))
+                    continue
+                subs = ["M" + x for x in d.split("M") if x.strip()]
+                inside = [x for x in subs if (lambda b: b[0] >= bx0 and b[1] >= by0 and b[2] <= bx1 and b[3] <= by1)(gk.bbox_d([x]))]
+                rest = [x for x in subs if x not in inside]
+                if rest:
+                    out.append(("".join(rest), f))
+                if inside:
+                    out.append(("".join(inside), snap(new)))
+            self.regs = out
         G = self.I["ground"]
         self.gk = G["kind"]
         self.ground = snap(self.o.get("face", G.get("color", "#ffffff")))
