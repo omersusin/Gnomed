@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Marti - Sound Disc</title>
+  <desc>original artwork made for the gnome-android-icons skill demo | licence: CC0-1.0</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#aa403f"/><stop offset="0.225" stop-color="#f56754"/><stop offset="0.45" stop-color="#cc504b"/><stop offset="0.55" stop-color="#cc504b"/><stop offset="0.775" stop-color="#f56754"/><stop offset="1" stop-color="#aa403f"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="4" x2="0" y2="122"><stop offset="0" stop-color="#ff7662"/><stop offset="0.55" stop-color="#ff6b57"/><stop offset="1" stop-color="#f4614e"/></linearGradient>
+    <radialGradient id="r3" gradientUnits="userSpaceOnUse" cx="64" cy="18.75" r="67.85"><stop offset="0" stop-color="#ffffff" stop-opacity="0.2"/><stop offset="0.6" stop-color="#ffffff" stop-opacity="0.06"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g id="disc">
+  <path id="disc-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g1)"/>
+  <path id="disc-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="url(#g2)"/>
+  <path id="disc-sheen" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="url(#r3)"/>
+  </g>
+  <g id="mark">
+  <path id="mark-lift" d="M55 33L73 33A25 25 0 0 1 98 58A25 25 0 0 1 73 83L58 83L42.5 95.2Q36.6 99.6 37.1 92.5L37.3 75.7A25 25 0 0 1 30 58A25 25 0 0 1 55 33M38 61C44 50 56 47 64 58C72 47 84 50 90 61C83 56 73 57 64 67C55 57 45 56 38 61" fill="#c0bfbc" fill-rule="evenodd"/>
+  <path id="mark-face" d="M 55,31 L 73,31 A 25,25 0 0,1 98,56 A 25,25 0 0,1 73,81 L 58,81 L 42.5,93.2 Q 36.6,97.6 37.1,90.5 L 37.3,73.7 A 25,25 0 0,1 30,56 A 25,25 0 0,1 55,31M 38,59 C 44,48 56,45 64,56 C 72,45 84,48 90,59 C 83,54 73,55 64,65 C 55,55 45,54 38,59" fill="#ffffff" fill-rule="evenodd"/>
+  </g>
+</svg>

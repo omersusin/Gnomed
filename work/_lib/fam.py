@@ -8,7 +8,8 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, "/root/.claude/skills/gnome-android-icons/scripts")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import skillpath  # noqa: E402,F401  (puts the vendored toolkit on sys.path)
 import gnome_kit as gk  # noqa: E402
 from gnome_kit import shade  # noqa: E402,F401
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Lale (source logo)</title>
+  <desc>original artwork made for the gnome-android-icons skill demo | licence: CC0-1.0</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="22" y1="106" x2="106" y2="22"><stop offset="0" stop-color="#6a35d9"/><stop offset="1" stop-color="#d63a8f"/></linearGradient>
+  </defs>
+  <path id="disc" d="M4 64A60 60 0 1 1 124 64A60 60 0 1 1 4 64Z" fill="url(#g1)"/>
+  <path id="note" d="M 51,23 Q 52,21.5 53.5,23 L 59,30 L 64.6,17.8 Q 66,15.6 67.4,17.8 L 73,30 L 78.5,23 Q 80,21.5 81,23 L 81,35 C 81,44 74.5,51 66,51 C 57.5,51 51,44 51,35 L 51,23M 63.5,49 L 68.5,49 L 68.5,91 L 63.5,91 L 63.5,49M 68.5,56 C 77,58 85,64 86,76 C 82,70 76,68 68.5,69 L 68.5,56M 47.765,94.933 A 10.5,7.6 -22 1,1 67.235,87.067 A 10.5,7.6 -22 1,1 47.765,94.933" fill="#ffffff"/>
+</svg>

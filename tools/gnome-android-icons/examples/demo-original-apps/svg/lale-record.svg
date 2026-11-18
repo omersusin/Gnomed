@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Lale - Record (object)</title>
+  <desc>original artwork made for the gnome-android-icons skill demo | licence: CC0-1.0</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#000000"/><stop offset="0.212" stop-color="#5e5c64"/><stop offset="0.424" stop-color="#241f31"/><stop offset="0.576" stop-color="#241f31"/><stop offset="0.788" stop-color="#5e5c64"/><stop offset="1" stop-color="#000000"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="20" y1="20" x2="108" y2="106"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.42" stop-color="#ffffff" stop-opacity="0.1"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.58" stop-color="#ffffff" stop-opacity="0.07"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="43" y1="84" x2="85" y2="42"><stop offset="0" stop-color="#6a35d9"/><stop offset="1" stop-color="#d63a8f"/></linearGradient>
+  </defs>
+  <g id="disc">
+  <path id="disc-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g1)"/>
+  <path id="disc-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="#3d3846"/>
+  </g>
+  <path id="groove52" d="M12 63A52 52 0 1 1 116 63A52 52 0 1 1 12 63ZM13 63A51 51 0 1 1 115 63A51 51 0 1 1 13 63Z" fill="#ffffff" opacity="0.07" fill-rule="evenodd"/>
+  <path id="groove46" d="M18 63A46 46 0 1 1 110 63A46 46 0 1 1 18 63ZM19 63A45 45 0 1 1 109 63A45 45 0 1 1 19 63Z" fill="#ffffff" opacity="0.07" fill-rule="evenodd"/>
+  <path id="groove40" d="M24 63A40 40 0 1 1 104 63A40 40 0 1 1 24 63ZM25 63A39 39 0 1 1 103 63A39 39 0 1 1 25 63Z" fill="#ffffff" opacity="0.07" fill-rule="evenodd"/>
+  <path id="edge" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63ZM6.5 63A57.5 57.5 0 1 1 121.5 63A57.5 57.5 0 1 1 6.5 63Z" fill="#77767b" fill-rule="evenodd"/>
+  <path id="sheen" d="M6.5 63A57.5 57.5 0 1 1 121.5 63A57.5 57.5 0 1 1 6.5 63Z" fill="url(#g2)"/>
+  <path id="label" d="M34 63A30 30 0 1 1 94 63A30 30 0 1 1 34 63Z" fill="url(#g3)"/>
+  <g id="note">
+  <path id="note-lift" d="M56.72 41.24Q57.28 40.4 58.12 41.24L61.2 45.16L64.336 38.328Q65.12 37.096 65.904 38.328L69.04 45.16L72.12 41.24Q72.96 40.4 73.52 41.24L73.52 47.96C73.52 53 69.88 56.92 65.12 56.92C60.36 56.92 56.72 53 56.72 47.96L56.72 41.24M63.72 55.8L66.52 55.8L66.52 79.32L63.72 79.32L63.72 55.8M66.52 59.72C71.28 60.84 75.76 64.2 76.32 70.92C74.08 67.56 70.72 66.44 66.52 67L66.52 59.72M54.908 81.522A5.88 4.256 -22 1 1 65.812 77.118A5.88 4.256 -22 1 1 54.908 81.522" fill="#c0bfbc"/>
+  <path id="note-face" d="M 56.72,40.04 Q 57.28,39.2 58.12,40.04 L 61.2,43.96 L 64.336,37.128 Q 65.12,35.896 65.904,37.128 L 69.04,43.96 L 72.12,40.04 Q 72.96,39.2 73.52,40.04 L 73.52,46.76 C 73.52,51.8 69.88,55.72 65.12,55.72 C 60.36,55.72 56.72,51.8 56.72,46.76 L 56.72,40.04M 63.72,54.6 L 66.52,54.6 L 66.52,78.12 L 63.72,78.12 L 63.72,54.6M 66.52,58.52 C 71.28,59.64 75.76,63 76.32,69.72 C 74.08,66.36 70.72,65.24 66.52,65.8 L 66.52,58.52M 54.908,80.322 A 5.88,4.256 -22 1,1 65.812,75.918 A 5.88,4.256 -22 1,1 54.908,80.322" fill="#ffffff"/>
+  </g>
+</svg>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Simit - Plate (object)</title>
+  <desc>original artwork made for the gnome-android-icons skill demo | licence: CC0-1.0</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="0" y1="14" x2="0" y2="112"><stop offset="0" stop-color="#cfeee8"/><stop offset="1" stop-color="#eaf8f5"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#c2c0bc"/><stop offset="0.225" stop-color="#deddda"/><stop offset="0.45" stop-color="#d5d3cf"/><stop offset="0.55" stop-color="#d5d3cf"/><stop offset="0.775" stop-color="#deddda"/><stop offset="1" stop-color="#c2c0bc"/></linearGradient>
+    <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="35.2" y1="0" x2="92.8" y2="0"><stop offset="0" stop-color="#8e542a"/><stop offset="0.26" stop-color="#c8873a"/><stop offset="0.48" stop-color="#aa6833"/><stop offset="0.52" stop-color="#aa6833"/><stop offset="0.74" stop-color="#c8873a"/><stop offset="1" stop-color="#8e542a"/></linearGradient>
+    <linearGradient id="g4" gradientUnits="userSpaceOnUse" x1="0" y1="31.6" x2="0" y2="89.2"><stop offset="0" stop-color="#e49f50"/><stop offset="0.6" stop-color="#d08c3c"/><stop offset="1" stop-color="#c68331"/></linearGradient>
+  </defs>
+  <g id="rim">
+  <path id="rim-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g2)"/>
+  <path id="rim-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="#ffffff"/>
+  <path id="rim-inner" d="M14 63A50 50 0 1 1 114 63A50 50 0 1 1 14 63Z" fill="url(#g1)"/>
+  <path id="rim-recess" d="M14 63A50 50 0 1 1 114 63A50 50 0 1 1 14 63ZM14 64.2A50 50 0 1 1 114 64.2A50 50 0 1 1 14 64.2Z" fill="#000000" opacity="0.08" fill-rule="evenodd"/>
+  </g>
+  <g id="simit">
+  <path id="arm_l-chin" d="M39.322 68.448L29.722 79.648A3 3 0 0 0 34.278 83.552L43.878 72.352A3 3 0 0 0 39.322 68.448" fill="#aa6833"/>
+  <path id="arm_l" d="M 39.322,66.448 L 29.722,77.648 A 3,3 0 0,0 34.278,81.552 L 43.878,70.352 A 3,3 0 0,0 39.322,66.448" fill="#c07d2a"/>
+  <path id="hand_l-chin" d="M27.04 82.8A4.16 4.16 0 1 1 35.36 82.8A4.16 4.16 0 1 1 27.04 82.8" fill="#aa6833"/>
+  <path id="hand_l" d="M 27.04,80.8 A 4.16,4.16 0 1,1 35.36,80.8 A 4.16,4.16 0 1,1 27.04,80.8" fill="#c07d2a"/>
+  <path id="leg_l-chin" d="M53.841 87.507L52.241 97.107A3 3 0 0 0 58.159 98.093L59.759 88.493A3 3 0 0 0 53.841 87.507" fill="#aa6833"/>
+  <path id="leg_l" d="M 53.841,85.507 L 52.241,95.107 A 3,3 0 0,0 58.159,96.093 L 59.759,86.493 A 3,3 0 0,0 53.841,85.507" fill="#c07d2a"/>
+  <path id="leg_r-chin" d="M68.241 88.493L69.841 98.093A3 3 0 0 0 75.759 97.107L74.159 87.507A3 3 0 0 0 68.241 88.493" fill="#aa6833"/>
+  <path id="leg_r" d="M 68.241,86.493 L 69.841,96.093 A 3,3 0 0,0 75.759,95.107 L 74.159,85.507 A 3,3 0 0,0 68.241,86.493" fill="#c07d2a"/>
+  <path id="foot_l-chin" d="M48 98.8A5.2 3.2 0 1 1 58.4 98.8A5.2 3.2 0 1 1 48 98.8" fill="#aa6833"/>
+  <path id="foot_l" d="M 48,96.8 A 5.2,3.2 0 1,1 58.4,96.8 A 5.2,3.2 0 1,1 48,96.8" fill="#c07d2a"/>
+  <path id="foot_r-chin" d="M69.6 98.8A5.2 3.2 0 1 1 80 98.8A5.2 3.2 0 1 1 69.6 98.8" fill="#aa6833"/>
+  <path id="foot_r" d="M 69.6,96.8 A 5.2,3.2 0 1,1 80,96.8 A 5.2,3.2 0 1,1 69.6,96.8" fill="#c07d2a"/>
+  <path id="arm_r-chin" d="M88.8 64.2L98.4 51.4A3 3 0 0 0 93.6 47.8L84 60.6A3 3 0 0 0 88.8 64.2" fill="#aa6833"/>
+  <path id="arm_r" d="M 88.8,62.2 L 98.4,49.4 A 3,3 0 0,0 93.6,45.8 L 84,58.6 A 3,3 0 0,0 88.8,62.2" fill="#c07d2a"/>
+  <path id="hand_r-chin" d="M92.64 48.4A4.16 4.16 0 1 1 100.96 48.4A4.16 4.16 0 1 1 92.64 48.4" fill="#aa6833"/>
+  <path id="hand_r" d="M 92.64,46.4 A 4.16,4.16 0 1,1 100.96,46.4 A 4.16,4.16 0 1,1 92.64,46.4" fill="#c07d2a"/>
+  <path id="ring-chin" d="M35.2 64.4A28.8 28.8 0 1 1 92.8 64.4A28.8 28.8 0 1 1 35.2 64.4M54 59.6A10 10 0 1 1 74 59.6A10 10 0 1 1 54 59.6" fill="url(#g3)" fill-rule="evenodd"/>
+  <path id="ring" d="M 35.2,60.4 A 28.8,28.8 0 1,1 92.8,60.4 A 28.8,28.8 0 1,1 35.2,60.4M 54,55.6 A 10,10 0 1,1 74,55.6 A 10,10 0 1,1 54,55.6" fill="url(#g4)" fill-rule="evenodd"/>
+  <path id="sesame0-side" d="M46.652 49.531A1.76 0.96 -40 1 1 49.348 47.269A1.76 0.96 -40 1 1 46.652 49.531" fill="#a96804"/>
+  <path id="sesame0" d="M 46.652,48.731 A 1.76,0.96 -40 1,1 49.348,46.469 A 1.76,0.96 -40 1,1 46.652,48.731" fill="#fff4dc"/>
+  <path id="sesame1-side" d="M52.7 39.255A1.76 0.96 -15 1 1 56.1 38.345A1.76 0.96 -15 1 1 52.7 39.255" fill="#a96804"/>
+  <path id="sesame1" d="M 52.7,38.455 A 1.76,0.96 -15 1,1 56.1,37.545 A 1.76,0.96 -15 1,1 52.7,38.455" fill="#fff4dc"/>
+  <path id="sesame2-side" d="M62.24 36A1.76 0.96 0 1 1 65.76 36A1.76 0.96 0 1 1 62.24 36" fill="#a96804"/>
+  <path id="sesame2" d="M 62.24,35.2 A 1.76,0.96 0 1,1 65.76,35.2 A 1.76,0.96 0 1,1 62.24,35.2" fill="#fff4dc"/>
+  <path id="sesame3-side" d="M71.9 38.345A1.76 0.96 15 1 1 75.3 39.255A1.76 0.96 15 1 1 71.9 38.345" fill="#a96804"/>
+  <path id="sesame3" d="M 71.9,37.545 A 1.76,0.96 15 1,1 75.3,38.455 A 1.76,0.96 15 1,1 71.9,37.545" fill="#fff4dc"/>
+  <path id="sesame4-side" d="M78.652 47.269A1.76 0.96 40 1 1 81.348 49.531A1.76 0.96 40 1 1 78.652 47.269" fill="#a96804"/>
+  <path id="sesame4" d="M 78.652,46.469 A 1.76,0.96 40 1,1 81.348,48.731 A 1.76,0.96 40 1,1 78.652,46.469" fill="#fff4dc"/>
+  <path id="sesame5-side" d="M84.494 57.866A1.76 0.96 80 1 1 85.106 61.334A1.76 0.96 80 1 1 84.494 57.866" fill="#a96804"/>
+  <path id="sesame5" d="M 84.494,57.066 A 1.76,0.96 80 1,1 85.106,60.534 A 1.76,0.96 80 1,1 84.494,57.066" fill="#fff4dc"/>
+  <path id="sesame6-side" d="M42.894 61.334A1.76 0.96 -80 1 1 43.506 57.866A1.76 0.96 -80 1 1 42.894 61.334" fill="#a96804"/>
+  <path id="sesame6" d="M 42.894,60.534 A 1.76,0.96 -80 1,1 43.506,57.066 A 1.76,0.96 -80 1,1 42.894,60.534" fill="#fff4dc"/>
+  <path id="sesame7-side" d="M47.92 64.324A1.76 0.96 -60 1 1 49.68 61.276A1.76 0.96 -60 1 1 47.92 64.324" fill="#a96804"/>
+  <path id="sesame7" d="M 47.92,63.524 A 1.76,0.96 -60 1,1 49.68,60.476 A 1.76,0.96 -60 1,1 47.92,63.524" fill="#fff4dc"/>
+  <path id="sesame8-side" d="M77.52 62.876A1.76 0.96 60 1 1 79.28 65.924A1.76 0.96 60 1 1 77.52 62.876" fill="#a96804"/>
+  <path id="sesame8" d="M 77.52,62.076 A 1.76,0.96 60 1,1 79.28,65.124 A 1.76,0.96 60 1,1 77.52,62.076" fill="#fff4dc"/>
+  <path id="sesame9-side" d="M57.466 43.906A1.76 0.96 -10 1 1 60.934 43.294A1.76 0.96 -10 1 1 57.466 43.906" fill="#a96804"/>
+  <path id="sesame9" d="M 57.466,43.106 A 1.76,0.96 -10 1,1 60.934,42.494 A 1.76,0.96 -10 1,1 57.466,43.106" fill="#fff4dc"/>
+  <path id="sesame10-side" d="M67.066 43.294A1.76 0.96 10 1 1 70.534 43.906A1.76 0.96 10 1 1 67.066 43.294" fill="#a96804"/>
+  <path id="sesame10" d="M 67.066,42.494 A 1.76,0.96 10 1,1 70.534,43.106 A 1.76,0.96 10 1,1 67.066,42.494" fill="#fff4dc"/>
+  <path id="cheek_l" d="M 47.2,79.6 A 3.2,2.08 0 1,1 53.6,79.6 A 3.2,2.08 0 1,1 47.2,79.6" fill="#f66151" opacity="0.45"/>
+  <path id="cheek_r" d="M 74.4,79.6 A 3.2,2.08 0 1,1 80.8,79.6 A 3.2,2.08 0 1,1 74.4,79.6" fill="#f66151" opacity="0.45"/>
+  <path id="eye_l" d="M 53.28,74.8 A 2.72,3.52 0 1,1 58.72,74.8 A 2.72,3.52 0 1,1 53.28,74.8" fill="#241f31"/>
+  <path id="eye_r" d="M 69.28,74.8 A 2.72,3.52 0 1,1 74.72,74.8 A 2.72,3.52 0 1,1 69.28,74.8" fill="#241f31"/>
+  <path id="mouth" d="M 59.6,80 Q 64,82 68.4,80 Q 68,84.8 64,84.8 Q 60,84.8 59.6,80" fill="#241f31"/>
+  <path id="glint_l" d="M 55.92,73.52 A 1.04,1.04 0 1,1 58,73.52 A 1.04,1.04 0 1,1 55.92,73.52" fill="#ffffff"/>
+  <path id="glint_r" d="M 71.92,73.52 A 1.04,1.04 0 1,1 74,73.52 A 1.04,1.04 0 1,1 71.92,73.52" fill="#ffffff"/>
+  </g>
+</svg>

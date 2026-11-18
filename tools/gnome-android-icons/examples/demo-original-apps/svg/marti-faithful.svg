@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Marti - Adwaita Faithful</title>
+  <desc>original artwork made for the gnome-android-icons skill demo | licence: CC0-1.0</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="12" y1="0" x2="116" y2="0"><stop offset="0" stop-color="#aa403f"/><stop offset="0.096" stop-color="#f56754"/><stop offset="0.192" stop-color="#cc504b"/><stop offset="0.808" stop-color="#cc504b"/><stop offset="0.904" stop-color="#f56754"/><stop offset="1" stop-color="#aa403f"/></linearGradient>
+  </defs>
+  <g id="plate">
+  <path id="plate-chin" d="M32 16H96A20 20 0 0 1 116 36V96A20 20 0 0 1 96 116H32A20 20 0 0 1 12 96V36A20 20 0 0 1 32 16Z" fill="url(#g1)"/>
+  <path id="plate-face" d="M32 12H96A20 20 0 0 1 116 32V92A20 20 0 0 1 96 112H32A20 20 0 0 1 12 92V32A20 20 0 0 1 32 12Z" fill="#ff6b57"/>
+  </g>
+  <g id="mark">
+  <path id="mark-lift" d="M55.72 34.56L72.28 34.56A23 23 0 0 1 95.28 57.56A23 23 0 0 1 72.28 80.56L58.48 80.56L44.22 91.784Q38.792 95.832 39.252 89.3L39.436 73.844A23 23 0 0 1 32.72 57.56A23 23 0 0 1 55.72 34.56M40.08 60.32C45.6 50.2 56.64 47.44 64 57.56C71.36 47.44 82.4 50.2 87.92 60.32C81.48 55.72 72.28 56.64 64 65.84C55.72 56.64 46.52 55.72 40.08 60.32" fill="#c0bfbc" fill-rule="evenodd"/>
+  <path id="mark-face" d="M 55.72,32.56 L 72.28,32.56 A 23,23 0 0,1 95.28,55.56 A 23,23 0 0,1 72.28,78.56 L 58.48,78.56 L 44.22,89.784 Q 38.792,93.832 39.252,87.3 L 39.436,71.844 A 23,23 0 0,1 32.72,55.56 A 23,23 0 0,1 55.72,32.56M 40.08,58.32 C 45.6,48.2 56.64,45.44 64,55.56 C 71.36,45.44 82.4,48.2 87.92,58.32 C 81.48,53.72 72.28,54.64 64,63.84 C 55.72,54.64 46.52,53.72 40.08,58.32" fill="#ffffff" fill-rule="evenodd"/>
+  </g>
+</svg>

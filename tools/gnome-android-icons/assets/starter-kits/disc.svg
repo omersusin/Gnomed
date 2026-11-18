@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>disc skeleton</title>
+  <desc>gnome-android-icons starter skeleton (CC0)</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#134d90"/><stop offset="0.225" stop-color="#327eda"/><stop offset="0.45" stop-color="#2062b1"/><stop offset="0.55" stop-color="#2062b1"/><stop offset="0.775" stop-color="#327eda"/><stop offset="1" stop-color="#134d90"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="4" x2="0" y2="122"><stop offset="0" stop-color="#418ff0"/><stop offset="0.55" stop-color="#3584e4"/><stop offset="1" stop-color="#2b7bda"/></linearGradient>
+  </defs>
+  <g id="disc">
+  <path id="disc-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g1)"/>
+  <path id="disc-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="url(#g2)"/>
+  </g>
+  <g id="glyph">
+  <path id="glyph-lift" d="M52 42H76A8 8 0 0 1 84 50V78A8 8 0 0 1 76 86H52A8 8 0 0 1 44 78V50A8 8 0 0 1 52 42Z" fill="#c0bfbc"/>
+  <path id="glyph-face" d="M52 40H76A8 8 0 0 1 84 48V76A8 8 0 0 1 76 84H52A8 8 0 0 1 44 76V48A8 8 0 0 1 52 40Z" fill="#ffffff"/>
+  </g>
+</svg>

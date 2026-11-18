@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>portrait skeleton</title>
+  <desc>gnome-android-icons starter skeleton (CC0)</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="20" y1="0" x2="108" y2="0"><stop offset="0" stop-color="#134d90"/><stop offset="0.045" stop-color="#327eda"/><stop offset="0.091" stop-color="#2062b1"/><stop offset="0.909" stop-color="#2062b1"/><stop offset="0.955" stop-color="#327eda"/><stop offset="1" stop-color="#134d90"/></linearGradient>
+  </defs>
+  <g id="plate">
+  <path id="plate-chin" d="M28 12H100A8 8 0 0 1 108 20V112A8 8 0 0 1 100 120H28A8 8 0 0 1 20 112V20A8 8 0 0 1 28 12Z" fill="url(#g1)"/>
+  <path id="plate-face" d="M28 8H100A8 8 0 0 1 108 16V108A8 8 0 0 1 100 116H28A8 8 0 0 1 20 108V16A8 8 0 0 1 28 8Z" fill="#3584e4"/>
+  </g>
+  <g id="glyph">
+  <path id="glyph-lift" d="M52 42H76A8 8 0 0 1 84 50V78A8 8 0 0 1 76 86H52A8 8 0 0 1 44 78V50A8 8 0 0 1 52 42Z" fill="#c0bfbc"/>
+  <path id="glyph-face" d="M52 40H76A8 8 0 0 1 84 48V76A8 8 0 0 1 76 84H52A8 8 0 0 1 44 76V48A8 8 0 0 1 52 40Z" fill="#ffffff"/>
+  </g>
+</svg>

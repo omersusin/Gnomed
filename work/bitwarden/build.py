@@ -13,7 +13,8 @@ not identity; its colour is.
 import sys
 from pathlib import Path
 
-sys.path.insert(0, r"/root/.claude/skills/gnome-android-icons/scripts")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "_lib"))
+import skillpath  # noqa: E402,F401
 import gnome_kit as gk  # noqa: E402
 
 OUT = Path(__file__).resolve().parent

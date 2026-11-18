@@ -30,7 +30,7 @@ def superellipse_d(cx, cy, a, b, n, k=240):
 
 
 def gk_rounded_polygon(points, r):
-    sys.path.insert(0, "/root/.claude/skills/gnome-android-icons/scripts")
+    import skillpath  # noqa: F401
     import gnome_kit
     return gnome_kit.rounded_polygon_d(points, r)
 

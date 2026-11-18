@@ -24,3 +24,9 @@ GitHub Actions (`.github/workflows/build.yml`) builds all four APKs on every pus
 Tag `v*`, run the workflow manually with *release*, or push a commit whose message contains `[release]` to publish a release.
 Release signing needs four repository secrets: `GNOMED_KEYSTORE_BASE64`,
 `GNOMED_KEYSTORE_PASSWORD`, `GNOMED_KEY_ALIAS`, `GNOMED_KEY_PASSWORD`.
+
+## Contributing
+
+Everything about making icons, the design rules, the tools and how to send a pull
+request is in **[CONTRIBUTING.md](CONTRIBUTING.md)**. AI agents: read
+**[AGENTS.md](AGENTS.md)** as well. Ask for an app with the *Icon request* issue template.
