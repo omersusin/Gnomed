@@ -378,4 +378,9 @@
     <item drawable="survivor_io_alt1" name="Survivor.io (Disc)" />
     <item drawable="survivor_io_alt2" name="Survivor.io (Rimmed)" />
     <item drawable="survivor_io_alt3" name="Survivor.io (Symbol)" />
+
+    <category title="Education" />
+    <item drawable="duolingo" name="Duolingo" />
+    <item drawable="duolingo_alt1" name="Duolingo (Disc)" />
+    <item drawable="duolingo_alt2" name="Duolingo (Rimmed)" />
 </resources>

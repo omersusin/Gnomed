@@ -34,6 +34,10 @@ OVERRIDES = {
     # waves on the tile are photo-like shading; the identity is the white wordmark
     "anker_soundcore": {"only_white": True, "skip": ["symbol"],
                         "note": "wordmark only (tile waves are photographic shading); no Symbol: a white wordmark alone vanishes on light wallpapers"},
+    # face bleeds off the left/right edge of the source tile: a free symbol would be a
+    # "mask" with straight cut sides (completing them would invent the head silhouette)
+    "duolingo": {"skip": ["symbol"], "rimmed_scale": 1.1,
+                 "note": "no Symbol: the source face is cropped by the tile's left/right edges, so the free face stands on straight cut sides (a mask); Rimmed mark enlarged to fill the recess"},
     # game posters (archetype H): no clean vector identity element in a 192 px poster
     "clash_royale": {"skip": ["symbol"], "note": "WEAK: posterised trace of the game poster, not a real GNOME conversion; needs a hand-drawn emblem (crown/king) from a better source"},
     # blurry 192 px source: the pale green region is the blur halo + the semi-transparent mic
@@ -221,6 +225,8 @@ class App:
         x0, y0, x1, y1 = self.I["mark_bbox"]
         asp = (x1 - x0) / max(y1 - y0, 1e-6)
         sc = self.o.get("scale", 1.0) if kind != "symbol" else self.o.get("symbol_scale", 1.0)
+        if kind == "rimmed":
+            sc *= self.o.get("rimmed_scale", 1.0)
         base = {"faithful": (64, 62, 72), "disc": (64, 63, 76), "rimmed": (64, 63, 64), "symbol": (64, 61, 106)}[kind]
         cx, cy, w = base
         w *= sc

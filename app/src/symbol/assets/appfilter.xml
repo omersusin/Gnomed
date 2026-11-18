@@ -107,4 +107,5 @@
     <item component="ComponentInfo{com.feresr.walpy/com.feresr.walpy.ui.MainActivity}" drawable="walpy_alt3" />
     <item component="ComponentInfo{gnomed.it/gnomed.it.activities.MainActivity}" drawable="gnomed_alt3" />
     <item component="ComponentInfo{co.aospa.dolby.xiaomi/co.aospa.dolby.xiaomi.DolbySettingsActivity}" drawable="dolby_atmos_alt3" />
+    <item component="ComponentInfo{com.duolingo/com.duolingo.app.LoginActivity}" drawable="duolingo" />
 </resources>

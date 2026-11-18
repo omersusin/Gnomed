@@ -434,6 +434,10 @@
       "disc": "dolby_atmos_alt1",
       "rimmed": "dolby_atmos_alt2",
       "symbol": "dolby_atmos_alt3"
+    },
+    "duolingo": {
+      "disc": "duolingo_alt1",
+      "rimmed": "duolingo_alt2"
     }
   }
 }
