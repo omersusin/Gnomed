@@ -104,4 +104,6 @@
     <item component="ComponentInfo{com.dxx.firenow/com.unity3d.player.UnityPlayerActivityOverride}" drawable="survivor_io" />
     <item component="ComponentInfo{com.termoneplus/com.termoneplus.TermActivity}" drawable="terminal_em_lat_r" />
     <item component="ComponentInfo{com.feresr.walpy/com.feresr.walpy.ui.MainActivity}" drawable="walpy" />
+    <item component="ComponentInfo{gnomed.it/gnomed.it.activities.MainActivity}" drawable="gnomed" />
+    <item component="ComponentInfo{co.aospa.dolby.xiaomi/co.aospa.dolby.xiaomi.DolbySettingsActivity}" drawable="dolby_atmos" />
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Gnomed - Rimmed</title>
+  <desc>original Gnomed logo</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#c2c0bc"/><stop offset="0.225" stop-color="#deddda"/><stop offset="0.45" stop-color="#d5d3cf"/><stop offset="0.55" stop-color="#d5d3cf"/><stop offset="0.775" stop-color="#deddda"/><stop offset="1" stop-color="#c2c0bc"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="9.5" x2="0" y2="116.5"><stop offset="0" stop-color="#45404e"/><stop offset="1" stop-color="#332e3b"/></linearGradient>
+    <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="31.36" y1="0" x2="60.8" y2="0"><stop offset="0" stop-color="#134d90"/><stop offset="0.076" stop-color="#327eda"/><stop offset="0.152" stop-color="#2062b1"/><stop offset="0.848" stop-color="#2062b1"/><stop offset="0.924" stop-color="#327eda"/><stop offset="1" stop-color="#134d90"/></linearGradient>
+    <linearGradient id="g4" gradientUnits="userSpaceOnUse" x1="67.2" y1="0" x2="96.64" y2="0"><stop offset="0" stop-color="#1c8e50"/><stop offset="0.225" stop-color="#32ca76"/><stop offset="0.45" stop-color="#23a860"/><stop offset="0.55" stop-color="#23a860"/><stop offset="0.775" stop-color="#32ca76"/><stop offset="1" stop-color="#1c8e50"/></linearGradient>
+    <linearGradient id="g5" gradientUnits="userSpaceOnUse" x1="0" y1="29.72" x2="0" y2="59.16"><stop offset="0" stop-color="#46de86"/><stop offset="1" stop-color="#21c771"/></linearGradient>
+    <linearGradient id="g6" gradientUnits="userSpaceOnUse" x1="66.586" y1="0" x2="97.254" y2="0"><stop offset="0" stop-color="#511763"/><stop offset="0.042" stop-color="#8a3da4"/><stop offset="0.083" stop-color="#69277f"/><stop offset="0.917" stop-color="#69277f"/><stop offset="0.958" stop-color="#8a3da4"/><stop offset="1" stop-color="#511763"/></linearGradient>
+  </defs>
+  <g id="rim">
+  <path id="rim-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g1)"/>
+  <path id="rim-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="#f6f5f4"/>
+  <path id="rim-inner" d="M10.5 63A53.5 53.5 0 1 1 117.5 63A53.5 53.5 0 1 1 10.5 63Z" fill="url(#g2)"/>
+  <path id="rim-recess" d="M10.5 63A53.5 53.5 0 1 1 117.5 63A53.5 53.5 0 1 1 10.5 63ZM10.5 64.2A53.5 53.5 0 1 1 117.5 64.2A53.5 53.5 0 1 1 10.5 64.2Z" fill="#000000" opacity="0.1" fill-rule="evenodd"/>
+  </g>
+  <path id="sq-chin" d="M35.84 32.28H56.32A4.48 4.48 0 0 1 60.8 36.76V55.32A4.48 4.48 0 0 1 56.32 59.8H35.84A4.48 4.48 0 0 1 31.36 55.32V36.76A4.48 4.48 0 0 1 35.84 32.28Z" fill="url(#g3)"/>
+  <path id="sq-face" d="M35.84 30.36H56.32A4.48 4.48 0 0 1 60.8 34.84V53.4A4.48 4.48 0 0 1 56.32 57.88H35.84A4.48 4.48 0 0 1 31.36 53.4V34.84A4.48 4.48 0 0 1 35.84 30.36Z" fill="#3584e4"/>
+  <path id="disc-chin" d="M67.2 45.72A14.72 14.72 0 1 1 96.64 45.72A14.72 14.72 0 1 1 67.2 45.72Z" fill="url(#g4)"/>
+  <path id="disc-face" d="M67.2 44.44A14.72 14.72 0 1 1 96.64 44.44A14.72 14.72 0 1 1 67.2 44.44Z" fill="url(#g5)"/>
+  <path id="rim-chin" d="M31.36 80.92A14.72 14.72 0 1 1 60.8 80.92A14.72 14.72 0 1 1 31.36 80.92Z" fill="#c0bfbc"/>
+  <path id="rim-face" d="M31.36 79.64A14.72 14.72 0 1 1 60.8 79.64A14.72 14.72 0 1 1 31.36 79.64Z" fill="#f6f5f4"/>
+  <path id="rim-inner" d="M33.92 79.64A12.16 12.16 0 1 1 58.24 79.64A12.16 12.16 0 1 1 33.92 79.64Z" fill="#ff7800"/>
+  <path id="rim-recess" d="M33.92 79.64A12.16 12.16 0 1 1 58.24 79.64A12.16 12.16 0 1 1 33.92 79.64ZM33.92 80.408A12.16 12.16 0 1 1 58.24 80.408A12.16 12.16 0 1 1 33.92 80.408Z" fill="#000000" opacity="0.12" fill-rule="evenodd"/>
+  <path id="spark-chin" d="M81.465 66.892Q81.92 65.56 82.375 66.892L85.538 76.155Q85.993 77.487 87.325 77.942L96.588 81.105Q97.92 81.56 96.588 82.015L87.325 85.178Q85.993 85.633 85.538 86.965L82.375 96.228Q81.92 97.56 81.465 96.228L78.302 86.965Q77.847 85.633 76.515 85.178L67.252 82.015Q65.92 81.56 67.252 81.105L76.515 77.942Q77.847 77.487 78.302 76.155Z" fill="url(#g6)"/>
+  <path id="spark-face" d="M81.465 64.972Q81.92 63.64 82.375 64.972L85.538 74.235Q85.993 75.567 87.325 76.022L96.588 79.185Q97.92 79.64 96.588 80.095L87.325 83.258Q85.993 83.713 85.538 85.045L82.375 94.308Q81.92 95.64 81.465 94.308L78.302 85.045Q77.847 83.713 76.515 83.258L67.252 80.095Q65.92 79.64 67.252 79.185L76.515 76.022Q77.847 75.567 78.302 74.235Z" fill="#9141ac"/>
+</svg>

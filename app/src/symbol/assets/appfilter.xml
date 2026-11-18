@@ -105,4 +105,6 @@
     <item component="ComponentInfo{com.dxx.firenow/com.unity3d.player.UnityPlayerActivityOverride}" drawable="survivor_io_alt3" />
     <item component="ComponentInfo{com.termoneplus/com.termoneplus.TermActivity}" drawable="terminal_em_lat_r_alt3" />
     <item component="ComponentInfo{com.feresr.walpy/com.feresr.walpy.ui.MainActivity}" drawable="walpy_alt3" />
+    <item component="ComponentInfo{gnomed.it/gnomed.it.activities.MainActivity}" drawable="gnomed_alt3" />
+    <item component="ComponentInfo{co.aospa.dolby.xiaomi/co.aospa.dolby.xiaomi.DolbySettingsActivity}" drawable="dolby_atmos_alt3" />
 </resources>

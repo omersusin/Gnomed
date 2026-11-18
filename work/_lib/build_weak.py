@@ -617,6 +617,87 @@ def survivor_io():
     return out
 
 
+# ------------------------------------------------------------------ Dolby Atmos
+@build
+def dolby_atmos():
+    """Source: Dolby's pale disc with the dark double-D (cropped from the phone's app-info
+    screen). The pale disc is the TILE (plate/disc colour); the mark is exactly the two
+    largest dark components (the Ds) - the disc's thin rim line is not part of the mark."""
+    a, s = gt.load(WORK / "dolby_atmos")
+    dark = (lum(a) < 0.45) & gt.opaque(a)
+    comps = gt.components(dark)
+    ds_src = [trace(comps[0] | comps[1], s)]
+    PALE, INKD = "#dae5ea", "#465461"
+    out = {}
+    for st, title, base, bx in (("faithful", "Faithful", lambda i: fam.plate(i, PALE), box_c(64, 62, 66, 52)),
+                                ("disc", "Sound Disc", lambda i: fam.disc(i, PALE, top_light=0), box_c(64, 63, 70, 54)),
+                                ("rimmed", "Rimmed", lambda i: i.rimmed_disc(inner=PALE, rim_face="#f6f5f4"), box_c(64, 63, 60, 46))):
+        ic = gk.Icon(f"Dolby Atmos - {title}", note("dolby_atmos", "pale tile + dark double-D"))
+        base(ic)
+        ds, _ = place(ds_src, bx)
+        raised(ic, [(ds[0], INKD)], lift=2)
+        out[st] = ic
+    ic = gk.Icon("Dolby Atmos - Free Symbol", note("dolby_atmos", "double-D with a pale margin"))
+    ds, _ = place(ds_src, box_c(64, 80, 108, 76))
+    body = fam.offset_d(ds[0], 4.0)
+    x0, _, x1, _ = gk.bbox_d(body)
+    ic.path(gk.translate_d(body, 0, 4), ic.chin_gradient(PALE, x0, x1, 10), layer_id="body-chin")
+    ic.path(body, PALE, layer_id="body-face")
+    raised(ic, [(ds[0], INKD)], lift=1.5)
+    out["symbol"] = ic
+    return out
+
+
+# ------------------------------------------------------------------ Gnomed (our own logo)
+@build
+def gnomed():
+    """Gnomed's own logo - an original design (no third-party source): the pack's four
+    styles as four small GNOME objects in a 2x2 cluster - a blue square plate (Faithful),
+    a green disc (Disc), an orange disc in a light rim (Rimmed) and a free purple spark
+    (Symbol). Adwaita palette: Blue3 #3584e4, Green3 #33d17a, Orange3 #ff7800, Purple3 #9141ac."""
+    import math
+    BLUE, GREEN, ORANGE, PURPLE = "#3584e4", "#33d17a", "#ff7800", "#9141ac"
+
+    def cluster(ic, s_, cx, cy):
+        u = 26 * s_            # half cell
+        g = 4 * s_             # gap
+        d1 = 3 * s_            # chin depth
+        # TL: square plate
+        x0, y0 = cx - 2 * u - g / 2, cy - 2 * u - g / 2
+        sq = gk.rrect_d(x0 + 3 * s_, y0 + 3 * s_, 2 * u - 6 * s_, 2 * u - 6 * s_ - d1, 7 * s_)
+        bx = gk.bbox_d(sq)
+        ic.path(gk.translate_d(sq, 0, d1), ic.chin_gradient(BLUE, bx[0], bx[2], 7 * s_), layer_id="sq-chin")
+        ic.path(sq, BLUE, layer_id="sq-face")
+        # TR: disc
+        c = (cx + u + g / 2, cy - u - g / 2 - 1 * s_)
+        r = u - 3 * s_
+        ic.path(gk.circle_d(c[0], c[1] + 2 * s_, r), ic.chin_gradient(GREEN, c[0] - r, c[0] + r, r * 0.9), layer_id="disc-chin")
+        ic.path(gk.circle_d(c[0], c[1], r), ic.linear([(0, shade(GREEN, 0.04)), (1, shade(GREEN, -0.03))], 0, c[1] - r, 0, c[1] + r), layer_id="disc-face")
+        # BL: rimmed disc
+        c = (cx - u - g / 2, cy + u + g / 2 - 2 * s_)
+        ic.path(gk.circle_d(c[0], c[1] + 2 * s_, r), "#c0bfbc", layer_id="rim-chin")
+        ic.path(gk.circle_d(c[0], c[1], r), "#f6f5f4", layer_id="rim-face")
+        ri = r - 4 * s_
+        ic.path(gk.circle_d(c[0], c[1], ri), ORANGE, layer_id="rim-inner")
+        ic.path(gk.circle_d(c[0], c[1], ri) + gk.circle_d(c[0], c[1] + 1.2 * s_, ri), "#000000", opacity=0.12, fill_rule="evenodd", layer_id="rim-recess")
+        # BR: free 4-point spark
+        c = (cx + u + g / 2, cy + u + g / 2 - 2 * s_)
+        R, rr = u - 1 * s_, (u - 1 * s_) * 0.36
+        pts = [(c[0] + (R if k % 2 == 0 else rr) * math.cos(math.radians(-90 + 45 * k)),
+                c[1] + (R if k % 2 == 0 else rr) * math.sin(math.radians(-90 + 45 * k))) for k in range(8)]
+        sp = gk.rounded_polygon_d(pts, 2.2 * s_)
+        bx = gk.bbox_d(sp)
+        ic.path(gk.translate_d(sp, 0, d1), ic.chin_gradient(PURPLE, bx[0], bx[2], 4 * s_), layer_id="spark-chin")
+        ic.path(sp, PURPLE, layer_id="spark-face")
+
+    out = {}
+    ic = gk.Icon("Gnomed - Faithful", "original Gnomed logo"); fam.plate(ic, "#f6f5f4"); cluster(ic, 0.76, 64, 62); out["faithful"] = ic
+    ic = gk.Icon("Gnomed - Sound Disc", "original Gnomed logo"); fam.disc(ic, "#3d3846", top_light=0.4); cluster(ic, 0.72, 64, 63); out["disc"] = ic
+    ic = gk.Icon("Gnomed - Rimmed", "original Gnomed logo"); fam.rimmed(ic, "#3d3846"); cluster(ic, 0.64, 64, 63); out["rimmed"] = ic
+    ic = gk.Icon("Gnomed - Free Symbol", "original Gnomed logo"); cluster(ic, 1.0, 64, 64); out["symbol"] = ic
+    return out
+
+
 if __name__ == "__main__":
     for slug in (sys.argv[1:] or B):
         try:
