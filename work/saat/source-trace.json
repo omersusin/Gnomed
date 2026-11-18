@@ -1,0 +1,15 @@
+{
+ "source": "/home/user/Gnomed/work/saat/source.png",
+ "work_size": 768,
+ "noise_rgb": 0.0,
+ "detail_pass": null,
+ "gradient_parts": [],
+ "missed_details": [],
+ "smooth_shading": [],
+ "shapes": 8,
+ "colours": [
+  "#116e20",
+  "#86b58e",
+  "#fcfdfc"
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "source": "/home/user/Gnomed/work/youtube/source.png",
+ "work_size": 768,
+ "noise_rgb": 0.0,
+ "detail_pass": null,
+ "gradient_parts": [],
+ "missed_details": [],
+ "smooth_shading": [],
+ "shapes": 6,
+ "colours": [
+  "#ff0134",
+  "#ff859f",
+  "#fff2f5"
+ ]
+}

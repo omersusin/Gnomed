@@ -1,0 +1,38 @@
+{
+ "file": "/home/user/Gnomed/work/ayarlar/source.png",
+ "bbox_px_at_512": [
+  11,
+  0,
+  487,
+  512
+ ],
+ "aspect_w_over_h": 0.951,
+ "fill_ratio": 1.0,
+ "circularity": 0.788,
+ "mirror_symmetry_iou": 1.0,
+ "enclosed_holes": 0,
+ "silhouette_class": "square (sharp)",
+ "suggested_template": "square",
+ "dominant_colours": [
+  {
+   "hex": "#844e30",
+   "share": 0.548,
+   "nearest_hig": "brown4",
+   "hig_hex": "#865e3c",
+   "dE": 9.0
+  },
+  {
+   "hex": "#f2f2f1",
+   "share": 0.452,
+   "nearest_hig": "light2",
+   "hig_hex": "#f6f5f4",
+   "dE": 1.2
+  }
+ ],
+ "thinnest_feature_px": {
+  "at_64": 4.44,
+  "at_48": 3.33,
+  "at_32": 2.22
+ },
+ "warnings": []
+}

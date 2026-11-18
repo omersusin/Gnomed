@@ -1,0 +1,42 @@
+{
+ "input": "/tmp/claude-0/-home-user-Gnomed/40d9f5d6-2e5b-5e89-9471-629963fd4223/scratchpad/iconreq/icons/telefon.png",
+ "input_size": [
+  192,
+  192
+ ],
+ "viewer_bg": "#106d1f",
+ "content_rect": [
+  37,
+  37,
+  118,
+  118
+ ],
+ "content_detection": "component",
+ "canvas_color": "#106d1f",
+ "canvas_uniformity": 1.0,
+ "canvas_saturation": 0.853,
+ "background": "kept: canvas is a saturated full-bleed tile, probably part of the identity (use --remove-bg to strip)",
+ "warning": "source is only 118px; upscaled x4.3 - use it as reference, not as artwork",
+ "output": "/home/user/Gnomed/work/telefon/source.png",
+ "trimmed_size_px": [
+  118,
+  118
+ ],
+ "aspect": 1.0,
+ "dominant_colors": [
+  {
+   "hex": "#106d1f",
+   "share": 0.703,
+   "nearest_hig": "green5",
+   "hig_hex": "#26a269",
+   "dE": 24.6
+  },
+  {
+   "hex": "#ffffff",
+   "share": 0.229,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 0.0
+  }
+ ]
+}

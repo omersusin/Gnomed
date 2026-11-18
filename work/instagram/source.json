@@ -1,0 +1,70 @@
+{
+ "input": "/tmp/claude-0/-home-user-Gnomed/40d9f5d6-2e5b-5e89-9471-629963fd4223/scratchpad/iconreq/icons/instagram.png",
+ "input_size": [
+  192,
+  192
+ ],
+ "viewer_bg": "#000000",
+ "content_rect": [
+  0,
+  0,
+  191,
+  191
+ ],
+ "content_detection": "dense-band",
+ "canvas_color": "#6f1dff",
+ "canvas_uniformity": 0.127,
+ "canvas_saturation": 0.886,
+ "background": "kept",
+ "warning": "source is only 191px; upscaled x2.7 - use it as reference, not as artwork",
+ "output": "/home/user/Gnomed/work/instagram/source.png",
+ "trimmed_size_px": [
+  191,
+  191
+ ],
+ "aspect": 1.0,
+ "dominant_colors": [
+  {
+   "hex": "#ffffff",
+   "share": 0.14,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 0.1
+  },
+  {
+   "hex": "#ffc600",
+   "share": 0.029,
+   "nearest_hig": "yellow4",
+   "hig_hex": "#f5c211",
+   "dE": 4.6
+  },
+  {
+   "hex": "#ff03c6",
+   "share": 0.024,
+   "nearest_hig": "purple2",
+   "hig_hex": "#c061cb",
+   "dE": 37.9
+  },
+  {
+   "hex": "#ffba02",
+   "share": 0.023,
+   "nearest_hig": "yellow4",
+   "hig_hex": "#f5c211",
+   "dE": 8.6
+  },
+  {
+   "hex": "#ffd100",
+   "share": 0.023,
+   "nearest_hig": "yellow4",
+   "hig_hex": "#f5c211",
+   "dE": 8.1
+  },
+  {
+   "hex": "#ff03b9",
+   "share": 0.022,
+   "nearest_hig": "purple2",
+   "hig_hex": "#c061cb",
+   "dE": 38.1
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "source": "/home/user/Gnomed/work/instagram/source.png",
+ "work_size": 768,
+ "noise_rgb": 0.0,
+ "detail_pass": null,
+ "gradient_parts": [
+  {
+   "fill": "#e863a1",
+   "stops": [
+    "#ffb406",
+    "#ff6631",
+    "#8419fe",
+    "#ff2270",
+    "#c211f3",
+    "#ff0ea7",
+    "#f50dd8"
+   ]
+  },
+  {
+   "fill": "#fd4b84",
+   "stops": [
+    "#ffb406",
+    "#ff6631",
+    "#ff2270",
+    "#f50dd8",
+    "#ff0ea7"
+   ]
+  },
+  {
+   "fill": "#ff217d",
+   "stops": [
+    "#ff2270",
+    "#ff0ea7"
+   ]
+  }
+ ],
+ "missed_details": [],
+ "smooth_shading": [
+  {
+   "colour": "#ff435a",
+   "area_px128": 179.5,
+   "bbox128": [
+    50.2,
+    50.2,
+    79.5,
+    79.5
+   ],
+   "contrast": 0.392,
+   "edge": 0.27,
+   "blend": false
+  }
+ ],
+ "shapes": 6,
+ "colours": [
+  "#e863a1",
+  "#fd4b84",
+  "#ff217d",
+  "#fff5f8"
+ ]
+}

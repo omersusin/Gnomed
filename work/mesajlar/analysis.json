@@ -1,0 +1,45 @@
+{
+ "file": "/home/user/Gnomed/work/mesajlar/source.png",
+ "bbox_px_at_512": [
+  0,
+  17,
+  512,
+  478
+ ],
+ "aspect_w_over_h": 1.071,
+ "fill_ratio": 1.0,
+ "circularity": 0.788,
+ "mirror_symmetry_iou": 1.0,
+ "enclosed_holes": 0,
+ "silhouette_class": "square (sharp)",
+ "suggested_template": "square",
+ "dominant_colours": [
+  {
+   "hex": "#fdfefd",
+   "share": 0.573,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 0.6
+  },
+  {
+   "hex": "#136f21",
+   "share": 0.378,
+   "nearest_hig": "green5",
+   "hig_hex": "#26a269",
+   "dE": 23.9
+  },
+  {
+   "hex": "#8ab791",
+   "share": 0.049,
+   "nearest_hig": "green5",
+   "hig_hex": "#26a269",
+   "dE": 26.9
+  }
+ ],
+ "thinnest_feature_px": {
+  "at_64": 2.25,
+  "at_48": 1.69,
+  "at_32": 1.12
+ },
+ "warnings": []
+}

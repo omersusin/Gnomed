@@ -1,0 +1,43 @@
+{
+ "input": "/tmp/claude-0/-home-user-Gnomed/40d9f5d6-2e5b-5e89-9471-629963fd4223/scratchpad/iconreq/icons/youtube.png",
+ "input_size": [
+  192,
+  192
+ ],
+ "viewer_bg": "#ffffff",
+ "content_rect": [
+  21,
+  43,
+  150,
+  106
+ ],
+ "content_detection": "component",
+ "canvas_color": "#ffffff",
+ "canvas_uniformity": 1.0,
+ "canvas_saturation": 0.0,
+ "background": "removed (neutral canvas)",
+ "removed_fraction": 0.177,
+ "warning": "source is only 142px; upscaled x3.6 - use it as reference, not as artwork",
+ "output": "/home/user/Gnomed/work/youtube/source.png",
+ "trimmed_size_px": [
+  142,
+  98
+ ],
+ "aspect": 1.449,
+ "dominant_colors": [
+  {
+   "hex": "#ff0033",
+   "share": 0.87,
+   "nearest_hig": "red3",
+   "hig_hex": "#e01b24",
+   "dE": 12.0
+  },
+  {
+   "hex": "#ffffff",
+   "share": 0.046,
+   "nearest_hig": "light1",
+   "hig_hex": "#ffffff",
+   "dE": 0.1
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+ "source": "/home/user/Gnomed/work/foto_raflar/source.png",
+ "work_size": 768,
+ "noise_rgb": 0.0,
+ "detail_pass": null,
+ "gradient_parts": [
+  {
+   "fill": "#45a8c7",
+   "stops": [
+    "#0ab165",
+    "#56bcb4",
+    "#5a97fe"
+   ]
+  },
+  {
+   "fill": "#fd546e",
+   "stops": [
+    "#fe67a5",
+    "#fc464d"
+   ]
+  }
+ ],
+ "missed_details": [],
+ "smooth_shading": [],
+ "shapes": 5,
+ "colours": [
+  "#181818",
+  "#45a8c7",
+  "#fd546e",
+  "#fed713",
+  "#fefefe"
+ ]
+}

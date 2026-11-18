@@ -1,0 +1,68 @@
+{
+ "file": "/home/user/Gnomed/work/instagram/source.png",
+ "bbox_px_at_512": [
+  0,
+  0,
+  512,
+  512
+ ],
+ "aspect_w_over_h": 1.0,
+ "fill_ratio": 1.0,
+ "circularity": 0.788,
+ "mirror_symmetry_iou": 1.0,
+ "enclosed_holes": 0,
+ "silhouette_class": "square (sharp)",
+ "suggested_template": "square",
+ "dominant_colours": [
+  {
+   "hex": "#f40dd1",
+   "share": 0.217,
+   "nearest_hig": "purple2",
+   "hig_hex": "#c061cb",
+   "dE": 36.2
+  },
+  {
+   "hex": "#ff1781",
+   "share": 0.194,
+   "nearest_hig": "red2",
+   "hig_hex": "#ed333b",
+   "dE": 39.9
+  },
+  {
+   "hex": "#fff5f9",
+   "share": 0.186,
+   "nearest_hig": "light2",
+   "hig_hex": "#f6f5f4",
+   "dE": 4.0
+  },
+  {
+   "hex": "#ffaf08",
+   "share": 0.163,
+   "nearest_hig": "yellow5",
+   "hig_hex": "#e5a50a",
+   "dE": 9.5
+  },
+  {
+   "hex": "#ff5a3e",
+   "share": 0.137,
+   "nearest_hig": "red1",
+   "hig_hex": "#f66151",
+   "dE": 12.0
+  },
+  {
+   "hex": "#9916fb",
+   "share": 0.104,
+   "nearest_hig": "purple3",
+   "hig_hex": "#9141ac",
+   "dE": 52.3
+  }
+ ],
+ "thinnest_feature_px": {
+  "at_64": 1.43,
+  "at_48": 1.07,
+  "at_32": 0.71
+ },
+ "warnings": [
+  "some features are thinner than 1px at 32px: thicken them optically or accept loss at 32"
+ ]
+}

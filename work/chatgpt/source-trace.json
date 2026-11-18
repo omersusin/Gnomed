@@ -1,0 +1,54 @@
+{
+ "source": "/home/user/Gnomed/work/chatgpt/source.png",
+ "work_size": 768,
+ "noise_rgb": 0.0,
+ "detail_pass": {
+  "regions": 18,
+  "colours_added": [
+   "#868686",
+   "#000000",
+   "#bdbdbd"
+  ]
+ },
+ "gradient_parts": [],
+ "missed_details": [
+  {
+   "colour": "#8f8f8f",
+   "area_px128": 24.4,
+   "bbox128": [
+    109.7,
+    19.0,
+    117.5,
+    35.0
+   ],
+   "contrast": 0.553,
+   "edge": 0.39,
+   "blend": false
+  }
+ ],
+ "smooth_shading": [
+  {
+   "colour": "#e0e0e0",
+   "area_px128": 8.2,
+   "bbox128": [
+    55.3,
+    120.7,
+    66.3,
+    125.8
+   ],
+   "contrast": 0.772,
+   "edge": 0.26,
+   "blend": false
+  }
+ ],
+ "shapes": 44,
+ "colours": [
+  "#000000",
+  "#040404",
+  "#575757",
+  "#868686",
+  "#aeaeae",
+  "#bdbdbd",
+  "#fcfcfc"
+ ]
+}

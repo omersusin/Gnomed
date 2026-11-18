@@ -1,0 +1,261 @@
+{
+ "source": "/home/user/Gnomed/work/kamera/source.png",
+ "work_size": 768,
+ "noise_rgb": 0.0,
+ "detail_pass": {
+  "regions": 14,
+  "colours_added": [
+   "#484949",
+   "#000000",
+   "#6b6b6b",
+   "#7e7f7f"
+  ]
+ },
+ "gradient_parts": [],
+ "missed_details": [
+  {
+   "colour": "#353535",
+   "area_px128": 7.6,
+   "bbox128": [
+    86.0,
+    118.8,
+    92.3,
+    122.5
+   ],
+   "contrast": 0.262,
+   "edge": 0.69,
+   "blend": false
+  },
+  {
+   "colour": "#646464",
+   "area_px128": 6.6,
+   "bbox128": [
+    115.3,
+    91.3,
+    118.2,
+    95.5
+   ],
+   "contrast": 0.437,
+   "edge": 0.32,
+   "blend": false
+  },
+  {
+   "colour": "#000000",
+   "area_px128": 4.2,
+   "bbox128": [
+    91.5,
+    78.0,
+    94.7,
+    82.3
+   ],
+   "contrast": 0.213,
+   "edge": 0.52,
+   "blend": false
+  },
+  {
+   "colour": "#6d6d6d",
+   "area_px128": 3.9,
+   "bbox128": [
+    119.8,
+    82.7,
+    121.5,
+    85.7
+   ],
+   "contrast": 0.468,
+   "edge": 0.42,
+   "blend": false
+  },
+  {
+   "colour": "#7a7a7b",
+   "area_px128": 3.4,
+   "bbox128": [
+    78.8,
+    6.5,
+    81.5,
+    8.2
+   ],
+   "contrast": 0.514,
+   "edge": 0.42,
+   "blend": false
+  },
+  {
+   "colour": "#4a4a4a",
+   "area_px128": 2.4,
+   "bbox128": [
+    95.8,
+    115.5,
+    97.8,
+    117.0
+   ],
+   "contrast": 0.343,
+   "edge": 0.59,
+   "blend": false
+  },
+  {
+   "colour": "#313133",
+   "area_px128": 2.3,
+   "bbox128": [
+    91.5,
+    12.0,
+    93.3,
+    13.7
+   ],
+   "contrast": 0.223,
+   "edge": 0.78,
+   "blend": false
+  },
+  {
+   "colour": "#212121",
+   "area_px128": 2.1,
+   "bbox128": [
+    87.2,
+    9.8,
+    89.0,
+    11.3
+   ],
+   "contrast": 0.181,
+   "edge": 0.78,
+   "blend": false
+  },
+  {
+   "colour": "#262626",
+   "area_px128": 2.1,
+   "bbox128": [
+    116.7,
+    39.0,
+    118.2,
+    40.8
+   ],
+   "contrast": 0.201,
+   "edge": 0.78,
+   "blend": false
+  },
+  {
+   "colour": "#1a1a1a",
+   "area_px128": 2.1,
+   "bbox128": [
+    4.3,
+    87.2,
+    6.0,
+    89.3
+   ],
+   "contrast": 0.151,
+   "edge": 0.74,
+   "blend": false
+  },
+  {
+   "colour": "#151516",
+   "area_px128": 2.0,
+   "bbox128": [
+    42.2,
+    123.3,
+    44.2,
+    124.7
+   ],
+   "contrast": 0.129,
+   "edge": 0.8,
+   "blend": false
+  },
+  {
+   "colour": "#f6c5c7",
+   "area_px128": 1.7,
+   "bbox128": [
+    126.8,
+    8.8,
+    128.0,
+    10.8
+   ],
+   "contrast": 0.314,
+   "edge": 0.4,
+   "blend": false
+  }
+ ],
+ "smooth_shading": [
+  {
+   "colour": "#000000",
+   "area_px128": 4316.1,
+   "bbox128": [
+    1.2,
+    4.3,
+    123.7,
+    126.8
+   ],
+   "contrast": 0.273,
+   "edge": 0.29,
+   "blend": false
+  },
+  {
+   "colour": "#000000",
+   "area_px128": 1287.3,
+   "bbox128": [
+    41.2,
+    43.8,
+    83.7,
+    86.3
+   ],
+   "contrast": 0.371,
+   "edge": 0.24,
+   "blend": false
+  },
+  {
+   "colour": "#000000",
+   "area_px128": 947.4,
+   "bbox128": [
+    23.0,
+    26.8,
+    102.0,
+    105.3
+   ],
+   "contrast": 0.329,
+   "edge": 0.24,
+   "blend": false
+  },
+  {
+   "colour": "#bfc0c1",
+   "area_px128": 20.3,
+   "bbox128": [
+    0.0,
+    59.7,
+    1.8,
+    71.7
+   ],
+   "contrast": 0.723,
+   "edge": 0.22,
+   "blend": false
+  },
+  {
+   "colour": "#c0c1c2",
+   "area_px128": 18.9,
+   "bbox128": [
+    56.3,
+    126.2,
+    68.0,
+    128.0
+   ],
+   "contrast": 0.726,
+   "edge": 0.22,
+   "blend": false
+  },
+  {
+   "colour": "#575757",
+   "area_px128": 12.6,
+   "bbox128": [
+    18.2,
+    16.3,
+    25.7,
+    23.2
+   ],
+   "contrast": 0.372,
+   "edge": 0.27,
+   "blend": false
+  }
+ ],
+ "shapes": 11,
+ "colours": [
+  "#000000",
+  "#010101",
+  "#363636",
+  "#5e5e5e",
+  "#ff0404"
+ ]
+}

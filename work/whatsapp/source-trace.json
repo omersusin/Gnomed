@@ -1,0 +1,15 @@
+{
+ "source": "/home/user/Gnomed/work/whatsapp/source.png",
+ "work_size": 768,
+ "noise_rgb": 0.0,
+ "detail_pass": null,
+ "gradient_parts": [],
+ "missed_details": [],
+ "smooth_shading": [],
+ "shapes": 7,
+ "colours": [
+  "#27d367",
+  "#92e9b3",
+  "#fafefb"
+ ]
+}
