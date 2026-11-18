@@ -97,6 +97,10 @@
     <item drawable="qobuz_alt1" name="Qobuz (Disc)" />
     <item drawable="qobuz_alt2" name="Qobuz (Rimmed)" />
     <item drawable="qobuz_alt3" name="Qobuz (Symbol)" />
+    <item drawable="dolby_atmos" name="Dolby Atmos" />
+    <item drawable="dolby_atmos_alt1" name="Dolby Atmos (Disc)" />
+    <item drawable="dolby_atmos_alt2" name="Dolby Atmos (Rimmed)" />
+    <item drawable="dolby_atmos_alt3" name="Dolby Atmos (Symbol)" />
 
     <category title="System" />
     <item drawable="telefon" name="Telefon" />
@@ -123,6 +127,10 @@
     <item drawable="ayarlar_alt1" name="Ayarlar (Disc)" />
     <item drawable="ayarlar_alt2" name="Ayarlar (Rimmed)" />
     <item drawable="ayarlar_alt3" name="Ayarlar (Symbol)" />
+    <item drawable="gnomed" name="Gnomed" />
+    <item drawable="gnomed_alt1" name="Gnomed (Disc)" />
+    <item drawable="gnomed_alt2" name="Gnomed (Rimmed)" />
+    <item drawable="gnomed_alt3" name="Gnomed (Symbol)" />
 
     <category title="AI" />
     <item drawable="chatgpt" name="ChatGPT" />

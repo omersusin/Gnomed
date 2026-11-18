@@ -71,3 +71,5 @@ walpy	Walpy	ComponentInfo{com.feresr.walpy/com.feresr.walpy.ui.MainActivity}	wal
 weblibre	WebLibre	ComponentInfo{eu.weblibre.gecko/eu.weblibre.gecko.MainActivity}	weblibre
 wupp	Wupp	ComponentInfo{com.wupp.app/com.wa.beastclient.MainActivity}	wupp
 y_hava_durumu	Y.Hava durumu	ComponentInfo{ru.yandex.weatherplugin/ru.yandex.weatherplugin.ui.common.activity.SplashActivity}	y_hava_durumu
+gnomed	Gnomed	ComponentInfo{gnomed.it/gnomed.it.activities.MainActivity}	gnomed
+dolby_atmos	Dolby Atmos	ComponentInfo{co.aospa.dolby.xiaomi/co.aospa.dolby.xiaomi.DolbySettingsActivity}	dolby_atmos

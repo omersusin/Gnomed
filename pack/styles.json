@@ -424,6 +424,16 @@
       "disc": "pix_material_you_light_dark_alt1",
       "rimmed": "pix_material_you_light_dark_alt2",
       "symbol": "pix_material_you_light_dark_alt3"
+    },
+    "gnomed": {
+      "disc": "gnomed_alt1",
+      "rimmed": "gnomed_alt2",
+      "symbol": "gnomed_alt3"
+    },
+    "dolby_atmos": {
+      "disc": "dolby_atmos_alt1",
+      "rimmed": "dolby_atmos_alt2",
+      "symbol": "dolby_atmos_alt3"
     }
   }
 }

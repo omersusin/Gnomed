@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Gnomed - Sound Disc</title>
+  <desc>original Gnomed logo</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#292431"/><stop offset="0.225" stop-color="#746f7f"/><stop offset="0.45" stop-color="#302b39"/><stop offset="0.55" stop-color="#302b39"/><stop offset="0.775" stop-color="#746f7f"/><stop offset="1" stop-color="#292431"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="4" x2="0" y2="122"><stop offset="0" stop-color="#46414f"/><stop offset="0.55" stop-color="#3d3846"/><stop offset="1" stop-color="#35303e"/></linearGradient>
+    <radialGradient id="r3" gradientUnits="userSpaceOnUse" cx="64" cy="18.75" r="67.85"><stop offset="0" stop-color="#ffffff" stop-opacity="0.08"/><stop offset="0.6" stop-color="#ffffff" stop-opacity="0.024"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="g4" gradientUnits="userSpaceOnUse" x1="27.28" y1="0" x2="60.4" y2="0"><stop offset="0" stop-color="#134d90"/><stop offset="0.076" stop-color="#327eda"/><stop offset="0.152" stop-color="#2062b1"/><stop offset="0.848" stop-color="#2062b1"/><stop offset="0.924" stop-color="#327eda"/><stop offset="1" stop-color="#134d90"/></linearGradient>
+    <linearGradient id="g5" gradientUnits="userSpaceOnUse" x1="67.6" y1="0" x2="100.72" y2="0"><stop offset="0" stop-color="#1c8e50"/><stop offset="0.225" stop-color="#32ca76"/><stop offset="0.45" stop-color="#23a860"/><stop offset="0.55" stop-color="#23a860"/><stop offset="0.775" stop-color="#32ca76"/><stop offset="1" stop-color="#1c8e50"/></linearGradient>
+    <linearGradient id="g6" gradientUnits="userSpaceOnUse" x1="0" y1="25.56" x2="0" y2="58.68"><stop offset="0" stop-color="#46de86"/><stop offset="1" stop-color="#21c771"/></linearGradient>
+    <linearGradient id="g7" gradientUnits="userSpaceOnUse" x1="66.91" y1="0" x2="101.41" y2="0"><stop offset="0" stop-color="#511763"/><stop offset="0.042" stop-color="#8a3da4"/><stop offset="0.083" stop-color="#69277f"/><stop offset="0.917" stop-color="#69277f"/><stop offset="0.958" stop-color="#8a3da4"/><stop offset="1" stop-color="#511763"/></linearGradient>
+  </defs>
+  <g id="disc">
+  <path id="disc-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g1)"/>
+  <path id="disc-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="url(#g2)"/>
+  <path id="disc-sheen" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="url(#r3)"/>
+  </g>
+  <path id="sq-chin" d="M32.32 28.44H55.36A5.04 5.04 0 0 1 60.4 33.48V54.36A5.04 5.04 0 0 1 55.36 59.4H32.32A5.04 5.04 0 0 1 27.28 54.36V33.48A5.04 5.04 0 0 1 32.32 28.44Z" fill="url(#g4)"/>
+  <path id="sq-face" d="M32.32 26.28H55.36A5.04 5.04 0 0 1 60.4 31.32V52.2A5.04 5.04 0 0 1 55.36 57.24H32.32A5.04 5.04 0 0 1 27.28 52.2V31.32A5.04 5.04 0 0 1 32.32 26.28Z" fill="#3584e4"/>
+  <path id="disc-chin" d="M67.6 43.56A16.56 16.56 0 1 1 100.72 43.56A16.56 16.56 0 1 1 67.6 43.56Z" fill="url(#g5)"/>
+  <path id="disc-face" d="M67.6 42.12A16.56 16.56 0 1 1 100.72 42.12A16.56 16.56 0 1 1 67.6 42.12Z" fill="url(#g6)"/>
+  <path id="rim-chin" d="M27.28 83.16A16.56 16.56 0 1 1 60.4 83.16A16.56 16.56 0 1 1 27.28 83.16Z" fill="#c0bfbc"/>
+  <path id="rim-face" d="M27.28 81.72A16.56 16.56 0 1 1 60.4 81.72A16.56 16.56 0 1 1 27.28 81.72Z" fill="#f6f5f4"/>
+  <path id="rim-inner" d="M30.16 81.72A13.68 13.68 0 1 1 57.52 81.72A13.68 13.68 0 1 1 30.16 81.72Z" fill="#ff7800"/>
+  <path id="rim-recess" d="M30.16 81.72A13.68 13.68 0 1 1 57.52 81.72A13.68 13.68 0 1 1 30.16 81.72ZM30.16 82.584A13.68 13.68 0 1 1 57.52 82.584A13.68 13.68 0 1 1 30.16 82.584Z" fill="#000000" opacity="0.12" fill-rule="evenodd"/>
+  <path id="spark-chin" d="M83.648 67.379Q84.16 65.88 84.672 67.379L88.23 77.799Q88.742 79.298 90.241 79.81L100.661 83.368Q102.16 83.88 100.661 84.392L90.241 87.95Q88.742 88.462 88.23 89.961L84.672 100.381Q84.16 101.88 83.648 100.381L80.09 89.961Q79.578 88.462 78.079 87.95L67.659 84.392Q66.16 83.88 67.659 83.368L78.079 79.81Q79.578 79.298 80.09 77.799Z" fill="url(#g7)"/>
+  <path id="spark-face" d="M83.648 65.219Q84.16 63.72 84.672 65.219L88.23 75.639Q88.742 77.138 90.241 77.65L100.661 81.208Q102.16 81.72 100.661 82.232L90.241 85.79Q88.742 86.302 88.23 87.801L84.672 98.221Q84.16 99.72 83.648 98.221L80.09 87.801Q79.578 86.302 78.079 85.79L67.659 82.232Q66.16 81.72 67.659 81.208L78.079 77.65Q79.578 77.138 80.09 75.639Z" fill="#9141ac"/>
+</svg>
