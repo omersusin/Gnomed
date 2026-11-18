@@ -16,4 +16,10 @@
     <item drawable="icon_9" />
     <item drawable="icon_10" />
 
+
+    <category title="Security" />
+    <item drawable="bitwarden" name="Bitwarden" />
+    <item drawable="bitwarden_alt1" name="Bitwarden (Disc)" />
+    <item drawable="bitwarden_alt2" name="Bitwarden (Rimmed)" />
+    <item drawable="bitwarden_alt3" name="Bitwarden (Symbol)" />
 </resources>

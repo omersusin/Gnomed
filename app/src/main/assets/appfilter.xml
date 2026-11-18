@@ -20,4 +20,5 @@
 
     <item component="ComponentInfo{some.app.sample/some.app.sample.MainActivity}" drawable="some_app" />
 
+    <item component="ComponentInfo{com.x8bit.bitwarden/com.x8bit.bitwarden.MainActivity}" drawable="bitwarden" />
 </resources>

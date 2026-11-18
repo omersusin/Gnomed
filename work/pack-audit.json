@@ -1,0 +1,441 @@
+{
+ "summary": {
+  "components": 13,
+  "appfilter_drawables": 13,
+  "gallery": 14,
+  "categories": 3,
+  "resources": 22
+ },
+ "issues": [
+  [
+   "ERROR",
+   "appfilter: drawable 'app_drawer' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'browser' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'calculator' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'calendar' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'camera' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'clock' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'contacts' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'email' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'gallery' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'messaging' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'phone' has no resource file"
+  ],
+  [
+   "ERROR",
+   "appfilter: drawable 'some_app' has no resource file"
+  ],
+  [
+   "WARN",
+   "orphan resource (in no XML): nav_head.png"
+  ],
+  [
+   "WARN",
+   "orphan resource (in no XML): profile_picture.png"
+  ],
+  [
+   "WARN",
+   "icon_1.png: heavy visual mass 0.93 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_1.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_1.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_2.png: heavy visual mass 1.00 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_2.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_2.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_3.png: heavy visual mass 0.83 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_3.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_3.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_4.png: heavy visual mass 0.83 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_4.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_4.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_5.png: heavy visual mass 0.79 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_5.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_5.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_6.png: heavy visual mass 1.00 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_6.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_6.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_7.png: heavy visual mass 0.93 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_7.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_7.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_8.png: heavy visual mass 1.00 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_8.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_8.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_9.png: heavy visual mass 0.93 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_9.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_9.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "WARN",
+   "icon_10.png: heavy visual mass 0.79 (official 0.38-0.71)"
+  ],
+  [
+   "WARN",
+   "icon_10.png: touches the canvas edge (128x128)"
+  ],
+  [
+   "WARN",
+   "icon_10.png: bottom edge y=128 (official 116-126)"
+  ],
+  [
+   "INFO",
+   "appfilter fallback: <iconback img1=\"iconback\" /> (affects only unthemed apps)"
+  ],
+  [
+   "INFO",
+   "appfilter fallback: <iconmask img1=\"iconmask\" /> (affects only unthemed apps)"
+  ],
+  [
+   "INFO",
+   "appfilter fallback: <scale factor=\"0.64\" /> (affects only unthemed apps)"
+  ],
+  [
+   "INFO",
+   "13 gallery-only drawables (3 are _altN alternatives): bitwarden_alt1, bitwarden_alt2, bitwarden_alt3, icon_1, icon_10, icon_2, icon_3, icon_4, icon_5, icon_6, icon_7, icon_8 ..."
+  ]
+ ],
+ "icons": [
+  {
+   "name": "icon_1",
+   "file": "app/src/main/res/drawable-nodpi/icon_1.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.93 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.925,
+   "chin": null
+  },
+  {
+   "name": "icon_2",
+   "file": "app/src/main/res/drawable-nodpi/icon_2.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 1.00 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.996,
+   "chin": null
+  },
+  {
+   "name": "icon_3",
+   "file": "app/src/main/res/drawable-nodpi/icon_3.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.83 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.831,
+   "chin": 125.8
+  },
+  {
+   "name": "icon_4",
+   "file": "app/src/main/res/drawable-nodpi/icon_4.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.83 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.831,
+   "chin": 125.2
+  },
+  {
+   "name": "icon_5",
+   "file": "app/src/main/res/drawable-nodpi/icon_5.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.79 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.787,
+   "chin": 124.5
+  },
+  {
+   "name": "icon_6",
+   "file": "app/src/main/res/drawable-nodpi/icon_6.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 1.00 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.996,
+   "chin": null
+  },
+  {
+   "name": "icon_7",
+   "file": "app/src/main/res/drawable-nodpi/icon_7.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.93 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.925,
+   "chin": null
+  },
+  {
+   "name": "icon_8",
+   "file": "app/src/main/res/drawable-nodpi/icon_8.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 1.00 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.996,
+   "chin": null
+  },
+  {
+   "name": "icon_9",
+   "file": "app/src/main/res/drawable-nodpi/icon_9.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.93 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.925,
+   "chin": null
+  },
+  {
+   "name": "icon_10",
+   "file": "app/src/main/res/drawable-nodpi/icon_10.png",
+   "size": [
+    192,
+    192
+   ],
+   "flags": [
+    "heavy visual mass 0.79 (official 0.38-0.71)",
+    "touches the canvas edge (128x128)",
+    "bottom edge y=128 (official 116-126)"
+   ],
+   "w": 128.0,
+   "h": 128.0,
+   "b": 128.0,
+   "area": 0.787,
+   "chin": null
+  },
+  {
+   "name": "bitwarden",
+   "file": "app/src/main/res/drawable-nodpi/bitwarden.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 104.5,
+   "h": 104.5,
+   "b": 116.2,
+   "area": 0.657,
+   "chin": 4.0
+  },
+  {
+   "name": "bitwarden_alt1",
+   "file": "app/src/main/res/drawable-nodpi/bitwarden_alt1.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "bitwarden_alt2",
+   "file": "app/src/main/res/drawable-nodpi/bitwarden_alt2.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 118.5,
+   "h": 120.5,
+   "b": 124.2,
+   "area": 0.682,
+   "chin": 1.8
+  },
+  {
+   "name": "bitwarden_alt3",
+   "file": "app/src/main/res/drawable-nodpi/bitwarden_alt3.png",
+   "size": [
+    256,
+    256
+   ],
+   "flags": [],
+   "w": 89.0,
+   "h": 110.5,
+   "b": 119.2,
+   "area": 0.512,
+   "chin": 3.8
+  }
+ ]
+}
