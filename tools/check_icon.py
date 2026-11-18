@@ -19,6 +19,10 @@ Checks (per style that exists):
   legibility32  structure kept at 32 px (official median SSIM 0.82) ........... WARN < 0.72, FAIL < 0.62
   box_in_plate  Faithful: one region covering most of the plate (a tile/disc
                 drawn inside the plate) ........................................ FAIL
+Per app:
+  redesign      the app is a GNOME redesign (REDESIGN.md): work/<slug>/redesign.py exists and
+                design.md has "approved:" filled from the human's answer. The automatic
+                builds (logo on a plate + chin) are drafts and FAIL here .............. FAIL
 Per app (from geometry.json):
   stripes       3+ regions of near-identical hue = one gradient cut into bands . WARN -> merge_grad
   trace_iou     traced parts match their masks: WARN < 0.90; FAIL if a part >= 3 % of the canvas < 0.75
@@ -83,6 +87,22 @@ def main():
         res.append({"scope": scope, "check": check, "status": status, "value": value, "fix": fix})
 
     svgs = {st: w / f"{slug}-{st}.svg" for st in STYLES if (w / f"{slug}-{st}.svg").exists()}
+    sys.path.insert(0, str(ROOT / "work/_lib"))
+    import builders
+    is_redesign = builders.redesigned(slug)
+    approved = ""
+    if (w / "design.md").exists():
+        for line in (w / "design.md").read_text(encoding="utf-8").splitlines():
+            if line.lower().startswith("approved:"):
+                approved = line.split(":", 1)[1].strip()
+    if not is_redesign:
+        add("app", "redesign", "FAIL", "logo on a plate (automatic draft)",
+            f"R0: not a Gnomed icon yet - follow REDESIGN.md: python3 tools/new_redesign.py {slug}")
+    elif not approved or approved.lower() in ("no", "-", "none", "?"):
+        add("app", "redesign", "FAIL", "design.md: approved is empty",
+            "R0: show work/<slug>/concepts.png to the human, write their choice in design.md 'approved:'")
+    else:
+        add("app", "redesign", "PASS", approved[:40])
     add("app", "faithful", "PASS" if "faithful" in svgs else "FAIL", "faithful" in svgs,
         "" if "faithful" in svgs else "build the app first: python3 tools/make_icon.py " + slug)
     for st, svg in svgs.items():
@@ -108,6 +128,8 @@ def main():
         lo, hi = (0.20, 0.75) if st == "symbol" else (0.40, 0.75)
         add(st, "mass", "PASS" if lo <= m <= hi else "WARN", round(m, 2), "" if lo <= m <= hi else "R10 scale")
         blo, bhi = {"faithful": (114, 118.5), "disc": (120, 126.5), "rimmed": (120, 126.5), "symbol": (108, 124.5)}[st]
+        if is_redesign:
+            blo, bhi = 108, 126.5          # free objects: GNOME icons end anywhere from 108 to 126
         add(st, "baseline", "PASS" if blo <= bottom <= bhi else "WARN", round(bottom, 1), "" if blo <= bottom <= bhi else "R9 baseline")
         leg = subprocess.run([sys.executable, str(SK / "legibility_check.py"), str(svg)], capture_output=True, text=True).stdout
         ssim = None
