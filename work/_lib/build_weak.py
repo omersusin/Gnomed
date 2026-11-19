@@ -364,29 +364,17 @@ def konabess():
 # ------------------------------------------------------------------ BCR
 @build
 def bcr():
-    """Blurry source: handset + microphone from the analysis (halo removed), but the
-    microphone drawn white like the handset (it is semi-transparent white in the source,
-    which reads as a smudge at icon size)."""
-    import json
-    g = json.loads((WORK / "bcr/geometry.json").read_text())
-    P = {k: v["d"] for k, v in g["parts"].items()}
-    regs = [(P[r["name"]], r["fill"]) for r in g["info"]["regions"]]
-    hand = [d for d, f in regs if f.lower() == "#ffffff"][0]
-    mic_src = [d for d, f in regs if f.lower() != "#ffffff"][0]
-    # the source mic (blurred) shows capsule + U-holder + stem; rebuild those three
-    # primitives inside the mic's measured bounding box
-    mx0, my0, mx1, my1 = gk.bbox_d(mic_src)
-    mw, mh = mx1 - mx0, my1 - my0
-    mcx = (mx0 + mx1) / 2
-    cap_w, cap_h = mw * 0.42, mh * 0.55
-    capsule = gk.rrect_d(mcx - cap_w / 2, my0, cap_w, cap_h, cap_w / 2)
-    lw = max(1.2, mw * 0.14)
-    arc_r = mw * 0.40
-    ay = my0 + cap_h * 0.62
-    holder = Point(mcx, ay).buffer(arc_r).difference(Point(mcx, ay).buffer(arc_r - lw)).intersection(
-        sbox(mcx - arc_r - 1, ay, mcx + arc_r + 1, ay + arc_r + 1))
-    stem = sbox(mcx - lw / 2, ay + arc_r - lw, mcx + lw / 2, my1)
-    mic = d_of(unary_union([poly_of(capsule), holder, stem]))
+    """Handset + microphone traced from work/bcr/clean-source.png - a sharp copy of BCR's
+    icon sent by the owner (the phone's 192 px icon was blurry: the handset came out
+    lumpy). White parts of the clean image: the biggest piece is the handset, the rest is
+    the microphone (capsule, holder, stem); their layout is the clean image's own."""
+    from PIL import Image
+    a = np.asarray(Image.open(WORK / "bcr/clean-source.png").convert("RGBA")).astype(np.float32) / 255
+    white = (lum(a) > 0.75) & (a[..., 3] > 0.5)
+    comps = gt.components(white)
+    s = 128 / max(white.shape)
+    hand = trace(comps[0], s)
+    mic = trace(np.any(np.stack(comps[1:]), axis=0), s)
     ds_src = [hand, mic]
     G = "#44a148"
     out = {}

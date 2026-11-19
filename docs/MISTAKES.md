@@ -29,6 +29,8 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | Answers in English after he once wrote English | — | — | default language Turkish (CLAUDE.md); follow his last message's language |
 
 ## 2. Identity and design
+| BCR's handset was lumpy | the phone's 192 px icon was blurry | traced from a sharp copy the owner sent (`work/bcr/clean-source.png`) | a blurry source is not final: ask for or use a sharp official copy |
+| Türk Telekom had an extra dark triangle at the bottom, and the logo sat off-centre | a blurred **background** shape was traced as part of the logo; the mark box included it, so placement was wrong | `erase` override removes it from regions + silhouette and re-measures the box; leftover blur rims dropped | background decorations are not the logo — check every traced piece against the source; alignment comes from the mark box, so fix the box too |
 
 | What happened | Why | Fix | Rule / check |
 |---|---|---|---|
@@ -81,6 +83,8 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | "Long-press → edit icon" was offered for picking styles | he wants the choice inside the app ("Uzun bas düzenle ile istemiyorum") | in-app style picker (§7) | — |
 
 ## 6. Pipeline and tools
+| `pokemon_unıte` became slug `pokemon_un_te` | Turkish dotless ı not transliterated | `import_request.py` transliterates (ı→i, accents removed) | — |
+| Apps listed in `batch_apps.tsv` without a `source.png` (lines added by another agent) blocked a later import ("REGISTERED") | the tools treated "listed" as "registered" | listed-without-source counts as NEW; `add_source` writes the source without a duplicate line | — |
 
 | What happened | Why | Fix | Rule / check |
 |---|---|---|---|
@@ -119,6 +123,7 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | A stop hook asked to commit untracked files | build outputs in the tree | commit only real work; ignore caches | — |
 
 ## 9. Agents and documentation
+| While reviewing the `horustest` branch I first reported "andvm.png missing, assets not updated" | I read only the last 40 lines of a long diff stat | checked again: both were there | never conclude from truncated output; verify the file itself before reporting a problem |
 
 | What happened | Why | Fix | Rule |
 |---|---|---|---|

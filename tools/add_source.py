@@ -36,16 +36,19 @@ def register(slug, png, label, comp):
         return "component must look like ComponentInfo{package/full.activity.Name}"
     if "\t" in label or "\n" in label:
         return "label must be one line"
-    if slug in registered_slugs():
+    listed = slug in registered_slugs()
+    if listed and (ROOT / "work" / slug / "source.png").exists():
         return f"{slug} is already registered"
+    # listed without a source (a line added by hand / by another tool): only write the source
     im = Image.open(png).convert("RGBA")
     if min(im.size) < 48:
         return f"icon is only {im.size[0]}x{im.size[1]} px - too small to trace"
     out = ROOT / "work" / slug
     out.mkdir(parents=True, exist_ok=True)
     im.resize((512, 512), Image.LANCZOS).save(out / "source.png")
-    with (ROOT / "work/_lib/batch_apps.tsv").open("a", encoding="utf-8") as f:
-        f.write(f"{slug}\t{label}\t{comp}\t{slug}\n")
+    if not listed:
+        with (ROOT / "work/_lib/batch_apps.tsv").open("a", encoding="utf-8") as f:
+            f.write(f"{slug}\t{label}\t{comp}\t{slug}\n")
     return None
 
 
