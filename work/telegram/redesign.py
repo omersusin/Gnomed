@@ -105,4 +105,7 @@ def design_envelope():
 
 if __name__ == "__main__":
     # owner: "Defaultu o mektup yap" -> the envelope is the default; the cloud moves to Symbol
-    save_styles(SLUG, {"faithful": design_envelope(), "disc": design_ring(), "symbol": design_cloud()})
+    # owner: the default must be the envelope also in the Symbol style he uses ->
+    # symbol = envelope too; the cloud stays as a drawing here (telegram-cloud.svg), not in the pack
+    design_cloud().save(Path(__file__).resolve().parent / "telegram-cloud.svg")
+    save_styles(SLUG, {"faithful": design_envelope(), "disc": design_ring(), "symbol": design_envelope()})
