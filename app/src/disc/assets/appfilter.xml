@@ -113,4 +113,5 @@
     <item component="ComponentInfo{org.telegram.messenger/org.telegram.messenger.DefaultIcon}" drawable="telegram_alt1" />
     <item component="ComponentInfo{com.lerist.andvm/a.i.b}" drawable="andvm" />
     <item component="ComponentInfo{com.scariflabs.horus/com.scariflabs.horus.MainActivity}" drawable="horus" />
+    <item component="ComponentInfo{com.aurex.browser/com.aurex.browser.MainActivity}" drawable="aurex_browser" />
 </resources>

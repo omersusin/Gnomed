@@ -353,6 +353,7 @@
     <item drawable="weblibre_alt1" name="WebLibre (Disc)" />
     <item drawable="weblibre_alt2" name="WebLibre (Rimmed)" />
     <item drawable="weblibre_alt3" name="WebLibre (Symbol)" />
+    <item drawable="aurex_browser" name="Aurex Browser" />
 
     <category title="Finance" />
     <item drawable="binance_tr" name="Binance TR" />
