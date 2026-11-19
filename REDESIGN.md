@@ -158,4 +158,9 @@ once per session. The ones that cost the owner most:
   icons in the pack; diff pixels before shipping (`work/_lib/builders.py`).
 - **Colours must be the source's**: dark parts lost into a dark tile, gradients flattened,
   black gradients — `tools/region_check.py <slug>`.
+- **Talk plainly**: he answered "Anlamadım" to questions full of internal terms (dry-run,
+  appfilter, slot). Ask in Turkish, in phone words, one decision per question; never say
+  "impossible" before researching (the in-app style switch was possible).
+- **Look before you ask to ship**: unreviewed drafts were pushed ("the pushed icons are
+  broken"); weak icons must be listed by you, not found by him.
 - When the owner has to point out a new mistake, add it to docs/MISTAKES.md in the same PR.
