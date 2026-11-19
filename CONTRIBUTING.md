@@ -495,7 +495,9 @@ The PR template asks for all of this.
 
 ## 15. Lessons learned (read before you start)
 
-Real mistakes from this project's history — do not repeat them:
+Real mistakes from this project's history — do not repeat them. The complete, maintained
+list with causes and fixes is **[docs/MISTAKES.md](docs/MISTAKES.md)**; the table below is
+the short version:
 
 | Mistake | Rule |
 |---|---|
@@ -507,7 +509,7 @@ Real mistakes from this project's history — do not repeat them:
 | Wobbly edges at large size | the 192 px source's pixel staircase — trace with smoothing (`gtrace`) |
 | Tile edge highlights traced as part of the mark | edge-hugging pieces are dropped; check thin arcs |
 | Blurry sources became blobs | `SMOOTH`, `THRESH`, `HALO`; keep the source's proportion |
-| Wide symbols floating mid-canvas | free objects stand on the baseline (bottom ≈ 118) |
+| Wide symbols floating mid-canvas; Telegram's envelope looked small (bottom 107) | free objects stand on the baseline (bottom 116–120), wide objects get wider instead of floating; `tools/size_audit.py` |
 | A box drawn on a plate (Terminal, MT) | the box becomes the plate, or the object gets bigger |
 | A white wordmark alone as Symbol | it vanishes on light wallpapers → no Symbol |
 | YouTube as a red disc with a triangle | reads as YouTube Music — keep the red button shape |

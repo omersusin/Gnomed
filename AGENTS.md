@@ -16,6 +16,9 @@ and rules for humans: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 Talk to the human in **their** language. Keep messages short.
 
+**Before you start: read [docs/MISTAKES.md](docs/MISTAKES.md)** — every mistake this
+project already made, why, and the rule that prevents it. Add new ones there.
+
 ---
 
 ## 0. `main` belongs to the maintainer. Never touch it.
