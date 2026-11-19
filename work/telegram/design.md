@@ -18,7 +18,7 @@ concepts (work/telegram/concepts.png):
   F (L2): a blue envelope (like GNOME Mail), the paper plane is its stamp
 
 approved: E (faithful) + D (disc) + F (symbol) - "Select one and make others alt" (he let me pick; I chose E as primary: plane biggest, reads best at 32 px)
-styles: faithful=E cloud, disc=D ring, symbol=F envelope (rimmed falls back to faithful)
+styles: faithful=F envelope, disc=D ring, symbol=E cloud (rimmed falls back to faithful) - owner: "Defaultu o mektup yap"
 techniques used (min. 3): thickness / material gradient / top light / recess / hole / secondary object / glass
 palette (GNOME HIG names): Blue 1-5, Light 1-5 (paper plane)
 review (48/32 px, light + dark wallpaper, what is still weak):

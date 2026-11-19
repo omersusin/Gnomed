@@ -2,10 +2,11 @@
 """telegram - Gnomed redesign.
 
 Approved (design.md): "Select one and make others alt" - the owner let me choose:
-  faithful = E  a blue volumetric cloud (Telegram is a cloud messenger) with the white
+  (owner, after the review: "Defaultu o mektup yap" -> faithful = F, symbol = E)
+  symbol   = E  a blue volumetric cloud (Telegram is a cloud messenger) with the white
                 paper plane flying out of it, in front, lower right (secondary object)
   disc     = D  the blue circle as a thick enamel ring, the paper plane flying through it
-  symbol   = F  a blue envelope (like GNOME Mail) whose stamp carries the paper plane
+  faithful = F  a blue envelope (like GNOME Mail) whose stamp carries the paper plane
 Anchors kept: the paper plane (points measured from work/telegram/geometry.json, the
 "holes" part), Telegram blue #31a5df -> HIG Blue ramp (#99c1f1 / #62a0ea / #3584e4 /
 #1c71d8 / #1a5fb4), the round shape (cloud lobes / ring).
@@ -99,4 +100,5 @@ def design_envelope():
 
 
 if __name__ == "__main__":
-    save_styles(SLUG, {"faithful": design_cloud(), "disc": design_ring(), "symbol": design_envelope()})
+    # owner: "Defaultu o mektup yap" -> the envelope is the default; the cloud moves to Symbol
+    save_styles(SLUG, {"faithful": design_envelope(), "disc": design_ring(), "symbol": design_cloud()})
