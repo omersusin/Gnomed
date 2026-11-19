@@ -453,6 +453,8 @@
     "telegram": {
       "disc": "telegram_alt1",
       "symbol": "telegram_alt2"
-    }
+    },
+    "andvm": {},
+    "horus": {}
   }
 }

@@ -152,6 +152,7 @@
     <item drawable="qwen_alt1" name="Qwen (Disc)" />
     <item drawable="qwen_alt2" name="Qwen (Rimmed)" />
     <item drawable="qwen_alt3" name="Qwen (Symbol)" />
+    <item drawable="horus" name="Horus" />
 
     <category title="Tools" />
     <item drawable="onedm" name="1DM+" />
@@ -333,6 +334,7 @@
     <item drawable="quarry_alt1" name="Quarry (Disc)" />
     <item drawable="quarry_alt2" name="Quarry (Rimmed)" />
     <item drawable="quarry_alt3" name="Quarry (Symbol)" />
+    <item drawable="andvm" name="AndVM" />
 
     <category title="Browsers" />
     <item drawable="bare" name="Bare" />

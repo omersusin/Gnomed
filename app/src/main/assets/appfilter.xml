@@ -110,4 +110,6 @@
     <item component="ComponentInfo{com.pozitron.hepsiburada/com.hepsiburada.ui.startup.SplashActivity}" drawable="hepsiburada" />
     <item component="ComponentInfo{app.quarry.tanvir.info/app.quarry.tanvir.info.MainActivity}" drawable="quarry" />
     <item component="ComponentInfo{org.telegram.messenger/org.telegram.messenger.DefaultIcon}" drawable="telegram" />
+    <item component="ComponentInfo{com.lerist.andvm/a.i.b}" drawable="andvm" />
+    <item component="ComponentInfo{com.scariflabs.horus/com.scariflabs.horus.MainActivity}" drawable="horus" />
 </resources>
