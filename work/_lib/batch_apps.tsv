@@ -76,3 +76,4 @@ dolby_atmos	Dolby Atmos	ComponentInfo{co.aospa.dolby.xiaomi/co.aospa.dolby.xiaom
 duolingo	Duolingo	ComponentInfo{com.duolingo/com.duolingo.app.LoginActivity}	duolingo
 hepsiburada	Hepsiburada	ComponentInfo{com.pozitron.hepsiburada/com.hepsiburada.ui.startup.SplashActivity}	hepsiburada
 quarry	Quarry	ComponentInfo{app.quarry.tanvir.info/app.quarry.tanvir.info.MainActivity}	quarry
+telegram	Telegram	ComponentInfo{org.telegram.messenger/org.telegram.messenger.DefaultIcon}	telegram
