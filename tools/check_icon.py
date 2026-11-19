@@ -23,6 +23,11 @@ Per app:
   redesign      the app is a GNOME redesign (REDESIGN.md): work/<slug>/redesign.py exists and
                 design.md has "approved:" filled from the human's answer. The automatic
                 builds (logo on a plate + chin) are drafts and FAIL here .............. FAIL
+  plain_shape   (redesigns) the Faithful silhouette is a plain DISC (circle match > 0.95):
+                the logo on a disc is not a redesign ................................ FAIL
+                a plain SQUARE/box (fills > 97 % of its bounds): fine for a real box
+                object (envelope, case), a plate otherwise ............................ WARN
+                both lifted by a line in design.md:  shape-ok: <the owner's words>
 Per app (from geometry.json):
   stripes       3+ regions of near-identical hue = one gradient cut into bands . WARN -> merge_grad
   trace_iou     traced parts match their masks: WARN < 0.90; FAIL if a part >= 3 % of the canvas < 0.75
@@ -103,6 +108,33 @@ def main():
             "R0: show work/<slug>/concepts.png to the human, write their choice in design.md 'approved:'")
     else:
         add("app", "redesign", "PASS", approved[:40])
+    if is_redesign and (w / f"{slug}-faithful.svg").exists():
+        shape_ok = ""
+        if (w / "design.md").exists():
+            for line in (w / "design.md").read_text(encoding="utf-8").splitlines():
+                if line.lower().startswith("shape-ok:"):
+                    shape_ok = line.split(":", 1)[1].strip()
+        import io
+        import cairosvg
+        al = np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(url=str(w / f"{slug}-faithful.svg"),
+                                                               output_width=256, output_height=256))).convert("RGBA"))[..., 3] > 128
+        ys, xs = np.where(al)
+        x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max()
+        Y, X = np.mgrid[:256, :256]
+        r = ((x1 - x0) + (y1 - y0)) / 4
+        circle = (X - (x0 + x1) / 2) ** 2 + (Y - (y0 + y1) / 2) ** 2 <= r * r
+        iou = (al & circle).sum() / (al | circle).sum()
+        fill = al[y0:y1 + 1, x0:x1 + 1].mean()
+        if iou > 0.95:
+            add("app", "plain_shape", "PASS" if shape_ok else "FAIL", f"plain disc (circle match {iou:.2f})",
+                "" if shape_ok else "REDESIGN §1: the logo on a disc is not a redesign - make the app's OBJECT "
+                "(concept ladder), or get the owner's OK and write 'shape-ok: <his words>' in design.md")
+        elif fill > 0.97:
+            add("app", "plain_shape", "PASS" if shape_ok else "WARN", f"plain square/box (fills {fill:.0%})",
+                "" if shape_ok else "a real box object (envelope, case)? say so in design.md 'shape-ok:'; "
+                "a plate with the logo on it is not a redesign")
+        else:
+            add("app", "plain_shape", "PASS", f"object silhouette (circle {iou:.2f}, fill {fill:.0%})")
     add("app", "faithful", "PASS" if "faithful" in svgs else "FAIL", "faithful" in svgs,
         "" if "faithful" in svgs else "build the app first: python3 tools/make_icon.py " + slug)
     for st, svg in svgs.items():

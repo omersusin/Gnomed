@@ -22,3 +22,4 @@ styles: faithful=F envelope, disc=D ring, symbol=F envelope (rimmed falls back t
 techniques used (min. 3): thickness / material gradient / top light / recess / hole / secondary object / glass
 palette (GNOME HIG names): Blue 1-5, Light 1-5 (paper plane)
 review (48/32 px, light + dark wallpaper, what is still weak):
+shape-ok: the envelope is a real box object (GNOME Mail-like); owner: "Defaultu o mektup yap"

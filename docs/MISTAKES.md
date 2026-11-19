@@ -131,6 +131,15 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | DeepSeek copied Duolingo's ComponentInfo from other icon packs | not from the phone | verified on the phone (`cmd package resolve-activity`) | AGENTS.md A3: phone / request / APK only |
 | DeepSeek built a Duolingo Symbol, then skipped it | its own rule reading ("mask") | Symbol rebuilt later | report what was built and why it was dropped |
 | The size rule was too loose to catch a floating icon | "bottom 108…126" | REDESIGN.md §5 baseline rule + `size_audit.py` | — |
+| DeepSeek worked for over an hour on 3 apps ("kah toollar eksik, kah yönergeler") and the result was weak | the docs were written for a strong model; the gaps below | the fixes below; one procedure in AGENTS.md C with exact commands | **if a weaker model gets stuck, the docs are wrong** — fix the docs/tools, not the model |
+| It rewrote the same two functions (path → shape, place shapes in a box) in all 6 of its files | `obj.py` had no helper to read the measured parts or to place them | `parts()`, `colour()`, `describe()`, `fit()` in `work/_lib/obj.py`; AGENTS.md section H lists every helper | every repeated chore gets a helper and a line in section H |
+| The docs said "measure from geometry.json" but nothing created it in the REDESIGN flow | `new_redesign.py` did not measure; the file only appeared after the old pipeline | `new_redesign.py` measures and prints every part as text | a step may only use files an earlier step created |
+| No concept template: each agent invented its own concept script | step 3 said "draw 3 SVGs" | `new_redesign.py` writes a working `concepts/make_concepts.py` (A/B/C from the measured parts, standing on the baseline) | — |
+| AGENTS.md mixed two procedures (old "make_icon → recipe" loop and REDESIGN) | REDESIGN was added on top | AGENTS.md C rewritten as ONE path (C0–C11); D = REDESIGN's review questions; section I = what to do for every error message | one procedure per job, never two |
+| Aurex Browser shipped as the logo on a blue disc with faint rings — and passed the gate | the gate only checked that redesign.py exists | `check_icon` `plain_shape`: FAIL for a plain disc, WARN for a plain square; lifted only by `shape-ok: <owner's words>` in design.md | a check must test the rule, not the file name |
+| `make_icon` told redesigned apps to use the old recipes and go to pack_add | old hint text | redesign-aware hint: review → ask the owner → pack_add | — |
+| `fit()` centred wide marks, so free objects floated | centring is right for a mark ON an object, wrong for a free object | `fit(..., anchor="bottom")`, used by the templates | — |
+| Text-only models could not "open source.png" | the steps assumed eyes | `describe()` prints the parts; a POSTER warning when parts cover the whole tile | every visual step has a text alternative or says "ask the owner" |
 
 ## 10. Decisions the owner made (do not undo them)
 
