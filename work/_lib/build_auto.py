@@ -53,6 +53,7 @@ OVERRIDES = {
                         "note": "the fox body is one cyan->violet gradient (no hard edge to the purple belly); tail and globe keep their tones"},
     "reddit": {"symbol": "margin", "note": "Symbol: white Snoo with an orange margin (Reddit's own logo use), not an orange Snoo"},
     "pentas": {"keep_ground": True, "note": "peach tile kept"},
+    "t_rk_telekom": {"erase": [(28, 102, 80, 128)], "drop": ["#16719d"], "note": "the dark-blue triangle at the bottom is a blurred background shape, not part of the logo (owner); removed and the mark re-aligned; the rest of that dark-blue region was only blur rims around the triangles (dropped)"},
     "stride": {"merge_grad": [["#83eca0", "#28c79b", "#1f916b"]], "note": "runner is one light-green->teal gradient; the dark track stays separate"},
     "smart_launcher": {"merge_grad": [["#7cc8f7", "#5fbbff", "#668dfe", "#7171ff"]], "note": "the lower layer is one blue->violet gradient"},
     "nuvio": {"merge_grad": [["#3cc3e2", "#2970c7", "#5059d2", "#7744d1", "#b04df0"]], "note": "the play shape is one cyan->violet gradient"},
@@ -128,6 +129,21 @@ class App:
         rep = self.o.get("regions", {})
         self.I0 = self.I
         self.regs = [(self.P[r["name"]], snap(rep.get(r["fill"], r["fill"]))) for r in self.I["regions"]]
+        # "erase": [(x0, y0, x1, y1)] - subpaths lying inside a box are not part of the mark
+        # (a blurred background shape traced with it, e.g. Turk Telekom's bottom triangle);
+        # removed from every region AND the silhouette, and the mark box is re-measured so
+        # the logo is centred/aligned without it
+        def _keep(d, boxes):
+            subs = ["M" + x for x in d.split("M") if x.strip()]
+            inside = lambda b, q: b[0] >= q[0] and b[1] >= q[1] and b[2] <= q[2] and b[3] <= q[3]  # noqa: E731
+            return "".join(x for x in subs if not any(inside(gk.bbox_d([x]), q) for q in boxes))
+        if self.o.get("erase"):
+            boxes = self.o["erase"]
+            self.regs = [(_keep(d, boxes), f) for d, f in self.regs]
+            self.P = dict(self.P, silhouette=_keep(self.P["silhouette"], boxes))
+            if "holes" in self.P:
+                self.P["holes"] = _keep(self.P["holes"], boxes) or self.P["holes"]
+            self.I = dict(self.I, mark_bbox=list(gk.bbox_d([d for d, _ in self.regs if d])))
         # "split": [(fill, (x0, y0, x1, y1), new_fill)] - subpaths of a region that lie inside
         # the box become their own region (thin parts k-means folded into a bigger colour)
         for fill, (bx0, by0, bx1, by1), new in self.o.get("split", []):

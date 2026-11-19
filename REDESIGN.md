@@ -47,27 +47,35 @@ and never `<text>`; make the letters the object (L1) or print them on one (L2).
 ## 4. Procedure — one app, in this order
 
 ```
-1  python3 tools/new_redesign.py <slug>        -> work/<slug>/design.md, concepts/, redesign.py
-2  STUDY   open work/<slug>/source.png and docs/redesign/gnome-objects.png.
-           design.md: anchors, function object. Measure proportions and colours from
-           source.png (or work/<slug>/geometry.json) - never from memory.
-3  CONCEPTS  draw 3 rough SVGs work/<slug>/concepts/A.svg B.svg C.svg - three different
-           ideas from the ladder; flat shapes are fine, keep each short.
-           python3 tools/concepts.py <slug>  ->  open work/<slug>/concepts.png yourself;
-           replace any concept that is just the logo on a shape.
+1  python3 tools/new_redesign.py <slug>   -> MEASURES the source (geometry.json), prints
+           every part as text (colour, % of tile, box), creates design.md,
+           concepts/make_concepts.py (a working template) and redesign.py.
+           "WARNING ... POSTER" -> ask the owner which element to adapt.
+2  STUDY   open work/<slug>/source.png and docs/redesign/gnome-objects.png (cannot see
+           images? use the printed parts). design.md: anchors, function object.
+           Shapes and colours come from the measurement: parts(), colour(), describe()
+           (AGENTS.md section H) - never from memory.
+3  CONCEPTS  edit work/<slug>/concepts/make_concepts.py: A/B/C = three different ideas
+           from the ladder (fit() places the measured parts; flat shapes are fine).
+           python3 work/<slug>/concepts/make_concepts.py && python3 tools/concepts.py <slug>
+           -> open work/<slug>/concepts.png; replace any concept that is the logo on a
+           plain disc or square.
 4  ASK     AskUserQuestion, in Turkish: "Hangi yön?" options A / B / C / "Hiçbiri, yeniden dene",
            each with one short line; tell him the board is work/<slug>/concepts.png.
            STOP until he answers. Write in design.md:  approved: <letter> - <his words>
            Never fill "approved" yourself.
-5  BUILD   write the approved concept in work/<slug>/redesign.py with work/_lib/obj.py
-           (solid, recess, hole, toplight). Model: docs/redesign/examples/build_examples.py.
-           python3 tools/make_icon.py <slug>
+5  BUILD   copy the approved concept into work/<slug>/redesign.py (design()), delete the
+           "raise SystemExit" line, polish with obj.py (solid, recess, hole, toplight, fit,
+           parts - AGENTS.md section H). Models: work/telegram/redesign.py,
+           docs/redesign/examples/build_examples.py.
+           python3 tools/make_icon.py <slug>   (FAIL? AGENTS.md section I)
 6  LOOK    open work/<slug>/review.png and answer:
            a) same idea and anchors as the source?
            b) does it belong in the family row next to the real GNOME icons?
            c) reads at 48 and 32 px on light AND dark?
            d) at least 3 techniques of section 5 used?
-           e) nothing that is only "logo + chin"?
+           e) nothing that is only "logo + chin", not the logo on a plain disc/square
+              (the gate's plain_shape check FAILs a plain disc)?
            f) same baseline and size as its neighbours in the family row (no floating)?
            Fix (max 3 rounds), then show him review.png with AskUserQuestion:
            "Tamam" / "Şunu değiştir" / "Konseptlere dön".

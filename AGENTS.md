@@ -4,20 +4,19 @@ You are an AI agent working on **Gnomed**, an Android icon pack in the GNOME sty
 Follow this file **exactly**. It is written for every model, small or large. When this
 file and your own idea disagree, this file wins.
 
-> **Icon design: [REDESIGN.md](REDESIGN.md) is binding and comes first.** The automatic
-> pipeline (`tools/make_icon.py` for an app without `work/<slug>/redesign.py`) only makes
-> a draft — the logo on a plate — and the gate FAILs it (`redesign` check). Steps C3–C6
-> below are the measuring/draft stage; the icon itself is designed with REDESIGN.md.
+> **Icon design: [REDESIGN.md](REDESIGN.md) is binding.** A Gnomed icon is the app's
+> idea built as a GNOME object — never the logo on a plate or a disc. Section C below is
+> the ONE procedure (it follows REDESIGN.md step by step, with the exact commands);
+> section H lists every helper you need, section I what to do for every error message.
 
-Learn the job first: [REDESIGN.md](REDESIGN.md) and
-`docs/redesign/examples/build_examples.py`. [`docs/course/`](docs/course/README.md)
-explains the draft pipeline and its tools (recipes for measuring problems). Background
-and rules for humans: [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Read, in this order: this file → [REDESIGN.md](REDESIGN.md) →
+[docs/MISTAKES.md](docs/MISTAKES.md) → `work/telegram/redesign.py` (a real redesign).
+You do not need `docs/course/` (the old automatic pipeline) or CONTRIBUTING.md.
 
 Talk to the human in **their** language. Keep messages short.
 
-**Before you start: read [docs/MISTAKES.md](docs/MISTAKES.md)** — every mistake this
-project already made, why, and the rule that prevents it. Add new ones there.
+[docs/MISTAKES.md](docs/MISTAKES.md) is every mistake this project already made, why,
+and the rule that prevents it. Add new ones there.
 
 ---
 
@@ -82,82 +81,95 @@ ask for it.
 
 Ask with 2–4 short options.
 
-## C. Procedure (do the steps in order, for each app)
+## C. Procedure — ONE path, in this order, for ONE app
+
+Every command runs from the repository root. Do not skip a step, do not invent another
+path (the old "make_icon → recipe → make_icon" loop is gone: every new app FAILs it).
 
 ```
-C0  git config core.hooksPath tools/hooks                      (once per clone; section 0)
-    git switch -c icons/<slug>                                 (never work on main)
-C1  python3 tools/gnome-android-icons/scripts/doctor.py        -> must end "result: READY"
+C0  git config core.hooksPath tools/hooks          (once per clone; section 0)
+    git switch -c icons/<slug>                      (never work on main)
+C1  python3 tools/gnome-android-icons/scripts/doctor.py      -> must end "result: READY"
+        not READY -> python3 -m pip install -r tools/gnome-android-icons/requirements.txt
 C2  python3 tools/import_request.py <request zip | folder | request.txt>     (section G)
-        -> lists the apps (NEW / NO-ICON / IN-PACK); then add --add --only <slug>
-    or, for one app by hand:
-    python3 tools/add_source.py <slug> <icon.png> "<Label>" '<ComponentInfo{...}>'
-        slug: lowercase a-z0-9_, starts with a letter. Single quotes around the component.
-C3  python3 tools/make_icon.py <slug>
-C4  read the last block "summary: N PASS, N WARN, N FAIL"
-        FAIL > 0  -> C5
-        FAIL = 0  -> C6
-C5  for each FAIL/WARN line, read "-> FIX: R<n>", open docs/course/04-recipes.md, apply
-    recipe R<n> exactly (usually one line in OVERRIDES of work/_lib/build_auto.py,
-    with a "note"), then go back to C3 (use --remeasure after editing auto.py tables)
-C6  if you can see images: open work/<slug>/styles.png and answer the 5 questions in D;
-    fix what is wrong (lesson 4), back to C3.
-    if you cannot see images: write that in your report (E).
-C7  python3 tools/pack_add.py <slug> --category <Category> --dry-run
-        -> show the diff to the human, wait for "yes"
-C8  python3 tools/pack_add.py <slug> --category <Category>
-C9  python3 tools/gnome-android-icons/scripts/pack_audit.py --project .
-        -> no ERROR mentioning <slug>
-    python3 tools/size_audit.py
-        -> "0 icon(s) outside the ranges" (same baseline and size as the rest of the pack)
-C10 git branch --show-current          -> must NOT be main
-    python3 tools/pr_guard.py           -> 0 ERROR (nothing deleted, no [release])
-    git add -A; git commit -m "Add <App> (styles)"; git push -u origin icons/<slug>
-C11 open a pull request from icons/<slug> to main (template), post the report (E), STOP.
-    The human merges or not. Never merge it yourself.
+        -> NEW <slug> ...   then: python3 tools/import_request.py <same> --add --only <slug>
+C3  python3 tools/new_redesign.py <slug>
+        measures the source and PRINTS its parts (colour, % of tile, box) - read them.
+        "WARNING ... POSTER" -> STOP, ask the owner which ONE element to adapt (section B).
+C4  fill work/<slug>/design.md: anchors (2-4 things that make the app recognisable) and
+    the function object (what the app does, as a physical thing).
+C5  edit work/<slug>/concepts/make_concepts.py: A, B, C = three DIFFERENT ideas
+    (REDESIGN.md §3 ladder). Use only the helpers in section H. Then:
+        python3 work/<slug>/concepts/make_concepts.py
+        python3 tools/concepts.py <slug>              -> work/<slug>/concepts.png
+C6  ASK the owner (2-4 options: A / B / C / "none, try again"); tell him the board is
+    work/<slug>/concepts.png. STOP until he answers. Write his words in design.md:
+        approved: <letter> - <his words>
+C7  copy the approved concept into work/<slug>/redesign.py (function design()), delete
+    the "raise SystemExit" line, polish (thickness, light from the top, recess/hole,
+    secondary object), then:
+        python3 tools/make_icon.py <slug>
+    read the last block "summary: N PASS, N WARN, N FAIL"; FAIL > 0 -> section I, fix,
+    run again (max 3 rounds, then ask).
+C8  open work/<slug>/review.png and answer the questions in D (cannot see images? say
+    so). ASK the owner: "Tamam" / "Şunu değiştir" / "Konseptlere dön". STOP.
+C9  new app:  python3 tools/pack_add.py <slug> --category <Category> --dry-run
+              -> show the diff to the owner, wait for "yes", then without --dry-run
+    app already in the pack:  python3 tools/pack_refresh.py <slug>
+C10 python3 tools/gnome-android-icons/scripts/pack_audit.py --project .  -> no ERROR with <slug>
+    python3 tools/size_audit.py        -> "0 icon(s) outside the ranges"
+C11 git branch --show-current          -> must NOT be main
+    python3 tools/pr_guard.py           -> 0 ERROR
+    git add -A; git commit -m "Add <App> (redesign)"; git push -u origin icons/<slug>
+    open a pull request from icons/<slug> to main, post the report (E), STOP.
 ```
 
-Work on one app at a time until C9, or on a batch of up to 10 apps where every app
-reaches 0 FAIL before C7.
+One app per session (REDESIGN.md §7). `docs/course/` describes the old automatic
+pipeline; read lesson 4 only when the MEASUREMENT is wrong (a part missing or the wrong
+colour in C3's list - check with `python3 tools/region_check.py <slug>`).
 
-## D. Five questions for `styles.png` (if you can see images)
+## D. Questions for review.png (C8)
 
-Each row: source | Faithful | Disc | Rimmed | Symbol, on light and dark.
+1. Same idea and anchors as the source (count the parts, holes, colours)?
+2. Is it an OBJECT - not the logo on a plain disc, square or plate (gate `plain_shape`)?
+3. Does it belong next to the real GNOME icons in the family row?
+4. Readable at 48 and 32 px on light AND dark?
+5. Same baseline and size as its neighbours - nothing floating, nothing cut?
+6. At least 3 techniques: thickness / light from the top / recess / hole / secondary object / material?
 
-1. Is it the same shape as the source (count the parts, holes, points)?
-2. Is there anything that is NOT in the source (a box, a blob, a glow, stripes)?
-3. Is anything from the source missing (a dot, a hole, a second colour)?
-4. Does any style disappear on the light or the dark half?
-5. Does anything look cut, crushed, too small or too big?
-
-A "yes" to 2–5 or a "no" to 1 → find the recipe in lesson 4.
+A "no" → fix in redesign.py, run C7 again.
 
 ## E. Report (copy, fill, post to the human and into the PR)
 
 ```
 App: <name> (<slug>)   Component: <ComponentInfo>  from: <Gnomed request / IconRequest app / cmd package on the phone / APK>
-Styles built: Faithful, Disc, Rimmed, Symbol   (skipped: <style> because <reason>)
-Gate: <N> PASS, <N> WARN, 0 FAIL
+Concept: <A/B/C> - <one line>        Approved: <the owner's words>
+Styles: faithful = <concept>  (other slots only with the owner's OK)
+Techniques: <thickness / light from the top / recess / hole / secondary object / material>
+Gate: <N> PASS, <N> WARN, 0 FAIL      size_audit: 0 outside
 WARN lines: <copy them>
-Fixes applied: <recipe numbers + the OVERRIDES line>
-Looked at styles.png: yes / NO - I cannot see images, please review work/<slug>/styles.png
+Looked at review.png: yes / NO - I cannot see images, please review work/<slug>/review.png
+Weak points: <honest>
 Not verified: on-device launcher look
 Model/tool: <your name>
 ```
 
-## E2. Improving existing icons
+## E2. Improving an icon that is already in the pack
 
-`docs/STATUS.md` lists every app's gate warnings (worst first). For an app already in
-the pack: fix it (lesson 4), `python3 tools/make_icon.py <slug>` until 0 FAIL and fewer
-WARN, then `python3 tools/pack_refresh.py <slug>` (never pack_add), then
-`python3 tools/pack_status.py`, commit, PR.
+Change only what the owner asked (docs/MISTAKES.md §1). Redesigned app: edit
+`work/<slug>/redesign.py` → `python3 tools/make_icon.py <slug>` → show him → 
+`python3 tools/pack_refresh.py <slug>`. An app without redesign.py is redesigned with
+section C (C3 onwards) — never with `build_auto.py` over many apps.
 
 ## F. Facts you must not get wrong
 
 * Canvas 128×128 units. Plate 104×104 at (12,12) r8, chin 4. Disc Ø118 at (64,63), chin 2.
 * Pure black → `#241f31`. White mark's side → `#deddda`.
-* Every app needs Faithful. A style that cannot be made well is skipped (`"skip": [...]`).
-* Hex colours for OVERRIDES come from `work/<slug>/geometry.json` → `info.regions[].fill`.
+* Every app needs Faithful. Disc / Rimmed / Symbol only with the owner's OK (REDESIGN.md §6);
+  an app without them shows its Faithful icon in that style — the owner uses the Symbol style.
+* Colours come from the measurement (`colour(slug, "r0")`, C3's list), mapped to the GNOME
+  palette in REDESIGN.md §5 — never from memory.
+* Free objects stand on the baseline: bottom edge 116–120 (REDESIGN.md §5).
 * Run commands from the repository root.
 
 ## G. Where the input comes from (icon PNG + ComponentInfo)
@@ -192,3 +204,44 @@ You need both, from the human's phone. Look in this order:
 
 Never fill a gap yourself: a guessed ComponentInfo is the one mistake the human cannot see
 in a review, and the icon silently never appears.
+
+## H. Helpers for concepts and redesign.py (`from obj import *`)
+
+Everything you need is here — do not write your own path parser or placement code.
+
+| Helper | Does |
+|---|---|
+| `P = parts(slug)` | the measured source parts as shapes, 0..128 source space: `P["r0"]`, `P["r1"]` … (colour regions, biggest first), `P["silhouette"]` (the whole mark), `P["holes"]` |
+| `colour(slug, "r0")` | the measured colour of a part (`#hex`) |
+| `print(describe(slug))` | all parts as text: colour, % of tile, box — for models that cannot see images |
+| `a, b = fit([P["r0"], P["r1"]], (x0, y0, x1, y1))` | scale + move shapes TOGETHER into a box, aspect kept (layout of the source stays) |
+| `circ(cx, cy, r)`, `ellipse(...)`, `box(x0, y0, x1, y1)`, `rounded(shape, r)`, `poly([(x, y), …], r)` | primitive shapes |
+| `move(g, dx, dy)`, `scale(g, s, about)`, `down(g, dy)`, `unary_union([...])`, `g.difference(h)`, `g.intersection(h)` | shape maths |
+| `ic = gk.Icon("Name")` | a new 128×128 icon; `ic.save(path)` |
+| `solid(ic, g, face, depth=4, side=None)` | a physical part: face (hex or gradient stops `[(0, "#hex"), (1, "#hex")]`, top→bottom) + its side `depth` px below |
+| `toplight(ic, g)` | thin light on the upper edges |
+| `recess(ic, g, face)` | a part sunk into the surface (screen, label, inlay) |
+| `hole(ic, g)` | a real hole (lens, slot, keyhole) |
+| `ic.linear(stops, x1, y1, x2, y2)`, `ic.radial(stops, cx, cy, r)` | gradients (stops may have opacity: `(0, "#fff", 0.6)`) |
+| `ic.path(geom_d(g), fill, layer_id="x")` | draw any shape |
+| `save_styles(slug, {"faithful": ic, ...})` | write `work/<slug>/<slug>-<style>.svg` |
+
+Worked examples: `docs/redesign/examples/build_examples.py` (invented apps), `work/telegram/redesign.py` (a real app).
+
+## I. When you see this … do this
+
+| Message | Meaning | Do |
+|---|---|---|
+| `doctor.py` not READY / `ModuleNotFoundError` | a Python package is missing | `python3 -m pip install -r tools/gnome-android-icons/requirements.txt` (add `--break-system-packages` if pip refuses) |
+| `work/<slug>/source.png missing` | the app is not registered | C2 (`import_request.py … --add --only <slug>`) |
+| `NO-ICON` in C2 | the request has no PNG for it | ask the owner for the icon (section G) |
+| `WARNING ... POSTER` in C3 | the source is game art / a photo | ask the owner which element to adapt |
+| `SystemExit: copy the approved concept here` | redesign.py is still the template | C7: put the approved concept in `design()` and delete that line |
+| `FAIL app redesign: design.md: approved is empty` | the owner has not chosen | C6 — never fill "approved" yourself |
+| `FAIL app redesign: logo on a plate (automatic draft)` | there is no redesign.py | C3 |
+| `FAIL app plain_shape: plain disc` | the icon is the logo on a circle | make the app's object (concept ladder); only the owner can allow a disc (`shape-ok:` in design.md) |
+| `WARN app plain_shape: plain square/box` | silhouette is a square | fine for a real box object (envelope, case): write `shape-ok: <owner's words>`; a plate with the logo is not a redesign |
+| `size_audit: floats / small / touches edge` | wrong place or size | free objects: bottom edge (side included) 116–120, larger side ≥ 96, inside 8…120 — change the box in `fit()` / the coordinates |
+| `pack_add: … already exists` | the app is in the pack | use `tools/pack_refresh.py <slug>` |
+| `pr_guard: ERROR` | you deleted/changed pack entries or wrote `[release]` | undo that change; never delete |
+| a hook says `BLOCKED` | you are on `main` or used `[release]` | section 0 |

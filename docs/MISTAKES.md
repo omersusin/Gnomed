@@ -29,6 +29,8 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | Answers in English after he once wrote English | — | — | default language Turkish (CLAUDE.md); follow his last message's language |
 
 ## 2. Identity and design
+| BCR's handset was lumpy | the phone's 192 px icon was blurry | traced from a sharp copy the owner sent (`work/bcr/clean-source.png`) | a blurry source is not final: ask for or use a sharp official copy |
+| Türk Telekom had an extra dark triangle at the bottom, and the logo sat off-centre | a blurred **background** shape was traced as part of the logo; the mark box included it, so placement was wrong | `erase` override removes it from regions + silhouette and re-measures the box; leftover blur rims dropped | background decorations are not the logo — check every traced piece against the source; alignment comes from the mark box, so fix the box too |
 
 | What happened | Why | Fix | Rule / check |
 |---|---|---|---|
@@ -81,6 +83,8 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | "Long-press → edit icon" was offered for picking styles | he wants the choice inside the app ("Uzun bas düzenle ile istemiyorum") | in-app style picker (§7) | — |
 
 ## 6. Pipeline and tools
+| `pokemon_unıte` became slug `pokemon_un_te` | Turkish dotless ı not transliterated | `import_request.py` transliterates (ı→i, accents removed) | — |
+| Apps listed in `batch_apps.tsv` without a `source.png` (lines added by another agent) blocked a later import ("REGISTERED") | the tools treated "listed" as "registered" | listed-without-source counts as NEW; `add_source` writes the source without a duplicate line | — |
 
 | What happened | Why | Fix | Rule / check |
 |---|---|---|---|
@@ -119,6 +123,7 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | A stop hook asked to commit untracked files | build outputs in the tree | commit only real work; ignore caches | — |
 
 ## 9. Agents and documentation
+| While reviewing the `horustest` branch I first reported "andvm.png missing, assets not updated" | I read only the last 40 lines of a long diff stat | checked again: both were there | never conclude from truncated output; verify the file itself before reporting a problem |
 
 | What happened | Why | Fix | Rule |
 |---|---|---|---|
@@ -126,6 +131,15 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | DeepSeek copied Duolingo's ComponentInfo from other icon packs | not from the phone | verified on the phone (`cmd package resolve-activity`) | AGENTS.md A3: phone / request / APK only |
 | DeepSeek built a Duolingo Symbol, then skipped it | its own rule reading ("mask") | Symbol rebuilt later | report what was built and why it was dropped |
 | The size rule was too loose to catch a floating icon | "bottom 108…126" | REDESIGN.md §5 baseline rule + `size_audit.py` | — |
+| DeepSeek worked for over an hour on 3 apps ("kah toollar eksik, kah yönergeler") and the result was weak | the docs were written for a strong model; the gaps below | the fixes below; one procedure in AGENTS.md C with exact commands | **if a weaker model gets stuck, the docs are wrong** — fix the docs/tools, not the model |
+| It rewrote the same two functions (path → shape, place shapes in a box) in all 6 of its files | `obj.py` had no helper to read the measured parts or to place them | `parts()`, `colour()`, `describe()`, `fit()` in `work/_lib/obj.py`; AGENTS.md section H lists every helper | every repeated chore gets a helper and a line in section H |
+| The docs said "measure from geometry.json" but nothing created it in the REDESIGN flow | `new_redesign.py` did not measure; the file only appeared after the old pipeline | `new_redesign.py` measures and prints every part as text | a step may only use files an earlier step created |
+| No concept template: each agent invented its own concept script | step 3 said "draw 3 SVGs" | `new_redesign.py` writes a working `concepts/make_concepts.py` (A/B/C from the measured parts, standing on the baseline) | — |
+| AGENTS.md mixed two procedures (old "make_icon → recipe" loop and REDESIGN) | REDESIGN was added on top | AGENTS.md C rewritten as ONE path (C0–C11); D = REDESIGN's review questions; section I = what to do for every error message | one procedure per job, never two |
+| Aurex Browser shipped as the logo on a blue disc with faint rings — and passed the gate | the gate only checked that redesign.py exists | `check_icon` `plain_shape`: FAIL for a plain disc, WARN for a plain square; lifted only by `shape-ok: <owner's words>` in design.md | a check must test the rule, not the file name |
+| `make_icon` told redesigned apps to use the old recipes and go to pack_add | old hint text | redesign-aware hint: review → ask the owner → pack_add | — |
+| `fit()` centred wide marks, so free objects floated | centring is right for a mark ON an object, wrong for a free object | `fit(..., anchor="bottom")`, used by the templates | — |
+| Text-only models could not "open source.png" | the steps assumed eyes | `describe()` prints the parts; a POSTER warning when parts cover the whole tile | every visual step has a text alternative or says "ask the owner" |
 
 ## 10. Decisions the owner made (do not undo them)
 

@@ -39,9 +39,15 @@ def main():
         sys.exit("build failed")
     run(["bash", "tools/review.sh", slug])
     code = run([sys.executable, "tools/check_icon.py", slug])
-    print(f"\nNext: open work/{slug}/styles.png (if you can see images), fix every FAIL "
-          f"(docs/course/04-recipes.md), re-run this command. When it ends with 0 FAIL: "
-          f"python3 tools/pack_add.py {slug} --category <Category> --dry-run")
+    if builders.redesigned(slug):
+        print(f"\nNext (AGENTS.md C7-C9): a FAIL -> AGENTS.md section I, fix redesign.py, run this again. "
+              f"0 FAIL -> open work/{slug}/review.png, answer AGENTS.md D, then ASK the owner "
+              f"(Tamam / Şunu değiştir / Konseptlere dön). Only after his OK: "
+              f"python3 tools/pack_add.py {slug} --category <Category> --dry-run "
+              f"(already in the pack: python3 tools/pack_refresh.py {slug})")
+    else:
+        print(f"\nThis is the automatic DRAFT (measuring only). Next: python3 tools/new_redesign.py {slug} "
+              f"(AGENTS.md C3). Wrong parts/colours in the measurement: python3 tools/region_check.py {slug}")
     sys.exit(code)
 
 

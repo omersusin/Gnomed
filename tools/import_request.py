@@ -53,7 +53,10 @@ DIGITS = "zero one two three four five six seven eight nine".split()
 
 def to_slug(drawable):
     """CandyBar drawable names must start with a letter: _1dm -> onedm, 2fas -> twofas."""
-    s = re.sub(r"[^a-z0-9_]+", "_", drawable.lower()).strip("_")
+    import unicodedata
+    t = drawable.replace("ı", "i").replace("İ", "i")          # Turkish dotless i (pokemon_unıte)
+    t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode()
+    s = re.sub(r"[^a-z0-9_]+", "_", t.lower()).strip("_")
     s = re.sub(r"_+", "_", s)
     if s and s[0].isdigit():
         s = DIGITS[int(s[0])] + s[1:]
@@ -156,7 +159,7 @@ def main():
                 status = "BAD"
             elif comp in in_pack:
                 status = "IN-PACK"
-            elif slug in registered:
+            elif slug in registered and (ROOT / "work" / slug / "source.png").exists():
                 status = "REGISTERED"
             elif png is None:
                 status = "NO-ICON"
