@@ -107,6 +107,8 @@ docs/course/               the course: 7 lessons with pictures, recipes R1-R15, 
 docs/STATUS.md             gate results for every app, worst first
   gen_styles.py            regenerate the per-style appfilters from pack/styles.json
   pr_guard.py              additive-only check of a branch (run before your PR; CI runs it)
+  size_audit.py            every pack icon on one baseline and size per style (floating,
+                           too small/big, touching the canvas edge)
   region_check.py          redraws the measured regions over the source: finds parts that
                            were lost into the background or got a wrong colour
   hooks/                   git hooks: block commits/pushes on main, tags, [release]
@@ -493,7 +495,9 @@ The PR template asks for all of this.
 
 ## 15. Lessons learned (read before you start)
 
-Real mistakes from this project's history — do not repeat them:
+Real mistakes from this project's history — do not repeat them. The complete, maintained
+list with causes and fixes is **[docs/MISTAKES.md](docs/MISTAKES.md)**; the table below is
+the short version:
 
 | Mistake | Rule |
 |---|---|
@@ -505,7 +509,7 @@ Real mistakes from this project's history — do not repeat them:
 | Wobbly edges at large size | the 192 px source's pixel staircase — trace with smoothing (`gtrace`) |
 | Tile edge highlights traced as part of the mark | edge-hugging pieces are dropped; check thin arcs |
 | Blurry sources became blobs | `SMOOTH`, `THRESH`, `HALO`; keep the source's proportion |
-| Wide symbols floating mid-canvas | free objects stand on the baseline (bottom ≈ 118) |
+| Wide symbols floating mid-canvas; Telegram's envelope looked small (bottom 107) | free objects stand on the baseline (bottom 116–120), wide objects get wider instead of floating; `tools/size_audit.py` |
 | A box drawn on a plate (Terminal, MT) | the box becomes the plate, or the object gets bigger |
 | A white wordmark alone as Symbol | it vanishes on light wallpapers → no Symbol |
 | YouTube as a red disc with a triangle | reads as YouTube Music — keep the red button shape |

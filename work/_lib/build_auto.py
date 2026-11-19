@@ -78,7 +78,7 @@ OVERRIDES = {
     "wupp": {"flat": True, "face": "#131c23", "drop": ["#131c23"], "note": "flat dark tile behind the green bubble"},
     "walpy": {"scale": 0.76, "note": "blurry signature: only its sharp core traced (threshold 0.85); kept at the source's ~40 % proportion"},
     "mt_manager": {"scale": 1.18, "note": "folder object larger on the plate (was a small box in a big plate)"},
-    "ashell_you": {"margin_w": 7.0, "note": "black robot: wide white margin so the Symbol still reads on dark wallpapers (check_icon visible_dark)"},
+    "ashell_you": {"margin_w": 7.0, "symbol_scale": 0.86, "note": "black robot: wide white margin so the Symbol still reads on dark wallpapers (check_icon visible_dark)"},
     "survivor_io": {"skip": ["symbol"], "note": "WEAK: posterised trace of the game poster, not a real GNOME conversion"},
 }
 
@@ -283,6 +283,10 @@ class App:
 
     def box(self, kind):
         x0, y0, x1, y1 = self.I["mark_bbox"]
+        if kind == "symbol" and (self.o.get("only_white") or self.o.get("drop")):
+            # the Symbol is placed by the DRAWN parts (marks() ref): size it by them too,
+            # otherwise dropped parts make it float above the baseline (Scene)
+            x0, y0, x1, y1 = gk.bbox_d([d for d, _ in self.regs])
         asp = (x1 - x0) / max(y1 - y0, 1e-6)
         sc = self.o.get("scale", 1.0) if kind != "symbol" else self.o.get("symbol_scale", 1.0)
         if kind == "rimmed":
@@ -295,7 +299,14 @@ class App:
             # free objects stand on the GNOME baseline (face bottom ~114 + 4 px chin),
             # instead of floating in the middle when they are wider than tall
             h = min(bh, bw / asp)
-            cy = 114 - h / 2
+            if self.symbol_mode() == "margin":
+                # the margin grows outward on every side: object + margin must fit 5..118
+                m = self.o.get("margin_w", 3.5)
+                k = min(1.0, (109 - 2 * m) / h)
+                bw, bh, h = bw * k, bh * k, h * k
+                cy = 114 - h / 2 - m                  # margin bottom on the baseline
+            else:
+                cy = 114 - h / 2
         return box_c(cx, cy, bw, bh)
 
     def raised(self, ic, items, lift=2):

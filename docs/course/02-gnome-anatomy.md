@@ -30,7 +30,7 @@ Canvas: 128 × 128 units (exported as 256 px). Everything is in these units.
 ## 2.2 Size and weight
 
 * Official GNOME icons paint about **62 %** of the canvas (between 44 % and 69 %).
-* Plates end at the bottom edge y = 116, discs at 124–126, free symbols stand on a baseline near 118.
+* Plates end at the bottom edge y = 114–118, discs at 120–125, free objects (Symbols, redesigns) stand on the baseline 116–120 (target 118) and look as big as their neighbours — `tools/size_audit.py` checks every icon.
 * An icon must be recognisable at **32 px**. Tiny details that vanish there should be merged or dropped.
 
 ## 2.3 Things GNOME never does (and you must not)

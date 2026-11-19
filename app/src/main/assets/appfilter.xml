@@ -109,4 +109,5 @@
     <item component="ComponentInfo{com.duolingo/com.duolingo.app.LoginActivity}" drawable="duolingo" />
     <item component="ComponentInfo{com.pozitron.hepsiburada/com.hepsiburada.ui.startup.SplashActivity}" drawable="hepsiburada" />
     <item component="ComponentInfo{app.quarry.tanvir.info/app.quarry.tanvir.info.MainActivity}" drawable="quarry" />
+    <item component="ComponentInfo{org.telegram.messenger/org.telegram.messenger.DefaultIcon}" drawable="telegram" />
 </resources>

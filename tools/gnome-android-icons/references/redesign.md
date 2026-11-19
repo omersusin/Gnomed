@@ -59,7 +59,12 @@ never the same logo on four template shapes.
 
 ## 3. Construction rules
 
-- Canvas 128 × 128; the object inside 8…120; bottom edge 108…126; painted area ≈ 45–65 %.
+- Canvas 128 × 128; the object inside 8…120; painted area ≈ 45–65 %.
+- **One baseline, one size**: free objects stand with their bottom edge (side included)
+  at 116–120 (target 118), larger side ≥ 96; plates end 114–118, discs 120–125. A wide,
+  short object is made wider (≤ 112) and stands on the baseline, never centred and
+  floating; margins/outlines/glows count in the size. Next to other icons of the pack
+  every icon must look equally big and stand on the same line.
 - **Thickness** under the face: 2 px thin parts/discs, 4–6 px flat objects, 8–24 px boxes,
   devices, cylinders (`solid(depth=)`; side colour derived from the face).
 - **Light from the top**: curved faces get a vertical gradient (top lighter); flat faces

@@ -449,6 +449,10 @@
       "disc": "quarry_alt1",
       "rimmed": "quarry_alt2",
       "symbol": "quarry_alt3"
+    },
+    "telegram": {
+      "disc": "telegram_alt1",
+      "symbol": "telegram_alt2"
     }
   }
 }

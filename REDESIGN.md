@@ -68,17 +68,25 @@ and never `<text>`; make the letters the object (L1) or print them on one (L2).
            c) reads at 48 and 32 px on light AND dark?
            d) at least 3 techniques of section 5 used?
            e) nothing that is only "logo + chin"?
+           f) same baseline and size as its neighbours in the family row (no floating)?
            Fix (max 3 rounds), then show him review.png with AskUserQuestion:
            "Tamam" / "Şunu değiştir" / "Konseptlere dön".
-7  SHIP    tools/check_icon.py <slug> = 0 FAIL, then AGENTS.md C7-C11:
+7  SHIP    tools/check_icon.py <slug> = 0 FAIL, tools/size_audit.py = 0 outside,
+           then AGENTS.md C7-C11:
            new app: pack_add.py --dry-run -> his yes -> pack_add.py
            app already in the pack: tools/pack_refresh.py <slug>
 ```
 
 ## 5. Construction rules
 
-- Canvas 128 × 128; the object inside 8…120; bottom edge between 108 and 126; painted
-  area about 45–65 % of the canvas.
+- Canvas 128 × 128; the object inside 8…120; painted area about 45–65 % of the canvas.
+- **One baseline, one size** (every icon stands next to the others on the home screen):
+  free objects (every redesign, every Symbol) have their **bottom edge (side included)
+  at 116–120** (target 118) and their larger side ≥ 96; plates end at 114–118, discs at
+  120–125. A wide, short object (envelope, cloud, keyboard) is made **wider (up to 112)
+  and stands on the baseline** — it never floats in the middle. Anything that grows
+  outward (margin, outline, glow) counts in the size and must stay inside 5…118 + side.
+  Check: `python3 tools/size_audit.py` → `0 icon(s) outside the ranges`.
 - **Thickness** (the side under the face): 2 px thin parts and discs, 4–6 px flat objects,
   8–24 px boxes, devices, cylinders. `solid()` derives the side colour from the face.
 - **Light from the top**: curved faces get a vertical gradient (top lighter), flat faces
@@ -133,3 +141,26 @@ Kapı (gate): <N> PASS, <N> WARN, 0 FAIL
 Zayıf yanlar: <honest>
 Bakılacak: work/<slug>/review.png
 ```
+
+## 9. Mistakes already made — do not repeat them
+
+The full list with causes and fixes is [docs/MISTAKES.md](docs/MISTAKES.md) — read it
+once per session. The ones that cost the owner most:
+
+- **Floating / small icons**: a wide object centred in the canvas (Telegram envelope,
+  bottom 107). → baseline rule in §5, `tools/size_audit.py`.
+- **The owner uses the Symbol style**: an app without a Symbol shows its plate there
+  (Duolingo); "make X the default" means the slot he sees — put it in Faithful AND
+  Symbol, or ask which style he uses.
+- **Change exactly what was asked**: "fix the paper plane on the stamp" is not "put the
+  whole logo on the stamp".
+- **Never rebuild "all apps" blindly**: a builder run over every app replaced hand-built
+  icons in the pack; diff pixels before shipping (`work/_lib/builders.py`).
+- **Colours must be the source's**: dark parts lost into a dark tile, gradients flattened,
+  black gradients — `tools/region_check.py <slug>`.
+- **Talk plainly**: he answered "Anlamadım" to questions full of internal terms (dry-run,
+  appfilter, slot). Ask in Turkish, in phone words, one decision per question; never say
+  "impossible" before researching (the in-app style switch was possible).
+- **Look before you ask to ship**: unreviewed drafts were pushed ("the pushed icons are
+  broken"); weak icons must be listed by you, not found by him.
+- When the owner has to point out a new mistake, add it to docs/MISTAKES.md in the same PR.

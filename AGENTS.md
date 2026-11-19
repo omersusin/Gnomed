@@ -16,6 +16,9 @@ and rules for humans: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 Talk to the human in **their** language. Keep messages short.
 
+**Before you start: read [docs/MISTAKES.md](docs/MISTAKES.md)** — every mistake this
+project already made, why, and the rule that prevents it. Add new ones there.
+
 ---
 
 ## 0. `main` belongs to the maintainer. Never touch it.
@@ -105,6 +108,8 @@ C7  python3 tools/pack_add.py <slug> --category <Category> --dry-run
 C8  python3 tools/pack_add.py <slug> --category <Category>
 C9  python3 tools/gnome-android-icons/scripts/pack_audit.py --project .
         -> no ERROR mentioning <slug>
+    python3 tools/size_audit.py
+        -> "0 icon(s) outside the ranges" (same baseline and size as the rest of the pack)
 C10 git branch --show-current          -> must NOT be main
     python3 tools/pr_guard.py           -> 0 ERROR (nothing deleted, no [release])
     git add -A; git commit -m "Add <App> (styles)"; git push -u origin icons/<slug>

@@ -60,6 +60,9 @@
     <item drawable="wupp_alt1" name="Wupp (Disc)" />
     <item drawable="wupp_alt2" name="Wupp (Rimmed)" />
     <item drawable="wupp_alt3" name="Wupp (Symbol)" />
+    <item drawable="telegram" name="Telegram" />
+    <item drawable="telegram_alt1" name="Telegram (Disc)" />
+    <item drawable="telegram_alt2" name="Telegram (Symbol)" />
 
     <category title="Media" />
     <item drawable="youtube" name="YouTube" />
