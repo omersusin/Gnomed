@@ -93,14 +93,13 @@ def design_envelope():
     stamp = st.difference(perf)
     solid(ic, stamp, face=[(0, "#ffffff"), (1, "#f6f5f4")], depth=2, side="#deddda", layer="stamp")
     recess(ic, box(74, 64, 104, 92), "#f6f5f4", wall=1.2, wall_opacity=0.12, layer="stamp-print-area")
-    # the print: Telegram's own mark, exact shapes measured from the source (geometry.json:
-    # the circle = silhouette, the white plane = holes), scaled as one unit onto the stamp
+    # the print: only the paper plane - its exact shape measured from the source
+    # (geometry.json "holes"), in Telegram blue on the white stamp, scaled as one unit
     import json
     import fam
     g = json.loads((Path(__file__).resolve().parent / "geometry.json").read_text())["parts"]
-    (disc_d, plane_d), _ = fam.place([g["silhouette"]["d"], g["holes"]["d"]], (77, 66, 101, 90), ref=[g["silhouette"]["d"]])
-    ic.path(disc_d, ic.linear([(0, "#62a0ea"), (1, "#3584e4")], 0, 66, 0, 90), layer_id="stamp-print-disc")
-    ic.path(plane_d, "#ffffff", layer_id="stamp-print-plane")
+    (plane_d,), _ = fam.place([g["holes"]["d"]], (76, 67, 102, 89))
+    ic.path(plane_d, ic.linear([(0, "#62a0ea"), (1, "#3584e4")], 0, 67, 0, 89), layer_id="stamp-print-plane")
     return ic
 
 
