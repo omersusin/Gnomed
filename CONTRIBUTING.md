@@ -107,6 +107,8 @@ docs/course/               the course: 7 lessons with pictures, recipes R1-R15, 
 docs/STATUS.md             gate results for every app, worst first
   gen_styles.py            regenerate the per-style appfilters from pack/styles.json
   pr_guard.py              additive-only check of a branch (run before your PR; CI runs it)
+  size_audit.py            every pack icon on one baseline and size per style (floating,
+                           too small/big, touching the canvas edge)
   region_check.py          redraws the measured regions over the source: finds parts that
                            were lost into the background or got a wrong colour
   hooks/                   git hooks: block commits/pushes on main, tags, [release]

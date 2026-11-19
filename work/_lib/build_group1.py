@@ -251,7 +251,7 @@ def kamera():
 
     ic = gk.Icon("Kamera - Free Symbol", fam.note("kamera"))
     s = 0.86
-    cx, cy = 58, 68
+    cx, cy = 58, 66  # baseline: bottom 120 (was 122)
     lens(ic, cx, cy, s, chin=2, edge=True)
     red_dot(ic, cx + ddx * s, cy + ddy * s, dot["r"] * s)
     out["symbol"] = ic
@@ -336,13 +336,13 @@ def saat():
 
     # Symbol: the clock as an object - green case, white face, green hands (inverse use).
     ic = gk.Icon("Saat - Free Symbol", fam.note("saat"))
-    case = gk.circle_d(64, 62, 58)
+    case = gk.circle_d(64, 61, 56)
     fam.slab(ic, case, G, depth=3, corner_r=52)
-    s = 58 / ro["r"]
-    ic.path(gk.circle_d(64, 62, ri["r"] * s), "#ffffff", layer_id="face")
-    ic.path(gk.circle_d(64, 62, ri["r"] * s) + gk.circle_d(64, 63.4, ri["r"] * s), "#000000",
+    s = 56 / ro["r"]
+    ic.path(gk.circle_d(64, 61, ri["r"] * s), "#ffffff", layer_id="face")
+    ic.path(gk.circle_d(64, 61, ri["r"] * s) + gk.circle_d(64, 62.4, ri["r"] * s), "#000000",
             layer_id="face-recess", opacity=0.10, fill_rule="evenodd")
-    hands = gk.xform_d(P["hands"], s, 64 - ro["cx"], 62 - ro["cy"], about=(ro["cx"], ro["cy"]))
+    hands = gk.xform_d(P["hands"], s, 64 - ro["cx"], 61 - ro["cy"], about=(ro["cx"], ro["cy"]))
     raised(ic, [(hands, G, shade(G, -0.06))], lift=1.5)
     out["symbol"] = ic
     return out

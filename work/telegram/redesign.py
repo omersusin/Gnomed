@@ -79,29 +79,35 @@ def design_ring():
 
 
 def design_envelope():
-    """F: blue envelope (GNOME Mail-like), the stamp carries the paper plane."""
+    """F: blue envelope (GNOME Mail-like), the stamp carries the paper plane.
+    Drawn on a 12..116 x 30..102 grid, then scaled as one unit (T) so the envelope is
+    112 wide (8..120) and stands on the GNOME baseline (face bottom 112 + 6 side = 118)."""
+    from shapely import affinity
+    k, dy = 112 / 104, 112 - (30 + 72 * 112 / 104)
+    T = lambda g: affinity.translate(affinity.scale(g, k, k, origin=(64, 30)), 0, dy)  # noqa: E731
+    Y = lambda y: 30 + (y - 30) * k + dy                                               # noqa: E731
+    X = lambda x: 64 + (x - 64) * k                                                    # noqa: E731
     ic = gk.Icon("Telegram - Gnomed (envelope + paper plane stamp)")
-    env = rounded(box(12, 30, 116, 102), 7)
+    env = T(rounded(box(12, 30, 116, 102), 7))
     solid(ic, env, face=[(0, "#62a0ea"), (1, "#3584e4")], depth=6, side="#1c71d8", layer="envelope")
-    flap = poly([(15, 33), (113, 33), (64, 72)], 3)
+    flap = T(poly([(15, 33), (113, 33), (64, 72)], 3))
     ic.path(geom_d(move(flap, 0, 2.5).difference(flap).intersection(env)), "#1a5fb4", opacity=0.35, layer_id="flap-shadow")
     solid(ic, flap, face=[(0, "#99c1f1"), (1, "#62a0ea")], depth=0, top=False, layer="flap")
     # stamp: paper with a perforated edge, the plane printed on it
     st = box(70, 60, 108, 96)
     perf = unary_union([circ(x, y, 1.6) for x in range(72, 108, 5) for y in (60, 96)] +
                        [circ(x, y, 1.6) for y in range(63, 96, 5) for x in (70, 108)])
-    stamp = st.difference(perf)
+    stamp = T(st.difference(perf))
     solid(ic, stamp, face=[(0, "#ffffff"), (1, "#f6f5f4")], depth=2, side="#deddda", layer="stamp")
-    recess(ic, box(74, 64, 104, 92), "#f6f5f4", wall=1.2, wall_opacity=0.12, layer="stamp-print-area")
+    recess(ic, T(box(74, 64, 104, 92)), "#f6f5f4", wall=1.2, wall_opacity=0.12, layer="stamp-print-area")
     # the print: only the paper plane - its exact shape measured from the source
     # (geometry.json "holes"), in Telegram blue on the white stamp, scaled as one unit
     import json
     import fam
     g = json.loads((Path(__file__).resolve().parent / "geometry.json").read_text())["parts"]
-    (plane_d,), _ = fam.place([g["holes"]["d"]], (76, 67, 102, 89))
-    ic.path(plane_d, ic.linear([(0, "#62a0ea"), (1, "#3584e4")], 0, 67, 0, 89), layer_id="stamp-print-plane")
+    (plane_d,), _ = fam.place([g["holes"]["d"]], (X(76), Y(67), X(102), Y(89)))
+    ic.path(plane_d, ic.linear([(0, "#62a0ea"), (1, "#3584e4")], 0, Y(67), 0, Y(89)), layer_id="stamp-print-plane")
     return ic
-
 
 if __name__ == "__main__":
     # owner: "Defaultu o mektup yap" -> the envelope is the default; the cloud moves to Symbol
