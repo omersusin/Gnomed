@@ -394,6 +394,9 @@
     <item drawable="kafa_topu_2_alt1" name="Kafa Topu 2 (Disc)" />
     <item drawable="kafa_topu_2_alt2" name="Kafa Topu 2 (Rimmed)" />
     <item drawable="kafa_topu_2_alt3" name="Kafa Topu 2 (Symbol)" />
+    <item drawable="pokemon_unite_alt1" name="Pokémon UNITE (Disc)" />
+    <item drawable="pokemon_unite_alt2" name="Pokémon UNITE (Rimmed)" />
+    <item drawable="pokemon_unite_alt3" name="Pokémon UNITE (Symbol)" />
 
     <category title="Education" />
     <item drawable="duolingo" name="Duolingo" />

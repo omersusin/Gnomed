@@ -1,57 +1,54 @@
-"""Pokémon UNITE - concepts traced FROM the poster (round 2). Pikachu's head (the most
-recognisable element) is traced from the source crop 32-66 x 0-66 - measured, not drawn
-from memory. Purple background excluded."""
+"""Pokémon UNITE - round 3 concepts (REDESIGN 3b). Every concept keeps the identity:
+THREE heroes (dragon / electric mouse / rabbit striker) charging left + the team goal.
+Drawn with work/pokemon_unite/kit.py from the store icon (no tracing)."""
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "work/_lib"))
-from obj import *  # noqa: F401,F403,E402
-SLUG = Path(__file__).resolve().parents[1].name
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from kit import *  # noqa: F401,F403,E402
 OUT = Path(__file__).resolve().parent
 
 
-def place(regs, box_):
-    shapes = fit([g for g, _ in regs], box_, anchor="bottom")
-    return list(zip(shapes, [h for _, h in regs]))
-
-BG = ("#8428b2", "#7a2da9", "#5b2a9a")
-
-
-def pika():
-    return traced(SLUG, (30, 0, 68, 66), n=7, exclude=BG,
-                  keep=unary_union([ellipse(51, 44, 17, 21), poly([(38, 30), (44, 4), (52, 28)]), poly([(52, 26), (64, 2), (64, 30)])]))
-
-
 def A():
-    """Pikachu's head cut out as an object."""
-    ic = gk.Icon("Pokemon UNITE concept A - Pikachu head")
-    cutout(ic, place(pika(), (14, 6, 112, 112)), depth=5, layer="pika")
+    """the store crop: the three heroes in their staggered charge, the mouse in front."""
+    ic = gk.Icon("Pokemon UNITE concept A - charge")
+    dragon(ic, 36, 46, 19)
+    rabbit(ic, 92, 66, 21)
+    mouse(ic, 58, 70, 21, body=True)
     return ic
 
 
 def B():
-    """Pikachu's head in front of a purple star (the UNITE purple)."""
-    ic = gk.Icon("Pokemon UNITE concept B - head + purple star")
-    import numpy as np
-    a = np.radians(-90 + np.arange(10) * 36)
-    rr = np.where(np.arange(10) % 2 == 0, 56, 30)
-    star = poly(list(zip(64 + rr * np.cos(a), 62 + rr * np.sin(a))), 3)
-    solid(ic, star, face=[(0, "#c061cb"), (1, "#813d9c")], depth=5, side="#613583", layer="star")
-    cutout(ic, place(pika(), (30, 22, 104, 114)), depth=4, layer="pika")
+    """the score: the mouse dunks an energy orb into the purple goal; the other two below."""
+    ic = gk.Icon("Pokemon UNITE concept B - dunk")
+    goal(ic, 82, 118, 22, 66)
+    orb(ic, 70, 44, 9)
+    mouse(ic, 48, 50, 17)
+    dragon(ic, 30, 98, 14)
+    rabbit(ic, 100, 100, 14)
     return ic
 
 
 def C():
-    """the three heroes (the poster) on a purple glass tile (L3)."""
-    ic = gk.Icon("Pokemon UNITE concept C - poster tile")
-    tile = rounded(box(10, 10, 118, 112), 14)
-    solid(ic, tile, face=[(0, "#c061cb"), (1, "#613583")], depth=6, side="#613583", layer="tile")
-    scene = traced(SLUG, (0, 0, 128, 104), n=9, exclude=BG)
-    for i, (g, h) in enumerate(place(scene, (12, 12, 116, 110))):
-        ic.path(geom_d(g.intersection(tile)), h, layer_id=f"s{i}", fill_rule="evenodd")
+    """round: the arena (purple half / orange half) with the three heroes on it."""
+    ic = gk.Icon("Pokemon UNITE concept C - arena")
+    arena(ic, 64, 104, 56, 14)
+    dragon(ic, 34, 78, 15)
+    rabbit(ic, 96, 82, 15)
+    mouse(ic, 62, 66, 18, body=True)
     return ic
 
+
+def D():
+    """the goal ring as the frame: the three heroes seen through/in front of it."""
+    ic = gk.Icon("Pokemon UNITE concept D - goal ring")
+    ring, inner = goal(ic, 64, 120, 40, 62)
+    dragon(ic, 38, 96, 14)
+    rabbit(ic, 92, 98, 14)
+    mouse(ic, 62, 72, 16)
+    return ic
+
+
 if __name__ == "__main__":
-    for name, fn in (("A", A), ("B", B), ("C", C)):
+    for name, fn in (("A", A), ("B", B), ("C", C), ("D", D)):
         fn().save(OUT / f"{name}.svg")
         print("wrote", name)
-

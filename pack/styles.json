@@ -462,7 +462,11 @@
       "rimmed": "kafa_topu_2_alt2",
       "symbol": "kafa_topu_2_alt3"
     },
-    "pokemon_unite": {},
+    "pokemon_unite": {
+      "disc": "pokemon_unite_alt1",
+      "rimmed": "pokemon_unite_alt2",
+      "symbol": "pokemon_unite_alt3"
+    },
     "rush_royale": {}
   }
 }
