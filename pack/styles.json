@@ -457,7 +457,11 @@
     "andvm": {},
     "horus": {},
     "aurex_browser": {},
-    "kafa_topu_2": {},
+    "kafa_topu_2": {
+      "disc": "kafa_topu_2_alt1",
+      "rimmed": "kafa_topu_2_alt2",
+      "symbol": "kafa_topu_2_alt3"
+    },
     "pokemon_unite": {},
     "rush_royale": {}
   }

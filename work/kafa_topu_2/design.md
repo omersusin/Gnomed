@@ -31,7 +31,7 @@ concepts (work/kafa_topu_2/concepts.png) - four different ideas:
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7)
 approved: B - "B" (2026-11-21)
 keep: A, C, D - "A,B,C,D,Sen karar ver" (2026-11-21)
-final:
+final: "Tamam, pakete ekle" (2026-11-21)
 styles: symbol=B faithful=A disc=C rimmed=D
 decisions I made myself (and why; mention them in Q2):
   - keep: he ticked all and "Sen karar ver"; B is the main, so A (the duel, closest to the
