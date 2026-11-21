@@ -166,10 +166,10 @@ def goal(ic, x0, y0, x1, y1, name="goal"):
     """White metal goal frame with a net, seen from the front-side."""
     frame = unary_union([box(x0, y0, x1, y0 + 4), box(x0, y0, x0 + 4, y1)])
     net = box(x0 + 4, y0 + 4, x1, y1)
-    lines = unary_union([LineString([(x, y0 + 4), (x, y1)]).buffer(0.35) for x in np.arange(x0 + 9, x1, 6)] +
-                        [LineString([(x0 + 4, y), (x1, y)]).buffer(0.35) for y in np.arange(y0 + 9, y1, 6)])
-    ic.path(geom_d(net), "#deddda", opacity=0.35, layer_id=f"{name}-netfill")
-    ic.path(geom_d(lines.intersection(net)), "#ffffff", opacity=0.85, layer_id=f"{name}-net")
+    lines = unary_union([LineString([(x, y0 + 4), (x, y1)]).buffer(0.5) for x in np.arange(x0 + 11, x1, 8)] +
+                        [LineString([(x0 + 4, y), (x1, y)]).buffer(0.5) for y in np.arange(y0 + 11, y1, 8)])
+    ic.path(geom_d(net), ic.linear([(0, "#f6f5f4"), (1, "#deddda")], 0, y0, 0, y1), layer_id=f"{name}-netfill")
+    ic.path(geom_d(lines.intersection(net)), "#c0bfbc", layer_id=f"{name}-net")
     solid(ic, frame, face=[(0, "#ffffff"), (1, "#deddda")], depth=2, side="#9a9996", layer=f"{name}-frame")
     return frame
 

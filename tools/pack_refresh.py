@@ -2,7 +2,9 @@
 """Re-render the pack PNGs (and artwork/ SVG copies) of apps that are ALREADY in the pack,
 after their build was improved. XML is not touched.
 
-    python3 tools/pack_refresh.py <slug> [<slug> ...]
+    python3 tools/pack_refresh.py <slug> [<slug> ...] [--dry-run]
+
+--dry-run rebuilds the work/ SVGs only and lists the pack files it would overwrite.
 
 Each app is first rebuilt with ITS builder (work/_lib/builders.py: hand-built apps with
 build_weak.py / build_group1.py, the rest with build_auto.py), so the pack always gets
@@ -23,7 +25,12 @@ import builders  # noqa: E402
 
 def main():
     styles = json.loads((ROOT / "pack/styles.json").read_text())["icons"]
-    for slug in sys.argv[1:]:
+    dry = "--dry-run" in sys.argv[1:]
+    bad = [a for a in sys.argv[1:] if a.startswith("-") and a != "--dry-run"]
+    slugs = [a for a in sys.argv[1:] if not a.startswith("-")]
+    if bad or not slugs:
+        sys.exit(__doc__)
+    for slug in slugs:
         names = {"faithful": slug, **styles.get(slug, {})}
         builder = builders.builder_of(slug)
         if subprocess.run([sys.executable, builder, slug], cwd=ROOT).returncode:
@@ -33,7 +40,9 @@ def main():
             png = ROOT / f"app/src/main/res/drawable-nodpi/{name}.png"
             if not png.exists():
                 sys.exit(f"{name}.png is not in the pack - use tools/pack_add.py for new apps")
-            if svg.exists():
+            if svg.exists() and dry:
+                print(f"would overwrite {png.relative_to(ROOT)} + artwork/{name}.svg  <- {svg.relative_to(ROOT)}")
+            elif svg.exists():
                 render_svg(str(svg), 256).save(png, optimize=True)
                 shutil.copy(svg, ROOT / f"artwork/{name}.svg")
                 print("refreshed", name)

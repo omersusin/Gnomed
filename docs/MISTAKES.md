@@ -148,6 +148,7 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | Games added to the pack without approval; `approved:` written by the agent | "beni sorma" read as "decide everything" | approval lines are quotes + date; Q2 = pack approval | `redesign` check format (D2) |
 | Game icons "çok çirkin", wrong composition (one head instead of two, no boots) | only the store poster, no screenshots, drawn from memory | games rule: screenshots, composition + count, serious materials | REDESIGN §3b |
 | One giant session (758k tokens), hours per app | everything in one conversation | new session per app/part | Budget rules (REDESIGN §8) |
+| `pack_refresh.py kafa_topu_2 --dry-run` overwrote the pack PNG before approval (2026-11-21, reverted at once) | the tool had no `--dry-run` and took the flag as a slug | `pack_refresh.py` has `--dry-run`, refuses unknown flags | `pack_refresh.py --dry-run` |
 
 ## 10. Decisions the owner made (do not undo them — read every session)
 

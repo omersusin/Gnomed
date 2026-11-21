@@ -29,11 +29,20 @@ concepts (work/kafa_topu_2/concepts.png) - four different ideas:
   D: object - the header goal: one player heading the ball into a goal
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7)
-approved:
-keep:
+approved: B - "B" (2026-11-21)
+keep: A, C, D - "A,B,C,D,Sen karar ver" (2026-11-21)
 final:
-styles: symbol=<main> faithful=<kept or main> disc=<kept or main> rimmed=<kept or main>
+styles: symbol=B faithful=A disc=C rimmed=D
 decisions I made myself (and why; mention them in Q2):
+  - keep: he ticked all and "Sen karar ver"; B is the main, so A (the duel, closest to the
+    game screenshots) -> faithful, C (round pitch) -> disc, D (goal) -> rimmed.
+  - B was moved down/enlarged so the shoulders stand on the baseline (concept floated).
+  - rimmed (D): the net is opaque (light mesh, grey threads) - a see-through net FAILed lint
+    and read as a blur; the goal is smaller so the players stay legible at 32 px.
+  - pack: styles.json had no slots for kafa_topu_2 (Symbol APK showed the faithful PNG), so
+    shipping = pack_add (alt1 disc, alt2 rimmed, alt3 symbol) + pack_refresh (faithful).
+  - mistake: pack_refresh --dry-run wrote the pack PNG (no dry-run existed); reverted with
+    git checkout at once; the tool now has --dry-run.
 techniques used (min. 3): thickness / material gradient / top light / recess / hole / secondary object / glass
 palette (GNOME HIG names):
 review (phone.png + review.png: light + dark, holes, baseline, what is still weak):
