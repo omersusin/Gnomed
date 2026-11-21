@@ -10,7 +10,8 @@ you work on a branch and open a pull request; he merges.
 1. this file
 2. [REDESIGN.md](REDESIGN.md) — how an icon must look (§0 how to talk to the owner, §3b games, §5 rules)
 3. [AGENTS.md](AGENTS.md) — git, ComponentInfo, pack files, what is forbidden
-4. [docs/PLAYBOOK.md](docs/PLAYBOOK.md) — **only the section of the step you are on** (`tools/next.py` names it)
+4. [docs/MISTAKES.md](docs/MISTAKES.md) **§10 only** — the owner's decisions (the rest when a topic comes up)
+5. [docs/PLAYBOOK.md](docs/PLAYBOOK.md) — **only the section of the step you are on** (`tools/next.py` names it)
 
 Old and NOT for designing: `docs/course/`, `CONTRIBUTING.md` (the legacy plate pipeline).
 Tools that read a file automatically: Claude Code reads `CLAUDE.md`; OpenCode and Codex CLI read
@@ -39,9 +40,12 @@ Before the first `next.py` of a session (once):
 
 ```
 git config core.hooksPath tools/hooks
-git switch -c icons/<slug>          # never work on main; next.py refuses (STATE ON_MAIN)
+git branch --show-current           # on main? -> git switch -c icons/<slug>
+                                    # on another branch (yours, or one your tool made)? stay on it
 python3 tools/gnome-android-icons/scripts/doctor.py     # must end with "result: READY"
 ```
+No `START-HERE.md` or no `tools/next.py` in your checkout? You are on an old branch: run
+`git fetch origin && git switch -c icons/<slug> origin/main` and start again.
 
 The flow `next.py` walks you through (one app = one session, then `/clear` or a new chat):
 
