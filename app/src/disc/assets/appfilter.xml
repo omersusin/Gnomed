@@ -111,4 +111,10 @@
     <item component="ComponentInfo{com.pozitron.hepsiburada/com.hepsiburada.ui.startup.SplashActivity}" drawable="hepsiburada_alt1" />
     <item component="ComponentInfo{app.quarry.tanvir.info/app.quarry.tanvir.info.MainActivity}" drawable="quarry_alt1" />
     <item component="ComponentInfo{org.telegram.messenger/org.telegram.messenger.DefaultIcon}" drawable="telegram_alt1" />
+    <item component="ComponentInfo{com.lerist.andvm/a.i.b}" drawable="andvm" />
+    <item component="ComponentInfo{com.scariflabs.horus/com.scariflabs.horus.MainActivity}" drawable="horus" />
+    <item component="ComponentInfo{com.aurex.browser/com.aurex.browser.MainActivity}" drawable="aurex_browser" />
+    <item component="ComponentInfo{com.masomo.headball2/org.cocos2dx.cpp.AppActivity}" drawable="kafa_topu_2_alt1" />
+    <item component="ComponentInfo{jp.pokemon.pokemonunite/com.nishiki.pgame.n.PGameLauncherActivity}" drawable="pokemon_unite_alt1" />
+    <item component="ComponentInfo{com.my.defense/games.my.heart.commonpreloaderlib.PreloadActivity}" drawable="rush_royale" />
 </resources>

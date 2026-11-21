@@ -38,10 +38,16 @@ def main():
     if run([sys.executable, builders.builder_of(slug), slug]):
         sys.exit("build failed")
     run(["bash", "tools/review.sh", slug])
+    if builders.redesigned(slug):
+        run([sys.executable, "tools/phone_preview.py", slug])        # work/<slug>/phone.png for Q2
     code = run([sys.executable, "tools/check_icon.py", slug])
-    print(f"\nNext: open work/{slug}/styles.png (if you can see images), fix every FAIL "
-          f"(docs/course/04-recipes.md), re-run this command. When it ends with 0 FAIL: "
-          f"python3 tools/pack_add.py {slug} --category <Category> --dry-run")
+    if builders.redesigned(slug):
+        print(f"\nNext (REDESIGN.md 4-7): FAIL -> AGENTS.md section I, fix redesign.py, run again. "
+              f"0 FAIL -> look at work/{slug}/phone.png and review.png, then Q2 (the final question) with the "
+              f"pack_add --dry-run summary; only after \"Tamam, pakete ekle\": pack_add / pack_refresh.")
+    else:
+        print(f"\nThis is the automatic DRAFT (measuring only). Next: python3 tools/new_redesign.py {slug} "
+              f"(REDESIGN.md 4). Wrong parts/colours in the measurement: python3 tools/region_check.py {slug}")
     sys.exit(code)
 
 

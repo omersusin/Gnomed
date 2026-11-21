@@ -1,3 +1,5 @@
+> LEGACY: describes the old automatic plate pipeline. Do not use it to design icons — see REDESIGN.md.
+
 # Lesson 7 — Shipping
 
 ## 7.1 Add the app to the pack

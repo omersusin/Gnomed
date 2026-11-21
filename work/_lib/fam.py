@@ -94,9 +94,39 @@ def slab(ic, d, face, depth=4, face_fill=None, layer="body", corner_r=None):
         ic.path(d, face_fill or face, layer_id=f"{layer}-face", fill_rule="evenodd")
 
 
-def offset_d(d, dist, samples=900):
+def _poly_of_d(d, samples=900):
+    """Closed path (any number of subpaths, even-odd) -> shapely geometry with real holes."""
+    from shapely.geometry import Polygon
+    from svgpathtools import parse_path
+    out = None
+    rings = []
+    for sp in parse_path(d).continuous_subpaths():
+        pts = [sp.point(i / samples) for i in range(samples)]
+        g = Polygon([(p.real, p.imag) for p in pts]).buffer(0)
+        if g.area > 0.05:
+            rings.append(g)
+    for g in sorted(rings, key=lambda r: -r.area):
+        out = g if out is None else (out.difference(g) if out.covers(g) else out.union(g))
+    return out
+
+
+def geom_to_d(g):
+    """shapely (Multi)Polygon -> path d with every interior ring (draw with evenodd)."""
+    out = []
+    for p in getattr(g, "geoms", [g]):
+        if p.is_empty or p.geom_type != "Polygon":
+            continue
+        for ring in [p.exterior, *p.interiors]:
+            c = list(ring.coords)
+            out.append("M" + "L".join(f"{x:.2f} {y:.2f}" for x, y in c[:-1]) + "Z")
+    return "".join(out)
+
+
+def offset_d(d, dist, samples=900, holes_d=None):
     """Outline offset of a closed path (round joins) -> polygon path d. Used for an
-    outer margin that the source shows as ground colour around a mark."""
+    outer margin that the source shows as ground colour around a mark.
+    holes_d: the mark's holes (letter counters, eyes, a clock face) - they are CUT out of
+    the margin body, so the wallpaper shows through them like in the source."""
     from shapely.geometry import Polygon
     from svgpathtools import parse_path
     polys = []
@@ -106,9 +136,14 @@ def offset_d(d, dist, samples=900):
     from shapely.ops import unary_union
     # union of every piece (letters, brackets ...), not just the largest one
     poly = unary_union([p for p in polys if p.area > 0.5]).buffer(dist, join_style=1, resolution=16).simplify(0.06)
-    geoms = getattr(poly, "geoms", [poly])
+    if holes_d:
+        h = _poly_of_d(holes_d, samples)
+        if h is not None and not h.is_empty:
+            poly = poly.difference(h.buffer(0))
+        return geom_to_d(poly)
+    # without holes_d: outer outlines only (unchanged behaviour for every older caller)
     out = []
-    for g in geoms:
+    for g in getattr(poly, "geoms", [poly]):
         coords = list(g.exterior.coords)
         out.append("M" + "L".join(f"{x:.2f} {y:.2f}" for x, y in coords[:-1]) + "Z")
     return "".join(out)

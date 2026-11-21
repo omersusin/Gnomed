@@ -1,8 +1,8 @@
 # REDESIGN.md — how a Gnomed icon is made (binding)
 
-Read this first. Where `docs/course/`, `CONTRIBUTING.md` or the old pipeline disagree
-with this file, **this file wins**. Git, ComponentInfo and pack-file rules stay in
-[AGENTS.md](AGENTS.md) (sections 0, A, B, G and steps C7–C11).
+This is the **only** design document. AGENTS.md covers git, ComponentInfo, pack files and
+tools; docs/MISTAKES.md is the history (read its §10 every session). `docs/course/` and
+`CONTRIBUTING.md` are LEGACY (the old plate pipeline) — do not design with them.
 
 ## 1. The one rule
 
@@ -10,97 +10,99 @@ with this file, **this file wins**. Git, ComponentInfo and pack-file rules stay 
 
 ![what a redesign is](docs/redesign/target.png)
 
-Test: cover the plate/disc and the chin. If what is left is the original logo, the icon
-is not done.
+Test: cover the plate/disc and the chin. If what is left is the original logo, it is not done.
+The automatic builds (`build_auto.py`, the skill's autodrafts) only **measure** shapes and
+colours; the gate FAILs them (`redesign`) until the app has `work/<slug>/redesign.py`.
 
-The automatic builds (`tools/make_icon.py` for an app without `work/<slug>/redesign.py`,
-`build_auto.py`, the skill's autodrafts) only **measure** shapes and colours. Their
-output is a draft. The gate fails it (`redesign` check) until the app is redesigned.
+Study before every app: [docs/redesign/gnome-objects.png](docs/redesign/gnome-objects.png)
+(objects) and, for games, [docs/redesign/gnome-games.png](docs/redesign/gnome-games.png).
 
-The same method, without the repository parts, is in the vendored skill:
-`tools/gnome-android-icons/references/redesign.md` (v1.2).
+## 2. What the owner wants
 
-Real GNOME icons to study before every app: [docs/redesign/gnome-objects.png](docs/redesign/gnome-objects.png)
-(SVGs in `tools/gnome-android-icons/assets/reference-library/`).
+- the real GNOME / Adwaita look; premium, made by a professional; every app its own idea
+- the app recognisable at a glance: its 2–4 **anchors** survive (shape, colour field, accent,
+  composition)
+- **he uses the Symbol style**: every board shows Symbol first; an app is not done without
+  a Symbol (§6)
+- **not**: the logo with a shadow/emboss/chin; the logo inside a plate, disc or rim; every icon
+  round; invented wrappers; toys; image-generation models of any kind
 
-## 2. What the human wants (his own words, summarised)
-
-- the real GNOME / Adwaita look — he loves the official GNOME app icons
-- the app recognisable at a glance: 2–4 **anchors** of the source survive
-- premium, made-by-a-professional look; every app gets its own idea
-- **not**: the logo with a shadow, emboss or chin; the logo inside a plate, disc or rim;
-  every icon round; invented wrappers (TV, camera body, speaker, coin) that have nothing
-  to do with the app; image-generation models of any kind
-- liked: the "Sound Disc" look for music-like apps — only where it fits
-
-## 3. The concept ladder (choose per app)
+## 3. The concept ladder
 
 | Level | What | GNOME examples |
 |---|---|---|
-| **L1** | The mark **becomes an object**: its own silhouette gets thickness, material, light | Calls (handset), Polari (bubbles), the *Kasa* example |
-| **L2** | A GNOME **object that carries the mark**: the app's function as a thing; the mark is its label, print, inlay, lens or the thing it holds | Weather, FileRoller, Software, Mousai, the *Bulut* example |
-| **L3** | **Material tile** — only for pure wordmarks/abstract marks when L1 and L2 fail: glass, enamel, metal or paper with real thickness, never a flat colour square | Meld, Tangram |
+| **L1** | the mark **becomes an object**: its silhouette gets thickness, material, light | Calls, Polari, *Kasa* example |
+| **L2** | a GNOME **object that carries the mark** (the app's function as a thing) | Weather, FileRoller, Mousai, *Bulut* example |
+| **L3** | **material tile** (glass, enamel, metal, paper with thickness) — only for pure wordmarks/abstract marks when L1/L2 fail | Meld, Tangram |
 
-Wordmarks: letter shapes come from the source (trace / geometry.json), never from a font
-and never `<text>`; make the letters the object (L1) or print them on one (L2).
+Wordmarks: letter shapes come from the source (`parts()`), never a font, never `<text>`.
 
-## 4. Procedure — one app, in this order
+### 3b. Games — the game's objects, no characters
+
+Owner (2026-11-21): *"Karakter yok, oyunun nesnesi"* (replaces the earlier "draw the game's
+scene / keep the characters" rule).
+
+1. **No characters**: never draw a character, face, animal or creature in a game icon.
+2. **1–3 objects of the game**: the things the game is played with, as GNOME objects
+   (Pokémon UNITE = the goal ring + the ball; Kafa Topu 2 = the ball + the football boot;
+   Rush Royale = its distinctive object). Model: `docs/redesign/gnome-games.png`
+   (Chess, Tali, Mahjongg — real objects, not people).
+3. **Serious**: real proportions and materials (leather, metal, rubber, glass, wood) with
+   GNOME light and thickness; no toy look, no cartoon outlines, no blob shapes.
+4. **Colours**: the HIG ramps nearest to the game's own colours.
+5. **References**: the store icon plus at least 2 in-game screenshots (ask in Q1 if you have
+   none); write in design.md which objects they show and their colours. Redraw, never trace.
+
+## 4. Procedure — one app per session
 
 ```
-1  python3 tools/new_redesign.py <slug>        -> work/<slug>/design.md, concepts/, redesign.py
-2  STUDY   open work/<slug>/source.png and docs/redesign/gnome-objects.png.
-           design.md: anchors, function object. Measure proportions and colours from
-           source.png (or work/<slug>/geometry.json) - never from memory.
-3  CONCEPTS  draw 3 rough SVGs work/<slug>/concepts/A.svg B.svg C.svg - three different
-           ideas from the ladder; flat shapes are fine, keep each short.
-           python3 tools/concepts.py <slug>  ->  open work/<slug>/concepts.png yourself;
-           replace any concept that is just the logo on a shape.
-4  ASK     AskUserQuestion, in Turkish: "Hangi yön?" options A / B / C / "Hiçbiri, yeniden dene",
-           each with one short line; tell him the board is work/<slug>/concepts.png.
-           STOP until he answers. Write in design.md:  approved: <letter> - <his words>
-           Never fill "approved" yourself.
-5  BUILD   write the approved concept in work/<slug>/redesign.py with work/_lib/obj.py
-           (solid, recess, hole, toplight). Model: docs/redesign/examples/build_examples.py.
-           python3 tools/make_icon.py <slug>
-6  LOOK    open work/<slug>/review.png and answer:
-           a) same idea and anchors as the source?
-           b) does it belong in the family row next to the real GNOME icons?
-           c) reads at 48 and 32 px on light AND dark?
-           d) at least 3 techniques of section 5 used?
-           e) nothing that is only "logo + chin"?
-           f) same baseline and size as its neighbours in the family row (no floating)?
-           Fix (max 3 rounds), then show him review.png with AskUserQuestion:
-           "Tamam" / "Şunu değiştir" / "Konseptlere dön".
-7  SHIP    tools/check_icon.py <slug> = 0 FAIL, tools/size_audit.py = 0 outside,
-           then AGENTS.md C7-C11:
-           new app: pack_add.py --dry-run -> his yes -> pack_add.py
-           app already in the pack: tools/pack_refresh.py <slug>
+1  MEASURE   python3 tools/new_redesign.py <slug>
+             -> geometry.json, the parts as text, design.md, concepts/make_concepts.py
+                (4 concept stubs A-D), redesign.py
+2  STUDY     source.png + gnome-objects.png (+ gnome-games.png and the screenshots for a
+             game, §3b: its objects, no characters). Fill design.md: anchors, function object, references.
+3  CONCEPTS  FOUR different ideas A-D from the ladder in concepts/make_concepts.py (rough,
+             flat is fine; shapes from parts()/fit(), never from memory), then
+             python3 work/<slug>/concepts/make_concepts.py && python3 tools/concepts.py <slug>
+             -> look at concepts.png yourself; replace any concept that is the logo on a
+             plain disc or square.
+4  Q1        the concept question (§7)                                    -> STOP, wait
+5  BUILD     the main design + the kept ones in redesign.py; save_styles(§6);
+             python3 tools/make_icon.py <slug>   (review + gate + phone preview)
+             fix every FAIL (AGENTS.md I); look at work/<slug>/phone.png and review.png:
+             same anchors? Symbol good on light AND dark? holes real? same size and
+             baseline as the neighbours? at least 3 techniques of §5?
+6  Q2        the final question (§7); "Şunu değiştir" -> change EXACTLY that, ask Q2 again
+7  SHIP      only after "Tamam, pakete ekle":
+             new app: python3 tools/pack_add.py <slug> --category <C>
+             in the pack: python3 tools/pack_refresh.py <slug>
+             then AGENTS.md C (audits, commit, push, PR)
 ```
 
 ## 5. Construction rules
 
-- Canvas 128 × 128; the object inside 8…120; painted area about 45–65 % of the canvas.
-- **One baseline, one size** (every icon stands next to the others on the home screen):
-  free objects (every redesign, every Symbol) have their **bottom edge (side included)
-  at 116–120** (target 118) and their larger side ≥ 96; plates end at 114–118, discs at
-  120–125. A wide, short object (envelope, cloud, keyboard) is made **wider (up to 112)
-  and stands on the baseline** — it never floats in the middle. Anything that grows
-  outward (margin, outline, glow) counts in the size and must stay inside 5…118 + side.
-  Check: `python3 tools/size_audit.py` → `0 icon(s) outside the ranges`.
-- **Thickness** (the side under the face): 2 px thin parts and discs, 4–6 px flat objects,
-  8–24 px boxes, devices, cylinders. `solid()` derives the side colour from the face.
-- **Light from the top**: curved faces get a vertical gradient (top lighter), flat faces
-  are almost flat; a 1–1.5 px **top light** on upper edges (`toplight()`).
-- **Recess** (screen, label, inlay): its top inner wall is darker (`recess()`).
-  **Hole** (lens, slot, keyhole): dark body, darker top wall (`hole()`).
+- Canvas 128 × 128; the object inside 8…120; painted area about 45–65 %.
+- **One baseline, one size**: free objects (every redesign, every Symbol) have their bottom
+  edge (side included) at **116–120** (target 118) and their larger side ≥ 96; plates end at
+  114–118, discs at 120–125. A wide, short object is made wider (≤ 112) and stands on the
+  baseline — never centred and floating. Margins/outlines count in the size.
+  Check: `python3 tools/size_audit.py`.
+- **Holes are holes**: what is a hole in the source (letter counters, eyes, a ring's
+  centre) is **transparent** in every free style — cut it (`body(slug)`, `difference`),
+  never paint it white or in the tile colour. Exceptions only with the owner's words
+  (`painted-holes:` in design.md) or the `painted_counters` override for white parts that
+  are figure, not holes. Gate: `holes`.
+- **Thickness**: 2 px thin parts/discs, 4–6 px flat objects, 8–24 px boxes/devices/cylinders.
+- **Light from the top**: curved faces get a vertical gradient (top lighter); 1–1.5 px top
+  light on upper edges (`toplight()`). **Recess** (screen, label, inlay): darker top inner
+  wall (`recess()`). **Hole** (lens, slot): dark body, darker top wall (`hole()`).
 - **Secondary object**: smaller, in front, bottom centre or lower right, with its own side.
-- **Materials**: metal = Light 1–4 with a lighter middle on the side; glass = deep centre,
-  rings, 1–2 soft highlights; paper = Light 1–2, almost flat; enamel/plastic = 3 steps of one ramp.
-- No outer shadows, no blur or filters, no `<text>`, no raster images, no pure black
-  (`#241f31` is the darkest). One idea per icon: drop decoration that does not carry identity.
-- Details under 2 px vanish at 32 px: merge them or leave them out.
-- **Palette** (GNOME HIG). Map the brand colour to the nearest ramp, keep its lightness;
-  use 3 steps of one ramp per part (top light / face / side):
+- **Materials**: metal = Light 1–4, lighter middle on the side; glass = deep centre, rings,
+  1–2 soft highlights; paper = Light 1–2; enamel/plastic = 3 steps of one ramp.
+- No outer shadows, blur, filters, `<text>`, raster images, no pure black (`#241f31`).
+  Details under 2 px vanish at 32 px.
+- **Palette** (GNOME HIG): map the brand colour to the nearest ramp, keep its lightness;
+  3 steps of one ramp per part (top light / face / side):
 
 | Ramp | 1 | 2 | 3 | 4 | 5 |
 |---|---|---|---|---|---|
@@ -114,53 +116,71 @@ and never `<text>`; make the letters the object (L1) or print them on one (L2).
 | Light | #ffffff | #f6f5f4 | #deddda | #c0bfbc | #9a9996 |
 | Dark | #77767b | #5e5c64 | #3d3846 | #241f31 | — |
 
-## 6. Styles and alternatives
+## 6. Style slots — every slot a different design
 
-The pack has four slots: `faithful`, `disc`, `rimmed`, `symbol`. The approved design goes
-into `faithful`. Fill another slot **only** with a concept he also approved.
-`save_styles()` overwrites the old wrapper SVGs of an app that is already in the pack with
-the new design, so no logo-on-plate version survives. Never make four versions by default.
+The pack has four slots (`faithful`, `disc`, `rimmed`, `symbol`); each is a separate APK.
+Owner: *"her stil yuvası farklı olursa çok iyi olur"*.
 
-## 7. Budget — he pays for every message
+1. The concept board shows **4 concepts** (A–D), four different ideas.
+2. Q1 asks (a) the **main** design → it goes to **Symbol** (his style) and to every slot
+   without a design of its own; (b) which others to **keep** (may be none) → they fill the
+   other slots: the one closest to the original logo → **Faithful**, a round one → **Disc**,
+   the next → **Rimmed**.
+3. Polish only the main and the kept ones.
+4. `save_styles(slug, {"symbol": main, "faithful": …, "disc": …, "rimmed": …})` writes
+   every slot: missing slots get the main design, so an app already in the pack loses its
+   old plate/disc/rim versions.
+5. "Disc" and "Rimmed" are slot names — they do **not** mean "put the logo in a disc".
 
-- One app per session; start the next app after `/clear`. Batches only after he approved
-  three redesigns in a row, and only the apps he names.
-- Do not read the whole course or CONTRIBUTING.md; this file, AGENTS.md (0, A, B, G) and
-  `docs/redesign/examples/build_examples.py` are enough.
-- Concepts are cheap and rough; polish only the approved one.
-- Never redo old apps on your own; he picks the next app.
-- Stuck after 3 rounds: stop, show the board, ask.
+## 7. Questions and approvals — exactly two per app
 
-## 8. Report (Turkish, short)
+**Q1 — concepts** (one AskUserQuestion call, Turkish, phone words, no jargon):
+- the board path `work/<slug>/concepts.png`;
+- question (a) main design: single choice A / B / C / D / "Hiçbiri, yeniden dene";
+- question (b) keep: multiSelect of the other concepts (none is fine);
+- a game without screenshots: ask for them here (§3b).
+
+**Q2 — final**: the message names `work/<slug>/phone.png` (Symbol first, light + dark, phone
+size among pack neighbours) and `review.png`, the `pack_add --dry-run` summary (new lines
+only), and your honest weak points. Options: **"Tamam, pakete ekle"** (this answer IS the
+pack approval) / "Şunu değiştir" (he types what) / "Konseptlere dön".
+
+Everything else: decide yourself, write the decision and the reason in design.md, mention
+it in Q2. No other questions.
+
+**Approval lines quote him** — verbatim, in quotes, with the date; never written from a
+general instruction (the gate checks the format):
+
+```
+approved: B - "<his answer to Q1 (a)>" (2026-11-21)
+keep: A, D - "<his answer to Q1 (b)>" (2026-11-21)
+final: "Tamam, pakete ekle" (2026-11-21)
+shape-ok: "<his words>" (date)          only if a plain square/disc is really meant
+painted-holes: "<his words>" (date)     only if a hole is really meant to be painted
+```
+
+## 8. Budget — he pays for every message
+
+- **One app per session**, then `/clear`. Effort `high` for design, `medium` for git/docs.
+- At session start read only: CLAUDE.md, this file, AGENTS.md, docs/MISTAKES.md §10, and the
+  files the task names.
+- Concepts are cheap and rough; polish only the chosen ones.
+- Never rebuild the whole pack blindly: rebuild only what you changed, compare pixels with
+  `git show HEAD:<png>`, keep only real changes. Never redo old apps on your own.
+
+## 9. Report (Turkish, short)
 
 ```
 Uygulama: <name> (<slug>)
-Konsept: <A/B/C> - <one line>        Onay: <his words>
+Ana tasarım: <letter> → Symbol (+ <kept letters> → <slots>)     Onay: "<his words>"
 Teknikler: <thickness / material / top light / recess / hole / secondary object>
-Kapı (gate): <N> PASS, <N> WARN, 0 FAIL
+Kapı (gate): <N> PASS, <N> WARN, 0 FAIL     Delikler: <source % -> transparent %>
 Zayıf yanlar: <honest>
-Bakılacak: work/<slug>/review.png
+Bakılacak: work/<slug>/phone.png, work/<slug>/review.png
 ```
 
-## 9. Mistakes already made — do not repeat them
+## 10. History
 
-The full list with causes and fixes is [docs/MISTAKES.md](docs/MISTAKES.md) — read it
-once per session. The ones that cost the owner most:
-
-- **Floating / small icons**: a wide object centred in the canvas (Telegram envelope,
-  bottom 107). → baseline rule in §5, `tools/size_audit.py`.
-- **The owner uses the Symbol style**: an app without a Symbol shows its plate there
-  (Duolingo); "make X the default" means the slot he sees — put it in Faithful AND
-  Symbol, or ask which style he uses.
-- **Change exactly what was asked**: "fix the paper plane on the stamp" is not "put the
-  whole logo on the stamp".
-- **Never rebuild "all apps" blindly**: a builder run over every app replaced hand-built
-  icons in the pack; diff pixels before shipping (`work/_lib/builders.py`).
-- **Colours must be the source's**: dark parts lost into a dark tile, gradients flattened,
-  black gradients — `tools/region_check.py <slug>`.
-- **Talk plainly**: he answered "Anlamadım" to questions full of internal terms (dry-run,
-  appfilter, slot). Ask in Turkish, in phone words, one decision per question; never say
-  "impossible" before researching (the in-app style switch was possible).
-- **Look before you ask to ship**: unreviewed drafts were pushed ("the pushed icons are
-  broken"); weak icons must be listed by you, not found by him.
-- When the owner has to point out a new mistake, add it to docs/MISTAKES.md in the same PR.
+Every mistake so far with its fix: [docs/MISTAKES.md](docs/MISTAKES.md) — §10 (the owner's
+decisions) every session, the rest when a topic comes up. When the owner has to point out a
+new mistake, add it there in the same PR.

@@ -5,18 +5,23 @@ Worst first. `redesign` FAIL = the app is still the logo on a plate: redesign it
 REDESIGN.md (`python3 tools/new_redesign.py <slug>`), then `tools/pack_refresh.py <slug>`.
 Other WARNs: recipes in docs/course/04-recipes.md.
 
-Apps: 90 · with FAIL: 89 · with WARN: 35
+Apps: 96 · with FAIL: 92 · with WARN: 39
 
 | App | FAIL | WARN | Issues (style · check · value → recipe) |
 |---|---|---|---|
-| `chatgpt` | 1 | 3 | app · redesign · logo on a plate (automatic draft) → R0; rimmed · legibility32 · 0.71 → R11 (bigger mark, drop tiny details, thicker strokes); symbol · visible_light · 0.54 → R6; symbol · visible_dark · 0.54 → R6 |
+| `chatgpt` | 2 | 3 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 28.0% -> transparent 0.0% → REDESIGN.md 5; rimmed · legibility32 · 0.71 → R11 (bigger mark, drop tiny details, thicker strokes); symbol · visible_light · 0.54 → R6; symbol · visible_dark · 0.54 → R6 |
+| `ashell_you` | 2 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 0.5% -> transparent 0.0% → REDESIGN.md 5; symbol · visible_dark · 0.36 → R6 |
+| `kernelsu_next` | 2 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 19.3% -> transparent 0.0% → REDESIGN.md 5; symbol · visible_dark · 0.42 → R6 |
+| `firefox_beta` | 2 | 0 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 1.1% -> transparent 0.0% → REDESIGN.md 5 |
+| `pentas` | 2 | 0 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 19.7% -> transparent 0.0% → REDESIGN.md 5 |
+| `terminal_em_lat_r` | 2 | 0 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 0.4% -> transparent 0.0% → REDESIGN.md 5 |
 | `enpara` | 1 | 3 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.52 → R6; app · stripes · ['#faa91a', '#dfd989', '#9ec842'] → R1; app · trace_iou · {'r5': 0.8302} → R12 |
 | `cloudstream` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; app · stripes · ['#4186d5', '#4081e6', '#2148db', '#2009 → R1; app · trace_iou · {'r1': 0.8881} → R12 |
 | `frostkeys` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; app · stripes · ['#b7e2ff', '#2673eb', '#8aa0ff'] → R1; app · trace_iou · {'r2': 0.8245} → R12 |
 | `obtainx` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; app · stripes · ['#aaa9d8', '#5431a7', '#8051bf'] → R1; app · trace_iou · {'r2': 0.8216} → R12 |
+| `qobuz` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.54 → R6; symbol · visible_dark · 0.55 → R6 |
 | `smart_launcher` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.48 → R6; app · trace_iou · {'r5': 0.2757} → R12 |
 | `apple_music` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.36 → R6 |
-| `ashell_you` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_dark · 0.36 → R6 |
 | `bare` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · stripes · ['#6bbcf8', '#55a0f6', '#4987f6', '#3e6d → R1 |
 | `binance_tr` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · mass · 0.19 → R10 scale |
 | `duolingo` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · stripes · ['#f48000', '#ffc200', '#ffde00'] → R1 |
@@ -24,19 +29,18 @@ Apps: 90 · with FAIL: 89 · with WARN: 35
 | `ffupdater` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r2': 0.8682} → R12 |
 | `firefox_nightly` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r2': 0.8904} → R12 |
 | `iconrequest` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r3': 0.2847} → R12 |
+| `kafa_topu_2` | 1 | 1 | app · redesign · approved is not a quote + date: original → REDESIGN.md 7; faithful · mass · 0.38 → R10 scale |
 | `kamera` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_dark · 0.41 → R6 |
-| `kernelsu_next` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_dark · 0.42 → R6 |
 | `onedm` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r3': 0.7558} → R12 |
 | `payload_dumper` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r1': 0.7271} → R12 |
+| `pokemon_unite` | 1 | 1 | app · redesign · approved is not a quote + date: original → REDESIGN.md 7; faithful · mass · 0.33 → R10 scale |
 | `proton_vpn` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r3': 0.883, 'r4': 0.8933} → R12 |
-| `qobuz` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_dark · 0.54 → R6 |
 | `quarry` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r1': 0.8335} → R12 |
 | `recon` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · legibility32 · 0.718 → R11 (bigger mark, drop tiny details, thicker strokes) |
 | `reddit` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.32 → R6 |
-| `saat` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.45 → R6 |
+| `rush_royale` | 1 | 1 | app · redesign · approved is not a quote + date: original → REDESIGN.md 7; faithful · mass · 0.37 → R10 scale |
 | `scene` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r3': 0.5664} → R12 |
 | `stride` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r2': 0.8619} → R12 |
-| `t_rk_telekom` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · stripes · ['#39c1d7', '#009bde', '#16719d'] → R1 |
 | `termux_api` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.43 → R6 |
 | `termux_boot` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.43 → R6 |
 | `termux_widget` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.43 → R6 |
@@ -56,7 +60,6 @@ Apps: 90 · with FAIL: 89 · with WARN: 35
 | `discord` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `dolby_atmos` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `exteraless` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
-| `firefox_beta` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `foto_raflar` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `gboardwu` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `gnomed` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
@@ -77,18 +80,18 @@ Apps: 90 · with FAIL: 89 · with WARN: 35
 | `mt_manager` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `nuvio` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `opencode_mobile` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
-| `pentas` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `pix_material_you_light_dark` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `play_store` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `plush_iconpack` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `proton_drive` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `qwen` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
+| `saat` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `sd_maid_se` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `shizuku` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `survivor_io` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `swift_backup` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
+| `t_rk_telekom` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `telefon` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
-| `terminal_em_lat_r` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `today_weather` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `trendyolmilla` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `trestle` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
@@ -98,4 +101,7 @@ Apps: 90 · with FAIL: 89 · with WARN: 35
 | `wupp` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `y_hava_durumu` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `youtube` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
-| `telegram` | 0 | 0 | clean |
+| `aurex_browser` | 0 | 1 | app · plain_shape · plain square/box (fills 99%) → a real box object (envelope, case)? say so in design.md 'shape-ok |
+| `horus` | 0 | 1 | faithful · mass · 0.3 → R10 scale |
+| `telegram` | 0 | 1 | app · plain_shape · plain square/box (fills 100%) → a real box object (envelope, case)? say so in design.md 'shape-ok |
+| `andvm` | 0 | 0 | clean |

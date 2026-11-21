@@ -152,6 +152,7 @@
     <item drawable="qwen_alt1" name="Qwen (Disc)" />
     <item drawable="qwen_alt2" name="Qwen (Rimmed)" />
     <item drawable="qwen_alt3" name="Qwen (Symbol)" />
+    <item drawable="horus" name="Horus" />
 
     <category title="Tools" />
     <item drawable="onedm" name="1DM+" />
@@ -333,6 +334,7 @@
     <item drawable="quarry_alt1" name="Quarry (Disc)" />
     <item drawable="quarry_alt2" name="Quarry (Rimmed)" />
     <item drawable="quarry_alt3" name="Quarry (Symbol)" />
+    <item drawable="andvm" name="AndVM" />
 
     <category title="Browsers" />
     <item drawable="bare" name="Bare" />
@@ -351,6 +353,7 @@
     <item drawable="weblibre_alt1" name="WebLibre (Disc)" />
     <item drawable="weblibre_alt2" name="WebLibre (Rimmed)" />
     <item drawable="weblibre_alt3" name="WebLibre (Symbol)" />
+    <item drawable="aurex_browser" name="Aurex Browser" />
 
     <category title="Finance" />
     <item drawable="binance_tr" name="Binance TR" />
@@ -385,6 +388,15 @@
     <item drawable="survivor_io_alt1" name="Survivor.io (Disc)" />
     <item drawable="survivor_io_alt2" name="Survivor.io (Rimmed)" />
     <item drawable="survivor_io_alt3" name="Survivor.io (Symbol)" />
+    <item drawable="kafa_topu_2" name="Kafa Topu 2" />
+    <item drawable="pokemon_unite" name="Pokémon UNITE" />
+    <item drawable="rush_royale" name="Rush Royale" />
+    <item drawable="kafa_topu_2_alt1" name="Kafa Topu 2 (Disc)" />
+    <item drawable="kafa_topu_2_alt2" name="Kafa Topu 2 (Rimmed)" />
+    <item drawable="kafa_topu_2_alt3" name="Kafa Topu 2 (Symbol)" />
+    <item drawable="pokemon_unite_alt1" name="Pokémon UNITE (Disc)" />
+    <item drawable="pokemon_unite_alt2" name="Pokémon UNITE (Rimmed)" />
+    <item drawable="pokemon_unite_alt3" name="Pokémon UNITE (Symbol)" />
 
     <category title="Education" />
     <item drawable="duolingo" name="Duolingo" />

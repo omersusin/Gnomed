@@ -77,3 +77,9 @@ duolingo	Duolingo	ComponentInfo{com.duolingo/com.duolingo.app.LoginActivity}	duo
 hepsiburada	Hepsiburada	ComponentInfo{com.pozitron.hepsiburada/com.hepsiburada.ui.startup.SplashActivity}	hepsiburada
 quarry	Quarry	ComponentInfo{app.quarry.tanvir.info/app.quarry.tanvir.info.MainActivity}	quarry
 telegram	Telegram	ComponentInfo{org.telegram.messenger/org.telegram.messenger.DefaultIcon}	telegram
+andvm	AndVM	ComponentInfo{com.lerist.andvm/a.i.b}	andvm
+aurex_browser	Aurex Browser	ComponentInfo{com.aurex.browser/com.aurex.browser.MainActivity}	aurex_browser
+horus	Horus	ComponentInfo{com.scariflabs.horus/com.scariflabs.horus.MainActivity}	horus
+kafa_topu_2	Kafa Topu 2	ComponentInfo{com.masomo.headball2/org.cocos2dx.cpp.AppActivity}	kafa_topu_2
+rush_royale	Rush Royale	ComponentInfo{com.my.defense/games.my.heart.commonpreloaderlib.PreloadActivity}	rush_royale
+pokemon_unite	Pokémon UNITE	ComponentInfo{jp.pokemon.pokemonunite/com.nishiki.pgame.n.PGameLauncherActivity}	pokemon_unite
