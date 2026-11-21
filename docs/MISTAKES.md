@@ -162,7 +162,8 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 - **The owner uses the Symbol style**: every board shows Symbol first; no app is done without a Symbol.
 - **Every style slot a different design** (2026-11-21): "her stil yuvası farklı olursa çok iyi olur" — 4 concepts; main → Symbol, kept ones → Faithful / Disc / Rimmed (REDESIGN §6).
 - **Exactly two questions per app** (2026-11-21): Q1 concepts (main + keep), Q2 final; "Tamam, pakete ekle" is the pack approval (REDESIGN §7). Approval lines are his words in quotes + date.
-- **Games** (2026-11-21): "Oyunun resmini çizsin ama oyuncak gibi olmasın, ciddi bir iş olsun… simgesi oyunu anlatsın" — references (≥ 2 screenshots), the scene's composition and count, serious materials (REDESIGN §3b). Replaces the earlier "free adaptation / original logo" wording.
+- ~~Games (2026-11-21): draw the game's scene with its characters~~ — replaced the same day by:
+- **Games: no characters, the game's objects** (2026-11-21): "Karakter yok, oyunun nesnesi" — no characters, faces or animals; 1–3 of the game's objects (Pokémon UNITE = goal ring + ball, Kafa Topu 2 = ball + boot, Rush Royale = its distinctive object), real materials, GNOME light + thickness, HIG colours near the game's (REDESIGN §3b).
 - Holes are real holes in free styles (PR #12); painting them needs his words.
 - Telegram: envelope (Faithful + Symbol), ring (Disc).
-- Kafa Topu 2, Pokémon UNITE, Rush Royale: not approved; redo per DUZELTME-PLANI Part E, one per session.
+- Pokémon UNITE: the character version (shipped 2026-11-21) is dropped; redo with objects only. Rush Royale: not approved, objects only. Kafa Topu 2 shipped with characters before this rule (redo only if the owner asks).

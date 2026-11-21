@@ -1,139 +1,83 @@
-"""Pokémon UNITE - shared parts for the concepts and the redesign (REDESIGN.md 3b).
+"""Pokémon UNITE - the game's OBJECTS (REDESIGN.md 3b, owner 2026-11-21: "Karakter yok,
+oyunun nesnesi"). No characters, faces or animals.
 
-Reference: the store icon (source.png) - three heroes charging LEFT in a staggered row
-(an orange dragon at the back-left, the yellow electric mouse in the middle-front, a white
-rabbit striker with an orange brow at the right), purple sky behind, orange floor.
-The game: two teams (purple / orange) score by carrying energy to the rival goal zones.
-Serious, not a toy: real thickness, light from the top, small eyes, no outlines.
-All heads face LEFT (as in the store icon).
+References (refs/, the owner's screenshots): the key art shows the GOAL RING - a thick gold
+torus with a blue inner face - and a glowing yellow energy ball; the UNITE logo ends in two
+team balls (orange left, purple right: a coloured top half, white bottom, dark band, white
+button); the arena screenshot shows round score zones, purple team left / orange team right.
 """
 import sys
 from pathlib import Path
 
-import numpy as np
-
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "_lib"))
 from obj import *  # noqa: F401,F403,E402
 
-YELLOW = ("#f9f06b", "#f6d32d", "#f5c211", "#e5a50a")
-ORANGE = ("#ffbe6f", "#ffa348", "#ff7800", "#c64600")
-WHITE = ("#ffffff", "#f6f5f4", "#deddda", "#9a9996")
+GOLD = ("#f9f06b", "#f6d32d", "#f5c211", "#e5a50a", "#c64600")
 PURPLE = ("#dc8add", "#c061cb", "#9141ac", "#613583")
-TEAM_O = ("#ffbe6f", "#ff7800", "#e66100", "#c64600")
+ORANGE = ("#ffbe6f", "#ffa348", "#ff7800", "#c64600")
 
 
-def _eye(ic, ex, ey, w, h, iris, name):
-    e = ellipse(ex, ey, w, h)
-    ic.path(geom_d(e), "#241f31", layer_id=f"{name}-eye")
-    if iris:
-        ic.path(geom_d(ellipse(ex - w * 0.15, ey + h * 0.15, w * 0.6, h * 0.6).intersection(e)), iris, layer_id=f"{name}-iris")
-    ic.path(geom_d(circ(ex - w * 0.25, ey - h * 0.4, max(0.9, w * 0.35))), "#ffffff", layer_id=f"{name}-glint")
+def ring(ic, cx, cy, rx, ry, w, depth=5, name="ring", inner=True):
+    """The gold goal ring seen at an angle: a torus (outer ellipse minus the hole), the far
+    inner wall blue (seen through the top of the hole), the hole itself transparent."""
+    outer = ellipse(cx, cy, rx, ry)
+    hole_ = ellipse(cx, cy, rx - w, ry - w * 0.8)
+    band = outer.difference(hole_)
+    solid(ic, band, face=[(0, GOLD[0]), (0.35, GOLD[1]), (0.75, GOLD[3]), (1, GOLD[4])], depth=depth, side=GOLD[4], layer=f"{name}-gold")
+    # the inner wall: the far (upper) part of the hole shows the ring's blue inside
+    wall = hole_.difference(move(hole_, 0, w * 0.55))
+    if inner:
+        ic.path(geom_d(wall), ic.linear([(0, "#1a5fb4"), (1, "#3584e4")], 0, cy - ry, 0, cy - ry + w * 1.6), layer_id=f"{name}-inner")
+    # metal sheen on the gold: a soft band along the upper left
+    sheen = ellipse(cx - rx * 0.05, cy - ry * 0.05, rx - w * 0.35, ry - w * 0.3).difference(
+        ellipse(cx + rx * 0.06, cy + ry * 0.06, rx - w * 0.35, ry - w * 0.3)).intersection(band)
+    ic.path(geom_d(sheen), "#ffffff", opacity=0.45, layer_id=f"{name}-sheen")
+    return band, hole_
 
 
-# ------------------------------------------------------------------ yellow electric mouse
-def mouse(ic, cx, cy, r, name="mouse", body=False):
-    """Head (3/4 view, facing left) with two long ears (dark tips), red cheek, small eye."""
-    lt, mid, sh, side = YELLOW
-    if body:
-        b = poly([(cx - r * 0.75, cy + r * 0.55), (cx + r * 0.80, cy + r * 0.55), (cx + r * 0.95, cy + r * 1.75),
-                  (cx - r * 0.85, cy + r * 1.75)], r * 0.35)
-        solid(ic, b, face=[(0, mid), (1, sh)], depth=3, side=side, layer=f"{name}-body")
-        arm = poly([(cx - r * 0.55, cy + r * 0.85), (cx - r * 1.15, cy + r * 0.95), (cx - r * 1.15, cy + r * 1.20),
-                    (cx - r * 0.45, cy + r * 1.20)], r * 0.14)
-        solid(ic, arm, face=[(0, lt), (1, mid)], depth=2, side=side, layer=f"{name}-arm")
-    ears = []
-    for k, (bx, tip) in enumerate((((cx + r * 0.55), (cx + r * 1.45, cy - r * 2.15)),
-                                   ((cx - r * 0.10), (cx + r * 0.25, cy - r * 2.45)))):
-        ear = poly([(bx - r * 0.34, cy - r * 0.55), tip, (bx + r * 0.36, cy - r * 0.45)], r * 0.10)
-        ears.append(ear)
-        solid(ic, ear, face=[(0, lt), (1, mid)] if k else [(0, mid), (1, sh)], depth=2, side=side, layer=f"{name}-ear{k}")
-        tipg = ear.intersection(circ(*tip, r * 0.62))
-        ic.path(geom_d(tipg), ic.linear([(0, "#3d3846"), (1, "#241f31")], 0, tip[1], 0, tip[1] + r * 0.6), layer_id=f"{name}-tip{k}")
-    head = unary_union([ellipse(cx, cy, r, r * 0.88), ellipse(cx - r * 0.12, cy + r * 0.30, r * 0.92, r * 0.62)])
-    solid(ic, head, face=[(0, lt), (0.5, mid), (1, sh)], depth=2.5, side=side, layer=f"{name}-head")
-    _eye(ic, cx - r * 0.52, cy - r * 0.08, r * 0.12, r * 0.17, None, name)
-    cheek = circ(cx + r * 0.18, cy + r * 0.12, r * 0.30)
-    ic.path(geom_d(cheek), ic.linear([(0, "#ed333b"), (1, "#c01c28")], 0, cy - r * 0.2, 0, cy + r * 0.45), layer_id=f"{name}-cheek")
-    mouth = poly([(cx - r * 0.86, cy + r * 0.36), (cx - r * 0.50, cy + r * 0.40), (cx - r * 0.64, cy + r * 0.62)], r * 0.06)
-    ic.path(geom_d(mouth), "#a51d2d", layer_id=f"{name}-mouth")
-    ic.path(geom_d(circ(cx - r * 0.64, cy + r * 0.54, r * 0.07).intersection(mouth)), "#f66151", layer_id=f"{name}-tongue")
-    return head
-
-
-# ------------------------------------------------------------------ white rabbit striker
-def rabbit(ic, cx, cy, r, name="rabbit"):
-    """White head facing left, a long ear swept back, orange brow band, red-ringed eye."""
-    lt, mid, sh, side = WHITE
-    ear = poly([(cx + r * 0.05, cy - r * 0.60), (cx + r * 0.55, cy - r * 2.05), (cx + r * 0.95, cy - r * 2.0),
-                (cx + r * 0.75, cy - r * 0.45)], r * 0.30)
-    solid(ic, ear, face=[(0, lt), (1, sh)], depth=2, side=side, layer=f"{name}-ear")
-    inner = poly([(cx + r * 0.30, cy - r * 0.75), (cx + r * 0.62, cy - r * 1.80), (cx + r * 0.72, cy - r * 0.70)], r * 0.12)
-    ic.path(geom_d(inner.intersection(ear)), ic.linear([(0, ORANGE[1]), (1, ORANGE[2])], 0, cy - r * 1.8, 0, cy - r * 0.7), layer_id=f"{name}-inner")
-    head = unary_union([ellipse(cx, cy, r * 0.92, r * 0.85),
-                        poly([(cx - r * 0.55, cy - r * 0.10), (cx - r * 1.15, cy + r * 0.35), (cx - r * 0.45, cy + r * 0.70)], r * 0.2)])
-    solid(ic, head, face=[(0, lt), (0.6, mid), (1, sh)], depth=2.5, side=side, layer=f"{name}-head")
-    brow = head.intersection(poly([(cx - r * 1.2, cy - r * 0.10), (cx - r * 0.2, cy - r * 1.0), (cx + r * 0.4, cy - r * 1.0),
-                                   (cx - r * 0.1, cy - r * 0.35), (cx - r * 1.2, cy + r * 0.12)]))
-    ic.path(geom_d(brow), ic.linear([(0, ORANGE[1]), (1, ORANGE[3])], 0, cy - r, 0, cy), layer_id=f"{name}-brow")
-    ring = ellipse(cx - r * 0.40, cy + r * 0.05, r * 0.24, r * 0.28)
-    ic.path(geom_d(ring), "#e01b24", layer_id=f"{name}-ring")
-    _eye(ic, cx - r * 0.42, cy + r * 0.07, r * 0.12, r * 0.17, "#1c71d8", name)
-    mouth = poly([(cx - r * 1.0, cy + r * 0.40), (cx - r * 0.55, cy + r * 0.45), (cx - r * 0.70, cy + r * 0.68)], r * 0.05)
-    ic.path(geom_d(mouth), "#a51d2d", layer_id=f"{name}-mouth")
-    return head
-
-
-# ------------------------------------------------------------------ orange dragon
-def dragon(ic, cx, cy, r, name="dragon"):
-    """Orange head facing left: long snout, a horn swept back, small teal eye, a fang,
-    cream lower jaw."""
-    lt, mid, sh, side = ORANGE
-    horn = poly([(cx + r * 0.30, cy - r * 0.55), (cx + r * 1.30, cy - r * 1.10), (cx + r * 0.75, cy - r * 0.20)], r * 0.12)
-    solid(ic, horn, face=[(0, lt), (1, mid)], depth=2, side=side, layer=f"{name}-horn")
-    head = unary_union([ellipse(cx + r * 0.10, cy - r * 0.05, r * 0.80, r * 0.70),
-                        poly([(cx - r * 0.20, cy - r * 0.45), (cx - r * 1.35, cy - r * 0.05), (cx - r * 1.40, cy + r * 0.45),
-                              (cx - r * 0.10, cy + r * 0.55)], r * 0.28)])
-    solid(ic, head, face=[(0, lt), (0.5, mid), (1, sh)], depth=2.5, side=side, layer=f"{name}-head")
-    jaw = head.intersection(box(0, cy + r * 0.28, 128, 128))
-    ic.path(geom_d(jaw), ic.linear([(0, "#f6f5f4"), (1, "#deddda")], 0, cy + r * 0.28, 0, cy + r * 0.6), layer_id=f"{name}-jaw")
-    fang = poly([(cx - r * 1.05, cy + r * 0.26), (cx - r * 0.80, cy + r * 0.26), (cx - r * 0.93, cy + r * 0.50)], r * 0.03)
-    ic.path(geom_d(fang), "#ffffff", layer_id=f"{name}-fang")
-    _eye(ic, cx - r * 0.05, cy - r * 0.22, r * 0.14, r * 0.16, "#2ec27e", name)
-    ic.path(geom_d(circ(cx - r * 1.15, cy + r * 0.02, r * 0.05)), "#c64600", layer_id=f"{name}-nostril")
-    return head
-
-
-# ------------------------------------------------------------------ the goal + energy
-GOLD = ("#f9f06b", "#f6d32d", "#f5c211", "#c64600")
-
-
-def goal(ic, cx, base_y, r, h, team=GOLD, name="goal"):
-    """The team goal: a thick ring on a pillar standing on a round pad. Ring centre = hole."""
-    lt, mid, sh, side = team
-    pad = ellipse(cx, base_y - r * 0.30, r * 1.25, r * 0.30)
-    solid(ic, pad, face=[(0, "#deddda"), (1, "#c0bfbc")], depth=4, side="#9a9996", top=False, layer=f"{name}-pad")
-    ring_cy = base_y - h
-    pillar = box(cx - r * 0.18, ring_cy + r * 0.6, cx + r * 0.18, base_y - r * 0.30)
-    ic.path(geom_d(pillar), ic.linear([(0, "#9a9996"), (0.45, "#f6f5f4"), (1, "#9a9996")], cx - r * 0.18, 0, cx + r * 0.18, 0), layer_id=f"{name}-pillar")
-    ring = circ(cx, ring_cy, r).difference(circ(cx, ring_cy, r * 0.62))
-    solid(ic, ring, face=[(0, lt), (0.5, mid), (1, sh)], depth=4, side=side, layer=f"{name}-ring")
-    inner = circ(cx, ring_cy, r * 0.62).difference(circ(cx, ring_cy - r * 0.10, r * 0.58)).difference(circ(cx, ring_cy, r * 0.5))
-    ic.path(geom_d(inner), ic.linear([(0, "#1a5fb4"), (1, "#3584e4")], 0, ring_cy - r * 0.6, 0, ring_cy + r * 0.6), layer_id=f"{name}-inner")
-    return ring, circ(cx, ring_cy, r * 0.62)
-
-
-def orb(ic, cx, cy, r, name="orb"):
-    """Glowing energy: a glass sphere, deep centre, soft highlight."""
+def energy(ic, cx, cy, r, name="energy"):
+    """The glowing energy ball: a glass sphere, hot centre, a swirl band, a highlight."""
     o = circ(cx, cy, r)
-    ic.path(geom_d(o), ic.radial([(0, "#f9f06b"), (0.55, "#f6d32d"), (1, "#e5a50a")], cx, cy + r * 0.2, r), layer_id=f"{name}-face")
-    ic.path(geom_d(ellipse(cx - r * 0.3, cy - r * 0.4, r * 0.38, r * 0.22)), "#ffffff", opacity=0.8, layer_id=f"{name}-hl")
+    solid(ic, o, face="#e5a50a", depth=1.5, side="#c64600", top=False, layer=f"{name}-body")
+    ic.path(geom_d(o), ic.radial([(0, "#ffffff"), (0.35, "#f9f06b"), (0.75, "#f6d32d"), (1, "#ff7800")], cx - r * 0.1, cy - r * 0.1, r), layer_id=f"{name}-glow")
+    swirl = ellipse(cx, cy + r * 0.05, r * 0.95, r * 0.32).difference(ellipse(cx, cy - r * 0.02, r * 0.85, r * 0.24)).intersection(o)
+    ic.path(geom_d(swirl), "#ffffff", opacity=0.55, layer_id=f"{name}-swirl")
+    ic.path(geom_d(ellipse(cx - r * 0.35, cy - r * 0.45, r * 0.30, r * 0.18)), "#ffffff", opacity=0.9, layer_id=f"{name}-hl")
     return o
 
 
+def team_ball(ic, cx, cy, r, team, name="ball"):
+    """A team ball (from the UNITE logo): coloured top half, white bottom, dark band, button."""
+    o = circ(cx, cy, r)
+    solid(ic, o, face="#c0bfbc", depth=2.5, side="#77767b", top=False, layer=f"{name}-shell")
+    bottom = o.intersection(box(0, cy, 128, 128))
+    ic.path(geom_d(bottom), ic.linear([(0, "#ffffff"), (1, "#c0bfbc")], 0, cy, 0, cy + r), layer_id=f"{name}-white")
+    top = o.intersection(box(0, 0, 128, cy))
+    ic.path(geom_d(top), ic.linear([(0, team[0]), (0.5, team[1]), (1, team[3])], 0, cy - r, 0, cy), layer_id=f"{name}-top")
+    band = o.intersection(box(0, cy - r * 0.08, 128, cy + r * 0.08))
+    ic.path(geom_d(band), "#3d3846", layer_id=f"{name}-band")
+    btn_o = circ(cx, cy, r * 0.30)
+    ic.path(geom_d(btn_o), "#3d3846", layer_id=f"{name}-btnrim")
+    btn = circ(cx, cy, r * 0.20)
+    ic.path(geom_d(btn), ic.linear([(0, "#ffffff"), (1, "#deddda")], 0, cy - r * 0.2, 0, cy + r * 0.2), layer_id=f"{name}-btn")
+    ic.path(geom_d(ellipse(cx - r * 0.42, cy - r * 0.55, r * 0.28, r * 0.16)), "#ffffff", opacity=0.6, layer_id=f"{name}-hl")
+    toplight(ic, o, layer=name)
+    return o
+
+
+def stand(ic, cx, top_y, base_y, w, name="stand"):
+    """Metal goal post on a round pad (the stadium goal)."""
+    pad = ellipse(cx, base_y - 6, w * 1.6, 6)
+    solid(ic, pad, face=[(0, "#deddda"), (1, "#c0bfbc")], depth=4, side="#9a9996", top=False, layer=f"{name}-pad")
+    post = box(cx - w / 2, top_y, cx + w / 2, base_y - 6)
+    ic.path(geom_d(post), ic.linear([(0, "#9a9996"), (0.45, "#f6f5f4"), (1, "#77767b")], cx - w / 2, 0, cx + w / 2, 0), layer_id=f"{name}-post")
+    return post
+
+
 def arena(ic, cx, cy, rx, ry, depth=6, name="arena"):
-    """Round arena platform: purple half / orange half, with thickness."""
+    """Round arena: purple half / orange half, with thickness."""
     a = ellipse(cx, cy, rx, ry)
     solid(ic, a.intersection(box(0, 0, cx, 128)), face=[(0, PURPLE[1]), (1, PURPLE[2])], depth=depth, side=PURPLE[3], top=False, layer=f"{name}-p")
-    solid(ic, a.intersection(box(cx, 0, 128, 128)), face=[(0, TEAM_O[1]), (1, TEAM_O[2])], depth=depth, side=TEAM_O[3], top=False, layer=f"{name}-o")
+    solid(ic, a.intersection(box(cx, 0, 128, 128)), face=[(0, ORANGE[1]), (1, ORANGE[2])], depth=depth, side=ORANGE[3], top=False, layer=f"{name}-o")
     toplight(ic, a, layer=name)
     return a

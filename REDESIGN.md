@@ -37,25 +37,21 @@ Study before every app: [docs/redesign/gnome-objects.png](docs/redesign/gnome-ob
 
 Wordmarks: letter shapes come from the source (`parts()`), never a font, never `<text>`.
 
-### 3b. Games and characters
+### 3b. Games — the game's objects, no characters
 
-Owner: *"Oyunun resmini çizsin ama oyuncak gibi olmasın, ciddi bir iş olsun… simgesi
-oyunu anlatsın."*
+Owner (2026-11-21): *"Karakter yok, oyunun nesnesi"* (replaces the earlier "draw the game's
+scene / keep the characters" rule).
 
-1. **References**: the store icon **plus at least 2 in-game screenshots** (from the owner —
-   ask for them in Q1 if you have none — or the store page's screenshots if you can open
-   them). Write in design.md what they show: number of characters, how they face each
-   other, signature gear (boots, ball, hat), key object, colours.
-2. **The icon tells the game**: its core scene with its own elements, simplified into 1–3
-   GNOME objects. **Keep the composition and the count** — they are the identity
-   (Kafa Topu 2 = two heads facing each other + their boots + the ball; Pokémon UNITE =
-   three characters + the goal).
-3. **Serious, not a toy**: realistic proportions, no big googly eyes, no cartoon outlines,
-   no blob shapes; real materials (leather, rubber, metal, cloth, glass) with GNOME light
-   and thickness; the HIG palette near the game's colours. Model: `docs/redesign/gnome-games.png`.
-4. **Adapt, do not copy**: redraw from the references; never trace or paste the poster.
-   Brand logos are never drawn from memory (AGENTS A2); for game characters the references
-   above replace memory — never draw a character from memory alone.
+1. **No characters**: never draw a character, face, animal or creature in a game icon.
+2. **1–3 objects of the game**: the things the game is played with, as GNOME objects
+   (Pokémon UNITE = the goal ring + the ball; Kafa Topu 2 = the ball + the football boot;
+   Rush Royale = its distinctive object). Model: `docs/redesign/gnome-games.png`
+   (Chess, Tali, Mahjongg — real objects, not people).
+3. **Serious**: real proportions and materials (leather, metal, rubber, glass, wood) with
+   GNOME light and thickness; no toy look, no cartoon outlines, no blob shapes.
+4. **Colours**: the HIG ramps nearest to the game's own colours.
+5. **References**: the store icon plus at least 2 in-game screenshots (ask in Q1 if you have
+   none); write in design.md which objects they show and their colours. Redraw, never trace.
 
 ## 4. Procedure — one app per session
 
@@ -64,7 +60,7 @@ oyunu anlatsın."*
              -> geometry.json, the parts as text, design.md, concepts/make_concepts.py
                 (4 concept stubs A-D), redesign.py
 2  STUDY     source.png + gnome-objects.png (+ gnome-games.png and the screenshots for a
-             game, §3b). Fill design.md: anchors, function object, references.
+             game, §3b: its objects, no characters). Fill design.md: anchors, function object, references.
 3  CONCEPTS  FOUR different ideas A-D from the ladder in concepts/make_concepts.py (rough,
              flat is fine; shapes from parts()/fit(), never from memory), then
              python3 work/<slug>/concepts/make_concepts.py && python3 tools/concepts.py <slug>

@@ -1,6 +1,5 @@
-"""Pokémon UNITE - round 3 concepts (REDESIGN 3b). Every concept keeps the identity:
-THREE heroes (dragon / electric mouse / rabbit striker) charging left + the team goal.
-Drawn with work/pokemon_unite/kit.py from the store icon (no tracing)."""
+"""Pokémon UNITE - round 4 concepts: the game's OBJECTS only (owner 2026-11-21: "Karakter
+yok, oyunun nesnesi"). Goal ring + ball; drawn with work/pokemon_unite/kit.py."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -9,42 +8,37 @@ OUT = Path(__file__).resolve().parent
 
 
 def A():
-    """the store crop: the three heroes in their staggered charge, the mouse in front."""
-    ic = gk.Icon("Pokemon UNITE concept A - charge")
-    dragon(ic, 36, 46, 19)
-    rabbit(ic, 92, 66, 21)
-    mouse(ic, 58, 70, 21, body=True)
+    """the goal ring standing on its edge, the energy ball in front of it (key art)."""
+    ic = gk.Icon("Pokemon UNITE concept A - ring + energy")
+    ring(ic, 58, 62, 46, 50, 13)
+    energy(ic, 92, 96, 20)
     return ic
 
 
 def B():
-    """the score: the mouse dunks an energy orb into the purple goal; the other two below."""
-    ic = gk.Icon("Pokemon UNITE concept B - dunk")
-    goal(ic, 82, 118, 22, 66)
-    orb(ic, 70, 44, 9)
-    mouse(ic, 48, 50, 17)
-    dragon(ic, 30, 98, 14)
-    rabbit(ic, 100, 100, 14)
+    """the stadium goal: the ring on a metal post, the energy ball dunking into it."""
+    ic = gk.Icon("Pokemon UNITE concept B - goal post")
+    stand(ic, 64, 70, 118, 8)
+    ring(ic, 64, 46, 38, 34, 11)
+    energy(ic, 64, 40, 15)
     return ic
 
 
 def C():
-    """round: the arena (purple half / orange half) with the three heroes on it."""
+    """round: the arena (purple / orange) with the ring lying on it as the score zone."""
     ic = gk.Icon("Pokemon UNITE concept C - arena")
-    arena(ic, 64, 104, 56, 14)
-    dragon(ic, 34, 78, 15)
-    rabbit(ic, 96, 82, 15)
-    mouse(ic, 62, 66, 18, body=True)
+    arena(ic, 64, 100, 58, 16)
+    ring(ic, 64, 96, 34, 10, 6, depth=3)
+    energy(ic, 64, 50, 22)
     return ic
 
 
 def D():
-    """the goal ring as the frame: the three heroes seen through/in front of it."""
-    ic = gk.Icon("Pokemon UNITE concept D - goal ring")
-    ring, inner = goal(ic, 64, 120, 40, 62)
-    dragon(ic, 38, 96, 14)
-    rabbit(ic, 92, 98, 14)
-    mouse(ic, 62, 72, 16)
+    """the ring + the two team balls (orange and purple, as in the UNITE logo)."""
+    ic = gk.Icon("Pokemon UNITE concept D - ring + team balls")
+    ring(ic, 64, 54, 46, 44, 12)
+    team_ball(ic, 38, 98, 19, ORANGE, "b1")
+    team_ball(ic, 90, 98, 19, PURPLE, "b2")
     return ic
 
 
