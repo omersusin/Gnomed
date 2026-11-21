@@ -1,3 +1,5 @@
+> LEGACY: describes the old automatic plate pipeline. Do not use it to design icons — see REDESIGN.md.
+
 # Lesson 1 — Concepts
 
 ## 1.1 What an icon pack is

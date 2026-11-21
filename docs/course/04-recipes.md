@@ -1,3 +1,5 @@
+> LEGACY: describes the old automatic plate pipeline. Do not use it to design icons — see REDESIGN.md.
+
 # Lesson 4 — Recipes: symptom → fix
 
 Every recipe has: the **symptom** (how it looks, and how `tools/check_icon.py` reports

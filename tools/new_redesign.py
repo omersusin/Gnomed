@@ -7,8 +7,8 @@ Needs work/<slug>/source.png (tools/add_source.py or tools/import_request.py mad
 Does, only what is missing (nothing existing is overwritten):
   work/<slug>/geometry.json  - MEASURES the source (work/_lib/auto.py): colour parts r0, r1 ...
   work/<slug>/design.md      - the design note; the gate reads its "approved:" line
-  work/<slug>/concepts/make_concepts.py - a WORKING template for the 3 rough concepts
-                               (run it: it writes concepts/A.svg B.svg C.svg)
+  work/<slug>/concepts/make_concepts.py - a WORKING template for the 4 rough concepts
+                               (run it: it writes concepts/A.svg B.svg C.svg D.svg)
   work/<slug>/redesign.py    - the final build (template; uses the measured parts)
 and prints the measured parts as text (colour, size, position) - no image needed.
 """
@@ -20,21 +20,28 @@ ROOT = Path(__file__).resolve().parent.parent
 DESIGN = """# {slug} - design note (REDESIGN.md)
 
 source: work/{slug}/source.png
+references (games: store icon + >= 2 in-game screenshots; what they show: number of
+  characters, how they face each other, signature gear, key object, colours):
 anchors (2-4 things that make the app recognisable; they must survive):
   1.
   2.
 function object (what the app does, as a physical thing):
 
-concepts (work/{slug}/concepts.png):
-  A (L1 the mark becomes an object):
-  B (L2 a GNOME object that carries the mark):
-  C (L3 material tile, only if A and B fail):
+concepts (work/{slug}/concepts.png) - four different ideas:
+  A:
+  B:
+  C:
+  D:
 
+# the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7)
 approved:
-styles: faithful=?
+keep:
+final:
+styles: symbol=<main> faithful=<kept or main> disc=<kept or main> rimmed=<kept or main>
+decisions I made myself (and why; mention them in Q2):
 techniques used (min. 3): thickness / material gradient / top light / recess / hole / secondary object / glass
 palette (GNOME HIG names):
-review (48/32 px, light + dark wallpaper, what is still weak):
+review (phone.png + review.png: light + dark, holes, baseline, what is still weak):
 """
 
 TEMPLATE = '''#!/usr/bin/env python3
@@ -59,13 +66,15 @@ def design():
 
 
 if __name__ == "__main__":
-    save_styles(SLUG, {{"faithful": design()}})   # add "disc"/"rimmed"/"symbol" only for user-approved alternatives
+    # REDESIGN.md 6: the MAIN design -> symbol (and every slot without its own design);
+    # kept concepts -> faithful (closest to the original) / disc (a round one) / rimmed
+    save_styles(SLUG, {{"symbol": design()}})
 '''
 
 CONCEPTS = '''#!/usr/bin/env python3
 """{slug} - 3 ROUGH concepts (REDESIGN.md step 3). Run:
     python3 work/{slug}/concepts/make_concepts.py && python3 tools/concepts.py {slug}
-Each function is ONE idea from the ladder; flat shapes are fine. Replace the example
+Each function is ONE idea from the ladder (FOUR different ideas); flat shapes are fine. Replace the example
 bodies. Every shape of the app's mark comes from P (measured), never from memory."""
 import sys
 from pathlib import Path
@@ -107,8 +116,17 @@ def C():
     return ic
 
 
+def D():
+    """a fourth, different idea (REDESIGN.md 6: four concepts; Q1 picks the main one for
+    Symbol and which others to keep for Faithful / Disc / Rimmed)."""
+    ic = gk.Icon("{slug} concept D")
+    for g, c in zip(fit(MARK, (24, 22, 104, 114), anchor="bottom"), COL):     # bottom 114 + side 4 = 118
+        solid(ic, g, face=c, depth=4)
+    return ic
+
+
 if __name__ == "__main__":
-    for name, fn in (("A", A), ("B", B), ("C", C)):
+    for name, fn in (("A", A), ("B", B), ("C", C), ("D", D)):
         fn().save(OUT / f"{{name}}.svg")
         print("wrote", (OUT / f"{{name}}.svg").name)
 '''
@@ -141,10 +159,10 @@ def main():
     print(f"""
 Next (REDESIGN.md):
   2. look at work/{slug}/source.png and docs/redesign/gnome-objects.png; fill anchors + function object
-  3. edit work/{slug}/concepts/make_concepts.py (3 different ideas), then
+  3. edit work/{slug}/concepts/make_concepts.py (4 different ideas, A-D), then
      python3 work/{slug}/concepts/make_concepts.py && python3 tools/concepts.py {slug}
-  4. show work/{slug}/concepts.png to the human, ask which one (2-4 options); write "approved:" with their answer
-  5. build the chosen concept in work/{slug}/redesign.py  ->  python3 tools/make_icon.py {slug}""")
+  4. Q1 (REDESIGN.md 7): main design + which to keep; write approved:/keep: as his quotes + date
+  5. build main + kept in redesign.py  ->  python3 tools/make_icon.py {slug}  ->  Q2""")
 
 
 if __name__ == "__main__":

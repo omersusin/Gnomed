@@ -2,12 +2,11 @@
 
 Everything here really happened while building Gnomed (Nov 2026, owner + Claude Code,
 plus one DeepSeek PR). Each line: **what happened → why → how it was fixed → the rule
-or check that prevents it now.** Read this once per session before you change an icon,
-a tool, the app or the docs. When the owner has to point out a new mistake, add it here
-in the same pull request that fixes it.
+or check that prevents it now.** Read **§10 (the owner's decisions) every session**; read
+the other sections when their topic comes up. When the owner has to point out a new
+mistake, add it here in the same pull request that fixes it.
 
-Linked from [REDESIGN.md](../REDESIGN.md) §9, [AGENTS.md](../AGENTS.md) and
-[CONTRIBUTING.md](../CONTRIBUTING.md) §15.
+Linked from [REDESIGN.md](../REDESIGN.md) §10, [AGENTS.md](../AGENTS.md) and CLAUDE.md.
 
 Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradients ·
 4 Size and baseline · 5 Styles and what the owner sees · 6 Pipeline and tools ·
@@ -27,7 +26,7 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | "Varsayılan mektup değil ama" | "default" was taken as the Faithful slot; he uses the **Symbol** APK | envelope in Faithful AND Symbol | "default" = what he sees on his phone (§5) |
 | He asked only a question ("why are these not the same size?") | — | answered first, offered the fix, did it when he said so | a question is not an order: answer, then offer |
 | Answers in English after he once wrote English | — | — | default language Turkish (CLAUDE.md); follow his last message's language |
-| "Beni böyle ikide bir sorma" — the owner was asked again and again (concept rounds, direction, permission) | every uncertainty became a question | question budget: concept choice + final look only, several apps in one call; games need no permission (§3b) | after two "none" answers decide yourself from the rules and show the result |
+| "Beni böyle ikide bir sorma" — the owner was asked again and again (concept rounds, direction, permission) | every uncertainty became a question | exactly two questions per app: Q1 concepts (main + keep), Q2 final = pack approval (REDESIGN §7, owner's decision 2026-11-21) | everything else: decide, write the reason in design.md, mention it in Q2 |
 
 ## 2. Identity and design
 | BCR's handset was lumpy | the phone's 192 px icon was blurry | traced from a sharp copy the owner sent (`work/bcr/clean-source.png`) | a blurry source is not final: ask for or use a sharp official copy |
@@ -50,8 +49,8 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | Hepsiburada's phone icon was an outdated poster | the installed app shows an old icon | the owner sent the official logos ("bunlardan birini kullan veya kendin yap") | an owner-supplied official logo is a valid source; keep the phone icon as `phone-icon.png` |
 | A white wordmark alone as Symbol | vanishes on light wallpapers | no Symbol, a margin, or the brand's own layout (Hepsiburada: orange wordmark + colour bar) | `check_icon` `visible_light/dark` |
 | Firefox Beta "BETA" letters thin slivers | letters are holes; the badge's lift side filled them | `holes_inlay` | look at letters/holes at 256 px |
-| Games round 1 (Kafa Topu 2, Pokémon UNITE, Rush Royale): a plain ball, a bolt, a hat — "hiç benzemiyorlar" | the docs said "ONE generic element from primitives" and I banned characters ("no character from memory" read too widely) | REDESIGN.md §3b: an original logo **inspired by the game** (hero/mascot traits + palette) | recognisable first; a generic object fails even if it is clean |
-| Games round 2: blobby traces of the poster — rejected | tracing a 512 px poster with few colours gives crude cut-outs; the owner wants a designed logo, not a copy | drawn new as GNOME objects (big-head footballer + ball; wizard hat + crown + gem + crystals; electric face + goal ring) | "direkt kopyala yapıştır yapmayacaksın" |
+| Games round 1 (Kafa Topu 2, Pokémon UNITE, Rush Royale): a plain ball, a bolt, a hat — "hiç benzemiyorlar" | the docs said "ONE generic element from primitives" and I banned characters ("no character from memory" read too widely) | superseded by REDESIGN.md §3b (2026-11-21): references, the scene's composition and count, serious materials | recognisable first; a generic object fails even if it is clean |
+| Games round 2: blobby traces of the poster — rejected | tracing a 512 px poster with few colours gives crude cut-outs; the owner wants a designed logo, not a copy | round 3 (one hero each) was also rejected ("iki kafa… üç karakter… çok çirkin", "ayakkabıları var"); see the 2026-11-21 games row | "direkt kopyala yapıştır yapmayacaksın"; REDESIGN §3b |
 | Aurex round 2: a white A without its blue field — "hiç benzemiyor" | an anchor (the blue field) was dropped | the A on a blue browser-window object | keep every anchor the owner sees: shape, colour field, accent |
 | Aurex: a gap inside the A ("orijinalinde boşluk yok") | the measured counter above the bead was kept as a hole | counter and the open notch above the bead filled | compare holes with the source |
 
@@ -145,15 +144,24 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | `make_icon` told redesigned apps to use the old recipes and go to pack_add | old hint text | redesign-aware hint: review → ask the owner → pack_add | — |
 | `fit()` centred wide marks, so free objects floated | centring is right for a mark ON an object, wrong for a free object | `fit(..., anchor="bottom")`, used by the templates | — |
 | Text-only models could not "open source.png" | the steps assumed eyes | `describe()` prints the parts; a POSTER warning when parts cover the whole tile | every visual step has a text alternative or says "ask the owner" |
+| Symbol insides filled: qobuz "o", saat face, discord eyes ("O harfinin içi dolu… saatin içi dolu") | Symbol builders painted tile-coloured enclosed areas white; `offset_d` dropped interior rings | PR #12: real holes, `painted_counters` only for white figure | `holes` check (D1) |
+| Games added to the pack without approval; `approved:` written by the agent | "beni sorma" read as "decide everything" | approval lines are quotes + date; Q2 = pack approval | `redesign` check format (D2) |
+| Game icons "çok çirkin", wrong composition (one head instead of two, no boots) | only the store poster, no screenshots, drawn from memory | games rule: screenshots, composition + count, serious materials | REDESIGN §3b |
+| One giant session (758k tokens), hours per app | everything in one conversation | new session per app/part | Budget rules (REDESIGN §8) |
 
-## 10. Decisions the owner made (do not undo them)
+## 10. Decisions the owner made (do not undo them — read every session)
 
 - App name **Gnomed**, applicationId **gnomed.it**, default language **English** (Turkish strings in `values-tr`).
 - Style choice **inside the app** (drawer, Apply popup, shortcut) and from the launcher popup; four styles Faithful / Disc / Rimmed / Symbol.
 - Releases are public on GitHub; signing key only in repository secrets.
 - Requests come from the phone (Gnomed's Request screen, any of its export ways); the owner uploads them.
-- Free adaptation allowed for posters/games ("istediğin gibi uyarla"); Clash Royale = two crowns.
 - Wallpapers calm, with grain, loaded from the repository.
-- Telegram: envelope (Faithful + Symbol), ring (Disc); the owner uses the **Symbol** style.
 - Only the owner touches `main`; every change is a PR he merges or not.
-- REDESIGN.md decides how icons look; one app per session; he approves concepts and the final board.
+- REDESIGN.md is the only design document; one app per session (`/clear` between apps).
+- **The owner uses the Symbol style**: every board shows Symbol first; no app is done without a Symbol.
+- **Every style slot a different design** (2026-11-21): "her stil yuvası farklı olursa çok iyi olur" — 4 concepts; main → Symbol, kept ones → Faithful / Disc / Rimmed (REDESIGN §6).
+- **Exactly two questions per app** (2026-11-21): Q1 concepts (main + keep), Q2 final; "Tamam, pakete ekle" is the pack approval (REDESIGN §7). Approval lines are his words in quotes + date.
+- **Games** (2026-11-21): "Oyunun resmini çizsin ama oyuncak gibi olmasın, ciddi bir iş olsun… simgesi oyunu anlatsın" — references (≥ 2 screenshots), the scene's composition and count, serious materials (REDESIGN §3b). Replaces the earlier "free adaptation / original logo" wording.
+- Holes are real holes in free styles (PR #12); painting them needs his words.
+- Telegram: envelope (Faithful + Symbol), ring (Disc).
+- Kafa Topu 2, Pokémon UNITE, Rush Royale: not approved; redo per DUZELTME-PLANI Part E, one per session.

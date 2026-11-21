@@ -90,9 +90,9 @@ def describe(slug):
     sb = P["silhouette"].bounds if "silhouette" in P and not P["silhouette"].is_empty else (0, 0, 0, 0)
     if (sb[2] - sb[0]) > 118 and (sb[3] - sb[1]) > 118 and len(info["regions"]) >= 4:
         lines.append("WARNING: the measured parts cover the whole tile - this is a POSTER / game art, "
-                     "not a logo. Design an ORIGINAL logo inspired by the game (REDESIGN.md 3b): the hero "
-                     "item / mascot traits + the measured palette, drawn new as a GNOME object. No copy "
-                     "or trace of the poster, no generic object. Do not ask the owner for permission.")
+                     "not a logo. Follow REDESIGN.md 3b: get >= 2 in-game screenshots (ask in Q1 if you "
+                     "have none), draw the game's scene with its composition and count, serious "
+                     "materials, no toy look; never trace the poster, never draw characters from memory alone.")
     return "\n".join(lines)
 
 
@@ -172,17 +172,13 @@ def cutout(ic, regions, depth=5, side=None, layer="cut"):
 
 
 def save_styles(slug, icons):
-    """Write work/<slug>/<slug>-<style>.svg for the given styles.  A style NOT given is
-    overwritten with the primary ONLY if an old (pre-redesign) SVG of it exists, so no
-    old logo-on-plate version survives in the pack after tools/pack_refresh.py."""
+    """Write work/<slug>/<slug>-<style>.svg for ALL four slots (REDESIGN.md 6):
+    icons = {"symbol": main, "faithful": kept, "disc": kept, "rimmed": kept} - the MAIN
+    design (symbol; or faithful when no symbol is given) also fills every slot without a
+    design of its own, so an app in the pack loses its old plate/disc/rim versions."""
     w = ROOT / "work" / slug
-    primary = icons.get("faithful") or next(iter(icons.values()))
+    main = icons.get("symbol") or icons.get("faithful") or next(iter(icons.values()))
     for st in ("faithful", "disc", "rimmed", "symbol"):
         out = w / f"{slug}-{st}.svg"
-        if st in icons:
-            icons[st].save(out)
-        elif out.exists():
-            primary.save(out)
-        else:
-            continue
-        print("wrote", out.relative_to(ROOT))
+        (icons.get(st) or main).save(out)
+        print("wrote", out.relative_to(ROOT), "" if st in icons else "(= main design)")

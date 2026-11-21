@@ -1,3 +1,5 @@
+> LEGACY: describes the old automatic plate pipeline. Do not use it to design icons — see REDESIGN.md.
+
 # Lesson 6 — Hand-built icons
 
 Use this when OVERRIDES cannot fix an app:

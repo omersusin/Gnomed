@@ -1,3 +1,5 @@
+> LEGACY: describes the old automatic plate pipeline. Do not use it to design icons — see REDESIGN.md.
+
 # Lesson 2 — Anatomy of a GNOME icon
 
 GNOME app icons are not flat logos. They show an object from above **and** a little

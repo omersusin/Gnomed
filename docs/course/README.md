@@ -1,3 +1,5 @@
+> LEGACY: describes the old automatic plate pipeline. Do not use it to design icons — see REDESIGN.md.
+
 # The Gnomed icon course
 
 A step-by-step course for **anyone who makes Gnomed icons — people and AI models of

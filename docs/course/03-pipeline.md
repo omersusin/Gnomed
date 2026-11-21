@@ -1,3 +1,5 @@
+> LEGACY: describes the old automatic plate pipeline. Do not use it to design icons — see REDESIGN.md.
+
 # Lesson 3 — The pipeline
 
 ![The pipeline in four pictures](img/03-pipeline.png)

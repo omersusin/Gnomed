@@ -1,3 +1,5 @@
+> LEGACY: describes the old automatic plate pipeline. Do not use it to design icons — see REDESIGN.md.
+
 # Contributing to Gnomed
 
 Gnomed is an Android icon pack that redraws app icons in the visual language of

@@ -1,3 +1,5 @@
+> LEGACY: describes the old automatic plate pipeline. Do not use it to design icons — see REDESIGN.md.
+
 # Lesson 5 — Worked example: one app from zero
 
 This is **the routine**. Do exactly these steps, in this order, for every new app.
