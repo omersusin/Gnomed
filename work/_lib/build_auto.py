@@ -7,8 +7,9 @@ Same construction as group 1:
   disc     = the tile colour as a disc + the mark raised
   rimmed   = Adwaita rim + recessed disc in the tile colour + the mark raised
   symbol   = the mark itself as the object:
-             - white marks on a coloured tile are inverted (mark takes the tile colour,
-               enclosed counters become white) - GNOME Calls/Telefon construction;
+             - white marks on a coloured tile are inverted (mark takes the tile colour);
+               enclosed counters / eyes / holes stay REAL HOLES (transparent, the chin shows
+               as the inner wall) - never painted white;
              - neutral marks on a dark neutral tile keep a tile-coloured margin (WhatsApp
                construction) so they read on light and dark wallpapers;
              - marks on a white/transparent tile keep their own colours.
@@ -28,9 +29,15 @@ INK = "#241f31"
 
 # slug -> options. keys:
 #   skip: [styles] not built (style falls back to Faithful)       scale: mark size factor
+#   painted_counters: True - the Symbol paints the mark's enclosed tile-coloured areas
+#     (white letters, keys, lines, eye whites that are FIGURE) instead of cutting them as
+#     real holes. Default = real holes (letter counters, eyes, dials see-through).
 #   symbol: "keep" | "invert" | "margin"   force a symbol mode      face: plate/disc colour override
 #   regions: {old_hex: new_hex} colour snaps decided in review       note: text for the brief
 OVERRIDES = {
+    "twofas_auth": {"painted_counters": True, "note": "white lines are figure"},
+    "gboardwu": {"painted_counters": True, "note": "white keys are figure"},
+    "frostkeys": {"painted_counters": True, "note": "white keys are figure"},
     # waves on the tile are photo-like shading; the identity is the white wordmark
     "anker_soundcore": {"only_white": True, "skip": ["symbol"],
                         "note": "wordmark only (tile waves are photographic shading); no Symbol: a white wordmark alone vanishes on light wallpapers"},
@@ -43,7 +50,7 @@ OVERRIDES = {
     # blurry 192 px source: the pale green region is the blur halo + the semi-transparent mic
     "bcr": {"note": "blurry source: halo around the handset dropped, the separate pale microphone kept (semi-transparent white in the source), traced with 1.6 u smoothing"},
     "databackup": {"keep_ground": True, "note": "peach tile kept (it is the app's colour, not a neutral canvas)"},
-    "enpara": {"light": True, "note": "white tile; the colour bars are part of the mark"},
+    "enpara": {"light": True, "painted_counters": True, "note": "white tile; the colour bars are part of the mark; the white ring inside is figure"},
     "exteraless": {"face": "#ffe9e9", "flat": True, "keep_ground": True, "drop": ["#ffdbdb"], "merge_grad": [["#ff8291", "#ff75a1", "#ff937f", "#ffa865", "#ffbb4d"]],
                    "note": "soft pink glow dropped (no glows in GNOME); the chevron is ONE part with its measured pink->orange gradient (no bands)"},
     "bitchord": {"merge_grad": [["#edaeb8", "#f8e3e6"]], "note": "the waves are one white->pink gradient (measured), not two flat bands"},
@@ -51,7 +58,7 @@ OVERRIDES = {
                      "note": "fox flame = one yellow->red gradient, globe = one purple gradient (check_icon: stripes + low trace IoU); BETA badge kept"},
     "firefox_nightly": {"merge_grad": [["#28baf6", "#5d84fe", "#7a4ff4"]],
                         "note": "the fox body is one cyan->violet gradient (no hard edge to the purple belly); tail and globe keep their tones"},
-    "reddit": {"symbol": "margin", "note": "Symbol: white Snoo with an orange margin (Reddit's own logo use), not an orange Snoo"},
+    "reddit": {"symbol": "margin", "painted_counters": True, "note": "Symbol: white Snoo with an orange margin (Reddit's own logo use), not an orange Snoo"},
     "pentas": {"keep_ground": True, "note": "peach tile kept"},
     "t_rk_telekom": {"erase": [(28, 102, 80, 128)], "drop": ["#16719d"], "note": "the dark-blue triangle at the bottom is a blurred background shape, not part of the logo (owner); removed and the mark re-aligned; the rest of that dark-blue region was only blur rims around the triangles (dropped)"},
     "stride": {"merge_grad": [["#83eca0", "#28c79b", "#1f916b"]], "note": "runner is one light-green->teal gradient; the dark track stays separate"},
@@ -78,7 +85,7 @@ OVERRIDES = {
     "vortex": {"flat": True, "face": "#0d0e0d", "drop": ["#0d0e0d"], "note": "flat black tile (the spiral touching the edge skewed the gradient fit)"},
     "wupp": {"flat": True, "face": "#131c23", "drop": ["#131c23"], "note": "flat dark tile behind the green bubble"},
     "walpy": {"scale": 0.76, "note": "blurry signature: only its sharp core traced (threshold 0.85); kept at the source's ~40 % proportion"},
-    "mt_manager": {"scale": 1.18, "note": "folder object larger on the plate (was a small box in a big plate)"},
+    "mt_manager": {"scale": 1.18, "painted_counters": True, "note": "folder object larger on the plate (was a small box in a big plate)"},
     "ashell_you": {"margin_w": 7.0, "symbol_scale": 0.86, "note": "black robot: wide white margin so the Symbol still reads on dark wallpapers (check_icon visible_dark)"},
     "survivor_io": {"skip": ["symbol"], "note": "WEAK: posterised trace of the game poster, not a real GNOME conversion"},
 }
@@ -388,8 +395,14 @@ class App:
         mode = self.symbol_mode()
         ic = gk.Icon(f"{self.slug} - Free Symbol", fam.note(self.slug) + f" | symbol mode: {mode}")
         items, sil, s = self.marks(self.box("symbol"), ic)
+        hd = None
+        if "holes" in self.P and not self.o.get("painted_counters"):
+            ref = self.P["silhouette"]
+            hd = place([self.P["holes"], ref], self.box("symbol"), ref=[ref])[0][0]
         if mode == "margin":
-            body = fam.offset_d(sil, self.o.get("margin_w", 3.5))
+            # a dark margin keeps the counters open (qobuz "o"); a light margin is a white
+            # sticker whose counters are the sticker itself (kernelsu_next) - nothing to cut
+            body = fam.offset_d(sil, self.o.get("margin_w", 3.5), holes_d=None if self.light else hd)
             if self.light:
                 x0, _, x1, _ = gk.bbox_d(body)
                 c = ic.chin_gradient("#c0bfbc", x0, x1, (x1 - x0) * 0.3,
@@ -421,12 +434,12 @@ class App:
                             layer_id=f"body-{i}-chin", fill_rule="evenodd")
                 for i, (d, f, g) in enumerate(faces):
                     ic.path(d, g or f, layer_id=f"body-{i}-face", fill_rule="evenodd")
-            if "holes" in self.P:
-                x0, y0, x1, y1 = self.I["mark_bbox"]
+            if self.o.get("painted_counters") and "holes" in self.P:
+                # owner-approved exception only: counters painted white
                 ref = self.P["silhouette"]
-                hd, _ = place([self.P["holes"], ref], self.box("symbol"), ref=[ref])
-                ic.path(hd[0], "#ffffff", layer_id="counters", fill_rule="evenodd")
-                ic.path(hd[0] + gk.translate_d(hd[0], 0, 1.4), "#000000", layer_id="counters-recess",
+                hp, _ = place([self.P["holes"], ref], self.box("symbol"), ref=[ref])
+                ic.path(hp[0], "#ffffff", layer_id="counters", fill_rule="evenodd")
+                ic.path(hp[0] + gk.translate_d(hp[0], 0, 1.4), "#000000", layer_id="counters-recess",
                         opacity=0.10, fill_rule="evenodd")
             return ic
         # keep: the mark's own colours, every region extruded (all chins first)
@@ -438,10 +451,10 @@ class App:
             for i, (d, f, b) in enumerate(items):
                 ic.path(d, f, layer_id=f"body-{i}-face", fill_rule="evenodd")
         self.inlays(ic, items)
-        if (self.light or self.o.get("keep_ground")) and "holes" in self.P:
+        if (self.o.get("painted_counters") or self.o.get("keep_ground")) and "holes" in self.P:
             ref = self.P["silhouette"]
-            hd, _ = place([self.P["holes"], ref], self.box("symbol"), ref=[ref])
-            ic.path(hd[0], "#ffffff" if self.light else self.ground, layer_id="counters", fill_rule="evenodd")
+            hp, _ = place([self.P["holes"], ref], self.box("symbol"), ref=[ref])
+            ic.path(hp[0], "#ffffff" if self.light else self.ground, layer_id="counters", fill_rule="evenodd")
         return ic
 
     def build(self):
