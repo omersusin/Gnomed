@@ -59,7 +59,7 @@ def main():
     err = register(slug, png, label, comp)
     if err:
         sys.exit(err)
-    print(f"ok: work/{slug}/source.png + batch_apps.tsv. Next: python3 tools/make_icon.py {slug}")
+    print(f"ok: work/{slug}/source.png + batch_apps.tsv. Next: python3 tools/next.py {slug}")
 
 
 if __name__ == "__main__":

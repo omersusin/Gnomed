@@ -110,7 +110,8 @@ def main():
         print(f"holes: {len(big)} transparent area(s) enclosed by paint, together {sum(big) / paint.size:.1%} of the canvas "
               f"(letter counters, eyes, a ring's centre - REDESIGN.md 5 wants them transparent)")
     else:
-        print("holes: none (no transparent area is enclosed by paint)")
+        print("holes: none transparent (no transparent area is enclosed by paint). Fine when the mark is printed ON")
+        print("  an object (a label, stamp, page shows through its holes) - check_icon's 'holes' line says which.")
     if opaque_tile:
         print("  NOTE: a source tile has no transparency - its holes are painted in the tile colour. The MEASURED")
         print("  holes of a source are the 'holes' part of: python3 -c \"import sys; sys.path.insert(0,'work/_lib');"

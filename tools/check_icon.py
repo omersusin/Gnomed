@@ -234,13 +234,13 @@ def main():
         out = subprocess.run([sys.executable, str(SK / "lint_svg.py"), str(svg)], capture_output=True, text=True).stdout
         fail = "[FAIL]" in out
         add(st, "lint", "FAIL" if fail else "PASS", "FAIL" if fail else "ok",
-            "read the lint message; edge contact -> smaller scale (recipe R10)" if fail else "")
+            "read the lint message; edge contact -> make the object smaller (inside 8..120)" if fail else "")
         a = render(svg)
         vl, vd = visible(a, LIGHT), visible(a, DARK)
         if st == "symbol":
             # no plate: the object itself must read on BOTH wallpapers
-            for name, v, rec in (("visible_light", vl, "R6: symbol mode margin, or skip the symbol"),
-                                 ("visible_dark", vd, "R6: symbol mode margin / light edge, or skip the symbol")):
+            for name, v, rec in (("visible_light", vl, "too pale on a light wallpaper: darker side/face (docs/PLAYBOOK.md#fix-fail)"),
+                                 ("visible_dark", vd, "too dark on a dark wallpaper: lighter face, top light (docs/PLAYBOOK.md#fix-fail)")):
                 stt = "PASS" if v >= 0.55 else ("WARN" if v >= 0.25 else "FAIL")
                 add(st, name, stt, round(v, 2), "" if stt == "PASS" else rec)
         else:
@@ -248,10 +248,12 @@ def main():
             # edge separate it; it must read clearly on at least ONE of the two
             v = max(vl, vd)
             stt = "PASS" if v >= 0.55 else "FAIL"
-            add(st, "visible", stt, f"light {vl:.2f} / dark {vd:.2f}", "" if stt == "PASS" else "R6: plate colour too close to both wallpapers / mark too faint")
+            add(st, "visible", stt, f"light {vl:.2f} / dark {vd:.2f}", "" if stt == "PASS" else "vanishes on both wallpapers: stronger colours (docs/PLAYBOOK.md#fix-fail)")
         m, bottom = mass_and_bottom(a)
-        lo, hi = (0.20, 0.75) if st == "symbol" else (0.40, 0.75)
-        add(st, "mass", "PASS" if lo <= m <= hi else "WARN", round(m, 2), "" if lo <= m <= hi else "R10 scale")
+        # a redesign is a free object in EVERY slot: one range for all (tools/describe_icon.py uses it too)
+        lo, hi = (0.35, 0.75) if is_redesign else ((0.20, 0.75) if st == "symbol" else (0.40, 0.75))
+        add(st, "mass", "PASS" if lo <= m <= hi else "WARN", round(m, 2), "" if lo <= m <= hi else
+            "the icon looks thin: bigger object, or a secondary object in front (docs/PLAYBOOK.md#fix-fail, mass)")
         blo, bhi = {"faithful": (114, 118.5), "disc": (120, 126.5), "rimmed": (120, 126.5), "symbol": (108, 124.5)}[st]
         if is_redesign:
             blo, bhi = 108, 126.5          # free objects: GNOME icons end anywhere from 108 to 126
@@ -266,7 +268,7 @@ def main():
                     pass
         if ssim is not None:
             stt = "PASS" if ssim >= 0.72 else ("WARN" if ssim >= 0.62 else "FAIL")
-            add(st, "legibility32", stt, ssim, "" if stt == "PASS" else "R11 (bigger mark, drop tiny details, thicker strokes)")
+            add(st, "legibility32", stt, ssim, "" if stt == "PASS" else "details vanish at 32 px: bigger parts, drop tiny details, strokes >= 2 px")
         # holes: the Symbol of every app and every style of a redesign (plates are exempt:
         # there the holes show the plate, which is correct)
         if st == "symbol" or is_redesign:

@@ -191,7 +191,10 @@ new rule (e.g. Kafa Topu 2: `characters: no`, anchors = the ball and the boot) a
 
 **Goal:** the approved concept (and the kept ones) as finished GNOME objects + review images.
 1. Copy the approved function from `concepts/make_concepts.py` into `work/<slug>/redesign.py`
-   (and the kept ones). Polish: thickness, light from the top, a secondary object (REDESIGN.md §5).
+   (and the kept ones). redesign.py must `from objects import *` (as the concepts file does) to
+   use the ready objects. Polish: thickness, light from the top, a secondary object (REDESIGN.md §5).
+   A mark printed on a white/light surface (label, stamp, page) must be in a strong colour (the
+   brand colour) — a white mark on a white label vanishes.
 2. End with `save_styles(SLUG, {"symbol": main(), "faithful": …, "disc": …, "rimmed": …})`;
    a slot you leave out gets the main design. Write the slots into design.md `styles:`.
 3. Build:
@@ -222,7 +225,7 @@ Annotated examples: [telegram](playbook/telegram.md) (mark on an envelope stamp)
 | `visible_light` / `visible_dark` (WARN < 0.55, FAIL < 0.25) | vanishes on a light / dark wallpaper | darker side (ramp 4–5) / lighter face (ramp 1–3) |
 | `legibility32` | details vanish at 32 px | fewer, bigger parts; strokes ≥ 2 px |
 | `faithful` | no Faithful SVG | `save_styles` writes all slots |
-| `mass` (WARN) | the icon looks thin | object +10–15 %, taller, or a secondary object |
+| `mass` (WARN, < 0.35) | the icon looks thin | object +10–15 %, taller, or a secondary object. A TALL thin object (bottle) cannot grow: add a secondary object in front at the lower right (e.g. `water_drop`), or choose a wider object |
 | `baseline` (WARN) | not on the line | the bottom incl. side at 118 |
 Then `python3 tools/make_icon.py <slug>` again.
 
@@ -252,7 +255,8 @@ python3 tools/check_icon.py <slug>                                    # 0 FAIL
 An app already in the pack but without Disc/Rimmed/Symbol slots needs `pack_add` (adds the
 `_alt1/_alt2/_alt3` slots) **and** `pack_refresh` (re-renders the main icon). Category: `next.py`
 fills in the app's current one; for a new app it lists them (Security, Social, Media, System, AI,
-Tools, Browsers, Finance, Weather, Games, Education, Shopping) — pick the closest.
+Tools, Browsers, Finance, Weather, Games, Education, Shopping) — pick the closest and name it in Q2
+(`Telefonuna: … kategori: X`). A new category only when the owner asks for one.
 Mistakes: hand-editing XML/PNG (forbidden); `pack_refresh` on the whole pack (rebuild only yours).
 
 ## log

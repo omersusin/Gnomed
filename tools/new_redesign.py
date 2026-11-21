@@ -54,7 +54,7 @@ Build:  python3 tools/make_icon.py {slug}      (runs this file, then review + ga
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "work/_lib"))
-from obj import *  # noqa: F401,F403,E402
+from objects import *  # noqa: F401,F403,E402   (objects.py + obj.py: envelope, bottle, fit, solid, save_styles ...)
 SLUG = Path(__file__).resolve().parent.name
 P = parts(SLUG)               # measured parts: P["r0"], P["r1"], ..., P["silhouette"], P["holes"]
 # print(describe(SLUG))       # colours / sizes / positions as text

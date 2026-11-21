@@ -292,7 +292,9 @@ def q2_text(slug, w, text, rows, in_pack, missing, stale):
     p = sum(r["status"] == "PASS" for r in rows)
     weak = sorted({WARN_TR.get(r["check"], r["check"]) for r in wn})
     if not in_pack:
-        phone = "yeni simge pakete eklenir (her stil için bir resim); hiçbir şey silinmez"
+        cat = category_of(slug)
+        phone = ("yeni simge pakete eklenir (her stil için bir resim; kategori: "
+                 f"{cat or '<KATEGORİ - listeden seç>'}); hiçbir şey silinmez")
     else:
         parts = []
         if stale or True:
@@ -327,11 +329,16 @@ def state_of(slug, cheap=False, use_git=True):
     approved = line(text, "approved")
     if not quoted(approved):
         if not anchors_filled(text) or not function_filled(text) or \
-                not line(text, "kind").lower().startswith(("app", "game")):
+                not line(text, "kind").lower().startswith(("app", "game")) or \
+                (game and line(text, "characters").lower().startswith("yes")):
             return "FILL_DESIGN", {"game": game}
         svgs = sorted((w / "concepts").glob("*.svg"))
         if len(svgs) < 4:
             return "DRAW_CONCEPTS", {"game": game, "n": len(svgs)}
+        cl = concept_lines(text)
+        missing = [p.stem for p in svgs if not cl.get(p.stem)]
+        if missing:
+            return "DRAW_CONCEPTS", {"game": game, "n": len(svgs), "lines": missing}
         if not (w / "concepts.png").exists() or board_current(slug) is False:
             return "BOARD", {}
         return "ASK_Q1", {"game": game, "text": text}
@@ -405,6 +412,11 @@ def run_slug(slug):
              f"python3 -c \"import sys; sys.path.insert(0,'work/_lib'); from obj import describe; print(describe('{slug}'))\"",
              "Game? REDESIGN.md 3b: no characters, faces or animals - 1-3 of the game's OBJECTS.",
              "Pick the object from the decision table in docs/PLAYBOOK.md (app type -> object) and docs/redesign/OBJECTS.md."])
+    elif st == "DRAW_CONCEPTS" and info.get("lines"):
+        say(st, "describe each concept in one line in design.md (the owner's Q1 text is built from them)",
+            [f"In work/{slug}/design.md, under 'concepts (...) - four different ideas:', write for {', '.join(info['lines'])}:",
+             "  A: <in plain words, what the object is and where the mark sits>   (example: 'A: a blue glass bottle, the",
+             "     drop on its white label'). One line each, indented two spaces, letter + colon."])
     elif st == "DRAW_CONCEPTS":
         say(st, f"draw FOUR different rough ideas A-D (now {info['n']}) in work/{slug}/concepts/make_concepts.py",
             ["Each function A()..D() returns an icon; ideas from REDESIGN.md 3 (L1 mark as object / L2 object that carries\n"
@@ -421,7 +433,8 @@ def run_slug(slug):
              "  and replace a concept that is only the logo on a plain disc or square."])
     elif st == "ASK_Q1":
         say(st, "Q1: the owner chooses the main design and which others to keep",
-            plate_warning(slug) + ["Send the text below (Turkish). Then STOP. When he answers, write his words in design.md:",
+            plate_warning(slug) + ["Translate the concept lines (A: ..., B: ...) into short, plain Turkish in the text.",
+                                   "Send the text below (Turkish). Then STOP. When he answers, write his words in design.md:",
              f'  approved: <letter> - "<his answer to Soru 1, verbatim>" ({TODAY})',
              f'  keep: <letters or none> - "<his answer to Soru 2, verbatim>" ({TODAY})',
              "If he answered 'Hiçbiri, yeniden dene': archive concepts/ as concepts-roundN/ and draw 4 new ones.",
@@ -593,18 +606,46 @@ def start_redo(slug):
             "def A():\n    ic = gk.Icon(\"A\")\n    # ... compose objects here ...\n    return ic\n\n\n"
             "if __name__ == \"__main__\":\n    for name, fn in ((\"A\", A),):   # add B, C, D\n"
             "        fn().save(OUT / f\"{name}.svg\")\n        print(\"wrote\", name)\n", encoding="utf-8")
-    out = []
+    out, in_old, in_anch = [], False, False
     for ln in text.splitlines():
         key = ln.split(":", 1)[0].lower() if ":" in ln else ""
+        if in_anch and not re.match(r"\s+\d\.", ln):
+            out += ["anchors (2-4 things that make the app recognisable; they must survive):", "  1.", "  2.", "  3."]
+            in_anch = False
+        if ln.lower().startswith("anchors"):
+            out.append("old anchors (before the redo):")
+            in_anch = True
+            continue
+        if in_anch:
+            out.append(re.sub(r"^(\s+)(\d\.)", r"\1old \2", ln))
+            continue
+        if key.startswith("function object"):
+            out.append("old " + ln)
+            out.append("function object (what the app does, as a physical thing):")
+            continue
+        if key == "characters" and line(text, "kind").lower().startswith("game"):
+            out.append("characters: no   (REDESIGN.md 3b; before the redo: " + ln.split(":", 1)[1].strip() + ")")
+            continue
+        if key == "ladder":
+            out.append("ladder:   (old: " + ln.split(":", 1)[1].strip() + ")")
+            continue
+        if in_old and not re.match(r"\s+[A-H]\b", ln):
+            out += ["concepts (work/" + slug + "/concepts.png) - four different ideas:", "  A:", "  B:", "  C:", "  D:"]
+            in_old = False
         if key in ("approved", "keep", "final"):
             out.append(f"history-{key}: {ln.split(':', 1)[1].strip()}   [before the redo, concepts-round{n}/]")
             out.append(f"{key}:")
         elif key == "redo":
             out.append("redo-started:" + ln.split(":", 1)[1] + f" ({TODAY}, old concepts -> concepts-round{n}/)")
-        elif re.match(r"\s+[A-H]:", ln):
-            out.append(ln.replace(":", " (old round):", 1))
+        elif ln.lower().startswith("concepts"):
+            out.append(f"old concepts (round {n}, before the redo):")
+            in_old = True
+        elif in_old:
+            out.append(re.sub(r"^(\s+)([A-H])\b", r"\1old \2", ln))
         else:
             out.append(ln)
+    if in_old:
+        out += ["concepts (work/" + slug + "/concepts.png) - four different ideas:", "  A:", "  B:", "  C:", "  D:"]
     (w / "design.md").write_text("\n".join(out) + "\n", encoding="utf-8")
     print(f"redo started: old concepts in work/{slug}/concepts-round{n}/, approval lines cleared in design.md.")
     print(f"Fix design.md (kind / anchors / function object for the new rule), then: python3 tools/next.py {slug}")

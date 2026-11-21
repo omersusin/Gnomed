@@ -58,10 +58,18 @@ def main():
         sheet.paste(im, (x + 11, y + 6), im)
         dr.text((x + 6, y + cell - 4), fname, fill="#241f31", font=font)
         x0, y0, x1, y1 = (round(v) for v in g.bounds)
-        doc = (inspect.getdoc(getattr(O, fname)) or "").split("\n")[0]
+        doc = " ".join((inspect.getdoc(getattr(O, fname)) or "").split())
         md.append(f"| `{fname}` | {use} | {SHEET_SIZE[fname]} | {x0} {y0} {x1} {y1} | {doc} |")
     sheet.save(ROOT / "docs/redesign/objects.png")
-    md += ["", "Ramps: " + ", ".join(f"`{k}`" for k in O.RAMP), ""]
+    md += ["", "## Where to put the app's mark on an object (boxes for `fit()`)", "",
+           "| helper | gives |", "|---|---|"]
+    for h in ("envelope_stamp", "browser_page", "bottle_label", "bag_front", "goal_ring_centre"):
+        fn = getattr(O, h)
+        md.append(f"| `{h}{inspect.signature(fn)}` | {' '.join((inspect.getdoc(fn) or '').split())} |")
+    md += ["", "Example: `bottle(ic, 64, 118, 54, ramp=RAMP[\"Blue\"])` then",
+           "`for g, c in zip(fit(MARK, bottle_label(64, 118, 54)), COL): solid(ic, g, face=c, depth=0, top=False)`.",
+           "A white mark on a white label/stamp vanishes: print it in the brand colour (Telegram's stamp: the plane in blue).",
+           "", "Ramps: " + ", ".join(f"`{k}`" for k in O.RAMP), ""]
     (ROOT / "docs/redesign/OBJECTS.md").write_text("\n".join(md) + "\n")
     print("wrote docs/redesign/objects.png + docs/redesign/OBJECTS.md")
 

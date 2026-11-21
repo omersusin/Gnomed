@@ -101,7 +101,7 @@ Apps: 96 · with FAIL: 89 · with WARN: 39
 | `kafa_topu_2` | 0 | 3 | faithful · mass · 0.33 → R10 scale; disc · mass · 0.36 → R10 scale; rimmed · legibility32 · 0.653 → R11 (bigger mark, drop tiny details, thicker strokes) |
 | `pokemon_unite` | 0 | 3 | faithful · mass · 0.29 → R10 scale; disc · mass · 0.37 → R10 scale; rimmed · mass · 0.37 → R10 scale |
 | `rush_royale` | 0 | 3 | faithful · mass · 0.36 → R10 scale; disc · mass · 0.39 → R10 scale; rimmed · mass · 0.36 → R10 scale |
-| `aurex_browser` | 0 | 1 | app · plain_shape · plain square/box (fills 99%) → a real box object (envelope, case)? say so in design.md 'shape-ok |
+| `aurex_browser` | 0 | 1 | faithful · plain_shape · square tile/plate (fills 99% of its box) → a tile with the logo on it is 'the logo on a plate' (REDESIGN §1) - allowed only as L3 for a pure wordmark, or a real square object (window, calendar) - say which in Q2 |
 | `horus` | 0 | 1 | faithful · mass · 0.3 → R10 scale |
-| `telegram` | 0 | 1 | app · plain_shape · plain square/box (fills 100%) → a real box object (envelope, case)? say so in design.md 'shape-ok |
+| `telegram` | 0 | 1 | faithful · plain_shape · plain square/box (fills 100%) → a real box object (envelope, case)? say so in design.md 'shape-ok |
 | `andvm` | 0 | 0 | clean |
