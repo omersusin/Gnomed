@@ -397,6 +397,9 @@
     <item drawable="pokemon_unite_alt1" name="Pokémon UNITE (Disc)" />
     <item drawable="pokemon_unite_alt2" name="Pokémon UNITE (Rimmed)" />
     <item drawable="pokemon_unite_alt3" name="Pokémon UNITE (Symbol)" />
+    <item drawable="rush_royale_alt1" name="Rush Royale (Disc)" />
+    <item drawable="rush_royale_alt2" name="Rush Royale (Rimmed)" />
+    <item drawable="rush_royale_alt3" name="Rush Royale (Symbol)" />
 
     <category title="Education" />
     <item drawable="duolingo" name="Duolingo" />

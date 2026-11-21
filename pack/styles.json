@@ -467,6 +467,10 @@
       "rimmed": "pokemon_unite_alt2",
       "symbol": "pokemon_unite_alt3"
     },
-    "rush_royale": {}
+    "rush_royale": {
+      "disc": "rush_royale_alt1",
+      "rimmed": "rush_royale_alt2",
+      "symbol": "rush_royale_alt3"
+    }
   }
 }
