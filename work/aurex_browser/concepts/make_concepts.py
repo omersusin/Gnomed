@@ -1,109 +1,62 @@
-"""Rough concepts A/B/C for aurex_browser (REDESIGN.md step 3).
-
-Measured masks from work/aurex_browser/geometry.json: r0/r1 = the white A faces,
-r2 = its dark blue side, r3 = the cyan sphere, holes = the counter.
-"""
-import json
+"""Aurex Browser - round 3 (round 2 'hiç benzemiyor'): the anchors are the BLUE field,
+the white A and the cyan ball together. Measured parts r0/r1 (A), r3 (ball), blue
+#53a2fa -> #305fde."""
 import sys
 from pathlib import Path
-
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "work/_lib"))
 from obj import *  # noqa: F401,F403,E402
-
-from shapely import affinity  # noqa: E402
-from shapely.geometry import Polygon  # noqa: E402
-from shapely.ops import unary_union  # noqa: E402
-from svgpathtools import parse_path  # noqa: E402
-
-HERE = Path(__file__).resolve().parent
-G = json.loads((HERE.parent / "geometry.json").read_text())
-
-LIGHT, MID, DARK, CYAN = "#e6f1fd", "#b1cff5", "#1e57c4", "#59e6dd"
+SLUG = Path(__file__).resolve().parents[1].name
+OUT = Path(__file__).resolve().parent
 
 
-def dg(d, samples=700):
-    polys = []
-    for sp in parse_path(d).continuous_subpaths():
-        pts = [sp.point(i / samples) for i in range(samples)]
-        polys.append(Polygon([(p.real, p.imag) for p in pts]).buffer(0))
-    return unary_union([p for p in polys if p.area > 0.01])
+def place(regs, box_):
+    shapes = fit([g for g, _ in regs], box_, anchor="bottom")
+    return list(zip(shapes, [h for _, h in regs]))
+
+P = parts(SLUG)
 
 
-def placed(geoms, box):
-    u = unary_union(geoms)
-    x0, y0, x1, y1 = u.bounds
-    bx0, by0, bx1, by1 = box
-    s = min((bx1 - bx0) / (x1 - x0), (by1 - by0) / (y1 - y0))
-    tx = (bx0 + bx1) / 2 - s * (x0 + x1) / 2
-    ty = (by0 + by1) / 2 - s * (y0 + y1) / 2
-    return [affinity.translate(affinity.scale(g, s, s, origin=(0, 0)), tx, ty) for g in geoms]
-
-
-def a_parts(box):
-    geoms = [dg(G["parts"][k]["d"]) for k in ("r0", "r1", "r2")]
-    ball = dg(G["parts"]["r3"]["d"])
-    ps = placed(geoms + [ball], box)
-    return ps[:3], ps[3]
+def A_ball(box_):
+    a_, ball = fit([unary_union([P["r0"], P["r1"]]), P["r3"]], box_, anchor="bottom")
+    return a_, ball
 
 
 def A():
-    """L1: the white A and the cyan ball themselves become thick objects (no plate)."""
-    ic = gk.Icon("aurex_browser A - the A and the glass ball as thick objects")
-    (r0, r1, r2), ball = a_parts((19, 8, 109, 113))
-    face = unary_union([r0, r1])
-    solid(ic, face, face=[(0, "#ffffff"), (0.6, "#e6f1fd"), (1, "#b1cff5")], depth=5,
-          side="#1e57c4", layer="A")
-    solid(ic, ball, face=[(0, "#c9fff9"), (0.5, CYAN), (1, "#2fb9c9")], depth=2, side="#2a9fb0",
-          layer="ball")
-    glint = circ(60, 78, 5.5).intersection(ball)
-    ic.path(geom_d(glint), ic.radial([(0, "#ffffff", 0.9), (1, "#ffffff", 0)], 60, 78, 5.5),
-            layer_id="ball-glint")
+    """L3: a thick blue glass tile (the source's field, as material) with the thick white A
+    and the glass bead - the source composition, built."""
+    ic = gk.Icon("Aurex concept A - blue glass tile + A")
+    tile = rounded(box(10, 10, 118, 112), 22)
+    solid(ic, tile, face=[(0, "#62a0ea"), (0.5, "#4281ec"), (1, "#305fde")], depth=6, side="#1e57c4", layer="tile")
+    ic.path(geom_d(circ(40, 30, 30).intersection(tile)), ic.radial([(0, "#ffffff", 0.45), (1, "#ffffff", 0)], 40, 30, 30), layer_id="glint")
+    a_, ball = A_ball((26, 20, 102, 102))
+    solid(ic, a_, face=[(0, "#ffffff"), (0.6, "#e6f1fd"), (1, "#b1cff5")], depth=5, side="#1e57c4", layer="A")
+    solid(ic, ball, face=[(0, "#c4fff8"), (0.5, "#59e6dd"), (1, "#2fb9c9")], depth=2, side="#2a9fb0", layer="ball")
     return ic
 
 
 def B():
-    """L2: a blue glass globe (the web) carrying the white A, the cyan ball in its counter."""
-    ic = gk.Icon("aurex_browser B - the A and ball on a blue glass globe")
-    globe = circ(64, 67, 48)
-    solid(ic, globe, face=[(0, "#99c1f1"), (0.45, "#3584e4"), (1, "#1c71d8")], depth=3,
-          side="#1a5fb4", layer="globe")
-    glint = circ(46, 38, 20).intersection(globe)
-    ic.path(geom_d(glint), ic.radial([(0, "#ffffff", 0.85), (1, "#ffffff", 0)], 46, 38, 20),
-            layer_id="globe-glint")
-    for r, op in ((36, 0.2), (26, 0.14)):
-        ic.path(geom_d(circ(64, 67, r).difference(circ(64, 67, r - 1.6))), "#ffffff",
-                opacity=op, layer_id=f"glass-ring{r}")
-    (r0, r1, r2), ball = a_parts((34, 33, 94, 101))
-    face = unary_union([r0, r1])
-    solid(ic, face, face=[(0, "#ffffff"), (0.55, "#eef6ff"), (1, "#cfe0f5")], depth=2,
-          side="#1e57c4", layer="A")
-    solid(ic, ball, face=[(0, "#c9fff9"), (0.5, CYAN), (1, "#2fb9c9")], depth=2, side="#2a9fb0",
-          layer="ball")
-    glint2 = circ(60, 82, 4.6).intersection(ball)
-    ic.path(geom_d(glint2), ic.radial([(0, "#ffffff", 0.9), (1, "#ffffff", 0)], 60, 82, 4.6),
-            layer_id="ball-glint")
+    """L1: the A in Aurex blue (the field becomes the letter's material), white top face."""
+    ic = gk.Icon("Aurex concept B - blue A")
+    a_, ball = A_ball((14, 10, 114, 110))
+    solid(ic, a_, face=[(0, "#99c1f1"), (0.5, "#53a2fa"), (1, "#305fde")], depth=8, side="#1e57c4", layer="A")
+    solid(ic, ball, face=[(0, "#c4fff8"), (0.5, "#59e6dd"), (1, "#2fb9c9")], depth=3, side="#2a9fb0", layer="ball")
     return ic
 
 
 def C():
-    """L3: the source's blue as a physical enamel tile carrying the raised A and ball."""
-    ic = gk.Icon("aurex_browser C - the blue tile with the raised A and ball")
-    tile = rounded(box(12, 12, 116, 112), 8)
-    solid(ic, tile, face=[(0, "#53a2fa"), (0.5, "#4281ec"), (1, "#305fde")], depth=4,
-          side="#1c4fb8", layer="tile")
-    (r0, r1, r2), ball = a_parts((24, 16, 104, 104))
-    face = unary_union([r0, r1])
-    solid(ic, face, face=[(0, "#ffffff"), (0.6, "#e6f1fd"), (1, "#b1cff5")], depth=4,
-          side="#1e57c4", layer="A")
-    solid(ic, ball, face=[(0, "#c9fff9"), (0.5, CYAN), (1, "#2fb9c9")], depth=2, side="#2a9fb0",
-          layer="ball")
-    glint = circ(60, 72, 5).intersection(ball)
-    ic.path(geom_d(glint), ic.radial([(0, "#ffffff", 0.9), (1, "#ffffff", 0)], 60, 72, 5),
-            layer_id="ball-glint")
+    """L2: a blue browser window, the white A on its page, the bead in front."""
+    ic = gk.Icon("Aurex concept C - blue window + A")
+    win = rounded(box(8, 16, 120, 108), 10)
+    solid(ic, win, face=[(0, "#62a0ea"), (1, "#305fde")], depth=6, side="#1e57c4", layer="win")
+    for i, x in enumerate((18, 26, 34)):
+        ic.path(geom_d(circ(x, 25, 2.4)), "#ffffff", opacity=0.9, layer_id=f"dot{i}")
+    a_, ball = A_ball((34, 34, 94, 102))
+    solid(ic, a_, face=[(0, "#ffffff"), (1, "#b1cff5")], depth=4, side="#1e57c4", layer="A")
+    solid(ic, ball, face=[(0, "#c4fff8"), (1, "#2fb9c9")], depth=2, side="#2a9fb0", layer="ball")
     return ic
-
 
 if __name__ == "__main__":
     for name, fn in (("A", A), ("B", B), ("C", C)):
-        fn().save(HERE / f"{name}.svg")
+        fn().save(OUT / f"{name}.svg")
         print("wrote", name)
+

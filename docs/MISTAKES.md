@@ -27,6 +27,7 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | "Varsayılan mektup değil ama" | "default" was taken as the Faithful slot; he uses the **Symbol** APK | envelope in Faithful AND Symbol | "default" = what he sees on his phone (§5) |
 | He asked only a question ("why are these not the same size?") | — | answered first, offered the fix, did it when he said so | a question is not an order: answer, then offer |
 | Answers in English after he once wrote English | — | — | default language Turkish (CLAUDE.md); follow his last message's language |
+| "Beni böyle ikide bir sorma" — the owner was asked again and again (concept rounds, direction, permission) | every uncertainty became a question | question budget: concept choice + final look only, several apps in one call; games need no permission (§3b) | after two "none" answers decide yourself from the rules and show the result |
 
 ## 2. Identity and design
 | BCR's handset was lumpy | the phone's 192 px icon was blurry | traced from a sharp copy the owner sent (`work/bcr/clean-source.png`) | a blurry source is not final: ask for or use a sharp official copy |
@@ -49,6 +50,10 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | Hepsiburada's phone icon was an outdated poster | the installed app shows an old icon | the owner sent the official logos ("bunlardan birini kullan veya kendin yap") | an owner-supplied official logo is a valid source; keep the phone icon as `phone-icon.png` |
 | A white wordmark alone as Symbol | vanishes on light wallpapers | no Symbol, a margin, or the brand's own layout (Hepsiburada: orange wordmark + colour bar) | `check_icon` `visible_light/dark` |
 | Firefox Beta "BETA" letters thin slivers | letters are holes; the badge's lift side filled them | `holes_inlay` | look at letters/holes at 256 px |
+| Games round 1 (Kafa Topu 2, Pokémon UNITE, Rush Royale): a plain ball, a bolt, a hat — "hiç benzemiyorlar" | the docs said "ONE generic element from primitives" and I banned characters ("no character from memory" read too widely) | REDESIGN.md §3b: an original logo **inspired by the game** (hero/mascot traits + palette) | recognisable first; a generic object fails even if it is clean |
+| Games round 2: blobby traces of the poster — rejected | tracing a 512 px poster with few colours gives crude cut-outs; the owner wants a designed logo, not a copy | drawn new as GNOME objects (big-head footballer + ball; wizard hat + crown + gem + crystals; electric face + goal ring) | "direkt kopyala yapıştır yapmayacaksın" |
+| Aurex round 2: a white A without its blue field — "hiç benzemiyor" | an anchor (the blue field) was dropped | the A on a blue browser-window object | keep every anchor the owner sees: shape, colour field, accent |
+| Aurex: a gap inside the A ("orijinalinde boşluk yok") | the measured counter above the bead was kept as a hole | counter and the open notch above the bead filled | compare holes with the source |
 
 ## 3. Colours and gradients
 

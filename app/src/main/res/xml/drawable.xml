@@ -388,6 +388,9 @@
     <item drawable="survivor_io_alt1" name="Survivor.io (Disc)" />
     <item drawable="survivor_io_alt2" name="Survivor.io (Rimmed)" />
     <item drawable="survivor_io_alt3" name="Survivor.io (Symbol)" />
+    <item drawable="kafa_topu_2" name="Kafa Topu 2" />
+    <item drawable="pokemon_unite" name="Pokémon UNITE" />
+    <item drawable="rush_royale" name="Rush Royale" />
 
     <category title="Education" />
     <item drawable="duolingo" name="Duolingo" />

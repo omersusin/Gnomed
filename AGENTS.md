@@ -74,7 +74,8 @@ ask for it.
 * you do not have the app's icon PNG **and** its ComponentInfo (section G says where to
   look and what to ask for),
 * the gate still shows FAIL after you tried the recipe 3 times,
-* the source is a poster, a photo or a character (free adaptation needs their OK),
+* (posters / games: do NOT ask - the owner's rule is in REDESIGN.md §3b: an original
+  logo inspired by the game)
 * after the concept board (REDESIGN.md step 4) and after the final review (step 6),
 * before `tools/pack_add.py` without `--dry-run` (show the dry-run diff first),
 * anything would delete or overwrite.
@@ -95,14 +96,16 @@ C2  python3 tools/import_request.py <request zip | folder | request.txt>     (se
         -> NEW <slug> ...   then: python3 tools/import_request.py <same> --add --only <slug>
 C3  python3 tools/new_redesign.py <slug>
         measures the source and PRINTS its parts (colour, % of tile, box) - read them.
-        "WARNING ... POSTER" -> STOP, ask the owner which ONE element to adapt (section B).
+        "WARNING ... POSTER" -> a game/poster: design an ORIGINAL logo inspired by the game
+        (REDESIGN.md §3b) - no copy/trace of the poster, no generic object.
 C4  fill work/<slug>/design.md: anchors (2-4 things that make the app recognisable) and
     the function object (what the app does, as a physical thing).
 C5  edit work/<slug>/concepts/make_concepts.py: A, B, C = three DIFFERENT ideas
     (REDESIGN.md §3 ladder). Use only the helpers in section H. Then:
         python3 work/<slug>/concepts/make_concepts.py
         python3 tools/concepts.py <slug>              -> work/<slug>/concepts.png
-C6  ASK the owner (2-4 options: A / B / C / "none, try again"); tell him the board is
+C6  ASK the owner (2-4 options: A / B / C / "none, try again"; several apps in ONE question
+    call); tell him the board is
     work/<slug>/concepts.png. STOP until he answers. Write his words in design.md:
         approved: <letter> - <his words>
 C7  copy the approved concept into work/<slug>/redesign.py (function design()), delete
@@ -235,7 +238,7 @@ Worked examples: `docs/redesign/examples/build_examples.py` (invented apps), `wo
 | `doctor.py` not READY / `ModuleNotFoundError` | a Python package is missing | `python3 -m pip install -r tools/gnome-android-icons/requirements.txt` (add `--break-system-packages` if pip refuses) |
 | `work/<slug>/source.png missing` | the app is not registered | C2 (`import_request.py … --add --only <slug>`) |
 | `NO-ICON` in C2 | the request has no PNG for it | ask the owner for the icon (section G) |
-| `WARNING ... POSTER` in C3 | the source is game art / a photo | ask the owner which element to adapt |
+| `WARNING ... POSTER` in C3 | the source is game art / a photo | REDESIGN.md §3b: an original logo inspired by the game (hero item / mascot traits + its palette, drawn new as an object); do not ask |
 | `SystemExit: copy the approved concept here` | redesign.py is still the template | C7: put the approved concept in `design()` and delete that line |
 | `FAIL app redesign: design.md: approved is empty` | the owner has not chosen | C6 — never fill "approved" yourself |
 | `FAIL app redesign: logo on a plate (automatic draft)` | there is no redesign.py | C3 |

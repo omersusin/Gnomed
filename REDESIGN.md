@@ -41,6 +41,23 @@ Real GNOME icons to study before every app: [docs/redesign/gnome-objects.png](do
 | **L2** | A GNOME **object that carries the mark**: the app's function as a thing; the mark is its label, print, inlay, lens or the thing it holds | Weather, FileRoller, Software, Mousai, the *Bulut* example |
 | **L3** | **Material tile** — only for pure wordmarks/abstract marks when L1 and L2 fail: glass, enamel, metal or paper with real thickness, never a flat colour square | Meld, Tangram |
 
+### 3b. Games and posters (owner's rule)
+
+A game's icon is a poster or a scene, not a logo. **Design an ORIGINAL logo inspired by
+the game** — "oyunun logosuna bakarak, esinlenerek yapacaksın; direkt kopyala yapıştır
+yapmayacaksın; oyuna uygun bir logo yap":
+
+- pick what the players know: the hero item or mascot TRAITS and the game's palette
+  (Clash Royale → two crowns; Rush Royale → the wizard hat with crown band, gem and
+  crystals; Head Ball 2 → an angry big-head footballer heading the ball; Pokémon UNITE →
+  a yellow electric face with dark-tipped ears and red cheeks on the purple/orange goal ring);
+- draw it new, as a GNOME object (thickness, light from the top, secondary object) with
+  colours measured from the poster;
+- **not** a copy or trace of the poster (rejected: "hiç benzemiyor" for blobby traces),
+  **not** a generic object that could be any game (rejected: a plain ball, bolt or hat);
+- test: a player of the game names it at a glance.
+- The owner's permission for this adaptation is given once for all games — do not ask it again.
+
 Wordmarks: letter shapes come from the source (trace / geometry.json), never from a font
 and never `<text>`; make the letters the object (L1) or print them on one (L2).
 
@@ -60,7 +77,10 @@ and never `<text>`; make the letters the object (L1) or print them on one (L2).
            python3 work/<slug>/concepts/make_concepts.py && python3 tools/concepts.py <slug>
            -> open work/<slug>/concepts.png; replace any concept that is the logo on a
            plain disc or square.
-4  ASK     AskUserQuestion, in Turkish: "Hangi yön?" options A / B / C / "Hiçbiri, yeniden dene",
+4  ASK     (question budget: the concept choice and the final look are the ONLY two
+           questions per app - several apps in ONE AskUserQuestion; never ask a third time
+           in another form: after "none" twice, decide yourself with §3/§3b and show the result)
+           AskUserQuestion, in Turkish: "Hangi yön?" options A / B / C / "Hiçbiri, yeniden dene",
            each with one short line; tell him the board is work/<slug>/concepts.png.
            STOP until he answers. Write in design.md:  approved: <letter> - <his words>
            Never fill "approved" yourself.
@@ -171,4 +191,7 @@ once per session. The ones that cost the owner most:
   "impossible" before researching (the in-app style switch was possible).
 - **Look before you ask to ship**: unreviewed drafts were pushed ("the pushed icons are
   broken"); weak icons must be listed by you, not found by him.
+- **Recognisable first**: concepts that drop the anchors (Aurex without its blue field,
+  games as a generic ball/bolt/hat) were rejected outright ("hiç benzemiyorlar").
+- **Do not keep asking**: "beni böyle ikide bir sorma" - two questions per app at most (§4).
 - When the owner has to point out a new mistake, add it to docs/MISTAKES.md in the same PR.

@@ -215,7 +215,7 @@ def main():
         striped = [grp for grp in groups if len(grp) >= 3]
         ov = (ROOT / "work/_lib/build_auto.py").read_text()
         merged = f'"{slug}"' in ov and "merge_grad" in ov.split(f'"{slug}"')[1].split("\n")[0]
-        if striped and not merged:
+        if striped and not merged and not is_redesign:      # a redesign does not draw the measured bands
             add("app", "stripes", "WARN", [f for _, f in striped[0]],
                 f'R1: python: OVERRIDES["{slug}"] = {{"merge_grad": [{[f for _, f in striped[0]]}]}}')
         else:

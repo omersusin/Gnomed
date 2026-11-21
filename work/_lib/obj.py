@@ -29,7 +29,7 @@ _spec.loader.exec_module(_skill)
 globals().update({k: getattr(_skill, k) for k in _skill.__all__})
 
 __all__ = list(_skill.__all__) + ["save_styles", "ROOT", "parts", "colour", "describe", "fit",
-                                  "shape_of"]
+                                  "shape_of", "traced", "cutout"]
 
 
 def shape_of(d, samples=400):
@@ -89,9 +89,10 @@ def describe(slug):
             lines.append(f"  {k:10s}           box {b[0]:.0f} {b[1]:.0f} {b[2]:.0f} {b[3]:.0f}")
     sb = P["silhouette"].bounds if "silhouette" in P and not P["silhouette"].is_empty else (0, 0, 0, 0)
     if (sb[2] - sb[0]) > 118 and (sb[3] - sb[1]) > 118 and len(info["regions"]) >= 4:
-        lines.append("WARNING: the measured parts cover the whole tile - this is a POSTER / illustration, "
-                     "not a logo. Stop and ask the owner (AGENTS.md B): free adaptation of ONE element "
-                     "he names, built from primitives in the measured colours.")
+        lines.append("WARNING: the measured parts cover the whole tile - this is a POSTER / game art, "
+                     "not a logo. Design an ORIGINAL logo inspired by the game (REDESIGN.md 3b): the hero "
+                     "item / mascot traits + the measured palette, drawn new as a GNOME object. No copy "
+                     "or trace of the poster, no generic object. Do not ask the owner for permission.")
     return "\n".join(lines)
 
 
@@ -111,6 +112,63 @@ def fit(shapes, box_, keep_aspect=True, anchor="center"):
     if anchor == "bottom":
         ty = by1 - sy * y1
     return [affinity.translate(affinity.scale(s, sx, sy, origin=(0, 0)), tx, ty) for s in shapes]
+
+
+def traced(slug, box_, n=6, exclude=(), smooth=0.5, min_share=0.004, keep=None):
+    """Trace the recognisable element of a POSTER/illustration straight from the source
+    (measurement, not memory): the pixels inside box_ (x0, y0, x1, y1 in the 0..128 source
+    space) are reduced to `n` colours and each colour is traced. Colours within dE 18 of
+    an `exclude` hex (the background) are skipped; `keep` = a shape: only pixels inside it.
+    -> [(shape, "#hex"), ...] biggest first, in source space (place them with fit())."""
+    import numpy as np
+    from scipy.cluster.vq import kmeans2
+    from skimage.color import rgb2lab, lab2rgb
+    sys.path.insert(0, str(ROOT / "work/_lib"))
+    import gtrace as gt
+    a, s = gt.load(ROOT / "work" / slug)
+    H, W = a.shape[:2]
+    x0, y0, x1, y1 = [int(round(v / s)) for v in box_]
+    m = np.zeros((H, W), bool)
+    m[max(0, y0):min(H, y1), max(0, x0):min(W, x1)] = True
+    m &= a[..., 3] > 0.5
+    if keep is not None:
+        from shapely import affinity as _af
+        km = gt.render_mask(geom_d(_af.scale(keep, 1, 1, origin=(0, 0))), H)
+        m &= km
+    lab = rgb2lab(np.clip(a[..., :3], 0, 1))
+    pix = lab[m]
+    rng = np.random.default_rng(0)
+    sample = pix[rng.choice(len(pix), min(len(pix), 30000), replace=False)].astype(np.float64)
+    cent, _ = kmeans2(sample, n, minit="++", seed=0)
+    lbl = np.argmin(np.linalg.norm(lab[..., None, :] - cent[None, None], axis=-1), axis=-1)
+    excl = [rgb2lab(np.array([[[int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)]]]))[0, 0] for h in exclude]
+    out = []
+    for c in range(len(cent)):
+        if any(np.linalg.norm(cent[c] - e) < 18 for e in excl):
+            continue
+        cm = m & (lbl == c)
+        if cm.sum() < min_share * m.sum():
+            continue
+        rgb = np.clip(lab2rgb(cent[c].reshape(1, 1, 3)).reshape(3), 0, 1)
+        hx = "#%02x%02x%02x" % tuple(int(round(v * 255)) for v in rgb)
+        g = shape_of(gt.trace_mask(cm, s, smooth_u=smooth))
+        if not g.is_empty:
+            out.append((g, hx, int(cm.sum())))
+    out.sort(key=lambda t: -t[2])
+    return [(g, h) for g, h, _ in out]
+
+
+def cutout(ic, regions, depth=5, side=None, layer="cut"):
+    """Draw traced regions as ONE die-cut object: the union gets a side `depth` px deep
+    (colour: `side` or the darkest region darkened), then every region on top, top light."""
+    from gnome_kit import shade
+    body = unary_union([g for g, _ in regions]).buffer(0.6).buffer(-0.6)
+    dark = side or shade(min((h for _, h in regions), key=lambda h: sum(int(h[i:i + 2], 16) for i in (1, 3, 5))), -0.25)
+    solid(ic, body, face=dark, depth=depth, side=dark, top=False, layer=f"{layer}-body")
+    for i, (g, h) in enumerate(regions):
+        ic.path(geom_d(g), h, layer_id=f"{layer}-{i}", fill_rule="evenodd")
+    toplight(ic, body, layer=layer)
+    return body
 
 
 def save_styles(slug, icons):
