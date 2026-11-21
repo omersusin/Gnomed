@@ -38,16 +38,16 @@ def main():
     if run([sys.executable, builders.builder_of(slug), slug]):
         sys.exit("build failed")
     run(["bash", "tools/review.sh", slug])
+    if builders.redesigned(slug):
+        run([sys.executable, "tools/phone_preview.py", slug])        # work/<slug>/phone.png for Q2
     code = run([sys.executable, "tools/check_icon.py", slug])
     if builders.redesigned(slug):
-        print(f"\nNext (AGENTS.md C7-C9): a FAIL -> AGENTS.md section I, fix redesign.py, run this again. "
-              f"0 FAIL -> open work/{slug}/review.png, answer AGENTS.md D, then ASK the owner "
-              f"(Tamam / Şunu değiştir / Konseptlere dön). Only after his OK: "
-              f"python3 tools/pack_add.py {slug} --category <Category> --dry-run "
-              f"(already in the pack: python3 tools/pack_refresh.py {slug})")
+        print(f"\nNext (REDESIGN.md 4-7): FAIL -> AGENTS.md section I, fix redesign.py, run again. "
+              f"0 FAIL -> look at work/{slug}/phone.png and review.png, then Q2 (the final question) with the "
+              f"pack_add --dry-run summary; only after \"Tamam, pakete ekle\": pack_add / pack_refresh.")
     else:
         print(f"\nThis is the automatic DRAFT (measuring only). Next: python3 tools/new_redesign.py {slug} "
-              f"(AGENTS.md C3). Wrong parts/colours in the measurement: python3 tools/region_check.py {slug}")
+              f"(REDESIGN.md 4). Wrong parts/colours in the measurement: python3 tools/region_check.py {slug}")
     sys.exit(code)
 
 

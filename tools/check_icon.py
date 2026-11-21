@@ -21,8 +21,14 @@ Checks (per style that exists):
                 drawn inside the plate) ........................................ FAIL
 Per app:
   redesign      the app is a GNOME redesign (REDESIGN.md): work/<slug>/redesign.py exists and
-                design.md has "approved:" filled from the human's answer. The automatic
+                design.md has "approved:" = the owner's answer in quotes + (YYYY-MM-DD). The automatic
                 builds (logo on a plate + chin) are drafts and FAIL here .............. FAIL
+  holes         (Symbol of every app, every style of a redesign) what is a hole in the
+                source (letter counters, eyes, a ring's centre) must be TRANSPARENT:
+                enclosed transparent area >= 50 % of the source holes (placed like the
+                mark) when they are >= 0.4 % of the canvas ............................ FAIL
+                exceptions: OVERRIDES painted_counters, or design.md
+                painted-holes: "<owner's words>" (YYYY-MM-DD)
   plain_shape   (redesigns) the Faithful silhouette is a plain DISC (circle match > 0.95):
                 the logo on a disc is not a redesign ................................ FAIL
                 a plain SQUARE/box (fills > 97 % of its bounds): fine for a real box
@@ -35,6 +41,7 @@ Per app (from geometry.json):
 """
 import io
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -82,6 +89,67 @@ def hue(h):
     return hh * 360, ss, ll
 
 
+QUOTED_DATED = re.compile(r'"[^"]+".*\(\d{4}-\d{2}-\d{2}\)')
+
+
+def design_line(w, key):
+    """value of 'key:' in work/<slug>/design.md ('' if missing)"""
+    if (w / "design.md").exists():
+        for line in (w / "design.md").read_text(encoding="utf-8").splitlines():
+            if line.lower().startswith(key + ":"):
+                return line.split(":", 1)[1].strip()
+    return ""
+
+
+def is_quote(v):
+    """an approval line: the owner's words verbatim in quotes + the date (REDESIGN.md 7)"""
+    return bool(QUOTED_DATED.search(v or ""))
+
+
+def hole_measure(slug, svg, N=512):
+    """-> (source holes % of canvas, placed like the mark; enclosed transparent % in the
+    style; IoU of the style's filled outline with the source mark) or None if unknown."""
+    gp = ROOT / "work" / slug / "geometry.json"
+    if not gp.exists():
+        return None
+    sys.path.insert(0, str(ROOT / "work/_lib"))
+    from obj import shape_of, geom_d
+    from gtrace import render_mask
+    from shapely import affinity
+    from shapely.geometry import Polygon
+    from shapely.ops import unary_union
+    from scipy.ndimage import binary_fill_holes
+    parts = json.loads(gp.read_text())["parts"]
+    body = unary_union([shape_of(v["d"]) for k, v in parts.items() if k not in ("silhouette", "holes")]).buffer(0)
+    if body.is_empty:
+        return None
+    filled = unary_union([Polygon(g.exterior) for g in getattr(body, "geoms", [body])])
+    if "holes" in parts:
+        holes = shape_of(parts["holes"]["d"]).intersection(filled)
+    else:   # e.g. group-1 apps: the parts' own interiors that no other part fills
+        holes = filled.difference(body).buffer(-0.8).buffer(0.8)
+    # measured WITHOUT the side/chin layers: a thick object's own side may show inside a
+    # hole (that is correct GNOME depth); only paint on the face fills a hole
+    txt = re.sub(r'<path[^>]*\bid="[^"]*(?:-chin|-side)[^"]*"[^>]*/>', "", Path(svg).read_text(encoding="utf-8"))
+    a = np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(bytestring=txt.encode(), output_width=N, output_height=N)))
+                   .convert("RGBA"))[..., 3] > 127
+    if not a.any():
+        return None
+    ys, xs = np.nonzero(a)
+    u = 128 / N
+    ax0, ay0, ax1, ay1 = xs.min() * u, ys.min() * u, (xs.max() + 1) * u, (ys.max() + 1) * u
+    bx0, by0, bx1, by1 = filled.bounds
+    sc = min((ax1 - ax0) / (bx1 - bx0), (ay1 - ay0) / (by1 - by0))
+    ox, oy = (bx0 + bx1) / 2, (by0 + by1) / 2
+
+    def T(g):
+        return affinity.translate(affinity.scale(g, sc, sc, origin=(ox, oy)), (ax0 + ax1) / 2 - ox, (ay0 + ay1) / 2 - oy)
+    fa = binary_fill_holes(a)
+    sil = render_mask(geom_d(T(filled)), N)
+    iou = (fa & sil).sum() / max(1, (fa | sil).sum())
+    return T(holes).area / (128 * 128), (fa & ~a).sum() / (N * N), iou
+
+
 def main():
     slug = sys.argv[1]
     as_json = "--json" in sys.argv
@@ -105,15 +173,15 @@ def main():
             f"R0: not a Gnomed icon yet - follow REDESIGN.md: python3 tools/new_redesign.py {slug}")
     elif not approved or approved.lower() in ("no", "-", "none", "?"):
         add("app", "redesign", "FAIL", "design.md: approved is empty",
-            "R0: show work/<slug>/concepts.png to the human, write their choice in design.md 'approved:'")
+            "R0: Q1 (REDESIGN.md 7): write the owner's answer in design.md 'approved:'")
+    elif not is_quote(approved):
+        add("app", "redesign", "FAIL", f"approved is not a quote + date: {approved[:40]}",
+            'REDESIGN.md 7: approved: B - "<his words>" (YYYY-MM-DD) - never from a general instruction')
     else:
         add("app", "redesign", "PASS", approved[:40])
     if is_redesign and (w / f"{slug}-faithful.svg").exists():
-        shape_ok = ""
-        if (w / "design.md").exists():
-            for line in (w / "design.md").read_text(encoding="utf-8").splitlines():
-                if line.lower().startswith("shape-ok:"):
-                    shape_ok = line.split(":", 1)[1].strip()
+        shape_ok = design_line(w, "shape-ok")
+        shape_ok = shape_ok if is_quote(shape_ok) else ""          # only the owner's words + date count
         import io
         import cairosvg
         al = np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(url=str(w / f"{slug}-faithful.svg"),
@@ -174,6 +242,25 @@ def main():
         if ssim is not None:
             stt = "PASS" if ssim >= 0.72 else ("WARN" if ssim >= 0.62 else "FAIL")
             add(st, "legibility32", stt, ssim, "" if stt == "PASS" else "R11 (bigger mark, drop tiny details, thicker strokes)")
+        # holes: the Symbol of every app and every style of a redesign (plates are exempt:
+        # there the holes show the plate, which is correct)
+        if st == "symbol" or is_redesign:
+            m = hole_measure(slug, svg)
+            if m is not None:
+                src, transp, iou = m
+                val = f"source {src:.1%} -> transparent {transp:.1%}"
+                if src < 0.004:
+                    add(st, "holes", "PASS", val + " (no holes to keep)")
+                elif is_redesign and iou < 0.75:
+                    add(st, "holes", "PASS", val + f" (the mark is not the object's outline, iou {iou:.2f})")
+                elif transp >= 0.5 * src:
+                    add(st, "holes", "PASS", val)
+                else:
+                    import build_auto as _ba
+                    ok = _ba.OVERRIDES.get(slug, {}).get("painted_counters") or is_quote(design_line(w, "painted-holes"))
+                    add(st, "holes", "PASS" if ok else "FAIL", val + (" (painted on purpose)" if ok else ""),
+                        "" if ok else "REDESIGN.md 5: cut the holes (body(), difference) - never paint them; "
+                        "only the owner's words allow it: painted-holes: \"<his words>\" (YYYY-MM-DD)")
     # box inside the plate: a big single region whose colour differs from the plate
     gp = w / "geometry.json"
     sys.path.insert(0, str(ROOT / "work/_lib"))

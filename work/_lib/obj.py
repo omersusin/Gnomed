@@ -29,7 +29,8 @@ _spec.loader.exec_module(_skill)
 globals().update({k: getattr(_skill, k) for k in _skill.__all__})
 
 __all__ = list(_skill.__all__) + ["save_styles", "ROOT", "parts", "colour", "describe", "fit",
-                                  "shape_of", "traced", "cutout"]
+                                  "shape_of", "traced", "cutout", "body"]
+__all__ = [n for n in __all__ if n != "poly"] + ["poly"]
 
 
 def shape_of(d, samples=400):
@@ -58,9 +59,60 @@ def _geometry(slug):
 
 def parts(slug):
     """Every measured part of the source as a shapely shape in the source's 0..128 space:
-    r0, r1, ... (colour regions, biggest first), 'silhouette' (the whole mark), 'holes'."""
+    r0, r1, ... (colour regions, biggest first), 'silhouette' (the whole mark), 'holes'.
+    `silhouette` has NO holes - never draw it as an object; use body()."""
     g = _geometry(slug)
     return {k: shape_of(v["d"]) for k, v in g["parts"].items()}
+
+
+def body(slug):
+    """The mark as ONE object: the union of all colour regions with the source's holes
+    cut out (letter counters, eyes, a ring's centre stay transparent - REDESIGN.md 5)."""
+    P = parts(slug)
+    g = unary_union([v for k, v in P.items() if k not in ("silhouette", "holes")]).buffer(0)
+    if "holes" in P and not P["holes"].is_empty:
+        g = g.difference(P["holes"])
+    return g
+
+
+def poly(points, r=0, mode="fillet"):
+    """A polygon with rounded corners. mode="fillet" (default): every corner gets its own
+    arc whose radius is capped by half of the two edges next to it, so convex corners are
+    rounded and thin parts (a boot toe, a spike) are NEVER erased. mode="open": the old
+    buffer(-r).buffer(r) rounding, which removes parts thinner than 2r."""
+    import numpy as _np
+    p = Polygon(points).buffer(0)
+    if not r:
+        return p
+    if mode == "open":
+        return rounded(p, r)
+    pts = [_np.array(q, float) for q in points]
+    if len(pts) > 1 and _np.allclose(pts[0], pts[-1]):
+        pts = pts[:-1]
+    out = []
+    n = len(pts)
+    for i in range(n):
+        prev, cur, nxt = pts[i - 1], pts[i], pts[(i + 1) % n]
+        a_, b_ = prev - cur, nxt - cur
+        la, lb = _np.linalg.norm(a_), _np.linalg.norm(b_)
+        if la < 1e-9 or lb < 1e-9:
+            continue
+        a_, b_ = a_ / la, b_ / lb
+        theta = _np.arccos(_np.clip(a_ @ b_, -1, 1))          # angle between the two edges
+        if theta < 1e-3 or abs(theta - _np.pi) < 1e-3:
+            out.append(tuple(cur))
+            continue
+        d = min(r / _np.tan(theta / 2), 0.5 * la, 0.5 * lb)    # tangent distance, capped
+        reff = d * _np.tan(theta / 2)
+        bis = (a_ + b_) / _np.linalg.norm(a_ + b_)
+        c = cur + bis * (reff / _np.sin(theta / 2))
+        p1, p2 = cur + a_ * d, cur + b_ * d
+        t1, t2 = _np.arctan2(*(p1 - c)[::-1]), _np.arctan2(*(p2 - c)[::-1])
+        dt = (t2 - t1 + _np.pi) % (2 * _np.pi) - _np.pi        # the short way round
+        for t in _np.linspace(0, 1, 9):
+            ang = t1 + dt * t
+            out.append((c[0] + reff * _np.cos(ang), c[1] + reff * _np.sin(ang)))
+    return Polygon(out).buffer(0)
 
 
 def colour(slug, name):

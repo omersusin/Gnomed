@@ -13,7 +13,7 @@ concepts (work/andvm/concepts.png):
   B (L2 a GNOME object that carries the mark): a VM box with the peaks embossed on its front
   C (L3 material tile, only if A and B fail): a glass globe holding the two peaks
 
-approved: A - the two peaks themselves become thick enamel objects (free object, no plate); owner: "A - Kalın objeler (önerilen)"; only this style, no disc/rimmed/symbol yet
+approved: A - "A - Kalın objeler (önerilen)" (2026-11-19)   [date from DeepSeek's commit 639e21e; the two peaks as thick enamel objects]
 styles: faithful=A
 techniques used (min. 3): thickness / material gradient (3-step enamel) / top light /
   secondary object (back peak) / one baseline (side ends at 118)

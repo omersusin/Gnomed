@@ -13,9 +13,11 @@ concepts (work/aurex_browser/concepts.png):
   B (L2 a GNOME object that carries the mark): blue glass globe + white A + cyan ball - approved
   C (L3 material tile, only if A and B fail): blue enamel tile + raised A - not used
 
-approved: C - blue browser window + white A + cyan bead (owner: "C", concepts round 3; the earlier approved B = the A on a blue disc was replaced: it is the logo on a disc)
+approved: C - "C" (2026-11-19)   [blue browser window + white A + cyan bead; concepts round 3; the earlier B = the A on a blue disc was the logo on a disc]
+painted-holes: "Oyunu öğren içinde niye bir boşluk var? Orijinalinde bir boşluk yok, onu düzelt." (2026-11-19)   [the A's counter is filled]
+final:   [not given yet - he asked for the gap fix; Q2 must be asked again]
 styles: faithful=C (browser window)
 techniques used (min. 3): thickness / material gradient / top light / hole (the A's counter) / secondary object / glass (globe glint + rings)
 palette (GNOME HIG names): #53a2fa, #305fde (ground), #1e57c4 (A side), #e6f1fd, #b1cff5 (A face), #59e6dd (ball)
 review (48/32 px, light + dark wallpaper, what is still weak): looked at styles.png + review.png - the A, its counter and the cyan ball read at 32 px on light and dark; the two faint glass rings are the approved globe (not in the source); the ball's top now keeps a clear cyan edge + inner bright rim (owner fix: the first build's pale top merged with the white A); the A's dark side is subtle at 32 px; nothing cut or crushed.
-shape-ok: a browser window is a real box object; owner chose C
+shape-note: a browser window is a box object; he chose C ("C") but did not speak about the shape - NOT a shape-ok

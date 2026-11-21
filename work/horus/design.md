@@ -13,10 +13,7 @@ concepts (work/horus/concepts.png):
   B (L2 a GNOME object that carries the mark): a green glass loupe, the spiral as its handle
   C (L3 material tile, only if A and B fail): a camera lens with the eye reflected in the glass
 
-approved: A - the eye as a thick green enamel amulet; the sclera (the almond around the
-  pupil) stays TRANSPARENT (the wallpaper shows through, like the source's background),
-  the pupil stays green.  Owner: "a ama gözün içi transparan değil (gözbebeğinden
-  bahsetmiyorum, gozakindan bahsediyorum)".  Only this style; no disc/rimmed/symbol yet.
+approved: A - "a ama gözün içi transparan değil (gözbebeğinden bahsetmiyorum, gozakindan bahsediyorum)" (2026-11-19)   [date from DeepSeek's commit 639e21e; the eye as a thick green enamel amulet, the sclera a real hole]
 styles: faithful=A
 techniques used (min. 3): thickness / enamel gradient / top light / cut-out (the sclera
   is a real hole in the object) / secondary object (the pupil glint)
