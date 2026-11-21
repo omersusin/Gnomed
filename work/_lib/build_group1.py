@@ -334,14 +334,12 @@ def saat():
     raised(ic, white_items([hands]), lift=2)
     out["rimmed"] = ic
 
-    # Symbol: the clock as an object - green case, white face, green hands (inverse use).
+    # Symbol: the clock ring as an object - the face is a REAL hole like in the source
+    # (no painted white disc); the ring's chin shows as the inner wall, green hands.
     ic = gk.Icon("Saat - Free Symbol", fam.note("saat"))
-    case = gk.circle_d(64, 61, 56)
-    fam.slab(ic, case, G, depth=3, corner_r=52)
     s = 56 / ro["r"]
-    ic.path(gk.circle_d(64, 61, ri["r"] * s), "#ffffff", layer_id="face")
-    ic.path(gk.circle_d(64, 61, ri["r"] * s) + gk.circle_d(64, 62.4, ri["r"] * s), "#000000",
-            layer_id="face-recess", opacity=0.10, fill_rule="evenodd")
+    case = gk.circle_d(64, 61, 56) + gk.circle_d(64, 61, ri["r"] * s)
+    fam.slab(ic, case, G, depth=3, corner_r=52)
     hands = gk.xform_d(P["hands"], s, 64 - ro["cx"], 61 - ro["cy"], about=(ro["cx"], ro["cy"]))
     raised(ic, [(hands, G, shade(G, -0.06))], lift=1.5)
     out["symbol"] = ic
