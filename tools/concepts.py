@@ -29,6 +29,9 @@ def main():
                         "--title", f"{slug} - concepts", "--ref-ids", REFS, "--out", str(out)], capture_output=True, text=True)
     if r.returncode:
         sys.exit(r.stderr[-800:])
+    sys.path.insert(0, str(ROOT / "tools"))
+    from stamps import write_board_stamp
+    write_board_stamp(slug)
     print(f"board: {out.relative_to(ROOT)}  - open it, then ask the human which concept (REDESIGN.md step 4)")
 
 

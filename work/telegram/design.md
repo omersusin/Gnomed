@@ -1,6 +1,9 @@
 # telegram - design note (REDESIGN.md)
 
 source: work/telegram/source.png
+kind: app
+ladder: L2 - an envelope carries the paper plane on its stamp
+characters: no
 anchors (2-4 things that make the app recognisable; they must survive):
   1. the white paper plane (measured from source.png: tip right-top, notch under the wing)
   2. Telegram blue #31a5df (between HIG Blue 2 and 3)

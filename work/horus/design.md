@@ -1,6 +1,9 @@
 # horus - design note (REDESIGN.md)
 
 source: work/horus/source.png
+kind: app
+ladder: L1 - the eye as a thick enamel amulet
+characters: no
 anchors (2-4 things that make the app recognisable; they must survive):
   1. the Eye of Horus outline: the almond eye, the brow, the spiral tail
   2. the pupil (a green disc in the almond) with the sclera around it

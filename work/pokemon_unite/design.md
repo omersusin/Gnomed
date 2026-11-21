@@ -1,6 +1,9 @@
 # pokemon_unite - design note (REDESIGN.md)
 
 source: work/pokemon_unite/source.png
+kind: game
+ladder: game objects - goal ring + energy ball
+characters: no
 references (games: store icon + >= 2 in-game screenshots; what they show: number of
   characters, how they face each other, signature gear, key object, colours):
   - store icon (source.png): THREE heroes charging LEFT in a staggered row - an orange dragon

@@ -1,6 +1,9 @@
 # rush_royale - design note (REDESIGN.md)
 
 source: work/rush_royale/source.png
+kind: game
+ladder: game objects - wizard hat + ice crystals
+characters: no
 references (games: store icon + >= 2 in-game screenshots; objects only, REDESIGN 3b):
   - store icon: a purple wizard hat (wide brim, pointed crown) with a gold crown band and a
     magenta gem in a diamond setting, two glowing ice-blue crystals, a green checkered board.

@@ -1,6 +1,10 @@
 # kafa_topu_2 - design note (REDESIGN.md)
 
 source: work/kafa_topu_2/source.png
+kind: game
+ladder: scene with characters (made before the objects-only rule)
+characters: yes - two heads with faces
+redo: "Evet, yeni oturumda" (2026-11-21) - objects only (the ball + the boot), no characters (REDESIGN.md 3b)
 references (games: store icon + >= 2 in-game screenshots; what they show: number of
   characters, how they face each other, signature gear, key object, colours):
   - store icon (source.png): TWO big-head footballers FACING each other (left: brown hair with

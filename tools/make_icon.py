@@ -42,6 +42,11 @@ def main():
         run([sys.executable, "tools/phone_preview.py", slug])        # work/<slug>/phone.png for Q2
     code = run([sys.executable, "tools/check_icon.py", slug])
     if builders.redesigned(slug):
+        # tools/next.py compares this stamp with the sources to know whether the build is current
+        sys.path.insert(0, str(ROOT / "tools"))
+        from stamps import write_build_stamp
+        write_build_stamp(slug)
+        print(f"\nNext: python3 tools/next.py {slug}")
         print(f"\nNext (REDESIGN.md 4-7): FAIL -> AGENTS.md section I, fix redesign.py, run again. "
               f"0 FAIL -> look at work/{slug}/phone.png and review.png, then Q2 (the final question) with the "
               f"pack_add --dry-run summary; only after \"Tamam, pakete ekle\": pack_add / pack_refresh.")

@@ -20,6 +20,9 @@ ROOT = Path(__file__).resolve().parent.parent
 DESIGN = """# {slug} - design note (REDESIGN.md)
 
 source: work/{slug}/source.png
+kind: <app | game>
+ladder: <L1 mark as object | L2 object carries the mark | L3 material tile | game objects>
+characters: no
 references (games: store icon + >= 2 in-game screenshots; what they show: number of
   characters, how they face each other, signature gear, key object, colours):
 anchors (2-4 things that make the app recognisable; they must survive):

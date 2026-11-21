@@ -1,0 +1,132 @@
+# Gnomed — work log (append-only)
+
+One entry per session that changed `work/` or the pack. **Append at the end; never edit or
+delete an old entry.** `tools/pr_guard.py` fails a pull request that changes `work/` or the pack
+without adding an entry here. `tools/next.py` sends you here (state LOG) before the commit.
+
+Format (copy it):
+
+```
+## YYYY-MM-DD — <model> via <tool> — `slug`, `slug`
+- What: <what changed, per app; main design -> Symbol, kept -> slots>
+- Why: <the owner's reason / request>
+- Owner: <his words, verbatim in quotes, with the date>
+- PR: <#number or link>
+- Open problems: <honest weak points, what is left>
+```
+
+Backfilled on 2026-11-21 from `git log`, `docs/MISTAKES.md`, `work/*/design.md` and the pull
+requests. The repository starts on 2026-11-18: there is no record of any work before that date.
+Times are from the commits; the model of a backfilled session is what the commits and PRs show.
+
+---
+
+## 2026-11-18 — Claude via Claude Code (cloud session) — `bitwarden` + the app
+- What: CandyBar dashboard base (zixpo/candybar-sample); Bitwarden in 4 styles; the Gnomed app:
+  package `gnomed.it`, one APK per style (Gradle flavors), in-app style switch, CI; release crash
+  fixed (Room/WorkManager keep rule) + a CI guard against it.
+- Why: the owner's first request (install the skill, a CandyBar pack, 4 alternatives per icon).
+- Owner: "Benim istediğim gibi nasıl mümkün değil????" (2026-11-18) — after the agent first said an
+  in-app style switch was impossible; it was then built (REDESIGN.md §0.5).
+- PR: #1, #2
+- Open problems: Bitwarden is the old "logo on a plate" style.
+
+## 2026-11-18 — Claude via Claude Code (cloud session) — group 1 + 73 apps
+- What: group 1 hand-built (`whatsapp`, `instagram`, `youtube`, `telefon`, `mesajlar`, `kamera`,
+  `foto_raflar`, `saat`, `ayarlar`, `chatgpt`); a batch pipeline (auto measuring + generic builds)
+  for 73 more apps, 63 added at once; 10 weak ones redrawn (`clash_royale`, `survivor_io`,
+  `shizuku`, `konabess`, …); wallpapers with grain; releases.
+- Why: "Tüm uygulamalarımi yapabilir misin? Hemen kullanmak istiyorum" (2026-11-18).
+- Owner: "The pushed icons are broken" (2026-11-18) — the 73-app batch went out with one approval
+  at the end; broken icons reached his phone (REDESIGN.md §0.7).
+- PR: #2, #4
+- Open problems: every one of these is the old "logo on a plate" style (see docs/APPS.md).
+
+## 2026-11-18 — DeepSeek via another tool (the owner's account) — `duolingo`
+- What: Duolingo (owl face, three styles), as a test of the contributor docs with a weaker model.
+- Why: "Deepseek için yeterli olur mu o doküman? Deneyelim mi bir ikon için" (2026-11-18).
+- Owner: "Duolingo yanlış" (2026-11-18) — fixed by Claude the same day (Symbol added).
+- PR: #3, #6
+- Open problems: the docs were too long and contradictory for a small model (fixed later, Part C).
+
+## 2026-11-18 — Claude via Claude Code (cloud session) — fixes, `hepsiburada`, `quarry`, redesign-first
+- What: restored 6 hand-built icons overwritten by the automatic builder (+ guard); Hepsiburada and
+  Quarry; lost colours/flattened gradients fixed pack-wide (`sd_maid_se` and others); Firefox
+  Beta/Nightly letters; the owner's redesign patch: REDESIGN.md, object helpers, concept board,
+  redesign gate; skill 1.2 vendored.
+- Why: "Fix sdmaid and others that changed colors. Fix Gradients too." (2026-11-18); the owner's
+  `gnomed-redesign.patch`.
+- PR: #5, #6, #7, #8
+- Open problems: the pack is still "logo on a plate" except the apps redesigned later.
+
+## 2026-11-19 — Claude via Claude Code (cloud session) — `telegram`, size audit, MISTAKES.md
+- What: Telegram redesigned (envelope with the paper plane on its stamp = Faithful + Symbol, ring =
+  Disc); a size/baseline audit of the whole pack (18 icons fixed); docs/MISTAKES.md written;
+  `bcr` from a sharp source; `t_rk_telekom` without the background triangle.
+- Why: "Bir şey soracağım. Bu simgeler niye aynı boyutta değil…" (2026-11-19).
+- Owner: "Defaultu o mektup yap" (2026-11-19); "Varsayılan mektup değil ama. Düzelt lütfen"
+  (2026-11-19) — "varsayılan" meant the Symbol he uses, not Faithful (REDESIGN.md §0.2);
+  "Ben orijinal Telegram ikonunu oraya koy demedim. Sadece o kağıttan uçağı düzelttim." (2026-11-19)
+  (REDESIGN.md §0.8).
+- PR: #9, #10
+- Open problems: Telegram has no own Rimmed (falls back to Faithful).
+
+## 2026-11-19 — DeepSeek via OpenCode — `andvm`, `horus`, `aurex_browser`
+- What: AndVM (two peaks as enamel objects), Horus (the eye as an amulet, sclera a real hole),
+  Aurex Browser (first version) on branch `horustest`.
+- Why: the owner tested whether a cheaper model can follow the docs.
+- Owner: Horus Q1: "a ama gözün içi transparan değil (gözbebeğinden bahsetmiyorum, gozakindan
+  bahsediyorum)" (2026-11-19). "Deepseek 1 saatten fazladır simgeleri yapmak için uğraşıyor. Kah
+  toollar eksik, kah yonergeler…" (2026-11-19).
+- PR: merged later through `horustest` (#13, #14)
+- Open problems: AndVM and Horus have no Symbol and no Q2 approval (`final:` empty) — see docs/APPS.md.
+
+## 2026-11-19 — Claude via Claude Code (cloud session) — `aurex_browser`, games (first try), docs for weak models
+- What: Aurex Browser redone (browser window + A, concept C); first versions of `kafa_topu_2`,
+  `pokemon_unite`, `rush_royale` (rejected); "make the redesign flow work for weaker models".
+- Owner: Aurex: "C" (2026-11-19); "Oyunu öğren içinde niye bir boşluk var? Orijinalinde bir boşluk
+  yok, onu düzelt." (2026-11-19) — voice typing for "A'nın içinde" (REDESIGN.md §0.3);
+  games: "Bak, Kafa Topu oyununda iki kafa olması gerekiyor, böyle karşı karşıya…" (2026-11-19).
+- PR: #11 (closed, included in #13)
+- Open problems: Aurex has no Symbol and no Q2 answer; the games were added without his approval
+  and with an approval line the agent wrote itself (fixed 2026-11-21).
+
+## 2026-11-21 — Claude via Claude Code (the owner's chat) — real holes
+- What: Symbol holes made real (transparent) for `qobuz`, `discord`, `saat`, `trestle`,
+  `swift_backup`, `obtainx`, `thunderbird`, `scene`; `painted_counters` override for white figure parts.
+- Why: "O harfinin içi dolu… saatin içi dolu" (the owner's review).
+- PR: #12 (merged through `horustest`)
+
+## 2026-11-21 — Claude via Claude Code (cloud session) — DUZELTME-PLANI A–D, `kafa_topu_2`
+- What: Part A (saved `horustest`), B (merged the holes fix), C (one rule set: REDESIGN.md = design,
+  AGENTS.md = git/pack/tools), D (`holes` + approval-format checks, phone preview, `tools/selftest.py`);
+  Kafa Topu 2 redone from the owner's screenshots: two players facing + ball (B = Symbol, A/C/D kept).
+- Owner: Kafa Topu 2 Q1 "B" / "A,B,C,D,Sen karar ver"; Q2 "Tamam, pakete ekle" (2026-11-21).
+- PR: #13
+- Open problems: Kafa Topu 2 still draws two faces; the owner agreed to redo it with objects only
+  ("Evet, yeni oturumda", 2026-11-21) — `python3 tools/next.py kafa_topu_2` starts the redo.
+
+## 2026-11-21 — Claude via Claude Code (cloud session) — `pokemon_unite`, `rush_royale`, games rule
+- What: Pokémon UNITE first with characters (shipped), then — after the owner's new rule "Karakter
+  yok, oyunun nesnesi" — redone with objects only: gold goal ring on a post + energy ball
+  (B = Symbol/Disc/Rimmed, A = Faithful); Rush Royale with objects only: wizard hat with gold crown
+  band + magenta gem + two ice crystals (C = Symbol/Faithful/Rimmed, D round tile = Disc);
+  REDESIGN.md §0 (talking to the owner) and §3b (games: objects, no characters).
+- Owner: Pokémon UNITE: "B" / "A,A'daki halkanın içindeki mavi hilali kaldır." / "B'deki mavi hilali
+  de kaldır. Simgeyi yaklaşık %10 büyüt, direği biraz kalınlaştır (32 px'te kaybolmasın)." /
+  "Tamam, pakete ekle" (2026-11-21). Rush Royale: "C" / "D,Şapkanın kenarını kaynaktaki gibi daha
+  geniş ve kıvrık yap, ortadaki taş pembe/macenta olsun." / "Simgeyi yaklaşık %10 büyüt…" /
+  "Tamam, pakete ekle" (2026-11-21).
+- PR: #14
+- Open problems: both are a little thin (mass 0.36–0.37, WARN); the magenta gem is outside the HIG
+  palette (his choice).
+
+## 2026-11-21 — Claude via Claude Code (cloud session) — handoff docs (no icons changed)
+- What: START-HERE.md, `tools/next.py` (the one command), `tools/describe_icon.py`, docs/APPS.md
+  (generated), this log, docs/PLAYBOOK.md + docs/playbook/ worked examples, `work/_lib/objects.py`
+  (28 ready objects) + docs/redesign/objects.png / OBJECTS.md, `pr_guard` LOG rule, selftest;
+  metadata lines (`kind:`, `ladder:`, `characters:`) in the 7 redesigned design.md files and the
+  owner's `redo:` line for `kafa_topu_2`.
+- Why: the owner's PROMPT-BAGIMSIZLIK.md: any model must be able to continue without Claude.
+- PR: see the `docs/handoff` pull request
+- Open problems: see the PR description ("what a new model still cannot do alone").

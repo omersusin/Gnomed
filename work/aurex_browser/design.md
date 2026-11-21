@@ -1,6 +1,9 @@
 # aurex_browser - design note (REDESIGN.md)
 
 source: work/aurex_browser/source.png
+kind: app
+ladder: L2 - a browser window carries the A
+characters: no
 anchors (2-4 things that make the app recognisable; they must survive):
   1. the white A with its two tones (top #e6f1fd, bottom #b1cff5)
   2. the dark-blue A side (#1e57c4)

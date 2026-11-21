@@ -1,9 +1,11 @@
+**New here? Read [START-HERE.md](START-HERE.md) first, then run `python3 tools/next.py <slug>` and do only what it prints.**
+
 # AGENTS.md — git, ComponentInfo, pack files, tools
 
 You are an AI agent working on **Gnomed**, an Android icon pack in the GNOME style.
 **How icons look and the per-app flow are in [REDESIGN.md](REDESIGN.md) — the only design
 document.** This file covers what REDESIGN.md does not: git, ComponentInfo, the pack files
-and the tools. Read at session start: CLAUDE.md → REDESIGN.md → this file →
+and the tools. Read at session start: START-HERE.md → REDESIGN.md → this file →
 [docs/MISTAKES.md](docs/MISTAKES.md) §10. Talk to the owner in **his** language, short.
 
 ## 0. `main` belongs to the maintainer. Never touch it.
@@ -23,8 +25,8 @@ and the tools. Read at session start: CLAUDE.md → REDESIGN.md → this file �
 
 1. Image-generation or image-editing models of any kind.
 2. A known **brand logo** drawn from memory — shapes come from `work/<slug>/source.png`
-   (`parts()`), an APK vector or an official SVG. Game characters: REDESIGN.md §3b
-   (references, never memory alone).
+   (`parts()`), an APK vector or an official SVG. Games: REDESIGN.md §3b (the game's
+   objects, no characters).
 3. A ComponentInfo not copied from the owner's request, `cmd package` output from his
    phone, or the APK. Other icon packs' appfilters, websites and memory are **not** a source.
 4. Deleting, renaming or hand-editing anything in `app/src/main/res/`, the XML files,
@@ -50,12 +52,15 @@ C1  python3 tools/gnome-android-icons/scripts/doctor.py   -> "result: READY"
 C2  python3 tools/import_request.py <zip | folder | request.txt | url>     (section G)
     python3 tools/import_request.py <same> --add --only <slug>
 C3  REDESIGN.md §4 steps 1-6 (new_redesign.py, concepts, Q1, redesign.py, make_icon.py, Q2)
+    - python3 tools/next.py <slug> prints the step you are on, with the exact commands
 C4  after "Tamam, pakete ekle":
       new app:          python3 tools/pack_add.py <slug> --category <Category>
       already in pack:  python3 tools/pack_refresh.py <slug>
 C5  python3 tools/gnome-android-icons/scripts/pack_audit.py --project .   -> no ERROR with <slug>
     python3 tools/size_audit.py                                           -> 0 outside
     python3 tools/check_icon.py <slug>                                    -> 0 FAIL
+C5b append an entry to docs/LOG.md (format at its top): every session that changes work/ or the
+    pack adds one; pr_guard FAILs the PR without it. Never edit old entries.
 C6  python3 tools/pr_guard.py -> 0 ERROR; git add -A; git commit; git push -u origin icons/<slug>
     open a PR to main with the REDESIGN.md §9 report; STOP.
 ```
@@ -89,8 +94,11 @@ Never fill a gap yourself: a wrong ComponentInfo silently never shows the icon.
 | `ic = gk.Icon("Name")`, `ic.path(geom_d(g), fill)`, `ic.linear(...)`, `ic.radial(...)` | icon, any shape, gradients |
 | `solid(ic, g, face, depth, side)`, `toplight`, `recess`, `hole` | GNOME parts: thickness, top light, inlay, real hole |
 | `save_styles(slug, {"symbol": main, ...})` | writes all four slots (REDESIGN.md §6) |
+| `from objects import *` (`work/_lib/objects.py`) | 28 ready GNOME objects `f(ic, cx, base, size, ramp=RAMP["Blue"])` — catalogue [docs/redesign/OBJECTS.md](docs/redesign/OBJECTS.md), picture `docs/redesign/objects.png` |
+| `python3 tools/describe_icon.py <svg/png>` | an icon as text: box, baseline, mass, HIG colours, holes, ASCII |
 
-Examples: `work/telegram/redesign.py`, `docs/redesign/examples/build_examples.py`.
+Examples: `work/telegram/redesign.py`, `docs/redesign/examples/build_examples.py`, annotated in
+[docs/playbook/](docs/playbook/).
 
 ## I. When you see this … do this
 
