@@ -126,5 +126,39 @@ expect(pg.log_problems({"work/x/redesign.py"}, ""), "pr_guard: work/ changed wit
 expect(not pg.log_problems({"work/x/redesign.py", "docs/LOG.md"}, "+## 2026-11-22 — m via t — `x`"), "pr_guard: with a new LOG entry -> ok")
 expect(pg.log_problems({"docs/LOG.md"}, "-## 2026-11-18 old\n+## 2026-11-18 new"), "pr_guard: an edited LOG line -> ERROR (append-only)")
 
+# gradients (2026-11-22, Deezer concepts looked melted): a source gradient must come back as ONE
+# part with a real gradient, and flat bands in a style must FAIL the `bands` check
+import obj as OB  # noqa: E402
+_grp = [(n, f) for n, _, f in OB.regions("exteraless") if "+" in n]
+expect(_grp and isinstance(_grp[0][1], OB.Grad), "regions(): exteraless's gradient bands come back merged with a Grad fill")
+if _grp:
+    _names = _grp[0][0].split("+")
+    _flat = "".join(f'<path d="M0 0" fill="{OB.colour("exteraless", k)}"/>' for k in _names[:2])
+    expect(OB.banded("exteraless", _flat), "banded(): two bands of one gradient painted flat -> found (check `bands` FAILs)")
+    _ic = OB.gk.Icon("g")
+    OB.solid(_ic, OB.rounded(OB.box(20, 20, 108, 110), 10), face=_grp[0][1], depth=4)
+    with tempfile.TemporaryDirectory() as tmp:
+        _ic.save(Path(tmp) / "g.svg")
+        _t = (Path(tmp) / "g.svg").read_text()
+    expect("linearGradient" in _t and not OB.banded("exteraless", _t), "solid(face=Grad) paints a real gradient, no bands")
+_tmp = ROOT / "work" / "_selftest_grad"
+try:
+    import numpy as _np
+    from PIL import Image as _Im
+    _tmp.mkdir(exist_ok=True)
+    _y, _x = _np.mgrid[0:256, 0:256] / 256
+    _a = _np.zeros((256, 256, 4))
+    _a[..., 3] = 1
+    _a[..., :3] = 0.08
+    _m = (_x > 0.2) & (_x < 0.8) & (_y > 0.3) & (_y < 0.7)
+    for _k, (_c0, _c1) in enumerate(((1.0, 0.2), (0.6, 0.3), (0.1, 0.9))):
+        _a[..., _k] = _np.where(_m, _c0 + (_c1 - _c0) * _x, _a[..., _k])
+    _Im.fromarray((_a * 255).astype(_np.uint8)).save(_tmp / "source.png")
+    _tr = OB.traced("_selftest_grad", (0, 0, 128, 128), n=6, exclude=["#141414"])
+    expect(len(_tr) == 1 and isinstance(_tr[0][1], OB.Grad), f"traced(): one gradient bar -> ONE part with a Grad (got {len(_tr)})")
+finally:
+    import shutil
+    shutil.rmtree(_tmp, ignore_errors=True)
+
 print(f"selftest: {ok} passed, {bad} failed")
 sys.exit(1 if bad else 0)

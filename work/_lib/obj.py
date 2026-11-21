@@ -15,6 +15,15 @@ Using the MEASURED source (never draw a logo from memory):
     print(describe("myapp"))        # every part: colour, size, position (text, no image needed)
     a, b = fit([P["r0"], P["r1"]], (24, 30, 104, 110))   # scale+move together, aspect kept
     solid(ic, a, face=colour("myapp", "r0"), depth=4)
+
+GRADIENTS (a gradient logo: Deezer bars, Instagram, Firefox ...): the measurement splits a
+gradient into flat colour BANDS (r1, r2, ... in near colours). Drawn one by one they look
+melted/broken. Use regions(slug) instead of parts()+colour(): bands of one gradient come back
+merged as ONE shape with a Grad fill (a real gradient, measured from the source pixels):
+
+    for name, g, fill in regions("myapp"):         # fill = "#hex" or Grad (works as a hex too)
+        ...
+    face = gradient("myapp", some_shape)            # the source's gradient under any shape
 """
 import importlib.util
 import sys
@@ -29,7 +38,7 @@ _spec.loader.exec_module(_skill)
 globals().update({k: getattr(_skill, k) for k in _skill.__all__})
 
 __all__ = list(_skill.__all__) + ["save_styles", "ROOT", "parts", "colour", "describe", "fit",
-                                  "shape_of", "traced", "cutout", "body"]
+                                  "shape_of", "traced", "cutout", "body", "gradient", "regions", "banded"]
 __all__ = [n for n in __all__ if n != "poly"] + ["poly"]
 
 
@@ -139,6 +148,15 @@ def describe(slug):
         if k in P and not P[k].is_empty:
             b = P[k].bounds
             lines.append(f"  {k:10s}           box {b[0]:.0f} {b[1]:.0f} {b[2]:.0f} {b[3]:.0f}")
+    try:
+        groups = [(n, f) for n, _, f in regions(slug) if "+" in n]
+    except Exception as e:                      # never let the description fail
+        groups, lines = [], lines + [f"  (gradient measurement skipped: {e})"]
+    for n, f in groups:
+        st = " -> ".join(c for _, c in f.stops) if isinstance(f, Grad) else f
+        lines.append(f"GRADIENT: {n.replace('+', ', ')} are bands of ONE gradient ({st}). Never draw them "
+                     f"one by one with colour(): use regions({slug!r}) - it gives them as one part "
+                     f"named {n!r} with a real gradient (Grad).")
     sb = P["silhouette"].bounds if "silhouette" in P and not P["silhouette"].is_empty else (0, 0, 0, 0)
     if (sb[2] - sb[0]) > 118 and (sb[3] - sb[1]) > 118 and len(info["regions"]) >= 4:
         lines.append("WARNING: the measured parts cover the whole tile - this is a POSTER / game art, "
@@ -146,6 +164,175 @@ def describe(slug):
                      "have none), draw the game's scene with its composition and count, serious "
                      "materials, no toy look; never trace the poster, never draw characters from memory alone.")
     return "\n".join(lines)
+
+
+def _lab(rgb):
+    from skimage.color import rgb2lab
+    return rgb2lab(np.clip(rgb, 0, 1).reshape(-1, 1, 3)).reshape(-1, 3)
+
+
+def _fit_grad(a, s, mask, flat_de=6.0, n_max=40000):
+    """Least-squares linear colour plane over the source pixels in `mask` (bool, image size).
+    -> (fill, rms_dE, rms_flat): fill = Grad (3 stops along the main direction of change, spanning the
+    pixels) or "#hex" when the area is flat (end colours closer than flat_de)."""
+    import math
+    from scipy import ndimage
+    m = mask & (a[..., 3] > 0.5)
+    core = ndimage.binary_erosion(m, iterations=2)          # anti-aliased edges are not the gradient
+    if core.sum() >= 0.3 * m.sum() and core.sum() > 50:
+        m = core
+    ys, xs = np.nonzero(m)
+    if len(xs) == 0:
+        return None, 99.0, 99.0
+    if len(xs) > n_max:
+        k = np.random.default_rng(0).choice(len(xs), n_max, replace=False)
+        ys, xs = ys[k], xs[k]
+    X, Y = xs * s, ys * s
+    rgb = a[ys, xs, :3].astype(np.float64)
+    A = np.c_[X, Y, np.ones_like(X)]
+    coef = np.linalg.lstsq(A, rgb, rcond=None)[0]
+    L = _lab(rgb)
+    rms = float(np.sqrt(np.mean(np.sum((L - _lab(A @ coef)) ** 2, axis=1))))
+    rms_flat = float(np.sqrt(np.mean(np.sum((L - L.mean(axis=0)) ** 2, axis=1)))) + 1e-9
+    hexc = lambda c: "#%02x%02x%02x" % tuple(int(round(v * 255)) for v in np.clip(c, 0, 1))  # noqa: E731
+    J = coef[:2].T
+    u = np.linalg.svd(J, full_matrices=False)[2][0]
+    if u[1] < -1e-9 or (abs(u[1]) <= 1e-9 and u[0] < 0):
+        u = -u                                            # always top->bottom / left->right
+    t = X * u[0] + Y * u[1]
+    lo, hi = np.percentile(t, 0.5), np.percentile(t, 99.5)
+    cx, cy = X.mean(), Y.mean()
+    tc = cx * u[0] + cy * u[1]
+    at = lambda tt: coef[0] * (cx + (tt - tc) * u[0]) + coef[1] * (cy + (tt - tc) * u[1]) + coef[2]  # noqa: E731
+    c0, c1 = at(lo), at(hi)
+    if np.linalg.norm(_lab(c0) - _lab(c1)) < flat_de:
+        return hexc(rgb.mean(axis=0)), rms, rms_flat
+    stops = [(0, hexc(c0)), (0.5, hexc(at((lo + hi) / 2))), (1, hexc(c1))]
+    return Grad(stops, math.degrees(math.atan2(u[1], u[0]))), rms, rms_flat
+
+
+def gradient(slug, shape, flat_de=6.0):
+    """The source's colour under `shape` (0..128 source space, e.g. P["r2"] or a union of
+    bands) as ONE fill: a Grad when the source has a gradient there, else "#hex".
+    Use it as face= of solid()/recess(); it spans whatever shape you draw (after fit())."""
+    sys.path.insert(0, str(ROOT / "work/_lib"))
+    import gtrace as gt
+    a, s = gt.load(ROOT / "work" / slug)
+    fill, _, _ = _fit_grad(a, s, gt.render_mask(geom_d(shape), a.shape[0]), flat_de)
+    return fill
+
+
+def regions(slug, flat_de=6.0):
+    """The measured mark as drawable parts [(name, shape, fill)], biggest first.
+    Touching colour regions that are BANDS OF ONE source gradient (the colour runs on
+    smoothly across their border) are merged back into one part (name "r1+r2") whose fill
+    is a measured Grad - never draw such bands one by one. A single region with a clear
+    gradient inside gets a Grad too. fill is "#hex" or Grad (a str: works as a hex too).
+    Cached in work/<slug>/gradients.json (redone when geometry.json changes)."""
+    import hashlib
+    import json
+    gp = ROOT / "work" / slug / "geometry.json"
+    key = hashlib.sha1(gp.read_bytes()).hexdigest()[:16] + f"-v3-{flat_de}"
+    cache = ROOT / "work" / slug / "gradients.json"
+    P = parts(slug)
+    names = [r["name"] for r in _geometry(slug)["info"].get("regions", []) if r["name"] in P and not P[r["name"]].is_empty]
+    if not names:
+        return []                                   # hand-built source without colour regions
+    if cache.exists():
+        c = json.loads(cache.read_text())
+        if c.get("key") == key:
+            out = []
+            for n, f in c["parts"]:
+                g = unary_union([P[k] for k in n.split("+")]).buffer(0)
+                out.append((n, g, Grad([tuple(x) for x in f["stops"]], f["angle"]) if isinstance(f, dict) else f))
+            return out
+    sys.path.insert(0, str(ROOT / "work/_lib"))
+    import gtrace as gt
+    a, s = gt.load(ROOT / "work" / slug)
+    H = a.shape[0]
+    opaque = a[..., 3] > 0.5
+    mask = lambda g: gt.render_mask(geom_d(g), H) & opaque if not g.is_empty else np.zeros((H, H), bool)  # noqa: E731
+    masks = {n: mask(P[n]) for n in names}
+    lab_img = None
+
+    def mean_lab(m):
+        nonlocal lab_img
+        if lab_img is None:
+            lab_img = _lab(a[..., :3]).reshape(H, H, 3)
+        return lab_img[m].mean(axis=0) if m.sum() >= 20 else None
+
+    def hexlab(h):
+        return _lab(np.array([int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)]))[0]
+
+    parent = {n: n for n in names}
+
+    def root(n):
+        while parent[n] != n:
+            n = parent[n]
+        return n
+
+    for i, n1 in enumerate(names):
+        for n2 in names[i + 1:]:
+            if root(n1) == root(n2) or P[n1].distance(P[n2]) > 1.0:
+                continue
+            l1, l2 = hexlab(colour(slug, n1)), hexlab(colour(slug, n2))
+            if (l1[1] ** 2 + l1[2] ** 2) ** 0.5 < 12 or (l2[1] ** 2 + l2[2] ** 2) ** 0.5 < 12:
+                continue                                    # white / grey / black are never bands
+            full = np.linalg.norm(l1 - l2)
+            if full < 3 or full > 70:
+                continue
+            # the pixels on both sides of the shared border: a gradient runs on smoothly
+            # (small jump), two different colours jump by their full difference
+            z1 = mean_lab(mask(P[n1].intersection(P[n2].buffer(1.5)).difference(P[n2])))
+            z2 = mean_lab(mask(P[n2].intersection(P[n1].buffer(1.5)).difference(P[n1])))
+            if z1 is None or z2 is None:
+                continue
+            if np.linalg.norm(z1 - z2) < 0.45 * full:
+                parent[root(n2)] = root(n1)
+    groups = {}
+    for n in names:
+        groups.setdefault(root(n), []).append(n)
+    out = []
+    for members in groups.values():
+        members.sort(key=names.index)
+        m = np.zeros((H, H), bool)
+        for k in members:
+            m |= masks[k]
+        fill, rms, rms_flat = _fit_grad(a, s, m, flat_de)
+        if len(members) == 1 and not (isinstance(fill, Grad) and rms < 0.8 * rms_flat):
+            fill = colour(slug, members[0])                 # flat, or no clean gradient inside
+        elif fill is None:
+            fill = colour(slug, members[0])
+        out.append(("+".join(members), unary_union([P[k] for k in members]).buffer(0), fill))
+    out.sort(key=lambda t: -t[1].area)
+    cache.write_text(json.dumps({"key": key, "parts": [
+        [n, {"stops": f.stops, "angle": f.angle} if isinstance(f, Grad) else f] for n, _, f in out]}, indent=1))
+    return out
+
+
+def banded(slug, svg_text, de=8.0):
+    """Gradient bands painted flat in an SVG: for every part regions() merged ("r1+r2"),
+    the members whose measured colour appears (within dE `de`) as a FLAT fill in svg_text.
+    -> [("r1+r2", ["#hex", "#hex"]), ...] - only groups with 2+ members found. Empty = fine.
+    Used by tools/check_icon.py (check `bands`) and tools/concepts.py."""
+    import re
+    flats = sorted(set(h.lower() for h in re.findall(r'fill="(#[0-9a-fA-F]{6})"', svg_text)))
+    if not flats:
+        return []
+    fl = _lab(np.array([[int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)] for h in flats]))
+    out = []
+    for name, _, _ in regions(slug):
+        if "+" not in name:
+            continue
+        found = []
+        for k in name.split("+"):
+            h = colour(slug, k)
+            d = np.linalg.norm(fl - _lab(np.array([int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)])), axis=1)
+            if d.min() < de:
+                found.append(flats[int(d.argmin())])
+        if len(set(found)) >= 2:
+            out.append((name, sorted(set(found))))
+    return out
 
 
 def fit(shapes, box_, keep_aspect=True, anchor="center"):
@@ -166,12 +353,16 @@ def fit(shapes, box_, keep_aspect=True, anchor="center"):
     return [affinity.translate(affinity.scale(s, sx, sy, origin=(0, 0)), tx, ty) for s in shapes]
 
 
-def traced(slug, box_, n=6, exclude=(), smooth=0.5, min_share=0.004, keep=None):
+def traced(slug, box_, n=6, exclude=(), smooth=0.5, min_share=0.004, keep=None, gradients=True):
     """Trace the recognisable element of a POSTER/illustration straight from the source
     (measurement, not memory): the pixels inside box_ (x0, y0, x1, y1 in the 0..128 source
     space) are reduced to `n` colours and each colour is traced. Colours within dE 18 of
     an `exclude` hex (the background) are skipped; `keep` = a shape: only pixels inside it.
-    -> [(shape, "#hex"), ...] biggest first, in source space (place them with fit())."""
+    -> [(shape, fill), ...] biggest first, in source space (place them with fit()).
+    gradients=True (default): a gradient in the source is NOT cut into flat bands - each
+    connected piece whose colours run on smoothly comes back as ONE shape with a measured
+    Grad fill (a str: works as a hex). Draw with solid()/recess()/cutout(), which paint
+    Grad as a real gradient (ic.path() would paint only its middle colour)."""
     import numpy as np
     from scipy.cluster.vq import kmeans2
     from skimage.color import rgb2lab, lab2rgb
@@ -194,31 +385,72 @@ def traced(slug, box_, n=6, exclude=(), smooth=0.5, min_share=0.004, keep=None):
     cent, _ = kmeans2(sample, n, minit="++", seed=0)
     lbl = np.argmin(np.linalg.norm(lab[..., None, :] - cent[None, None], axis=-1), axis=-1)
     excl = [rgb2lab(np.array([[[int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)]]]))[0, 0] for h in exclude]
+    keep_c = [c for c in range(len(cent)) if not any(np.linalg.norm(cent[c] - e) < 18 for e in excl)]
+    hexs = {c: "#%02x%02x%02x" % tuple(int(round(v * 255)) for v in
+                                       np.clip(lab2rgb(cent[c].reshape(1, 1, 3)).reshape(3), 0, 1)) for c in keep_c}
+    pieces = []                                  # (mask, fill)
+    if gradients:
+        from scipy import ndimage
+        fg = m & np.isin(lbl, keep_c)
+        comp, nc = ndimage.label(fg)
+        for k in range(1, nc + 1):
+            cm = comp == k
+            if cm.sum() < min_share * m.sum():
+                continue
+            cs = [c for c in keep_c if (cm & (lbl == c)).sum() >= 0.05 * cm.sum()]
+            if len(cs) <= 1:                     # one colour (plus edge pixels): the whole piece
+                fill, rms, rms_flat = _fit_grad(a, s, cm)
+                dom = max(keep_c, key=lambda c: (cm & (lbl == c)).sum())
+                pieces.append((cm, fill if isinstance(fill, Grad) and rms < 0.8 * rms_flat else hexs[dom]))
+                continue
+            if len(cs) >= 2:
+                # several clusters in one piece: one gradient, or really different colours?
+                # a gradient runs on smoothly: neighbouring pixels across the cluster borders
+                # differ little compared with the clusters' own colour difference
+                core = ndimage.binary_erosion(cm, iterations=3)   # not the anti-aliased rim
+                sub = lbl * core + (-1) * (~core)
+                jumps, fulls = [], []
+                for dy, dx in ((0, 1), (1, 0)):
+                    a1, a2 = sub[: sub.shape[0] - dy, : sub.shape[1] - dx], sub[dy:, dx:]
+                    e = (a1 != a2) & (a1 >= 0) & (a2 >= 0)
+                    if e.any():
+                        l1 = lab[: lab.shape[0] - dy, : lab.shape[1] - dx][e]
+                        l2 = lab[dy:, dx:][e]
+                        jumps.append(np.linalg.norm(l1 - l2, axis=1))
+                        fulls.append(np.linalg.norm(cent[a1[e]] - cent[a2[e]], axis=1))
+                smooth_run = bool(jumps) and np.median(np.concatenate(jumps)) < 0.3 * np.median(np.concatenate(fulls))
+                if smooth_run:
+                    fill, _, _ = _fit_grad(a, s, cm)
+                    pieces.append((cm, fill or hexs[cs[0]]))
+                    continue
+            for c in cs or keep_c:
+                cc = cm & (lbl == c)
+                if cc.sum() >= min_share * m.sum():
+                    pieces.append((cc, hexs[c]))
+    else:
+        for c in keep_c:
+            cc = m & (lbl == c)
+            if cc.sum() >= min_share * m.sum():
+                pieces.append((cc, hexs[c]))
     out = []
-    for c in range(len(cent)):
-        if any(np.linalg.norm(cent[c] - e) < 18 for e in excl):
-            continue
-        cm = m & (lbl == c)
-        if cm.sum() < min_share * m.sum():
-            continue
-        rgb = np.clip(lab2rgb(cent[c].reshape(1, 1, 3)).reshape(3), 0, 1)
-        hx = "#%02x%02x%02x" % tuple(int(round(v * 255)) for v in rgb)
+    for cm, fill in pieces:
         g = shape_of(gt.trace_mask(cm, s, smooth_u=smooth))
         if not g.is_empty:
-            out.append((g, hx, int(cm.sum())))
+            out.append((g, fill, int(cm.sum())))
     out.sort(key=lambda t: -t[2])
     return [(g, h) for g, h, _ in out]
 
 
 def cutout(ic, regions, depth=5, side=None, layer="cut"):
     """Draw traced regions as ONE die-cut object: the union gets a side `depth` px deep
-    (colour: `side` or the darkest region darkened), then every region on top, top light."""
+    (colour: `side` or the darkest region darkened), then every region on top, top light.
+    A Grad fill (from traced()/regions()) is painted as a real gradient."""
     from gnome_kit import shade
     body = unary_union([g for g, _ in regions]).buffer(0.6).buffer(-0.6)
-    dark = side or shade(min((h for _, h in regions), key=lambda h: sum(int(h[i:i + 2], 16) for i in (1, 3, 5))), -0.25)
+    dark = side or shade(str.__str__(min((h for _, h in regions), key=lambda h: sum(int(h[i:i + 2], 16) for i in (1, 3, 5)))), -0.25)
     solid(ic, body, face=dark, depth=depth, side=dark, top=False, layer=f"{layer}-body")
     for i, (g, h) in enumerate(regions):
-        ic.path(geom_d(g), h, layer_id=f"{layer}-{i}", fill_rule="evenodd")
+        ic.path(geom_d(g), _skill._fill(ic, h, g), layer_id=f"{layer}-{i}", fill_rule="evenodd")
     toplight(ic, body, layer=layer)
     return body
 

@@ -33,6 +33,18 @@ def main():
     from stamps import write_board_stamp
     write_board_stamp(slug)
     print(f"board: {out.relative_to(ROOT)}  - open it, then ask the human which concept (REDESIGN.md step 4)")
+    # a source gradient painted as flat bands looks melted (docs/PLAYBOOK.md#gradients)
+    try:
+        sys.path.insert(0, str(ROOT / "work/_lib"))
+        import obj
+        for svg in svgs:
+            bad = obj.banded(slug, svg.read_text())
+            if bad:
+                print(f"WARNING concept {svg.stem}: gradient painted as flat bands ("
+                      + "; ".join(f"{n}: {', '.join(h)}" for n, h in bad)
+                      + f") - fix with regions({slug!r}) before Q1, docs/PLAYBOOK.md#gradients")
+    except Exception as e:
+        print(f"(gradient band check skipped: {e})")
 
 
 if __name__ == "__main__":

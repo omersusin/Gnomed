@@ -69,6 +69,8 @@ def main():
     md += ["", "Example: `bottle(ic, 64, 118, 54, ramp=RAMP[\"Blue\"])` then",
            "`for g, c in zip(fit(MARK, bottle_label(64, 118, 54)), COL): solid(ic, g, face=c, depth=0, top=False)`.",
            "A white mark on a white label/stamp vanishes: print it in the brand colour (Telegram's stamp: the plane in blue).",
+           "`MARK`/`COL` come from `regions(SLUG)` (the concept template does this): a gradient logo's bands",
+           "come back as ONE part with a real gradient (`Grad`) - never `colour()` per band (docs/PLAYBOOK.md#gradients).",
            "", "Ramps: " + ", ".join(f"`{k}`" for k in O.RAMP), ""]
     (ROOT / "docs/redesign/OBJECTS.md").write_text("\n".join(md) + "\n")
     print("wrote docs/redesign/objects.png + docs/redesign/OBJECTS.md")

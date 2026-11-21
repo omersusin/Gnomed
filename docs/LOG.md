@@ -141,3 +141,19 @@ Times are from the commits; the model of a backfilled session is what the commit
 - PR: the `docs/handoff` pull request
 - Open problems: a model without vision still cannot judge beauty — the owner's eye in Q1/Q2 is the
   only check of looks; `andvm`, `horus`, `aurex_browser` have no Symbol and no Q2 answer yet.
+
+## 2026-11-22 — Claude via Claude Code (cloud session) — tools only (no icons changed)
+- What: gradients no longer break into bands. `Grad` fill (any direction) in the vendored
+  skill's obj.py (`solid`/`recess` paint it); `work/_lib/obj.py`: `gradient(slug, shape)`,
+  `regions(slug)` (bands of one source gradient merged back, measured by how smoothly the colour
+  runs across their border; cached in `work/<slug>/gradients.json`, git-ignored), `banded()`,
+  `traced(gradients=True)`, `cutout()` paints `Grad`, `describe()` prints GRADIENT lines; the
+  concept/redesign templates use `regions()`; gate `bands` (FAIL) + concept warnings in
+  `next.py`/`concepts.py`; selftest +4; REDESIGN §5, PLAYBOOK#gradients, MISTAKES §3.
+- Why: DeepSeek's Deezer concept A had melted bars; the owner: "gradyanlar bozuk. Onun için bir
+  şey yapamaz mıyız? Depoya da ekleyelim." (2026-11-22)
+- Tested: a synthetic gradient-bars source (not committed): old template -> bands, gate FAIL;
+  new template -> smooth gradients, PASS. All 417 existing SVGs: 0 `bands` hits. selftest 33/33.
+- PR: fix/gradients
+- Open problems: the Deezer work is on the owner's machine (OpenCode), not in the repo — redraw
+  its concept A with the new template (`regions()`) before Q1.
