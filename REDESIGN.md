@@ -76,6 +76,9 @@ scene / keep the characters" rule).
 
 ## 4. Procedure — one app per session
 
+`python3 tools/next.py <slug>` tells you which of these steps you are on and prints its exact
+commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
+
 ```
 1  MEASURE   python3 tools/new_redesign.py <slug>
              -> geometry.json, the parts as text, design.md, concepts/make_concepts.py
@@ -183,7 +186,7 @@ painted-holes: "<his words>" (date)     only if a hole is really meant to be pai
 ## 8. Budget — he pays for every message
 
 - **One app per session**, then `/clear`. Effort `high` for design, `medium` for git/docs.
-- At session start read only: CLAUDE.md, this file, AGENTS.md, docs/MISTAKES.md §10, and the
+- At session start read only: START-HERE.md, this file, AGENTS.md, docs/MISTAKES.md §10, and the
   files the task names.
 - Concepts are cheap and rough; polish only the chosen ones.
 - Never rebuild the whole pack blindly: rebuild only what you changed, compare pixels with

@@ -281,7 +281,8 @@ def state_of(slug, cheap=False, use_git=True):
     game = is_game(w, text)
     approved = line(text, "approved")
     if not quoted(approved):
-        if not anchors_filled(text) or not function_filled(text) or not line(text, "kind"):
+        if not anchors_filled(text) or not function_filled(text) or \
+                not line(text, "kind").lower().startswith(("app", "game")):
             return "FILL_DESIGN", {"game": game}
         svgs = sorted((w / "concepts").glob("*.svg"))
         if len(svgs) < 4:
