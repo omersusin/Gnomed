@@ -104,6 +104,10 @@
     <item drawable="dolby_atmos_alt1" name="Dolby Atmos (Disc)" />
     <item drawable="dolby_atmos_alt2" name="Dolby Atmos (Rimmed)" />
     <item drawable="dolby_atmos_alt3" name="Dolby Atmos (Symbol)" />
+    <item drawable="deezer" name="Deezer" />
+    <item drawable="deezer_alt1" name="Deezer (Disc)" />
+    <item drawable="deezer_alt2" name="Deezer (Rimmed)" />
+    <item drawable="deezer_alt3" name="Deezer (Symbol)" />
 
     <category title="System" />
     <item drawable="telefon" name="Telefon" />
