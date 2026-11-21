@@ -166,4 +166,4 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 - **Games: no characters, the game's objects** (2026-11-21): "Karakter yok, oyunun nesnesi" — no characters, faces or animals; 1–3 of the game's objects (Pokémon UNITE = goal ring + ball, Kafa Topu 2 = ball + boot, Rush Royale = its distinctive object), real materials, GNOME light + thickness, HIG colours near the game's (REDESIGN §3b).
 - Holes are real holes in free styles (PR #12); painting them needs his words.
 - Telegram: envelope (Faithful + Symbol), ring (Disc).
-- Pokémon UNITE: the character version (shipped 2026-11-21) is dropped; redo with objects only. Rush Royale: not approved, objects only. Kafa Topu 2 shipped with characters before this rule (redo only if the owner asks).
+- Pokémon UNITE and Rush Royale: redone with objects only and shipped (2026-11-21). Kafa Topu 2 shipped with characters before this rule (redo only if the owner asks).

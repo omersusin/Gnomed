@@ -4,6 +4,27 @@ This is the **only** design document. AGENTS.md covers git, ComponentInfo, pack 
 tools; docs/MISTAKES.md is the history (read its §10 every session). `docs/course/` and
 `CONTRIBUTING.md` are LEGACY (the old plate pipeline) — do not design with them.
 
+## 0. Talking to the owner (from his own messages, 2026-11-18..21)
+
+1. Always Turkish, short, plain words. In questions never use jargon (dry-run, appfilter,
+   ComponentInfo, slot, flavor) without saying what changes ON HIS PHONE.
+   He answered "Anlamadım" and "Bu soruyu sor diyince tekrar sor" to technical questions.
+2. "Varsayılan / default" = the icon he sees = the SYMBOL style (he uses the Symbol APK).
+   Never assume Faithful is what he sees.
+3. He often types by voice: a sentence may contain a wrong word
+   ("Oyunu öğren içinde niye boşluk var" = "A'nın içinde…"). Read it from the context;
+   if two readings are possible, put both as options in the next question. Do not stop.
+4. If he picks every option plus "Sen karar ver", keep all of them, decide the order
+   yourself and show the order in Q2.
+5. Never answer "not possible" before checking. When he says "it is possible, I've seen it",
+   research and find the way (the in-app style switcher was "impossible" and then was built).
+6. "Beni sorma" means fewer questions, never "approve on my behalf". Exactly two
+   questions per app (Q1 concepts, Q2 final); approvals are his words in quotes + date.
+7. Never publish (pack, release, main) icons he has not seen in Q2.
+   "Batches, one approval at end" put broken icons on his phone.
+8. "Change X" means change exactly X (Telegram stamp: he said the plane, not the whole logo).
+9. Games: objects only, no characters/faces/animals (owner decision 2026-11-21).
+
 ## 1. The one rule
 
 **A Gnomed icon is the app's idea built as a GNOME object — not the app's logo on a plate.**
