@@ -1,0 +1,44 @@
+name: Icon request
+description: Ask for an app to get a Gnomed icon
+title: "Icon request: "
+labels: ["icon-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The easiest way: in the Gnomed app open **Request**, pick the apps and send (zip, or
+        *Share as images + text*). Attach that here. Or fill in the fields below.
+  - type: input
+    id: app
+    attributes:
+      label: App name
+      placeholder: e.g. Signal
+    validations:
+      required: true
+  - type: input
+    id: store
+    attributes:
+      label: Store link (Google Play / F-Droid / GitHub)
+      placeholder: https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms
+  - type: textarea
+    id: component
+    attributes:
+      label: ComponentInfo
+      description: |
+        From Gnomed's Request screen (any export), or with adb / root:
+        `cmd package resolve-activity --brief -c android.intent.category.LAUNCHER <package>`.
+        Please do not guess it - a wrong one means the icon never applies.
+      placeholder: ComponentInfo{org.thoughtcrime.securesms/org.thoughtcrime.securesms.RoutingActivity}
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: icon
+    attributes:
+      label: The app's current icon
+      description: Drag the exported PNG (from the request zip) or a screenshot here.
+  - type: textarea
+    id: idea
+    attributes:
+      label: An idea for the GNOME object? (optional)
+      description: What should the icon show? e.g. "a speaker" for a music app. You can also attach an SVG drawn with docs/template/gnomed-template.svg.

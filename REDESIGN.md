@@ -1,8 +1,8 @@
 # REDESIGN.md — how a Gnomed icon is made (binding)
 
 This is the **only** design document. AGENTS.md covers git, ComponentInfo, pack files and
-tools; docs/MISTAKES.md is the history (read its §10 every session). `docs/course/` and
-`CONTRIBUTING.md` are LEGACY (the old plate pipeline) — do not design with them.
+tools; docs/MISTAKES.md is the history (read its §10 every session). `docs/course/` (with
+`CONTRIBUTING-legacy.md`) is LEGACY (the old plate pipeline) — do not design with it.
 
 ## 0. Talking to the owner (from his own messages, 2026-11-18..21)
 
@@ -58,6 +58,16 @@ Study before every app: [docs/redesign/gnome-objects.png](docs/redesign/gnome-ob
 
 Wordmarks: letter shapes come from the source (`parts()`), never a font, never `<text>`.
 
+**Choosing the object** (GNOME HIG, *App Icons → Metaphor*; research: [docs/RESEARCH.md](docs/RESEARCH.md)):
+ONE simple, recognisable object with a clear link to the app's **function or name** — a physical
+object it uses (a speaker for music), one from its domain or an older analog form (a cassette
+for podcasts), a domain symbol (a play triangle), or a simplified piece of its own UI. Not:
+random objects, mascots/characters, a logo that only works in its brand style.
+**System apps** (Ayarlar, Saat, Kamera, Telefon, Mesajlar, Kişiler, Hesap Makinesi, Hava
+Durumu, Fotoğraflar, Dosyalar…) take the metaphor of GNOME's own app for that job (Settings,
+Clocks, Snapshot, Calls, Chatty, Contacts, Calculator, Weather, Loupe, Files) — that IS the GNOME
+icon of the function; redraw it, never copy its file.
+
 ### 3b. Games — the game's objects, no characters
 
 Owner (2026-11-21): *"Karakter yok, oyunun nesnesi"* (replaces the earlier "draw the game's
@@ -106,6 +116,10 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
 ## 5. Construction rules
 
 - Canvas 128 × 128; the object inside 8…120; painted area about 45–65 %.
+- **Template keylines** (GNOME's `template.svg`): circle r 59.5 (a round object may reach
+  4.5…123.5), square 103 × 103, tall 87 × 111, wide 111 × 87, corner radius 8. Size the object
+  to the keyline closest to its shape so all icons weigh the same:
+  [docs/template/gnomed-template.svg](docs/template/gnomed-template.svg) (Inkscape, with the guides).
 - **One baseline, one size**: free objects (every redesign, every Symbol) have their bottom
   edge (side included) at **116–120** (target 118) and their larger side ≥ 96; plates end at
   114–118, discs at 120–125. A wide, short object is made wider (≤ 112) and stands on the
@@ -123,7 +137,14 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   melted). Draw the mark with `regions(slug)` (bands come back merged, fill = `Grad`) or
   `face=gradient(slug, shape)`; `traced()` keeps gradients by default. Gate: `bands`.
   How: [docs/PLAYBOOK.md#gradients](docs/PLAYBOOK.md#gradients).
-- **Thickness**: 2 px thin parts/discs, 4–6 px flat objects, 8–24 px boxes/devices/cylinders.
+- **Thickness** (the front profile below the top face): **2–4 px** for discs, plates and flat
+  objects — the HIG default ("2 detail units, 4 px"); up to 6 for a thick flat object; 8–24 px
+  only for boxes/devices/cylinders whose front is a real face.
+- **Flat faces flat, curved faces shaded** (HIG): flat colours on straight surfaces, gradients
+  only on curved ones (a ball, a cylinder, a bulging cushion) and for a brand gradient (above).
+- **No strokes or outlines**: a line-art logo (an outlined note, `>_`, a knot) becomes a SOLID
+  object with thickness; lines thinner than 4 px disappear at 48 px. Edges on the 2 px grid
+  where possible — they stay crisp at 64 px.
 - **Light from the top**: curved faces get a vertical gradient (top lighter); 1–1.5 px top
   light on upper edges (`toplight()`). **Recess** (screen, label, inlay): darker top inner
   wall (`recess()`). **Hole** (lens, slot): dark body, darker top wall (`hole()`).

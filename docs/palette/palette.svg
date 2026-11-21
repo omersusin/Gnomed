@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="648" viewBox="0 0 660 648">
+<rect width="660" height="648" fill="#ffffff"/>
+<style>text{font-family:Inter,Cantarell,DejaVu Sans,sans-serif}</style>
+<text x="16" y="26" font-size="15" font-weight="700" fill="#241f31">Gnomed palette (GNOME HIG)</text>
+<text x="140.0" y="52" font-size="11" fill="#5e5c64" text-anchor="middle">1</text>
+<text x="252.0" y="52" font-size="11" fill="#5e5c64" text-anchor="middle">2</text>
+<text x="364.0" y="52" font-size="11" fill="#5e5c64" text-anchor="middle">3</text>
+<text x="476.0" y="52" font-size="11" fill="#5e5c64" text-anchor="middle">4</text>
+<text x="588.0" y="52" font-size="11" fill="#5e5c64" text-anchor="middle">5</text>
+<text x="16" y="92.0" font-size="13" fill="#241f31">Blue</text>
+<rect x="86" y="58" width="108" height="60" rx="8" fill="#99c1f1" stroke="#000000" stroke-opacity="0.08"/>
+<text x="140.0" y="92.0" font-size="12" fill="#241f31" text-anchor="middle">#99c1f1</text>
+<rect x="198" y="58" width="108" height="60" rx="8" fill="#62a0ea" stroke="#000000" stroke-opacity="0.08"/>
+<text x="252.0" y="92.0" font-size="12" fill="#ffffff" text-anchor="middle">#62a0ea</text>
+<rect x="310" y="58" width="108" height="60" rx="8" fill="#3584e4" stroke="#000000" stroke-opacity="0.08"/>
+<text x="364.0" y="92.0" font-size="12" fill="#ffffff" text-anchor="middle">#3584e4</text>
+<rect x="422" y="58" width="108" height="60" rx="8" fill="#1c71d8" stroke="#000000" stroke-opacity="0.08"/>
+<text x="476.0" y="92.0" font-size="12" fill="#ffffff" text-anchor="middle">#1c71d8</text>
+<rect x="534" y="58" width="108" height="60" rx="8" fill="#1a5fb4" stroke="#000000" stroke-opacity="0.08"/>
+<text x="588.0" y="92.0" font-size="12" fill="#ffffff" text-anchor="middle">#1a5fb4</text>
+<text x="16" y="156.0" font-size="13" fill="#241f31">Green</text>
+<rect x="86" y="122" width="108" height="60" rx="8" fill="#8ff0a4" stroke="#000000" stroke-opacity="0.08"/>
+<text x="140.0" y="156.0" font-size="12" fill="#241f31" text-anchor="middle">#8ff0a4</text>
+<rect x="198" y="122" width="108" height="60" rx="8" fill="#57e389" stroke="#000000" stroke-opacity="0.08"/>
+<text x="252.0" y="156.0" font-size="12" fill="#241f31" text-anchor="middle">#57e389</text>
+<rect x="310" y="122" width="108" height="60" rx="8" fill="#33d17a" stroke="#000000" stroke-opacity="0.08"/>
+<text x="364.0" y="156.0" font-size="12" fill="#241f31" text-anchor="middle">#33d17a</text>
+<rect x="422" y="122" width="108" height="60" rx="8" fill="#2ec27e" stroke="#000000" stroke-opacity="0.08"/>
+<text x="476.0" y="156.0" font-size="12" fill="#ffffff" text-anchor="middle">#2ec27e</text>
+<rect x="534" y="122" width="108" height="60" rx="8" fill="#26a269" stroke="#000000" stroke-opacity="0.08"/>
+<text x="588.0" y="156.0" font-size="12" fill="#ffffff" text-anchor="middle">#26a269</text>
+<text x="16" y="220.0" font-size="13" fill="#241f31">Yellow</text>
+<rect x="86" y="186" width="108" height="60" rx="8" fill="#f9f06b" stroke="#000000" stroke-opacity="0.08"/>
+<text x="140.0" y="220.0" font-size="12" fill="#241f31" text-anchor="middle">#f9f06b</text>
+<rect x="198" y="186" width="108" height="60" rx="8" fill="#f8e45c" stroke="#000000" stroke-opacity="0.08"/>
+<text x="252.0" y="220.0" font-size="12" fill="#241f31" text-anchor="middle">#f8e45c</text>
+<rect x="310" y="186" width="108" height="60" rx="8" fill="#f6d32d" stroke="#000000" stroke-opacity="0.08"/>
+<text x="364.0" y="220.0" font-size="12" fill="#241f31" text-anchor="middle">#f6d32d</text>
+<rect x="422" y="186" width="108" height="60" rx="8" fill="#f5c211" stroke="#000000" stroke-opacity="0.08"/>
+<text x="476.0" y="220.0" font-size="12" fill="#241f31" text-anchor="middle">#f5c211</text>
+<rect x="534" y="186" width="108" height="60" rx="8" fill="#e5a50a" stroke="#000000" stroke-opacity="0.08"/>
+<text x="588.0" y="220.0" font-size="12" fill="#241f31" text-anchor="middle">#e5a50a</text>
+<text x="16" y="284.0" font-size="13" fill="#241f31">Orange</text>
+<rect x="86" y="250" width="108" height="60" rx="8" fill="#ffbe6f" stroke="#000000" stroke-opacity="0.08"/>
+<text x="140.0" y="284.0" font-size="12" fill="#241f31" text-anchor="middle">#ffbe6f</text>
+<rect x="198" y="250" width="108" height="60" rx="8" fill="#ffa348" stroke="#000000" stroke-opacity="0.08"/>
+<text x="252.0" y="284.0" font-size="12" fill="#241f31" text-anchor="middle">#ffa348</text>
+<rect x="310" y="250" width="108" height="60" rx="8" fill="#ff7800" stroke="#000000" stroke-opacity="0.08"/>
+<text x="364.0" y="284.0" font-size="12" fill="#ffffff" text-anchor="middle">#ff7800</text>
+<rect x="422" y="250" width="108" height="60" rx="8" fill="#e66100" stroke="#000000" stroke-opacity="0.08"/>
+<text x="476.0" y="284.0" font-size="12" fill="#ffffff" text-anchor="middle">#e66100</text>
+<rect x="534" y="250" width="108" height="60" rx="8" fill="#c64600" stroke="#000000" stroke-opacity="0.08"/>
+<text x="588.0" y="284.0" font-size="12" fill="#ffffff" text-anchor="middle">#c64600</text>
+<text x="16" y="348.0" font-size="13" fill="#241f31">Red</text>
+<rect x="86" y="314" width="108" height="60" rx="8" fill="#f66151" stroke="#000000" stroke-opacity="0.08"/>
+<text x="140.0" y="348.0" font-size="12" fill="#ffffff" text-anchor="middle">#f66151</text>
+<rect x="198" y="314" width="108" height="60" rx="8" fill="#ed333b" stroke="#000000" stroke-opacity="0.08"/>
+<text x="252.0" y="348.0" font-size="12" fill="#ffffff" text-anchor="middle">#ed333b</text>
+<rect x="310" y="314" width="108" height="60" rx="8" fill="#e01b24" stroke="#000000" stroke-opacity="0.08"/>
+<text x="364.0" y="348.0" font-size="12" fill="#ffffff" text-anchor="middle">#e01b24</text>
+<rect x="422" y="314" width="108" height="60" rx="8" fill="#c01c28" stroke="#000000" stroke-opacity="0.08"/>
+<text x="476.0" y="348.0" font-size="12" fill="#ffffff" text-anchor="middle">#c01c28</text>
+<rect x="534" y="314" width="108" height="60" rx="8" fill="#a51d2d" stroke="#000000" stroke-opacity="0.08"/>
+<text x="588.0" y="348.0" font-size="12" fill="#ffffff" text-anchor="middle">#a51d2d</text>
+<text x="16" y="412.0" font-size="13" fill="#241f31">Purple</text>
+<rect x="86" y="378" width="108" height="60" rx="8" fill="#dc8add" stroke="#000000" stroke-opacity="0.08"/>
+<text x="140.0" y="412.0" font-size="12" fill="#241f31" text-anchor="middle">#dc8add</text>
+<rect x="198" y="378" width="108" height="60" rx="8" fill="#c061cb" stroke="#000000" stroke-opacity="0.08"/>
+<text x="252.0" y="412.0" font-size="12" fill="#ffffff" text-anchor="middle">#c061cb</text>
+<rect x="310" y="378" width="108" height="60" rx="8" fill="#9141ac" stroke="#000000" stroke-opacity="0.08"/>
+<text x="364.0" y="412.0" font-size="12" fill="#ffffff" text-anchor="middle">#9141ac</text>
+<rect x="422" y="378" width="108" height="60" rx="8" fill="#813d9c" stroke="#000000" stroke-opacity="0.08"/>
+<text x="476.0" y="412.0" font-size="12" fill="#ffffff" text-anchor="middle">#813d9c</text>
+<rect x="534" y="378" width="108" height="60" rx="8" fill="#613583" stroke="#000000" stroke-opacity="0.08"/>
+<text x="588.0" y="412.0" font-size="12" fill="#ffffff" text-anchor="middle">#613583</text>
+<text x="16" y="476.0" font-size="13" fill="#241f31">Brown</text>
+<rect x="86" y="442" width="108" height="60" rx="8" fill="#cdab8f" stroke="#000000" stroke-opacity="0.08"/>
+<text x="140.0" y="476.0" font-size="12" fill="#241f31" text-anchor="middle">#cdab8f</text>
+<rect x="198" y="442" width="108" height="60" rx="8" fill="#b5835a" stroke="#000000" stroke-opacity="0.08"/>
+<text x="252.0" y="476.0" font-size="12" fill="#ffffff" text-anchor="middle">#b5835a</text>
+<rect x="310" y="442" width="108" height="60" rx="8" fill="#986a44" stroke="#000000" stroke-opacity="0.08"/>
+<text x="364.0" y="476.0" font-size="12" fill="#ffffff" text-anchor="middle">#986a44</text>
+<rect x="422" y="442" width="108" height="60" rx="8" fill="#865e3c" stroke="#000000" stroke-opacity="0.08"/>
+<text x="476.0" y="476.0" font-size="12" fill="#ffffff" text-anchor="middle">#865e3c</text>
+<rect x="534" y="442" width="108" height="60" rx="8" fill="#63452c" stroke="#000000" stroke-opacity="0.08"/>
+<text x="588.0" y="476.0" font-size="12" fill="#ffffff" text-anchor="middle">#63452c</text>
+<text x="16" y="540.0" font-size="13" fill="#241f31">Light</text>
+<rect x="86" y="506" width="108" height="60" rx="8" fill="#ffffff" stroke="#000000" stroke-opacity="0.08"/>
+<text x="140.0" y="540.0" font-size="12" fill="#241f31" text-anchor="middle">#ffffff</text>
+<rect x="198" y="506" width="108" height="60" rx="8" fill="#f6f5f4" stroke="#000000" stroke-opacity="0.08"/>
+<text x="252.0" y="540.0" font-size="12" fill="#241f31" text-anchor="middle">#f6f5f4</text>
+<rect x="310" y="506" width="108" height="60" rx="8" fill="#deddda" stroke="#000000" stroke-opacity="0.08"/>
+<text x="364.0" y="540.0" font-size="12" fill="#241f31" text-anchor="middle">#deddda</text>
+<rect x="422" y="506" width="108" height="60" rx="8" fill="#c0bfbc" stroke="#000000" stroke-opacity="0.08"/>
+<text x="476.0" y="540.0" font-size="12" fill="#241f31" text-anchor="middle">#c0bfbc</text>
+<rect x="534" y="506" width="108" height="60" rx="8" fill="#9a9996" stroke="#000000" stroke-opacity="0.08"/>
+<text x="588.0" y="540.0" font-size="12" fill="#241f31" text-anchor="middle">#9a9996</text>
+<text x="16" y="604.0" font-size="13" fill="#241f31">Dark</text>
+<rect x="86" y="570" width="108" height="60" rx="8" fill="#77767b" stroke="#000000" stroke-opacity="0.08"/>
+<text x="140.0" y="604.0" font-size="12" fill="#ffffff" text-anchor="middle">#77767b</text>
+<rect x="198" y="570" width="108" height="60" rx="8" fill="#5e5c64" stroke="#000000" stroke-opacity="0.08"/>
+<text x="252.0" y="604.0" font-size="12" fill="#ffffff" text-anchor="middle">#5e5c64</text>
+<rect x="310" y="570" width="108" height="60" rx="8" fill="#3d3846" stroke="#000000" stroke-opacity="0.08"/>
+<text x="364.0" y="604.0" font-size="12" fill="#ffffff" text-anchor="middle">#3d3846</text>
+<rect x="422" y="570" width="108" height="60" rx="8" fill="#241f31" stroke="#000000" stroke-opacity="0.08"/>
+<text x="476.0" y="604.0" font-size="12" fill="#ffffff" text-anchor="middle">#241f31</text>
+</svg>

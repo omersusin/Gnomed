@@ -1,0 +1,24 @@
+<p><b>Gnomed</b> brings the look of GNOME's app icons (Adwaita) to Android. The goal: instead of putting
+the brand logo on a plate, every icon is redrawn as a GNOME-style object - simple geometric shapes, the GNOME
+colour palette, light from above and a visible front edge.</p>
+
+<p><i>Work in progress:</i> the first apps are redrawn this way; the others still use a first, simpler
+version and are redone one by one. Missing an app? Send an icon request from the app.</p>
+
+<p><b>Four styles in one app</b> - switch from the dashboard (drawer, Apply screen or app shortcut):</p>
+<ul>
+<li><b>Symbol</b> - the main Gnomed design: the app's idea as an object</li>
+<li><b>Faithful</b> - closest to the original logo</li>
+<li><b>Disc</b> - a round version</li>
+<li><b>Rimmed</b> - an alternative design</li>
+</ul>
+
+<p><b>Also included</b></p>
+<ul>
+<li>Icon requests: send the apps you use (e-mail, zip, or images + text that any AI agent can read)</li>
+<li>Calm GNOME wallpapers, loaded from the repository (new ones arrive without an update)</li>
+<li>Works with the launchers CandyBar supports (Nova, Lawnchair, Niagara, Smart Launcher, Hyperion and many more)</li>
+</ul>
+
+<p>Every icon is drawn as SVG code from the GNOME Human Interface Guidelines - no image generators.
+Free and open source (GPL-3.0). App names and logos belong to their owners.</p>

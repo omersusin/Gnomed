@@ -1,0 +1,1 @@
+GNOME / Adwaita tarzı simge paketi: her uygulama bir GNOME nesnesi olarak

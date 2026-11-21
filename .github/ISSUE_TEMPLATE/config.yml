@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: How a Gnomed icon is designed
+    url: https://github.com/omersusin/Gnomed/blob/main/REDESIGN.md
+    about: The design rules (GNOME objects, template, palette).
+  - name: Contributing (people and AI agents)
+    url: https://github.com/omersusin/Gnomed/blob/main/CONTRIBUTING.md
+    about: Request, report, or draw an icon.

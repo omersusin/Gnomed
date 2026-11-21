@@ -19,3 +19,9 @@ jobs:
       - name: Additive-only check
         # HEAD is the PR merged into the current base; HEAD^1 = base, HEAD^2 = the PR branch
         run: python3 tools/pr_guard.py HEAD^1 HEAD
+      - name: Pack files are consistent
+        # every appfilter/drawable.xml/styles.json entry points to a real PNG, no conflicting
+        # ComponentInfos, assets/ and res/xml/ copies identical (tools/validate_pack.py)
+        run: python3 tools/validate_pack.py
+      - name: Per-style files are up to date
+        run: python3 tools/gen_styles.py --check

@@ -1,0 +1,26 @@
+name: App bug
+description: The Gnomed app itself crashes or something in it does not work
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open Gnomed\n2. Tap Apply\n3. ..."
+  - type: input
+    id: version
+    attributes:
+      label: Gnomed version and style APK
+      placeholder: e.g. v1.0.24, gnomed-symbol.apk
+  - type: input
+    id: device
+    attributes:
+      label: Phone, Android version, launcher
+      placeholder: e.g. POCO F5, Android 15, Lawnchair

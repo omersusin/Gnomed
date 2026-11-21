@@ -160,5 +160,14 @@ finally:
     import shutil
     shutil.rmtree(_tmp, ignore_errors=True)
 
+# pack consistency + design resources (2026-11-22)
+code, out = run("tools/validate_pack.py")
+expect(code == 0 and "0 ERROR" in out, "validate_pack.py: every pack entry points to a real PNG (0 ERROR)")
+_gpl = (ROOT / "docs/palette/gnomed.gpl").read_text().splitlines()
+_hex = {"#%02x%02x%02x" % tuple(int(v) for v in ln.split("\t")[0].split()) for ln in _gpl if ln[:1].isdigit() or ln[:1] == " "}
+expect({h for steps in O.RAMP.values() for h in steps} <= _hex and "#000000" not in _hex,
+       "docs/palette/gnomed.gpl = RAMP of objects.py, no pure black (re-run tools/make_palettes.py)")
+expect((ROOT / "docs/template/gnomed-template.svg").exists(), "docs/template/gnomed-template.svg exists")
+
 print(f"selftest: {ok} passed, {bad} failed")
 sys.exit(1 if bad else 0)

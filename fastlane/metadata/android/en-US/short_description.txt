@@ -1,0 +1,1 @@
+GNOME / Adwaita style icon pack: every app redrawn as a GNOME object
