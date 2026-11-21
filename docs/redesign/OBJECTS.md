@@ -53,6 +53,8 @@ The box below is what `size` on the sheet gives (x0 y0 x1 y1 in the 128 canvas).
 Example: `bottle(ic, 64, 118, 54, ramp=RAMP["Blue"])` then
 `for g, c in zip(fit(MARK, bottle_label(64, 118, 54)), COL): solid(ic, g, face=c, depth=0, top=False)`.
 A white mark on a white label/stamp vanishes: print it in the brand colour (Telegram's stamp: the plane in blue).
+`MARK`/`COL` come from `regions(SLUG)` (the concept template does this): a gradient logo's bands
+come back as ONE part with a real gradient (`Grad`) - never `colour()` per band (docs/PLAYBOOK.md#gradients).
 
 Ramps: `Blue`, `Green`, `Yellow`, `Orange`, `Red`, `Purple`, `Brown`, `Light`, `Dark`
 

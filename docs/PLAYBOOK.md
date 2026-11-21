@@ -227,7 +227,33 @@ Annotated examples: [telegram](playbook/telegram.md) (mark on an envelope stamp)
 | `faithful` | no Faithful SVG | `save_styles` writes all slots |
 | `mass` (WARN, < 0.35) | the icon looks thin | object +10–15 %, taller, or a secondary object. A TALL thin object (bottle) cannot grow: add a secondary object in front at the lower right (e.g. `water_drop`), or choose a wider object |
 | `baseline` (WARN) | not on the line | the bottom incl. side at 118 |
+| `bands` | a gradient of the source is painted as flat bands (looks melted) | [gradients](#gradients): `regions(slug)` / `gradient(slug, shape)` |
 Then `python3 tools/make_icon.py <slug>` again.
+
+## gradients
+
+**Goal:** a gradient of the source stays ONE smooth gradient — never flat bands.
+The measurement (`geometry.json`) cuts every gradient into 2–5 flat colours (`r1`, `r2` … in
+near colours). Drawn one by one with `colour()` they look **melted/broken** (Deezer, 2026-11-22).
+`print(describe(slug))` lists them as `GRADIENT: r1, r2 are bands of ONE gradient`.
+
+```python
+R = regions(SLUG)                 # [(name, shape, fill)] - "r1+r2" = bands merged, fill = Grad
+MARK = [g for _, g, _ in R]
+COL = [f for _, _, f in R]
+for g, f in zip(fit(MARK, (14, 12, 114, 112), anchor="bottom"), COL):
+    solid(ic, g, face=f, depth=6)  # solid/recess/cutout paint a Grad as a real SVG gradient
+
+face = gradient(SLUG, P["r2"])    # the source's gradient under any shape (also a union of parts)
+face = Grad([(0, "#ffa348"), (1, "#e01b24")], angle=90)   # your own: 90 = top->bottom, 0 = left->right
+pieces = traced(SLUG, box_)       # posters: gradients=True (default) keeps them as Grad
+```
+
+| If this fails | Do |
+|---|---|
+| gate `bands` FAIL | you painted two bands flat: replace `colour(SLUG, "rN")` per band by the `regions()` fill |
+| the gradient is gone (flat) | you used `ic.path(d, fill)`: a `Grad` there paints only its middle colour — use `solid()`/`recess()` |
+| two really different colours got merged | draw them from `parts()` + `colour()` instead, and say so in Q2 |
 
 ## ask-q2
 

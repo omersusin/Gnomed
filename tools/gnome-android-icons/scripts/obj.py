@@ -29,7 +29,7 @@ import gnome_kit as gk  # noqa: E402
 
 __all__ = ["gk", "Point", "Polygon", "box", "unary_union", "affinity", "np",
            "geom_d", "rounded", "circ", "ellipse", "poly", "down", "move", "scale", "side_of",
-           "solid", "recess", "hole", "toplight"]
+           "solid", "recess", "hole", "toplight", "Grad"]
 
 
 # ---------- shapes ----------
@@ -82,16 +82,56 @@ def side_of(g, depth):
     return unary_union([affinity.translate(g, 0, t) for t in np.linspace(0.8, depth, 10)])
 
 
-# ---------- parts ----------
+# ---------- fills ----------
+class Grad(str):
+    """A linear gradient in any direction that still works everywhere a hex colour does
+    (its value IS the middle colour, so shade(), comparisons and old code keep working).
+    solid()/recess() draw it as a real SVG gradient across the drawn shape:
+
+        face = Grad([(0, "#ffa11e"), (0.5, "#f25d4b"), (1, "#c01c28")], angle=90)
+        angle: 90 = top -> bottom, 0 = left -> right, 45 = top-left -> bottom-right.
+
+    Never paint a gradient as several flat bands (two or more touching shapes in
+    near colours): that looks melted/broken. One shape + one Grad."""
+
+    def __new__(cls, stops, angle=90.0):
+        stops = [(float(o), c) for o, c in stops]
+        o = str.__new__(cls, stops[len(stops) // 2][1])
+        o.stops, o.angle = stops, float(angle)
+        return o
+
+    def __reduce__(self):
+        return (Grad, (self.stops, self.angle))
+
+
+def _grad_ends(g, angle):
+    """The two end points of a gradient at `angle` that spans shape g exactly."""
+    import math
+    u = np.array([math.cos(math.radians(angle)), math.sin(math.radians(angle))])
+    geoms = getattr(g, "geoms", [g])
+    pts = np.array([c for q in geoms for c in q.exterior.coords])
+    t = pts @ u
+    c = np.array(g.centroid.coords[0])
+    tc = c @ u
+    return c + (t.min() - tc) * u, c + (t.max() - tc) * u
+
+
 def _fill(ic, f, g, vertical=True):
+    if isinstance(f, Grad):
+        p0, p1 = _grad_ends(g, f.angle)
+        return ic.linear(f.stops, p0[0], p0[1], p1[0], p1[1])
     if isinstance(f, str):
         return f
     x0, y0, x1, y1 = g.bounds
     return ic.linear(f, 0, y0, 0, y1) if vertical else ic.linear(f, x0, 0, x1, 0)
 
 
+# ---------- parts ----------
+
+
 def solid(ic, g, face, depth=4, side=None, top=True, layer="part"):
-    """One physical part.  face: hex or gradient stops [(0, '#hex'), (1, '#hex')] (top->bottom).
+    """One physical part.  face: hex, gradient stops [(0, '#hex'), (1, '#hex')] (top->bottom),
+    or Grad(stops, angle) for a gradient in any direction (a measured brand gradient).
     side: hex the side colours are derived from (default: the face's last stop);
     depth: thickness in px (GNOME: 2 for discs/thin parts, 4 for plates, 6-12 for boxes)."""
     x0, _, x1, _ = g.bounds

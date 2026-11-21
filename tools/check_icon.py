@@ -289,6 +289,24 @@ def main():
                     add(st, "holes", "PASS" if ok else "FAIL", val + (" (painted on purpose)" if ok else ""),
                         "" if ok else "REDESIGN.md 5: cut the holes (body(), difference) - never paint them; "
                         "only the owner's words allow it: painted-holes: \"<his words>\" (YYYY-MM-DD)")
+        # bands: a gradient of the source painted as several flat colours looks melted/broken
+        # (Deezer concepts, 2026-11-22). regions() knows which measured parts are bands of one
+        # gradient; two or more of them as flat fills in one style = FAIL.
+        if is_redesign and (w / "geometry.json").exists():
+            try:
+                import obj as _obj
+                bad = _obj.banded(slug, svg.read_text())
+            except Exception as e:                       # the check must never crash the gate
+                bad, _err = None, e
+            if bad is None:
+                add(st, "bands", "PASS", f"not measured ({str(_err)[:40]})")
+            elif bad:
+                add(st, "bands", "FAIL", "; ".join(f"{n}: {', '.join(h)}" for n, h in bad),
+                    f"a gradient of the source is painted as flat bands - draw those parts as ONE shape with "
+                    f"a real gradient: for name, g, fill in regions('{slug}') (or face=gradient('{slug}', shape)); "
+                    "docs/PLAYBOOK.md#gradients")
+            else:
+                add(st, "bands", "PASS", "no flat gradient bands")
     # box inside the plate: a big single region whose colour differs from the plate
     gp = w / "geometry.json"
     sys.path.insert(0, str(ROOT / "work/_lib"))

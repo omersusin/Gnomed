@@ -69,6 +69,9 @@ never the same logo on four template shapes.
   devices, cylinders (`solid(depth=)`; side colour derived from the face).
 - **Light from the top**: curved faces get a vertical gradient (top lighter); flat faces
   are almost flat; 1–1.5 px **top light** on upper edges (`toplight()`).
+- **A brand gradient stays one gradient**: a gradient in the source is ONE part with a real
+  gradient (`face=Grad(stops, angle)` in obj.py, painted by `solid()`/`recess()`), never
+  several flat bands in near colours - tracing cuts gradients into bands and they look melted.
 - **Recess** (screen, label, inlay): darker top inner wall (`recess()`).
   **Hole** (lens, slot, keyhole): dark body, darker top wall (`hole()`).
 - **Secondary object**: smaller, in front, bottom centre or lower right, its own side.

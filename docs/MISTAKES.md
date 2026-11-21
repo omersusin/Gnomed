@@ -66,6 +66,7 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | White marks got a dirty grey gradient (Mix, Reddit) | antialias/shadow pixels in the fit | whites excluded from automatic gradients | white marks stay clean white |
 | Quarry's chart bars came out blue | thin dark parts folded into the blue cluster | `split` override | — |
 | Wallpapers showed banding | 8-bit gradients | fine film grain, JPEG | — |
+| Deezer concept A (DeepSeek, 2026-11-22): the gradient bars looked melted — wavy flat bands inside each bar | the concept template drew `parts()` with `colour()` per region; the measurement cuts a gradient into k-means bands; `merge_grad` only existed for the old plate pipeline | `regions(slug)` merges bands back into one part with a measured `Grad` (any direction); `traced()` keeps gradients; `solid()`/`recess()`/`cutout()` paint `Grad`; the concept template uses `regions()` | gate `bands` (FAIL), concept warning in `next.py`/`concepts.py`; PLAYBOOK#gradients |
 
 ## 4. Size, baseline, canvas
 

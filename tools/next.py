@@ -59,11 +59,18 @@ RECIPES = {
                    "  (work/_lib/objects.py, docs/redesign/OBJECTS.md).",
     "faithful": "No Faithful SVG. In redesign.py end with save_styles(SLUG, {\"symbol\": main(), ...}) - it writes\n"
                 "  every slot (missing ones get the main design). Then python3 tools/make_icon.py <slug>.",
+    "bands": "A GRADIENT of the source is painted as several flat colours (bands) - it looks melted/broken.\n"
+             "  Draw those parts as ONE shape with a real gradient:\n"
+             "      for name, g, fill in regions(SLUG):      # 'r1+r2' = bands merged back, fill = Grad\n"
+             "          solid(ic, g_placed, face=fill, ...)    # solid()/recess()/cutout() paint Grad as a gradient\n"
+             "  or face=gradient(SLUG, shape) for any shape. Never ic.path(..., colour(SLUG, 'r1')) per band.\n"
+             "  docs/PLAYBOOK.md#gradients",
     "box_in_plate": "Old plate style only: the mark is a box inside the plate. A redesign does not have this.",
     "stripes": "Automatic draft only (bands of one gradient). A redesign does not draw the measured bands.",
     "trace_iou": "Automatic draft only (traced parts do not match). A redesign draws its own shapes.",
 }
 WARN_TR = {
+    "bands": "renk geçişi (gradyan) bantlara bölünmüş, erimiş gibi görünüyor",
     "mass": "simge biraz ince/küçük görünebilir (komşularından az dolu)",
     "visible_light": "açık duvar kâğıdında biraz soluk",
     "visible_dark": "koyu duvar kâğıdında biraz soluk",
@@ -198,10 +205,29 @@ def concept_shapes(slug):
     return out
 
 
+def band_warning(slug):
+    """concepts that paint a source gradient as flat bands (check `bands`, docs/PLAYBOOK.md#gradients)"""
+    try:
+        sys.path.insert(0, str(ROOT / "work/_lib"))
+        import obj
+        lines = []
+        for svg in sorted((ROOT / "work" / slug / "concepts").glob("*.svg")):
+            bad = obj.banded(slug, svg.read_text())
+            if bad:
+                lines.append(f"WARNING concept {svg.stem}: a gradient is painted as flat bands ("
+                             + "; ".join(f"{n}: {', '.join(h)}" for n, h in bad) + ") - it looks melted.")
+        if lines:
+            lines.append(f"  Fix BEFORE the board: draw those parts with regions({slug!r}) (one shape + Grad), "
+                         "see docs/PLAYBOOK.md#gradients.")
+        return lines
+    except Exception:
+        return []
+
+
 def plate_warning(slug):
     bad = concept_shapes(slug)
     if not bad:
-        return []
+        return band_warning(slug)
     lines = []
     for letter, kind, fill in bad:
         what = "a plain DISC" if kind == "disc" else f"a square TILE/plate (fills {fill:.0%} of its box)"
@@ -209,7 +235,7 @@ def plate_warning(slug):
     lines.append("  If it is the logo on a tile/disc: REPLACE it with a different object before asking (REDESIGN.md 1 -")
     lines.append("  the owner rejects 'the logo on a plate' every time). If it is a real square/round OBJECT")
     lines.append("  (a window, a calendar page, a die, a coin, a lens), keep it. Exception: L3 tile for a pure wordmark.")
-    return lines
+    return lines + band_warning(slug)
 
 
 def git_dirty(slug):

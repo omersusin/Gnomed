@@ -118,6 +118,11 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   the object itself must be cut through.) Exceptions only with the owner's words
   (`painted-holes:` in design.md) or the `painted_counters` override for white parts that
   are figure, not holes. Gate: `holes`.
+- **Gradients stay gradients**: a gradient of the source (Deezer's bars, Instagram, Firefox) is
+  ONE part with ONE real gradient — never several flat bands in near colours (that looks
+  melted). Draw the mark with `regions(slug)` (bands come back merged, fill = `Grad`) or
+  `face=gradient(slug, shape)`; `traced()` keeps gradients by default. Gate: `bands`.
+  How: [docs/PLAYBOOK.md#gradients](docs/PLAYBOOK.md#gradients).
 - **Thickness**: 2 px thin parts/discs, 4–6 px flat objects, 8–24 px boxes/devices/cylinders.
 - **Light from the top**: curved faces get a vertical gradient (top lighter); 1–1.5 px top
   light on upper edges (`toplight()`). **Recess** (screen, label, inlay): darker top inner

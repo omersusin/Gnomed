@@ -57,7 +57,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "work/_lib"))
 from objects import *  # noqa: F401,F403,E402   (objects.py + obj.py: envelope, bottle, fit, solid, save_styles ...)
 SLUG = Path(__file__).resolve().parent.name
 P = parts(SLUG)               # measured parts: P["r0"], P["r1"], ..., P["silhouette"], P["holes"]
-# print(describe(SLUG))       # colours / sizes / positions as text
+R = regions(SLUG)             # the same parts ready to draw: [(name, shape, fill)]; gradient bands merged
+                              # into one part with a real gradient (Grad) - use these fills, not colour()
+# print(describe(SLUG))       # colours / sizes / positions / GRADIENT lines as text
 
 
 def design():
@@ -91,8 +93,11 @@ OUT = Path(__file__).resolve().parent
 P = parts(SLUG)        # r0, r1 ... = colour regions; "holes" = what the mark ENCLOSES (a letter's
                        # counter, or a figure inside a ring - e.g. Telegram's plane). Which is which:
                        # print(describe(SLUG)) - colour + box of every part.
-MARK = [P[k] for k in sorted(P) if k.startswith("r")]          # the coloured parts
-COL = [colour(SLUG, k) for k in sorted(P) if k.startswith("r")]
+R = regions(SLUG)      # the coloured parts [(name, shape, fill)]. Bands of ONE source gradient come
+                       # back merged ("r1+r2") with a real gradient fill (Grad) - never colour() per band:
+                       # flat bands look melted (docs/PLAYBOOK.md#gradients)
+MARK = [g for _, g, _ in R]
+COL = [f for _, _, f in R]
 
 
 def A():
