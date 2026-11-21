@@ -18,9 +18,9 @@ in which style (design.md `styles:`); *ladder* = REDESIGN.md §3 level; *gate* =
 | `andvm` | A - "A - Kalın objeler (önerilen)" (2026-11-19) | - | faithful=A | L1 - the two peaks as thick enamel objects | no | 0 / 0 | 2026-11-21 | BUILD (no Symbol / not built) |
 | `aurex_browser` | C - "C" (2026-11-19) | - | faithful=C (browser window) | L2 - a browser window carries the A | no | 0 / 1 | 2026-11-21 | BUILD (no Symbol / not built) |
 | `horus` | A - "a ama gözün içi transparan değil (gözbebeğinden bahsetmiyorum, go | - | faithful=A | L1 - the eye as a thick enamel amulet | no | 0 / 1 | 2026-11-21 | BUILD (no Symbol / not built) |
-| `kafa_topu_2` | B - "B" (2026-11-21) | "Tamam, pakete ekle" (2026-11-21) | symbol=B faithful=A disc=C rimmed=D | scene with characters (made before the objects-only rule) | yes - two heads with faces | 0 / 3 | 2026-11-21 | REDO (owner asked) |
-| `pokemon_unite` | B - "B" (2026-11-21) | "Tamam, pakete ekle" (2026-11-21) | symbol=B faithful=A disc=B rimmed=B | game objects - goal ring + energy ball | no | 0 / 3 | 2026-11-21 | done |
-| `rush_royale` | C - "C" (2026-11-21) | "Tamam, pakete ekle" (2026-11-21) | symbol=C faithful=C disc=D rimmed=C | game objects - wizard hat + ice crystals | no | 0 / 3 | 2026-11-21 | done |
+| `kafa_topu_2` | B - "B" (2026-11-21) | "Tamam, pakete ekle" (2026-11-21) | symbol=B faithful=A disc=C rimmed=D | scene with characters (made before the objects-only rule) | yes - two heads with faces | 0 / 2 | 2026-11-21 | REDO (owner asked) |
+| `pokemon_unite` | B - "B" (2026-11-21) | "Tamam, pakete ekle" (2026-11-21) | symbol=B faithful=A disc=B rimmed=B | game objects - goal ring + energy ball | no | 0 / 1 | 2026-11-21 | done |
+| `rush_royale` | C - "C" (2026-11-21) | "Tamam, pakete ekle" (2026-11-21) | symbol=C faithful=C disc=D rimmed=C | game objects - wizard hat + ice crystals | no | 0 / 0 | 2026-11-21 | done |
 | `telegram` | F - "Defaultu o mektup yap" (2026-11-19); in his Symbol style too: "Va | "Tamam" (2026-11-19) | faithful=F envelope, disc=D ring, symbol=F envelope (rimmed  | L2 - an envelope carries the paper plane on its stamp | no | 0 / 1 | 2026-11-21 | done |
 
 ## Not redesigned yet (logo on a plate)

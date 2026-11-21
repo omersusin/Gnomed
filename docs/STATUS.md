@@ -5,45 +5,45 @@ Worst first. `redesign` FAIL = the app is still the logo on a plate: redesign it
 REDESIGN.md (`python3 tools/new_redesign.py <slug>`), then `tools/pack_refresh.py <slug>`.
 Other FAIL/WARN: the recipes in docs/PLAYBOOK.md#fix-fail (tools/next.py <slug> prints the one you need).
 
-Apps: 96 · with FAIL: 89 · with WARN: 39
+Apps: 96 · with FAIL: 89 · with WARN: 38
 
 | App | FAIL | WARN | Issues (style · check · value → recipe) |
 |---|---|---|---|
-| `chatgpt` | 2 | 3 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 28.0% -> transparent 0.0% → REDESIGN.md 5; rimmed · legibility32 · 0.71 → R11 (bigger mark, drop tiny details, thicker strokes); symbol · visible_light · 0.54 → R6; symbol · visible_dark · 0.54 → R6 |
-| `ashell_you` | 2 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 0.5% -> transparent 0.0% → REDESIGN.md 5; symbol · visible_dark · 0.36 → R6 |
-| `kernelsu_next` | 2 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 19.3% -> transparent 0.0% → REDESIGN.md 5; symbol · visible_dark · 0.42 → R6 |
+| `chatgpt` | 2 | 3 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 28.0% -> transparent 0.0% → REDESIGN.md 5; rimmed · legibility32 · 0.71 → details vanish at 32 px; symbol · visible_light · 0.54 → too pale on a light wallpaper; symbol · visible_dark · 0.54 → too dark on a dark wallpaper |
+| `ashell_you` | 2 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 0.5% -> transparent 0.0% → REDESIGN.md 5; symbol · visible_dark · 0.36 → too dark on a dark wallpaper |
+| `kernelsu_next` | 2 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 19.3% -> transparent 0.0% → REDESIGN.md 5; symbol · visible_dark · 0.42 → too dark on a dark wallpaper |
 | `firefox_beta` | 2 | 0 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 1.1% -> transparent 0.0% → REDESIGN.md 5 |
 | `pentas` | 2 | 0 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 19.7% -> transparent 0.0% → REDESIGN.md 5 |
 | `terminal_em_lat_r` | 2 | 0 | app · redesign · logo on a plate (automatic draft) → R0; symbol · holes · source 0.4% -> transparent 0.0% → REDESIGN.md 5 |
-| `enpara` | 1 | 3 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.52 → R6; app · stripes · ['#faa91a', '#dfd989', '#9ec842'] → R1; app · trace_iou · {'r5': 0.8302} → R12 |
+| `enpara` | 1 | 3 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.52 → too pale on a light wallpaper; app · stripes · ['#faa91a', '#dfd989', '#9ec842'] → R1; app · trace_iou · {'r5': 0.8302} → R12 |
 | `cloudstream` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; app · stripes · ['#4186d5', '#4081e6', '#2148db', '#2009 → R1; app · trace_iou · {'r1': 0.8881} → R12 |
 | `frostkeys` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; app · stripes · ['#b7e2ff', '#2673eb', '#8aa0ff'] → R1; app · trace_iou · {'r2': 0.8245} → R12 |
 | `obtainx` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; app · stripes · ['#aaa9d8', '#5431a7', '#8051bf'] → R1; app · trace_iou · {'r2': 0.8216} → R12 |
-| `qobuz` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.54 → R6; symbol · visible_dark · 0.55 → R6 |
-| `smart_launcher` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.48 → R6; app · trace_iou · {'r5': 0.2757} → R12 |
-| `apple_music` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.36 → R6 |
+| `qobuz` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.54 → too pale on a light wallpaper; symbol · visible_dark · 0.55 → too dark on a dark wallpaper |
+| `smart_launcher` | 1 | 2 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.48 → too pale on a light wallpaper; app · trace_iou · {'r5': 0.2757} → R12 |
+| `apple_music` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.36 → too pale on a light wallpaper |
 | `bare` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · stripes · ['#6bbcf8', '#55a0f6', '#4987f6', '#3e6d → R1 |
-| `binance_tr` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · mass · 0.19 → R10 scale |
+| `binance_tr` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · mass · 0.19 → the icon looks thin |
 | `duolingo` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · stripes · ['#f48000', '#ffc200', '#ffde00'] → R1 |
 | `f_droid` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r2': 0.8843, 'r3': 0.7638} → R12 |
 | `ffupdater` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r2': 0.8682} → R12 |
 | `firefox_nightly` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r2': 0.8904} → R12 |
 | `iconrequest` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r3': 0.2847} → R12 |
-| `kamera` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_dark · 0.41 → R6 |
+| `kamera` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_dark · 0.41 → too dark on a dark wallpaper |
 | `onedm` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r3': 0.7558} → R12 |
 | `payload_dumper` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r1': 0.7271} → R12 |
 | `proton_vpn` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r3': 0.883, 'r4': 0.8933} → R12 |
 | `quarry` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r1': 0.8335} → R12 |
-| `recon` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · legibility32 · 0.718 → R11 (bigger mark, drop tiny details, thicker strokes) |
-| `reddit` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.32 → R6 |
+| `recon` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · legibility32 · 0.718 → details vanish at 32 px |
+| `reddit` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.32 → too pale on a light wallpaper |
 | `scene` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r3': 0.5664} → R12 |
 | `stride` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r2': 0.8619} → R12 |
-| `termux_api` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.43 → R6 |
-| `termux_boot` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.43 → R6 |
-| `termux_widget` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.43 → R6 |
+| `termux_api` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.43 → too pale on a light wallpaper |
+| `termux_boot` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.43 → too pale on a light wallpaper |
+| `termux_widget` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.43 → too pale on a light wallpaper |
 | `thunderbird` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r2': 0.6102} → R12 |
-| `tiktok_lite` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.51 → R6 |
-| `walpy` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.29 → R6 |
+| `tiktok_lite` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.51 → too pale on a light wallpaper |
+| `walpy` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; symbol · visible_light · 0.29 → too pale on a light wallpaper |
 | `weblibre` | 1 | 1 | app · redesign · logo on a plate (automatic draft) → R0; app · trace_iou · {'r2': 0.8971} → R12 |
 | `anker_soundcore` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `ayarlar` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
@@ -98,10 +98,10 @@ Apps: 96 · with FAIL: 89 · with WARN: 39
 | `wupp` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `y_hava_durumu` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
 | `youtube` | 1 | 0 | app · redesign · logo on a plate (automatic draft) → R0 |
-| `kafa_topu_2` | 0 | 3 | faithful · mass · 0.33 → R10 scale; disc · mass · 0.36 → R10 scale; rimmed · legibility32 · 0.653 → R11 (bigger mark, drop tiny details, thicker strokes) |
-| `pokemon_unite` | 0 | 3 | faithful · mass · 0.29 → R10 scale; disc · mass · 0.37 → R10 scale; rimmed · mass · 0.37 → R10 scale |
-| `rush_royale` | 0 | 3 | faithful · mass · 0.36 → R10 scale; disc · mass · 0.39 → R10 scale; rimmed · mass · 0.36 → R10 scale |
+| `kafa_topu_2` | 0 | 2 | faithful · mass · 0.33 → the icon looks thin; rimmed · legibility32 · 0.653 → details vanish at 32 px |
 | `aurex_browser` | 0 | 1 | faithful · plain_shape · square tile/plate (fills 99% of its box) → a tile with the logo on it is 'the logo on a plate' (REDESIGN §1) - allowed only as L3 for a pure wordmark, or a real square object (window, calendar) - say which in Q2 |
-| `horus` | 0 | 1 | faithful · mass · 0.3 → R10 scale |
+| `horus` | 0 | 1 | faithful · mass · 0.3 → the icon looks thin |
+| `pokemon_unite` | 0 | 1 | faithful · mass · 0.29 → the icon looks thin |
 | `telegram` | 0 | 1 | faithful · plain_shape · plain square/box (fills 100%) → a real box object (envelope, case)? say so in design.md 'shape-ok |
 | `andvm` | 0 | 0 | clean |
+| `rush_royale` | 0 | 0 | clean |
