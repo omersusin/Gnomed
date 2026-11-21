@@ -112,6 +112,13 @@ for fname, kw, _ in O.CATALOGUE:
     except Exception as e:  # noqa: BLE001
         broken.append(f"{fname}: {e}")
 expect(not broken, f"objects.py: all {len(O.CATALOGUE)} objects build inside the baseline {broken or ''}")
+with tempfile.TemporaryDirectory() as tmp:
+    t = O.gk.Icon("tile")
+    O.solid(t, O.rounded(O.box(14, 14, 114, 112), 16), face="#33d17a", depth=6)
+    O.solid(t, O.circ(64, 60, 22), face="#ffffff", depth=2)
+    t.save(Path(tmp) / "tile.svg")
+    expect(ci.shape_kind(Path(tmp) / "tile.svg")[0] == "tile", "check_icon.shape_kind: the logo on a rounded tile -> 'tile' (plain_shape WARN)")
+expect(ci.shape_kind(ROOT / "work/pokemon_unite/pokemon_unite-symbol.svg")[0] == "object", "check_icon.shape_kind: a real object -> 'object'")
 _g = importlib.util.spec_from_file_location("pr_guard", ROOT / "tools/pr_guard.py")
 pg = importlib.util.module_from_spec(_g)
 _g.loader.exec_module(pg)

@@ -94,7 +94,7 @@ Never fill a gap yourself: a wrong ComponentInfo silently never shows the icon.
 | `ic = gk.Icon("Name")`, `ic.path(geom_d(g), fill)`, `ic.linear(...)`, `ic.radial(...)` | icon, any shape, gradients |
 | `solid(ic, g, face, depth, side)`, `toplight`, `recess`, `hole` | GNOME parts: thickness, top light, inlay, real hole |
 | `save_styles(slug, {"symbol": main, ...})` | writes all four slots (REDESIGN.md §6) |
-| `from objects import *` (`work/_lib/objects.py`) | 28 ready GNOME objects `f(ic, cx, base, size, ramp=RAMP["Blue"])` — catalogue [docs/redesign/OBJECTS.md](docs/redesign/OBJECTS.md), picture `docs/redesign/objects.png` |
+| `from objects import *` (`work/_lib/objects.py`) | 32 ready GNOME objects `f(ic, cx, base, size, ramp=RAMP["Blue"])` — catalogue [docs/redesign/OBJECTS.md](docs/redesign/OBJECTS.md), picture `docs/redesign/objects.png` |
 | `python3 tools/describe_icon.py <svg/png>` | an icon as text: box, baseline, mass, HIG colours, holes, ASCII |
 
 Examples: `work/telegram/redesign.py`, `docs/redesign/examples/build_examples.py`, annotated in

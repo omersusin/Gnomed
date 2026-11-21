@@ -101,6 +101,32 @@ def design_line(w, key):
     return ""
 
 
+def shape_kind(svg):
+    """-> (kind, circle_iou, fill) of an SVG's silhouette: 'disc' (circle match > 0.95), 'tile'
+    (a near-square block filling > 90 % of its box: a rounded-square plate), 'box' (any block
+    filling > 97 %), else 'object'. Used by plain_shape and by tools/next.py for concepts."""
+    import io as _io
+    al = np.asarray(Image.open(_io.BytesIO(cairosvg.svg2png(url=str(svg), output_width=256, output_height=256)))
+                    .convert("RGBA"))[..., 3] > 128
+    ys, xs = np.where(al)
+    if not len(xs):
+        return "object", 0.0, 0.0
+    x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max()
+    Y, X = np.mgrid[:256, :256]
+    r = ((x1 - x0) + (y1 - y0)) / 4
+    circle = (X - (x0 + x1) / 2) ** 2 + (Y - (y0 + y1) / 2) ** 2 <= r * r
+    iou = float((al & circle).sum() / (al | circle).sum())
+    fill = float(al[y0:y1 + 1, x0:x1 + 1].mean())
+    aspect = (x1 - x0 + 1) / (y1 - y0 + 1)
+    if iou > 0.95:
+        return "disc", iou, fill
+    if fill > 0.90 and 0.8 <= aspect <= 1.25:
+        return "tile", iou, fill
+    if fill > 0.97:
+        return "box", iou, fill
+    return "object", iou, fill
+
+
 def is_quote(v):
     """an approval line: the owner's words verbatim in quotes + the date (REDESIGN.md 7)"""
     return bool(QUOTED_DATED.search(v or ""))
@@ -182,27 +208,26 @@ def main():
     if is_redesign and (w / f"{slug}-faithful.svg").exists():
         shape_ok = design_line(w, "shape-ok")
         shape_ok = shape_ok if is_quote(shape_ok) else ""          # only the owner's words + date count
-        import io
-        import cairosvg
-        al = np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(url=str(w / f"{slug}-faithful.svg"),
-                                                               output_width=256, output_height=256))).convert("RGBA"))[..., 3] > 128
-        ys, xs = np.where(al)
-        x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max()
-        Y, X = np.mgrid[:256, :256]
-        r = ((x1 - x0) + (y1 - y0)) / 4
-        circle = (X - (x0 + x1) / 2) ** 2 + (Y - (y0 + y1) / 2) ** 2 <= r * r
-        iou = (al & circle).sum() / (al | circle).sum()
-        fill = al[y0:y1 + 1, x0:x1 + 1].mean()
-        if iou > 0.95:
-            add("app", "plain_shape", "PASS" if shape_ok else "FAIL", f"plain disc (circle match {iou:.2f})",
-                "" if shape_ok else "REDESIGN §1: the logo on a disc is not a redesign - make the app's OBJECT "
-                "(concept ladder), or get the owner's OK and write 'shape-ok: <his words>' in design.md")
-        elif fill > 0.97:
-            add("app", "plain_shape", "PASS" if shape_ok else "WARN", f"plain square/box (fills {fill:.0%})",
-                "" if shape_ok else "a real box object (envelope, case)? say so in design.md 'shape-ok:'; "
-                "a plate with the logo on it is not a redesign")
-        else:
-            add("app", "plain_shape", "PASS", f"object silhouette (circle {iou:.2f}, fill {fill:.0%})")
+        for st in ("faithful", "symbol"):
+            if st == "symbol" and not (w / f"{slug}-symbol.svg").exists():
+                continue
+            if st == "symbol" and (w / f"{slug}-symbol.svg").read_bytes() == (w / f"{slug}-faithful.svg").read_bytes():
+                continue                                            # the same design, checked once
+            kind, iou, fill = shape_kind(w / f"{slug}-{st}.svg")
+            if kind == "disc":
+                add(st, "plain_shape", "PASS" if shape_ok else "FAIL", f"plain disc (circle match {iou:.2f})",
+                    "" if shape_ok else "REDESIGN §1: the logo on a disc is not a redesign - make the app's OBJECT "
+                    "(concept ladder), or get the owner's OK and write 'shape-ok: <his words>' in design.md")
+            elif kind == "tile":
+                add(st, "plain_shape", "PASS" if shape_ok else "WARN", f"square tile/plate (fills {fill:.0%} of its box)",
+                    "" if shape_ok else "a tile with the logo on it is 'the logo on a plate' (REDESIGN §1) - allowed only "
+                    "as L3 for a pure wordmark, or a real square object (window, calendar) - say which in Q2")
+            elif kind == "box":
+                add(st, "plain_shape", "PASS" if shape_ok else "WARN", f"plain square/box (fills {fill:.0%})",
+                    "" if shape_ok else "a real box object (envelope, case)? say so in design.md 'shape-ok:'; "
+                    "a plate with the logo on it is not a redesign")
+            else:
+                add(st, "plain_shape", "PASS", f"object silhouette (circle {iou:.2f}, fill {fill:.0%})")
     add("app", "faithful", "PASS" if "faithful" in svgs else "FAIL", "faithful" in svgs,
         "" if "faithful" in svgs else "build the app first: python3 tools/make_icon.py " + slug)
     for st, svg in svgs.items():
@@ -252,7 +277,8 @@ def main():
                 if src < 0.004:
                     add(st, "holes", "PASS", val + " (no holes to keep)")
                 elif is_redesign and iou < 0.75:
-                    add(st, "holes", "PASS", val + f" (the mark is not the object's outline, iou {iou:.2f})")
+                    add(st, "holes", "PASS", val + f" (the mark sits ON an object, iou {iou:.2f}: the object behind "
+                        "it shows through its holes - correct; if the mark itself IS the object, cut its holes)")
                 elif transp >= 0.5 * src:
                     add(st, "holes", "PASS", val)
                 else:

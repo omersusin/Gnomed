@@ -167,6 +167,51 @@ def pack_state(slug):
     return in_pack, missing, stale
 
 
+def categories():
+    p = ROOT / "app/src/main/res/xml/drawable.xml"
+    return re.findall(r'<category title="([^"]+)"', p.read_text(encoding="utf-8")) if p.exists() else []
+
+
+def category_of(slug):
+    p = ROOT / "app/src/main/res/xml/drawable.xml"
+    cur = None
+    for ln in (p.read_text(encoding="utf-8").splitlines() if p.exists() else []):
+        m = re.search(r'<category title="([^"]+)"', ln)
+        if m:
+            cur = m.group(1)
+        if f'drawable="{slug}"' in ln:
+            return cur
+    return None
+
+
+def concept_shapes(slug):
+    """-> [(letter, kind)] for concepts that look like a plain disc or a square tile/plate."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("check_icon", ROOT / "tools/check_icon.py")
+    ci = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(ci)
+    out = []
+    for p in sorted((ROOT / "work" / slug / "concepts").glob("*.svg")):
+        kind, _, fill = ci.shape_kind(p)
+        if kind in ("disc", "tile"):
+            out.append((p.stem, kind, fill))
+    return out
+
+
+def plate_warning(slug):
+    bad = concept_shapes(slug)
+    if not bad:
+        return []
+    lines = []
+    for letter, kind, fill in bad:
+        what = "a plain DISC" if kind == "disc" else f"a square TILE/plate (fills {fill:.0%} of its box)"
+        lines.append(f"WARNING concept {letter} looks like {what}.")
+    lines.append("  If it is the logo on a tile/disc: REPLACE it with a different object before asking (REDESIGN.md 1 -")
+    lines.append("  the owner rejects 'the logo on a plate' every time). If it is a real square/round OBJECT")
+    lines.append("  (a window, a calendar page, a die, a coin, a lens), keep it. Exception: L3 tile for a pure wordmark.")
+    return lines
+
+
 def git_dirty(slug):
     _, out = sh("git", "status", "--porcelain", "--", f"work/{slug}", "artwork", "app/src", "pack", "docs/LOG.md")
     return [ln for ln in out.splitlines() if ln.strip()]
@@ -227,7 +272,7 @@ def q1_text(slug, w, text, game):
     need_refs = game and len(refs) < 2
     numbered = [f"{i + 1}) {k}" for i, k in enumerate(letters)] + [f"{len(letters) + 1}) Hiçbiri, yeniden dene"]
     t = (f"{name} için {len(letters)} fikir hazır. Resim: work/{slug}/concepts.png\n"
-         f"(en üstte kaynak, yanında {', '.join(letters)}; üst sıra açık, alt sıra koyu duvar kâğıdı)\n{desc}\n\n"
+         f"(en solda kaynak, sağında {', '.join(letters)}; üst sıra açık, alt sıra koyu duvar kâğıdı)\n{desc}\n\n"
          f"Soru 1: Telefonunda göreceğin ana simge (Symbol) hangisi olsun?\n  " + "  ".join(numbered) + "\n"
          f"Soru 2: Uygulamadaki diğer stiller (Faithful/Disc/Rimmed) için hangilerini de tutayım? Harfleri yaz\n"
          f"  (örnek: \"A, D\"); hiçbiri ise \"0\" yaz, o zaman hepsinde ana simge olur.")
@@ -261,7 +306,7 @@ def q2_text(slug, w, text, rows, in_pack, missing, stale):
             f"Stiller: {styles}\n"
             f"Telefonuna: {phone}.\n"
             f"Kontrol: {p} geçti, {len(wn)} uyarı, {f} hata.\n"
-            f"Zayıf yanlar: {'; '.join(weak) if weak else 'gördüğüm bir zayıflık yok'} <- add your own honest notes\n\n"
+            f"Zayıf yanlar: {'; '.join(weak) + '; ' if weak else ''}<SENİN DÜRÜST NOTLARIN - bunu değiştir>\n\n"
             f"  1) Tamam, pakete ekle   2) Şunu değiştir (ne olduğunu yaz)   3) Konseptlere dön\n\n"
             f"(With AskUserQuestion: one question with these three options. Without it: send the text as is.)")
 
@@ -371,12 +416,12 @@ def run_slug(slug):
              f"Write one line per concept in design.md under 'concepts' (  A: ..., B: ...)."])
     elif st == "BOARD":
         say(st, "render the concept board the owner will look at",
-            [f"python3 tools/concepts.py {slug}",
+            plate_warning(slug) + [f"python3 tools/concepts.py {slug}",
              f"Cannot see images? For each concept: python3 tools/describe_icon.py work/{slug}/concepts/A.svg (B, C, D)\n"
              "  and replace a concept that is only the logo on a plain disc or square."])
     elif st == "ASK_Q1":
         say(st, "Q1: the owner chooses the main design and which others to keep",
-            ["Send the text below (Turkish). Then STOP. When he answers, write his words in design.md:",
+            plate_warning(slug) + ["Send the text below (Turkish). Then STOP. When he answers, write his words in design.md:",
              f'  approved: <letter> - "<his answer to Soru 1, verbatim>" ({TODAY})',
              f'  keep: <letters or none> - "<his answer to Soru 2, verbatim>" ({TODAY})',
              "If he answered 'Hiçbiri, yeniden dene': archive concepts/ as concepts-roundN/ and draw 4 new ones.",
@@ -418,11 +463,16 @@ def run_slug(slug):
         say(st, "fix every FAIL of the quality gate (never ask the owner with a FAIL)", do)
     elif st == "ASK_Q2":
         in_pack, missing, stale = info["pack"]
-        cmd = f"python3 tools/pack_add.py {slug} --category <Category> --dry-run" if (not in_pack or missing) else \
+        cat = category_of(slug) or "<Category>"
+        cmd = f"python3 tools/pack_add.py {slug} --category {cat} --dry-run" if (not in_pack or missing) else \
             f"python3 tools/pack_refresh.py {slug} --dry-run"
         wn = [r for r in info["rows"] if r["status"] == "WARN"]
         do = ["Look at phone.png and review.png (cannot see images? describe_icon.py on each style SVG and say so).",
               f"Run the dry-run and keep only its new lines for yourself: {cmd}"]
+        if cat == "<Category>":
+            do.append("  <Category>: pick the one that fits from: " + ", ".join(categories()))
+        do.append("Replace <SENİN DÜRÜST NOTLARIN ...> in the text with your honest weak points (Turkish). Cannot see")
+        do.append("  images? write: \"Resimleri göremiyorum; ölçümlere göre: ...\" and the describe_icon facts.")
         for r in wn:
             do.append(f"WARN {r['scope']} {r['check']} {r['value']} - optional fix: " + RECIPES.get(r["check"], "").split("\n")[0])
         do += ["Send the text below. When he answers:",
@@ -435,10 +485,11 @@ def run_slug(slug):
         in_pack, missing, stale = info["pack"]
         do = []
         if not in_pack or missing:
-            do += [f"python3 tools/pack_add.py {slug} --category <Category> --dry-run    # read it",
-                   f"python3 tools/pack_add.py {slug} --category <Category>",
-                   "  Category: the one the app already has in app/src/main/res/xml/drawable.xml, else Games / Tools /",
-                   "  Social / ... (see that file's <category> titles)."]
+            cat = category_of(slug) or "<Category>"
+            do += [f"python3 tools/pack_add.py {slug} --category {cat} --dry-run    # read it",
+                   f"python3 tools/pack_add.py {slug} --category {cat}"]
+            if cat == "<Category>":
+                do.append("  <Category>: one of " + ", ".join(categories()) + " (a new name makes a new category)")
         if in_pack:
             do += [f"python3 tools/pack_refresh.py {slug}"]
         do += ["python3 tools/gnome-android-icons/scripts/pack_audit.py --project .   # no ERROR line with " + slug,
@@ -559,7 +610,7 @@ def start_redo(slug):
     print(f"Fix design.md (kind / anchors / function object for the new rule), then: python3 tools/next.py {slug}")
 
 
-if __name__ == "__main__":
+def main():
     args = [a for a in sys.argv[1:] if not a.startswith("-")]
     if "--start-redo" in sys.argv and args:
         start_redo(args[0])
@@ -567,3 +618,10 @@ if __name__ == "__main__":
         run_slug(args[0])
     else:
         overall()
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except BrokenPipeError:          # next.py | head
+        pass

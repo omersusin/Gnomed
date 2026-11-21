@@ -44,6 +44,8 @@ git branch --show-current           # on main? -> git switch -c icons/<slug>
                                     # on another branch (yours, or one your tool made)? stay on it
 python3 tools/gnome-android-icons/scripts/doctor.py     # must end with "result: READY"
 ```
+If your tool refuses the `git config` line, do not work around it: go on, run `python3 tools/pr_guard.py`
+before every push (the same checks), and tell the owner in your final message that hooks are off.
 No `START-HERE.md` or no `tools/next.py` in your checkout? You are on an old branch: run
 `git fetch origin && git switch -c icons/<slug> origin/main` and start again.
 
@@ -80,6 +82,8 @@ senin gözün."* Then:
   GNOME names, holes, the size rules, an ASCII preview.
 - `python3 tools/check_icon.py <slug>` — the quality gate (PASS/WARN/FAIL + the fix).
 - The object catalogue as text: [docs/redesign/OBJECTS.md](docs/redesign/OBJECTS.md).
+- Two different pictures: `docs/redesign/gnome-objects.png` / `gnome-games.png` = REAL GNOME icons
+  (how a GNOME object looks); `docs/redesign/objects.png` = our ready objects (OBJECTS.md as text).
 - Never claim you looked at a picture. The owner is the eye: Q1 and Q2 show him the PNGs.
 
 ## 6. Ten hard rules (the rest is in REDESIGN.md and AGENTS.md)
@@ -108,7 +112,7 @@ senin gözün."* Then:
 | `tools/describe_icon.py <file>` | an icon as text (for models without vision) |
 | `tools/pack_add.py` / `tools/pack_refresh.py` | put approved icons into the pack (`--dry-run` first) |
 | `tools/size_audit.py`, `tools/pr_guard.py`, `tools/selftest.py` | pack-wide checks before a PR |
-| `work/_lib/objects.py` | 28 ready GNOME objects to compose ([picture](docs/redesign/objects.png), [text](docs/redesign/OBJECTS.md)) |
+| `work/_lib/objects.py` | 32 ready GNOME objects to compose ([picture](docs/redesign/objects.png), [text](docs/redesign/OBJECTS.md)) |
 
 Worked examples from source to the pack: [docs/playbook/](docs/playbook/) (Telegram, Aurex
 Browser, Pokémon UNITE, Rush Royale). History of every mistake: [docs/MISTAKES.md](docs/MISTAKES.md).

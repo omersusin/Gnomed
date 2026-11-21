@@ -111,6 +111,10 @@ def main():
               f"(letter counters, eyes, a ring's centre - REDESIGN.md 5 wants them transparent)")
     else:
         print("holes: none (no transparent area is enclosed by paint)")
+    if opaque_tile:
+        print("  NOTE: a source tile has no transparency - its holes are painted in the tile colour. The MEASURED")
+        print("  holes of a source are the 'holes' part of: python3 -c \"import sys; sys.path.insert(0,'work/_lib');"
+              " from obj import describe; print(describe('<slug>'))\"")
 
     # the gate's size rules (REDESIGN.md 5) - indicative, tools/check_icon.py is the real gate
     print("size rules for a free object (REDESIGN.md 5; the pack-wide check is tools/size_audit.py):")

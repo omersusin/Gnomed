@@ -113,7 +113,9 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   Check: `python3 tools/size_audit.py`.
 - **Holes are holes**: what is a hole in the source (letter counters, eyes, a ring's
   centre) is **transparent** in every free style — cut it (`body(slug)`, `difference`),
-  never paint it white or in the tile colour. Exceptions only with the owner's words
+  never paint it white or in the tile colour. (When the mark is printed ON an object — a stamp,
+  a page, a label — that object shows through the mark's holes; that is correct. Only a hole of
+  the object itself must be cut through.) Exceptions only with the owner's words
   (`painted-holes:` in design.md) or the `painted_counters` override for white parts that
   are figure, not holes. Gate: `holes`.
 - **Thickness**: 2 px thin parts/discs, 4–6 px flat objects, 8–24 px boxes/devices/cylinders.

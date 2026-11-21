@@ -26,6 +26,10 @@ The box below is what `size` on the sheet gives (x0 y0 x1 y1 in the 128 canvas).
 | `book` | reading, docs, learning | 80 | 24 26 98 114 | Closed book standing, cover + page block on the right (reading, docs, learning). |
 | `phone_handset` | calls, dialer | 100 | 14 11 114 111 | Classic phone handset lying diagonally: a curved handle, an ear cup at the top left and |
 | `battery` | power, battery tools | 60 | 34 29 94 113 | Upright battery with a charge level. size = width; height ~1.6 * size. |
+| `water_drop` | water, hydration, liquids, weather | 72 | 28 17 100 115 | A water drop of blue glass: round bottom, pointed top, highlight (water, hydration, |
+| `bottle` | drinks, water trackers (mark on the label) | 54 | 37 20 91 114 | A water / drink bottle: cap, neck, body with a white label (put the mark on the label: |
+| `mug` | coffee, drinks, breaks | 104 | 12 35 116 111 | A mug with a handle on the right (drinks, coffee, breaks). size = width incl. the handle. |
+| `shopping_bag` | shops, marketplaces (mark on the front) | 96 | 16 36 112 112 | A paper shopping bag with two handles (shops, marketplaces). Mark on its front: |
 | `calendar_page` | calendar, planner | 100 | 14 23 114 112 | Desk calendar page: coloured header with two rings, white page with a day grid. |
 | `goal_ring` | game: a goal / target ring (Pokémon UNITE) | 90 | 19 13 109 90 | Thick gold torus on a metal post and a round pad (a goal, a target, a prize ring). |
 | `energy_ball` | game: glowing ball / power orb | 90 | 19 26 109 116 | Glowing glass ball: hot white centre, yellow -> orange edge, swirl, highlight. |

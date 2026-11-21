@@ -22,7 +22,7 @@ SHEET_SIZE = {"speech_bubble": 104, "envelope": 108, "paper_plane": 100, "cloud"
               "globe": 100, "shield": 88, "lock": 72, "key": 104, "card": 108, "coin": 96, "gear": 100,
               "folder": 108, "camera_lens": 100, "play_button": 108, "music_note": 92, "book": 80,
               "phone_handset": 100, "battery": 60, "calendar_page": 100, "goal_ring": 90, "energy_ball": 90,
-              "wizard_hat": 108, "crystal": 72, "football": 100, "team_ball": 96, "die": 86, "board_tiles": 108}
+              "wizard_hat": 108, "water_drop": 72, "bottle": 54, "mug": 104, "shopping_bag": 96, "crystal": 72, "football": 100, "team_ball": 96, "die": 86, "board_tiles": 108}
 
 
 def render(svg_text, px=128):
@@ -31,7 +31,7 @@ def render(svg_text, px=128):
 
 
 def main():
-    cols, cell, lab = 7, 150, 34
+    cols, cell, lab = 8, 150, 34
     rows = (len(O.CATALOGUE) + cols - 1) // cols
     sheet = Image.new("RGB", (cols * cell + 20, rows * (cell + lab) + 60), "#f6f5f4")
     dr = ImageDraw.Draw(sheet)

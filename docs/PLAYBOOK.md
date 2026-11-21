@@ -73,12 +73,22 @@ function object (what the app does, as a physical thing): a message flying off -
 Game example (Rush Royale): `kind: game`; anchors: the purple wizard hat, the gold crown band with
 the magenta gem, the ice-blue crystals; function object: the hat as a game piece on the board.
 
+**The measured parts** (`parts(slug)`, listed by `describe(slug)`): `r0`, `r1`, … are the colour
+regions (`r0` is often the background tile/circle — leave it out of the object); `holes` is what
+the mark ENCLOSES — a letter's counter (a real hole), or a figure inside a ring (Telegram's white
+plane sits inside the blue circle, so it is measured as `holes`). Decide which by its colour and
+box in `describe()`; write it in design.md (e.g. `figure: holes = the white plane`).
+
 How to find the facts without seeing the image:
 ```
 python3 tools/describe_icon.py work/<slug>/source.png
 python3 -c "import sys; sys.path.insert(0,'work/_lib'); from obj import describe; print(describe('<slug>'))"
 ```
 Choose the object with the [decision table](#decision-tables) and [OBJECTS.md](redesign/OBJECTS.md).
+No object fits? Then **L1** (the mark itself as a thick object) or compose one from the primitives
+(`rounded`, `poly`, `circ`, `ellipse` + `solid`) and write why in design.md. **Never** fall back to
+"the logo on a plain tile/square or disc" — that is the old pack the owner wants replaced.
+L3 (a material tile) is only for a pure wordmark (letters only) when L1 and L2 fail.
 Mistakes: an anchor dropped (Aurex without its blue field → "hiç benzemiyor"); an invented
 wrapper unrelated to the app (YouTube in a TV); games with characters (forbidden, §3b).
 A game needs **≥ 2 in-game screenshots** in `work/<slug>/refs/` — if you have none, Q1 asks for them.
@@ -88,7 +98,12 @@ A game needs **≥ 2 in-game screenshots** in `work/<slug>/refs/` — if you hav
 **Goal:** FOUR different rough ideas A–D in `work/<slug>/concepts/make_concepts.py`.
 Rules: four *different* ideas from the ladder (REDESIGN.md §3); the app's mark always from the
 source (`parts()` / `body()` / `fit()`), never from memory; ready objects from `objects.py`;
-rough is fine; stand on the baseline (`base=118`).
+rough is fine; stand on the baseline (`base=118`). **No concept may be the logo on a plain
+tile/square or disc** — `next.py` warns when one looks like it.
+
+`new_redesign.py` already wrote the file with four example functions (A = L1 the mark as an
+object, B = an envelope carrying the mark, C, D) — replace their bodies with your ideas. A
+filled-in example (Telegram; its figure is the `holes` part):
 
 ```python
 import sys
@@ -201,8 +216,8 @@ Annotated examples: [telegram](playbook/telegram.md) (mark on an envelope stamp)
 | check | means | fix |
 |---|---|---|
 | `redesign` | `approved:` empty or not a quote + date | ask Q1; write his words in quotes + date |
-| `holes` | a hole of the source is painted | cut it: `body(slug)` or `g.difference(hole)` |
-| `plain_shape` | the silhouette is a plain disc/square | make the app's object (objects.py) |
+| `holes` | a hole of the source is painted | cut it: `body(slug)` or `g.difference(hole)`. A PASS "(the mark sits ON an object)" is right: a stamp/page/label shows through the mark's holes — do not cut through that object |
+| `plain_shape` FAIL (disc) / WARN (tile, box) | the silhouette is a plain disc / square tile | make the app's object (objects.py); a real square object (window, calendar) may stay — say so in Q2 |
 | `lint` | `<text>`, raster, filter, or touching the edge | only obj/objects shapes, inside 8..120 |
 | `visible_light` / `visible_dark` (WARN < 0.55, FAIL < 0.25) | vanishes on a light / dark wallpaper | darker side (ramp 4–5) / lighter face (ramp 1–3) |
 | `legibility32` | details vanish at 32 px | fewer, bigger parts; strokes ≥ 2 px |
@@ -214,8 +229,9 @@ Then `python3 tools/make_icon.py <slug>` again.
 ## ask-q2
 
 **Goal:** the owner sees the result (phone.png, review.png) and approves it for the pack.
-`next.py` prints the Turkish text with the pass/warn counts and the WARNs in plain words. Add your
-own honest weak points (never hide one). Run the dry-run it names; tell him only what changes on
+`next.py` prints the Turkish text with the pass/warn counts and the WARNs in plain words. Replace
+`<SENİN DÜRÜST NOTLARIN - bunu değiştir>` with your own honest weak points (never hide one; without
+vision say "Resimleri göremiyorum; ölçümlere göre: …"). Run the dry-run it names; tell him only what changes on
 his phone (new icon / which replaces which / nothing deleted) — no jargon.
 - "Tamam, pakete ekle" → `final: "Tamam, pakete ekle" (2026-11-21)` → next state PACK.
 - "Şunu değiştir …" → change **exactly** that, quote it under `decisions`, `make_icon`, Q2 again.
@@ -234,8 +250,9 @@ python3 tools/size_audit.py                                           # 0 icon(s
 python3 tools/check_icon.py <slug>                                    # 0 FAIL
 ```
 An app already in the pack but without Disc/Rimmed/Symbol slots needs `pack_add` (adds the
-`_alt1/_alt2/_alt3` slots) **and** `pack_refresh` (re-renders the main icon). Categories: the
-`<category title="…">` lines in `app/src/main/res/xml/drawable.xml` (Games, Tools, Social, …).
+`_alt1/_alt2/_alt3` slots) **and** `pack_refresh` (re-renders the main icon). Category: `next.py`
+fills in the app's current one; for a new app it lists them (Security, Social, Media, System, AI,
+Tools, Browsers, Finance, Weather, Games, Education, Shopping) — pick the closest.
 Mistakes: hand-editing XML/PNG (forbidden); `pack_refresh` on the whole pack (rebuild only yours).
 
 ## log
@@ -285,7 +302,6 @@ The app is finished. If the PR is not open yet, open it. Next app: a NEW session
 | browser | L2 | `browser_window` (mark on the page), `globe` |
 | bank, wallet, payments | L2 | `card`, `coin` |
 | crypto / exchange | L2 | `coin` with the mark |
-| shop, marketplace | L2 | a bag / box (compose `rounded` boxes) with the mark |
 | password, 2FA, VPN, security | L2 | `shield`, `lock`, `key` |
 | settings, system, root tools | L2 | `gear` |
 | files, backup, cloud storage | L2 | `folder`, `cloud` |
@@ -298,7 +314,11 @@ The app is finished. If the PR is not open yet, open it. Next app: a NEW session
 | battery, power | L2 | `battery` |
 | weather | L2 | `cloud` (+ a sun disc) |
 | a strong geometric mark (letter, emblem) | L1 | the mark itself (`body(slug)`) with thickness |
+| water, hydration, drinks | L2 | `water_drop`, `bottle` (mark on `bottle_label`), `mug` |
+| health, fitness tracker | L1 / L2 | the mark as an object, or `water_drop` / `battery`-like gauge |
+| shop, marketplace | L2 | `shopping_bag` (mark on `bag_front`) |
 | a pure wordmark that fails L1/L2 | L3 | a material tile (enamel/metal/glass) with the letters from `parts()` |
+| nothing fits | L1 | the mark itself as a thick object; or compose from primitives — never a plain tile/disc |
 | **game** | game objects | 1–3 of its objects: `goal_ring`, `energy_ball`, `wizard_hat`, `crystal`, `football`, `team_ball`, `die`, `board_tiles` — never characters |
 
 ### Brand colour → GNOME HIG ramp (keep the lightness: light brand → steps 1–2, dark → 4–5)

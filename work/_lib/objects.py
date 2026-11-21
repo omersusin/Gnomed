@@ -18,6 +18,9 @@ REDESIGN.md 5. Catalogue with pictures: docs/redesign/objects.png; as text:
 docs/redesign/OBJECTS.md (regenerate both: python3 docs/redesign/make_objects_sheet.py).
 
 Brand marks are NOT here: an app's own mark always comes from parts(slug) / body(slug).
+No object fits your app? Use L1 (the mark itself as a thick object, REDESIGN.md 3) or compose
+one from the primitives (rounded / poly / circ / ellipse + solid) and say so in design.md -
+never put the logo on a plain tile or disc instead.
 """
 import math
 import sys
@@ -523,6 +526,87 @@ def board_tiles(ic, cx, base, size, ramp=RAMP["Green"], n=3, m=2, name="board"):
     return g
 
 
+def water_drop(ic, cx, base, size, ramp=RAMP["Blue"], name="drop"):
+    """A water drop of blue glass: round bottom, pointed top, highlight (water, hydration,
+    weather, liquids). size = width; height ~1.4 * size."""
+    d = max(2, size * 0.04)
+    r = size / 2
+    cy = base - d - r
+    tip = (cx, cy - r * 1.75)
+    a = math.asin(r / (r * 1.75))                              # where the tangents from the tip touch
+    t1 = (cx - r * math.cos(a), cy - r * math.sin(a))
+    t2 = (cx + r * math.cos(a), cy - r * math.sin(a))
+    g = unary_union([circ(cx, cy, r), poly([t1, tip, t2, (cx, cy)], r * 0.05)])
+    solid(ic, g, face=[(0, ramp[0]), (0.55, ramp[2]), (1, ramp[4])], depth=d, side=ramp[4], layer=name)
+    ic.path(geom_d(ellipse(cx - r * 0.42, cy - r * 0.15, r * 0.16, r * 0.34)), "#ffffff", opacity=0.75, layer_id=f"{name}-hl")
+    return g
+
+
+def bottle(ic, cx, base, size, ramp=RAMP["Blue"], name="bottle"):
+    """A water / drink bottle: cap, neck, body with a white label (put the mark on the label:
+    bottle_label(cx, base, size) gives its box). size = width; height ~2 * size."""
+    w, d = size, max(4, size * 0.08)
+    h = size * 2.0 - d
+    top = base - d - h
+    cap = rounded(box(cx - w * 0.22, top, cx + w * 0.22, top + h * 0.10), 2)
+    solid(ic, cap, face=_face(RAMP["Dark"]), depth=2, side=RAMP["Dark"][3], layer=f"{name}-cap")
+    shape = poly([(cx - w * 0.20, top + h * 0.10), (cx + w * 0.20, top + h * 0.10), (cx + w * 0.20, top + h * 0.18),
+                  (cx + w / 2, top + h * 0.30), (cx + w / 2, top + h), (cx - w / 2, top + h), (cx - w / 2, top + h * 0.30),
+                  (cx - w * 0.20, top + h * 0.18)], w * 0.12)
+    solid(ic, shape, face=[(0, ramp[0]), (0.5, ramp[1]), (1, ramp[3])], depth=d, side=ramp[4], layer=f"{name}-body")
+    ic.path(geom_d(box(cx - w * 0.36, top + h * 0.30, cx - w * 0.24, top + h * 0.92).intersection(shape)), "#ffffff",
+            opacity=0.35, layer_id=f"{name}-shine")
+    label = box(cx - w / 2, top + h * 0.50, cx + w / 2, top + h * 0.80).intersection(shape)
+    ic.path(geom_d(label), ic.linear([(0, "#ffffff"), (1, "#deddda")], 0, top + h * 0.5, 0, top + h * 0.8), layer_id=f"{name}-label")
+    return shape
+
+
+def bottle_label(cx, base, size):
+    """(x0, y0, x1, y1) of bottle()'s white label - fit() the mark into it."""
+    w, d = size, max(4, size * 0.08)
+    h = size * 2.0 - d
+    top = base - d - h
+    return (cx - w * 0.36, top + h * 0.52, cx + w * 0.36, top + h * 0.78)
+
+
+def mug(ic, cx, base, size, ramp=RAMP["Red"], name="mug"):
+    """A mug with a handle on the right (drinks, coffee, breaks). size = width incl. the handle."""
+    d = max(4, size * 0.07)
+    bw = size * 0.78
+    h = size * 0.80 - d
+    top = base - d - h
+    x0 = cx - size / 2
+    handle = ellipse(x0 + bw, top + h * 0.48, size * 0.22, h * 0.28).difference(ellipse(x0 + bw, top + h * 0.48, size * 0.11, h * 0.16))
+    solid(ic, handle, face=_face(ramp), depth=d, side=ramp[4], layer=f"{name}-handle")
+    cup = rounded(box(x0, top, x0 + bw, top + h), bw * 0.12)
+    solid(ic, cup, face=_face(ramp), depth=d, side=ramp[4], layer=f"{name}-cup")
+    ic.path(geom_d(ellipse(x0 + bw / 2, top + 3, bw * 0.46, 3)), RAMP["Brown"][3], layer_id=f"{name}-drink")
+    return unary_union([cup, handle])
+
+
+def shopping_bag(ic, cx, base, size, ramp=RAMP["Orange"], name="bag"):
+    """A paper shopping bag with two handles (shops, marketplaces). Mark on its front:
+    bag_front(cx, base, size) gives the box. size = width; height ~1.1 * size."""
+    w, d = size, max(4, size * 0.06)
+    h = size * 0.85 - d
+    top = base - d - h
+    handles = unary_union([ellipse(x, top, w * 0.12, h * 0.22).exterior.buffer(w * 0.025).intersection(box(0, 0, 128, top))
+                           for x in (cx - w * 0.2, cx + w * 0.2)])
+    solid(ic, handles, face="#9a9996", depth=1.5, side="#77767b", top=False, layer=f"{name}-handles")
+    g = poly([(cx - w * 0.44, top), (cx + w * 0.44, top), (cx + w / 2, top + h), (cx - w / 2, top + h)], w * 0.05)
+    solid(ic, g, face=_face(ramp), depth=d, side=ramp[4], layer=name)
+    ic.path(geom_d(box(cx - w * 0.44, top, cx + w * 0.44, top + h * 0.10).intersection(g)), "#ffffff", opacity=0.25, layer_id=f"{name}-fold")
+    return g
+
+
+def bag_front(cx, base, size):
+    """(x0, y0, x1, y1) of shopping_bag()'s front - fit() the mark into it."""
+    w, d = size, max(4, size * 0.06)
+    h = size * 0.85 - d
+    top = base - d - h
+    return (cx - w * 0.32, top + h * 0.22, cx + w * 0.32, top + h * 0.88)
+
+
 CATALOGUE = [
     # (function, call args for the contact sheet, one-line use)
     ("speech_bubble", dict(ramp=RAMP["Green"]), "chat, messages, comments"),
@@ -544,6 +628,10 @@ CATALOGUE = [
     ("book", dict(ramp=RAMP["Red"]), "reading, docs, learning"),
     ("phone_handset", dict(ramp=RAMP["Green"]), "calls, dialer"),
     ("battery", dict(ramp=RAMP["Green"]), "power, battery tools"),
+    ("water_drop", dict(ramp=RAMP["Blue"]), "water, hydration, liquids, weather"),
+    ("bottle", dict(ramp=RAMP["Blue"]), "drinks, water trackers (mark on the label)"),
+    ("mug", dict(ramp=RAMP["Red"]), "coffee, drinks, breaks"),
+    ("shopping_bag", dict(ramp=RAMP["Orange"]), "shops, marketplaces (mark on the front)"),
     ("calendar_page", dict(ramp=RAMP["Red"]), "calendar, planner"),
     ("goal_ring", dict(), "game: a goal / target ring (Pokémon UNITE)"),
     ("energy_ball", dict(), "game: glowing ball / power orb"),
