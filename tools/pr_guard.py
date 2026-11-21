@@ -13,6 +13,8 @@ ERROR (the PR cannot be merged like this):
   * an app or one of its styles was removed from pack/styles.json
   * a commit message contains [release] (that would publish a release)
   * the branch is main / master
+  * work/ or the pack changed but docs/LOG.md got no new entry (one per session, append-only)
+  * a line of docs/LOG.md was changed or removed (the log is append-only)
 WARN (allowed, but the maintainer must look closely):
   * CI workflows, Gradle build files, ProGuard rules, signing, AGENTS.md
 """
@@ -27,6 +29,21 @@ ITEM_FILES = ("app/src/main/res/xml/appfilter.xml", "app/src/main/assets/appfilt
 SENSITIVE = (".github/", "app/build.gradle", "build.gradle", "settings.gradle", "gradle/",
              "app/proguard-rules.pro", "AGENTS.md", "tools/hooks/", "tools/pr_guard.py")
 ITEM = re.compile(r"<item\b[^>]*?/>")
+LOGGED = ("work/", "app/src/", "artwork/", "pack/")      # changes here need a docs/LOG.md entry
+
+
+def log_problems(changed, log_diff):
+    """the docs/LOG.md rule. changed: paths changed in the PR; log_diff: `git diff` of docs/LOG.md.
+    -> list of error strings"""
+    errs = []
+    added = [ln for ln in log_diff.splitlines() if ln.startswith("+") and not ln.startswith("+++")]
+    removed = [ln for ln in log_diff.splitlines() if ln.startswith("-") and not ln.startswith("---")]
+    if any(p.startswith(LOGGED) for p in changed) and not any(re.match(r"\+## \d{4}-\d{2}-\d{2}", ln) for ln in added):
+        errs.append("work/ or the pack changed but docs/LOG.md has no new entry - append one "
+                    "(format at the top of docs/LOG.md; python3 tools/next.py <slug> shows it)")
+    if removed:
+        errs.append(f"docs/LOG.md: {len(removed)} line(s) changed or removed - the log is append-only, add at the end")
+    return errs
 
 
 def git(*args, check=True):
@@ -63,6 +80,11 @@ def main():
         for p in {old, new}:
             if p.startswith(SENSITIVE) or p == "gradle.properties":
                 warns.append(f"{p} changed ({status}) - maintainer-only area, review it line by line")
+
+    changed = set()
+    for line in git("diff", "--name-only", base, head).splitlines():
+        changed.add(line.strip())
+    errors += log_problems(changed, git("diff", base, head, "--", "docs/LOG.md", check=False))
 
     for path in ITEM_FILES:
         gone = items(show(base, path)) - items(show(head, path))

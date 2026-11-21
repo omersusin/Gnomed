@@ -8,6 +8,8 @@
    git history) FAILs the `holes` check
 3. `approved: yes` FAILs the `redesign` approval format; a quote + date passes
 4. obj.poly() rounds corners without erasing thin parts; obj.body() keeps the holes
+5. the handoff tools: tools/next.py (states), tools/describe_icon.py, work/_lib/objects.py,
+   the docs/LOG.md rule of tools/pr_guard.py
 """
 import importlib.util
 import json
@@ -73,6 +75,56 @@ expect(poly([(0, 0), (40, 0), (40, 3), (0, 3)], 4).area > 100, "poly(): a 3-unit
 expect(poly([(0, 0), (40, 0), (40, 40), (0, 40)], 6).area < 1580, "poly(): convex corners are rounded")
 b = body("qobuz")
 expect(sum(len(g.interiors) for g in getattr(b, "geoms", [b])) > 0, "body(qobuz) keeps the letter counters as holes")
+
+# 5. handoff tools
+def run(*cmd):
+    r = subprocess.run([sys.executable, *cmd], capture_output=True, text=True, cwd=ROOT)
+    return r.returncode, r.stdout + r.stderr
+
+
+def state(slug):
+    code, out = run("tools/next.py", slug)
+    m = [ln.split()[1] for ln in out.splitlines() if ln.startswith("STATE")]
+    return m[0] if m else f"no STATE line (exit {code}): {out[-200:]}"
+
+
+on_main = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True, text=True, cwd=ROOT).stdout.strip() in ("main", "master")
+if on_main:
+    expect(state("rush_royale") == "ON_MAIN", "next.py refuses to work on main")
+else:
+    expect(state("zz_no_such_app") == "NO_SOURCE", "next.py: an unknown app -> NO_SOURCE")
+    expect(state("kafa_topu_2") == "REDO", "next.py: kafa_topu_2 (owner's redo: line) -> REDO")
+    expect(state("qobuz") == "NOT_STARTED", "next.py: a plate app -> NOT_STARTED")
+    expect(state("andvm") == "BUILD", "next.py: a redesign without a Symbol -> BUILD")
+    st = state("rush_royale")
+    expect(st in ("LOG", "COMMIT", "PUSH", "DONE"), f"next.py: a shipped redesign is past Q2 ({st})")
+code, out = run("tools/next.py")
+expect(code == 0 and "Which app next?" in out, "next.py without a slug lists the next apps")
+code, out = run("tools/describe_icon.py", "work/pokemon_unite/pokemon_unite-symbol.svg")
+expect(code == 0 and "box:" in out and "holes: 1" in out and "ASCII" in out, "describe_icon.py describes an SVG (box, holes, ASCII)")
+import objects as O  # noqa: E402
+broken = []
+for fname, kw, _ in O.CATALOGUE:
+    try:
+        g = getattr(O, fname)(O.gk.Icon(fname), 64, 118, 90, **kw)
+        if g.is_empty or g.bounds[3] > 118.5:
+            broken.append(fname)
+    except Exception as e:  # noqa: BLE001
+        broken.append(f"{fname}: {e}")
+expect(not broken, f"objects.py: all {len(O.CATALOGUE)} objects build inside the baseline {broken or ''}")
+with tempfile.TemporaryDirectory() as tmp:
+    t = O.gk.Icon("tile")
+    O.solid(t, O.rounded(O.box(14, 14, 114, 112), 16), face="#33d17a", depth=6)
+    O.solid(t, O.circ(64, 60, 22), face="#ffffff", depth=2)
+    t.save(Path(tmp) / "tile.svg")
+    expect(ci.shape_kind(Path(tmp) / "tile.svg")[0] == "tile", "check_icon.shape_kind: the logo on a rounded tile -> 'tile' (plain_shape WARN)")
+expect(ci.shape_kind(ROOT / "work/pokemon_unite/pokemon_unite-symbol.svg")[0] == "object", "check_icon.shape_kind: a real object -> 'object'")
+_g = importlib.util.spec_from_file_location("pr_guard", ROOT / "tools/pr_guard.py")
+pg = importlib.util.module_from_spec(_g)
+_g.loader.exec_module(pg)
+expect(pg.log_problems({"work/x/redesign.py"}, ""), "pr_guard: work/ changed without a LOG entry -> ERROR")
+expect(not pg.log_problems({"work/x/redesign.py", "docs/LOG.md"}, "+## 2026-11-22 — m via t — `x`"), "pr_guard: with a new LOG entry -> ok")
+expect(pg.log_problems({"docs/LOG.md"}, "-## 2026-11-18 old\n+## 2026-11-18 new"), "pr_guard: an edited LOG line -> ERROR (append-only)")
 
 print(f"selftest: {ok} passed, {bad} failed")
 sys.exit(1 if bad else 0)

@@ -20,6 +20,9 @@ ROOT = Path(__file__).resolve().parent.parent
 DESIGN = """# {slug} - design note (REDESIGN.md)
 
 source: work/{slug}/source.png
+kind: <app | game>
+ladder: <L1 mark as object | L2 object carries the mark | L3 material tile | game objects>
+characters: no
 references (games: store icon + >= 2 in-game screenshots; what they show: number of
   characters, how they face each other, signature gear, key object, colours):
 anchors (2-4 things that make the app recognisable; they must survive):
@@ -33,7 +36,8 @@ concepts (work/{slug}/concepts.png) - four different ideas:
   C:
   D:
 
-# the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7)
+# the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7), e.g.
+#   approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
 approved:
 keep:
 final:
@@ -50,7 +54,7 @@ Build:  python3 tools/make_icon.py {slug}      (runs this file, then review + ga
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "work/_lib"))
-from obj import *  # noqa: F401,F403,E402
+from objects import *  # noqa: F401,F403,E402   (objects.py + obj.py: envelope, bottle, fit, solid, save_styles ...)
 SLUG = Path(__file__).resolve().parent.name
 P = parts(SLUG)               # measured parts: P["r0"], P["r1"], ..., P["silhouette"], P["holes"]
 # print(describe(SLUG))       # colours / sizes / positions as text
@@ -72,24 +76,28 @@ if __name__ == "__main__":
 '''
 
 CONCEPTS = '''#!/usr/bin/env python3
-"""{slug} - 3 ROUGH concepts (REDESIGN.md step 3). Run:
+"""{slug} - FOUR rough concepts A-D (REDESIGN.md step 3; docs/PLAYBOOK.md#draw-concepts). Run:
     python3 work/{slug}/concepts/make_concepts.py && python3 tools/concepts.py {slug}
-Each function is ONE idea from the ladder (FOUR different ideas); flat shapes are fine. Replace the example
-bodies. Every shape of the app's mark comes from P (measured), never from memory."""
+Each function is ONE different idea from the ladder; flat shapes are fine. REPLACE the example bodies.
+The app's mark always comes from P (measured), never from memory. Ready objects: from objects import *
+(catalogue: docs/redesign/OBJECTS.md). NEVER the logo on a plain tile/square or disc (REDESIGN.md 1)."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "work/_lib"))
-from obj import *  # noqa: F401,F403,E402
+from objects import *  # noqa: F401,F403,E402   (objects.py + obj.py: gk, solid, parts, fit, RAMP ...)
 
 SLUG = Path(__file__).resolve().parents[1].name
 OUT = Path(__file__).resolve().parent
-P = parts(SLUG)
+P = parts(SLUG)        # r0, r1 ... = colour regions; "holes" = what the mark ENCLOSES (a letter's
+                       # counter, or a figure inside a ring - e.g. Telegram's plane). Which is which:
+                       # print(describe(SLUG)) - colour + box of every part.
 MARK = [P[k] for k in sorted(P) if k.startswith("r")]          # the coloured parts
 COL = [colour(SLUG, k) for k in sorted(P) if k.startswith("r")]
 
 
 def A():
-    """L1 - the mark itself becomes the object (thickness, light), no plate."""
+    """L1 - the mark itself becomes the object (thickness, light), no plate.
+    If one region is only the logo's BACKGROUND (a tile or circle behind the figure), leave it out."""
     ic = gk.Icon("{slug} concept A")
     for g, c in zip(fit(MARK, (14, 12, 114, 112), anchor="bottom"), COL):   # bottom 112 + side 6 = 118
         solid(ic, g, face=c, depth=6)
@@ -97,19 +105,19 @@ def A():
 
 
 def B():
-    """L2 - a GNOME object that carries the mark (the app's function as a thing).
-    EXAMPLE object: a rounded box; REPLACE it with the app's object (envelope, cloud,
-    device, book, camera ...) - never a plain disc or square with the logo on it."""
+    """L2 - a GNOME object that carries the mark (the app's FUNCTION as a thing).
+    EXAMPLE: an envelope with the mark on its stamp - REPLACE envelope/envelope_stamp with the
+    app's object from docs/redesign/OBJECTS.md (bottle + bottle_label, browser_window + browser_page,
+    shopping_bag + bag_front, ...). Not a plain rounded square with the logo on it."""
     ic = gk.Icon("{slug} concept B")
-    body = rounded(box(18, 30, 110, 108), 10)                 # bottom 108 + side 10 = 118
-    solid(ic, body, face=[(0, "#f6f5f4"), (1, "#deddda")], depth=10)
-    for g, c in zip(fit(MARK, (36, 42, 92, 94)), COL):
-        solid(ic, g, face=c, depth=2)
+    envelope(ic, 64, 118, 108, ramp=RAMP["Blue"])
+    for g, c in zip(fit(MARK, envelope_stamp(64, 118, 108)), COL):
+        solid(ic, g, face=c, depth=0, top=False)
     return ic
 
 
 def C():
-    """another idea (a second L1/L2 idea; L3 material tile only if A and B fail)."""
+    """a second, DIFFERENT object idea (another L2 object, or L1 with a secondary object in front)."""
     ic = gk.Icon("{slug} concept C")
     for g, c in zip(fit(MARK, (16, 12, 112, 115), anchor="bottom"), COL):   # bottom 115 + side 3 = 118
         solid(ic, g, face=c, depth=3)
@@ -117,8 +125,8 @@ def C():
 
 
 def D():
-    """a fourth, different idea (REDESIGN.md 6: four concepts; Q1 picks the main one for
-    Symbol and which others to keep for Faithful / Disc / Rimmed)."""
+    """a fourth, different idea - e.g. a ROUND object (it can fill the Disc slot): a coin, a lens,
+    a globe ... with the mark. L3 (a material tile) only for a pure wordmark when L1/L2 fail."""
     ic = gk.Icon("{slug} concept D")
     for g, c in zip(fit(MARK, (24, 22, 104, 114), anchor="bottom"), COL):     # bottom 114 + side 4 = 118
         solid(ic, g, face=c, depth=4)
@@ -158,7 +166,10 @@ def main():
     print(describe(slug))
     print(f"""
 Next (REDESIGN.md):
-  2. look at work/{slug}/source.png and docs/redesign/gnome-objects.png; fill anchors + function object
+Next: python3 tools/next.py {slug}   (it prints each step; the list below is the overview)
+  2. fill design.md: kind, anchors, function object. Look at work/{slug}/source.png and
+     docs/redesign/gnome-objects.png (REAL GNOME icons: how objects look) - without vision use
+     python3 tools/describe_icon.py work/{slug}/source.png and docs/redesign/OBJECTS.md
   3. edit work/{slug}/concepts/make_concepts.py (4 different ideas, A-D), then
      python3 work/{slug}/concepts/make_concepts.py && python3 tools/concepts.py {slug}
   4. Q1 (REDESIGN.md 7): main design + which to keep; write approved:/keep: as his quotes + date

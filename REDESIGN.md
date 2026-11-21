@@ -76,6 +76,9 @@ scene / keep the characters" rule).
 
 ## 4. Procedure — one app per session
 
+`python3 tools/next.py <slug>` tells you which of these steps you are on and prints its exact
+commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
+
 ```
 1  MEASURE   python3 tools/new_redesign.py <slug>
              -> geometry.json, the parts as text, design.md, concepts/make_concepts.py
@@ -110,7 +113,9 @@ scene / keep the characters" rule).
   Check: `python3 tools/size_audit.py`.
 - **Holes are holes**: what is a hole in the source (letter counters, eyes, a ring's
   centre) is **transparent** in every free style — cut it (`body(slug)`, `difference`),
-  never paint it white or in the tile colour. Exceptions only with the owner's words
+  never paint it white or in the tile colour. (When the mark is printed ON an object — a stamp,
+  a page, a label — that object shows through the mark's holes; that is correct. Only a hole of
+  the object itself must be cut through.) Exceptions only with the owner's words
   (`painted-holes:` in design.md) or the `painted_counters` override for white parts that
   are figure, not holes. Gate: `holes`.
 - **Thickness**: 2 px thin parts/discs, 4–6 px flat objects, 8–24 px boxes/devices/cylinders.
@@ -183,7 +188,7 @@ painted-holes: "<his words>" (date)     only if a hole is really meant to be pai
 ## 8. Budget — he pays for every message
 
 - **One app per session**, then `/clear`. Effort `high` for design, `medium` for git/docs.
-- At session start read only: CLAUDE.md, this file, AGENTS.md, docs/MISTAKES.md §10, and the
+- At session start read only: START-HERE.md, this file, AGENTS.md, docs/MISTAKES.md §10, and the
   files the task names.
 - Concepts are cheap and rough; polish only the chosen ones.
 - Never rebuild the whole pack blindly: rebuild only what you changed, compare pixels with

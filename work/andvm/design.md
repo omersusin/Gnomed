@@ -1,6 +1,9 @@
 # andvm - design note (REDESIGN.md)
 
 source: work/andvm/source.png
+kind: app
+ladder: L1 - the two peaks as thick enamel objects
+characters: no
 anchors (2-4 things that make the app recognisable; they must survive):
   1. the two overlapping peaks: teal peak back-left, green peak front-right
   2. the rounded mountain/peak silhouette (the "A"-like mark)
