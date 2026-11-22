@@ -97,7 +97,8 @@ CATEGORIES = {
                ("picture frame", "", r"frame|çerçeve")],
               "Snapshot, Loupe, Shotwell, Camera", ""),
     "weather": ("Weather", ["WEATHER"],
-                [("cloud + sun", "cloud", r"cloud|bulut|sun|güneş"),
+                [("sun (always yellow/orange)", "sun", r"\bsun\b|güneş"),
+                 ("cloud", "cloud", r"cloud|bulut"),
                  ("umbrella", "", r"umbrella|şemsiye"),
                  ("thermometer", "", r"thermometer|termometre"),
                  ("water drop", "water_drop", r"drop|damla")],
@@ -127,7 +128,7 @@ CATEGORIES = {
                 ("paint palette / brush", "", r"palette|brush|fırça|palet"),
                 ("phone home screen", "", r"home screen|ana ekran|launcher"),
                 ("calculator", "", r"calculator|hesap makinesi"),
-                ("clock", "", r"clock|saat")],
+                ("clock (digits: digital_display)", "", r"clock|saat")],
                "Settings, Tweaks, Clocks, Calculator, Characters", ""),
     "ai": ("AI assistants", [],
            [("speech bubble + spark", "speech_bubble", r"bubble|balon|spark"),
@@ -271,9 +272,15 @@ def object_of(slug, key):
     return ""
 
 
+# objects that ARE another app's logo: never "free" for a different app (owner 2026-11-22:
+# Mesajlar got Telegram's paper plane)
+RESERVED = {"paper plane": "telegram (its logo)", "music note": "apple_music (its logo)"}
+
+
 def used(key, skip=None):
     """{object name: [slugs]} for every app of category `key` that already has a design."""
-    out = {}
+    out = {name: [who] for name, who in RESERVED.items()
+           if any(o[0] == name for o in CATEGORIES[key][2]) and not who.startswith(str(skip))}
     for d in sorted((ROOT / "work").glob("*/design.md")):
         slug = d.parent.name
         if slug == skip or slug.startswith(("_", "zz_")):
@@ -282,7 +289,7 @@ def used(key, skip=None):
         if k != key:
             continue
         o = object_of(slug, key)
-        if o:
+        if o and slug not in " ".join(out.get(o, [])):
             out.setdefault(o, []).append(slug)
     return out
 

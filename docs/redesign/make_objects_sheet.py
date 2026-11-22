@@ -23,7 +23,7 @@ SHEET_SIZE = {"speech_bubble": 104, "envelope": 108, "paper_plane": 100, "cloud"
               "folder": 108, "camera_lens": 100, "play_button": 108, "music_note": 92, "book": 80,
               "phone_handset": 100, "battery": 60, "calendar_page": 100, "goal_ring": 90, "energy_ball": 90,
               "wizard_hat": 108, "water_drop": 72, "bottle": 54, "mug": 104, "shopping_bag": 96, "crystal": 72, "football": 100, "team_ball": 96, "die": 86, "board_tiles": 108,
-              "vinyl_record": 104, "cassette": 104, "speaker": 80, "headphones": 104}
+              "vinyl_record": 104, "cassette": 104, "speaker": 80, "headphones": 104, "sun": 96}
 
 
 def render(svg_text, px=128):
@@ -65,7 +65,7 @@ def main():
     md += ["", "## Where to put the app's mark on an object (boxes for `fit()`)", "",
            "| helper | gives |", "|---|---|"]
     for h in ("envelope_stamp", "browser_page", "bottle_label", "bag_front", "goal_ring_centre",
-              "record_label", "cassette_label", "speaker_badge", "headphone_cup"):
+              "record_label", "cassette_label", "speaker_badge", "headphone_cup", "digital_display"):
         fn = getattr(O, h)
         md.append(f"| `{h}{inspect.signature(fn)}` | {' '.join((inspect.getdoc(fn) or '').split())} |")
     md += ["", "Example: `bottle(ic, 64, 118, 54, ramp=RAMP[\"Blue\"])` then",

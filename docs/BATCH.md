@@ -44,9 +44,18 @@ Before every app: read [START-HERE.md](../START-HERE.md) and run `python3 tools/
    ```
 5. Build (`python3 tools/make_icon.py <slug>`), then fix **every FAIL and every FIX_WARN**
    (`mark_size`, `visible_light`, `visible_dark`, `legibility32`, `slots`) — `next.py` says how.
-6. When `next.py` says ASK_Q2: **do not ask**. Copy `work/<slug>/review.png` and `phone.png` to
+6. **Look at it like the owner** (he found these in batch 1, 2026-11-22). For each of the four
+   styles write in progress.md what it shows in 2–4 plain words. Redo a style when:
+   - you cannot name it as a real thing (a box with dots, a card pile, a black disc with a strip);
+   - a real thing has the wrong colour (a red sun - use `sun()`); digits do not read (use
+     `digital_display()`);
+   - it uses another app's logo object (Telegram's paper plane - `RESERVED` in categories.py);
+   - two styles are the same object restyled (gate `slots` measures it).
+   Cannot see images? Use `python3 tools/describe_icon.py <svg>` and the concept code: if the code
+   draws "rounded box + 3 circles", it is not a nameable object.
+7. When `next.py` says ASK_Q2: **do not ask**. Copy `work/<slug>/review.png` and `phone.png` to
    `~/Downloads/gnomed/<slug>/`, add the app to the current group of 10.
-7. Append one line to `~/Downloads/gnomed/progress.md`: `- [x] <slug> - <main object> - <problems>`.
+8. Append one line to `~/Downloads/gnomed/progress.md`: `- [x] <slug> - S: <object> / F: <object> / D: <object> / R: <object> - <problems>`.
 
 ## 4. Every 10 apps — stop and show
 
@@ -58,6 +67,8 @@ Then send the owner a short Turkish message: the picture's path, the 10 apps, wh
 **STOP and wait.** His answer:
 - **"Devam"** → the next 10.
 - **"<app> olmamış (…)"** → redo exactly that app (new concepts), show it again.
+- **A list of fixes per app** → change exactly those styles, nothing else; then one overview of only
+  those apps (`tools/overview.py <those slugs>`), and wait again.
 
 ## 5. Into the pack — only with his words
 
