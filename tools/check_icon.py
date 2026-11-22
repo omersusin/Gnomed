@@ -176,6 +176,41 @@ def hole_measure(slug, svg, N=512):
     return T(holes).area / (128 * 128), (fa & ~a).sum() / (N * N), iou
 
 
+def style_groups(svgs, n=48):
+    """Styles that LOOK the same (owner 2026-11-22: Saat's Faithful and Disc, Photos' Symbol and
+    Faithful): rendered small on grey, mean colour difference dE < 12, or the same silhouette
+    (IoU >= 0.9) with dE < 20. Measured: really different designs have dE >= 23 and IoU <= 0.78.
+    -> (groups of style names, ["faithful ~ disc", ...])"""
+    import itertools
+    from skimage.color import rgb2lab as _lab
+    r = {}
+    for st, svg in svgs.items():
+        a = np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(url=str(svg), output_width=n, output_height=n)))
+                       .convert("RGBA")).astype(np.float32) / 255
+        al = a[..., 3:4]
+        r[st] = (_lab(a[..., :3] * al + 0.5 * (1 - al)), a[..., 3] > 0.5)
+    parent = {st: st for st in svgs}
+
+    def root(x):
+        while parent[x] != x:
+            x = parent[x]
+        return x
+    alike = []
+    for s1, s2 in itertools.combinations(svgs, 2):
+        (l1, m1), (l2, m2) = r[s1], r[s2]
+        de = float(np.linalg.norm(l1 - l2, axis=-1).mean())
+        iou = float((m1 & m2).sum() / max(1, (m1 | m2).sum()))
+        if de < 12 or (iou >= 0.9 and de < 20):
+            if root(s1) != root(s2):
+                parent[root(s2)] = root(s1)
+            if svgs[s1].read_bytes() != svgs[s2].read_bytes():
+                alike.append(f"{s1} ~ {s2} look almost the same")
+    groups = {}
+    for st in svgs:
+        groups.setdefault(root(st), []).append(st)
+    return list(groups.values()), alike
+
+
 def mark_measure(slug, svg, N=256, de=20.0):
     """How big the app's own colours are in a style: the pixels whose colour is close (dE < de)
     to a COLOURFUL measured part of the source (chroma > 20, >= 1 % of the tile), small specks
@@ -268,7 +303,8 @@ def main():
                 add(st, "plain_shape", "PASS", f"object silhouette (circle {iou:.2f}, fill {fill:.0%})")
     # slots: every style a different design (owner 2026-11-21 / 2026-11-22) unless he dropped the others
     if is_redesign and len(svgs) == 4:
-        distinct = len({p.read_bytes() for p in svgs.values()})
+        groups, alike = style_groups(svgs)
+        distinct = len(groups)
         keep = design_line(w, "keep")
         letters = set(re.findall(r"\b([A-H])\b", keep.split(" - ")[0].split('"')[0]))
         dropped = keep.lower().startswith(("none", "0", "-")) or '"0"' in keep
@@ -276,8 +312,9 @@ def main():
         if distinct >= expected:
             add("app", "slots", "PASS", f"{distinct} different designs (owner kept {expected})")
         else:
-            add("app", "slots", "WARN", f"only {distinct} different designs in 4 styles",
-                "REDESIGN.md 6: main -> symbol, closest to the logo -> faithful, round -> disc, the rest -> rimmed")
+            add("app", "slots", "WARN", f"only {distinct} different designs in 4 styles" + (f" ({'; '.join(alike)})" if alike else ""),
+                "REDESIGN.md 6: four DIFFERENT objects - not the same object in another colour or with a small extra; "
+                "main -> symbol, closest to the logo -> faithful, round -> disc, the rest -> rimmed")
     add("app", "faithful", "PASS" if "faithful" in svgs else "FAIL", "faithful" in svgs,
         "" if "faithful" in svgs else "build the app first: python3 tools/make_icon.py " + slug)
     for st, svg in svgs.items():

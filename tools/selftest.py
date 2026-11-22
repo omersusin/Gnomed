@@ -211,5 +211,24 @@ expect(_imgs == ["https://raw.githubusercontent.com/o/r/HEAD/docs/s1.png"], "fet
 expect(FR.system("com.android.settings", "Ayarlar")["category_key"] == "system" and FR.system("com.whatsapp", "x") is None,
        "fetch_refs.system: system packages need no screenshots (GNOME app for the same job)")
 
+# batch 1 lessons (2026-11-22): look-alike styles, reserved logo objects
+with tempfile.TemporaryDirectory() as tmp:
+    _sv = {}
+    for _st, _frame in (("symbol", "#1c71d8"), ("faithful", "#f6f5f4"), ("disc", "#1c71d8"), ("rimmed", "#1c71d8")):
+        _t = O.gk.Icon(_st)
+        if _st in ("symbol", "faithful"):              # the same framed photo, only the frame colour differs
+            O.solid(_t, O.rounded(O.box(16, 20, 112, 110), 6), face=_frame, depth=5)
+            O.solid(_t, O.box(26, 30, 102, 100), face="#62a0ea", depth=0, top=False)
+        elif _st == "disc":
+            O.sun(_t, 64, 118, 96)
+        else:
+            O.speaker(_t, 64, 118, 80)
+        _sv[_st] = Path(tmp) / f"{_st}.svg"
+        _t.save(_sv[_st])
+    _groups, _alike = ci.style_groups(_sv)
+    expect(len(_groups) == 3 and _alike, f"check_icon.style_groups: the same photo in two frame colours = ONE design ({_alike})")
+expect("telegram" in " ".join(CAT.used("messaging").get("paper plane", [])),
+       "categories: Telegram's paper plane is reserved (not free for other messaging apps)")
+
 print(f"selftest: {ok} passed, {bad} failed")
 sys.exit(1 if bad else 0)

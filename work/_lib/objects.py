@@ -745,6 +745,67 @@ def headphone_cup(cx, base, size):
     return (x - cup_w * 0.36, cy - cup_h * 0.30, x + cup_w * 0.36, cy + cup_h * 0.30)
 
 
+# ====================================================================== nature, displays
+# Real things keep their real colours (REDESIGN.md 5): the sun is yellow/orange, never the
+# brand red; water and sky blue; plants green. The brand colour goes on the man-made object.
+def sun(ic, cx, base, size, ramp=RAMP["Yellow"], rays=10, name="sun"):
+    """The sun: a glowing yellow -> orange disc with short rounded rays (weather, brightness,
+    daylight). size = width incl. rays. A secondary sun behind a cloud: size ~0.6 of the cloud."""
+    R = size / 2
+    d = max(2.5, size * 0.04)
+    cy = base - d - R
+    core = circ(cx, cy, R * 0.62)
+    ray_shapes = []
+    for k in range(rays):
+        a = 2 * math.pi * k / rays - math.pi / 2
+        tip = (cx + R * math.cos(a), cy + R * math.sin(a))
+        l = (cx + R * 0.70 * math.cos(a - 0.17), cy + R * 0.70 * math.sin(a - 0.17))
+        r = (cx + R * 0.70 * math.cos(a + 0.17), cy + R * 0.70 * math.sin(a + 0.17))
+        ray_shapes.append(poly([l, tip, r], 1.2))
+    rays_g = unary_union(ray_shapes)
+    solid(ic, rays_g, face=[(0, ramp[1]), (1, RAMP["Orange"][1])], depth=d, side=RAMP["Orange"][2], top=False, layer=f"{name}-rays")
+    ic.path(geom_d(core), ic.radial([(0, ramp[0]), (0.55, ramp[2]), (1, RAMP["Orange"][2])], cx - R * 0.15, cy - R * 0.2, R * 0.75),
+            layer_id=f"{name}-core")
+    solid(ic, core.difference(circ(cx, cy, R * 0.62)).buffer(0), face=ramp[2], depth=d, side=RAMP["Orange"][3], top=False,
+          layer=f"{name}-edge")
+    ic.path(geom_d(core.difference(down(core, 1.4))), "#ffffff", opacity=0.55, layer_id=f"{name}-toplight", fill_rule="evenodd")
+    return unary_union([core, rays_g])
+
+
+_SEG = {"0": "abcdef", "1": "bc", "2": "abged", "3": "abgcd", "4": "fgbc", "5": "afgcd", "6": "afgedc",
+        "7": "abc", "8": "abcdefg", "9": "abcfgd"}
+
+
+def digital_display(ic, text, box_, color="#33d17a", off=None, name="digits"):
+    """Seven-segment digits (and ':') that READ correctly - for clocks, timers, calculators.
+    text e.g. "10:10" or "42"; box_ = (x0, y0, x1, y1) of the screen area; segments >= 2 px thick.
+    off = colour of the unlit segments (None: not drawn)."""
+    x0, y0, x1, y1 = box_
+    chars = list(text)
+    units = sum(0.45 if c == ":" else 1.0 for c in chars) + 0.25 * (len(chars) - 1)
+    h = y1 - y0
+    w = min((x1 - x0) / units, h * 0.72)
+    t = max(2.0, w * 0.21)
+    x = x0 + ((x1 - x0) - units * w) / 2
+    for c in chars:
+        if c == ":":
+            for fy in (0.32, 0.68):
+                ic.path(geom_d(circ(x + w * 0.22, y0 + h * fy, t * 0.6)), color, layer_id=f"{name}-colon")
+            x += w * 0.45 + w * 0.25
+            continue
+        segs = {"a": box(x + t, y0, x + w - t, y0 + t), "g": box(x + t, y0 + h / 2 - t / 2, x + w - t, y0 + h / 2 + t / 2),
+                "d": box(x + t, y1 - t, x + w - t, y1), "f": box(x, y0 + t, x + t, y0 + h / 2 - t / 2),
+                "b": box(x + w - t, y0 + t, x + w, y0 + h / 2 - t / 2), "e": box(x, y0 + h / 2 + t / 2, x + t, y1 - t),
+                "c": box(x + w - t, y0 + h / 2 + t / 2, x + w, y1 - t)}
+        on = _SEG.get(c, "")
+        for k, g in segs.items():
+            if k in on:
+                ic.path(geom_d(rounded(g, t * 0.45)), color, layer_id=f"{name}-{c}-{k}")
+            elif off:
+                ic.path(geom_d(rounded(g, t * 0.45)), off, opacity=0.12, layer_id=f"{name}-{c}-{k}-off")
+        x += w * 1.25
+
+
 CATALOGUE = [
     # (function, call args for the contact sheet, one-line use)
     ("speech_bubble", dict(ramp=RAMP["Green"]), "chat, messages, comments"),
@@ -767,6 +828,7 @@ CATALOGUE = [
     ("cassette", dict(), "music, podcasts, recorders (mark on the label)"),
     ("speaker", dict(), "music, audio, sound tools (mark on the badge)"),
     ("headphones", dict(), "music, audio, podcasts (bold mark on the right cup)"),
+    ("sun", dict(), "weather, brightness, daylight - ALWAYS yellow/orange"),
     ("book", dict(ramp=RAMP["Red"]), "reading, docs, learning"),
     ("phone_handset", dict(ramp=RAMP["Green"]), "calls, dialer"),
     ("battery", dict(ramp=RAMP["Green"]), "power, battery tools"),

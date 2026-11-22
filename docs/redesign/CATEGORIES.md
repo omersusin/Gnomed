@@ -15,10 +15,10 @@ Play Store: `MUSIC_AND_AUDIO`
 | cassette | `cassette()` | — |
 | speaker | `speaker()` | — |
 | headphones | `headphones()` | — |
-| pocket music player | compose it | — |
+| pocket music player | compose it | apple_music |
 | radio | compose it | — |
 | microphone | compose it | — |
-| music note | `music_note()` | — |
+| music note | `music_note()` | apple_music (its logo) |
 
 GNOME apps of this kind: Mousai, Amberol, Lollypop, Rhythmbox, Shortwave, Podcasts.
 
@@ -42,7 +42,7 @@ Play Store: `COMMUNICATION`
 |---|---|---|
 | speech bubble | `speech_bubble()` | — |
 | envelope | `envelope()` | telegram |
-| paper plane | `paper_plane()` | — |
+| paper plane | `paper_plane()` | telegram (its logo) |
 | phone handset | `phone_handset()` | — |
 | walkie-talkie | compose it | — |
 | mailbox | compose it | — |
@@ -137,7 +137,8 @@ Play Store: `WEATHER`
 
 | Object | Ready function | Used by |
 |---|---|---|
-| cloud + sun | `cloud()` | — |
+| sun (always yellow/orange) | `sun()` | — |
+| cloud | `cloud()` | — |
 | umbrella | compose it | — |
 | thermometer | compose it | — |
 | water drop | `water_drop()` | — |
@@ -191,7 +192,7 @@ Play Store: `TOOLS`, `PERSONALIZATION`, `LIBRARIES_AND_DEMO`
 | paint palette / brush | compose it | — |
 | phone home screen | compose it | — |
 | calculator | compose it | — |
-| clock | compose it | — |
+| clock (digits: digital_display) | compose it | — |
 
 GNOME apps of this kind: Settings, Tweaks, Clocks, Calculator, Characters.
 

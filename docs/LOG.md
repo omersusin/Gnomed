@@ -204,3 +204,13 @@ Times are from the commits; the model of a backfilled session is what the commit
 - PR: #20
 - Open problems: Faithful mass 0.35 (at the limit), Disc legibility 0.739 (near the 0.72 limit),
   Rimmed mass 0.36; the red is the app's UI accent, the store icon itself is monochrome.
+
+## 2026-11-22 — Claude via Claude Code (cloud session) — tools/rules only (no icons changed)
+- What: batch-1 lessons as rules and checks: `slots` compares how the four styles look; `sun()`,
+  `digital_display()`; reserved logo objects in categories.py; REDESIGN §5 nameable objects / real
+  colours / other apps' logos; BATCH.md self-review step and fix-list answers.
+- Why: the owner on DeepSeek's first 9 system apps: "Bozukluklar yok mu sence de?" … "Repoyu düzelt"
+- Owner: "Repoyu düzelt ve promptu buna göre yaz" (2026-11-22)
+- PR: #22
+- Open problems: whether an object is "nameable" can only be checked by eye; the batch overview
+  every 10 apps stays the owner's check.

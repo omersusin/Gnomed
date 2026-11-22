@@ -163,6 +163,14 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   only for boxes/devices/cylinders whose front is a real face.
 - **Flat faces flat, curved faces shaded** (HIG): flat colours on straight surfaces, gradients
   only on curved ones (a ball, a cylinder, a bulging cushion) and for a brand gradient (above).
+- **Nameable**: every style shows a real thing you can name in 2–4 plain words ("a digital
+  alarm clock", "a rotary phone dial"). Abstract boxes with dots, piles of shapes, a black disc
+  with a strip — not allowed (batch 1, 2026-11-22: Ayarlar's "die", Kişiler's card pile).
+- **Real colours for real things**: the sun is yellow/orange (`sun()`), sky and water blue, plants
+  green, wood brown, paper white. The brand colour goes on the man-made object or the mark —
+  never a red sun (batch 1: Hava Durumu). Digits must read: `digital_display()` ("10:10", not "IO:IO").
+- **Another app's logo is not an object**: Telegram's paper plane, Apple Music's note … belong to
+  those apps (`RESERVED` in work/_lib/categories.py).
 - **No strokes or outlines**: a line-art logo (an outlined note, `>_`, a knot) becomes a SOLID
   object with thickness; lines thinner than 4 px disappear at 48 px. Edges on the 2 px grid
   where possible — they stay crisp at 64 px.
