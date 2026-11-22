@@ -44,15 +44,29 @@ def A():
     return ic
 
 
+def earbud(cx, cy, turn, inner=1):
+    """One earbud seen from above, as it lies in the case (owner 2026-11-22: two plain white
+    circles side by side read as EYES): a rounded body, a stem, a grey silicone ear tip; turned
+    `turn` degrees. No dark cradle ring and a grey (not black) tip: both cost the 32 px gate.
+    -> (body + stem, ear tip)"""
+    body = affinity.scale(circ(0, 0, 13), 1.0, 0.9)
+    stem = rounded(box(-5.5, 2, 5.5, 23), 5.4)
+    tip = affinity.scale(circ(6 * inner, -5, 4.5), 1.0, 0.85)
+    bud = body.union(stem)
+    rot = lambda g: affinity.translate(affinity.rotate(g, turn, origin=(0, 0)), cx, cy)
+    return rot(bud), rot(tip)
+
+
 def B():
     """Faithful - an open earbuds case: the source's blue gradient on the lid with the wordmark,
-    two buds in the case."""
+    two real earbuds (stem, ear tip, mirrored and tilted) - not two eye-discs."""
     ic = gk.Icon("anker_soundcore - faithful")
     base = rr(18, 54, 110, 112, 16)
     solid(ic, base, face=[(0, CYAN), (0.6, CYAN_D), (1, CYAN_DD)], depth=6, side=CYAN_DD, layer="case")
-    for i, x in enumerate((46, 82)):
-        bud = circ(x, 84, 14)
+    for i, (x, turn) in enumerate(((47, -20), (81, 20))):          # mirrored: stems point down and out
+        bud, tip = earbud(x, 74, turn, inner=1 if i == 0 else -1)
         solid(ic, bud, face=[(0, LIGHT[0]), (1, LIGHT[2])], depth=3, side=LIGHT[4], layer=f"bud{i}")
+        solid(ic, tip, face=[(0, LIGHT[3]), (1, LIGHT[4])], depth=0, top=False, layer=f"tip{i}")
     lid = rr(18, 18, 110, 60, 14)
     solid(ic, lid, face=gradient(SLUG, lid), depth=5, side=CYAN_DD, layer="lid")
     put_mark(ic, SLUG, (29, 21, 99, 49), face="#ffffff")
