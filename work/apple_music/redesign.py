@@ -1,95 +1,108 @@
 #!/usr/bin/env python3
-"""apple_music - Gnomed redesign.
-Main (Symbol) B: a pocket music player, red body, dark screen with the measured note, click wheel.
-Kept: A -> Faithful (the note itself as a red object), C -> Rimmed (headphones, note on the cup),
-D -> Disc (a round speaker with the note on the grille).
-Build:  python3 tools/make_icon.py apple_music"""
-import sys
+"""apple_music - Gnomed redesign (batch redo, 2026-11-22).
+Main (Symbol) A: a pocket music player with the note on its screen. Faithful B: the note itself,
+a solid red-pink object. Disc C: a tambourine with the note on its skin. Rimmed D: a wooden
+vintage radio with the note on its grille."""
+import sys, math
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "work/_lib"))
 from objects import *  # noqa: F401,F403,E402
+from shapely import affinity
+from shapely.geometry import LineString
+
 SLUG = Path(__file__).resolve().parent.name
-P = parts(SLUG)
-R = regions(SLUG)
-MARK = [g for _, g, _ in R]
-COL = [f for _, _, f in R]
-
 RED = RAMP["Red"]
-DARK = RAMP["Dark"]
 LIGHT = RAMP["Light"]
+DARK = RAMP["Dark"]
+BROWN = RAMP["Brown"]
+BLUE = RAMP["Blue"]
+YELLOW = RAMP["Yellow"]
 
 
-def note_on(ic, box_, colour="#f6f5f4", layer="mark"):
-    """Print the measured note inside box_ (flat; the object shows through its holes)."""
-    for g in fit(MARK, box_, anchor="center"):
-        solid(ic, g, face=colour, depth=0, top=False, layer=layer)
+def rr(x0, y0, x1, y1, r):
+    return rounded(box(x0, y0, x1, y1), min(r, 0.45 * min(x1 - x0, y1 - y0)))
 
 
 def A():
-    """Faithful - L1: the measured note itself as a red enamel object with thickness."""
-    ic = gk.Icon("apple_music - faithful")
-    for g in fit(MARK, (16, 8, 112, 110), anchor="bottom"):
-        g = g.buffer(4.5)                       # the source note is thin; bold it for 32 px
-        solid(ic, g, face=[(0, RED[0]), (0.45, RED[1]), (1, RED[2])], depth=4, side=RED[4], layer="note")
-        toplight(ic, g, width=1.4, opacity=0.65, layer="note")
+    """Symbol - a pocket music player: silver body, dark screen with the note, red click wheel."""
+    ic = gk.Icon("apple_music - symbol")
+    body = rr(26, 8, 102, 114, 11)
+    solid(ic, body, face=[(0, LIGHT[0]), (0.5, LIGHT[1]), (1, LIGHT[3])], depth=7, side=LIGHT[4], layer="body")
+    toplight(ic, body, width=1.8, opacity=0.85, layer="body")
+    screen = rr(34, 16, 94, 66, 4)
+    solid(ic, screen, face=[(0, "#2b2a2e"), (1, DARK[3])], depth=2, side=DARK[3], top=False, layer="screen")
+    put_mark(ic, SLUG, (40, 20, 88, 62), face="#ffffff")
+    wheel = circ(64, 94, 22)
+    solid(ic, wheel, face=[(0, LIGHT[1]), (0.6, LIGHT[2]), (1, LIGHT[3])], depth=3, side=LIGHT[4], layer="wheel")
+    toplight(ic, wheel, width=1.4, opacity=0.8, layer="wheel")
+    ring = circ(64, 94, 22).difference(circ(64, 94, 17))
+    ic.path(geom_d(ring), RED[2], opacity=0.9, layer_id="wheel-ring", fill_rule="evenodd")
+    centre = circ(64, 94, 8)
+    solid(ic, centre, face=[(0, RED[1]), (1, RED[3])], depth=2, side=RED[4], layer="centre")
+    for i, (x, y) in enumerate(((64, 74), (44, 94), (84, 94), (64, 114))):
+        ic.path(geom_d(circ(x, y, 1.8)), LIGHT[4], opacity=0.55, layer_id=f"menu{i}")
     return ic
 
 
 def B():
-    """Symbol - L2: a pocket music player: red body, recessed dark screen with the note, wheel."""
-    ic = gk.Icon("apple_music - symbol")
-    body = rounded(box(26, 14, 102, 110), 14)
-    solid(ic, body, face=[(0, RED[0]), (0.45, RED[1]), (1, RED[2])], depth=8, side=RED[4], layer="player")
-    toplight(ic, body, width=1.5, opacity=0.7, layer="player")
-    screen = rounded(box(34, 24, 94, 72), 6)
-    recess(ic, screen, [(0, "#241f31"), (1, "#3d3846")], wall=3, layer="player-screen")
-    note_on(ic, (40, 28, 88, 68))
-    wheel = circ(64, 92, 15)
-    solid(ic, wheel, face=[(0, LIGHT[0]), (1, LIGHT[2])], depth=3, side=LIGHT[4], layer="player-wheel")
-    centre = circ(64, 92, 5.5)
-    solid(ic, centre, face=[(0, LIGHT[1]), (1, LIGHT[3])], depth=1.5, side=LIGHT[4], top=False, layer="player-button")
-    top_btn = rounded(box(57, 9, 71, 16), 3)          # top button / jack: a real player detail
-    solid(ic, top_btn, face=[(0, LIGHT[2]), (1, LIGHT[4])], depth=3, side=LIGHT[4], layer="player-top")
+    """Faithful - the note itself: the measured glyph as a thick red-pink object."""
+    ic = gk.Icon("apple_music - faithful")
+    shapes = put_mark(ic, SLUG, (14, 10, 114, 108), depth=9,
+                      face=[(0, RED[1]), (0.5, RED[2]), (1, RED[3])], side=RED[4])
+    for g in shapes:
+        toplight(ic, g, width=2.2, opacity=0.35, layer="mark")
     return ic
 
 
 def C():
-    """Rimmed - L2: over-ear headphones, red cups, dark cushions, the note on the right cup."""
-    ic = gk.Icon("apple_music - rimmed")
-    base, d = 122, 6
-    cup_w, cup_h = 40, 60
-    cy = base - d - cup_h / 2
-    arc_r = 40
-    band = circ(64, cy - 2, arc_r).difference(circ(64, cy - 2, arc_r - 11)).intersection(box(0, 0, 128, cy - 2))
-    band = unary_union([band, box(64 - arc_r, cy - 3, 64 - arc_r + 11, cy),
-                        box(64 + arc_r - 11, cy - 3, 64 + arc_r, cy)])
-    solid(ic, band, face=[(0, RED[0]), (1, RED[2])], depth=d * 0.8, side=RED[4], layer="phones-band")
-    toplight(ic, band, width=1.4, opacity=0.6, layer="phones-band")
-    for sx, pad_box in ((-1, (41, cy - 19, 47, cy + 19)), (1, (81, cy - 19, 87, cy + 19))):
-        pad = rounded(box(*pad_box), 4)
-        solid(ic, pad, face=[(0, DARK[1]), (1, DARK[3])], depth=3, side=DARK[4], top=False, layer=f"phones-pad{sx}")
-        x = 64 + sx * (arc_r - 4)
-        cup = rounded(box(x - cup_w / 2, cy - cup_h / 2, x + cup_w / 2, cy + cup_h / 2), 8)
-        solid(ic, cup, face=[(0, RED[0]), (0.5, RED[1]), (1, RED[2])], depth=d, side=RED[4], layer=f"phones-cup{sx}")
-        toplight(ic, cup, width=1.4, opacity=0.6, layer=f"phones-cup{sx}")
-    note_on(ic, (88, 63, 118, 111))
+    """Disc - a tambourine: blue wooden rim, cream skin with the note, chrome jingles."""
+    ic = gk.Icon("apple_music - disc")
+    rim = circ(64, 64, 44).difference(circ(64, 64, 33))
+    solid(ic, rim, face=[(0, BLUE[1]), (0.5, BLUE[2]), (1, BLUE[4])], depth=8, side=BLUE[4], layer="rim")
+    toplight(ic, rim, width=2.0, opacity=0.6, layer="rim")
+    skin = circ(64, 64, 34)
+    solid(ic, skin, face=[(0, "#fff6e0"), (0.7, "#f4e6c2"), (1, "#e6d3a8")], depth=3, side="#c9b48f", layer="skin")
+    toplight(ic, skin, width=1.8, opacity=0.8, layer="skin")
+    for k in range(6):
+        a = -math.pi / 2 + k * math.pi / 3
+        cx, cy = 64 + 38.5 * math.cos(a), 64 + 38.5 * math.sin(a)
+        for j, off in enumerate((-2.4, 2.4)):
+            jg = rr(cx - 2.6, cy + off - 1.4, cx + 2.6, cy + off + 1.4, 1.4)
+            jg = affinity.rotate(jg, math.degrees(a) + 90, origin=(cx, cy))
+            solid(ic, jg, face=[(0, LIGHT[1]), (1, LIGHT[3])], depth=1.5, side=LIGHT[4], top=False,
+                  layer=f"jingle{k}{j}")
+    put_mark(ic, SLUG, (42, 42, 86, 86), face=RED[2])
+    hole = circ(64, 21, 3.2)
+    ic.path(geom_d(hole), "#3d3846", opacity=0.9, layer_id="grip-hole")
     return ic
 
 
 def D():
-    """Disc - L2 round: a round speaker, red cabinet rim, dark grille with the note."""
-    ic = gk.Icon("apple_music - disc")
-    cab = circ(64, 62, 52)
-    solid(ic, cab, face=[(0, RED[0]), (0.5, RED[1]), (1, RED[2])], depth=8, side=RED[4], layer="speaker")
-    toplight(ic, cab, width=1.5, opacity=0.7, layer="speaker")
-    grille = circ(64, 62, 43)
-    recess(ic, grille, [(0, "#241f31"), (1, "#3d3846")], wall=4, layer="speaker-grille")
-    for r in (36, 29, 22):
-        ring = circ(64, 62, r).difference(circ(64, 62, r - 1.2))
-        ic.path(geom_d(ring), "#ffffff", opacity=0.08, layer_id=f"speaker-ring{int(r)}")
-    note_on(ic, (46, 38, 82, 86))
+    """Rimmed - a vintage wooden radio: wood case, cream dial, the note on the dark grille."""
+    ic = gk.Icon("apple_music - rimmed")
+    case = rr(12, 34, 116, 116, 8)
+    solid(ic, case, face=[(0, BROWN[1]), (0.5, BROWN[2]), (1, BROWN[4])], depth=7, side=BROWN[4], layer="case")
+    toplight(ic, case, width=1.6, opacity=0.55, layer="case")
+    dial = rr(20, 40, 108, 62, 4)
+    recess(ic, dial, [(0, "#f6e6c4"), (1, "#e8d3a4")], wall=2.5, layer="dial")
+    for k in range(11):
+        x = 27 + k * 7.4
+        tick = rr(x - 0.7, 43, x + 0.7, 43 + (8 if k % 5 == 0 else 5), 0.7)
+        ic.path(geom_d(tick), BROWN[4], opacity=0.7, layer_id=f"tick{k}")
+    needle = rr(58, 41.5, 60.4, 60.5, 1.2)
+    solid(ic, needle, face=[(0, RED[1]), (1, RED[3])], depth=1, side=RED[4], top=False, layer="needle")
+    grille = rr(20, 68, 80, 112, 5)
+    solid(ic, grille, face=[(0, DARK[1]), (1, DARK[3])], depth=2, side=DARK[3], top=False, layer="grille")
+    for k in range(6):
+        y = 73 + k * 6.2
+        slot = rr(25, y, 75, y + 2.6, 1.3)
+        ic.path(geom_d(slot), BROWN[1], opacity=0.45, layer_id=f"slot{k}")
+    put_mark(ic, SLUG, (28, 72, 76, 110), face="#ffffff")
+    knob1 = circ(96, 80, 9)
+    solid(ic, knob1, face=[(0, LIGHT[1]), (1, LIGHT[3])], depth=3, side=LIGHT[4], layer="knob1")
+    knob2 = circ(96, 102, 6)
+    solid(ic, knob2, face=[(0, LIGHT[1]), (1, LIGHT[3])], depth=3, side=LIGHT[4], layer="knob2")
     return ic
 
 
-if __name__ == "__main__":
-    save_styles(SLUG, {"symbol": B(), "faithful": A(), "disc": D(), "rimmed": C()})
+save_styles(SLUG, {"symbol": A(), "faithful": B(), "disc": C(), "rimmed": D()})
