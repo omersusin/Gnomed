@@ -56,6 +56,40 @@ If it prints `WARNING ... POSTER`: the source is game art → it is a game (`kin
 If this fails with `ModuleNotFoundError`: `python3 -m pip install -r tools/gnome-android-icons/requirements.txt`
 (`--break-system-packages` if pip refuses), then run `python3 tools/gnome-android-icons/scripts/doctor.py`.
 
+## references
+
+**Goal:** know what the app is and shows before drawing anything — any model, with or without vision.
+```
+python3 tools/fetch_refs.py <slug>                    # package + name from the pack / the request
+python3 tools/fetch_refs.py <slug> --url <page>       # a page the owner names (GitHub, Telegram channel, site)
+```
+It searches, in order: **system app** (com.android.* → the GNOME app for the same job, no screenshots
+needed) → **Google Play** (US, then TR, IN, GB, DE for region-locked apps) → **F-Droid** →
+**IzzyOnDroid** → **Uptodown** (its page for the app's name, accepted only when the page shows the
+same package) → **GitHub** (repository search; accepted when the package is in the repository's
+gradle files / manifest — a README mention is marked NOT VERIFIED). Real store screenshots win over
+README pictures. APKMirror / APKPure block scripts (HTTP 403).
+
+It saves `work/<slug>/refs/store/` (screenshots, the store icon, `sheet.jpg`, `store.json` with every
+place it searched — not in git: store images are not ours), writes `category:` and `store:` into
+design.md, and prints the title, the description, the screenshots' main colours with GNOME names and
+the category's object family — as TEXT, so a model without vision can use it. A category guessed
+from words is marked "guessed - check it". The store `icon.png` is often sharper than the phone
+export: if `source.png` is small or blurry, say so in Q1 and offer it.
+
+Tested on the owner's 92 apps (2026-11-22): Play + F-Droid alone gave screenshots for 59; with the
+other places **78** (exteraless, MiX, MT Manager: Uptodown; BCR, KonaBess, Mochy, Recon, Quarry:
+GitHub; TikTok Lite: Play TR), 8 more with text only (their repository has no screenshots), 3 system
+apps (no screenshots needed), 3 nothing (closed apps from a website, his own test builds).
+
+| If this fails | Do |
+|---|---|
+| `nothing found` | Q1 asks the owner where he got it (a site, a Telegram channel) → `--url <it>`; or for 2–3 screenshots → `work/<slug>/refs/` |
+| GitHub `403` / rate limit | without a token GitHub allows 60 requests an hour: `export GITHUB_TOKEN=<token>` or `gh auth login` |
+| wrong app (NOT VERIFIED, other title) | `--url <the right page>` or `--package <the real package>` with `--force` |
+| no network in your tool | the owner runs it on his PC, or sends screenshots; never invent what the app looks like |
+| screenshots from the phone | USB debugging: `adb exec-out screencap -p > work/<slug>/refs/phone-1.png`; rooted: `su -c 'screencap -p /sdcard/s.png'` |
+
 ## fill-design
 
 **Goal:** write in `work/<slug>/design.md` what makes the app recognisable and what it does.
@@ -227,6 +261,7 @@ Annotated examples: [telegram](playbook/telegram.md) (mark on an envelope stamp)
 | `faithful` | no Faithful SVG | `save_styles` writes all slots |
 | `mass` (WARN, < 0.35) | the icon looks thin | object +10–15 %, taller, or a secondary object. A TALL thin object (bottle) cannot grow: add a secondary object in front at the lower right (e.g. `water_drop`), or choose a wider object |
 | `baseline` (WARN) | not on the line | the bottom incl. side at 118 |
+| `mark_size` (WARN, fixed before Q2) | the app's own mark/colours are < 36 px of 128 | [fix-warn](#fix-warn) |
 | `bands` | a gradient of the source is painted as flat bands (looks melted) | [gradients](#gradients): `regions(slug)` / `gradient(slug, shape)` |
 Then `python3 tools/make_icon.py <slug>` again.
 
@@ -254,6 +289,24 @@ pieces = traced(SLUG, box_)       # posters: gradients=True (default) keeps them
 | gate `bands` FAIL | you painted two bands flat: replace `colour(SLUG, "rN")` per band by the `regions()` fill |
 | the gradient is gone (flat) | you used `ic.path(d, fill)`: a `Grad` there paints only its middle colour — use `solid()`/`recess()` |
 | two really different colours got merged | draw them from `parts()` + `colour()` instead, and say so in Q2 |
+
+## fix-warn
+
+**Goal:** fix the WARNs the owner would notice on his phone **before** Q2 — he is not the
+reviewer of things a check can see (owner, 2026-11-22: *"ikide bir bana mesaj verip bunu, şunu,
+onu mu düzelteceksin?"*). `next.py` stops here for `mark_size`, `visible_light`, `visible_dark`,
+`legibility32`.
+
+| WARN | Do |
+|---|---|
+| `mark_size` | make the part that carries the mark bigger (record label, cassette label, stamp, screen, page) and `fit()` the mark into ≥ 36 px of 128; drop decoration that takes its room. Ready boxes keep it: `record_label()`, `cassette_label()`, `speaker_badge()`, `envelope_stamp()`, `bottle_label()` |
+| `visible_dark` | a dark object vanishes on a dark wallpaper: a light rim / top light, or lighter ramp steps (1–3) for its face |
+| `visible_light` | a pale object vanishes on a light wallpaper: a darker side (ramp 4–5) or a darker secondary object |
+| `legibility32` | fewer, bigger parts; strokes ≥ 2 px; drop tiny details |
+
+Tried and a real fix would break the approved design? Write ONE line per check in design.md —
+`warn-ok: mark_size - <why, one plain sentence>` — the owner reads it in Q2. Never write it
+without trying first.
 
 ## ask-q2
 
@@ -325,6 +378,9 @@ The app is finished. If the PR is not open yet, open it. Next app: a NEW session
 
 ### App type → ladder level and typical object (objects.py function)
 
+The full table with every category and which apps already use which object:
+[docs/redesign/CATEGORIES.md](redesign/CATEGORIES.md) (`tools/next.py` prints the part you need).
+
 | App type | Ladder | Typical object |
 |---|---|---|
 | messenger, SMS | L2 | `speech_bubble`, `envelope` (mark on the stamp), `paper_plane` |
@@ -337,7 +393,7 @@ The app is finished. If the PR is not open yet, open it. Next app: a NEW session
 | files, backup, cloud storage | L2 | `folder`, `cloud` |
 | camera, scanner, gallery | L2 | `camera_lens` |
 | video, media player | L1 / L2 | `play_button` |
-| music, audio, equaliser | L1 / L2 | `music_note` |
+| music, audio, equaliser | L2 | `vinyl_record` (mark on `record_label`), `cassette` (`cassette_label`), `speaker` (`speaker_badge`), `headphones`, `music_note` — a different one per app |
 | reading, docs, learning | L2 | `book` |
 | phone, dialer | L1 | `phone_handset` |
 | calendar, planner | L2 | `calendar_page` |

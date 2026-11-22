@@ -16,7 +16,11 @@ the pack (pack/styles.json, artwork/) and git, and prints exactly ONE state:
   DETAILS        - docs/PLAYBOOK.md section for this state
 
 States, in order: NO_SOURCE, NOT_STARTED, FILL_DESIGN, DRAW_CONCEPTS, BOARD, ASK_Q1,
-REDO, BUILD, FIX_FAIL, ASK_Q2, PACK, LOG, COMMIT, PUSH, DONE.
+REDO, BUILD, FIX_FAIL, FIX_WARN, ASK_Q2, PACK, LOG, COMMIT, PUSH, DONE.
+
+FIX_WARN: the WARNs the owner would notice on his phone (MUST_TRY) are fixed BEFORE Q2 -
+the owner is not the reviewer of things a check can see. Only when a real fix would break
+the approved design: design.md 'warn-ok: <check> - <why>' (shown to him in Q2).
 """
 import json
 import re
@@ -59,6 +63,10 @@ RECIPES = {
                    "  (work/_lib/objects.py, docs/redesign/OBJECTS.md).",
     "faithful": "No Faithful SVG. In redesign.py end with save_styles(SLUG, {\"symbol\": main(), ...}) - it writes\n"
                 "  every slot (missing ones get the main design). Then python3 tools/make_icon.py <slug>.",
+    "mark_size": "The app's own mark / colours are too small to read on the phone (e.g. Deezer's bars on a\n"
+                 "  record label: 25 px of 128 = 9 px at 48 px). Make the part that carries the mark bigger (the\n"
+                 "  label, stamp, screen, page) and fit() the mark to >= 36 px of 128; drop decoration that\n"
+                 "  takes its room. Check: python3 tools/check_icon.py <slug> (mark_size PASS).",
     "bands": "A GRADIENT of the source is painted as several flat colours (bands) - it looks melted/broken.\n"
              "  Draw those parts as ONE shape with a real gradient:\n"
              "      for name, g, fill in regions(SLUG):      # 'r1+r2' = bands merged back, fill = Grad\n"
@@ -70,6 +78,7 @@ RECIPES = {
     "trace_iou": "Automatic draft only (traced parts do not match). A redesign draws its own shapes.",
 }
 WARN_TR = {
+    "mark_size": "uygulamanın kendi işareti telefonda çok küçük kalıyor",
     "bands": "renk geçişi (gradyan) bantlara bölünmüş, erimiş gibi görünüyor",
     "mass": "simge biraz ince/küçük görünebilir (komşularından az dolu)",
     "visible_light": "açık duvar kâğıdında biraz soluk",
@@ -99,6 +108,19 @@ def line(text, key):
     return ""
 
 
+# WARNs the owner would see on his phone: fixed before Q2 (state FIX_WARN), or explained
+MUST_TRY = ("mark_size", "visible_light", "visible_dark", "legibility32")
+
+
+def warn_ok(text, check):
+    """design.md 'warn-ok: <check> - <reason>' -> the reason ('' if none)"""
+    for ln in text.splitlines():
+        m = re.match(r"warn-ok:\s*([a-z_0-9]+)\s*[-:]\s*(.+)", ln.strip(), re.I)
+        if m and m.group(1).lower() == check and len(m.group(2).strip()) >= 10:
+            return m.group(2).strip()
+    return ""
+
+
 def quoted(v):
     m = QUOTED_DATED.search(v or "")
     return m.group(1) if m else None
@@ -118,7 +140,14 @@ def is_game(w, text):
     k = line(text, "kind").lower()
     if k:
         return k.startswith("game")
-    return (w / "refs").is_dir() or "POSTER" in text or any(h in line(text, "function object (what the app does, as a physical thing)").lower() for h in GAME_HINTS)
+    store = w / "refs" / "store" / "store.json"
+    if store.exists():
+        try:
+            return json.loads(store.read_text(encoding="utf-8")).get("category", "").upper().startswith("GAME_")
+        except ValueError:
+            pass
+    owner_refs = (w / "refs").is_dir() and any(p.is_file() for p in (w / "refs").iterdir())
+    return owner_refs or "POSTER" in text or any(h in line(text, "function object (what the app does, as a physical thing)").lower() for h in GAME_HINTS)
 
 
 def anchors_filled(text):
@@ -127,6 +156,21 @@ def anchors_filled(text):
         return False
     items = [re.sub(r"^\s*\d\.\s*", "", x).strip() for x in m.group(1).splitlines()]
     return sum(1 for x in items if x) >= 2
+
+
+def category_filled(text):
+    v = line(text, "category")
+    return bool(v) and not v.startswith("<")
+
+
+def family(slug):
+    """the category's object family + what other apps already use (work/_lib/categories.py)"""
+    try:
+        sys.path.insert(0, str(ROOT / "work/_lib"))
+        import categories
+        return categories.suggest(slug)
+    except Exception as e:  # noqa: BLE001 - never block the next step
+        return f"(category list unavailable: {e})"
 
 
 def function_filled(text):
@@ -294,17 +338,24 @@ def q1_text(slug, w, text, game):
     cs = concept_lines(text)
     letters = sorted(p.stem for p in (w / "concepts").glob("*.svg"))
     desc = "\n".join(f"  {k}: {cs.get(k, '(design.md concepts satırına yaz)')}" for k in letters)
-    refs = list((w / "refs").glob("*.png")) + list((w / "refs").glob("*.jpg")) if (w / "refs").is_dir() else []
-    need_refs = game and len(refs) < 2
+    refs = [p for p in (w / "refs").rglob("*") if p.suffix.lower() in (".png", ".jpg") and p.name not in ("icon.png", "sheet.jpg")] \
+        if (w / "refs").is_dir() else []
+    store = w / "refs" / "store" / "store.json"
+    system_app = store.exists() and '"source": "system app"' in store.read_text(encoding="utf-8")
+    need_refs = (game and len(refs) < 2) or (not refs and not system_app)
     numbered = [f"{i + 1}) {k}" for i, k in enumerate(letters)] + [f"{len(letters) + 1}) Hiçbiri, yeniden dene"]
+    sheet = w / "refs" / "store" / "sheet.jpg"
     t = (f"{name} için {len(letters)} fikir hazır. Resim: work/{slug}/concepts.png\n"
+         + (f"(uygulamanın ekran görüntüleri: work/{slug}/refs/store/sheet.jpg)\n" if sheet.exists() else "") +
          f"(en solda kaynak, sağında {', '.join(letters)}; üst sıra açık, alt sıra koyu duvar kâğıdı)\n{desc}\n\n"
          f"Soru 1: Telefonunda göreceğin ana simge (Symbol) hangisi olsun?\n  " + "  ".join(numbered) + "\n"
          f"Soru 2: Uygulamadaki diğer stiller (Faithful/Disc/Rimmed) için hangilerini de tutayım? Harfleri yaz\n"
          f"  (örnek: \"A, D\"); hiçbiri ise \"0\" yaz, o zaman hepsinde ana simge olur.")
     if need_refs:
-        t += ("\nNot: Bu bir oyun; elimde oyun içi ekran görüntüsü yok. 2-3 tane atarsan oyunun nesnelerini\n"
-              "onlara göre düzeltirim.")
+        t += (("\nNot: Bu bir oyun; elimde oyun içi ekran görüntüsü yok. 2-3 tane atarsan oyunun nesnelerini\n"
+               "onlara göre düzeltirim.") if game else
+              ("\nNot: Bu uygulamanın ekran görüntüsünü hiçbir yerde bulamadım (Play, F-Droid, IzzyOnDroid, Uptodown,\n"
+               "GitHub). Nereden indirdiğini yazarsan ya da 2-3 ekran görüntüsü atarsan ona göre çizerim."))
     t += ("\n\n(With AskUserQuestion: the same text as two questions - Soru 1 single choice with the letters +\n"
           " \"Hiçbiri, yeniden dene\", Soru 2 multiSelect with the letters. Without it: send the text as is.)")
     return t
@@ -316,7 +367,8 @@ def q2_text(slug, w, text, rows, in_pack, missing, stale):
     f = sum(r["status"] == "FAIL" for r in rows)
     wn = [r for r in rows if r["status"] == "WARN"]
     p = sum(r["status"] == "PASS" for r in rows)
-    weak = sorted({WARN_TR.get(r["check"], r["check"]) for r in wn})
+    weak = sorted({WARN_TR.get(r["check"], r["check"]) + (f" ({warn_ok(text, r['check'])})" if warn_ok(text, r["check"]) else "")
+                   for r in wn})
     if not in_pack:
         cat = category_of(slug)
         phone = ("yeni simge pakete eklenir (her stil için bir resim; kategori: "
@@ -354,7 +406,7 @@ def state_of(slug, cheap=False, use_git=True):
     game = is_game(w, text)
     approved = line(text, "approved")
     if not quoted(approved):
-        if not anchors_filled(text) or not function_filled(text) or \
+        if not anchors_filled(text) or not function_filled(text) or not category_filled(text) or \
                 not line(text, "kind").lower().startswith(("app", "game")) or \
                 (game and line(text, "characters").lower().startswith("yes")):
             return "FILL_DESIGN", {"game": game}
@@ -384,6 +436,9 @@ def state_of(slug, cheap=False, use_git=True):
         fails = [r for r in rows if r["status"] == "FAIL"]
         if fails:
             return "FIX_FAIL", {"fails": fails}
+        todo = [r for r in rows if r["status"] == "WARN" and r["check"] in MUST_TRY and not warn_ok(text, r["check"])]
+        if todo:
+            return "FIX_WARN", {"warns": todo}
         in_pack, missing, stale = pack_state(slug)
         return "ASK_Q2", {"rows": rows, "text": text, "pack": (in_pack, missing, stale)}
     in_pack, missing, stale = pack_state(slug)
@@ -432,8 +487,15 @@ def run_slug(slug):
               "  kind: app\n  anchors (...):\n    1. the white paper plane (measured, tip right-top)\n"
               "    2. Telegram blue #31a5df -> HIG Blue 3\n    3. the round shape\n"
               "  function object (what the app does, as a physical thing): a message flying off - an envelope / paper plane")
+        first = [f"What the app is (store title, description, screenshot colours as text): python3 tools/fetch_refs.py {slug}"]
+        if not (w / "refs" / "store" / "store.json").exists():
+            first = [f"FIRST get the references (store screenshots, icon, category, description as text):",
+                     f"  python3 tools/fetch_refs.py {slug}       (searches Play, F-Droid, IzzyOnDroid, Uptodown, GitHub;",
+                     "   nothing found? --url <a page the owner names>, or Q1 asks him for 2-3 screenshots)"]
         say(st, f"write in work/{slug}/design.md what makes {name} recognisable and what it does as an object",
-            [f"Open work/{slug}/design.md and fill these lines (example):", ex,
+            first + [f"Open work/{slug}/design.md and fill these lines (example):", ex,
+             "  category: <key>   (fetch_refs.py fills it; keys and object families: docs/redesign/CATEGORIES.md)",
+             family(slug),
              f"Facts about the source: python3 tools/describe_icon.py work/{slug}/source.png  and the parts list:",
              f"python3 -c \"import sys; sys.path.insert(0,'work/_lib'); from obj import describe; print(describe('{slug}'))\"",
              "Game? REDESIGN.md 3b: no characters, faces or animals - 1-3 of the game's OBJECTS.",
@@ -450,6 +512,8 @@ def run_slug(slug):
              "Compose ready objects:  from objects import *   (catalogue: docs/redesign/OBJECTS.md, picture objects.png)",
              "The app's own mark ALWAYS from the source:  P = parts(slug); mark = body(slug); fit([...], box, anchor='bottom')",
              "Working examples: work/pokemon_unite/concepts/make_concepts.py (game), work/telegram/redesign.py (app).",
+             family(slug),
+             "  -> at least TWO of the four concepts use objects of this family; the main idea a FREE one.",
              f"Then: python3 work/{slug}/concepts/make_concepts.py",
              f"Write one line per concept in design.md under 'concepts' (  A: ..., B: ...)."])
     elif st == "BOARD":
@@ -500,6 +564,18 @@ def run_slug(slug):
             do.append("  -> " + RECIPES.get(r["check"], r.get("fix") or "see docs/PLAYBOOK.md#fix-fail"))
         do.append(f"then: python3 tools/make_icon.py {slug}")
         say(st, "fix every FAIL of the quality gate (never ask the owner with a FAIL)", do)
+    elif st == "FIX_WARN":
+        do, seen = [], set()
+        for r in info["warns"]:
+            do.append(f"WARN {r['scope']} {r['check']}: {r['value']}")
+        for r in info["warns"]:
+            if r["check"] not in seen:
+                seen.add(r["check"])
+                do.append(f"  -> {r['check']}: " + RECIPES.get(r["check"], r.get("fix") or "see docs/PLAYBOOK.md#fix-warn"))
+        do += [f"then: python3 tools/make_icon.py {slug}",
+               "Only if a REAL fix would break the approved design (try first!), write ONE line per check in",
+               "work/<slug>/design.md:  warn-ok: <check> - <why, one plain sentence>   (the owner reads it in Q2)"]
+        say(st, "fix the WARNs the owner would notice on his phone BEFORE asking him (he is not the reviewer)", do)
     elif st == "ASK_Q2":
         in_pack, missing, stale = info["pack"]
         cat = category_of(slug) or "<Category>"

@@ -1,0 +1,43 @@
+name: Icon problem
+description: An icon looks wrong, is cut off, too small, or does not apply
+title: "Icon problem: "
+labels: ["icon-problem"]
+body:
+  - type: input
+    id: app
+    attributes:
+      label: App
+      placeholder: e.g. Telegram
+    validations:
+      required: true
+  - type: dropdown
+    id: style
+    attributes:
+      label: Style
+      options: [Symbol, Faithful, Disc, Rimmed, I don't know]
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong?
+      multiple: true
+      options:
+        - The icon does not apply (the launcher shows the original)
+        - Wrong icon for this app
+        - Looks broken (cut off, blurry, wrong colours, filled holes)
+        - Too big / too small next to the other icons
+        - Hard to see on a light or dark wallpaper
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: launcher
+    attributes:
+      label: Launcher and Android version
+      placeholder: e.g. Lawnchair 15, Android 15
+  - type: textarea
+    id: details
+    attributes:
+      label: Screenshot and details
+      description: A home-screen screenshot helps the most.

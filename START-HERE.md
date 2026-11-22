@@ -13,7 +13,8 @@ you work on a branch and open a pull request; he merges.
 4. [docs/MISTAKES.md](docs/MISTAKES.md) **§10 only** — the owner's decisions (the rest when a topic comes up)
 5. [docs/PLAYBOOK.md](docs/PLAYBOOK.md) — **only the section of the step you are on** (`tools/next.py` names it)
 
-Old and NOT for designing: `docs/course/`, `CONTRIBUTING.md` (the legacy plate pipeline).
+Old and NOT for designing: `docs/course/` (incl. `CONTRIBUTING-legacy.md`, the legacy plate pipeline).
+For people (not agents): [CONTRIBUTING.md](CONTRIBUTING.md) is the short human guide.
 Tools that read a file automatically: Claude Code reads `CLAUDE.md`; OpenCode and Codex CLI read
 `AGENTS.md`; Gemini CLI reads `GEMINI.md`; Qwen Code reads `QWEN.md`. All of them point here.
 
@@ -22,6 +23,8 @@ Tools that read a file automatically: Claude Code reads `CLAUDE.md`; OpenCode an
 - [docs/APPS.md](docs/APPS.md) — every app: redesigned or not, the owner's approvals, what is in
   each style slot, the next step. (Regenerate: `python3 tools/pack_status.py`, a few minutes.)
 - [docs/LOG.md](docs/LOG.md) — what each session did, by which model, and why. Append-only.
+- [docs/ROADMAP.md](docs/ROADMAP.md) — which apps to redo first and why (the owner still picks).
+  [docs/RESEARCH.md](docs/RESEARCH.md) — where the design rules come from (GNOME HIG, MoreWaita, Delta).
 - Which app next? `python3 tools/next.py` (no slug). Unfinished apps come first; otherwise the
   **owner** picks the app — ask him, never pick one yourself.
 
@@ -53,7 +56,7 @@ The flow `next.py` walks you through (one app = one session, then `/clear` or a 
 
 ```
 NO_SOURCE → NOT_STARTED → FILL_DESIGN → DRAW_CONCEPTS → BOARD → ASK_Q1 (owner) →
-BUILD → FIX_FAIL → ASK_Q2 (owner) → PACK → LOG → COMMIT → PUSH → DONE
+BUILD → FIX_FAIL → FIX_WARN → ASK_Q2 (owner) → PACK → LOG → COMMIT → PUSH → DONE
 REDO = the owner asked to redo an app that was already approved
 ```
 
@@ -112,6 +115,11 @@ senin gözün."* Then:
 | `tools/describe_icon.py <file>` | an icon as text (for models without vision) |
 | `tools/pack_add.py` / `tools/pack_refresh.py` | put approved icons into the pack (`--dry-run` first) |
 | `tools/size_audit.py`, `tools/pr_guard.py`, `tools/selftest.py` | pack-wide checks before a PR |
+| `tools/fetch_refs.py <slug>` | store screenshots, icon, category, description (+ as text) → `work/<slug>/refs/store/` |
+| `work/_lib/categories.py <slug>` | the app's category, its object family, which objects other apps already use |
+| `tools/validate_pack.py` | appfilter / drawable.xml / styles.json point to real PNGs, no conflicting ComponentInfos (PR guard runs it) |
+| `tools/readme_previews.py` | after the pack changed: README pictures + store screenshots from the real PNGs |
+| `tools/make_palettes.py` | the GNOME palette for every program → `docs/palette/` (from `RAMP` in objects.py) |
 | `work/_lib/objects.py` | 32 ready GNOME objects to compose ([picture](docs/redesign/objects.png), [text](docs/redesign/OBJECTS.md)) |
 
 Worked examples from source to the pack: [docs/playbook/](docs/playbook/) (Telegram, Aurex

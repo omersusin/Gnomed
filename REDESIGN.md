@@ -1,10 +1,10 @@
 # REDESIGN.md — how a Gnomed icon is made (binding)
 
 This is the **only** design document. AGENTS.md covers git, ComponentInfo, pack files and
-tools; docs/MISTAKES.md is the history (read its §10 every session). `docs/course/` and
-`CONTRIBUTING.md` are LEGACY (the old plate pipeline) — do not design with them.
+tools; docs/MISTAKES.md is the history (read its §10 every session). `docs/course/` (with
+`CONTRIBUTING-legacy.md`) is LEGACY (the old plate pipeline) — do not design with it.
 
-## 0. Talking to the owner (from his own messages, 2026-11-18..21)
+## 0. Talking to the owner (from his own messages, 2026-11-18..22)
 
 1. Always Turkish, short, plain words. In questions never use jargon (dry-run, appfilter,
    ComponentInfo, slot, flavor) without saying what changes ON HIS PHONE.
@@ -24,6 +24,13 @@ tools; docs/MISTAKES.md is the history (read its §10 every session). `docs/cour
    "Batches, one approval at end" put broken icons on his phone.
 8. "Change X" means change exactly X (Telegram stamp: he said the plane, not the whole logo).
 9. Games: objects only, no characters/faces/animals (owner decision 2026-11-21).
+10. **He is not the reviewer** (2026-11-22: *"ikide bir bana mesaj verip bunu, şunu, onu mu
+    düzelteceksin?"*). Before Q2, look at your own result like a strict reviewer and fix what you
+    can see — a mark too small to read, a dark object lost on a dark wallpaper, melted gradients,
+    a size different from the neighbours. `next.py` blocks Q2 on those checks (FIX_WARN); write in
+    Q2 only what you could not fix, and why.
+11. Every app gets an object of its **category** (music → record, cassette, speaker…), a different
+    one from the apps already in the pack when possible (2026-11-22; REDESIGN §3).
 
 ## 1. The one rule
 
@@ -57,6 +64,26 @@ Study before every app: [docs/redesign/gnome-objects.png](docs/redesign/gnome-ob
 | **L3** | **material tile** (glass, enamel, metal, paper with thickness) — only for pure wordmarks/abstract marks when L1/L2 fail | Meld, Tangram |
 
 Wordmarks: letter shapes come from the source (`parts()`), never a font, never `<text>`.
+
+**Choosing the object** (GNOME HIG, *App Icons → Metaphor*; research: [docs/RESEARCH.md](docs/RESEARCH.md)):
+ONE simple, recognisable object with a clear link to the app's **function or name** — a physical
+object it uses (a speaker for music), one from its domain or an older analog form (a cassette
+for podcasts), a domain symbol (a play triangle), or a simplified piece of its own UI. Not:
+random objects, mascots/characters, a logo that only works in its brand style.
+**System apps** (Ayarlar, Saat, Kamera, Telefon, Mesajlar, Kişiler, Hesap Makinesi, Hava
+Durumu, Fotoğraflar, Dosyalar…) take the metaphor of GNOME's own app for that job (Settings,
+Clocks, Snapshot, Calls, Chatty, Contacts, Calculator, Weather, Loupe, Files) — that IS the GNOME
+icon of the function; redraw it, never copy its file.
+
+**Categories → object families** (owner, 2026-11-22: *"tarza ve kategoriye uygun"*): the app's
+category gives the family of objects — music → vinyl record, cassette, speaker, headphones,
+player, radio; messaging → bubble, envelope, paper plane, handset; banks → card, coin, wallet…
+Table: [docs/redesign/CATEGORIES.md](docs/redesign/CATEGORIES.md); `tools/next.py` prints the
+family and which objects other apps already use. Rules: at least two of the four concepts come
+from the family; apps of one category take **different** objects (GNOME: every icon unique);
+if two must share one, the brand colours and the mark keep them apart (gate `mark_size`).
+**References first:** `python3 tools/fetch_refs.py <slug>` saves the store screenshots, the store
+icon, the category and the description (also as text for models that cannot see images).
 
 ### 3b. Games — the game's objects, no characters
 
@@ -106,6 +133,10 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
 ## 5. Construction rules
 
 - Canvas 128 × 128; the object inside 8…120; painted area about 45–65 %.
+- **Template keylines** (GNOME's `template.svg`): circle r 59.5 (a round object may reach
+  4.5…123.5), square 103 × 103, tall 87 × 111, wide 111 × 87, corner radius 8. Size the object
+  to the keyline closest to its shape so all icons weigh the same:
+  [docs/template/gnomed-template.svg](docs/template/gnomed-template.svg) (Inkscape, with the guides).
 - **One baseline, one size**: free objects (every redesign, every Symbol) have their bottom
   edge (side included) at **116–120** (target 118) and their larger side ≥ 96; plates end at
   114–118, discs at 120–125. A wide, short object is made wider (≤ 112) and stands on the
@@ -118,12 +149,23 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   the object itself must be cut through.) Exceptions only with the owner's words
   (`painted-holes:` in design.md) or the `painted_counters` override for white parts that
   are figure, not holes. Gate: `holes`.
+- **The mark must read on the phone**: when the app's mark is printed on an object (a label,
+  stamp, screen, page), it spans **≥ 36 px of the 128 canvas** (≈ 14 px at 48 px). Make the
+  label bigger rather than the mark smaller. Gate: `mark_size` (Deezer, 2026-11-22: 25 px = a
+  coloured speck). `tools/next.py` makes the agent fix it **before** Q2 (state FIX_WARN).
 - **Gradients stay gradients**: a gradient of the source (Deezer's bars, Instagram, Firefox) is
   ONE part with ONE real gradient — never several flat bands in near colours (that looks
   melted). Draw the mark with `regions(slug)` (bands come back merged, fill = `Grad`) or
   `face=gradient(slug, shape)`; `traced()` keeps gradients by default. Gate: `bands`.
   How: [docs/PLAYBOOK.md#gradients](docs/PLAYBOOK.md#gradients).
-- **Thickness**: 2 px thin parts/discs, 4–6 px flat objects, 8–24 px boxes/devices/cylinders.
+- **Thickness** (the front profile below the top face): **2–4 px** for discs, plates and flat
+  objects — the HIG default ("2 detail units, 4 px"); up to 6 for a thick flat object; 8–24 px
+  only for boxes/devices/cylinders whose front is a real face.
+- **Flat faces flat, curved faces shaded** (HIG): flat colours on straight surfaces, gradients
+  only on curved ones (a ball, a cylinder, a bulging cushion) and for a brand gradient (above).
+- **No strokes or outlines**: a line-art logo (an outlined note, `>_`, a knot) becomes a SOLID
+  object with thickness; lines thinner than 4 px disappear at 48 px. Edges on the 2 px grid
+  where possible — they stay crisp at 64 px.
 - **Light from the top**: curved faces get a vertical gradient (top lighter); 1–1.5 px top
   light on upper edges (`toplight()`). **Recess** (screen, label, inlay): darker top inner
   wall (`recess()`). **Hole** (lens, slot): dark body, darker top wall (`hole()`).

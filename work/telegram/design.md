@@ -1,7 +1,9 @@
 # telegram - design note (REDESIGN.md)
 
 source: work/telegram/source.png
+store: https://play.google.com/store/apps/details?id=org.telegram.messenger&hl=en&gl=US (COMMUNICATION, fetched 2026-11-22; refs/store/, not in git)
 kind: app
+category: messaging
 ladder: L2 - an envelope carries the paper plane on its stamp
 characters: no
 anchors (2-4 things that make the app recognisable; they must survive):

@@ -1,7 +1,9 @@
 # rush_royale - design note (REDESIGN.md)
 
 source: work/rush_royale/source.png
+store: https://play.google.com/store/apps/details?id=com.my.defense&hl=en&gl=US (GAME_STRATEGY, fetched 2026-11-22; refs/store/, not in git)
 kind: game
+category: game
 ladder: game objects - wizard hat + ice crystals
 characters: no
 references (games: store icon + >= 2 in-game screenshots; objects only, REDESIGN 3b):

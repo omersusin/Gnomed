@@ -160,5 +160,56 @@ finally:
     import shutil
     shutil.rmtree(_tmp, ignore_errors=True)
 
+# pack consistency + design resources (2026-11-22)
+code, out = run("tools/validate_pack.py")
+expect(code == 0 and "0 ERROR" in out, "validate_pack.py: every pack entry points to a real PNG (0 ERROR)")
+_gpl = (ROOT / "docs/palette/gnomed.gpl").read_text().splitlines()
+_hex = {"#%02x%02x%02x" % tuple(int(v) for v in ln.split("\t")[0].split()) for ln in _gpl if ln[:1].isdigit() or ln[:1] == " "}
+expect({h for steps in O.RAMP.values() for h in steps} <= _hex and "#000000" not in _hex,
+       "docs/palette/gnomed.gpl = RAMP of objects.py, no pure black (re-run tools/make_palettes.py)")
+expect((ROOT / "docs/template/gnomed-template.svg").exists(), "docs/template/gnomed-template.svg exists")
+
+# categories, references, mark size, FIX_WARN (2026-11-22: "kategoriye uygun", screenshots, Deezer's tiny bars)
+import categories as CAT  # noqa: E402
+expect(CAT.from_play("MUSIC_AND_AUDIO") == "music" and CAT.from_play("GAME_SPORTS") == "game"
+       and CAT.from_play("COMMUNICATION") == "messaging", "categories.from_play: Play Store codes -> object families")
+expect(CAT.object_of("telegram", "messaging") == "envelope", "categories.object_of: Telegram's approved concept -> 'envelope'")
+expect("CATEGORY: messaging" in CAT.suggest("telegram"), "categories.suggest prints the family for next.py")
+_fr = importlib.util.spec_from_file_location("fetch_refs", ROOT / "tools/fetch_refs.py")
+FR = importlib.util.module_from_spec(_fr)
+_fr.loader.exec_module(FR)
+_html = ('<script type="application/ld+json">{"name":"X Music","applicationCategory":"MUSIC_AND_AUDIO",'
+         '"description":"Songs.","image":"https://play-lh.googleusercontent.com/ICON"}</script>'
+         '<div data-g-id="description">Line one<br>Line two</div>'
+         '<img src="https://play-lh.googleusercontent.com/AAA=w526-h296" alt="Screenshot image">'
+         '<img src="https://play-lh.googleusercontent.com/BBB=w526-h296" alt="Screenshot image">'
+         '<img src="https://play-lh.googleusercontent.com/AAA=w526-h296" alt="Screenshot image">')
+_inf = FR.parse_play(_html, "u")
+expect(_inf["title"] == "X Music" and _inf["category"] == "MUSIC_AND_AUDIO" and len(_inf["shots"]) == 2
+       and "Line two" in _inf["description"], "fetch_refs.parse_play: title, category, description, 2 unique screenshots")
+with tempfile.TemporaryDirectory() as tmp:
+    _t = O.gk.Icon("m")
+    O.solid(_t, O.rounded(O.box(16, 20, 112, 112), 10), face="#9a9996", depth=6)
+    O.solid(_t, O.box(56, 56, 72, 72), face="#2aa1da", depth=0, top=False)      # Telegram blue, 16 px
+    _t.save(Path(tmp) / "small.svg")
+    _m = ci.mark_measure("telegram", Path(tmp) / "small.svg")
+    expect(_m is not None and _m[0] < 36, f"check_icon.mark_measure: a 16 px mark -> below 36 (mark_size WARN) {_m and round(_m[0])}")
+_m = ci.mark_measure("telegram", ROOT / "work/telegram/telegram-symbol.svg")
+expect(_m is not None and _m[0] >= 36, "check_icon.mark_measure: Telegram's envelope -> >= 36 (PASS)")
+_g = importlib.util.spec_from_file_location("nextpy", ROOT / "tools/next.py")
+NX = importlib.util.module_from_spec(_g)
+_g.loader.exec_module(NX)
+expect(NX.warn_ok("warn-ok: mark_size - the label cannot grow without hiding the reels", "mark_size")
+       and not NX.warn_ok("warn-ok: mark_size - ok", "mark_size") and "mark_size" in NX.MUST_TRY,
+       "next.py: FIX_WARN needs a real reason in 'warn-ok:' (>= 10 characters)")
+
+expect(CAT.guess("exteraless: a Telegram client") == "messaging" and CAT.guess("Terminal emulator for Android") == "dev",
+       "categories.guess: words of a README/store text -> a category (apps not on Play)")
+_imgs = FR._readme_images("![s](docs/s1.png) ![b](https://img.shields.io/x.svg) <img src='logo.png'> ![g](get-it-on-fdroid.png)",
+                          "https://raw.githubusercontent.com/o/r/HEAD/")
+expect(_imgs == ["https://raw.githubusercontent.com/o/r/HEAD/docs/s1.png"], "fetch_refs: README screenshots kept, badges/logos dropped")
+expect(FR.system("com.android.settings", "Ayarlar")["category_key"] == "system" and FR.system("com.whatsapp", "x") is None,
+       "fetch_refs.system: system packages need no screenshots (GNOME app for the same job)")
+
 print(f"selftest: {ok} passed, {bad} failed")
 sys.exit(1 if bad else 0)

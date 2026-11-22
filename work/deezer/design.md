@@ -4,6 +4,7 @@ source: work/deezer/source.png - the owner's OG Deezer logo (multicolour equalis
   white lowercase "deezer" wordmark on black), from the URL he gave on 2026-11-22. This
   replaces the purple-circle icon used earlier and the 2023 heart from the request zip.
 kind: app
+category: music
 ladder: L1 / L2 - the measured multicolour bars as objects, or a music object carrying them
 characters: no
 references (games only): -

@@ -172,3 +172,23 @@ Times are from the commits; the model of a backfilled session is what the commit
 - PR: opened after this commit
 - Open problems: Faithful mass 0.30 (WARN; the bar mark is naturally wide/short); C's label bars
   are readable but still small at 32 px; D visible_dark 0.56 is close to the 0.55 threshold.
+
+## 2026-11-22 — Claude via Claude Code (cloud session) — tools + docs; `busuu`, `meta_ai`, `misspipe`, `termux`, `wlingua` registered
+- What: public face (README EN/TR, CONTRIBUTING, issue forms, palette, Inkscape template, fastlane
+  metadata, docs/RESEARCH.md, docs/ROADMAP.md, `tools/validate_pack.py` in the PR guard); gate
+  `mark_size` + next.py state FIX_WARN (fix what a check can see before Q2); `tools/fetch_refs.py`
+  (references from Play in 5 regions, F-Droid, IzzyOnDroid, Uptodown, GitHub - verified by the
+  package in the code -, any --url; text for blind models); `work/_lib/categories.py` +
+  docs/redesign/CATEGORIES.md (category -> object family, which objects are used); 4 music objects
+  (`vinyl_record`, `cassette`, `speaker`, `headphones` with mark boxes); `category:`/`store:` lines in
+  the 7 redesigned apps' design.md; five new apps from his request zips registered (sources only).
+- Why: the owner (2026-11-22): "Sence ikon paketimiz yeterince iyi mi? ... insanların kurmasını,
+  katkı sağlamalarını, ajanların çok iyi anlamasını istiyorum"; "ikide bir bana mesaj verip bunu, şunu,
+  onu mu düzelteceksin?"; "tarza ve kategoriye uygun şekilde"; "ekran görüntülerini nasıl bulacak? ...
+  GitHub, Uptodown, APKMirror ... her yerde"
+- Tested: fetch_refs on his 92 apps: screenshots for 78 (Play + F-Droid alone: 59), text for 8,
+  3 system apps, 3 nothing; mark_size on a synthetic record label (25 px WARN, 42 px PASS) and the
+  redesigned apps (no new WARN); selftest 46/46. No pack icon changed.
+- PR: improve/public (#17)
+- Open problems: APKMirror/APKPure block scripts (403); Deezer's design.md (DeepSeek's branch) needs
+  `category: music` after it is merged; the Bing/DuckDuckGo web search is not usable from scripts.

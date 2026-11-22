@@ -607,6 +607,144 @@ def bag_front(cx, base, size):
     return (cx - w * 0.32, top + h * 0.22, cx + w * 0.32, top + h * 0.88)
 
 
+# ====================================================================== music / audio family
+# One family, several objects: two music apps should not get the same one (REDESIGN.md 3,
+# docs/redesign/CATEGORIES.md). Each has a box for the app's mark that keeps it >= 36 px
+# (gate `mark_size`) at the default size.
+def _record_geom(cx, base, size, sleeve):
+    d = max(4, size * 0.05)
+    R = size * (0.43 if sleeve else 0.5)
+    rcx = cx + (size * 0.07 if sleeve else 0)
+    rcy = base - d - R
+    return d, R, rcx, rcy
+
+
+def vinyl_record(ic, cx, base, size, ramp=RAMP["Dark"], label=RAMP["Light"], sleeve=True, name="record"):
+    """Vinyl record (music players, streaming, radio), optionally sliding out of a paper sleeve
+    (upper left). size = overall width. Its big round label carries the app's mark:
+    record_label(cx, base, size, sleeve) gives the box. Grooves are faint rings."""
+    d, R, rcx, rcy = _record_geom(cx, base, size, sleeve)
+    parts = []
+    if sleeve:
+        sv = rounded(box(cx - size / 2, rcy - R - size * 0.02, cx - size / 2 + size * 0.78, rcy + R - size * 0.16), size * 0.04)
+        solid(ic, sv, face=[(0, RAMP["Light"][0]), (1, RAMP["Light"][2])], depth=d, side=RAMP["Light"][4], layer=f"{name}-sleeve")
+        parts.append(sv)
+    disc = circ(rcx, rcy, R)
+    solid(ic, disc, face=[(0, ramp[0]), (0.45, ramp[1]), (1, ramp[3])], depth=d, side=ramp[3], layer=name)
+    for k in (0.92, 0.80, 0.68):
+        ring = circ(rcx, rcy, R * k).difference(circ(rcx, rcy, R * k - 1.2))
+        ic.path(geom_d(ring), "#ffffff", opacity=0.10, layer_id=f"{name}-groove-{int(k * 100)}", fill_rule="evenodd")
+    lab = circ(rcx, rcy, R * 0.60)
+    solid(ic, lab, face=[(0, label[0]), (1, label[2])], depth=0, top=False, layer=f"{name}-label")
+    parts.append(disc)
+    return unary_union(parts)
+
+
+def record_label(cx, base, size, sleeve=True):
+    """(x0, y0, x1, y1) inside vinyl_record()'s round label - fit() the mark into it."""
+    d, R, rcx, rcy = _record_geom(cx, base, size, sleeve)
+    h = R * 0.60 * 0.72
+    return (rcx - h, rcy - h, rcx + h, rcy + h)
+
+
+def _cassette_geom(cx, base, size):
+    w, d = size, max(5, size * 0.07)
+    h = size * 0.64
+    top = base - d - h
+    return w, d, h, top
+
+
+def cassette(ic, cx, base, size, ramp=RAMP["Dark"], label=RAMP["Light"], name="cassette"):
+    """Audio cassette (music, podcasts, recorders): dark shell, a white label on top that carries
+    the app's mark (cassette_label), a window with two reels below. Height ~0.7 * size."""
+    w, d, h, top = _cassette_geom(cx, base, size)
+    shell = rounded(box(cx - w / 2, top, cx + w / 2, top + h), w * 0.07)
+    solid(ic, shell, face=[(0, ramp[0]), (1, ramp[2])], depth=d, side=ramp[3], layer=name)
+    lab = rounded(box(cx - w * 0.40, top + h * 0.09, cx + w * 0.40, top + h * 0.50), w * 0.035)
+    solid(ic, lab, face=[(0, label[0]), (1, label[1])], depth=0, top=False, layer=f"{name}-label")
+    win = rounded(box(cx - w * 0.27, top + h * 0.58, cx + w * 0.27, top + h * 0.86), w * 0.04)
+    recess(ic, win, [(0, "#241f31"), (1, ramp[2])], wall=2, layer=f"{name}-window")
+    for sx in (-1, 1):
+        rc = (cx + sx * w * 0.14, top + h * 0.72)
+        reel = circ(*rc, h * 0.10).difference(circ(*rc, h * 0.04))
+        solid(ic, reel, face=[(0, "#ffffff"), (1, "#deddda")], depth=1.5, side="#9a9996", top=False, layer=f"{name}-reel{sx}")
+    for sx in (-1, 1):
+        ic.path(geom_d(circ(cx + sx * w * 0.43, top + h * 0.88, max(1.2, w * 0.012))), ramp[4], layer_id=f"{name}-screw{sx}")
+    return shell
+
+
+def cassette_label(cx, base, size):
+    """(x0, y0, x1, y1) of the printable area on cassette()'s label - fit() the mark into it."""
+    w, d, h, top = _cassette_geom(cx, base, size)
+    return (cx - w * 0.36, top + h * 0.13, cx + w * 0.36, top + h * 0.46)
+
+
+def _speaker_geom(cx, base, size):
+    w, d = size, max(6, size * 0.10)
+    h = size * 1.22
+    top = base - d - h
+    return w, d, h, top
+
+
+def speaker(ic, cx, base, size, ramp=RAMP["Light"], cone=RAMP["Dark"], badge=True, name="speaker"):
+    """Box speaker (music, audio, sound tools): a cabinet with a big woofer below and, at the top,
+    a badge area for the app's mark (speaker_badge) - or a tweeter when badge=False.
+    size = width; height ~1.3 * size."""
+    w, d, h, top = _speaker_geom(cx, base, size)
+    cab = rounded(box(cx - w / 2, top, cx + w / 2, top + h), w * 0.10)
+    solid(ic, cab, face=[(0, ramp[1]), (1, ramp[2])], depth=d, side=ramp[3], layer=name)
+    wc = (cx, top + h * 0.66)
+    wr = w * 0.36
+    recess(ic, circ(*wc, wr), [(0, cone[3]), (1, cone[1])], wall=3, layer=f"{name}-woofer")
+    ic.path(geom_d(circ(*wc, wr * 0.62)), ic.radial([(0, cone[0]), (1, cone[3])], wc[0], wc[1] - wr * 0.2, wr * 0.7),
+            layer_id=f"{name}-cone")
+    solid(ic, circ(*wc, wr * 0.24), face=[(0, cone[0]), (1, cone[2])], depth=1.5, side=cone[3], top=False, layer=f"{name}-cap")
+    if not badge:
+        tc = (cx, top + h * 0.22)
+        recess(ic, circ(*tc, w * 0.13), [(0, cone[3]), (1, cone[1])], wall=2, layer=f"{name}-tweeter")
+    return cab
+
+
+def speaker_badge(cx, base, size):
+    """(x0, y0, x1, y1) of the badge area at the top of speaker() - fit() the mark into it."""
+    w, d, h, top = _speaker_geom(cx, base, size)
+    return (cx - w * 0.30, top + h * 0.06, cx + w * 0.30, top + h * 0.36)
+
+
+def headphones(ic, cx, base, size, ramp=RAMP["Dark"], cushion=RAMP["Dark"], name="headphones"):
+    """Over-ear headphones seen from the front (music, audio, podcasts): a thick headband arc and
+    two ear cups; the mark goes on the right cup (headphone_cup). size = width; height ~0.95 * size."""
+    w, d = size, max(4, size * 0.06)
+    cup_w, cup_h = w * 0.24, w * 0.40
+    cy = base - d - cup_h / 2
+    arc_r = w * 0.40
+    arc_c = (cx, cy - cup_h * 0.05)
+    band = circ(*arc_c, arc_r).difference(circ(*arc_c, arc_r - w * 0.09)).intersection(box(0, 0, 128, arc_c[1]))
+    band = unary_union([band, box(cx - arc_r, arc_c[1] - 1, cx - arc_r + w * 0.09, cy), box(cx + arc_r - w * 0.09, arc_c[1] - 1, cx + arc_r, cy)])
+    solid(ic, band, face=[(0, ramp[0]), (1, ramp[2])], depth=d * 0.8, side=ramp[3], layer=f"{name}-band")
+    cups = []
+    for sx in (-1, 1):
+        x = cx + sx * (arc_r - w * 0.045)
+        inner = x - sx * cup_w / 2                      # the cup's side that faces the head
+        pad = rounded(box(min(inner, inner - sx * w * 0.06) - (2 if sx < 0 else 0), cy - cup_h * 0.38,
+                          max(inner, inner - sx * w * 0.06) + (2 if sx > 0 else 0), cy + cup_h * 0.38), w * 0.025)
+        solid(ic, pad, face=[(0, cushion[1]), (1, cushion[3])], depth=d * 0.6, side=cushion[3], top=False, layer=f"{name}-pad{sx}")
+        cup = rounded(box(x - cup_w / 2, cy - cup_h / 2, x + cup_w / 2, cy + cup_h / 2), cup_w * 0.45)
+        solid(ic, cup, face=[(0, ramp[0]), (0.5, ramp[1]), (1, ramp[3])], depth=d, side=ramp[3], layer=f"{name}-cup{sx}")
+        cups.append(cup)
+    return unary_union([band] + cups)
+
+
+def headphone_cup(cx, base, size):
+    """(x0, y0, x1, y1) on headphones()'s right ear cup - fit() the mark into it (small: use for a
+    simple, bold mark; a detailed mark needs vinyl_record / cassette / speaker instead)."""
+    w, d = size, max(4, size * 0.06)
+    cup_w, cup_h = w * 0.24, w * 0.40
+    cy = base - d - cup_h / 2
+    x = cx + (w * 0.40 - w * 0.045)
+    return (x - cup_w * 0.36, cy - cup_h * 0.30, x + cup_w * 0.36, cy + cup_h * 0.30)
+
+
 CATALOGUE = [
     # (function, call args for the contact sheet, one-line use)
     ("speech_bubble", dict(ramp=RAMP["Green"]), "chat, messages, comments"),
@@ -625,6 +763,10 @@ CATALOGUE = [
     ("camera_lens", dict(), "camera, scanner, photos"),
     ("play_button", dict(ramp=RAMP["Red"]), "video, media players"),
     ("music_note", dict(ramp=RAMP["Purple"]), "music, audio"),
+    ("vinyl_record", dict(), "music players, streaming, radio (mark on the label)"),
+    ("cassette", dict(), "music, podcasts, recorders (mark on the label)"),
+    ("speaker", dict(), "music, audio, sound tools (mark on the badge)"),
+    ("headphones", dict(), "music, audio, podcasts (bold mark on the right cup)"),
     ("book", dict(ramp=RAMP["Red"]), "reading, docs, learning"),
     ("phone_handset", dict(ramp=RAMP["Green"]), "calls, dialer"),
     ("battery", dict(ramp=RAMP["Green"]), "power, battery tools"),

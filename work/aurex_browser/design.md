@@ -2,6 +2,7 @@
 
 source: work/aurex_browser/source.png
 kind: app
+category: browser
 ladder: L2 - a browser window carries the A
 characters: no
 anchors (2-4 things that make the app recognisable; they must survive):

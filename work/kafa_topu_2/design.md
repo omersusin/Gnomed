@@ -1,7 +1,9 @@
 # kafa_topu_2 - design note (REDESIGN.md)
 
 source: work/kafa_topu_2/source.png
+store: https://play.google.com/store/apps/details?id=com.masomo.headball2&hl=en&gl=US (GAME_SPORTS, fetched 2026-11-22; refs/store/, not in git)
 kind: game
+category: game
 ladder: scene with characters (made before the objects-only rule)
 characters: yes - two heads with faces
 redo: "Evet, yeni oturumda" (2026-11-21) - objects only (the ball + the boot), no characters (REDESIGN.md 3b)

@@ -23,6 +23,10 @@ The box below is what `size` on the sheet gives (x0 y0 x1 y1 in the 128 canvas).
 | `camera_lens` | camera, scanner, photos | 100 | 14 10 114 110 | Round lens barrel with glass (camera, scanner, Snapshot-like). Glass has rings. |
 | `play_button` | video, media players | 108 | 10 42 118 112 | Rounded rectangle with a white play triangle (video, media). |
 | `music_note` | music, audio | 92 | 18 9 113 112 | Two beamed eighth notes (music apps). size = width; height ~1.1 * size. |
+| `vinyl_record` | music players, streaming, radio (mark on the label) | 104 | 12 21 116 113 | Vinyl record (music players, streaming, radio), optionally sliding out of a paper sleeve (upper left). size = overall width. Its big round label carries the app's mark: record_label(cx, base, size, sleeve) gives the box. Grooves are faint rings. |
+| `cassette` | music, podcasts, recorders (mark on the label) | 104 | 12 44 116 111 | Audio cassette (music, podcasts, recorders): dark shell, a white label on top that carries the app's mark (cassette_label), a window with two reels below. Height ~0.7 * size. |
+| `speaker` | music, audio, sound tools (mark on the badge) | 80 | 24 12 104 110 | Box speaker (music, audio, sound tools): a cabinet with a big woofer below and, at the top, a badge area for the app's mark (speaker_badge) - or a tweeter when badge=False. size = width; height ~1.3 * size. |
+| `headphones` | music, audio, podcasts (bold mark on the right cup) | 104 | 15 47 113 112 | Over-ear headphones seen from the front (music, audio, podcasts): a thick headband arc and two ear cups; the mark goes on the right cup (headphone_cup). size = width; height ~0.95 * size. |
 | `book` | reading, docs, learning | 80 | 24 26 98 114 | Closed book standing, cover + page block on the right (reading, docs, learning). |
 | `phone_handset` | calls, dialer | 100 | 14 11 114 111 | Classic phone handset lying diagonally: a curved handle, an ear cup at the top left and a mouth cup at the bottom right, both turned inwards (calls). About size x size. |
 | `battery` | power, battery tools | 60 | 34 29 94 113 | Upright battery with a charge level. size = width; height ~1.6 * size. |
@@ -49,6 +53,10 @@ The box below is what `size` on the sheet gives (x0 y0 x1 y1 in the 128 canvas).
 | `bottle_label(cx, base, size)` | (x0, y0, x1, y1) of bottle()'s white label - fit() the mark into it. |
 | `bag_front(cx, base, size)` | (x0, y0, x1, y1) of shopping_bag()'s front - fit() the mark into it. |
 | `goal_ring_centre(cx, base, size)` | (x, y) of goal_ring()'s hole centre - put a ball there. |
+| `record_label(cx, base, size, sleeve=True)` | (x0, y0, x1, y1) inside vinyl_record()'s round label - fit() the mark into it. |
+| `cassette_label(cx, base, size)` | (x0, y0, x1, y1) of the printable area on cassette()'s label - fit() the mark into it. |
+| `speaker_badge(cx, base, size)` | (x0, y0, x1, y1) of the badge area at the top of speaker() - fit() the mark into it. |
+| `headphone_cup(cx, base, size)` | (x0, y0, x1, y1) on headphones()'s right ear cup - fit() the mark into it (small: use for a simple, bold mark; a detailed mark needs vinyl_record / cassette / speaker instead). |
 
 Example: `bottle(ic, 64, 118, 54, ramp=RAMP["Blue"])` then
 `for g, c in zip(fit(MARK, bottle_label(64, 118, 54)), COL): solid(ic, g, face=c, depth=0, top=False)`.

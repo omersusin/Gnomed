@@ -1,0 +1,24 @@
+<p><b>Gnomed</b>, GNOME'un uygulama simgelerinin (Adwaita) görünümünü Android'e getirir. Hedef: marka logosunu
+bir plakanın üstüne koymak yerine her simgeyi GNOME tarzı bir nesne olarak yeniden çizmek - basit geometrik
+şekiller, GNOME renk paleti, yukarıdan gelen ışık ve görünen bir ön kenar.</p>
+
+<p><i>Yapım aşamasında:</i> ilk uygulamalar bu şekilde yeniden çizildi; diğerleri henüz ilk, daha basit
+sürümlerinde ve tek tek yenileniyor. Bir uygulama mı eksik? Uygulamanın içinden simge isteği gönder.</p>
+
+<p><b>Tek uygulamada dört stil</b> - panelden değiştirilir (menü, Uygula ekranı veya uygulama kısayolu):</p>
+<ul>
+<li><b>Symbol</b> - asıl Gnomed tasarımı: uygulamanın fikri bir nesne olarak</li>
+<li><b>Faithful</b> - orijinal logoya en yakın olanı</li>
+<li><b>Disc</b> - yuvarlak bir sürüm</li>
+<li><b>Rimmed</b> - başka bir tasarım</li>
+</ul>
+
+<p><b>Ayrıca</b></p>
+<ul>
+<li>Simge isteği: kullandığın uygulamaları gönder (e-posta, zip ya da her yapay zekâ ajanının okuyabildiği resim + metin)</li>
+<li>Sakin GNOME duvar kâğıtları; depodan yüklenir, yenileri güncelleme olmadan gelir</li>
+<li>CandyBar'ın desteklediği başlatıcılarla çalışır (Nova, Lawnchair, Niagara, Smart Launcher, Hyperion ve dahası)</li>
+</ul>
+
+<p>Her simge GNOME İnsan Arayüzü Yönergelerine göre SVG kodu olarak çizilir; görsel üretim aracı kullanılmaz.
+Özgür ve açık kaynak (GPL-3.0). Uygulama adları ve logolar sahiplerine aittir.</p>
