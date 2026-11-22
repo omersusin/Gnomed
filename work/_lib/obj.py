@@ -24,6 +24,9 @@ merged as ONE shape with a Grad fill (a real gradient, measured from the source 
     for name, g, fill in regions("myapp"):         # fill = "#hex" or Grad (works as a hex too)
         ...
     face = gradient("myapp", some_shape)            # the source's gradient under any shape
+
+THE MARK ON EVERY STYLE (REDESIGN.md 5): put_mark(ic, "myapp", box) draws the measured mark
+(mark_parts: without the tile under it) inside a layer named "mark"; gate `mark` checks it.
 """
 import importlib.util
 import sys
@@ -38,7 +41,8 @@ _spec.loader.exec_module(_skill)
 globals().update({k: getattr(_skill, k) for k in _skill.__all__})
 
 __all__ = list(_skill.__all__) + ["save_styles", "ROOT", "parts", "colour", "describe", "fit",
-                                  "shape_of", "traced", "cutout", "body", "gradient", "regions", "banded"]
+                                  "shape_of", "traced", "cutout", "body", "gradient", "regions", "banded",
+                                  "mark_parts", "put_mark"]
 __all__ = [n for n in __all__ if n != "poly"] + ["poly"]
 
 
@@ -308,6 +312,58 @@ def regions(slug, flat_de=6.0):
     cache.write_text(json.dumps({"key": key, "parts": [
         [n, {"stops": f.stops, "angle": f.angle} if isinstance(f, Grad) else f] for n, _, f in out]}, indent=1))
     return out
+
+
+def mark_parts(slug, de=25.0):
+    """The app's MARK without the tile under it: regions(slug) minus the parts in the source's
+    ground colour (the tile / gradient behind the logo - Soundcore's blue bands). Measured holes
+    (letter counters) are cut out. -> [(name, shape, fill)]. This is what the owner wants to
+    see on EVERY style (REDESIGN.md 5, 2026-11-22: Apple Music and Soundcore lost it);
+    put_mark() draws it, gate `mark` (check_icon.py) looks for it."""
+    import numpy as np
+    P = parts(slug)
+    R = regions(slug)
+    if not R:                                      # hand-built source: every measured part
+        R = [(k, g, "#241f31") for k, g in P.items() if k not in ("silhouette", "holes") and not g.is_empty]
+    gr = _geometry(slug).get("info", {}).get("ground") or {}
+    hexes = [gr[k] for k in ("c0", "c1") if isinstance(gr.get(k), str)] or \
+        ([gr["color"]] if isinstance(gr.get("color"), str) else [])
+
+    def lab(h):
+        h = str.__str__(h)
+        return _lab(np.array([int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)]))[0]
+    keep = R
+    if hexes:
+        a, b = lab(hexes[0]), lab(hexes[-1])
+
+        def dist(p):
+            ab = b - a
+            t = float(np.clip((p - a) @ ab / max(float(ab @ ab), 1e-9), 0, 1))
+            return float(np.linalg.norm(p - (a + t * ab)))
+        keep = [r for r in R if dist(lab(r[2])) > de] or R
+    holes = P.get("holes")
+    if holes is not None and not holes.is_empty:
+        keep = [(n, g.difference(holes), f) for n, g, f in keep]
+    return keep
+
+
+def put_mark(ic, slug, box_, depth=0, anchor="center", face=None, side=None, layer="mark"):
+    """Draw the app's measured mark (mark_parts) fitted into box_ = (x0, y0, x1, y1), inside a
+    layer named 'mark' - the gate `mark` finds it there and checks size, contrast and shape.
+        put_mark(ic, SLUG, record_label(64, 118, 100), face="#ffffff")   # white mark on a label
+        put_mark(ic, SLUG, (14, 12, 114, 112), depth=6, anchor="bottom") # L1: the mark IS the object
+    face: one colour for every part (a white mark on a dark lid ...); default the measured
+    colours. depth > 0: a solid part with a side. -> the placed shapes."""
+    M = mark_parts(slug)
+    shapes = fit([g for _, g, _ in M], box_, anchor=anchor)
+    with ic.group(layer):
+        for i, (g, (_, _, f)) in enumerate(zip(shapes, M)):
+            fill = face or f
+            if depth:
+                solid(ic, g, face=fill, depth=depth, side=side, layer=f"{layer}-{i}")
+            else:
+                ic.path(geom_d(g), _skill._fill(ic, fill, g), layer_id=f"{layer}-{i}", fill_rule="evenodd")
+    return shapes
 
 
 def banded(slug, svg_text, de=8.0):

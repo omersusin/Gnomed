@@ -82,8 +82,13 @@ def run(*cmd):
     return r.returncode, r.stdout + r.stderr
 
 
-def state(slug):
-    code, out = run("tools/next.py", slug)
+def NX_open_fixes():
+    code, out = run("-c", "import sys; sys.path.insert(0, 'tools'); import next as n; print(len(n.open_fix_slugs()))")
+    return out.strip().splitlines()[-1:] != ["0"]
+
+
+def state(slug, app_only=True):
+    code, out = run("tools/next.py", slug, *(["--app-only"] if app_only else []))
     m = [ln.split()[1] for ln in out.splitlines() if ln.startswith("STATE")]
     return m[0] if m else f"no STATE line (exit {code}): {out[-200:]}"
 
@@ -98,6 +103,9 @@ else:
     expect(state("andvm") == "BUILD", "next.py: a redesign without a Symbol -> BUILD")
     st = state("rush_royale")
     expect(st in ("LOG", "COMMIT", "PUSH", "DONE"), f"next.py: a shipped redesign is past Q2 ({st})")
+    if list((ROOT / "work").glob("*/fixes.md")) and NX_open_fixes():
+        expect(state("rush_royale", app_only=False) == "OWNER_FIXES_FIRST",
+               "next.py: open owner fix lists come before any other app (OWNER_FIXES_FIRST)")
 code, out = run("tools/next.py")
 expect(code == 0 and "Which app next?" in out, "next.py without a slug lists the next apps")
 code, out = run("tools/describe_icon.py", "work/pokemon_unite/pokemon_unite-symbol.svg")
@@ -229,6 +237,48 @@ with tempfile.TemporaryDirectory() as tmp:
     expect(len(_groups) == 3 and _alike, f"check_icon.style_groups: the same photo in two frame colours = ONE design ({_alike})")
 expect("telegram" in " ".join(CAT.used("messaging").get("paper plane", [])),
        "categories: Telegram's paper plane is reserved (not free for other messaging apps)")
+
+# overview ara-2 lessons (2026-11-22): the mark on every style, objects per category, fix lists in the repo
+with tempfile.TemporaryDirectory() as tmp:
+    _no = O.gk.Icon("no mark")
+    O.cassette(_no, 64, 112, 104, ramp=O.RAMP["Red"])
+    _no.save(Path(tmp) / "no.svg")
+    _yes = O.gk.Icon("mark")
+    O.cassette(_yes, 64, 112, 104, ramp=O.RAMP["Red"])
+    O.put_mark(_yes, "apple_music", (44, 28, 84, 68), face="#241f31")
+    _yes.save(Path(tmp) / "yes.svg")
+    _m_ = O.gk.Icon("M")
+    O.cassette(_m_, 64, 112, 104, ramp=O.RAMP["Red"])
+    with _m_.group("mark"):
+        O.solid(_m_, O.poly([(44, 70), (50, 34), (64, 52), (78, 34), (84, 70), (78, 70), (76, 48), (64, 62), (52, 48), (50, 70)]),
+                face="#241f31", depth=0, top=False)
+    _m_.save(Path(tmp) / "m.svg")
+    _ww = O.gk.Icon("white on white")
+    O.cassette(_ww, 64, 112, 104, ramp=O.RAMP["Light"])
+    O.put_mark(_ww, "apple_music", (44, 28, 84, 68), face="#ffffff")
+    _ww.save(Path(tmp) / "ww.svg")
+    _r = {k: ci.mark_layer_measure("apple_music", Path(tmp) / f"{k}.svg") for k in ("no", "yes", "m", "ww")}
+    expect(_r["no"] is None, "check_icon.mark: a style without a 'mark' layer -> WARN (Apple Music lost its note)")
+    expect(_r["yes"] and _r["yes"][0] >= 36 and _r["yes"][1] >= 25 and _r["yes"][2] >= 0.5 and _r["yes"][3] >= 0.6,
+           f"check_icon.mark: put_mark() on a cassette label -> PASS {_r['yes'] and [round(x, 2) for x in _r['yes']]}")
+    expect(_r["m"] and _r["m"][2] < 0.5, "check_icon.mark: an 'M' in the mark layer is not the source's mark (ChatGPT's bulb)")
+    expect(_r["ww"] and (_r["ww"][1] < 25 or _r["ww"][3] < 0.6), "check_icon.mark: a white mark on a white label does not stand out")
+expect([n for n, _, _ in O.mark_parts("anker_soundcore")] == ["r3"],
+       "obj.mark_parts: Soundcore's mark is the white wordmark, not the blue tile bands under it")
+expect(NX.MUST_TRY and "mark" in NX.MUST_TRY and "same_object" in NX.MUST_TRY, "next.py: gates mark and same_object are fixed before Q2")
+with tempfile.TemporaryDirectory() as tmp:
+    _fx = Path(tmp) / "fixes.md"
+    _fx.write_text("# x\ngroup: g1\nshown:\n\n- [ ] disc: a\n- [x] symbol: b\n- [x] rimmed: c -> now: a red radio\n")
+    _orig = NX.ROOT
+    try:
+        (Path(tmp) / "work" / "zz_fix").mkdir(parents=True)
+        (Path(tmp) / "work" / "zz_fix" / "fixes.md").write_text(_fx.read_text())
+        NX.ROOT = Path(tmp)
+        _o, _d, _h = NX.owner_fixes("zz_fix")
+    finally:
+        NX.ROOT = _orig
+    expect(len(_o) == 2 and len(_d) == 1 and _h.get("group") == "g1",
+           "next.py: a fix line is done only when ticked AND '-> now: <what it is now>' (OWNER_FIX)")
 
 print(f"selftest: {ok} passed, {bad} failed")
 sys.exit(1 if bad else 0)

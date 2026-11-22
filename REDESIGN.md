@@ -171,6 +171,15 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   never a red sun (batch 1: Hava Durumu). Digits must read: `digital_display()` ("10:10", not "IO:IO").
 - **Another app's logo is not an object**: Telegram's paper plane, Apple Music's note … belong to
   those apps (`RESERVED` in work/_lib/categories.py).
+- **The mark stays — on every style** (owner 2026-11-22, overview ara-2: Apple Music and Soundcore
+  had lost it in all four; ChatGPT's bulb carried an "M"). The object says what the app DOES, the
+  mark says WHICH app it is: draw the measured mark ON the object (label, screen, lid, stamp,
+  page) or as the object itself (L1) — `put_mark(ic, SLUG, box)`, which keeps it in a layer named
+  `mark`. ≥ 36 px of 128 (Faithful ≥ 44), white on dark parts, dark or a strong colour on light
+  parts, never a letter or a logo from memory. Gate `mark` (WARN, fixed before Q2). Games
+  (objects only) and system apps (GNOME's own metaphor) are not measured.
+- **One object per app in a category**: an object another app of the category uses in ANY style
+  is taken (Apple Music's cassette was Deezer's). Gate `same_object` (WARN, fixed before Q2).
 - **No strokes or outlines**: a line-art logo (an outlined note, `>_`, a knot) becomes a SOLID
   object with thickness; lines thinner than 4 px disappear at 48 px. Edges on the 2 px grid
   where possible — they stay crisp at 64 px.
@@ -205,7 +214,9 @@ Owner: *"her stil yuvası farklı olursa çok iyi olur"*.
 1. The concept board shows **4 concepts** (A–D), four different ideas.
 2. Q1 asks (a) the **main** design → **Symbol** (his style); (b) which of the others to
    **drop** — by default **all of them stay** (owner 2026-11-22: *"bu stilleri diğer stillerde
-   kullanılması için"*): the one closest to the original logo → **Faithful**, a round one →
+   kullanılması için"*): the one closest to the original logo → **Faithful** (the mark big and
+   in the logo's own colours, often the mark itself as an object — not just any object with a
+   small mark; a turntable or a cardboard box is not "closest to the logo"), a round one →
    **Disc**, the rest → **Rimmed**. Four styles, four different designs.
    Only if he answers "0" does every slot get the main design.
 3. Build and polish all kept ones (same rules, same gate). Gate: `slots` (WARN, fixed before
