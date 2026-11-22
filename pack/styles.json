@@ -471,6 +471,11 @@
       "disc": "rush_royale_alt1",
       "rimmed": "rush_royale_alt2",
       "symbol": "rush_royale_alt3"
+    },
+    "deezer": {
+      "disc": "deezer_alt1",
+      "rimmed": "deezer_alt2",
+      "symbol": "deezer_alt3"
     }
   }
 }

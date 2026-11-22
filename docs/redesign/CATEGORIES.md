@@ -11,7 +11,7 @@ Play Store: `MUSIC_AND_AUDIO`
 
 | Object | Ready function | Used by |
 |---|---|---|
-| vinyl record | `vinyl_record()` | — |
+| vinyl record | `vinyl_record()` | deezer |
 | cassette | `cassette()` | — |
 | speaker | `speaker()` | — |
 | headphones | `headphones()` | — |
