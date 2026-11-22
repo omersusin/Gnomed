@@ -530,7 +530,7 @@ def run_slug(slug):
         return
     st, info = state_of(slug)
     name = label_of(slug)
-    others = open_fix_slugs(exclude=slug)
+    others = [] if "--app-only" in sys.argv else open_fix_slugs(exclude=slug)   # --app-only: tests
     if others and st != "OWNER_FIX":
         say("OWNER_FIXES_FIRST", "the owner's fix lists come before any other app (docs/BATCH.md 4)",
             ["The owner reviewed an overview and his fixes are written in work/<slug>/fixes.md for:",

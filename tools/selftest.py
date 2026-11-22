@@ -82,8 +82,13 @@ def run(*cmd):
     return r.returncode, r.stdout + r.stderr
 
 
-def state(slug):
-    code, out = run("tools/next.py", slug)
+def NX_open_fixes():
+    code, out = run("-c", "import sys; sys.path.insert(0, 'tools'); import next as n; print(len(n.open_fix_slugs()))")
+    return out.strip().splitlines()[-1:] != ["0"]
+
+
+def state(slug, app_only=True):
+    code, out = run("tools/next.py", slug, *(["--app-only"] if app_only else []))
     m = [ln.split()[1] for ln in out.splitlines() if ln.startswith("STATE")]
     return m[0] if m else f"no STATE line (exit {code}): {out[-200:]}"
 
@@ -98,6 +103,9 @@ else:
     expect(state("andvm") == "BUILD", "next.py: a redesign without a Symbol -> BUILD")
     st = state("rush_royale")
     expect(st in ("LOG", "COMMIT", "PUSH", "DONE"), f"next.py: a shipped redesign is past Q2 ({st})")
+    if list((ROOT / "work").glob("*/fixes.md")) and NX_open_fixes():
+        expect(state("rush_royale", app_only=False) == "OWNER_FIXES_FIRST",
+               "next.py: open owner fix lists come before any other app (OWNER_FIXES_FIRST)")
 code, out = run("tools/next.py")
 expect(code == 0 and "Which app next?" in out, "next.py without a slug lists the next apps")
 code, out = run("tools/describe_icon.py", "work/pokemon_unite/pokemon_unite-symbol.svg")
