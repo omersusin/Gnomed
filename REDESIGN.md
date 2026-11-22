@@ -195,11 +195,14 @@ The pack has four slots (`faithful`, `disc`, `rimmed`, `symbol`); each is a sepa
 Owner: *"her stil yuvası farklı olursa çok iyi olur"*.
 
 1. The concept board shows **4 concepts** (A–D), four different ideas.
-2. Q1 asks (a) the **main** design → it goes to **Symbol** (his style) and to every slot
-   without a design of its own; (b) which others to **keep** (may be none) → they fill the
-   other slots: the one closest to the original logo → **Faithful**, a round one → **Disc**,
-   the next → **Rimmed**.
-3. Polish only the main and the kept ones.
+2. Q1 asks (a) the **main** design → **Symbol** (his style); (b) which of the others to
+   **drop** — by default **all of them stay** (owner 2026-11-22: *"bu stilleri diğer stillerde
+   kullanılması için"*): the one closest to the original logo → **Faithful**, a round one →
+   **Disc**, the rest → **Rimmed**. Four styles, four different designs.
+   Only if he answers "0" does every slot get the main design.
+3. Build and polish all kept ones (same rules, same gate). Gate: `slots` (WARN, fixed before
+   Q2 by `next.py`) when styles repeat a design he did not drop.
+   **Batch work** (he approved a batch): the agent assigns the four concepts itself, the same way.
 4. `save_styles(slug, {"symbol": main, "faithful": …, "disc": …, "rimmed": …})` writes
    every slot: missing slots get the main design, so an app already in the pack loses its
    old plate/disc/rim versions.
