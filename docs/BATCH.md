@@ -8,14 +8,20 @@ This file is the **complete** batch procedure. Do not add or skip steps from a c
 owner changes something, it is written here first (a pull request), then followed.
 To start a batch, the owner sends one line: **"docs/BATCH.md'yi oku ve uygula."**
 
-## 1. Setup (once)
+## 1. Start of EVERY session (also after a compaction)
 
 ```
-git fetch origin && git switch -C icons/redo-batch origin/main
+git fetch origin
+git branch --show-current          # stay on the batch branch (line 1 of progress.md: "branch: <name>")
+#   no batch branch yet:  git switch -c icons/redo-batch origin/main   and write "branch: icons/redo-batch"
+#   as line 1 of progress.md. Never "git switch -C" / "reset --hard": they throw away unpushed icons.
+git merge --no-edit origin/main     # the owner's newest rules, checks and fix lists
 git config core.hooksPath tools/hooks
 python3 tools/gnome-android-icons/scripts/doctor.py      # "result: READY"; do NOT run selftest.py (too slow on a phone)
 mkdir -p ~/Downloads/gnomed        # on the phone: /sdcard/Download/gnomed
+python3 tools/next.py              # "0. The owner's FIXES" first, if it lists any
 ```
+A merge conflict: keep both sides (rules from main, your icons from the batch), never delete his work.
 
 ## 2. Scope — every app, none skipped
 
@@ -30,6 +36,7 @@ mkdir -p ~/Downloads/gnomed        # on the phone: /sdcard/Download/gnomed
 ## 3. Every app
 
 Before every app: read [START-HERE.md](../START-HERE.md) and run `python3 tools/next.py <slug>`.
+If it says OWNER_FIXES_FIRST, do the owner's fix lists first (§4).
 
 1. `python3 tools/fetch_refs.py <slug>` — screenshots, category. Nothing found: do your best, note it.
 2. Four concepts, **four different objects**, from the category's family
@@ -50,7 +57,13 @@ Before every app: read [START-HERE.md](../START-HERE.md) and run `python3 tools/
    - a real thing has the wrong colour (a red sun - use `sun()`); digits do not read (use
      `digital_display()`);
    - it uses another app's logo object (Telegram's paper plane - `RESERVED` in categories.py);
-   - two styles are the same object restyled (gate `slots` measures it).
+   - two styles are the same object restyled (gate `slots` measures it);
+   - **the app's mark is missing or wrong** (ara-2: Apple Music, Soundcore, ChatGPT's "M") - every
+     style carries the measured mark, `put_mark(ic, SLUG, box)`; gate `mark` measures it;
+   - **Faithful is not the closest to the logo** - the mark big, in the logo's colours, often the mark
+     itself as the object (a turntable or a cardboard box is not);
+   - another app of the category already has the object in any style (ara-2: Apple Music's cassette
+     was Deezer's) - gate `same_object`.
    Cannot see images? Use `python3 tools/describe_icon.py <svg>` and the concept code: if the code
    draws "rounded box + 3 circles", it is not a nameable object.
 7. When `next.py` says ASK_Q2: **do not ask**. Copy `work/<slug>/review.png` and `phone.png` to
@@ -61,14 +74,19 @@ Before every app: read [START-HERE.md](../START-HERE.md) and run `python3 tools/
 
 ```
 python3 tools/overview.py <the 10 slugs> --out ~/Downloads/gnomed/overview-<N>.png
-git add -A && git commit -m "batch <N>: <slugs>" && git push -u origin icons/redo-batch
+git add -A && git commit -m "batch <N>: <slugs>" && git push -u origin HEAD
 ```
 Then send the owner a short Turkish message: the picture's path, the 10 apps, what you could not fix.
 **STOP and wait.** His answer:
 - **"Devam"** → the next 10.
 - **"<app> olmamış (…)"** → redo exactly that app (new concepts), show it again.
-- **A list of fixes per app** → change exactly those styles, nothing else; then one overview of only
-  those apps (`tools/overview.py <those slugs>`), and wait again.
+- **A list of fixes per app** → it is written in the repository, not in a chat message (owner
+  2026-11-22: *"Bıktım bana prompt vermenden, yaz depoya"*): `work/<slug>/fixes.md`, one line per style.
+  After the owner merges it: `git merge origin/main` (§1), then `python3 tools/next.py` lists the
+  apps under "0. The owner's FIXES"; each app's `next.py <slug>` says OWNER_FIX with the lines.
+  Change exactly those styles, nothing else; tick each line with `-> now: <what it is now>`.
+  When the whole group is done, `next.py` (no slug) prints the overview command for only those
+  apps: run it, push, write `shown: <date>` in their fixes.md, send him the path, wait again.
 
 ## 5. Into the pack — only with his words
 
@@ -78,7 +96,8 @@ Then: for the approved apps `final: "<his words>" (<date>)` in design.md, `pack_
 
 ## 6. If your context is compacted
 
-`~/Downloads/gnomed/progress.md` is the truth: continue after its last `[x]` line. Re-read this file.
+`~/Downloads/gnomed/progress.md` is the truth: continue after its last `[x]` line. Re-read this file
+and do §1 again (it merges main and shows open fix lists).
 
 ## 7. Not allowed in a batch
 

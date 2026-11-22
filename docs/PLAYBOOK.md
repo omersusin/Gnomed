@@ -221,6 +221,27 @@ It moves `concepts/` + `concepts.png` to `concepts-round<N>/`, keeps the old app
 not touched (his old icon stays until the new one is approved). Then update design.md for the
 new rule (e.g. Kafa Topu 2: `characters: no`, anchors = the ball and the boot) and continue.
 
+## owner-fix
+
+**Goal:** the owner looked at an overview and wrote what is wrong; do exactly that, nothing else.
+His review lives in the repository — `work/<slug>/fixes.md` — not in a chat message (owner,
+2026-11-22: *"Bıktım bana prompt vermenden, yaz depoya"*):
+```
+# apple_music - fixes (the owner's review of ara-2)
+group: ara-2
+owner: "Bıktım bana prompt vermenden, yaz depoya" (2026-11-22)
+shown:
+
+- [ ] disc: the microphone/record mix is odd - a round object you can name, the note on it
+```
+1. `next.py <slug>` prints the open lines (state OWNER_FIX). Change only those styles in
+   `redesign.py`; `all:` = every style. Then `make_icon.py <slug>`.
+2. Done = ticked **and** what it is now: `- [x] disc: … -> now: a red speaker with the note`.
+   A tick without `-> now:` is still open.
+3. While any app has open lines, `next.py <other app>` says OWNER_FIXES_FIRST.
+4. When every app of the group is done, `next.py` (no slug) prints the overview command for
+   only those apps; push, write `shown: <date>` in their fixes.md, send him the path, wait.
+
 ## build
 
 **Goal:** the approved concept (and the kept ones) as finished GNOME objects + review images.
@@ -294,11 +315,13 @@ pieces = traced(SLUG, box_)       # posters: gradients=True (default) keeps them
 
 **Goal:** fix the WARNs the owner would notice on his phone **before** Q2 — he is not the
 reviewer of things a check can see (owner, 2026-11-22: *"ikide bir bana mesaj verip bunu, şunu,
-onu mu düzelteceksin?"*). `next.py` stops here for `mark_size`, `visible_light`, `visible_dark`,
-`legibility32`, `slots`.
+onu mu düzelteceksin?"*). `next.py` stops here for `mark`, `mark_size`, `visible_light`,
+`visible_dark`, `legibility32`, `slots`, `same_object`.
 
 | WARN | Do |
 |---|---|
+| `mark` | the app's mark is missing / small / melts in / not the source's shape. Draw the MEASURED mark on the object: `put_mark(ic, SLUG, box, face="#ffffff")` (on a label, screen, lid, stamp, page), or the mark as the object: `put_mark(ic, SLUG, (14, 12, 114, 112), depth=6, anchor="bottom")`. ≥ 36 px (Faithful ≥ 44), white on dark parts, dark/strong colour on light parts. Hand-drawn? wrap it in `with ic.group("mark"):` — the gate only finds layers named `mark` |
+| `same_object` | another app of the category has this object in some style: take a FREE one from the family (`next.py <slug>` in FILL_DESIGN/DRAW_CONCEPTS lists USED/free; or `python3 -c "import sys; sys.path.insert(0,'work/_lib'); import categories; print(categories.suggest('<slug>'))"`) |
 | `mark_size` | make the part that carries the mark bigger (record label, cassette label, stamp, screen, page) and `fit()` the mark into ≥ 36 px of 128; drop decoration that takes its room. Ready boxes keep it: `record_label()`, `cassette_label()`, `speaker_badge()`, `envelope_stamp()`, `bottle_label()` |
 | `visible_dark` | a dark object vanishes on a dark wallpaper: a light rim / top light, or lighter ramp steps (1–3) for its face |
 | `visible_light` | a pale object vanishes on a light wallpaper: a darker side (ramp 4–5) or a darker secondary object |

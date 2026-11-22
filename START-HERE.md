@@ -27,6 +27,8 @@ Tools that read a file automatically: Claude Code reads `CLAUDE.md`; OpenCode an
 - **Many apps in one run** (the owner says "hepsini yap" or "docs/BATCH.md'yi oku"): follow
   [docs/BATCH.md](docs/BATCH.md) exactly — it replaces Q1/Q2 per app with a review every 10 apps.
   [docs/RESEARCH.md](docs/RESEARCH.md) — where the design rules come from (GNOME HIG, MoreWaita, Delta).
+- **The owner's fix lists** live in the repository: `work/<slug>/fixes.md` (his review of an overview).
+  `next.py` shows them before anything else (OWNER_FIX); never wait for them as a chat message.
 - Which app next? `python3 tools/next.py` (no slug). Unfinished apps come first; otherwise the
   **owner** picks the app — ask him, never pick one yourself.
 

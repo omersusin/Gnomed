@@ -214,3 +214,19 @@ Times are from the commits; the model of a backfilled session is what the commit
 - PR: #22
 - Open problems: whether an object is "nameable" can only be checked by eye; the batch overview
   every 10 apps stays the owner's check.
+
+## 2026-11-22 — Claude via Claude Code (cloud session) — tools/rules + fix lists (no icons changed)
+- What: the owner's review of overview ara-2 written into the repository as fix lists
+  (`work/{anker_soundcore,apple_music,chatgpt,termux_api,termux_boot,termux_widget,walpy}/fixes.md`);
+  `next.py` state OWNER_FIX (and OWNER_FIXES_FIRST for every other app), group overview when done;
+  gate `mark` (the measured mark in a layer named `mark` on every style: present, size, contrast,
+  shape) with `put_mark()` / `mark_parts()` in obj.py; gate `same_object` (objects of all four
+  styles per category); REDESIGN §5 "The mark stays", Faithful = closest to the logo; BATCH.md §1
+  merges main at every session start and never resets the batch branch.
+- Why: ara-2 — Apple Music and Soundcore lost their marks in every style, ChatGPT's bulb carried
+  an "M", Apple Music took Deezer's cassette, Faithful was a turntable / a cardboard box.
+- Owner: "Bıktım bana prompt vermenden, yaz depoya" (2026-11-22)
+- PR: opened after this commit
+- Open problems: the gate finds a mark only in a layer named `mark` (put_mark does it); apps
+  redesigned before this rule warn until they are redone; whether an object is nameable is still
+  checked by eye (the overview).

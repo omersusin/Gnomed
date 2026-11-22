@@ -277,6 +277,54 @@ def object_of(slug, key):
 RESERVED = {"paper plane": "telegram (its logo)", "music note": "apple_music (its logo)"}
 
 
+def _first_object(src, key):
+    best = None
+    for name, _fn, kw in CATEGORIES[key][2]:
+        m = re.search(kw, src.lower())
+        if m and (best is None or m.start() < best[0]):
+            best = (m.start(), name)
+    return best[1] if best else ""
+
+
+def style_objects(slug, key):
+    """{style: object of family `key`} for every style of the app: design.md 'styles:'
+    (symbol=C faithful=A ...) -> each letter's concept line -> the object named first in it."""
+    text = _design(slug)
+    out = {}
+    for st, letter in re.findall(r"\b(symbol|faithful|disc|rimmed)\s*=\s*([A-H])\b", _line(text, "styles")):
+        m = re.search(rf"^\s+{letter}\b[^:\n]*:\s*(.+)$", text, re.M)
+        o = _first_object(m.group(1), key) if m else ""
+        if o:
+            out[st] = o
+    return out
+
+
+def clashes(slug):
+    """[(style, object, [other apps])]: a style uses an object that another app of the same
+    category already uses in ANY of its styles (owner 2026-11-22: Apple Music got Deezer's
+    cassette). An app's own reserved logo object (RESERVED) is never a clash for it."""
+    key, _ = category_of(slug)
+    if not key:
+        return []
+    mine = style_objects(slug, key)
+    if not mine:
+        return []
+    others = {}
+    for name, who in RESERVED.items():
+        if not who.startswith(slug):
+            others.setdefault(name, []).append(who.split()[0])
+    for d in sorted((ROOT / "work").glob("*/design.md")):
+        s = d.parent.name
+        if s == slug or s.startswith(("_", "zz_", "test_")):
+            continue
+        if category_of(s)[0] != key:
+            continue
+        objs = set(style_objects(s, key).values()) or ({object_of(s, key)} - {""})
+        for o in objs:
+            others.setdefault(o, []).append(s)
+    return [(st, o, sorted(set(others[o]))) for st, o in mine.items() if o in others]
+
+
 def used(key, skip=None):
     """{object name: [slugs]} for every app of category `key` that already has a design."""
     out = {name: [who] for name, who in RESERVED.items()

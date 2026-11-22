@@ -16,7 +16,10 @@ the pack (pack/styles.json, artwork/) and git, and prints exactly ONE state:
   DETAILS        - docs/PLAYBOOK.md section for this state
 
 States, in order: NO_SOURCE, NOT_STARTED, FILL_DESIGN, DRAW_CONCEPTS, BOARD, ASK_Q1,
-REDO, BUILD, FIX_FAIL, FIX_WARN, ASK_Q2, PACK, LOG, COMMIT, PUSH, DONE.
+REDO, OWNER_FIX, BUILD, FIX_FAIL, FIX_WARN, ASK_Q2, PACK, LOG, COMMIT, PUSH, DONE.
+
+OWNER_FIX: work/<slug>/fixes.md has open lines - the owner's review of an overview
+(docs/BATCH.md 4). They come before every other app (OWNER_FIXES_FIRST).
 
 FIX_WARN: the WARNs the owner would notice on his phone (MUST_TRY) are fixed BEFORE Q2 -
 the owner is not the reviewer of things a check can see. Only when a real fix would break
@@ -67,6 +70,16 @@ RECIPES = {
                  "  record label: 25 px of 128 = 9 px at 48 px). Make the part that carries the mark bigger (the\n"
                  "  label, stamp, screen, page) and fit() the mark to >= 36 px of 128; drop decoration that\n"
                  "  takes its room. Check: python3 tools/check_icon.py <slug> (mark_size PASS).",
+    "mark": "The app's MARK is missing, too small, melts into its surface, or is not the source's shape\n"
+            "  (owner 2026-11-22: Apple Music and Soundcore had lost their marks in every style). Every style shows\n"
+            "  the measured mark ON its object, in a layer named 'mark':\n"
+            "      put_mark(ic, SLUG, (x0, y0, x1, y1), face=\"#ffffff\")   # on a label / screen / lid / stamp\n"
+            "      put_mark(ic, SLUG, (14, 12, 114, 112), depth=6, anchor=\"bottom\")   # L1: the mark IS the object\n"
+            "  >= 36 px of 128 (Faithful >= 44: it is the style closest to the logo), white on dark parts, dark or\n"
+            "  strong-coloured on light parts. Never a letter or a logo from memory. docs/PLAYBOOK.md#fix-warn",
+    "same_object": "Another app of the same category already uses this object (design.md concept lines, all four\n"
+                   "  styles). The owner wants different objects per app (BATCH.md 7): pick a FREE object of the\n"
+                   "  family - python3 tools/next.py prints the family with USED/free - and redraw that style.",
     "slots": "Two or more of the 4 styles are the SAME design. The owner wants every style different\n"
              "  (REDESIGN.md 6): main -> symbol, closest to the logo -> faithful, a round one -> disc, the rest -> rimmed.\n"
              "  save_styles(SLUG, {\"symbol\": B(), \"faithful\": A(), \"disc\": D(), \"rimmed\": C()}) - build the kept\n"
@@ -82,6 +95,8 @@ RECIPES = {
     "trace_iou": "Automatic draft only (traced parts do not match). A redesign draws its own shapes.",
 }
 WARN_TR = {
+    "mark": "uygulamanın kendi işareti bu stilde yok / okunmuyor",
+    "same_object": "aynı kategorideki başka bir uygulama bu nesneyi kullanıyor",
     "mark_size": "uygulamanın kendi işareti telefonda çok küçük kalıyor",
     "slots": "bazı stiller aynı tasarımı tekrarlıyor",
     "bands": "renk geçişi (gradyan) bantlara bölünmüş, erimiş gibi görünüyor",
@@ -114,7 +129,7 @@ def line(text, key):
 
 
 # WARNs the owner would see on his phone: fixed before Q2 (state FIX_WARN), or explained
-MUST_TRY = ("mark_size", "visible_light", "visible_dark", "legibility32", "slots")
+MUST_TRY = ("mark", "mark_size", "visible_light", "visible_dark", "legibility32", "slots", "same_object")
 
 
 def warn_ok(text, check):
@@ -129,6 +144,47 @@ def warn_ok(text, check):
 def quoted(v):
     m = QUOTED_DATED.search(v or "")
     return m.group(1) if m else None
+
+
+# ------------------------------------------------------------------ the owner's fix lists
+# work/<slug>/fixes.md (docs/BATCH.md 4): the owner's review of an overview, as lines
+#     - [ ] disc: the tape measure is not recognisable - a round object you can name, >_ on it
+# A line is DONE only when it is ticked AND says what the style is now:
+#     - [x] disc: ... -> now: a white stopwatch with >_
+FIX_LINE = re.compile(r"^\s*-\s*\[( |x|X)\]\s*([a-zA-Z, ]+?)\s*:\s*(.+)$")
+
+
+def owner_fixes(slug):
+    """-> (open lines, done lines, header {key: value}) of work/<slug>/fixes.md"""
+    p = ROOT / "work" / slug / "fixes.md"
+    if not p.exists():
+        return [], [], {}
+    open_, done, head = [], [], {}
+    for ln in p.read_text(encoding="utf-8").splitlines():
+        m = FIX_LINE.match(ln)
+        if m:
+            ticked = m.group(1).lower() == "x"
+            now = re.search(r"->\s*now:\s*(\S.{3,})", m.group(3))
+            (done if ticked and now else open_).append(ln.strip())
+        elif re.match(r"^[a-z][a-z-]*:", ln) and not ln.startswith("- "):
+            k, v = ln.split(":", 1)
+            head[k.strip().lower()] = v.strip()
+    return open_, done, head
+
+
+def fix_groups():
+    """-> {group: [(slug, n_open, shown)]} for every work/*/fixes.md"""
+    out = {}
+    for p in sorted((ROOT / "work").glob("*/fixes.md")):
+        s = p.parent.name
+        o, d, head = owner_fixes(s)
+        if o or d:
+            out.setdefault(head.get("group", s), []).append((s, len(o), head.get("shown", "")))
+    return out
+
+
+def open_fix_slugs(exclude=None):
+    return [s for grp in fix_groups().values() for s, n, _ in grp if n and s != exclude]
 
 
 def label_of(slug):
@@ -426,6 +482,9 @@ def state_of(slug, cheap=False, use_git=True):
         if not (w / "concepts.png").exists() or board_current(slug) is False:
             return "BOARD", {}
         return "ASK_Q1", {"game": game, "text": text}
+    fx_open, _, _ = owner_fixes(slug)
+    if fx_open:
+        return "OWNER_FIX", {"open": fx_open, "final": quoted(line(text, "final"))}
     red = (w / "redesign.py").read_text(encoding="utf-8")
     built = [w / f"{slug}-{st}.svg" for st in ("faithful", "symbol")]     # the other slots may fall back
     if "copy the approved concept here" in red:
@@ -471,6 +530,14 @@ def run_slug(slug):
         return
     st, info = state_of(slug)
     name = label_of(slug)
+    others = open_fix_slugs(exclude=slug)
+    if others and st != "OWNER_FIX":
+        say("OWNER_FIXES_FIRST", "the owner's fix lists come before any other app (docs/BATCH.md 4)",
+            ["The owner reviewed an overview and his fixes are written in work/<slug>/fixes.md for:",
+             "  " + ", ".join(others),
+             f"Do those first, one app after another:  python3 tools/next.py {others[0]}",
+             f"Come back to {slug} when python3 tools/next.py (no slug) lists no open fixes."], play="owner-fix")
+        return
     if st == "NO_SOURCE":
         say(st, f"get the app's icon + ComponentInfo into work/{slug}/source.png",
             ["Look for the owner's request: a zip / folder / request.txt he gave you, or requests/inbox/.",
@@ -516,7 +583,8 @@ def run_slug(slug):
             ["Each function A()..D() returns an icon; ideas from REDESIGN.md 3 (L1 mark as object / L2 object that carries\n"
              "  the mark / L3 material tile) - for games: the game's objects only.",
              "Compose ready objects:  from objects import *   (catalogue: docs/redesign/OBJECTS.md, picture objects.png)",
-             "The app's own mark ALWAYS from the source:  P = parts(slug); mark = body(slug); fit([...], box, anchor='bottom')",
+             "The app's own mark ALWAYS from the source, on EVERY concept (gate `mark`):  put_mark(ic, SLUG, box)\n"
+             "  - on the object's label / screen / lid / stamp, or the mark itself as the object (depth=6, anchor='bottom')",
              "Working examples: work/pokemon_unite/concepts/make_concepts.py (game), work/telegram/redesign.py (app).",
              family(slug),
              "  -> at least TWO of the four concepts use objects of this family; the main idea a FREE one.",
@@ -544,6 +612,27 @@ def run_slug(slug):
              "(moves concepts/ to concepts-roundN/, keeps the old approval lines as 'history:' and clears them;\n"
              " the pack is not touched - the old icon stays on his phone until the new one is approved)"],
             extra=f"  the owner's words: {line(design_text(w), 'redo')}")
+    elif st == "OWNER_FIX":
+        do = [f"The owner's review (work/{slug}/fixes.md) - change EXACTLY these styles, nothing else:"]
+        do += ["  " + ln for ln in info["open"]]
+        do += ["For each line:",
+               f"  1. Change ONLY that style in work/{slug}/redesign.py (the function save_styles() puts in that",
+               "     slot; 'all' = every style). A new object: draw it there with objects.py / obj.py, same rules",
+               "     as a concept (REDESIGN.md 3 and 5): an object you can NAME, the app's measured mark ON it",
+               f"     (put_mark(ic, SLUG, box) - gate `mark`), no object another app of the category uses (gate same_object).",
+               f"  2. python3 tools/make_icon.py {slug}",
+               f"  3. Look at work/{slug}/review.png (cannot see images? python3 tools/describe_icon.py on the SVG):",
+               "     does the style now do what the line asks?",
+               "  4. Tick the line and say what the style is now, in 2-4 plain words:",
+               "       - [x] disc: <the line as it was> -> now: <what it is now>",
+               "     (a ticked line without '-> now:' still counts as open)",
+               "  5. An object changed? In design.md rewrite that style's concept line (its letter in 'styles:') to what",
+               "     it is now - gate same_object reads those lines - and the app's line in ~/Downloads/gnomed/progress.md.",
+               "Do not ask the owner anything here: when every line is done, next.py goes on (build, checks), and",
+               "python3 tools/next.py (no slug) says when the whole group is ready to show him."]
+        if info.get("final"):
+            do.append("design.md has 'final:' - rename it to 'history-final:' (he approves the fixed icon again).")
+        say(st, f"do the owner's fixes for {name}", do, play="owner-fix")
     elif st == "BUILD":
         game = info.get("game")
         ex = "work/pokemon_unite/redesign.py + kit.py (game objects)" if game else \
@@ -661,12 +750,34 @@ def overall(print_it=True, exclude=None):
             plate.append(s)
         elif st not in ("DONE", "NO_SOURCE"):
             open_.append((s, st))
+    groups = fix_groups()
+    fixes_open = [s for grp in groups.values() for s, n, _ in grp if n and s != exclude]
     if not print_it:
+        if fixes_open:
+            return f"{fixes_open[0]} (the owner's fixes: work/{fixes_open[0]}/fixes.md)"
         if open_:
             return f"{open_[0][0]} (unfinished: {open_[0][1]})"
         if redo:
             return f"{redo[0]} (the owner asked for a redo)"
         return None
+    if fixes_open:
+        print("0. The owner's FIXES (work/<slug>/fixes.md) - do these FIRST, before any other app:")
+        for g, grp in groups.items():
+            for s, n, _ in grp:
+                if n:
+                    print(f"     {s:24s} {n} open line(s) -> python3 tools/next.py {s}")
+        print()
+    for g, grp in groups.items():
+        if all(n == 0 for _, n, _ in grp) and not all(shown for _, _, shown in grp):
+            slugs = " ".join(s for s, _, _ in grp)
+            print(f"0. Group '{g}' is fixed - show it to the owner, then STOP:")
+            print(f"     python3 tools/overview.py {slugs} --out ~/Downloads/gnomed/{g}-fixed.png")
+            print("     (every app must be past its checks first: python3 tools/next.py <slug> must not say FIX_FAIL /")
+            print("      FIX_WARN / BUILD for any of them)")
+            print("     git add -A && git commit -m \"fixes " + g + ": " + slugs + "\" && git push")
+            print(f"     write 'shown: {TODAY}' in each of their fixes.md, send the owner the picture's path in Turkish")
+            print("     (short: which apps, what changed, what you could not fix) and WAIT for his answer.")
+            print()
     print("Which app next?  (docs/APPS.md has the full table: python3 tools/pack_status.py)")
     if open_:
         print("1. Unfinished redesigns - finish these first:")

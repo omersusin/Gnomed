@@ -19,6 +19,10 @@ Checks (per style that exists):
   legibility32  structure kept at 32 px (official median SSIM 0.82) ........... WARN < 0.72, FAIL < 0.62
   box_in_plate  Faithful: one region covering most of the plate (a tile/disc
                 drawn inside the plate) ........................................ FAIL
+  mark          (apps, not games / system apps) the app's measured mark in a layer named 'mark'
+                (put_mark()): present, >= 36 px of 128 (Faithful >= 44), contrast >= 25 against
+                what is under it, shape match with the source's mark >= 0.5 ............ WARN
+  same_object   a style uses an object another app of its category already uses ........ WARN
 Per app:
   redesign      the app is a GNOME redesign (REDESIGN.md): work/<slug>/redesign.py exists and
                 design.md has "approved:" = the owner's answer in quotes + (YYYY-MM-DD). The automatic
@@ -249,6 +253,95 @@ def mark_measure(slug, svg, N=256, de=20.0):
     return float(side), float(keep.sum() / max(painted.sum(), 1)), len(cols)
 
 
+MARK_ID = re.compile(r"^mark(?:$|[-_0-9])", re.I)
+
+
+def mark_applies(w):
+    """the mark gate measures apps, not games (objects only) or system apps (GNOME's metaphor)"""
+    if design_line(w, "kind").lower().startswith("game"):
+        return False
+    store = w / "refs" / "store" / "store.json"
+    return not (store.exists() and '"source": "system app"' in store.read_text(encoding="utf-8"))
+
+
+def mark_layer_measure(slug, svg, N=256):
+    """The app's own mark in a style (owner 2026-11-22, overview ara-2: Apple Music and Soundcore
+    had lost it in every style). The elements whose id starts with 'mark' (put_mark(), or
+    `with ic.group("mark"):`) are found; the style is rendered as it is, without them, and with
+    them painted magenta (their full footprint, even where they melt into the surface).
+    -> None when the style has no such element, else (larger side of the mark in px of 128,
+    median colour difference to what is under it, IoU of its shape with the source's mark,
+    the share of the mark that is visible at all)."""
+    import copy
+    import xml.etree.ElementTree as ET
+    from scipy import ndimage
+    txt = Path(svg).read_bytes()
+    ET.register_namespace("", "http://www.w3.org/2000/svg")
+    ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
+    without = ET.fromstring(txt)
+    magenta = ET.fromstring(txt)
+
+    def marks(root):
+        out = []
+        for parent in list(root.iter()):
+            if parent.tag.endswith("defs"):
+                continue
+            for ch in list(parent):
+                if MARK_ID.match(ch.get("id") or "") and not ch.tag.endswith(("Gradient", "clipPath", "mask")):
+                    out.append((parent, ch))
+        return out
+    found = marks(without)
+    if not found:
+        return None
+    for parent, ch in found:
+        parent.remove(ch)
+    for _, ch in marks(magenta):
+        for e in ch.iter():
+            for k in ("opacity", "fill-opacity", "style"):
+                e.attrib.pop(k, None)
+            if e.get("fill") not in (None, "none"):
+                e.set("fill", "#ff00ff")
+        if ch.get("fill") in (None,) and not list(ch):
+            ch.set("fill", "#ff00ff")
+
+    def lab_on_grey(b):
+        a = np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(bytestring=b, output_width=N, output_height=N)))
+                       .convert("RGBA")).astype(np.float32) / 255
+        al = a[..., 3:4]
+        return rgb2lab(np.clip(a[..., :3] * al + 0.5 * (1 - al), 0, 1))
+    base = lab_on_grey(ET.tostring(without))
+    de = np.linalg.norm(lab_on_grey(txt) - base, axis=-1)
+    foot = ndimage.binary_opening(np.linalg.norm(lab_on_grey(ET.tostring(magenta)) - base, axis=-1) > 10, iterations=1)
+    if foot.sum() < 20:
+        return 0.0, 0.0, 0.0, 0.0
+    ys, xs = np.nonzero(foot)
+    x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
+    side = max(x1 - x0, y1 - y0) * 128 / N
+    contrast = float(np.median(de[foot]))
+    seen = float(((de > 10) & foot).sum() / foot.sum())
+    try:                                   # the source's mark, fitted into the same box
+        sys.path.insert(0, str(ROOT / "work/_lib"))
+        import obj as _obj
+        from shapely.ops import unary_union
+        shp = unary_union([g for _, g, _ in _obj.mark_parts(slug)]).buffer(0)
+        bx0, by0, bx1, by1 = shp.bounds
+        W, H = int(x1 - x0), int(y1 - y0)
+        t_svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
+                 f'viewBox="{bx0} {by0} {bx1 - bx0} {by1 - by0}" preserveAspectRatio="xMidYMid meet">'
+                 f'<path d="{_obj.geom_d(shp)}" fill="#000" fill-rule="evenodd"/></svg>')
+        t = np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(bytestring=t_svg.encode()))).convert("RGBA"))[..., 3] > 127
+        crop = foot[y0:y1, x0:x1]
+        best = 0.0
+        for dy in (-2, -1, 0, 1, 2):
+            for dx in (-2, -1, 0, 1, 2):
+                ts = np.roll(np.roll(t, dy, 0), dx, 1)
+                best = max(best, float((crop & ts).sum() / max(1, (crop | ts).sum())))
+    except Exception:                      # no measurable source mark: only size and contrast
+        best = 1.0
+    del copy
+    return float(side), contrast, best, seen
+
+
 def main():
     slug = sys.argv[1]
     as_json = "--json" in sys.argv
@@ -390,6 +483,40 @@ def main():
                         "the app's own mark/colours are too small to read on the phone: make the part that "
                         "carries the mark (label, stamp, screen) bigger and the mark >= 36 px of 128 "
                         "(docs/PLAYBOOK.md#fix-warn)")
+        # mark: the app's own mark (measured from the source) on EVERY style, big enough, standing
+        # out from its surface, and really the source's shape (owner 2026-11-22, ara-2: Apple Music
+        # and Soundcore had lost it; ChatGPT's bulb carried an "M"). Games (objects only) and
+        # system apps (GNOME's own metaphor) are not measured.
+        if is_redesign and (w / "geometry.json").exists() and mark_applies(w):
+            need = 44 if st == "faithful" else 36
+            try:
+                mk = mark_layer_measure(slug, svg)
+            except Exception as e:                       # never crash the gate
+                mk = ("err", str(e))
+            how = ("draw the app's mark from the source with put_mark(ic, SLUG, box) (or inside "
+                   "`with ic.group(\"mark\"):`) ON the object - label, screen, lid, stamp - or as the object "
+                   "itself (L1); docs/PLAYBOOK.md#fix-warn")
+            if mk is None:
+                add(st, "mark", "WARN", "no layer named 'mark' - the app's mark is not in this style", how)
+            elif mk[0] == "err":
+                add(st, "mark", "PASS", f"not measured ({mk[1][:40]})")
+            else:
+                side, con, iou, seen = mk
+                val = f"{side:.0f} px of 128, contrast {con:.0f}, shape match {iou:.2f}, visible {seen:.0%}"
+                if iou < 0.5:
+                    add(st, "mark", "WARN", val + " - not the source's mark",
+                        "the 'mark' layer is not the app's mark (a letter or a shape drawn from memory): draw "
+                        "the MEASURED mark with put_mark(ic, SLUG, box) - never retype or redraw a logo")
+                elif con < 25 or seen < 0.6:
+                    add(st, "mark", "WARN", val + " - does not stand out",
+                        "the mark melts into what is under it: a white/light mark on a dark part, a dark or "
+                        "strong-coloured mark on a light part (put_mark(..., face=\"#ffffff\") / a darker ramp step)")
+                elif side < need:
+                    add(st, "mark", "WARN", val + f" - smaller than {need} px",
+                        f"make the part that carries the mark bigger and the mark >= {need} px of 128"
+                        + (" (Faithful is the style closest to the logo: the mark is big there)" if st == "faithful" else ""))
+                else:
+                    add(st, "mark", "PASS", val)
         # bands: a gradient of the source painted as several flat colours looks melted/broken
         # (Deezer concepts, 2026-11-22). regions() knows which measured parts are bands of one
         # gradient; two or more of them as flat fills in one style = FAIL.
@@ -408,6 +535,19 @@ def main():
                     "docs/PLAYBOOK.md#gradients")
             else:
                 add(st, "bands", "PASS", "no flat gradient bands")
+    # same_object: a style uses an object another app of the category already uses (owner
+    # 2026-11-22, ara-2: Apple Music's cassette was Deezer's). Read from design.md 'styles:' and
+    # the concept lines; work/_lib/categories.py knows the families.
+    if is_redesign:
+        try:
+            sys.path.insert(0, str(ROOT / "work/_lib"))
+            import categories as _cat
+            for st_, o, who in _cat.clashes(slug):
+                add(st_, "same_object", "WARN", f"{o} - also used by {', '.join(who)}",
+                    "pick a FREE object of the category's family for this style (python3 tools/next.py "
+                    f"{slug} lists USED/free) - BATCH.md 7: two apps of one category never share an object")
+        except Exception as e:                       # never crash the gate
+            add("app", "same_object", "PASS", f"not measured ({str(e)[:40]})")
     # box inside the plate: a big single region whose colour differs from the plate
     gp = w / "geometry.json"
     sys.path.insert(0, str(ROOT / "work/_lib"))
