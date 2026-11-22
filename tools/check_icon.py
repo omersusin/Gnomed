@@ -266,6 +266,18 @@ def main():
                     "a plate with the logo on it is not a redesign")
             else:
                 add(st, "plain_shape", "PASS", f"object silhouette (circle {iou:.2f}, fill {fill:.0%})")
+    # slots: every style a different design (owner 2026-11-21 / 2026-11-22) unless he dropped the others
+    if is_redesign and len(svgs) == 4:
+        distinct = len({p.read_bytes() for p in svgs.values()})
+        keep = design_line(w, "keep")
+        letters = set(re.findall(r"\b([A-H])\b", keep.split(" - ")[0].split('"')[0]))
+        dropped = keep.lower().startswith(("none", "0", "-")) or '"0"' in keep
+        expected = 1 if dropped else min(4, 1 + len(letters)) if letters else 4
+        if distinct >= expected:
+            add("app", "slots", "PASS", f"{distinct} different designs (owner kept {expected})")
+        else:
+            add("app", "slots", "WARN", f"only {distinct} different designs in 4 styles",
+                "REDESIGN.md 6: main -> symbol, closest to the logo -> faithful, round -> disc, the rest -> rimmed")
     add("app", "faithful", "PASS" if "faithful" in svgs else "FAIL", "faithful" in svgs,
         "" if "faithful" in svgs else "build the app first: python3 tools/make_icon.py " + slug)
     for st, svg in svgs.items():
