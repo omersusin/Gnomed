@@ -150,6 +150,9 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 | Game icons "çok çirkin", wrong composition (one head instead of two, no boots) | only the store poster, no screenshots, drawn from memory | games rule: screenshots, composition + count, serious materials | REDESIGN §3b |
 | One giant session (758k tokens), hours per app | everything in one conversation | new session per app/part | Budget rules (REDESIGN §8) |
 | `pack_refresh.py kafa_topu_2 --dry-run` overwrote the pack PNG before approval (2026-11-21, reverted at once) | the tool had no `--dry-run` and took the flag as a slug | `pack_refresh.py` has `--dry-run`, refuses unknown flags | `pack_refresh.py --dry-run` |
+| Deezer's final (DeepSeek, 2026-11-22): the bars on the record label were 25 px of 128 — a coloured speck on the phone; Claude had to point it out, the owner: *"ikide bir bana mesaj verip bunu, şunu, onu mu düzelteceksin?"* | nothing measured the mark's size; WARNs were "optional" so agents asked Q2 anyway | gate `mark_size` (≥ 36 px); `next.py` state FIX_WARN blocks Q2 on `mark_size`, `visible_*`, `legibility32` unless `warn-ok:` gives a reason; ready objects with mark boxes (`record_label`, `cassette_label`, `speaker_badge`) | REDESIGN §0.10, §5 |
+| DeepSeek could not find app screenshots (games and sideloaded apps) | no tool; a text-only model cannot browse image results | `tools/fetch_refs.py`: Play (5 regions), F-Droid, IzzyOnDroid, Uptodown, GitHub (verified by the package in the code), `--url` for anything else; text output for blind models; Q1 asks the owner when nothing is found | PLAYBOOK#references |
+| Two apps of one kind could get the same object; nothing said which objects exist per kind | metaphors were chosen per app, from memory | `work/_lib/categories.py` + docs/redesign/CATEGORIES.md: category → object family, which objects other apps already use; next.py prints it | REDESIGN §3 "Categories" |
 
 ## 10. Decisions the owner made (do not undo them — read every session)
 
@@ -168,3 +171,7 @@ Contents: 1 Talking to the owner · 2 Identity and design · 3 Colours and gradi
 - Holes are real holes in free styles (PR #12); painting them needs his words.
 - Telegram: envelope (Faithful + Symbol), ring (Disc).
 - Pokémon UNITE and Rush Royale: redone with objects only and shipped (2026-11-21). Kafa Topu 2 shipped with characters before this rule (redo only if the owner asks).
+- **Every app an object of its category** (2026-11-22): music → record, cassette, speaker, headphones…;
+  another app of the same category takes a different object when possible (REDESIGN §3, CATEGORIES.md).
+- **He is not the reviewer** (2026-11-22): the agent fixes what a check can see before Q2 (FIX_WARN);
+  Q2 lists only what it could not fix, with the reason.

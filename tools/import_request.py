@@ -186,7 +186,7 @@ def main():
                 print(f"SKIP {slug}: {err}")
             else:
                 added += 1
-                print(f"added {slug}: work/{slug}/source.png  -> next: python3 tools/make_icon.py {slug}")
+                print(f"added {slug}: work/{slug}/source.png  -> next: python3 tools/next.py {slug}")
         print(f"added {added} app(s). The pack is unchanged until tools/pack_add.py.")
 
 

@@ -176,6 +176,44 @@ def hole_measure(slug, svg, N=512):
     return T(holes).area / (128 * 128), (fa & ~a).sum() / (N * N), iou
 
 
+def mark_measure(slug, svg, N=256, de=20.0):
+    """How big the app's own colours are in a style: the pixels whose colour is close (dE < de)
+    to a COLOURFUL measured part of the source (chroma > 20, >= 1 % of the tile), small specks
+    dropped. -> (larger side of their box in the 128 canvas, share of the painted area, n colours)
+    or None when the source has no colourful part (white / black / grey marks)."""
+    gp = ROOT / "work" / slug / "geometry.json"
+    if not gp.exists():
+        return None
+    regs = json.loads(gp.read_text()).get("info", {}).get("regions", [])
+    cols = []
+    for r in regs:
+        h = r.get("fill", "")
+        if not (isinstance(h, str) and re.match(r"^#[0-9a-fA-F]{6}$", h)) or r.get("area", 0) < 0.01:
+            continue
+        L, A, B = rgb2lab(np.array([[[int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)]]]))[0, 0]
+        if (A * A + B * B) ** 0.5 > 20:
+            cols.append((L, A, B))
+    if not cols:
+        return None
+    a = render(svg, N)
+    painted = a[..., 3] > 0.5
+    lab = rgb2lab(np.clip(a[..., :3], 0, 1))
+    d = np.min(np.stack([np.linalg.norm(lab - np.array(c), axis=-1) for c in cols]), axis=0)
+    m = painted & (d < de)
+    from scipy import ndimage
+    lbl, n = ndimage.label(m)
+    if n:
+        sizes = ndimage.sum(m, lbl, range(1, n + 1))
+        keep = np.isin(lbl, [i + 1 for i, sz in enumerate(sizes) if sz >= 0.0005 * N * N])
+    else:
+        keep = m
+    if not keep.any():
+        return 0.0, 0.0, len(cols)
+    ys, xs = np.nonzero(keep)
+    side = max(xs.max() - xs.min() + 1, ys.max() - ys.min() + 1) * 128 / N
+    return float(side), float(keep.sum() / max(painted.sum(), 1)), len(cols)
+
+
 def main():
     slug = sys.argv[1]
     as_json = "--json" in sys.argv
@@ -289,6 +327,20 @@ def main():
                     add(st, "holes", "PASS" if ok else "FAIL", val + (" (painted on purpose)" if ok else ""),
                         "" if ok else "REDESIGN.md 5: cut the holes (body(), difference) - never paint them; "
                         "only the owner's words allow it: painted-holes: \"<his words>\" (YYYY-MM-DD)")
+        # mark_size: the app's own colours (its mark) must read on the phone. A mark printed small
+        # on a big object (Deezer's bars on a record label, 2026-11-22) is lost at 48 px.
+        if is_redesign:
+            mm = mark_measure(slug, svg)
+            if mm is not None:
+                side, share, _n = mm
+                val = f"{side:.0f} px of 128 (on the phone at 48 px: {side * 48 / 128:.0f} px)"
+                if side >= 36:
+                    add(st, "mark_size", "PASS", val)
+                else:
+                    add(st, "mark_size", "WARN", val,
+                        "the app's own mark/colours are too small to read on the phone: make the part that "
+                        "carries the mark (label, stamp, screen) bigger and the mark >= 36 px of 128 "
+                        "(docs/PLAYBOOK.md#fix-warn)")
         # bands: a gradient of the source painted as several flat colours looks melted/broken
         # (Deezer concepts, 2026-11-22). regions() knows which measured parts are bands of one
         # gradient; two or more of them as flat fills in one style = FAIL.

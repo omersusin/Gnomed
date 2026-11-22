@@ -21,6 +21,7 @@ DESIGN = """# {slug} - design note (REDESIGN.md)
 
 source: work/{slug}/source.png
 kind: <app | game>
+category: <music | video | messaging | social | browser | files | security | finance | shopping | photo | weather | maps | productivity | dev | system | ai | learning | health | game>  (python3 tools/fetch_refs.py {slug} fills it)
 ladder: <L1 mark as object | L2 object carries the mark | L3 material tile | game objects>
 characters: no
 references (games: store icon + >= 2 in-game screenshots; what they show: number of

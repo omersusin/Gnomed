@@ -1,7 +1,9 @@
 # horus - design note (REDESIGN.md)
 
 source: work/horus/source.png
+store: https://f-droid.org/en/packages/com.scariflabs.horus/ (F-Droid, fetched 2026-11-22; refs/store/, not in git)
 kind: app
+category: dev
 ladder: L1 - the eye as a thick enamel amulet
 characters: no
 anchors (2-4 things that make the app recognisable; they must survive):

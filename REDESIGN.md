@@ -4,7 +4,7 @@ This is the **only** design document. AGENTS.md covers git, ComponentInfo, pack 
 tools; docs/MISTAKES.md is the history (read its §10 every session). `docs/course/` (with
 `CONTRIBUTING-legacy.md`) is LEGACY (the old plate pipeline) — do not design with it.
 
-## 0. Talking to the owner (from his own messages, 2026-11-18..21)
+## 0. Talking to the owner (from his own messages, 2026-11-18..22)
 
 1. Always Turkish, short, plain words. In questions never use jargon (dry-run, appfilter,
    ComponentInfo, slot, flavor) without saying what changes ON HIS PHONE.
@@ -24,6 +24,13 @@ tools; docs/MISTAKES.md is the history (read its §10 every session). `docs/cour
    "Batches, one approval at end" put broken icons on his phone.
 8. "Change X" means change exactly X (Telegram stamp: he said the plane, not the whole logo).
 9. Games: objects only, no characters/faces/animals (owner decision 2026-11-21).
+10. **He is not the reviewer** (2026-11-22: *"ikide bir bana mesaj verip bunu, şunu, onu mu
+    düzelteceksin?"*). Before Q2, look at your own result like a strict reviewer and fix what you
+    can see — a mark too small to read, a dark object lost on a dark wallpaper, melted gradients,
+    a size different from the neighbours. `next.py` blocks Q2 on those checks (FIX_WARN); write in
+    Q2 only what you could not fix, and why.
+11. Every app gets an object of its **category** (music → record, cassette, speaker…), a different
+    one from the apps already in the pack when possible (2026-11-22; REDESIGN §3).
 
 ## 1. The one rule
 
@@ -67,6 +74,16 @@ random objects, mascots/characters, a logo that only works in its brand style.
 Durumu, Fotoğraflar, Dosyalar…) take the metaphor of GNOME's own app for that job (Settings,
 Clocks, Snapshot, Calls, Chatty, Contacts, Calculator, Weather, Loupe, Files) — that IS the GNOME
 icon of the function; redraw it, never copy its file.
+
+**Categories → object families** (owner, 2026-11-22: *"tarza ve kategoriye uygun"*): the app's
+category gives the family of objects — music → vinyl record, cassette, speaker, headphones,
+player, radio; messaging → bubble, envelope, paper plane, handset; banks → card, coin, wallet…
+Table: [docs/redesign/CATEGORIES.md](docs/redesign/CATEGORIES.md); `tools/next.py` prints the
+family and which objects other apps already use. Rules: at least two of the four concepts come
+from the family; apps of one category take **different** objects (GNOME: every icon unique);
+if two must share one, the brand colours and the mark keep them apart (gate `mark_size`).
+**References first:** `python3 tools/fetch_refs.py <slug>` saves the store screenshots, the store
+icon, the category and the description (also as text for models that cannot see images).
 
 ### 3b. Games — the game's objects, no characters
 
@@ -132,6 +149,10 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   the object itself must be cut through.) Exceptions only with the owner's words
   (`painted-holes:` in design.md) or the `painted_counters` override for white parts that
   are figure, not holes. Gate: `holes`.
+- **The mark must read on the phone**: when the app's mark is printed on an object (a label,
+  stamp, screen, page), it spans **≥ 36 px of the 128 canvas** (≈ 14 px at 48 px). Make the
+  label bigger rather than the mark smaller. Gate: `mark_size` (Deezer, 2026-11-22: 25 px = a
+  coloured speck). `tools/next.py` makes the agent fix it **before** Q2 (state FIX_WARN).
 - **Gradients stay gradients**: a gradient of the source (Deezer's bars, Instagram, Firefox) is
   ONE part with ONE real gradient — never several flat bands in near colours (that looks
   melted). Draw the mark with `regions(slug)` (bands come back merged, fill = `Grad`) or

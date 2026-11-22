@@ -1,7 +1,9 @@
 # pokemon_unite - design note (REDESIGN.md)
 
 source: work/pokemon_unite/source.png
+store: https://play.google.com/store/apps/details?id=jp.pokemon.pokemonunite&hl=en&gl=US (GAME_ACTION, fetched 2026-11-22; refs/store/, not in git)
 kind: game
+category: game
 ladder: game objects - goal ring + energy ball
 characters: no
 references (games: store icon + >= 2 in-game screenshots; what they show: number of

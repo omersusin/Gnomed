@@ -56,7 +56,7 @@ The flow `next.py` walks you through (one app = one session, then `/clear` or a 
 
 ```
 NO_SOURCE → NOT_STARTED → FILL_DESIGN → DRAW_CONCEPTS → BOARD → ASK_Q1 (owner) →
-BUILD → FIX_FAIL → ASK_Q2 (owner) → PACK → LOG → COMMIT → PUSH → DONE
+BUILD → FIX_FAIL → FIX_WARN → ASK_Q2 (owner) → PACK → LOG → COMMIT → PUSH → DONE
 REDO = the owner asked to redo an app that was already approved
 ```
 
@@ -115,6 +115,8 @@ senin gözün."* Then:
 | `tools/describe_icon.py <file>` | an icon as text (for models without vision) |
 | `tools/pack_add.py` / `tools/pack_refresh.py` | put approved icons into the pack (`--dry-run` first) |
 | `tools/size_audit.py`, `tools/pr_guard.py`, `tools/selftest.py` | pack-wide checks before a PR |
+| `tools/fetch_refs.py <slug>` | store screenshots, icon, category, description (+ as text) → `work/<slug>/refs/store/` |
+| `work/_lib/categories.py <slug>` | the app's category, its object family, which objects other apps already use |
 | `tools/validate_pack.py` | appfilter / drawable.xml / styles.json point to real PNGs, no conflicting ComponentInfos (PR guard runs it) |
 | `tools/readme_previews.py` | after the pack changed: README pictures + store screenshots from the real PNGs |
 | `tools/make_palettes.py` | the GNOME palette for every program → `docs/palette/` (from `RAMP` in objects.py) |

@@ -18,6 +18,14 @@ new request are needed — the source logo is already in `work/<slug>/source.png
 
 Within a group: the apps on the owner's home screen first.
 
+**New requests (registered 2026-11-22, not in the pack yet):** `busuu`, `meta_ai`, `misspipe`, `termux`,
+`wlingua` (from his request zips; `deezer` is being done in its own session). Start each with
+`python3 tools/next.py <slug>`; `tools/fetch_refs.py` already finds all five (Play / GitHub).
+
+Every app: its **category's object family** (docs/redesign/CATEGORIES.md) — e.g. Apple Music, Qobuz,
+BitChord, Mochy and Deezer are all `music`, so they share out record, cassette, speaker, headphones,
+player and radio instead of five records.
+
 ## 2. Getting Gnomed to people
 
 - [x] README with pictures, download links and an **Obtainium** button (this PR).

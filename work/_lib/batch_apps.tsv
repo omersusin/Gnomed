@@ -83,3 +83,8 @@ horus	Horus	ComponentInfo{com.scariflabs.horus/com.scariflabs.horus.MainActivity
 kafa_topu_2	Kafa Topu 2	ComponentInfo{com.masomo.headball2/org.cocos2dx.cpp.AppActivity}	kafa_topu_2
 rush_royale	Rush Royale	ComponentInfo{com.my.defense/games.my.heart.commonpreloaderlib.PreloadActivity}	rush_royale
 pokemon_unite	Pokémon UNITE	ComponentInfo{jp.pokemon.pokemonunite/com.nishiki.pgame.n.PGameLauncherActivity}	pokemon_unite
+busuu	Busuu	ComponentInfo{com.busuu.android.enc/com.busuu.android.bootstrap.presentation.BootStrapActivity}	busuu
+meta_ai	Meta AI	ComponentInfo{com.facebook.stella/com.facebook.wearable.companion.silverstone.main.view.SilverstoneMainActivity}	meta_ai
+misspipe	MISSPipe	ComponentInfo{com.missxxx.misspipe/org.schabi.newpipe.MainActivityDefaultIconAlias}	misspipe
+termux	Termux	ComponentInfo{com.termux/com.termux.app.TermuxActivity}	termux
+wlingua	Wlingua	ComponentInfo{com.wlingua.spanishcourse/com.wlingua.spanishcourse.MainActivity}	wlingua

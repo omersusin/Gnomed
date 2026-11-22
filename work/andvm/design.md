@@ -2,6 +2,7 @@
 
 source: work/andvm/source.png
 kind: app
+category: dev
 ladder: L1 - the two peaks as thick enamel objects
 characters: no
 anchors (2-4 things that make the app recognisable; they must survive):
