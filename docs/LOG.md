@@ -230,3 +230,12 @@ Times are from the commits; the model of a backfilled session is what the commit
 - Open problems: the gate finds a mark only in a layer named `mark` (put_mark does it); apps
   redesigned before this rule warn until they are redone; whether an object is nameable is still
   checked by eye (the overview).
+
+## 2026-11-22 — Claude via Claude Code (cloud session) — fix list round ara-2b (no icons changed)
+- What: `work/anker_soundcore/fixes-ara-2b.md` (Faithful: the buds read as two eyes - real earbuds);
+  next.py reads every `work/<slug>/fixes*.md` (one file per review round, no conflicts with the
+  batch branch, which ticks the older files).
+- Why: the owner's review of ara-2-fixed.png.
+- Owner: "Tamam, o göz gibi çıkmış dediklerini kulaklık gibi yapsın. Ve sonra depoya atsın." (2026-11-22)
+- PR: opened after this commit
+- Open problems: none.

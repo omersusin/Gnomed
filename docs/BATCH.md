@@ -81,7 +81,8 @@ Then send the owner a short Turkish message: the picture's path, the 10 apps, wh
 - **"Devam"** → the next 10.
 - **"<app> olmamış (…)"** → redo exactly that app (new concepts), show it again.
 - **A list of fixes per app** → it is written in the repository, not in a chat message (owner
-  2026-11-22: *"Bıktım bana prompt vermenden, yaz depoya"*): `work/<slug>/fixes.md`, one line per style.
+  2026-11-22: *"Bıktım bana prompt vermenden, yaz depoya"*): `work/<slug>/fixes.md`, one line per style;
+  a later round for the same app is a new file `work/<slug>/fixes-<group>.md`.
   After the owner merges it: `git merge origin/main` (§1), then `python3 tools/next.py` lists the
   apps under "0. The owner's FIXES"; each app's `next.py <slug>` says OWNER_FIX with the lines.
   Change exactly those styles, nothing else; tick each line with `-> now: <what it is now>`.
