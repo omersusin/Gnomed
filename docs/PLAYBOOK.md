@@ -234,7 +234,9 @@ shown:
 
 - [ ] disc: the microphone/record mix is odd - a round object you can name, the note on it
 ```
-1. `next.py <slug>` prints the open lines (state OWNER_FIX). Change only those styles in
+A later review round of the same app is a NEW file, `work/<slug>/fixes-<group>.md`
+(e.g. `fixes-ara-2b.md`, its own `group:` and `shown:`); the old file stays as history.
+1. `next.py <slug>` prints the open lines of all its fix files (state OWNER_FIX). Change only those styles in
    `redesign.py`; `all:` = every style. Then `make_icon.py <slug>`.
 2. Done = ticked **and** what it is now: `- [x] disc: … -> now: a red speaker with the note`.
    A tick without `-> now:` is still open.

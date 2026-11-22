@@ -178,6 +178,11 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   `mark`. ≥ 36 px of 128 (Faithful ≥ 44), white on dark parts, dark or a strong colour on light
   parts, never a letter or a logo from memory. Gate `mark` (WARN, fixed before Q2). Games
   (objects only) and system apps (GNOME's own metaphor) are not measured.
+- **Two equal round things side by side read as EYES** (owner 2026-11-22, ara-2: Soundcore's
+  earbuds case — two plain white circles under a lid looked like a face). A pair of buds, reels,
+  knobs or lenses gets its real shape: earbuds have a stem and an ear tip and are mirrored and
+  tilted in their cradles, reels have spokes, knobs have a pointer. Never two plain discs (or two
+  discs with a dot in the middle) next to each other on one face. Checked by eye in the self-review.
 - **One object per app in a category**: an object another app of the category uses in ANY style
   is taken (Apple Music's cassette was Deezer's). Gate `same_object` (WARN, fixed before Q2).
 - **No strokes or outlines**: a line-art logo (an outlined note, `>_`, a knot) becomes a SOLID

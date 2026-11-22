@@ -15,6 +15,7 @@ git fetch origin
 git branch --show-current          # stay on the batch branch (line 1 of progress.md: "branch: <name>")
 #   no batch branch yet:  git switch -c icons/redo-batch origin/main   and write "branch: icons/redo-batch"
 #   as line 1 of progress.md. Never "git switch -C" / "reset --hard": they throw away unpushed icons.
+git pull --no-rebase --no-edit      # fixes the owner or Claude pushed to YOUR batch branch (first session: skip)
 git merge --no-edit origin/main     # the owner's newest rules, checks and fix lists
 git config core.hooksPath tools/hooks
 python3 tools/gnome-android-icons/scripts/doctor.py      # "result: READY"; do NOT run selftest.py (too slow on a phone)
@@ -60,6 +61,8 @@ If it says OWNER_FIXES_FIRST, do the owner's fix lists first (§4).
    - two styles are the same object restyled (gate `slots` measures it);
    - **the app's mark is missing or wrong** (ara-2: Apple Music, Soundcore, ChatGPT's "M") - every
      style carries the measured mark, `put_mark(ic, SLUG, box)`; gate `mark` measures it;
+   - **two equal round things side by side look like eyes** (ara-2: Soundcore's earbuds = a face) -
+     give them their real shape: stems and ear tips, spokes, pointers; mirrored and tilted;
    - **Faithful is not the closest to the logo** - the mark big, in the logo's colours, often the mark
      itself as the object (a turntable or a cardboard box is not);
    - another app of the category already has the object in any style (ara-2: Apple Music's cassette
@@ -81,7 +84,8 @@ Then send the owner a short Turkish message: the picture's path, the 10 apps, wh
 - **"Devam"** → the next 10.
 - **"<app> olmamış (…)"** → redo exactly that app (new concepts), show it again.
 - **A list of fixes per app** → it is written in the repository, not in a chat message (owner
-  2026-11-22: *"Bıktım bana prompt vermenden, yaz depoya"*): `work/<slug>/fixes.md`, one line per style.
+  2026-11-22: *"Bıktım bana prompt vermenden, yaz depoya"*): `work/<slug>/fixes.md`, one line per style;
+  a later round for the same app is a new file `work/<slug>/fixes-<group>.md`.
   After the owner merges it: `git merge origin/main` (§1), then `python3 tools/next.py` lists the
   apps under "0. The owner's FIXES"; each app's `next.py <slug>` says OWNER_FIX with the lines.
   Change exactly those styles, nothing else; tick each line with `-> now: <what it is now>`.
