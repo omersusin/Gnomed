@@ -67,6 +67,10 @@ RECIPES = {
                  "  record label: 25 px of 128 = 9 px at 48 px). Make the part that carries the mark bigger (the\n"
                  "  label, stamp, screen, page) and fit() the mark to >= 36 px of 128; drop decoration that\n"
                  "  takes its room. Check: python3 tools/check_icon.py <slug> (mark_size PASS).",
+    "slots": "Two or more of the 4 styles are the SAME design. The owner wants every style different\n"
+             "  (REDESIGN.md 6): main -> symbol, closest to the logo -> faithful, a round one -> disc, the rest -> rimmed.\n"
+             "  save_styles(SLUG, {\"symbol\": B(), \"faithful\": A(), \"disc\": D(), \"rimmed\": C()}) - build the kept\n"
+             "  concepts in redesign.py too. Only if he dropped them (keep: none / \"0\") is a repeat right.",
     "bands": "A GRADIENT of the source is painted as several flat colours (bands) - it looks melted/broken.\n"
              "  Draw those parts as ONE shape with a real gradient:\n"
              "      for name, g, fill in regions(SLUG):      # 'r1+r2' = bands merged back, fill = Grad\n"
@@ -79,6 +83,7 @@ RECIPES = {
 }
 WARN_TR = {
     "mark_size": "uygulamanın kendi işareti telefonda çok küçük kalıyor",
+    "slots": "bazı stiller aynı tasarımı tekrarlıyor",
     "bands": "renk geçişi (gradyan) bantlara bölünmüş, erimiş gibi görünüyor",
     "mass": "simge biraz ince/küçük görünebilir (komşularından az dolu)",
     "visible_light": "açık duvar kâğıdında biraz soluk",
@@ -109,7 +114,7 @@ def line(text, key):
 
 
 # WARNs the owner would see on his phone: fixed before Q2 (state FIX_WARN), or explained
-MUST_TRY = ("mark_size", "visible_light", "visible_dark", "legibility32")
+MUST_TRY = ("mark_size", "visible_light", "visible_dark", "legibility32", "slots")
 
 
 def warn_ok(text, check):
@@ -349,15 +354,16 @@ def q1_text(slug, w, text, game):
          + (f"(uygulamanın ekran görüntüleri: work/{slug}/refs/store/sheet.jpg)\n" if sheet.exists() else "") +
          f"(en solda kaynak, sağında {', '.join(letters)}; üst sıra açık, alt sıra koyu duvar kâğıdı)\n{desc}\n\n"
          f"Soru 1: Telefonunda göreceğin ana simge (Symbol) hangisi olsun?\n  " + "  ".join(numbered) + "\n"
-         f"Soru 2: Uygulamadaki diğer stiller (Faithful/Disc/Rimmed) için hangilerini de tutayım? Harfleri yaz\n"
-         f"  (örnek: \"A, D\"); hiçbiri ise \"0\" yaz, o zaman hepsinde ana simge olur.")
+         f"Soru 2: Diğer 3 stil (Faithful/Disc/Rimmed): kalan fikirlerin HEPSİ kullanılır - logoya en yakın olan\n"
+         f"  Faithful'a, yuvarlak olan Disc'e, kalan Rimmed'e. Çıkmasını istediğin varsa harfini yaz (örnek: \"D\n"
+         f"  olmasın\"); boş = hepsi kalsın. \"0\" = diğer stillerde de ana simge olsun.")
     if need_refs:
         t += (("\nNot: Bu bir oyun; elimde oyun içi ekran görüntüsü yok. 2-3 tane atarsan oyunun nesnelerini\n"
                "onlara göre düzeltirim.") if game else
               ("\nNot: Bu uygulamanın ekran görüntüsünü hiçbir yerde bulamadım (Play, F-Droid, IzzyOnDroid, Uptodown,\n"
                "GitHub). Nereden indirdiğini yazarsan ya da 2-3 ekran görüntüsü atarsan ona göre çizerim."))
     t += ("\n\n(With AskUserQuestion: the same text as two questions - Soru 1 single choice with the letters +\n"
-          " \"Hiçbiri, yeniden dene\", Soru 2 multiSelect with the letters. Without it: send the text as is.)")
+          " \"Hiçbiri, yeniden dene\", Soru 2 multiSelect 'which to DROP' with the letters + 'Hepsi kalsın' (default). Without it: send the text as is.)")
     return t
 
 
@@ -526,7 +532,9 @@ def run_slug(slug):
             plate_warning(slug) + ["Translate the concept lines (A: ..., B: ...) into short, plain Turkish in the text.",
                                    "Send the text below (Turkish). Then STOP. When he answers, write his words in design.md:",
              f'  approved: <letter> - "<his answer to Soru 1, verbatim>" ({TODAY})',
-             f'  keep: <letters or none> - "<his answer to Soru 2, verbatim>" ({TODAY})',
+             f'  keep: <the letters that stay - ALL other letters unless he dropped some> - "<his answer to Soru 2, verbatim, or (boş) if he left it empty>" ({TODAY})',
+             "  Then styles: main -> symbol, the one closest to the logo -> faithful, a round one -> disc, the rest -> rimmed",
+             "  (four different designs; REDESIGN.md 6).",
              "If he answered 'Hiçbiri, yeniden dene': archive concepts/ as concepts-roundN/ and draw 4 new ones.",
              "If he wrote a change request inside his answer: do it in the build (and quote it in design.md)."],
             ask=q1_text(slug, w, info["text"], info["game"]))

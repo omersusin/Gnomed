@@ -295,7 +295,7 @@ pieces = traced(SLUG, box_)       # posters: gradients=True (default) keeps them
 **Goal:** fix the WARNs the owner would notice on his phone **before** Q2 — he is not the
 reviewer of things a check can see (owner, 2026-11-22: *"ikide bir bana mesaj verip bunu, şunu,
 onu mu düzelteceksin?"*). `next.py` stops here for `mark_size`, `visible_light`, `visible_dark`,
-`legibility32`.
+`legibility32`, `slots`.
 
 | WARN | Do |
 |---|---|
@@ -303,6 +303,7 @@ onu mu düzelteceksin?"*). `next.py` stops here for `mark_size`, `visible_light`
 | `visible_dark` | a dark object vanishes on a dark wallpaper: a light rim / top light, or lighter ramp steps (1–3) for its face |
 | `visible_light` | a pale object vanishes on a light wallpaper: a darker side (ramp 4–5) or a darker secondary object |
 | `legibility32` | fewer, bigger parts; strokes ≥ 2 px; drop tiny details |
+| `slots` | the 4 styles repeat a design: build the kept concepts and `save_styles(SLUG, {"symbol": main, "faithful": closest-to-logo, "disc": round, "rimmed": rest})` (REDESIGN.md §6) |
 
 Tried and a real fix would break the approved design? Write ONE line per check in design.md —
 `warn-ok: mark_size - <why, one plain sentence>` — the owner reads it in Q2. Never write it
