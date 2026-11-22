@@ -157,3 +157,18 @@ Times are from the commits; the model of a backfilled session is what the commit
 - PR: fix/gradients
 - Open problems: the Deezer work is on the owner's machine (OpenCode), not in the repo — redraw
   its concept A with the new template (`regions()`) before Q1.
+
+## 2026-11-22 — DeepSeek V4.1 Flash Free via OpenCode — `deezer`
+- What: new Deezer redesign from the owner's OG multicolour logo: C (vinyl record half out of
+  a light sleeve, silver rim, enlarged white label and bars) -> Symbol and Disc; A (the 10
+  measured equaliser bars, one smooth source gradient per bar via `regions()`/`gradient()`) ->
+  Faithful; D (cassette with the measured columns) -> Rimmed. Added to the pack in Media.
+  Also merged `origin/fix/gradients` into `gem` before drawing, as the owner asked.
+- Why: the owner's new app request; Q1 chose C, kept A and D, dropped B; after the first Q2 he
+  asked to enlarge C's label and bars so they read at 32 px, changing nothing else.
+- Owner: "Soru 1 cevabım: Ana tasarım C (plak). Kalsın: A ve D. B kalmasın." (2026-11-22);
+  "tamam, pakete ekle ama Plağın ortasındaki beyaz etiketi ve içindeki renkli çubukları biraz
+  büyüt, küçük boyutta da çubuklar seçilsin. Başka hiçbir şeyi değiştirme." (2026-11-22)
+- PR: opened after this commit
+- Open problems: Faithful mass 0.30 (WARN; the bar mark is naturally wide/short); C's label bars
+  are readable but still small at 32 px; D visible_dark 0.56 is close to the 0.55 threshold.

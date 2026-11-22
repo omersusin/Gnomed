@@ -116,4 +116,5 @@
     <item component="ComponentInfo{com.masomo.headball2/org.cocos2dx.cpp.AppActivity}" drawable="kafa_topu_2" />
     <item component="ComponentInfo{jp.pokemon.pokemonunite/com.nishiki.pgame.n.PGameLauncherActivity}" drawable="pokemon_unite" />
     <item component="ComponentInfo{com.my.defense/games.my.heart.commonpreloaderlib.PreloadActivity}" drawable="rush_royale" />
+    <item component="ComponentInfo{deezer.android.app/com.deezer.android.ui.activity.LauncherActivityDark}" drawable="deezer" />
 </resources>
