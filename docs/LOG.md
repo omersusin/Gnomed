@@ -201,6 +201,6 @@ Times are from the commits; the model of a backfilled session is what the commit
   approves before the batch.
 - Owner: Q1 "Soru 1 cevabım: Ana tasarım B (cep müzik çalar). Kalsın: A, C ve D - hepsi.
   A -> Faithful, C -> Rimmed, D -> Disc." (2026-11-22); Q2 "1) Tamam, pakete ekle." (2026-11-22)
-- PR: `icons/redo-all` (pilot PR)
+- PR: #20
 - Open problems: Faithful mass 0.35 (at the limit), Disc legibility 0.739 (near the 0.72 limit),
   Rimmed mass 0.36; the red is the app's UI accent, the store icon itself is monochrome.
