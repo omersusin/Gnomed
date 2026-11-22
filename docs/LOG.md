@@ -230,3 +230,14 @@ Times are from the commits; the model of a backfilled session is what the commit
 - Open problems: the gate finds a mark only in a layer named `mark` (put_mark does it); apps
   redesigned before this rule warn until they are redone; whether an object is nameable is still
   checked by eye (the overview).
+
+## 2026-11-22 — Claude via Claude Code (cloud session) — rule "pairs read as eyes", fix rounds (no icons changed here)
+- What: REDESIGN §5 + BATCH step 6: two equal round things side by side read as eyes; next.py
+  reads every `work/<slug>/fixes*.md` (one file per review round, no conflicts with the batch
+  branch); BATCH §1 pulls the batch branch's own upstream. The Soundcore buds themselves are
+  redrawn in a separate pull request into icons/redo-batch.
+- Why: the owner's review of ara-2-fixed.png (Soundcore Faithful: the buds looked like eyes).
+- Owner: "Tamam, o göz gibi çıkmış dediklerini kulaklık gibi yapsın. Ve sonra depoya atsın." /
+  "Ya da sen yap o düzeltmeyi, sonra da o hatayı dokumana yaz ki sorun olmasın gelecekte" (2026-11-22)
+- PR: opened after this commit
+- Open problems: none.
