@@ -24,6 +24,8 @@ Tools that read a file automatically: Claude Code reads `CLAUDE.md`; OpenCode an
   each style slot, the next step. (Regenerate: `python3 tools/pack_status.py`, a few minutes.)
 - [docs/LOG.md](docs/LOG.md) — what each session did, by which model, and why. Append-only.
 - [docs/ROADMAP.md](docs/ROADMAP.md) — which apps to redo first and why (the owner still picks).
+- **Many apps in one run** (the owner says "hepsini yap" or "docs/BATCH.md'yi oku"): follow
+  [docs/BATCH.md](docs/BATCH.md) exactly — it replaces Q1/Q2 per app with a review every 10 apps.
   [docs/RESEARCH.md](docs/RESEARCH.md) — where the design rules come from (GNOME HIG, MoreWaita, Delta).
 - Which app next? `python3 tools/next.py` (no slug). Unfinished apps come first; otherwise the
   **owner** picks the app — ask him, never pick one yourself.
@@ -117,6 +119,7 @@ senin gözün."* Then:
 | `tools/size_audit.py`, `tools/pr_guard.py`, `tools/selftest.py` | pack-wide checks before a PR |
 | `tools/fetch_refs.py <slug>` | store screenshots, icon, category, description (+ as text) → `work/<slug>/refs/store/` |
 | `work/_lib/categories.py <slug>` | the app's category, its object family, which objects other apps already use |
+| `tools/overview.py <slugs> --out <png>` | several apps in all four styles on one picture (batch review, docs/BATCH.md) |
 | `tools/validate_pack.py` | appfilter / drawable.xml / styles.json point to real PNGs, no conflicting ComponentInfos (PR guard runs it) |
 | `tools/readme_previews.py` | after the pack changed: README pictures + store screenshots from the real PNGs |
 | `tools/make_palettes.py` | the GNOME palette for every program → `docs/palette/` (from `RAMP` in objects.py) |
