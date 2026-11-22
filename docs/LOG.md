@@ -192,3 +192,15 @@ Times are from the commits; the model of a backfilled session is what the commit
 - PR: improve/public (#17)
 - Open problems: APKMirror/APKPure block scripts (403); Deezer's design.md (DeepSeek's branch) needs
   `category: music` after it is merged; the Bing/DuckDuckGo web search is not usable from scripts.
+
+## 2026-11-22 — DeepSeek V4.1 Flash Free via OpenCode — `apple_music`
+- What: pilot redesign of Apple Music in four different styles (REDESIGN §6): B pocket music
+  player -> Symbol, A red note -> Faithful, D round speaker -> Disc, C headphones -> Rimmed;
+  `pack_refresh` replaced the old apple_music PNG/SVG (4 files). 36 PASS, 0 WARN, 0 FAIL.
+- Why: the owner's "redo every app icon the Gnomed way" request; this is the one pilot he
+  approves before the batch.
+- Owner: Q1 "Soru 1 cevabım: Ana tasarım B (cep müzik çalar). Kalsın: A, C ve D - hepsi.
+  A -> Faithful, C -> Rimmed, D -> Disc." (2026-11-22); Q2 "1) Tamam, pakete ekle." (2026-11-22)
+- PR: #20
+- Open problems: Faithful mass 0.35 (at the limit), Disc legibility 0.739 (near the 0.72 limit),
+  Rimmed mass 0.36; the red is the app's UI accent, the store icon itself is monochrome.
