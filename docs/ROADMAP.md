@@ -7,6 +7,9 @@ new request are needed — the source logo is already in `work/<slug>/source.png
 
 ## 1. Redo the existing icons, best value first
 
+**Batch (2026-11-22):** the owner wants every icon redone, including the apps redone before
+(Telegram, Pokémon UNITE, Rush Royale, Deezer, Apple Music) — procedure: [BATCH.md](BATCH.md).
+
 | # | Group | Apps (slugs) | Why first | The object (start point for Q1) |
 |---|---|---|---|---|
 | 1 | **System apps** — seen every day | `ayarlar`, `saat`, `kamera`, `telefon`, `mesajlar`, `ki_iler`, `hesap_makinesi`, `y_hava_durumu`, `foto_raflar` | GNOME has the answer: its own app for the same job | Settings gears · Clocks · Snapshot lens · Calls handset · Chatty bubble · Contacts card · Calculator · Weather · Loupe photo |
