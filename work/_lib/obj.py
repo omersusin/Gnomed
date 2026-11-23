@@ -364,6 +364,20 @@ def mark_parts(slug, de=25.0):
         c = _box(*[float(v) for v in crop])
         keep = [(n, g.intersection(c), f) for n, g, f in keep]
         keep = [(n, g, f) for n, g, f in keep if not g.is_empty]
+    split = gr.get("mark_split")                   # one measured region holds several things in a
+    if isinstance(split, dict):                     # mixed colour (Payload Dumper: wrench + screwdriver
+        from shapely.geometry import box as _box   # + the robot's anti-aliased rim = one grey-green):
+        out = []                                    # {"r1": [[x0, y0, x1, y1, "#hex"], ...]} keeps only
+        for n, g, f in keep:                        # the listed boxes, each in its real colour
+            if n in split:
+                for k, (x0, y0, x1, y1, col) in enumerate(split[n]):
+                    sub = g.intersection(_box(x0, y0, x1, y1))
+                    sub = unary_union([q for q in getattr(sub, "geoms", [sub]) if q.area > 4])
+                    if not sub.is_empty:
+                        out.append((f"{n}.{k}", sub, col))
+            else:
+                out.append((n, g, f))
+        keep = out
     rr = gr.get("mark_round")                      # a part the source's tile edge cut straight
     if isinstance(rr, (int, float)) and rr > 0:      # (Duo's head runs off the tile): round its
         def _cut(g):                                 # corners so the mark is a whole thing
