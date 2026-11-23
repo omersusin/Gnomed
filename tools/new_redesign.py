@@ -32,9 +32,26 @@ anchors (2-4 things that make THIS app recognisable, seen in source.png and the 
   2. <thing, colour> - <where>
 function object (what the app does, as a physical thing):
 
+ideas (docs/METHOD.md §1b - at least 6 lines, from different sources; QUOTE the words you read):
+  slogan: "<the exact big words on a screenshot>" -> <a thing>
+  slogan: "<another screenshot's words>" -> <a thing>
+  screen: <a part only this app's screens have, and its colour> -> <a thing>
+  content: <what happens on the screens> -> <a thing>
+  name: "<the app's name, read literally>" -> <a thing>
+  description: "<words of refs/store/store.json summary>" -> <a thing>
+  logo: <what is inside the logo> -> <a thing>
+
+worksheet (docs/METHOD.md §2 - fill it BEFORE drawing; one line per style):
+  symbol (A):   idea=<slogan | name | content | screen - NOT logo or colour>  thing=<a thing of THIS app, big>  logo=<on a light part | on a brand-colour part | in front>  silhouette=<one word>  main colour=<colour>
+  faithful (B): thing=the logo itself (put_mark body=)  silhouette=the logo  main colour=<the logo's colour>
+  disc (C):     thing=<a ROUND thing: lens, dial, fan, cup, coin, radar>  logo=<where>  silhouette=round + <what breaks the circle>  main colour=<colour>
+  rimmed (D):   thing=<the fourth thing>  logo=<where>  silhouette=<one word>  main colour=<colour>
+  checks: four different silhouettes? at most two main colours black/charcoal? NO plain plate (disc, tile,
+  kite, shield) behind the logo? every thing named by an anchor? no UI card / list / screen drawn small?
+
 concepts (work/{slug}/concepts.png) - four different ideas, EACH carrying anchors (cite them):
   A: <the idea> (anchors 1, 2)
-  B: <the idea> (anchors ...)
+  B: the logo itself as a solid object - <what it looks like> (anchors 1, 2)
   C: <the idea> (anchors ...)
   D: <the idea> (anchors ...)
 
@@ -51,32 +68,52 @@ review (phone.png + review.png: light + dark, holes, baseline, what is still wea
 """
 
 TEMPLATE = '''#!/usr/bin/env python3
-"""{slug} - Gnomed redesign.  Concept: <write the approved concept from design.md>.
-Build:  python3 tools/make_icon.py {slug}      (runs this file, then review + gate)"""
+"""{slug} - Gnomed redesign.  The four styles, each a different THING of this app carrying its
+measured logo (docs/METHOD.md §1-2, design.md 'worksheet:').
+Build:  python3 tools/make_icon.py {slug}      (runs this file, then review + gate)
+
+FIRST look at docs/kit.png: every carrier of work/_lib/carriers.py drawn with real logos. Pick
+one per style by the app's own anchors - one line each, the carrier places the logo itself.
+No carrier fits an anchor? Draw it yourself like work/reddit, work/duolingo, work/scene,
+work/f_droid, work/binance_tr (copy their structure)."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "work/_lib"))
-from objects import *  # noqa: F401,F403,E402   (objects.py + obj.py: envelope, bottle, fit, solid, save_styles ...)
+from carriers import *  # noqa: F401,F403,E402   (the kit + objects.py + obj.py: gk, solid, put_mark ...)
 SLUG = Path(__file__).resolve().parent.name
-P = parts(SLUG)               # measured parts: P["r0"], P["r1"], ..., P["silhouette"], P["holes"]
-R = regions(SLUG)             # the same parts ready to draw: [(name, shape, fill)]; gradient bands merged
-                              # into one part with a real gradient (Grad) - use these fills, not colour()
-# print(describe(SLUG))       # colours / sizes / positions / GRADIENT lines as text
+BRAND = "<the app's main colour, hex, measured from source.png / the screenshots>"
 
 
-def design():
-    ic = gk.Icon("{slug} - Gnomed")
-    # Copy the APPROVED concept from concepts/make_concepts.py here, then polish:
-    # thickness (solid depth), light from the top (gradient + toplight), recess / hole,
-    # a secondary object. Object inside 8..120, bottom edge (side included) 116..120.
-    raise SystemExit("copy the approved concept here (concepts/make_concepts.py), then remove this line")
+def A():
+    """Symbol - <the strongest thing of THIS app> (anchors ...)"""
+    ic = gk.Icon("{slug} - symbol")
+    raise SystemExit("pick a carrier for the Symbol (docs/kit.png), e.g.  bag(ic, SLUG, BRAND)  - then remove this line")
+    return ic
+
+
+def B():
+    """Faithful - the logo itself as a solid object (anchors 1, 2)"""
+    ic = gk.Icon("{slug} - faithful")
+    logo_object(ic, SLUG, brand=BRAND)
+    return ic
+
+
+def C():
+    """Disc - <a ROUND thing of this app> (anchors ...)"""
+    ic = gk.Icon("{slug} - disc")
+    raise SystemExit("pick a round carrier for the Disc: lens / dial / radar / fan / coin / cup - then remove this line")
+    return ic
+
+
+def D():
+    """Rimmed - <the fourth thing, another silhouette> (anchors ...)"""
+    ic = gk.Icon("{slug} - rimmed")
+    raise SystemExit("pick a carrier for the Rimmed (docs/kit.png) - then remove this line")
     return ic
 
 
 if __name__ == "__main__":
-    # REDESIGN.md 6: the MAIN design -> symbol (and every slot without its own design);
-    # kept concepts -> faithful (closest to the original) / disc (a round one) / rimmed
-    save_styles(SLUG, {{"symbol": design()}})
+    save_styles(SLUG, {{"symbol": A(), "faithful": B(), "disc": C(), "rimmed": D()}})
 '''
 
 CONCEPTS = '''#!/usr/bin/env python3

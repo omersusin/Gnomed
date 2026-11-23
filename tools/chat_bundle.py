@@ -19,7 +19,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-EXAMPLES = ("reddit", "duolingo", "scene", "f_droid")
+EXAMPLES = ("reddit", "duolingo", "scene", "f_droid", "binance_tr")
 SKIP = ("__pycache__", ".pyc", "/png/", "build-stamp.txt")
 
 CHAT = """# CHAT.md - make the Gnomed icon for `{slug}` (you have no repository, only this zip)
@@ -34,6 +34,7 @@ Never use an image generator. The owner writes Turkish: answer him in Turkish, s
 
 ## 1. Read, in this order
 1. docs/METHOD.md - HOW to think: the app's own things + its measured logo, four different things.
+   Then LOOK at docs/kit.png: the ready carriers (work/_lib/carriers.py) - one line per style.
 2. REDESIGN.md §5 - the rules.
 3. One worked example completely: work/reddit/redesign.py + work/reddit/design.md
    (also work/duolingo, work/scene, work/f_droid).
@@ -48,7 +49,7 @@ Never use an image generator. The owner writes Turkish: answer him in Turkish, s
 - Fill work/{slug}/design.md (anchors with sources, four concept lines citing them,
   `approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)`,
   `keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)`, `styles: symbol=A faithful=B disc=C rimmed=D`).
-- Write work/{slug}/redesign.py (copy the structure of work/reddit/redesign.py).
+- Write work/{slug}/redesign.py: the template already imports the kit - pick a carrier per style.
 - Run:
       python3 work/{slug}/redesign.py
       python3 tools/check_icon.py {slug} --no-cache
@@ -74,7 +75,7 @@ def files_for(slug):
             out.append(p)
         elif p.is_dir():
             out.extend(q for q in p.rglob("*") if q.is_file())
-    for f in ("docs/METHOD.md", "REDESIGN.md", "docs/PLAYBOOK.md", "pack/styles.json",
+    for f in ("docs/METHOD.md", "docs/kit.png", "REDESIGN.md", "docs/PLAYBOOK.md", "pack/styles.json",
               "tools/check_icon.py", "tools/overview.py", "tools/describe_icon.py",
               "work/_lib", "tools/gnome-android-icons/scripts", "app/src/main/res/font"):
         add(ROOT / f)

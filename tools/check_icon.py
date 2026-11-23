@@ -30,6 +30,12 @@ Checks (per style that exists):
   anchors       design.md: >= 2 anchors say where they were seen (source.png / refs/...); each
                 style's concept line cites the anchors it carries ................. WARN
   empty_layer   a layer the code drew came out empty (d="") - the part is missing .......... FAIL
+  faithful_logo the Faithful is the logo itself (stands free, or the logo is >= 45 % of it) .. WARN
+  ideas         (apps in progress) design.md ideas: >= 6 lines from >= 3 sources, quoted words; the
+                Symbol's idea= is a slogan / name / content / screen ......................... WARN
+  round_twin    symbol/rimmed: round like a disc (circle match > 0.9) - only the Disc is round ... WARN
+  plate         symbol/disc/rimmed: a plain disc/tile/box that is one flat face + the logo ...... WARN
+  dark_family   at most two styles mostly black/charcoal ......................................... WARN
   mark_fit      the mark sits well on its part: nothing of it over the part's edge (<= 1 %),
                 >= 1 unit of room to that edge, nothing drawn over it (<= 3 %) ........ WARN
 Per app:
@@ -452,6 +458,12 @@ def mark_fit_measure(svg, N=256):
         return None
     if np.median(A[..., 3][foot]) < 0.5:
         return None                           # the mark stands on nothing (L1): nothing to sit on
+    whole_icon = rgba(txt)[..., 3] > 0.5
+    share = float(foot.sum() / max(1, whole_icon.sum()))    # how much of the icon IS the mark
+    diecut = 0.0                                            # the icon = the mark's own outline grown (a die-cut sticker)
+    for k in range(6, 27, 3):
+        grown = ndimage.binary_closing(ndimage.binary_dilation(foot, iterations=k), iterations=4)
+        diecut = max(diecut, float((grown & whole_icon).sum() / max(1, (grown | whole_icon).sum())))
     whole = rgba(ET.tostring(alone))[..., 3] > 0.5
     covered = float((whole & ~ndimage.binary_dilation(foot, iterations=1)).sum() / max(1, whole.sum()))
     g = np.zeros(la.shape[:2])
@@ -462,13 +474,77 @@ def mark_fit_measure(svg, N=256):
     ids, cnt = np.unique(lbl[foot & smooth], return_counts=True)
     ids, cnt = ids[ids > 0], cnt[ids > 0]
     if not len(ids):
-        return {"cross": 0.0, "margin": 99.0, "covered": covered}
+        return {"cross": 0.0, "margin": 99.0, "covered": covered, "share": share, "diecut": diecut}
     face = ndimage.binary_closing(ndimage.binary_fill_holes(lbl == ids[np.argmax(cnt)]), iterations=2)
     cross = float((foot & ~ndimage.binary_dilation(face, iterations=1)).sum() / foot.sum())
     inside = foot & face
     dist = ndimage.distance_transform_edt(np.pad(face, 1))[1:-1, 1:-1]
     margin = float(dist[inside].min()) * 128 / N if inside.any() else 0.0
-    return {"cross": cross, "margin": margin, "covered": covered}
+    return {"cross": cross, "margin": margin, "covered": covered, "share": share, "diecut": diecut}
+
+
+def plate_measure(svg, N=256):
+    """'logo on a plate' (Haiku's Stride test, 2026-11-23: the logo on a plain white card; Sonnet's:
+    on a dark disc). -> share of the icon covered by ONE smooth region once the logo is taken away
+    (a plate: one flat face; a fan, a radar, an envelope: several parts), or None without a mark."""
+    import xml.etree.ElementTree as ET
+    from scipy import ndimage
+    txt = Path(svg).read_bytes()
+    ET.register_namespace("", "http://www.w3.org/2000/svg")
+    ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
+    root = ET.fromstring(txt)
+    found = False
+    for par in list(root.iter()):
+        if par.tag.endswith("defs"):
+            continue
+        for c in list(par):
+            if MARK_ID.match(c.get("id") or "") and not c.tag.endswith(("Gradient", "clipPath", "mask")):
+                par.remove(c)
+                found = True
+    if not found:
+        return None
+
+    def rgba(b):
+        return np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(bytestring=b, output_width=N, output_height=N)))
+                          .convert("RGBA")).astype(np.float32) / 255
+    whole = rgba(txt)[..., 3] > 0.5
+    A = rgba(ET.tostring(root))
+    al = A[..., 3:4]
+    la = rgb2lab(np.clip(A[..., :3] * al + 0.5 * (1 - al), 0, 1))
+    g = np.zeros(la.shape[:2])
+    for ch in range(3):
+        g = np.maximum(g, np.hypot(ndimage.sobel(la[..., ch], 0), ndimage.sobel(la[..., ch], 1)) / 8)
+    lbl, n = ndimage.label((A[..., 3] > 0.5) & (g < 5))
+    if not n:
+        return 0.0
+    big = np.bincount(lbl.ravel())[1:].max()
+    return float(big / max(1, whole.sum()))
+
+
+def design_block(text, header):
+    """the indented lines under a design.md header ('anchors', 'ideas'), up to the next line that is
+    not indented. Line by line: the regex it replaces backtracked exponentially when a blank line
+    followed a block of lines with many spaces - the gate hung for 15+ minutes (2026-11-23)."""
+    out, inside = [], False
+    for ln in text.splitlines():
+        if not inside:
+            inside = ln.lower().startswith(header)
+            continue
+        if ln[:1] in (" ", "\t"):
+            out.append(ln)
+        else:
+            break
+    return out
+
+
+def dark_share(a):
+    """share of the painted pixels that are dark neutral (black/charcoal/dark grey: L < 38, chroma < 18)"""
+    op = a[..., 3] > 0.5
+    if not op.any():
+        return 0.0
+    lab = rgb2lab(a[..., :3])
+    dark = (lab[..., 0] < 38) & (np.hypot(lab[..., 1], lab[..., 2]) < 18) & op
+    return float(dark.sum() / op.sum())
 
 
 def _cache_key(slug):
@@ -574,6 +650,7 @@ def compute(slug):
                 "main -> symbol, closest to the logo -> faithful, round -> disc, the rest -> rimmed")
     add("app", "faithful", "PASS" if "faithful" in svgs else "FAIL", "faithful" in svgs,
         "" if "faithful" in svgs else "build the app first: python3 tools/make_icon.py " + slug)
+    darks = {}
     for st, svg in svgs.items():
         try:                                    # in-process: no new Python per style
             fail = bool(_skill_mod("lint_svg").lint(str(svg))["fails"])
@@ -603,6 +680,7 @@ def compute(slug):
             stt = "PASS" if v >= 0.55 else "FAIL"
             add(st, "visible", stt, f"light {vl:.2f} / dark {vd:.2f}", "" if stt == "PASS" else "vanishes on both wallpapers: stronger colours (docs/PLAYBOOK.md#fix-fail)")
         m, bottom = mass_and_bottom(a)
+        darks[st] = dark_share(a)
         # a redesign is a free object in EVERY slot: one range for all (tools/describe_icon.py uses it too)
         lo, hi = (0.35, 0.75) if is_redesign else ((0.20, 0.75) if st == "symbol" else (0.40, 0.75))
         add(st, "mass", "PASS" if lo <= m <= hi else "WARN", round(m, 2), "" if lo <= m <= hi else
@@ -648,7 +726,11 @@ def compute(slug):
                         "only the owner's words allow it: painted-holes: \"<his words>\" (YYYY-MM-DD)")
         # mark_size: the app's own colours (its mark) must read on the phone. A mark printed small
         # on a big object (Deezer's bars on a record label, 2026-11-22) is lost at 48 px.
-        if is_redesign:
+        has_layer = bool(re.search(r'id="mark', svg.read_text(encoding="utf-8"))) and (w / "geometry.json").exists() \
+            and mark_applies(w)
+        if is_redesign and has_layer:          # the measured mark is in a layer: gate `mark` measures its real
+            add(st, "mark_size", "PASS", "measured by gate mark (the layer)")   # size - a white logo has no colour
+        elif is_redesign:                      # to find (Haiku's BCR test, 2026-11-23: 0 px for a white handset)
             mm = mark_measure(slug, svg)
             if mm is not None:
                 side, share, _n = mm
@@ -712,6 +794,42 @@ def compute(slug):
                         "elsewhere). Check with: python3 tools/check_icon.py SLUG")
                 else:
                     add(st, "mark_fit", "PASS", val)
+            # plate: a plain silhouette (disc, tile, box) whose face is one flat region besides the logo
+            if st != "faithful" and is_redesign:
+                kind_, _, _ = shape_kind(svg)
+                if kind_ in ("disc", "tile", "box"):
+                    try:
+                        share_ = plate_measure(svg)
+                    except Exception:
+                        share_ = None
+                    if share_ is not None and share_ >= 0.75:
+                        add(st, "plate", "WARN", f"a plain {kind_} whose face is {share_:.0%} one flat region + the logo",
+                            "the logo on a plate is not an object (METHOD.md §2): pick a carrier with real parts "
+                            "(work/_lib/carriers.py, docs/kit.png) - a lens, a fan, a radar, a bag, an envelope ...")
+                    elif share_ is not None:
+                        add(st, "plate", "PASS", f"{kind_} with parts (largest flat region {share_:.0%})")
+            # round_twin: only the Disc is round (Haiku's Stride test, 2026-11-23: a round dial as the
+            # Symbol AND a round coin as the Disc - two medallions with the runner inside)
+            if st in ("symbol", "rimmed") and is_redesign:
+                _k, _iou, _ = shape_kind(svg)
+                if _iou > 0.9:
+                    add(st, "round_twin", "WARN", f"round like a disc (circle match {_iou:.2f})",
+                        "only the Disc style is round (METHOD.md §2): give the Symbol / Rimmed a thing with another "
+                        "silhouette - the kit's round carriers (lens, dial, radar, fan, coin, cup) are for the Disc only")
+                else:
+                    add(st, "round_twin", "PASS", f"circle match {_iou:.2f}")
+            # faithful_logo: the Faithful IS the logo (METHOD.md §2) - not the logo on a plate. Sonnet's
+            # Binance test (2026-11-23): the logo on a dark kite and on a dark disc.
+            if st == "faithful" and is_redesign:
+                if fit is None or (fit and "err" not in fit and (fit.get("share", 0) >= 0.45 or fit.get("diecut", 0) >= 0.8)):
+                    add(st, "faithful_logo", "PASS", "the logo itself" if fit is None else
+                        (f"the logo is {fit['share']:.0%} of it" if fit.get("share", 0) >= 0.45 else
+                         f"a die-cut sticker: its outline follows the logo ({fit['diecut']:.0%})"))
+                elif fit and "err" not in fit:
+                    add(st, "faithful_logo", "WARN", f"the logo is only {fit['share']:.0%} of the Faithful - it sits on a plate",
+                        "METHOD.md §2: the Faithful is the logo ITSELF as a solid object: put_mark(ic, SLUG, box, "
+                        "anchor=\"bottom\", body=7, side=<darker brand colour>) - no disc, tile, kite or shield behind it. "
+                        "A white or black logo: a die-cut sticker margin in the brand colour (work/reddit)")
         # bands: a gradient of the source painted as several flat colours looks melted/broken
         # (Deezer concepts, 2026-11-22). regions() knows which measured parts are bands of one
         # gradient; two or more of them as flat fills in one style = FAIL.
@@ -730,15 +848,55 @@ def compute(slug):
                     "docs/PLAYBOOK.md#gradients")
             else:
                 add(st, "bands", "PASS", "no flat gradient bands")
+    # ideas: the ideas came from READING the screenshots, the name, the description (METHOD.md §1b;
+    # 2026-11-23: smaller models chose safe carriers - a dial, a bubble - any app's). Only for apps in
+    # progress (no final approval yet) - finished apps are not asked again.
+    if is_redesign and (w / "design.md").exists() and slug not in SYSTEM_APPS and not is_quote(design_line(w, "final")):
+        text_ = (w / "design.md").read_text(encoding="utf-8")
+        lines_ = [ln.strip() for ln in design_block(text_, "ideas")]
+        srcs = []
+        for ln in lines_:
+            m_ = re.match(r"(slogan|screen|content|name|description|logo|colour|color)\s*:\s*\S.*->\s*\S", ln)
+            if m_ and "<" not in ln:                     # a template line still has its <placeholders>
+                srcs.append(m_.group(1))
+        quoted_ = [ln for ln in lines_ if re.match(r"(slogan|name|description)\s*:\s*\"[^\"<]{3,}\"", ln)]
+        ws = next((ln for ln in text_.splitlines() if ln.strip().lower().startswith("symbol (")), "")
+        sym_ok = bool(re.search(r"idea\s*=\s*(slogan|name|content|screen|description)\b", ws))
+        if len(srcs) >= 6 and len(set(srcs)) >= 3 and quoted_ and sym_ok:
+            add("app", "ideas", "PASS", f"{len(srcs)} ideas from {len(set(srcs))} sources; Symbol from {re.search(r'idea\s*=\s*(\w+)', ws).group(1)}")
+        else:
+            why = []
+            if len(srcs) < 6:
+                why.append(f"{len(srcs)} idea lines (>= 6)")
+            if len(set(srcs)) < 3:
+                why.append(f"{len(set(srcs))} sources (>= 3)")
+            if not quoted_:
+                why.append("no quoted slogan/name/description")
+            if not sym_ok:
+                why.append("worksheet symbol line has no idea=<slogan|name|content|screen|description>")
+            add("app", "ideas", "WARN", "; ".join(why),
+                "METHOD.md §1b: write the ideas: block - read the screenshots' big words, the name, the description "
+                "and write >= 6 'source: \"words\" -> thing' lines; the Symbol comes from a slogan, the name, the "
+                "content or a screen (worksheet idea=), not from the logo or the colour")
+    # dark_family: three or four styles mostly black / charcoal look alike and melt into a dark
+    # wallpaper (Sonnet's Binance test, 2026-11-23: a dark slab, a dark kite, a dark disc, a dark wallet)
+    if is_redesign and len(darks) == 4:
+        dk = sorted(st_ for st_, v in darks.items() if v > 0.45)
+        val = ", ".join(f"{st_} {darks[st_]:.0%}" for st_ in darks)
+        if len(dk) >= 3:
+            add("app", "dark_family", "WARN", f"{len(dk)} styles mostly dark ({val})",
+                "METHOD.md §2: at most two styles may be mostly black/charcoal - give the others the brand "
+                "colour, steel, paper or wood; the logo on a dark slab is not an object")
+        else:
+            add("app", "dark_family", "PASS", val)
     # anchors: every style carries the app's OWN anchors (owner 2026-11-23, Kafa Topu 2: a stopwatch,
     # a boot, a trophy and a blue ball - "Otun ile alakası yok ... Biz ne için ona ekran görüntüleri
     # logolar vesaire indirtiyoruz o zaman?"). design.md: anchors cite where they were seen
     # (source.png / refs/...), each style's concept line cites the anchors it carries.
     if is_redesign and (w / "design.md").exists() and slug not in SYSTEM_APPS:
         text = (w / "design.md").read_text(encoding="utf-8")
-        m = re.search(r"^anchors[^\n]*\n((?:[ \t]+[^\n]*\n?)+?)(?=^\S|\Z)", text, re.M)
         items = {}
-        for ln in (m.group(1).splitlines() if m else []):
+        for ln in design_block(text, "anchors"):
             mm = re.match(r"\s*(\d)\.\s*(\S.*)", ln)
             if mm:
                 items[mm.group(1)] = mm.group(2)

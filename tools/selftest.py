@@ -122,7 +122,7 @@ else:
     expect(_s1 == "REDO", f"next.py: the owner's redo: line -> REDO ({_s1})")
     expect(_s0 == "NOT_STARTED", f"next.py: an app with only its source -> NOT_STARTED ({_s0})")
     expect(state("andvm") == "BUILD", "next.py: a redesign without a Symbol -> BUILD")
-    st = state("rush_royale")
+    st = state("kafa_topu_2")          # a shipped redesign (rush_royale has the owner's redo line now)
     expect(st in ("LOG", "COMMIT", "PUSH", "DONE"), f"next.py: a shipped redesign is past Q2 ({st})")
     if list((ROOT / "work").glob("*/fixes.md")) and NX_open_fixes():
         expect(state("rush_royale", app_only=False) == "OWNER_FIXES_FIRST",
@@ -354,6 +354,36 @@ with tempfile.TemporaryDirectory() as tmp:
     (_w / "design.md").write_text('kind: app\nmark: none - "Logo olmasın" (2026-11-23)\n')
     _b = ci.mark_applies(_w)
 expect(_a and not _b, "check_icon.mark_applies: 'mark: none' counts only with the owner's words + date")
+
+
+# Sonnet's Binance test (2026-11-23): the Faithful on a dark kite -> faithful_logo; four dark styles -> dark_family
+with tempfile.TemporaryDirectory() as tmp:
+    ic = O.gk.Icon("kite")
+    O.solid(ic, O.Polygon([(64, 10), (116, 52), (64, 118), (12, 52)]), face="#2b3139", depth=5, side="#0b0e11", layer="kite")
+    O.put_mark(ic, "binance_tr", (44, 34, 84, 84))
+    ic.save(Path(tmp) / "k.svg")
+    _f = ci.mark_fit_measure(Path(tmp) / "k.svg")
+    _d = ci.dark_share(ci.render(Path(tmp) / "k.svg"))
+expect(_f is not None and _f["share"] < 0.45, f"check_icon.faithful_logo: the logo on a dark kite is a plate ({_f and round(_f['share'], 2)})")
+expect(_d > 0.45, f"check_icon.dark_share: a dark kite counts as dark ({_d:.2f})")
+expect("faithful_logo" in NX.MUST_TRY and "dark_family" in NX.MUST_TRY, "next.py: faithful_logo and dark_family are fixed before Q2")
+
+
+# Haiku's Stride test (2026-11-23): the logo on a plain white card -> plate; the kit's carriers are not plates
+with tempfile.TemporaryDirectory() as tmp:
+    ic = O.gk.Icon("card")
+    O.solid(ic, O.rounded(O.box(14, 14, 114, 114), 12), face="#ffffff", depth=4, side="#c0bfbc", layer="card")
+    O.put_mark(ic, "f_droid", (34, 30, 94, 90))
+    ic.save(Path(tmp) / "c.svg")
+    _k, _s = ci.shape_kind(Path(tmp) / "c.svg")[0], ci.plate_measure(Path(tmp) / "c.svg")
+    sys.path.insert(0, str(ROOT / "work/_lib"))
+    import carriers as CA
+    ic2 = CA.gk.Icon("radar")
+    CA.radar(ic2, "f_droid", "#1976d2")
+    ic2.save(Path(tmp) / "r.svg")
+    _s2 = ci.plate_measure(Path(tmp) / "r.svg")
+expect(_k in ("tile", "box") and _s >= 0.75, f"check_icon.plate: the logo on a plain card is a plate ({_k}, {_s:.2f})")
+expect(_s2 < 0.75, f"check_icon.plate: the kit's radar is not a plate ({_s2:.2f})")
 
 print(f"selftest: {ok} passed, {bad} failed")
 sys.exit(1 if bad else 0)

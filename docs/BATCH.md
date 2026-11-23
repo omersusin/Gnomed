@@ -49,7 +49,8 @@ If it says OWNER_FIXES_FIRST, do the owner's fix lists first (§4).
    no characters, faces or mascots.
 3. **All four are used** (REDESIGN.md §6): main → **Symbol**, closest to the original logo →
    **Faithful**, a round one → **Disc**, the rest → **Rimmed**. Four styles, four different designs.
-4. In design.md (Q1 is replaced by the owner's batch rule):
+4. In design.md (Q1 is replaced by the owner's batch rule; in a batch YOU pick the main letter: the concept with the
+   strongest anchor of the app - METHOD.md §2 - and say why in 'decisions'):
    ```
    approved: <main letter> - "batch: Biz onayladıktan sonra hepsini yapsın" (<date>)
    keep: <the other three letters> - "batch: hepsi kullanılsın" (<date>)
@@ -125,6 +126,9 @@ tools/archive.py list <slug>`, then `restore` (one style: `--style <style>`, the
 function from the archived redesign.py). Never delete or edit anything in archive/.
 
 ## 7. Not allowed in a batch
+
+Reading another branch's or another model's work for the app you draw (`compare/*`, `test/*`,
+`git log --all`, `git show <branch>:work/<slug>`) - draw your own; the owner compares models.  
 
 `pack_add` / `pack_refresh` before his approval · touching `main` · `selftest.py` (slow) · skipping
 an app · reusing an old concept · two apps of one category with the same object · a style that
