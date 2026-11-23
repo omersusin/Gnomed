@@ -32,6 +32,9 @@ def main():
         sys.exit(__doc__)
     for slug in slugs:
         names = {"faithful": slug, **styles.get(slug, {})}
+        if not dry:                  # the icons that shipped go to archive/<slug>/ first (tools/archive.py)
+            subprocess.run([sys.executable, str(ROOT / "tools/archive.py"), "pack", slug,
+                            "--label", "pack-before-refresh", "--quiet"], cwd=ROOT)
         builder = builders.builder_of(slug)
         if subprocess.run([sys.executable, builder, slug], cwd=ROOT).returncode:
             sys.exit(f"{slug}: {builder} failed - nothing refreshed")

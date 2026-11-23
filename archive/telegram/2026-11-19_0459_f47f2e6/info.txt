@@ -1,0 +1,3 @@
+source: git commit f47f2e6b40c9daab3cd3454e6e5cb20b69aea595 (2026-11-19_0459)
+subject: Telegram envelope: the stamp prints Telegram's own mark (measured circle + plane)
+label: f47f2e6

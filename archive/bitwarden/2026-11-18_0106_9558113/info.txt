@@ -1,0 +1,3 @@
+source: git commit 955811380607259521cf790a0896ef07803f9641 (2026-11-18_0106)
+subject: Bitwarden: GNOME-style icon, 4 alternatives (faithful, disc, rimmed, symbol)
+label: 9558113

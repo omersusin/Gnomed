@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Bitwarden - Rimmed</title>
+  <desc>geometry: trace of user's IconRequest PNG (192 px), curves fitted to the trace (fit_shield.py)</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#c2c0bc"/><stop offset="0.225" stop-color="#deddda"/><stop offset="0.45" stop-color="#d5d3cf"/><stop offset="0.55" stop-color="#d5d3cf"/><stop offset="0.775" stop-color="#deddda"/><stop offset="1" stop-color="#c2c0bc"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="9.5" x2="0" y2="116.5"><stop offset="0" stop-color="#2165e0"/><stop offset="1" stop-color="#064ec8"/></linearGradient>
+  </defs>
+  <g id="rim">
+  <path id="rim-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g1)"/>
+  <path id="rim-face" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="#f6f5f4"/>
+  <path id="rim-inner" d="M10.5 63A53.5 53.5 0 1 1 117.5 63A53.5 53.5 0 1 1 10.5 63Z" fill="url(#g2)"/>
+  <path id="rim-recess" d="M10.5 63A53.5 53.5 0 1 1 117.5 63A53.5 53.5 0 1 1 10.5 63ZM10.5 64.2A53.5 53.5 0 1 1 117.5 64.2A53.5 53.5 0 1 1 10.5 64.2Z" fill="#000000" opacity="0.1" fill-rule="evenodd"/>
+  </g>
+  <g id="shield">
+  <path id="shield-lift" d="M39.041 38.891C39.041 37.847 39.888 37 40.932 37L87.068 37C88.112 37 88.959 37.847 88.959 38.891L88.959 69.205C88.959 81.964 76.578 91.698 64 97C51.422 91.698 39.041 81.964 39.041 69.205L39.041 38.891M64 43.535L82.379 43.535L82.379 68.698C82.379 77.479 73.431 84.641 64 89.664L64 43.535" fill="#deddda" fill-rule="evenodd"/>
+  <path id="shield-face" d="M 39.041,36.891 C 39.041,35.847 39.888,35 40.932,35 L 87.068,35 C 88.112,35 88.959,35.847 88.959,36.891 L 88.959,67.205 C 88.959,79.964 76.578,89.698 64,95 C 51.422,89.698 39.041,79.964 39.041,67.205 L 39.041,36.891M 64,41.535 L 82.379,41.535 L 82.379,66.698 C 82.379,75.479 73.431,82.641 64,87.664 L 64,41.535" fill="#ffffff" fill-rule="evenodd"/>
+  </g>
+</svg>

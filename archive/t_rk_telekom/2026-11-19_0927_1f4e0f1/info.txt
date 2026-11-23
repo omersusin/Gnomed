@@ -1,0 +1,3 @@
+source: git commit 1f4e0f18690b078d357d9f28adbce577e0c2a4a8 (2026-11-19_0927)
+subject: BCR from a sharp source; Türk Telekom without the background triangle, re-aligned
+label: 1f4e0f1

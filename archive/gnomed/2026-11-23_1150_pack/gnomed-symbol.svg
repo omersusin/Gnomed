@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Gnomed - Free Symbol</title>
+  <desc>original Gnomed logo</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="13" y1="0" x2="59" y2="0"><stop offset="0" stop-color="#134d90"/><stop offset="0.076" stop-color="#327eda"/><stop offset="0.152" stop-color="#2062b1"/><stop offset="0.848" stop-color="#2062b1"/><stop offset="0.924" stop-color="#327eda"/><stop offset="1" stop-color="#134d90"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="69" y1="0" x2="115" y2="0"><stop offset="0" stop-color="#1c8e50"/><stop offset="0.225" stop-color="#32ca76"/><stop offset="0.45" stop-color="#23a860"/><stop offset="0.55" stop-color="#23a860"/><stop offset="0.775" stop-color="#32ca76"/><stop offset="1" stop-color="#1c8e50"/></linearGradient>
+    <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="0" y1="12" x2="0" y2="58"><stop offset="0" stop-color="#46de86"/><stop offset="1" stop-color="#21c771"/></linearGradient>
+    <linearGradient id="g4" gradientUnits="userSpaceOnUse" x1="68.041" y1="0" x2="115.959" y2="0"><stop offset="0" stop-color="#511763"/><stop offset="0.042" stop-color="#8a3da4"/><stop offset="0.083" stop-color="#69277f"/><stop offset="0.917" stop-color="#69277f"/><stop offset="0.958" stop-color="#8a3da4"/><stop offset="1" stop-color="#511763"/></linearGradient>
+  </defs>
+  <path id="sq-chin" d="M20 16H52A7 7 0 0 1 59 23V52A7 7 0 0 1 52 59H20A7 7 0 0 1 13 52V23A7 7 0 0 1 20 16Z" fill="url(#g1)"/>
+  <path id="sq-face" d="M20 13H52A7 7 0 0 1 59 20V49A7 7 0 0 1 52 56H20A7 7 0 0 1 13 49V20A7 7 0 0 1 20 13Z" fill="#3584e4"/>
+  <path id="disc-chin" d="M69 37A23 23 0 1 1 115 37A23 23 0 1 1 69 37Z" fill="url(#g2)"/>
+  <path id="disc-face" d="M69 35A23 23 0 1 1 115 35A23 23 0 1 1 69 35Z" fill="url(#g3)"/>
+  <path id="rim-chin" d="M13 92A23 23 0 1 1 59 92A23 23 0 1 1 13 92Z" fill="#c0bfbc"/>
+  <path id="rim-face" d="M13 90A23 23 0 1 1 59 90A23 23 0 1 1 13 90Z" fill="#f6f5f4"/>
+  <path id="rim-inner" d="M17 90A19 19 0 1 1 55 90A19 19 0 1 1 17 90Z" fill="#ff7800"/>
+  <path id="rim-recess" d="M17 90A19 19 0 1 1 55 90A19 19 0 1 1 17 90ZM17 91.2A19 19 0 1 1 55 91.2A19 19 0 1 1 17 91.2Z" fill="#000000" opacity="0.12" fill-rule="evenodd"/>
+  <path id="spark-chin" d="M91.289 70.082Q92 68 92.711 70.082L97.653 84.554Q98.364 86.636 100.446 87.347L114.918 92.289Q117 93 114.918 93.711L100.446 98.653Q98.364 99.364 97.653 101.446L92.711 115.918Q92 118 91.289 115.918L86.347 101.446Q85.636 99.364 83.554 98.653L69.082 93.711Q67 93 69.082 92.289L83.554 87.347Q85.636 86.636 86.347 84.554Z" fill="url(#g4)"/>
+  <path id="spark-face" d="M91.289 67.082Q92 65 92.711 67.082L97.653 81.554Q98.364 83.636 100.446 84.347L114.918 89.289Q117 90 114.918 90.711L100.446 95.653Q98.364 96.364 97.653 98.446L92.711 112.918Q92 115 91.289 112.918L86.347 98.446Q85.636 96.364 83.554 95.653L69.082 90.711Q67 90 69.082 89.289L83.554 84.347Q85.636 83.636 86.347 81.554Z" fill="#9141ac"/>
+</svg>

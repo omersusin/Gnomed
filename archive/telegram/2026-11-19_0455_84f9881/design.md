@@ -1,0 +1,24 @@
+# telegram - design note (REDESIGN.md)
+
+source: work/telegram/source.png
+anchors (2-4 things that make the app recognisable; they must survive):
+  1. the white paper plane (measured from source.png: tip right-top, notch under the wing)
+  2. Telegram blue #31a5df (between HIG Blue 2 and 3)
+  3. the round shape (the blue circle)
+function object (what the app does, as a physical thing): a message flying off - paper plane / message bubble
+
+concepts (work/telegram/concepts.png):
+  A (L1 the mark becomes an object): the paper plane as a folded blue paper object, no circle
+  B (L2 a GNOME object that carries the mark): thick blue message bubble with a raised white paper plane
+  C (L2): the circle as a blue glass sphere, a white paper plane flying out of it in front
+
+  round 1 A/B/C rejected ("Hiçbiri, yeniden dene"); kept in concepts-round1/
+  D (L2): the circle as a thick blue ring, the white paper plane flying through it
+  E (L2): a blue volumetric cloud (cloud messenger), the white plane flying out in front
+  F (L2): a blue envelope (like GNOME Mail), the paper plane is its stamp
+
+approved: E (faithful) + D (disc) + F (symbol) - "Select one and make others alt" (he let me pick; I chose E as primary: plane biggest, reads best at 32 px)
+styles: faithful=F envelope, disc=D ring, symbol=E cloud (rimmed falls back to faithful) - owner: "Defaultu o mektup yap"
+techniques used (min. 3): thickness / material gradient / top light / recess / hole / secondary object / glass
+palette (GNOME HIG names): Blue 1-5, Light 1-5 (paper plane)
+review (48/32 px, light + dark wallpaper, what is still weak):

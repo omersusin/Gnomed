@@ -1,0 +1,3 @@
+source: git commit 84f9881381f64aa37c91b5e9d6c352c4c9650152 (2026-11-19_0455)
+subject: Telegram: the envelope is the default (Faithful), the cloud moves to Symbol
+label: 84f9881

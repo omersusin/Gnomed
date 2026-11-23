@@ -1,0 +1,3 @@
+source: git commit 785802aaf023c0ced858d5c1a0fe244a5123062b (2026-11-21_1414)
+subject: rush_royale: objects only (wizard hat + ice crystals) - owner: "Tamam, pakete ekle"; REDESIGN 0: talking to the owner
+label: 785802a

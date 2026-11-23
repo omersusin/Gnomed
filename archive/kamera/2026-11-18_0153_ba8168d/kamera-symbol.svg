@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Kamera - Free Symbol</title>
+  <desc>geometry: kamera IconRequest PNG, colour-mask potrace (work/_lib/gtrace.py, IoU &gt;= 0.99 per part); GNOME construction: Gnomed</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5.093" y1="0" x2="110.907" y2="0"><stop offset="0" stop-color="#120d1d"/><stop offset="0.225" stop-color="#585367"/><stop offset="0.45" stop-color="#181324"/><stop offset="0.55" stop-color="#181324"/><stop offset="0.775" stop-color="#585367"/><stop offset="1" stop-color="#120d1d"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="15.093" x2="0" y2="120.907"><stop offset="0" stop-color="#3d3846"/><stop offset="0.55" stop-color="#241f31"/><stop offset="1" stop-color="#1a1625"/></linearGradient>
+    <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="98.411" y1="0" x2="114.098" y2="0"><stop offset="0" stop-color="#950828"/><stop offset="0.225" stop-color="#e33038"/><stop offset="0.45" stop-color="#b71834"/><stop offset="0.55" stop-color="#b71834"/><stop offset="0.775" stop-color="#e33038"/><stop offset="1" stop-color="#950828"/></linearGradient>
+  </defs>
+  <g id="lens">
+  <path id="lens-chin" d="M5.093 70A52.907 52.907 0 1 1 110.907 70A52.907 52.907 0 1 1 5.093 70Z" fill="url(#g1)"/>
+  <path id="lens-edge" d="M5.093 68A52.907 52.907 0 1 1 110.907 68A52.907 52.907 0 1 1 5.093 68Z" fill="#77767b"/>
+  <path id="lens-face" d="M6.493 68.6A51.507 51.507 0 1 1 109.507 68.6A51.507 51.507 0 1 1 6.493 68.6Z" fill="url(#g2)"/>
+  <path id="lens-ring1" d="M18.612 67.63A39.784 39.784 0 1 1 98.179 67.63A39.784 39.784 0 1 1 18.612 67.63ZM23.626 68.026A34.366 34.366 0 1 1 92.357 68.026A34.366 34.366 0 1 1 23.626 68.026Z" fill="#3d3846" fill-rule="evenodd"/>
+  <path id="lens-ring2" d="M30.265 67.665A28.088 28.088 0 1 1 86.44 67.665A28.088 28.088 0 1 1 30.265 67.665ZM39.854 67.235A18.937 18.937 0 1 1 77.728 67.235A18.937 18.937 0 1 1 39.854 67.235Z" fill="#5e5c64" fill-rule="evenodd"/>
+  </g>
+  <g id="dot">
+  <path id="dot-chin" d="M98.411 21.34A7.843 7.843 0 1 1 114.098 21.34A7.843 7.843 0 1 1 98.411 21.34Z" fill="url(#g3)"/>
+  <path id="dot-face" d="M98.411 19.84A7.843 7.843 0 1 1 114.098 19.84A7.843 7.843 0 1 1 98.411 19.84Z" fill="#ed333b"/>
+  </g>
+</svg>
