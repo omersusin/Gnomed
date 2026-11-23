@@ -348,6 +348,8 @@ def mark_parts(slug, de=25.0):
     if forced:                                     # a mark the heuristic threw away as ground
         have = {r[0] for r in keep}
         keep += [r for r in R if (set(r[0].split("+")) & forced) and r[0] not in have]
+        order = [r[0] for r in R]                   # in the source's drawing order (a head under its eyes)
+        keep.sort(key=lambda r: order.index(r[0]) if r[0] in order else len(order))
     mb = gr.get("mark_holes")                       # the mark lives in the measured holes (white
     if isinstance(mb, (list, tuple)) and len(mb) == 4:   # letters on a dark object)
         from shapely.geometry import box as _box
@@ -362,21 +364,39 @@ def mark_parts(slug, de=25.0):
         c = _box(*[float(v) for v in crop])
         keep = [(n, g.intersection(c), f) for n, g, f in keep]
         keep = [(n, g, f) for n, g, f in keep if not g.is_empty]
+    rr = gr.get("mark_round")                      # a part the source's tile edge cut straight
+    if isinstance(rr, (int, float)) and rr > 0:      # (Duo's head runs off the tile): round its
+        def _cut(g):                                 # corners so the mark is a whole thing
+            x0, y0, x1, y1 = g.bounds
+            return x0 <= 0.5 or y0 <= 0.5 or x1 >= 127.5 or y1 >= 127.5
+        def _whole(g):                              # its outline only: parts drawn later sit on it
+            ps = [g] if g.geom_type == "Polygon" else list(getattr(g, "geoms", []))
+            return unary_union([Polygon(q.exterior) for q in ps if q.geom_type == "Polygon"])
+        keep = [(n, rounded(_whole(g), float(rr)) if _cut(g) else g, f) for n, g, f in keep]
     holes = P.get("holes")
     if holes is not None and not holes.is_empty:
         keep = [(n, g.difference(holes), f) for n, g, f in keep]
     return keep
 
 
-def put_mark(ic, slug, box_, depth=0, anchor="center", face=None, side=None, layer="mark"):
+def put_mark(ic, slug, box_, depth=0, anchor="center", face=None, side=None, layer="mark", body=0):
     """Draw the app's measured mark (mark_parts) fitted into box_ = (x0, y0, x1, y1), inside a
     layer named 'mark' - the gate `mark` finds it there and checks size, contrast and shape.
         put_mark(ic, SLUG, record_label(64, 118, 100), face="#ffffff")   # white mark on a label
-        put_mark(ic, SLUG, (14, 12, 114, 112), depth=6, anchor="bottom") # L1: the mark IS the object
+        put_mark(ic, SLUG, (14, 12, 114, 112), body=6, anchor="bottom")  # L1: the mark IS the object
     face: one colour for every part (a white mark on a dark lid ...); default the measured
-    colours. depth > 0: a solid part with a side. -> the placed shapes."""
+    colours. depth > 0: EVERY part is a solid with its own side (a raised logo on a plate).
+    body > 0: the mark IS the object (L1, a face/emblem standing free - Duolingo's head): ONE side
+    of `body` units under the whole outline (colour `side`), the parts flat on top; the side is
+    part of the mark layer, so the gates see a free-standing mark, not a mark sitting on a part.
+    -> the placed shapes."""
     M = mark_parts(slug)
     shapes = fit([g for _, g, _ in M], box_, anchor=anchor)
+    if body:
+        sil = unary_union(shapes)
+        x0, _, x1, _ = sil.bounds
+        ic.path(geom_d(side_of(sil, body)), ic.chin_gradient(side or "#5e5c64", x0, x1, min(12, (x1 - x0) / 4)),
+                layer_id=f"{layer}-side", fill_rule="evenodd")
     with ic.group(layer):
         for i, (g, (_, _, f)) in enumerate(zip(shapes, M)):
             fill = face or f

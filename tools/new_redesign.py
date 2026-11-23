@@ -108,7 +108,7 @@ def A():
     """L1 - the mark itself becomes the object (thickness, light), no plate.
     If one region is only the logo's BACKGROUND (a tile or circle behind the figure), leave it out."""
     ic = gk.Icon("{slug} concept A")
-    put_mark(ic, SLUG, (14, 12, 114, 112), depth=6, anchor="bottom")   # bottom 112 + side 6 = 118
+    put_mark(ic, SLUG, (14, 12, 114, 112), body=6, anchor="bottom")    # L1: bottom 112 + side 6 = 118
     return ic
 
 

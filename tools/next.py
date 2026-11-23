@@ -74,7 +74,7 @@ RECIPES = {
             "  (owner 2026-11-22: Apple Music and Soundcore had lost their marks in every style). Every style shows\n"
             "  the measured mark ON its object, in a layer named 'mark':\n"
             "      put_mark(ic, SLUG, (x0, y0, x1, y1), face=\"#ffffff\")   # on a label / screen / lid / stamp\n"
-            "      put_mark(ic, SLUG, (14, 12, 114, 112), depth=6, anchor=\"bottom\")   # L1: the mark IS the object\n"
+            "      put_mark(ic, SLUG, (14, 12, 114, 112), body=6, anchor=\"bottom\")    # L1: the mark IS the object\n"
             "  >= 36 px of 128 (Faithful >= 44: it is the style closest to the logo), white on dark parts, dark or\n"
             "  strong-coloured on light parts. Never a letter or a logo from memory. docs/PLAYBOOK.md#fix-warn",
     "anchors": "A style does not carry the app's OWN anchors (owner 2026-11-23, Kafa Topu 2: a stopwatch, a\n"
