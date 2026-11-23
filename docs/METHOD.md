@@ -48,7 +48,61 @@ Keep 4-6 of them as **anchors** in design.md, each with its colour and where you
 (`- source.png`, `- refs/store/shot-3.jpg`). If a thing could belong to ANY app of the category, it
 is not an anchor.
 
+## 1b. Ideas before carriers — where the good ones came from
+
+In the tests (2026-11-23) smaller models chose safe carriers (a dial, a bubble, a coin) - clean, but
+any app's. The group-4 ideas all came from READING: write the `ideas:` block of design.md first,
+at least 6 lines, each from a different source, the words in quotes. The real lists:
+
+```
+Duolingo        slogan: "keep your daily streak" -> the streak flame          (Symbol)
+                content: two lessons ordering coffee ("Je voudrais un café") -> a coffee cup   (Disc)
+                screen: the blue sound button in white speech bubbles -> the lesson bubble    (Rimmed)
+Payload Dumper  name: "Dumper" -> a dump truck tipping out the partitions     (Symbol)
+                content: "31% - Extracting" -> a progress dial                 (Disc)
+                description: unpacks an OTA payload -> an opened zip pouch     (Rimmed)
+F-Droid         slogan: "Find people nearby" -> a radar                        (Disc)
+                screen: "Update all" button -> a phone with the button         (Rimmed)
+                description: a store of free apps -> GNOME Software's bag      (Symbol)
+Binance TR      slogan: "Purchase in Turkish lira" + floating coins -> the lira coin, the logo coin
+                screen: "Cüzdan 1,234.78 TRY" -> a wallet                      (Symbol)
+                screen: "Kolay Al/Sat" candles -> a trading screen             (Rimmed)
+```
+
+**Keep the idea, change the object.** When the best idea collides with another app's object
+(gate `same_object`), find another object for the SAME idea - never drop the idea for a generic
+carrier. Haiku's Midas test (2026-11-23): name "Midas" -> gold was the strongest idea, but a gold
+coin is Binance's and Enpara's, so it fell back to a dial; a **gold bar** (or a gold nugget, the
+Midas touch) keeps the idea with a free object. Two screens (a monitor AND a phone) in one app are
+one idea twice.
+
+Rules: the **Symbol comes from a slogan, the name, the content or a screen** - never just "the
+logo" or "the colour" (worksheet `idea=`). A generic carrier (dial, bubble, coin, shield, phone)
+is right only when an idea line names it. Then the kit (§2) draws it.
+
 ## 2. Choose four things — one per style
+
+> **Use the kit.** `docs/kit.png` shows every carrier of `work/_lib/carriers.py` with real logos
+> (white, coloured, black) on both wallpapers. Each is ONE line and places the logo itself, at a
+> size, contrast and position the gate accepts:
+> ```
+> from carriers import *
+> def A(): ic = gk.Icon("x - symbol");   bag(ic, SLUG, BRAND);              return ic   # a store
+> def B(): ic = gk.Icon("x - faithful"); logo_object(ic, SLUG, brand=BRAND); return ic   # always
+> def C(): ic = gk.Icon("x - disc");     radar(ic, SLUG, BRAND);            return ic   # "nearby"
+> def D(): ic = gk.Icon("x - rimmed");   phone(ic, SLUG, BRAND);            return ic   # "update all"
+> ```
+> Why: in the tests other models chose the right THING but could not draw it (Haiku's sneaker
+> became a block). The kit is the group-4 objects, tested. Pick each carrier by an ANCHOR of the
+> app (the slogan, the screen, the name) - not by the category. Only when no carrier fits an
+> anchor, draw it yourself (copy work/reddit, work/duolingo, work/scene, work/binance_tr).
+> `BRAND` is measured: the logo's or the screenshots' main colour (`print(describe(SLUG))`).
+> **No carrier fits the app's anchor** (a call recorder, a running shoe): copy the NEAREST carrier's
+> function from `work/_lib/carriers.py` into redesign.py and change its object, keeping its logo
+> placement (`logo()`, `label()`, `logo_free()`) - e.g. the phone with a red record dot and a
+> waveform for a call recorder. A carrier another app of the category already uses (Mesajlar's
+> bubble) is allowed only when nothing of THIS app fits - say so in `warn-ok: same_object`.
+> Two dark carriers at most (wallet, chip, radar, monitor are dark) - gate `dark_family`.
 
 The assignment that worked every time:
 
@@ -71,6 +125,22 @@ Before you draw, test the four ideas:
   that screen instead (the comments bubble, the shield).
 - **Round thing ≠ the logo on a plain disc.** A disc needs a reason to be round (a lens, a dial, a
   fan, a cup) and something that breaks the circle (a handle, a saucer, ticks).
+
+### Forbidden — seen in the tests of other models (the gate catches the first two)
+
+| Pattern | Seen | Gate |
+|---|---|---|
+| the Faithful is the logo on a plate (a disc, tile, kite, diamond, shield, hexagon behind it) | Sonnet, Binance 2026-11-23: a dark kite | `faithful_logo` |
+| three or four styles mostly black / charcoal - one family, gone on the dark wallpaper | Sonnet, Binance: dark slab, kite, disc, wallet | `dark_family` |
+| the Disc is the logo on a plain round plate, with small things scattered around it | Sonnet, Binance: a dark disc with six tiny coins | look: what is the round THING? |
+| any object of the category without an anchor (a globe, a book, a trophy) | DeepSeek, Duolingo / Kafa Topu 2 | `anchors` |
+| the app's screen drawn small (a card with lines, a list, buttons) | Claude's own first Reddit and IconRequest tries | `legibility32` |
+
+### The worksheet
+
+`design.md` has a `worksheet:` block (tools/new_redesign.py writes it): one line per style -
+the thing, where the logo sits, the silhouette in one word, the main colour - and the five checks.
+Fill it before drawing; if a line is hard to fill, the idea is weak - go back to §1.
 
 ## 3. The logo — measured, never drawn
 

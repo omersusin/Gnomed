@@ -238,8 +238,10 @@ def from_play(code):
 
 def category_of(slug):
     """-> (key or None, where it came from)."""
-    v = _line(_design(slug), "category").split()[0].lower() if _line(_design(slug), "category") else ""
-    v = v.strip("<>,")
+    raw = _line(_design(slug), "category")
+    # the template's placeholder "<music | video | ...>" is not a choice (Haiku's tests, 2026-11-23:
+    # every new app came out as "music")
+    v = "" if not raw or raw.lstrip().startswith("<") else raw.split()[0].lower().strip("<>,")
     if v in CATEGORIES:
         return v, "design.md"
     st = store_info(slug)
