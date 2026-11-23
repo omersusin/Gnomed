@@ -289,8 +289,8 @@ def mark_applies(w):
     """the mark gate measures apps, not games (objects only) or system apps (GNOME's metaphor)"""
     if design_line(w, "kind").lower().startswith("game"):
         return False
-    if w.name in SYSTEM_APPS or design_line(w, "category").lower() == "system":
-        return False
+    if w.name in SYSTEM_APPS:          # the phone's own apps (GNOME's metaphor); a third-party app
+        return False                   # of category "system" (launcher, Shizuku, F-Droid) keeps its mark
     # 'mark: none' only with the OWNER's words + date (2026-11-23: Duolingo's owl - the logo - was dropped
     # as "a mascot" with a plain 'mark: none'; the owner wants the app's own logo in every style)
     mk = design_line(w, "mark")

@@ -47,8 +47,14 @@ def geom_d(g):
 
 
 def rounded(g, r):
-    """Round every corner of a shape by r (convex and concave)."""
-    return g.buffer(-r, quad_segs=24).buffer(2 * r, quad_segs=24).buffer(-r, quad_segs=24)
+    """Round every corner of a shape by r (convex and concave).
+    A part thinner than 2r used to VANISH (an 18-unit pill with r 9, a 12-unit turf strip with r 6 -
+    2026-11-23, gate empty_layer): then r shrinks until the part survives (a full pill end)."""
+    out = g.buffer(-r, quad_segs=24).buffer(2 * r, quad_segs=24).buffer(-r, quad_segs=24)
+    while out.is_empty and not g.is_empty and r > 0.05:
+        r *= 0.8
+        out = g.buffer(-r, quad_segs=24).buffer(2 * r, quad_segs=24).buffer(-r, quad_segs=24)
+    return out
 
 
 def circ(cx, cy, r):
