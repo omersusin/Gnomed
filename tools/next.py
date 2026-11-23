@@ -115,6 +115,10 @@ RECIPES = {
     "plate": "The style is the logo on a plate: a plain disc / tile / card whose face is one flat colour\n"
              "  around the logo (Haiku's Stride test: a white card with the logo). Use a carrier with real\n"
              "  parts from work/_lib/carriers.py (see docs/kit.png): one line, it places the logo itself.",
+    "ideas": "Write the ideas: block of design.md first (docs/METHOD.md §1b, the real lists of Duolingo,\n"
+             "  Payload Dumper, F-Droid, Binance there): READ the screenshots' big words, the name, the store\n"
+             "  description; >= 6 lines 'slogan: \"<words>\" -> <thing>' from >= 3 sources. The Symbol comes\n"
+             "  from a slogan, the name, the content or a screen: worksheet 'symbol (A): idea=slogan ...'.",
     "round_twin": "The Symbol or the Rimmed is round like the Disc (Haiku's Stride test: a round dial as the\n"
                   "  Symbol and a round coin as the Disc - two medallions). Only the Disc is round: pick a carrier\n"
                   "  with another silhouette for that style (bag, arrow, envelope, phone, shield, book ...).",
@@ -130,6 +134,7 @@ WARN_TR = {
     "faithful_logo": "Faithful logonun kendisi değil, bir plakanın üstünde logo",
     "plate": "bu stil düz bir plakanın üstünde logo, bir nesne değil",
     "round_twin": "bu stil de Disc gibi yuvarlak: iki madalyon gibi duruyorlar",
+    "ideas": "fikirler ekran görüntülerinden/adından okunmamış, sıradan nesneler seçilmiş",
     "dark_family": "stillerin çoğu siyah/koyu gri: birbirine benziyor, koyu duvar kâğıdında kayboluyor",
     "empty_layer": "çizilmesi gereken bir parça boş çıkmış, simgede eksik",
     "same_object": "aynı kategorideki başka bir uygulama bu nesneyi kullanıyor",
@@ -168,7 +173,7 @@ def line(text, key):
 
 # WARNs the owner would see on his phone: fixed before Q2 (state FIX_WARN), or explained
 MUST_TRY = ("anchors", "mark", "mark_fit", "mark_size", "visible_light", "visible_dark", "legibility32", "slots", "same_object",
-            "faithful_logo", "dark_family", "plate", "round_twin")
+            "faithful_logo", "dark_family", "plate", "round_twin", "ideas")
 
 
 def warn_ok(text, check):

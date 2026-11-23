@@ -48,6 +48,31 @@ Keep 4-6 of them as **anchors** in design.md, each with its colour and where you
 (`- source.png`, `- refs/store/shot-3.jpg`). If a thing could belong to ANY app of the category, it
 is not an anchor.
 
+## 1b. Ideas before carriers — where the good ones came from
+
+In the tests (2026-11-23) smaller models chose safe carriers (a dial, a bubble, a coin) - clean, but
+any app's. The group-4 ideas all came from READING: write the `ideas:` block of design.md first,
+at least 6 lines, each from a different source, the words in quotes. The real lists:
+
+```
+Duolingo        slogan: "keep your daily streak" -> the streak flame          (Symbol)
+                content: two lessons ordering coffee ("Je voudrais un café") -> a coffee cup   (Disc)
+                screen: the blue sound button in white speech bubbles -> the lesson bubble    (Rimmed)
+Payload Dumper  name: "Dumper" -> a dump truck tipping out the partitions     (Symbol)
+                content: "31% - Extracting" -> a progress dial                 (Disc)
+                description: unpacks an OTA payload -> an opened zip pouch     (Rimmed)
+F-Droid         slogan: "Find people nearby" -> a radar                        (Disc)
+                screen: "Update all" button -> a phone with the button         (Rimmed)
+                description: a store of free apps -> GNOME Software's bag      (Symbol)
+Binance TR      slogan: "Purchase in Turkish lira" + floating coins -> the lira coin, the logo coin
+                screen: "Cüzdan 1,234.78 TRY" -> a wallet                      (Symbol)
+                screen: "Kolay Al/Sat" candles -> a trading screen             (Rimmed)
+```
+
+Rules: the **Symbol comes from a slogan, the name, the content or a screen** - never just "the
+logo" or "the colour" (worksheet `idea=`). A generic carrier (dial, bubble, coin, shield, phone)
+is right only when an idea line names it. Then the kit (§2) draws it.
+
 ## 2. Choose four things — one per style
 
 > **Use the kit.** `docs/kit.png` shows every carrier of `work/_lib/carriers.py` with real logos

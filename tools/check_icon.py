@@ -31,6 +31,8 @@ Checks (per style that exists):
                 style's concept line cites the anchors it carries ................. WARN
   empty_layer   a layer the code drew came out empty (d="") - the part is missing .......... FAIL
   faithful_logo the Faithful is the logo itself (stands free, or the logo is >= 45 % of it) .. WARN
+  ideas         (apps in progress) design.md ideas: >= 6 lines from >= 3 sources, quoted words; the
+                Symbol's idea= is a slogan / name / content / screen ......................... WARN
   round_twin    symbol/rimmed: round like a disc (circle match > 0.9) - only the Disc is round ... WARN
   plate         symbol/disc/rimmed: a plain disc/tile/box that is one flat face + the logo ...... WARN
   dark_family   at most two styles mostly black/charcoal ......................................... WARN
@@ -824,6 +826,37 @@ def compute(slug):
                     "docs/PLAYBOOK.md#gradients")
             else:
                 add(st, "bands", "PASS", "no flat gradient bands")
+    # ideas: the ideas came from READING the screenshots, the name, the description (METHOD.md §1b;
+    # 2026-11-23: smaller models chose safe carriers - a dial, a bubble - any app's). Only for apps in
+    # progress (no final approval yet) - finished apps are not asked again.
+    if is_redesign and (w / "design.md").exists() and slug not in SYSTEM_APPS and not is_quote(design_line(w, "final")):
+        text_ = (w / "design.md").read_text(encoding="utf-8")
+        mi = re.search(r"^ideas[^\n]*\n((?:[ \t]+[^\n]*\n?)+?)(?=^\S|\Z)", text_, re.M)
+        lines_ = [ln.strip() for ln in (mi.group(1).splitlines() if mi else [])]
+        srcs = []
+        for ln in lines_:
+            m_ = re.match(r"(slogan|screen|content|name|description|logo|colour|color)\s*:\s*\S.*->\s*\S", ln)
+            if m_ and "<" not in ln:                     # a template line still has its <placeholders>
+                srcs.append(m_.group(1))
+        quoted_ = [ln for ln in lines_ if re.match(r"(slogan|name|description)\s*:\s*\"[^\"<]{3,}\"", ln)]
+        ws = next((ln for ln in text_.splitlines() if ln.strip().lower().startswith("symbol (")), "")
+        sym_ok = bool(re.search(r"idea\s*=\s*(slogan|name|content|screen|description)\b", ws))
+        if len(srcs) >= 6 and len(set(srcs)) >= 3 and quoted_ and sym_ok:
+            add("app", "ideas", "PASS", f"{len(srcs)} ideas from {len(set(srcs))} sources; Symbol from {re.search(r'idea\s*=\s*(\w+)', ws).group(1)}")
+        else:
+            why = []
+            if len(srcs) < 6:
+                why.append(f"{len(srcs)} idea lines (>= 6)")
+            if len(set(srcs)) < 3:
+                why.append(f"{len(set(srcs))} sources (>= 3)")
+            if not quoted_:
+                why.append("no quoted slogan/name/description")
+            if not sym_ok:
+                why.append("worksheet symbol line has no idea=<slogan|name|content|screen|description>")
+            add("app", "ideas", "WARN", "; ".join(why),
+                "METHOD.md §1b: write the ideas: block - read the screenshots' big words, the name, the description "
+                "and write >= 6 'source: \"words\" -> thing' lines; the Symbol comes from a slogan, the name, the "
+                "content or a screen (worksheet idea=), not from the logo or the colour")
     # dark_family: three or four styles mostly black / charcoal look alike and melt into a dark
     # wallpaper (Sonnet's Binance test, 2026-11-23: a dark slab, a dark kite, a dark disc, a dark wallet)
     if is_redesign and len(darks) == 4:

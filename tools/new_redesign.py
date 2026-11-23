@@ -32,8 +32,17 @@ anchors (2-4 things that make THIS app recognisable, seen in source.png and the 
   2. <thing, colour> - <where>
 function object (what the app does, as a physical thing):
 
+ideas (docs/METHOD.md §1b - at least 6 lines, from different sources; QUOTE the words you read):
+  slogan: "<the exact big words on a screenshot>" -> <a thing>
+  slogan: "<another screenshot's words>" -> <a thing>
+  screen: <a part only this app's screens have, and its colour> -> <a thing>
+  content: <what happens on the screens> -> <a thing>
+  name: "<the app's name, read literally>" -> <a thing>
+  description: "<words of refs/store/store.json summary>" -> <a thing>
+  logo: <what is inside the logo> -> <a thing>
+
 worksheet (docs/METHOD.md §2 - fill it BEFORE drawing; one line per style):
-  symbol (A):   thing=<a thing of THIS app, big>  logo=<on a light part | on a brand-colour part | in front>  silhouette=<one word>  main colour=<colour>
+  symbol (A):   idea=<slogan | name | content | screen - NOT logo or colour>  thing=<a thing of THIS app, big>  logo=<on a light part | on a brand-colour part | in front>  silhouette=<one word>  main colour=<colour>
   faithful (B): thing=the logo itself (put_mark body=)  silhouette=the logo  main colour=<the logo's colour>
   disc (C):     thing=<a ROUND thing: lens, dial, fan, cup, coin, radar>  logo=<where>  silhouette=round + <what breaks the circle>  main colour=<colour>
   rimmed (D):   thing=<the fourth thing>  logo=<where>  silhouette=<one word>  main colour=<colour>
