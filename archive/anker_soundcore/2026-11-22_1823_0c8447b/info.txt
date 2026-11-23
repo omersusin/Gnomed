@@ -1,0 +1,3 @@
+source: git commit 0c8447bc320781bcbd040639cf3dca26e43faafa (2026-11-22_1823)
+subject: anker_soundcore Faithful: real earbuds (stem, ear tip, mirrored and tilted) instead of two eye-like discs
+label: 0c8447b

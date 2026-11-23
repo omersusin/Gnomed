@@ -1,0 +1,3 @@
+source: git commit 5ac2b32f65179600ce51be1948204359c4735641 (2026-11-18_0201)
+subject: Group 1: fix wobbly edges (trace smoothing), clean YouTube superellipse, Instagram side faces follow the gradient
+label: 5ac2b32

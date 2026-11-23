@@ -1,0 +1,3 @@
+source: git commit 7baf2dd6f65c35b05f86581d100a1d134e743a5a (2026-11-21_1359)
+subject: pokemon_unite: objects only (goal ring + energy ball), no characters - owner: "Tamam, pakete ekle"
+label: 7baf2dd

@@ -280,6 +280,17 @@ Times are from the commits; the model of a backfilled session is what the commit
 - PR: opened after this commit
 - Open problems: a free mark sunk into a part is not measured (Enpara 6 u vs Terminal 4.5 u - too close).
 
+## 2026-11-23 — Claude via Claude Code (cloud session) — archive of every version (no icons changed)
+- What: `archive/<slug>/<date>_<time>_<label>/` - every version of every app's four styles (with
+  redesign.py, design.md, concepts, review lists) from the whole git history of icons/redo-batch,
+  plus the icons as they ship today (PNG + SVG); `tools/archive.py` (snap, pack, history, list,
+  restore, compare, index); next.py stores a version before the owner's fixes and before a redo,
+  pack_refresh.py before it overwrites the pack; archive/README.md, archive/INDEX.md, BATCH §6b.
+- Why: the owner wants nothing lost and any icon or other thing to be brought back.
+- Owner: "Evet olsun. Hatta şimdiki eskilerle push yapsın ... Böylece hiçbir şey kaybetmemiş oluruz" (2026-11-23)
+- PR: opened after this commit
+- Open problems: versions that were never committed (DeepSeek's first ara-2 builds) cannot be recovered.
+
 ## 2026-11-22 — Claude via Claude Code (cloud session) — rule "pairs read as eyes", fix rounds (no icons changed here)
 - What: REDESIGN §5 + BATCH step 6: two equal round things side by side read as eyes; next.py
   reads every `work/<slug>/fixes*.md` (one file per review round, no conflicts with the batch

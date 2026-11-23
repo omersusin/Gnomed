@@ -1,0 +1,3 @@
+source: git commit e9d58e74dcef599083b88a2c5153225489d92188 (2026-11-18_0306)
+subject: Add 63 apps to the pack (4 styles), Symbol style on the GNOME baseline [release]
+label: e9d58e7

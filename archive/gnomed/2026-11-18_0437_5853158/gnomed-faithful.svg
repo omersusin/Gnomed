@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Gnomed - Faithful</title>
+  <desc>original Gnomed logo</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="12" y1="0" x2="116" y2="0"><stop offset="0" stop-color="#c2c1c0"/><stop offset="0.038" stop-color="#dfdedd"/><stop offset="0.077" stop-color="#d2d1d0"/><stop offset="0.923" stop-color="#d2d1d0"/><stop offset="0.962" stop-color="#dfdedd"/><stop offset="1" stop-color="#c2c1c0"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="25.24" y1="0" x2="60.2" y2="0"><stop offset="0" stop-color="#134d90"/><stop offset="0.076" stop-color="#327eda"/><stop offset="0.152" stop-color="#2062b1"/><stop offset="0.848" stop-color="#2062b1"/><stop offset="0.924" stop-color="#327eda"/><stop offset="1" stop-color="#134d90"/></linearGradient>
+    <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="67.8" y1="0" x2="102.76" y2="0"><stop offset="0" stop-color="#1c8e50"/><stop offset="0.225" stop-color="#32ca76"/><stop offset="0.45" stop-color="#23a860"/><stop offset="0.55" stop-color="#23a860"/><stop offset="0.775" stop-color="#32ca76"/><stop offset="1" stop-color="#1c8e50"/></linearGradient>
+    <linearGradient id="g4" gradientUnits="userSpaceOnUse" x1="0" y1="22.48" x2="0" y2="57.44"><stop offset="0" stop-color="#46de86"/><stop offset="1" stop-color="#21c771"/></linearGradient>
+    <linearGradient id="g5" gradientUnits="userSpaceOnUse" x1="67.071" y1="0" x2="103.489" y2="0"><stop offset="0" stop-color="#511763"/><stop offset="0.042" stop-color="#8a3da4"/><stop offset="0.083" stop-color="#69277f"/><stop offset="0.917" stop-color="#69277f"/><stop offset="0.958" stop-color="#8a3da4"/><stop offset="1" stop-color="#511763"/></linearGradient>
+  </defs>
+  <g id="plate">
+  <path id="plate-chin" d="M20 16H108A8 8 0 0 1 116 24V108A8 8 0 0 1 108 116H20A8 8 0 0 1 12 108V24A8 8 0 0 1 20 16Z" fill="url(#g1)"/>
+  <path id="plate-face" d="M20 12H108A8 8 0 0 1 116 20V104A8 8 0 0 1 108 112H20A8 8 0 0 1 12 104V20A8 8 0 0 1 20 12Z" fill="#f6f5f4"/>
+  </g>
+  <path id="sq-chin" d="M30.56 25.52H54.88A5.32 5.32 0 0 1 60.2 30.84V52.88A5.32 5.32 0 0 1 54.88 58.2H30.56A5.32 5.32 0 0 1 25.24 52.88V30.84A5.32 5.32 0 0 1 30.56 25.52Z" fill="url(#g2)"/>
+  <path id="sq-face" d="M30.56 23.24H54.88A5.32 5.32 0 0 1 60.2 28.56V50.6A5.32 5.32 0 0 1 54.88 55.92H30.56A5.32 5.32 0 0 1 25.24 50.6V28.56A5.32 5.32 0 0 1 30.56 23.24Z" fill="#3584e4"/>
+  <path id="disc-chin" d="M67.8 41.48A17.48 17.48 0 1 1 102.76 41.48A17.48 17.48 0 1 1 67.8 41.48Z" fill="url(#g3)"/>
+  <path id="disc-face" d="M67.8 39.96A17.48 17.48 0 1 1 102.76 39.96A17.48 17.48 0 1 1 67.8 39.96Z" fill="url(#g4)"/>
+  <path id="rim-chin" d="M25.24 83.28A17.48 17.48 0 1 1 60.2 83.28A17.48 17.48 0 1 1 25.24 83.28Z" fill="#c0bfbc"/>
+  <path id="rim-face" d="M25.24 81.76A17.48 17.48 0 1 1 60.2 81.76A17.48 17.48 0 1 1 25.24 81.76Z" fill="#f6f5f4"/>
+  <path id="rim-inner" d="M28.28 81.76A14.44 14.44 0 1 1 57.16 81.76A14.44 14.44 0 1 1 28.28 81.76Z" fill="#ff7800"/>
+  <path id="rim-recess" d="M28.28 81.76A14.44 14.44 0 1 1 57.16 81.76A14.44 14.44 0 1 1 28.28 81.76ZM28.28 82.672A14.44 14.44 0 1 1 57.16 82.672A14.44 14.44 0 1 1 28.28 82.672Z" fill="#000000" opacity="0.12" fill-rule="evenodd"/>
+  <path id="spark-chin" d="M84.74 66.622Q85.28 65.04 85.82 66.622L89.576 77.621Q90.117 79.203 91.699 79.744L102.698 83.5Q104.28 84.04 102.698 84.58L91.699 88.336Q90.117 88.877 89.576 90.459L85.82 101.458Q85.28 103.04 84.74 101.458L80.984 90.459Q80.443 88.877 78.861 88.336L67.862 84.58Q66.28 84.04 67.862 83.5L78.861 79.744Q80.443 79.203 80.984 77.621Z" fill="url(#g5)"/>
+  <path id="spark-face" d="M84.74 64.342Q85.28 62.76 85.82 64.342L89.576 75.341Q90.117 76.923 91.699 77.464L102.698 81.22Q104.28 81.76 102.698 82.3L91.699 86.056Q90.117 86.597 89.576 88.179L85.82 99.178Q85.28 100.76 84.74 99.178L80.984 88.179Q80.443 86.597 78.861 86.056L67.862 82.3Q66.28 81.76 67.862 81.22L78.861 77.464Q80.443 76.923 80.984 75.341Z" fill="#9141ac"/>
+</svg>

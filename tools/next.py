@@ -512,8 +512,9 @@ def state_of(slug, cheap=False, use_git=True):
         return "ASK_Q1", {"game": game, "text": text}
     fx_open, _, _ = owner_fixes(slug)
     if fx_open:
+        head = owner_fixes(slug)[2]
         return "OWNER_FIX", {"open": fx_open, "final": quoted(line(text, "final")),
-                             "file": owner_fixes(slug)[2].get("file", "fixes.md")}
+                             "file": head.get("file", "fixes.md"), "group": head.get("group", "fixes")}
     red = (w / "redesign.py").read_text(encoding="utf-8")
     built = [w / f"{slug}-{st}.svg" for st in ("faithful", "symbol")]     # the other slots may fall back
     if "copy the approved concept here" in red:
@@ -642,6 +643,9 @@ def run_slug(slug):
              " the pack is not touched - the old icon stays on his phone until the new one is approved)"],
             extra=f"  the owner's words: {line(design_text(w), 'redo')}")
     elif st == "OWNER_FIX":
+        label = "before-" + re.sub(r"[^a-z0-9-]+", "-", info.get("group", "fixes").lower())
+        if not list((ROOT / "archive" / slug).glob(f"*_{label}*")):     # keep the version he reviewed
+            sh(sys.executable, "tools/archive.py", "snap", slug, "--label", label, "--quiet")
         do = [f"The owner's review (work/{slug}/{info.get('file', 'fixes.md')}) - change EXACTLY these styles, nothing else:"]
         do += ["  " + ln for ln in info["open"]]
         do += ["For each line:",
@@ -831,6 +835,7 @@ def start_redo(slug):
     text = design_text(w)
     if not quoted(line(text, "redo")):
         sys.exit("no quoted 'redo:' line in design.md - nothing to do")
+    sh(sys.executable, "tools/archive.py", "snap", slug, "--label", "before-redo", "--quiet")   # nothing is lost
     n = 1
     while (w / f"concepts-round{n}").exists():
         n += 1

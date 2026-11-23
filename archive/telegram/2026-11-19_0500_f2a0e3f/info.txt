@@ -1,0 +1,3 @@
+source: git commit f2a0e3fccef4136f03cb59719ba699e2e03325da (2026-11-19_0500)
+subject: Telegram envelope: the stamp prints only the paper plane (measured), no circle
+label: f2a0e3f

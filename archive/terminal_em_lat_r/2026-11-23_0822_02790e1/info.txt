@@ -1,0 +1,3 @@
+source: git commit 02790e1b597ebc7729d06c674638a7429301721a (2026-11-23_0822)
+subject: batch 3: anker_soundcore, trendyolmilla, hepsiburada, qobuz, terminal_em_lat_r, mt_manager, enpara
+label: 02790e1

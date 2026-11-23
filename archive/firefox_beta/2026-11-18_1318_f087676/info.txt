@@ -1,0 +1,3 @@
+source: git commit f087676bc31c95116273a7aa55014393554fc57a (2026-11-18_1318)
+subject: Firefox Beta: bold BETA letters (holes_inlay); Firefox Nightly: one cyan->violet body gradient
+label: f087676

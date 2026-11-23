@@ -1,0 +1,3 @@
+source: git commit 19ff2718841cdbd6948124f0d019bb7e9678d81a (2026-11-21_0407)
+subject: kafa_topu_2: build B (symbol) + A/C/D slots; pack_refresh --dry-run
+label: 19ff271

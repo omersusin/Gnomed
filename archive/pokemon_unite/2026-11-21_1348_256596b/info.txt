@@ -1,0 +1,3 @@
+source: git commit 256596b746b2232f2bc401c2b44221369868e384 (2026-11-21_1348)
+subject: pokemon_unite: ship A (symbol) + B/C/D slots from the owner's screenshots - owner: "Tamam, pakete ekle"
+label: 256596b
