@@ -34,7 +34,8 @@ def call(fn, slug):
           "bag": dict(brand=b), "envelope": dict(brand=b), "wallet": dict(), "chip": dict(lid=b), "phone": dict(brand=b),
           "shield": dict(brand=b), "bubble": dict(brand=b), "lens": dict(glass=b), "dial": dict(arc=b), "radar": dict(ring=b),
           "fan": dict(blades=b), "coin": dict(), "cup": dict(), "gauge": dict(), "monitor": dict(), "pouch": dict(brand=b),
-          "book": dict(brand=b), "card": dict(brand=b)}.get(fn, {})
+          "book": dict(brand=b), "card": dict(brand=b), "gold_bars": dict(), "player": dict(body=b), "truck": dict(cab=b),
+          "briefcase": dict(leather=b), "equalizer": dict(brand=b), "globe": dict(ocean=b), "knob": dict(cap=b)}.get(fn, {})
     f(ic, slug, **kw)
     return ic
 

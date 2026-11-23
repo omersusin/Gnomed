@@ -127,6 +127,9 @@ function from the archived redesign.py). Never delete or edit anything in archiv
 
 ## 7. Not allowed in a batch
 
+Reading another branch's or another model's work for the app you draw (`compare/*`, `test/*`,
+`git log --all`, `git show <branch>:work/<slug>`) - draw your own; the owner compares models.  
+
 `pack_add` / `pack_refresh` before his approval · touching `main` · `selftest.py` (slow) · skipping
 an app · reusing an old concept · two apps of one category with the same object · a style that
 repeats another style's design · characters, faces, mascots · image generators.

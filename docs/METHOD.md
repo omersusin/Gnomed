@@ -80,6 +80,28 @@ Rules: the **Symbol comes from a slogan, the name, the content or a screen** - n
 logo" or "the colour" (worksheet `idea=`). A generic carrier (dial, bubble, coin, shield, phone)
 is right only when an idea line names it. Then the kit (§2) draws it.
 
+### Idea patterns — what Claude's ideas looked like, by kind of app
+
+DeepSeek follows examples closely (its Mornye matched Claude's), so here are the patterns. Use
+them as a START; the app's own words still decide.
+
+| Kind | Symbol (bold, the app's most specific thing) | Disc (round) | Rimmed |
+|---|---|---|---|
+| music / audio | `player` with the APP'S OWN ARTWORK on its screen (Mornye's flower) | `knob` (volume, hi-res) | `equalizer` with the app's curve |
+| finance / stocks / crypto | what the NAME or a slogan says: `gold_bars` (Midas), `wallet` with the logo coin (Binance) | `globe` (markets abroad), `coin` | `briefcase` (portfolio), `monitor` (charts) |
+| store / downloads | `bag` (GNOME Software's object) | `radar` ("nearby"), `dial` (progress) | `phone` ("Update all") |
+| social / community | the app's own reaction: `arrow` (up-vote) | `lens` (search) | `bubble` (comments) |
+| learning / habits | the app's reward: `flame` (streak) | `cup` (a lesson's content) | `bubble` (the lesson) |
+| tools / root / system | what the NAME says: `truck` (Dumper) | `fan`, `dial` | `pouch` (unpacking), `gauge` |
+| requests / mail | `envelope` (sent) | `dial` (a score) | `shield` (a check) |
+
+**The Symbol is the boldest of the four**: one big thing + the logo, at most two more parts. Never
+the busiest style - a panel with faders, a wave, a strip and the logo is a Rimmed, not a Symbol
+(DeepSeek's Mornye put its equalizer in the Symbol; at 32 px it was grey stripes).
+**If the screenshots have the app's own artwork or colours** (an album cover, illustrations), one
+style shows them - usually the Symbol (`player(..., art=(bg, main, accent))`). Four styles only in the
+logo's two colours look like one icon four times.
+
 ## 2. Choose four things — one per style
 
 > **Use the kit.** `docs/kit.png` shows every carrier of `work/_lib/carriers.py` with real logos

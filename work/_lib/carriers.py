@@ -123,7 +123,10 @@ def sticker(ic, slug, brand, margin=9):
     shapes = fit([g for _, g, _ in mark_parts(slug)], box_, anchor="bottom")
     # closed: the margin fills the gaps between the logo's parts - an open gap between two bars
     # read as two dark eyes (Haiku's Mornye test, 2026-11-23)
-    st = rounded(unary_union(shapes).buffer(margin + 6, quad_segs=24).buffer(-6, quad_segs=24), 4)
+    # and smooth: a big closing then a small opening - the outline of a real die-cut, no bumps
+    # around each bar (it looked like a glove - DeepSeek's and Claude's Mornye, 2026-11-23)
+    st = unary_union(shapes).buffer(margin + 14, quad_segs=24).buffer(-14, quad_segs=24)
+    st = st.buffer(-4, quad_segs=24).buffer(4, quad_segs=24)
     solid(ic, st, face=face(r), depth=5, side=r[4], layer="sticker")
     return logo(ic, slug, box_, on="brand", anchor="bottom")
 
@@ -439,6 +442,148 @@ def card(ic, slug, brand):
     return g
 
 
+# ------------------------------------------------------------------ idea objects (Claude's Midas, Mornye,
+# Payload Dumper, 2026-11-23) - the things a NAME or a SLOGAN suggested; one line each, like the rest
+def gold_bars(ic, slug, stamp=None):
+    """the name or a slogan says GOLD (Midas, "altın", treasure, premium): three gold bars stacked,
+    the logo stamped on the top bar (stamp = its colour, default a deep gold)"""
+    G = ("#fff3c4", "#f9dc7a", "#eec04a", "#d4a12a", "#a67a12")
+
+    def ingot(x0, x1, base, h, name):
+        inset, th = (x1 - x0) * 0.10, h * 0.30
+        front = Polygon([(x0, base), (x1, base), (x1 - inset, base - h + th), (x0 + inset, base - h + th)])
+        top = Polygon([(x0 + inset, base - h + th), (x1 - inset, base - h + th), (x1 - inset * 2, base - h), (x0 + inset * 2, base - h)])
+        solid(ic, front, face=[(0, G[2]), (1, G[3])], depth=4, side=G[4], top=False, layer=f"{name}-front")
+        ic.path(geom_d(top), ic.linear([(0, G[0]), (1, G[1])], 0, base - h, 0, base - h + th), layer_id=f"{name}-top")
+        ic.path(geom_d(front.intersection(box(x0, base - h + th, x1, base - h + th + 2.2))), "#ffffff", opacity=0.45, layer_id=f"{name}-edge")
+    ingot(8, 64, 114, 34, "bar-l")
+    ingot(64, 120, 114, 34, "bar-r")
+    ingot(20, 108, 82, 62, "bar-top")
+    put_mark(ic, slug, (36, 42.5, 92, 79.5), face=stamp or "#6b4f10")
+
+
+def globe(ic, slug, ocean, metal=GOLD):
+    """world, markets abroad, languages, travel: a globe in the brand colour on a meridian and stand,
+    light continents, the logo on the ocean"""
+    o, m = ramp(ocean), ramp(metal)
+    cx, cy, R = 64, 56, 44
+    solid(ic, rounded(box(42, 108, 86, 116), 3), face=[(0, m[1]), (1, m[3])], depth=3, side=m[4], layer="base")
+    solid(ic, box(61, 96, 67, 110), face=[(0, m[2]), (1, m[3])], depth=1, side=m[4], top=False, layer="post")
+    ring = LineString([(cx + (R + 7) * math.cos(math.radians(a)), cy + (R + 7) * math.sin(math.radians(a))) for a in range(-40, 141, 4)])
+    solid(ic, ring.buffer(3.2, cap_style=1), face=[(0, m[1]), (1, m[3])], depth=2, side=m[4], layer="meridian")
+    g = circ(cx, cy, R)
+    light = logo_tone(slug) == "light"           # a coloured logo: a pale ocean, the brand on the land
+    sea = o if light else ("#ffffff", "#eef3fd", "#dbe6f8", "#c3d4f0", "#a8bfe6")
+    solid(ic, g, face=[(0, sea[1]), (0.55, sea[2]), (1, sea[3])], depth=3, side=o[4], layer="globe")
+    land = unary_union([rounded(Polygon([(22, 32), (34, 26), (38, 38), (32, 52), (36, 68), (30, 84), (25, 78), (23, 60), (20, 46)]), 4),
+                        rounded(Polygon([(92, 26), (104, 30), (104, 42), (98, 46), (106, 56), (102, 76), (94, 86), (92, 66), (90, 50), (88, 40)]), 4)]).intersection(g.buffer(-2))
+    ic.path(geom_d(land), ic.linear([(0, "#ffffff"), (1, o[0])], 0, 12, 0, 100) if light else ic.linear([(0, o[1]), (1, o[3])], 0, 12, 0, 100),
+            layer_id="continents")
+    ic.path(geom_d(g.difference(affinity.translate(g, 6, 7))), "#ffffff", opacity=0.25, layer_id="globe-light")
+    logo(ic, slug, (45, 37, 83, 75), on="brand")
+
+
+def briefcase(ic, slug, leather, metal=GOLD):
+    """a portfolio, work, business, documents: a leather briefcase in the brand colour, its handle,
+    two clasps, the logo on its front"""
+    r, m = ramp(leather), ramp(metal)
+    solid(ic, LineString([(48, 42), (48, 28), (80, 28), (80, 42)]).buffer(4.2, join_style=1, cap_style=1), face=[(0, r[3]), (1, r[4])], depth=2, side=r[4], layer="handle")
+    case = rounded(box(10, 40, 118, 114), 11)
+    solid(ic, case, face=[(0, r[1]), (0.45, r[2]), (1, r[3])], depth=6, side=r[4], layer="case")
+    ic.path(geom_d(box(10, 56, 118, 59).intersection(case)), "#000000", opacity=0.22, layer_id="lid-seam")
+    for x in (30, 98):
+        solid(ic, rounded(box(x - 6, 50, x + 6, 64), 2.5), face=[(0, m[0]), (1, m[3])], depth=2, side=m[4], layer=f"clasp-{x}")
+    if logo_tone(slug) == "light":
+        logo(ic, slug, (34, 64, 94, 108), on="brand")
+    else:
+        label(ic, rounded(box(32, 63, 96, 109), 6))
+        logo(ic, slug, (36, 66, 92, 106))
+
+
+def player(ic, slug, body, art=("#ffd6e0", "#c2185b", "#f9b208")):
+    """music, podcasts, hi-res, audiobooks: a pocket player (a DAP) - the APP'S OWN ARTWORK on its
+    screen (art = background, main shape, accent: take them from the screenshots), a wavy seek
+    line, a volume wheel, the logo on its body"""
+    b = ramp(body)
+    solid(ic, rounded(box(94, 30, 106, 54), 4), face=[(0, "#ffffff"), (0.5, "#c0bfbc"), (1, "#77767b")], depth=2, side="#5e5c64", layer="wheel")
+    solid(ic, rounded(box(26, 8, 100, 118), 13), face=[(0, b[0]), (0.5, b[2]), (1, b[3])], depth=5, side=b[4], layer="body")
+    scr = rounded(box(33, 15, 93, 63), 6)
+    recess(ic, scr, [(0, _mix(art[0], "#ffffff", 0.3)), (1, art[0])], wall=2, layer="screen")
+    a = scr.buffer(-1)
+    ic.path(geom_d(circ(48, 44, 11).intersection(a)), art[2], layer_id="art-accent")
+    petals = unary_union([circ(70 + 11 * math.cos(math.radians(t)), 36 + 11 * math.sin(math.radians(t)), 8) for t in range(0, 360, 60)] + [circ(70, 36, 9)])
+    ic.path(geom_d(petals.intersection(a)), ic.linear([(0, _mix(art[1], "#ffffff", 0.2)), (1, _mix(art[1], "#000000", 0.25))], 0, 20, 0, 52), layer_id="art-main")
+    wave = LineString([(38 + t, 57 + 2.2 * math.sin(t / 3.2)) for t in range(0, 34)] + [(72, 57), (88, 57)]).buffer(1.6, cap_style=1)
+    ic.path(geom_d(wave.intersection(a)), "#ffffff", layer_id="seek")
+    if logo_tone(slug) == "light":
+        logo(ic, slug, (42, 68, 84, 112), on="brand")
+    else:
+        label(ic, rounded(box(40, 68, 86, 112), 6))
+        logo(ic, slug, (43, 71, 83, 109))
+
+
+def knob(ic, slug, cap, scale=None):
+    """volume, sound quality, a setting turned up: an aluminium knob on its tick scale, the logo on
+    the cap in the brand colour"""
+    c = ramp(cap)
+    sc = scale or c[1]
+    cx, cy = 64, 62
+    ticks = unary_union([LineString([(cx + 50 * math.cos(math.radians(a)), cy + 50 * math.sin(math.radians(a))),
+                                     (cx + 56 * math.cos(math.radians(a)), cy + 56 * math.sin(math.radians(a)))]).buffer(1.8, cap_style=1)
+                         for a in range(135, 406, 27)])
+    ic.path(geom_d(ticks), sc, layer_id="scale")
+    solid(ic, circ(cx, cy, 45), face=[(0, "#ffffff"), (0.5, "#c0bfbc"), (1, "#77767b")], depth=6, side="#5e5c64", layer="knob")
+    knurl = unary_union([LineString([(cx + 41 * math.cos(math.radians(a)), cy + 41 * math.sin(math.radians(a))),
+                                     (cx + 45 * math.cos(math.radians(a)), cy + 45 * math.sin(math.radians(a)))]).buffer(0.9) for a in range(0, 360, 10)])
+    ic.path(geom_d(knurl), "#5e5c64", opacity=0.45, layer_id="knurl")
+    tone = logo_tone(slug)
+    cr = c if tone == "light" else LIGHT
+    solid(ic, circ(cx, cy, 34), face=[(0, cr[0]), (1, cr[3])], depth=2, side=cr[4], layer="cap")
+    ptr = LineString([(cx + 30 * math.cos(math.radians(-50)), cy + 30 * math.sin(math.radians(-50))),
+                      (cx + 40 * math.cos(math.radians(-50)), cy + 40 * math.sin(math.radians(-50)))]).buffer(2.4, cap_style=1)
+    ic.path(geom_d(ptr), sc, layer_id="pointer")
+    logo(ic, slug, (cx - 19, cy - 22, cx + 19, cy + 22), on="brand")
+
+
+def equalizer(ic, slug, brand, curve=(44, 52, 64, 66)):
+    """sound shaping, mixing, bass boost, settings with sliders: a hardware equalizer - a light panel,
+    four faders standing on the app's curve (curve = their heights), the logo on a brand end plate"""
+    r = ramp(brand)
+    solid(ic, rounded(box(8, 24, 120, 108), 10), face=[(0, "#ffffff"), (1, "#deddda")], depth=6, side="#9a9996", layer="panel")
+    plate_r = r if logo_tone(slug) == "light" else LIGHT
+    solid(ic, rounded(box(14, 30, 60, 102), 7), face=[(0, plate_r[1]), (1, plate_r[3])], depth=2, side=plate_r[4], layer="plate")
+    logo(ic, slug, (18, 44, 56, 88), on="brand")
+    for k, (x, y) in enumerate(zip((70, 84, 98, 112), curve)):
+        ic.path(geom_d(LineString([(x, 36), (x, 96)]).buffer(2.2, cap_style=1)), "#9a9996", layer_id=f"track-{k}")
+        solid(ic, rounded(box(x - 6, y - 5, x + 6, y + 5), 2.5), face=[(0, r[0]), (1, r[3])], depth=2, side=r[4], layer=f"fader-{k}")
+
+
+def truck(ic, slug, cab, items=("#3ddc84", "#9a9996", "#f08a24")):
+    """the NAME says it: a dumper, delivery, moving, unloading - a dump truck tipping out its load,
+    the logo on its steel bed"""
+    c = ramp(cab)
+    k, org, hinge = 1.06, (62.5, 113), (92, 84)
+
+    def T(g):
+        return affinity.scale(g, k, k, origin=org)
+    for n, (x, y, a, col) in enumerate(((99, 99, 14, items[0]), (107, 88, -8, items[1]), (101, 77, 20, items[2]))):
+        solid(ic, T(affinity.rotate(rounded(box(x - 8, y - 5.5, x + 8, y + 5.5), 2), a, origin=(x, y))), face=col, depth=3, layer=f"load-{n}")
+    solid(ic, T(rounded(box(10, 80, 96, 91), 3)), face=[(0, c[0]), (1, c[2])], depth=3, side=c[4], layer="chassis")
+    bed = affinity.rotate(rounded(box(34, 44, 96, 82), 4), -20, origin=hinge)
+    solid(ic, T(bed), face=[(0, "#ffffff"), (0.5, "#deddda"), (1, "#b5b3b0")], depth=5, side="#77767b", layer="bed")
+    M = mark_parts(slug)
+    shapes = fit([g for _, g, _ in M], (45, 48, 87, 79))
+    fc = "#5e5c64" if logo_tone(slug) == "light" else None
+    with ic.group("mark"):
+        for n, (g, (_, _, f)) in enumerate(zip(shapes, M)):
+            ic.path(geom_d(T(affinity.rotate(g, -20, origin=hinge))), fc or f, layer_id=f"mark-{n}", fill_rule="evenodd")
+    solid(ic, T(rounded(Polygon([(10, 91), (10, 63), (18, 53), (34, 53), (34, 91)]), 3)), face=[(0, c[0]), (0.5, c[1]), (1, c[2])], depth=4, side=c[4], layer="cab")
+    ic.path(geom_d(T(rounded(Polygon([(14, 67), (20, 58), (30, 58), (30, 67)]), 1.5))), ic.linear([(0, "#99c1f1"), (1, "#62a0ea")], 0, 50, 0, 70), layer_id="window")
+    for wx in (27, 78):
+        solid(ic, T(circ(wx, 98, 11)), face=[(0, "#3d3846"), (1, "#241f31")], depth=2, side="#000000", top=False, layer=f"wheel-{wx}")
+        ic.path(geom_d(T(circ(wx, 98, 4.5))), "#9a9996", layer_id=f"hub-{wx}")
+
+
 KIT = [
     # (function, what it is FOR - pick by the app's own anchor, METHOD §2), style it suits
     ("logo_object", "Faithful: the logo itself (a white/black logo gets a brand sticker margin)", "faithful"),
@@ -463,6 +608,13 @@ KIT = [
     ("pouch", "packages, archives, unpacking, files", "rimmed"),
     ("book", "reading, learning, notes, docs", "rimmed"),
     ("card", "payments, banking, a membership", "rimmed"),
+    ("gold_bars", "the NAME or a slogan says gold: Midas, 'altın', treasure, premium", "symbol"),
+    ("player", "music, podcasts, hi-res: a pocket player with the APP'S OWN ART on its screen", "symbol"),
+    ("truck", "the NAME says it: dumper, delivery, moving, unloading", "symbol"),
+    ("briefcase", "a portfolio, work, business, documents", "rimmed"),
+    ("equalizer", "sound shaping, mixing, bass boost, sliders", "rimmed"),
+    ("globe", "the world, markets abroad, languages, travel - ROUND: the Disc only", "disc"),
+    ("knob", "volume, sound quality, a setting turned up - ROUND: the Disc only", "disc"),
 ]
 
 __all__ = [n for n in dir() if not n.startswith("_") and n not in ("math", "sys", "Path")]
