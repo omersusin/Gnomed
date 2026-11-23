@@ -13,6 +13,7 @@
 """
 import importlib.util
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -82,6 +83,11 @@ def run(*cmd):
     return r.returncode, r.stdout + r.stderr
 
 
+_g = importlib.util.spec_from_file_location("nextpy", ROOT / "tools/next.py")
+NX = importlib.util.module_from_spec(_g)
+_g.loader.exec_module(NX)
+
+
 def NX_open_fixes():
     code, out = run("-c", "import sys; sys.path.insert(0, 'tools'); import next as n; print(len(n.open_fix_slugs()))")
     return out.strip().splitlines()[-1:] != ["0"]
@@ -98,8 +104,23 @@ if on_main:
     expect(state("rush_royale") == "ON_MAIN", "next.py refuses to work on main")
 else:
     expect(state("zz_no_such_app") == "NO_SOURCE", "next.py: an unknown app -> NO_SOURCE")
-    expect(state("kafa_topu_2") == "REDO", "next.py: kafa_topu_2 (owner's redo: line) -> REDO")
-    expect(state("qobuz") == "NOT_STARTED", "next.py: a plate app -> NOT_STARTED")
+    # REDO / NOT_STARTED on a throw-away app: real apps move on (kafa_topu_2 and qobuz were these once)
+    with tempfile.TemporaryDirectory() as tmp:
+        _w = Path(tmp) / "work" / "zz_redo"
+        _w.mkdir(parents=True)
+        (_w / "source.png").write_bytes((ROOT / "work/qobuz/source.png").read_bytes())
+        _orig = NX.ROOT
+        try:
+            NX.ROOT = Path(tmp)
+            _s0 = NX.state_of("zz_redo", cheap=True)[0]
+            for f in ("geometry.json", "redesign.py"):
+                (_w / f).write_text("{}" if f.endswith(".json") else "")
+            (_w / "design.md").write_text('# zz\nredo: "Kabul edilemez" (2026-11-23)\n')
+            _s1 = NX.state_of("zz_redo", cheap=True)[0]
+        finally:
+            NX.ROOT = _orig
+    expect(_s1 == "REDO", f"next.py: the owner's redo: line -> REDO ({_s1})")
+    expect(_s0 == "NOT_STARTED", f"next.py: an app with only its source -> NOT_STARTED ({_s0})")
     expect(state("andvm") == "BUILD", "next.py: a redesign without a Symbol -> BUILD")
     st = state("rush_royale")
     expect(st in ("LOG", "COMMIT", "PUSH", "DONE"), f"next.py: a shipped redesign is past Q2 ({st})")
@@ -204,9 +225,6 @@ with tempfile.TemporaryDirectory() as tmp:
     expect(_m is not None and _m[0] < 36, f"check_icon.mark_measure: a 16 px mark -> below 36 (mark_size WARN) {_m and round(_m[0])}")
 _m = ci.mark_measure("telegram", ROOT / "work/telegram/telegram-symbol.svg")
 expect(_m is not None and _m[0] >= 36, "check_icon.mark_measure: Telegram's envelope -> >= 36 (PASS)")
-_g = importlib.util.spec_from_file_location("nextpy", ROOT / "tools/next.py")
-NX = importlib.util.module_from_spec(_g)
-_g.loader.exec_module(NX)
 expect(NX.warn_ok("warn-ok: mark_size - the label cannot grow without hiding the reels", "mark_size")
        and not NX.warn_ok("warn-ok: mark_size - ok", "mark_size") and "mark_size" in NX.MUST_TRY,
        "next.py: FIX_WARN needs a real reason in 'warn-ok:' (>= 10 characters)")
@@ -300,6 +318,17 @@ with tempfile.TemporaryDirectory() as tmp:
     expect(_fi["off"] and _bad(_fi["off"]), "check_icon.mark_fit: a mark running off its plate -> WARN (hepsiburada's cart)")
     expect(_fi["hole"] and _fi["hole"]["covered"] > 0.03, "check_icon.mark_fit: a hole drawn over the mark -> WARN (the CD hole on '>_')")
 expect("mark_fit" in NX.MUST_TRY, "next.py: gate mark_fit is fixed before Q2")
+
+# empty_layer (2026-11-23): rounded() on a strip thinner than 2r returns nothing - the part vanished silently
+expect(O.rounded(O.box(8, 102, 120, 114), 6).is_empty and not O.rounded(O.box(8, 102, 120, 114), 5).is_empty,
+       "obj.rounded: r >= half the height -> empty (why the gate empty_layer exists)")
+with tempfile.TemporaryDirectory() as tmp:
+    ic = O.gk.Icon("empty")
+    O.solid(ic, O.rounded(O.box(8, 102, 120, 114), 6), face="#57e389", depth=4, layer="turf")
+    ic.save(Path(tmp) / "e.svg")
+    _empty = re.findall(r'<path id="([^"]+)" d=""', (Path(tmp) / "e.svg").read_text())
+    expect("turf-face" in _empty, f"check_icon.empty_layer: the vanished turf is found: {_empty}")
+expect("empty_layer" in NX.RECIPES and "empty_layer" in NX.WARN_TR, "next.py: empty_layer has a recipe and a Turkish line")
 
 print(f"selftest: {ok} passed, {bad} failed")
 sys.exit(1 if bad else 0)

@@ -29,6 +29,7 @@ Checks (per style that exists):
   same_object   a style uses an object another app of its category already uses ........ WARN
   anchors       design.md: >= 2 anchors say where they were seen (source.png / refs/...); each
                 style's concept line cites the anchors it carries ................. WARN
+  empty_layer   a layer the code drew came out empty (d="") - the part is missing .......... FAIL
   mark_fit      the mark sits well on its part: nothing of it over the part's edge (<= 1 %),
                 >= 1 unit of room to that edge, nothing drawn over it (<= 3 %) ........ WARN
 Per app:
@@ -577,6 +578,12 @@ def compute(slug):
             fail = "[FAIL]" in out
         add(st, "lint", "FAIL" if fail else "PASS", "FAIL" if fail else "ok",
             "read the lint message; edge contact -> make the object smaller (inside 8..120)" if fail else "")
+        # empty_layer: a part the code meant to draw came out as nothing (d=""), e.g. rounded(g, r) with r >=
+        # half the part's height, or an intersection that missed - the icon silently loses that part
+        empty = re.findall(r'<path id="([^"]+)" d=""', svg.read_text(encoding="utf-8"))
+        add(st, "empty_layer", "FAIL" if empty else "PASS", ", ".join(empty[:6]) + (" ..." if len(empty) > 6 else "") if empty else "none",
+            "these layers are EMPTY - the part is missing from the icon: rounded(g, r) needs r < half the part's "
+            "thinnest side; check intersections/differences; or delete the layer if the part is not wanted" if empty else "")
         a = render(svg)
         vl, vd = visible(a, LIGHT), visible(a, DARK)
         if st == "symbol":

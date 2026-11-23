@@ -342,6 +342,21 @@ Times are from the commits; the model of a backfilled session is what the commit
 - Open problems: allowed WARNs only (plain_shape on real boxes/signs/sleeves); every FAIL and every
   fixable WARN (mark_fit, mark_size, visible, legibility32, same_object) is cleared.
 
+## 2026-11-23 — Claude via Claude Code (cloud session, takeover) — `kafa_topu_2` round 5, gate `empty_layer`
+- What: Kafa Topu 2 redrawn by Claude with the game's own anchors (design.md 1-6, sources cited):
+  Symbol = the header (one big head on its red boot heading the black-and-white ball), Faithful =
+  the store icon (two busts facing, yellow VS, ball above), Disc = the banner's round green pitch
+  with both players on boots, Rimmed = the fireball shot into a goal on a turf strip
+  (refs/store/shot-2.jpg). DeepSeek's objects-only round archived as
+  `archive/kafa_topu_2/2026-11-23_1217_deepseek-objects`.
+- New gate `empty_layer` (FAIL): a layer that came out empty (`d=""`) - the turf had vanished
+  (`rounded()` with r = half the strip). The same silent loss is in ayarlar disc, chatgpt
+  faithful, y_hava_durumu disc + symbol: `tools/audit.py` lists them. selftest 62/62 (REDO and
+  NOT_STARTED now tested on a throw-away app).
+- Why: owner "Kabul edilemez ... Oyunlarda ve uygulamalarda hassas olmalı" (2026-11-23), "Oyuna
+  göre sen seç", "Şimdilik devral bakalım ama ben seni bırakıp deepseek ile devam edebileyim".
+- Open problems: Q2 for kafa_topu_2 (not in the pack); symbol mass 0.33 (one head, allowed WARN).
+
 ## 2026-11-23 — DeepSeek V4.1 Flash Free via OpenCode — fixes `overview-3b` (2 apps)
 - What: enpara faithful: put_mark box (20,34,108,88) depth 6 anchor bottom - the side ends on the
   stripe top (y 94), the en stands on the stripe instead of sinking into it. qobuz faithful: the

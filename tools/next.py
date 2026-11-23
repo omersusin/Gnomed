@@ -102,12 +102,18 @@ RECIPES = {
              "          solid(ic, g_placed, face=fill, ...)    # solid()/recess()/cutout() paint Grad as a gradient\n"
              "  or face=gradient(SLUG, shape) for any shape. Never ic.path(..., colour(SLUG, 'r1')) per band.\n"
              "  docs/PLAYBOOK.md#gradients",
+    "empty_layer": "A layer came out EMPTY (d=\"\"): the code meant to draw a part and it vanished, silently\n"
+                   "  (2026-11-23: Kafa Topu 2's turf - rounded(box(8,102,120,114), 6) on a 12-unit strip). The\n"
+                   "  usual causes: rounded(g, r) with r >= half the part's thinnest side (use a smaller r), an\n"
+                   "  intersection()/difference() that leaves nothing, a box with x0 > x1. Fix the geometry, or\n"
+                   "  delete the layer if the part is not wanted. Look at the icon again afterwards.",
     "box_in_plate": "Old plate style only: the mark is a box inside the plate. A redesign does not have this.",
     "stripes": "Automatic draft only (bands of one gradient). A redesign does not draw the measured bands.",
     "trace_iou": "Automatic draft only (traced parts do not match). A redesign draws its own shapes.",
 }
 WARN_TR = {
     "mark": "uygulamanın kendi işareti bu stilde yok / okunmuyor",
+    "empty_layer": "çizilmesi gereken bir parça boş çıkmış, simgede eksik",
     "same_object": "aynı kategorideki başka bir uygulama bu nesneyi kullanıyor",
     "mark_fit": "işaret üstünde durduğu parçadan taşıyor, kenara değiyor ya da üstü kapanıyor",
     "anchors": "bu stil uygulamanın kendi tanıdık öğelerini taşımıyor (herhangi bir uygulamanınki olabilir)",
