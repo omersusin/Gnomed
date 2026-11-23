@@ -121,7 +121,9 @@ def sticker(ic, slug, brand, margin=9):
     r = ramp(brand) if logo_tone(slug) != "colour" else LIGHT
     box_ = (20, 18, 108, 100)
     shapes = fit([g for _, g, _ in mark_parts(slug)], box_, anchor="bottom")
-    st = rounded(unary_union(shapes).buffer(margin, quad_segs=24), 4)
+    # closed: the margin fills the gaps between the logo's parts - an open gap between two bars
+    # read as two dark eyes (Haiku's Mornye test, 2026-11-23)
+    st = rounded(unary_union(shapes).buffer(margin + 6, quad_segs=24).buffer(-6, quad_segs=24), 4)
     solid(ic, st, face=face(r), depth=5, side=r[4], layer="sticker")
     return logo(ic, slug, box_, on="brand", anchor="bottom")
 
