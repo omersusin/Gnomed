@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """mt_manager - Gnomed redesign.
-Main (Symbol) A: a filing cabinet with a white MT label. Faithful B: an open folder with a white
-MT card. Disc C: a hard-disk platter with an MT label band. Rimmed D: an archive box with a coral
-lid, a real handle slot and an MT label."""
+Main (Symbol) A: a filing cabinet with a white MT label. Faithful B: a charcoal folder with a
+raised tab, a coral sheet behind and the white MT on the front flap. Disc C: a round archive tin -
+charcoal cylinder, silver lid, coral base band, MT on the label. Rimmed D: a USB flash drive -
+charcoal body, coral stripe, steel connector, lanyard hole and MT on the body."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "work/_lib"))
@@ -44,59 +45,57 @@ def A():
 
 
 def B():
-    """Faithful - an open folder: a charcoal back panel with a coral tab and a low front flap, a
-    white card with the dark MT standing clear. The closest style to the source's folder."""
+    """Faithful - a dark folder, the closest style to the source: a charcoal back panel with a
+    raised tab, a salmon sheet peeking out behind it, and a low front flap carrying the white MT."""
     ic = gk.Icon("mt_manager - faithful")
-    back = rr(14, 44, 114, 112, 4).union(rr(14, 26, 62, 52, 4))
-    solid(ic, back, face=[(0, "#5e5e5e"), (0.5, CHAR), (1, CHAR_D)], depth=5, side=CHAR_DD, layer="back")
-    card = rr(24, 40, 94, 92, 3)
-    solid(ic, card, face=[(0, "#ffffff"), (1, LIGHT[2])], depth=2, side=LIGHT[4], layer="card")
-    put_mark(ic, SLUG, (30, 52, 86, 80), face="#3d3846")
-    front = poly([(12, 86), (116, 86), (116, 116), (12, 116)], 4)
-    solid(ic, front, face=[(0, "#ffa183"), (0.55, CORAL), (1, CORAL_D)], depth=5, side=CORAL_DD, layer="front")
-    ic.path(geom_d(rr(12, 86, 116, 90, 2)), "#ffffff", opacity=0.18, layer_id="front-lip")
-    tab = rr(92, 28, 112, 50, 3)
-    solid(ic, tab, face=[(0, "#ffa183"), (1, CORAL_D)], depth=3, side=CORAL_DD, layer="tab")
+    sheet = rr(20, 16, 108, 46, 3)
+    solid(ic, sheet, face=[(0, "#ffb39a"), (0.6, CORAL), (1, CORAL_D)], depth=2, side=CORAL_DD, layer="sheet")
+    back = rr(12, 40, 116, 114, 4)
+    tab = poly([(12, 40), (12, 24), (54, 24), (60, 40)], 3)
+    solid(ic, back.union(tab), face=[(0, "#5e5e5e"), (0.5, CHAR), (1, CHAR_D)], depth=5, side=CHAR_DD, layer="back")
+    front = poly([(8, 66), (120, 60), (120, 116), (8, 116)], 4)
+    solid(ic, front, face=[(0, "#565656"), (0.55, "#434343"), (1, CHAR_DD)], depth=5, side="#1c1c1c", layer="front")
+    ic.path(geom_d(poly([(8, 66), (120, 60), (120, 65), (8, 71)], 2)), "#ffffff", opacity=0.16, layer_id="lip")
+    put_mark(ic, SLUG, (28, 76, 100, 104), face="#ffffff")
     return ic
 
 
 def C():
-    """Disc - a hard-disk platter: a silver disc with a real spindle hole, an actuator arm and a
-    white label band carrying the dark MT."""
+    """Disc - a round archive tin: a charcoal cylinder with a silver lid seen from above, a real
+    rim, a small lid handle and a white MT label on the front band. Not a record player."""
     ic = gk.Icon("mt_manager - disc")
-    full = circ(64, 62, 46)
-    platter = full.difference(circ(64, 62, 7))
-    solid(ic, platter, face=[(0, "#6f6f6f"), (0.45, "#555555"), (1, "#2f2f2f")], depth=5, side=CHAR_DD, layer="platter")
-    sheen = box(20, 22, 108, 46).intersection(platter)
-    ic.path(geom_d(sheen), "#ffffff", opacity=0.14, layer_id="sheen")
-    hub = circ(64, 62, 15).difference(circ(64, 62, 7))
-    solid(ic, hub, face=[(0, "#deddda"), (1, "#9a9996")], depth=2, side="#5e5c64", top=False, layer="hub")
-    arm = poly([(96, 16), (108, 18), (92, 52), (82, 64), (74, 56), (86, 42)], 3)
-    solid(ic, arm, face=[(0, "#ffa183"), (0.55, CORAL), (1, CORAL_D)], depth=3, side=CORAL_DD, layer="arm")
-    pivot = circ(100, 20, 7)
-    solid(ic, pivot, face=[(0, "#5e5e5e"), (1, CHAR_D)], depth=2, side=CHAR_DD, layer="pivot")
-    band = rr(22, 70, 106, 96, 4)
-    band = band.intersection(box(14, 70, 114, 96))
-    solid(ic, band, face=[(0, "#ffffff"), (1, LIGHT[2])], depth=1.5, side=LIGHT[4], top=False, layer="band")
-    put_mark(ic, SLUG, (32, 74, 96, 92), face="#3d3846")
+    body = rr(18, 44, 110, 110, 7)
+    solid(ic, body, face=[(0, "#5e5e5e"), (0.5, CHAR), (1, CHAR_D)], depth=5, side=CHAR_DD, layer="body")
+    lid = ellipse(64, 44, 48, 14)
+    solid(ic, lid, face=[(0, "#f6f5f4"), (0.55, "#d6d5d2"), (1, "#a9a8a5")], depth=3, side="#77767b", layer="lid")
+    rim = rr(16, 42, 112, 56, 7).difference(rr(20, 46, 108, 52, 5))
+    ic.path(geom_d(rim), "#f6f5f4", opacity=0.55, layer_id="rim")
+    knob = ellipse(64, 42, 16, 4.5)
+    solid(ic, knob, face=[(0, "#ffffff"), (1, "#b5b3b0")], depth=1.5, side="#77767b", top=False, layer="knob")
+    base = rr(18, 98, 110, 110, 6)
+    ic.path(geom_d(base.intersection(body)), CORAL, layer_id="base-band")
+    label = rr(28, 64, 100, 96, 3)
+    solid(ic, label, face=[(0, "#ffffff"), (1, LIGHT[2])], depth=1.5, side=LIGHT[4], top=False, layer="label")
+    put_mark(ic, SLUG, (32, 68, 96, 92), face="#3d3846")
     return ic
 
 
 def D():
-    """Rimmed - an archive box: a charcoal box, a coral rimmed lid, a real handle slot cut through
-    the front and a white MT label."""
+    """Rimmed - a USB flash drive: a charcoal body with a coral stripe, a steel connector with
+    two contact slots and a real lanyard hole at the back, the white MT on the body."""
     ic = gk.Icon("mt_manager - rimmed")
-    boxg = rr(18, 42, 110, 118, 4)
-    handle = rr(50, 94, 78, 106, 4)
-    solid(ic, boxg.difference(handle), face=[(0, "#5e5e5e"), (0.5, CHAR), (1, CHAR_D)], depth=6, side=CHAR_DD, layer="box")
-    toplight(ic, boxg.difference(handle), width=1.8, opacity=0.4, layer="box")
-    lid = rr(12, 26, 116, 52, 4)
-    solid(ic, lid, face=[(0, "#ffa183"), (0.55, CORAL), (1, CORAL_D)], depth=4, side=CORAL_DD, layer="lid")
-    rim = rr(14, 48, 114, 54, 2)
-    ic.path(geom_d(rim), "#ffffff", opacity=0.22, layer_id="rim")
-    label = rr(28, 60, 100, 88, 3)
-    solid(ic, label, face=[(0, "#ffffff"), (1, LIGHT[2])], depth=1.5, side=LIGHT[4], top=False, layer="label")
-    put_mark(ic, SLUG, (32, 64, 96, 84), face="#3d3846")
+    body = rr(10, 36, 94, 104, 10)
+    hole_g = circ(23, 70, 6.5)
+    solid(ic, body.difference(hole_g), face=[(0, "#5e5e5e"), (0.5, CHAR), (1, CHAR_D)], depth=5, side=CHAR_DD, layer="body")
+    hole(ic, hole_g, color=(CHAR_DD, "#1c1c1c"), wall=2.5, layer="lanyard")
+    strip = rr(36, 36, 94, 48, 5).intersection(body)
+    ic.path(geom_d(strip), CORAL, layer_id="stripe")
+    put_mark(ic, SLUG, (36, 56, 88, 92), face="#ffffff")
+    conn = rr(90, 52, 122, 88, 4)
+    solid(ic, conn, face=[(0, "#f6f5f4"), (0.55, "#c0bfbc"), (1, "#8a8986")], depth=4, side="#5e5c64", layer="connector")
+    for k in range(2):
+        slot = rr(100, 58 + k * 14, 120, 62 + k * 14, 2)
+        ic.path(geom_d(slot), "#77767b", opacity=0.6, layer_id=f"slot-{k}")
     return ic
 
 

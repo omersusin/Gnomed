@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """qobuz - Gnomed redesign.
-Main (Symbol) A: a studio condenser microphone. Faithful B: an album sleeve - white wordmark
-on the dark cover, the inner sleeve peeking out. Disc C: a compact disc. Rimmed D: a mixing
-console with faders."""
+Main (Symbol) A: a big broadcast studio microphone. Faithful B: an album sleeve with its open mouth
+and the inner sleeve peeking out. Disc C: a compact disc. Rimmed D: a mixing console with faders."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "work/_lib"))
@@ -21,39 +20,42 @@ def rr(x0, y0, x1, y1, r):
 
 
 def A():
-    """Symbol - a studio condenser microphone: silver mesh grille, steel body with the white
-    wordmark, a dark shock-mount yoke and foot."""
+    """Symbol - a big broadcast studio microphone: a wide silver grille in a ring shock mount,
+    a broad steel body with the white wordmark, a thin stand and a round foot."""
     ic = gk.Icon("qobuz - symbol")
-    grille = rounded(box(40, 16, 88, 62), 21)
-    solid(ic, grille, face=[(0, "#ffffff"), (0.55, LIGHT[3]), (1, LIGHT[4])], depth=3, side="#77767b", layer="grille")
-    for y in (28, 38, 48):
-        mesh = box(42, y, 86, y + 2.4)
-        ic.path(geom_d(mesh.intersection(grille)), "#5e5c64", opacity=0.6, layer_id=f"mesh-{y}")
-    body = rr(40, 56, 88, 108, 7)
+    stand = rr(60, 102, 68, 117, 3)
+    solid(ic, stand, face=[(0, "#9a9996"), (1, "#5e5c64")], depth=2, side="#3d3846", layer="stand")
+    foot = ellipse(64, 117, 26, 5)
+    solid(ic, foot, face=[(0, "#77767b"), (1, "#3d3846")], depth=2, side="#241f31", layer="foot")
+    body = rr(30, 72, 98, 112, 9)
     solid(ic, body, face=[(0, "#77767b"), (0.5, "#5e5c64"), (1, "#3d3846")], depth=5, side="#241f31", layer="body")
-    collar = rr(37, 54, 91, 64, 4)
-    solid(ic, collar, face=[(0, "#ffffff"), (1, LIGHT[3])], depth=2, side="#77767b", layer="collar")
-    yoke = rr(26, 60, 33, 112, 3).union(rr(95, 60, 102, 112, 3))
-    solid(ic, yoke, face=[(0, LIGHT[3]), (1, "#5e5c64")], depth=3, side="#3d3846", layer="yoke")
-    foot = rr(30, 110, 98, 118, 4)
-    solid(ic, foot, face=[(0, "#5e5c64"), (1, "#3d3846")], depth=2, side="#241f31", layer="foot")
-    put_mark(ic, SLUG, (42, 72, 86, 104), face="#ffffff")
+    put_mark(ic, SLUG, (33, 82, 95, 106), face="#ffffff")
+    mount = rr(56, 54, 72, 70, 3)
+    solid(ic, mount, face=[(0, "#5e5c64"), (1, "#3d3846")], depth=3, side="#241f31", layer="mount")
+    ring = circ(64, 42, 34).difference(circ(64, 42, 28))
+    solid(ic, ring, face=[(0, "#f6f5f4"), (0.5, "#c0bfbc"), (1, "#8a8986")], depth=3, side="#5e5c64", layer="ring")
+    grille = circ(64, 42, 28)
+    solid(ic, grille, face=[(0, "#ffffff"), (0.6, LIGHT[3]), (1, LIGHT[4])], depth=2, side="#77767b", layer="grille")
+    for y in (26, 36, 46, 56):
+        mesh = box(34, y, 94, y + 2.6).intersection(grille)
+        ic.path(geom_d(mesh), "#5e5c64", opacity=0.55, layer_id=f"mesh-{y}")
     return ic
 
 
 def B():
-    """Faithful - an album sleeve: dark cardboard cover with the white wordmark, the pale inner
-    sleeve peeking out of the top. Closest to the logo's white-on-black."""
+    """Faithful - an album sleeve: a dark cardboard cover with its open mouth at the top, the white
+    paper inner sleeve peeking out of it, and the white wordmark across the front. No record: a
+    vinyl is Deezer's object (same_object)."""
     ic = gk.Icon("qobuz - faithful")
-    inner = rr(18, 14, 102, 44, 2)
-    solid(ic, inner, face=[(0, "#ffffff"), (1, LIGHT[3])], depth=1.5, side=LIGHT[4], top=False, layer="inner")
-    cover = rr(14, 26, 104, 112, 3)
-    solid(ic, cover, face=[(0, "#3d3846"), (0.6, DARK[3]), (1, "#1b1a1f")], depth=5, side="#1b1a1f", layer="cover")
-    spine = rr(14, 26, 24, 112, 3)
-    solid(ic, spine, face=[(0, "#5e5c64"), (1, "#3d3846")], depth=2, side="#1b1a1f", top=False, layer="spine")
-    line = box(14, 26, 104, 28).intersection(cover)
-    ic.path(geom_d(line), "#ffffff", opacity=0.18, layer_id="cover-edge")
-    put_mark(ic, SLUG, (26, 54, 100, 84), face="#ffffff")
+    inner = rr(24, 8, 104, 40, 2)
+    solid(ic, inner, face=[(0, "#ffffff"), (0.6, LIGHT[2]), (1, LIGHT[3])], depth=2, side=LIGHT[4], layer="inner-sleeve")
+    ic.path(geom_d(rr(28, 12, 100, 15, 1.5)), "#b5b3b0", opacity=0.45, layer_id="inner-fold")
+    cover = rr(12, 30, 116, 114, 3)
+    solid(ic, cover, face=[(0, "#3d3846"), (0.6, DARK[3]), (1, "#1b1a1f")], depth=6, side="#141317", layer="cover")
+    mouth = rr(12, 30, 116, 38, 2)
+    solid(ic, mouth, face=[(0, "#8a8986"), (1, "#5e5c64")], depth=1.5, side="#3d3846", top=False, layer="mouth")
+    ic.path(geom_d(rr(14, 38, 114, 41, 1.5)), "#000000", opacity=0.35, layer_id="mouth-shadow")
+    put_mark(ic, SLUG, (20, 52, 108, 92), face="#ffffff")
     return ic
 
 

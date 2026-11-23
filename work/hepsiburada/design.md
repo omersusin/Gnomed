@@ -19,8 +19,11 @@ function object (what the app does, as a physical thing): a parcel you ordered, 
 concepts (work/hepsiburada/concepts.png) - four different ideas:
   A: an orange delivery van with the white wordmark on its side panel (Symbol)
   B: a cardboard parcel with an orange label carrying the white wordmark (Faithful)
-  C: a roll of packing tape: white tape, orange rim, a paper band with the wordmark (Disc)
+  C: a round hanging shop sign: white enamel disc, orange rim, steel bracket and links, wordmark on the face (Disc)
   D: a shopping cart with the wordmark on its basket (Rimmed)
+shape-note: the Faithful is a real shop awning sign (fascia under a striped canopy); its face is a
+  square sign, not a logo plate - the gate's plain_shape WARN stays on purpose (2026-11-23).
+
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7), e.g.
 #   approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)

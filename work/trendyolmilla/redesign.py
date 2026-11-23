@@ -53,19 +53,22 @@ def B():
 
 
 def C():
-    """Disc - a round hat box: lavender body, purple lid with a rim and a knob, the wordmark on
-    the lid."""
+    """Disc - a round hat box: a purple cylinder with a wide lid, a ribbon round its middle tied
+    in a bow, and the wordmark on a paper label on the front."""
     ic = gk.Icon("trendyolmilla - disc")
-    wall = rr(20, 74, 108, 116, 12)
-    solid(ic, wall, face=[(0, PURPLE[2]), (1, PURPLE[4])], depth=4, side=PURPLE[4], layer="wall")
-    lid = circ(64, 62, 40)
-    solid(ic, lid, face=gradient(SLUG, lid), depth=6, side=PURPLE[4], layer="lid")
-    rim = circ(64, 62, 40).difference(circ(64, 62, 33))
-    ic.path(geom_d(rim), "#f6f5f4", opacity=0.45, layer_id="lid-rim")
-    top = circ(64, 17, 4.5)
-    stem = rr(62, 18, 66, 27, 2)
-    solid(ic, stem.union(top), face=[(0, PURPLE[1]), (1, PURPLE[3])], depth=2, side=PURPLE[4], layer="knob")
-    put_mark(ic, SLUG, (34, 52, 94, 74), face="#ffffff")
+    body = rr(20, 56, 108, 114, 12)
+    solid(ic, body, face=gradient(SLUG, body), depth=6, side=PURPLE[4], layer="body")
+    lid = rr(12, 40, 116, 66, 10)
+    solid(ic, lid, face=[(0, PURPLE[1]), (1, PURPLE[3])], depth=5, side=PURPLE[4], layer="lid")
+    top = ellipse(64, 42, 52, 8)
+    solid(ic, top, face=[(0, "#f3ebf8"), (0.6, PURPLE[1]), (1, PURPLE[2])], depth=3, side=PURPLE[3], layer="lid-top")
+    label = rr(22, 72, 106, 108, 3)
+    solid(ic, label, face=gradient(SLUG, label), depth=2, side=PURPLE[4], top=False, layer="label")
+    put_mark(ic, SLUG, (30, 77, 98, 101), face="#ffffff")
+    knot = rr(102, 52, 116, 66, 4)
+    solid(ic, knot, face=[(0, "#efe6f6"), (1, PURPLE[2])], depth=2, side=PURPLE[4], layer="bow-knot")
+    tail = poly([(104, 64), (100, 100), (107, 94), (113, 102), (112, 64)], 2)
+    solid(ic, tail, face=[(0, "#efe6f6"), (1, PURPLE[2])], depth=2.5, side=PURPLE[4], layer="bow-tail")
     return ic
 
 
@@ -83,9 +86,9 @@ def D():
         ic.path(geom_d(rib), "#f6f5f4", opacity=0.18, layer_id=f"rib-{x}")
     handle = circ(64, 58, 36).difference(circ(64, 58, 29)).intersection(box(0, 0, 128, 59))
     solid(ic, handle, face=[(0, "#d0a568"), (1, "#8b5a2b")], depth=5, side="#5b3a1a", layer="handle")
-    tag = rr(36, 66, 92, 98, 3)
+    tag = rr(30, 60, 98, 100, 3)
     solid(ic, tag, face=gradient(SLUG, tag), depth=2, side=PURPLE[4], layer="tag")
-    put_mark(ic, SLUG, (40, 71, 88, 94), face="#ffffff")
+    put_mark(ic, SLUG, (34, 64, 94, 96), face="#ffffff")
     return ic
 
 

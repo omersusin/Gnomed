@@ -293,3 +293,15 @@ Times are from the commits; the model of a backfilled session is what the commit
 - Open problems: allowed WARNs only (plain_shape on real boxes/sleeves, baseline on the card,
   mass on the faithful mark); `work/_lib/obj.py` gained `mark_holes`/`mark_crop`/`mark_keep`/
   `mark_skip` so a mark that lives inside the source's ground parts or tile edge is measurable.
+
+## 2026-11-23 — DeepSeek V4.1 Flash Free via OpenCode — fixes `overview-3` (6 apps)
+- What: the owner's review round for group 3. enpara: the faithful is the measured en on the
+  four-colour stripe (no plate), the rimmed a steel safe door with hinges, dial, handle and the en
+  on a small plate. hepsiburada: the disc is now a round hanging shop sign. mt_manager: folder with
+  the coral sheet, round archive tin, USB stick. qobuz: a big broadcast microphone, an album sleeve
+  with its inner sleeve out (a vinyl is Deezer's object). terminal_em_lat_r: slate mark on a lime
+  plinth, install disc, rack server front. trendyolmilla: the disc is a real hat box.
+- Why: reviews in the repository (owner 2026-11-22), rules "cover the mark" and "a wordmark is a label".
+- Owner: "Bıktım bana prompt vermenden, yaz depoya" (2026-11-22)
+- Open problems: allowed WARNs only (plain_shape on real boxes/signs/sleeves); every FAIL and every
+  fixable WARN (mark_fit, mark_size, visible, legibility32, same_object) is cleared.

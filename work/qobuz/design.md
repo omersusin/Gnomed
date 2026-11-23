@@ -18,7 +18,9 @@ function object (what the app does, as a physical thing): a studio microphone - 
 
 concepts (work/qobuz/concepts.png) - four different ideas:
   A: a studio condenser microphone on a shock mount, wordmark on its body (Symbol)
-  B: an album sleeve, white wordmark on the dark cover, inner sleeve peeking out (Faithful)
+  B: an album sleeve: dark cardboard cover with its open mouth and the white inner sleeve peeking out, wordmark on the front (Faithful)
+shape-ok: the Faithful is an album sleeve (a real cardboard sleeve, open at the top) - a flat
+  square object, not a plate with the logo on it; the plain_shape WARN stays on purpose (2026-11-23).
   C: a compact disc: iridescent silver, dark label band with the wordmark (Disc)
   D: a mixing console: faders and knobs, white wordmark on the front panel (Rimmed)
 

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """terminal_em_lat_r - Gnomed redesign.
-Main (Symbol) A: a software package box. Faithful B: the measured "> 1+ Term" mark as a thick
-white object. Disc C: an install disc. Rimmed D: a server rack."""
+Main (Symbol) A: a software package box. Faithful B: the measured "> 1+ Term" mark as a slate
+object standing on a lime plinth. Disc C: an install disc with a lime label. Rimmed D: a rack server
+front with drive caddies, LEDs and a small mark label."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "work/_lib"))
@@ -43,39 +44,48 @@ def B():
     object with a slate side, standing on the source's lime-green wave as a low base. The
     closest style to the logo, no plate."""
     ic = gk.Icon("terminal_em_lat_r - faithful")
-    base = rr(20, 100, 108, 116, 5)
+    base = rr(10, 92, 118, 120, 6)
     solid(ic, base, face=[(0, "#b8d95c"), (0.55, GREEN), (1, GREEN_D)], depth=5, side=GREEN_DD, layer="base")
-    put_mark(ic, SLUG, (14, 14, 114, 100), depth=3, anchor="bottom", face=WHITE, side=SLATE_D)
+    put_mark(ic, SLUG, (12, 10, 116, 94), depth=3, anchor="bottom", face=SLATE, side=WHITE)
     return ic
 
 
 def C():
-    """Disc - an install disc: silver, a green label ring with the white mark, a real spindle
-    hole."""
+    """Disc - an install disc: a big silver disc with a real spindle hole and a bright rim, a lime
+    label carrying the white mark above the hub, and a soft shine across the top left."""
     ic = gk.Icon("terminal_em_lat_r - disc")
-    full = circ(64, 64, 46)
-    disc = full.difference(circ(64, 64, 6.5))
+    full = circ(64, 64, 50)
+    disc = full.difference(circ(64, 64, 7))
     solid(ic, disc, face=[(0, "#ffffff"), (0.55, LIGHT[2]), (1, LIGHT[4])], depth=5, side=LIGHT[4], layer="disc")
-    label = circ(64, 64, 35).difference(circ(64, 64, 6.5))
-    solid(ic, label, face=[(0, "#b8d95c"), (0.55, GREEN), (1, GREEN_D)], depth=2, side=GREEN_DD, top=False, layer="label")
-    hub = circ(64, 64, 10).difference(circ(64, 64, 6.5))
-    solid(ic, hub, face=[(0, LIGHT[2]), (1, LIGHT[4])], depth=1, side=LIGHT[4], top=False, layer="hub")
-    put_mark(ic, SLUG, (34, 40, 94, 88), face="#ffffff")
+    rim = full.difference(circ(64, 64, 46))
+    ic.path(geom_d(rim), "#b5b3b0", opacity=0.7, layer_id="rim")
+    shine = circ(48, 44, 44).difference(circ(55, 51, 44)).intersection(disc)
+    ic.path(geom_d(shine), "#ffffff", opacity=0.45, layer_id="shine")
+    label = circ(64, 64, 46).difference(circ(64, 64, 7))
+    solid(ic, label, face=[(0, "#c9e06f"), (0.55, GREEN), (1, GREEN_D)], depth=2, side=GREEN_DD, top=False, layer="label")
+    hub = circ(64, 64, 10).difference(circ(64, 64, 7))
+    solid(ic, hub, face=[(0, LIGHT[2]), (1, LIGHT[4])], depth=1.5, side=LIGHT[4], top=False, layer="hub")
+    put_mark(ic, SLUG, (44, 24, 84, 56), face="#ffffff")
     return ic
 
 
 def D():
-    """Rimmed - a server rack: a slate cabinet with the white mark on its door and a wide vent
-    cut through at the bottom, ringed in lime. The machine a terminal logs into."""
+    """Rimmed - a rack server seen from the front: a slate chassis with a lime bezel line, a dark
+    drive-bay recess holding two light caddies with their handles, two status LEDs and a steel
+    label with the mark in the lower corner."""
     ic = gk.Icon("terminal_em_lat_r - rimmed")
-    cab = rr(8, 4, 120, 118, 6)
-    hole = rr(26, 96, 102, 110, 4)
-    body = cab.difference(hole)
-    solid(ic, body, face=[(0, "#7d99a6"), (0.3, SLATE), (1, "#2f4450")], depth=5, side="#22333c", layer="cabinet")
-    toplight(ic, body, width=1.8, opacity=0.35, layer="cabinet")
-    put_mark(ic, SLUG, (20, 12, 108, 82), face="#ffffff")
-    ring = rr(20, 92, 108, 114, 6).difference(hole)
-    solid(ic, ring, face=[(0, "#b8d95c"), (0.55, GREEN), (1, GREEN_D)], depth=3, side=GREEN_DD, layer="vent-ring")
+    cab = rr(8, 18, 120, 114, 7)
+    solid(ic, cab, face=[(0, "#7d99a6"), (0.35, SLATE), (1, SLATE_D)], depth=5, side=SLATE_DD, layer="chassis", top=False)
+    ic.path(geom_d(rr(8, 26, 120, 32, 2)), GREEN, layer_id="bezel")
+    ic.path(geom_d(rr(14, 36, 68, 94, 4)), "#22333c", layer_id="bay-recess")
+    for k, y in enumerate((40, 64)):
+        ic.path(geom_d(rr(18, y, 64, y + 26, 3)), "#e9edee", layer_id=f"caddy-{k}")
+        ic.path(geom_d(rr(20, y + 10, 28, y + 24, 2)), "#5b7482", opacity=0.7, layer_id=f"handle-{k}")
+    ic.path(geom_d(circ(78, 70, 3)), GREEN, layer_id="led-0")
+    ic.path(geom_d(circ(87, 70, 3)), "#c9a227", layer_id="led-1")
+    label = rr(44, 74, 116, 112, 4)
+    solid(ic, label, face=[(0, "#ffffff"), (0.7, LIGHT[2]), (1, LIGHT[3])], depth=2, side=LIGHT[4], layer="label", top=False)
+    put_mark(ic, SLUG, (47, 76, 113, 110), face=SLATE)
     return ic
 
 

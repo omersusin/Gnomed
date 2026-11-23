@@ -17,9 +17,12 @@ function object (what the app does, as a physical thing): a cabinet of files you
 
 concepts (work/mt_manager/concepts.png) - four different ideas:
   A: a filing cabinet: charcoal drawers, a white label plate with MT (Symbol)
-  B: an open folder: charcoal back and front, coral tab, a white card with MT (Faithful)
-  C: a hard-disk platter: silver disc, spindle and actuator arm, a white MT label (Disc)
-  D: an archive box: charcoal box with a rimmed coral lid, white label with MT (Rimmed)
+  B: a charcoal folder with a raised tab, the coral sheet behind and MT on the front flap (Faithful)
+  C: a round archive tin: charcoal cylinder, silver lid, coral base band, MT on the front label (Disc)
+  D: a USB flash drive: charcoal body, coral stripe, steel connector, lanyard hole, MT on the body (Rimmed)
+shape-ok: the Symbol is a filing cabinet and the Faithful is a folder - real box objects of the files
+  family, not a plate with the logo on it; the plain_shape WARNs stay on purpose (2026-11-23).
+
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7), e.g.
 #   approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)

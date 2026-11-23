@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """hepsiburada - Gnomed redesign.
 Main (Symbol) A: a cardboard parcel with an orange label. Faithful B: a shop awning sign -
-orange fascia with the white wordmark under a striped canopy. Disc C: a roll of packing tape
-with a paper band. Rimmed D: a shopping cart with the wordmark on its basket."""
+orange fascia with the white wordmark under a striped canopy. Disc C: a round hanging shop sign -
+white enamel disc, orange rim, steel bracket and links. Rimmed D: a shopping cart with the wordmark
+on its basket."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "work/_lib"))
@@ -58,20 +59,27 @@ def B():
 
 
 def C():
-    """Disc - a roll of packing tape: white tape, an orange rim, a white paper band with the
-    orange wordmark, a loose tape end."""
+    """Disc - a round hanging shop sign: a white enamel disc with an orange rim, hung from a
+    steel bracket by two links, the orange wordmark on its face and a soft shadow below."""
     ic = gk.Icon("hepsiburada - disc")
-    roll = circ(58, 66, 42)
-    solid(ic, roll, face=[(0, "#ffffff"), (0.7, LIGHT[2]), (1, LIGHT[3])], depth=6, side=LIGHT[4], layer="roll")
-    rim = circ(58, 66, 42).difference(circ(58, 66, 34))
-    ic.path(geom_d(rim), ORANGE, opacity=0.92, layer_id="rim")
-    core = circ(58, 66, 14)
-    ic.path(geom_d(core), "#b08a5e", opacity=0.5, layer_id="core")
-    strip = poly([(96, 80), (112, 86), (108, 114), (94, 110)], 2)
-    solid(ic, strip, face=[(0, OR_L), (1, OR_D)], depth=1.5, side=OR_DD, layer="strip")
-    band = rr(18, 52, 98, 82, 4)
-    solid(ic, band, face=[(0, "#ffffff"), (1, LIGHT[2])], depth=2, side=LIGHT[4], top=False, layer="band")
-    put_mark(ic, SLUG, (22, 56, 94, 78), face=ORANGE)
+    arm = rr(50, 6, 78, 12, 3)
+    solid(ic, arm, face=[(0, "#9a9996"), (1, "#5e5c64")], depth=2, side="#3d3846", layer="bracket")
+    post = rr(61, 10, 67, 22, 2)
+    solid(ic, post, face=[(0, "#9a9996"), (1, "#5e5c64")], depth=2, side="#3d3846", layer="post")
+    for k, x in enumerate((52, 64, 76)):
+        link = circ(x, 16, 3.4).difference(circ(x, 16, 1.8))
+        ic.path(geom_d(link), "#77767b", layer_id=f"link-{k}")
+    shadow = ellipse(64, 118, 40, 5)
+    ic.path(geom_d(shadow), "#000000", opacity=0.10, layer_id="shadow")
+    disc = circ(64, 72, 42)
+    solid(ic, disc, face=[(0, "#ffffff"), (0.7, LIGHT[2]), (1, LIGHT[3])], depth=5, side=LIGHT[4], layer="disc")
+    rim = circ(64, 72, 42).difference(circ(64, 72, 37))
+    ic.path(geom_d(rim), ORANGE, layer_id="rim")
+    inner = circ(64, 72, 36)
+    toplight(ic, inner, width=2.4, opacity=0.5, layer="disc")
+    put_mark(ic, SLUG, (36, 57, 92, 87), face=ORANGE)
+    holder = rr(60, 28, 68, 36, 2)
+    ic.path(geom_d(holder), "#77767b", layer_id="holder")
     return ic
 
 
@@ -81,7 +89,7 @@ def D():
     ic = gk.Icon("hepsiburada - rimmed")
     basket = poly([(14, 36), (112, 36), (100, 94), (26, 94)], 5)
     solid(ic, basket, face=[(0, OR_L), (0.5, ORANGE), (1, OR_D)], depth=5, side=OR_DD, layer="basket")
-    for y in (52, 70):
+    for y in (42, 88):
         rib = box(18, y, 108, y + 3).intersection(basket)
         ic.path(geom_d(rib), "#f6f5f4", opacity=0.55, layer_id=f"rib-{y}")
     handle = rounded(box(102, 32, 118, 38).union(box(108, 6, 114, 36)), 3)
@@ -90,7 +98,7 @@ def D():
         leg = box(x - 2.4, 94, x + 2.4, 106)
         solid(ic, leg, face=[(0, LIGHT[3]), (1, LIGHT[4])], depth=2, side="#5e5c64", top=False, layer=f"leg-{x}")
         solid(ic, circ(x, 110, 11), face=[(0, DARK[1]), (1, DARK[3])], depth=3, side="#1b1a1f", layer=f"wheel-{x}")
-    put_mark(ic, SLUG, (28, 50, 100, 84), face="#ffffff")
+    put_mark(ic, SLUG, (32, 52, 96, 80), face="#ffffff")
     return ic
 
 

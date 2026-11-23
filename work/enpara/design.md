@@ -18,9 +18,9 @@ function object (what the app does, as a physical thing): a bank card you pay wi
 
 concepts (work/enpara/concepts.png) - four different ideas:
   A: a bank card: white card, magenta en, a chip and a four-colour edge stripe (Symbol)
-  B: a wallet: magenta leather, stitching, a white card with the en peeking out (Faithful)
+  B: the measured en as one solid magenta object standing on the source's four-colour stripe (Faithful)
   C: a coin: golden rim, magenta en embossed, a milled edge (Disc)
-  D: a safe: grey-blue body, a round dial and handle, the en on the door (Rimmed)
+  D: a safe door: steel door, two dark hinges, a big round dial with ticks, a handle, the en on a small plate (Rimmed)
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7), e.g.
 #   approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
@@ -34,6 +34,9 @@ decisions I made myself (and why; mention them in Q2):
   - the source's bottom colour bar becomes the four-colour stripe on the card edge (A), not a
     plate: the app's palette survives on a real object.
   - the measured "en" sits inside the purple ring segment of the source; geometry.json
+  - the Faithful's four-colour stripe is the source's own bottom bar; the Rimmed safe carries the en
+    on a small white plate so the door, not the wordmark, is the object (REDESIGN 5, cover-the-mark).
+
     `mark_keep` r1 + `mark_crop` keeps the two letters and drops the ring arc and the colour bar.
 techniques used (min. 3): thickness / material gradient / top light / recess / secondary object
 palette (GNOME HIG names): Purple 3 #9141ac, Orange 2 #ffbe6f, Green 3 #8ff0a4, Blue 3 #3584e4, Light 2 #f6f5f4

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """enpara - Gnomed redesign.
-Main (Symbol) A: a bank card with the magenta en and a four-colour edge stripe. Faithful B: a
-magenta wallet with a white card. Disc C: a coin with the en embossed. Rimmed D: a safe with a dial
-and the en on its door."""
+Main (Symbol) A: a bank card with the magenta en and a four-colour edge stripe. Faithful B: the
+measured en as one solid object standing on the source's four-colour stripe. Disc C: a coin with the
+en embossed. Rimmed D: a safe door with hinges, a dial and a handle, the en on a small plate."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "work/_lib"))
 from objects import *  # noqa: F401,F403,E402
+from shapely import affinity
 
 SLUG = Path(__file__).resolve().parent.name
 MAG = "#aa519e"
@@ -30,34 +31,33 @@ def A():
     """Symbol - a bank card: a white card with the magenta en, a gold chip and a four-colour
     stripe along the bottom edge - the source's palette on a real object."""
     ic = gk.Icon("enpara - symbol")
-    card = rr(10, 30, 118, 98, 7)
+    card = rr(10, 36, 118, 104, 7)
     solid(ic, card, face=[(0, "#ffffff"), (0.6, LIGHT[2]), (1, LIGHT[3])], depth=5, side=LIGHT[4], layer="card")
-    chip = rr(20, 42, 44, 60, 3)
+    chip = rr(20, 48, 44, 66, 3)
     solid(ic, chip, face=[(0, "#ffe08a"), (1, ORANGE)], depth=1.5, side=ORANGE_D, top=False, layer="chip")
-    ic.path(geom_d(rr(20, 47, 44, 49, 1)), "#cf8610", opacity=0.5, layer_id="chip-line")
-    put_mark(ic, SLUG, (52, 38, 112, 66), face=MAG)
-    stripe = rr(10, 84, 118, 94, 3).intersection(card)
+    ic.path(geom_d(rr(20, 53, 44, 55, 1)), "#cf8610", opacity=0.5, layer_id="chip-line")
+    put_mark(ic, SLUG, (52, 44, 112, 72), face=MAG)
+    stripe = rr(10, 90, 118, 100, 3).intersection(card)
     cols = [MAG, ORANGE, GREEN, BLUE]
     for i, c in enumerate(cols):
-        seg = box(10 + i * 27, 84, 10 + (i + 1) * 27, 94).intersection(stripe)
+        seg = box(10 + i * 27, 90, 10 + (i + 1) * 27, 100).intersection(stripe)
         ic.path(geom_d(seg), c, layer_id=f"stripe-{i}")
     return ic
 
 
 def B():
-    """Faithful - a wallet: magenta leather, pale stitching, a white card with the magenta en
-    peeking out of the top. The closest style to the source's colours."""
+    """Faithful - the logo as one solid object (L1): the measured "en", extruded in the brand
+    magenta, standing on the source's four-colour stripe. No plate, nothing clipped."""
     ic = gk.Icon("enpara - faithful")
-    card = rr(24, 12, 104, 60, 4)
-    solid(ic, card, face=[(0, "#ffffff"), (1, LIGHT[3])], depth=2, side=LIGHT[4], layer="card")
-    put_mark(ic, SLUG, (32, 20, 96, 46), face=MAG)
-    body = rr(14, 50, 114, 116, 8)
-    solid(ic, body, face=[(0, "#c06cb2"), (0.5, MAG), (1, MAG_D)], depth=6, side=MAG_DD, layer="wallet")
-    toplight(ic, body, width=2.0, opacity=0.4, layer="wallet")
-    flap = rr(14, 78, 114, 116, 8)
-    solid(ic, flap, face=[(0, "#c06cb2"), (0.55, MAG), (1, MAG_DD)], depth=4, side=MAG_DD, layer="flap")
-    stitch = rr(20, 84, 108, 108, 6).difference(rr(23, 87, 105, 105, 5))
-    ic.path(geom_d(stitch), "#e8c9e2", opacity=0.5, layer_id="stitch")
+    shadow = ellipse(64, 94, 44, 5)
+    ic.path(geom_d(shadow), "#000000", opacity=0.14, layer_id="shadow")
+    stripe = rr(14, 94, 114, 116, 5)
+    solid(ic, stripe, face=[(0, "#ffffff"), (1, LIGHT[3])], depth=4, side=LIGHT[4], layer="stripe")
+    cols = [MAG, ORANGE, GREEN, BLUE]
+    for i, c in enumerate(cols):
+        seg = box(14 + i * 25, 94, 14 + (i + 1) * 25, 116).intersection(stripe)
+        ic.path(geom_d(seg), c, layer_id=f"stripe-{i}")
+    put_mark(ic, SLUG, (20, 40, 108, 94), depth=6, anchor="bottom", face=MAG, side=MAG_DD)
     return ic
 
 
@@ -75,20 +75,26 @@ def C():
 
 
 def D():
-    """Rimmed - a safe: a steel-blue body, a thick rimmed door, a big round dial and a handle, the
-    magenta en on the door."""
+    """Rimmed - a safe door: a heavy steel door with two dark hinges, a big round dial with tick
+    marks and a shaded face, a steel handle at the edge - the en on a small white plate."""
     ic = gk.Icon("enpara - rimmed")
-    body = rr(12, 10, 116, 118, 6)
-    solid(ic, body, face=[(0, "#7d99a6"), (0.3, "#5b7f92"), (1, "#2f4450")], depth=6, side="#22333c", layer="body")
-    door = rr(20, 18, 108, 112, 6)
-    solid(ic, door, face=[(0, "#d7dee2"), (0.55, "#a6b6bf"), (1, "#7d94a0")], depth=3, side="#4a6674", layer="door")
-    put_mark(ic, SLUG, (32, 26, 96, 54), face=MAG_D)
-    dial = circ(64, 88, 14)
-    solid(ic, dial, face=[(0, "#ffffff"), (0.5, "#deddda"), (1, "#9a9996")], depth=4, side="#5e5c64", layer="dial")
-    for a in (0, 90, 180, 270):
-        pass
-    handle = rr(86, 78, 100, 100, 3)
-    solid(ic, handle, face=[(0, "#deddda"), (1, "#77767b")], depth=2, side="#3d3846", layer="handle")
+    door = rr(10, 10, 118, 116, 8)
+    solid(ic, door, face="#c3cfd6", depth=4, side="#8fa8b4", layer="door", top=False)
+    for k, y in enumerate((30, 74)):
+        hinge = rr(10, y, 26, y + 22, 4)
+        solid(ic, hinge, face="#3f5866", depth=3, side="#2b3d47", layer=f"hinge-{k}", top=False)
+    plate = rr(30, 22, 98, 52, 3)
+    ic.path(geom_d(plate), "#ffffff", layer_id="plate")
+    put_mark(ic, SLUG, (35, 26, 93, 48), face=MAG)
+    dial = circ(60, 84, 24)
+    ic.path(geom_d(dial), ic.radial([(0, "#ffffff"), (1, "#b5b3b0")], 60, 84, 24), layer_id="dial")
+    for k in range(4):
+        a = 45 + k * 90
+        tick = affinity.rotate(box(-3.2, -24, 3.2, -16), a, origin=(0, 0))
+        tick = affinity.translate(tick, 60, 84)
+        ic.path(geom_d(tick), "#5e5c64", layer_id=f"tick-{k}")
+    handle = rr(104, 62, 118, 104, 7)
+    solid(ic, handle, face="#8fa8b4", depth=3, side="#5b7482", layer="handle", top=False)
     return ic
 
 

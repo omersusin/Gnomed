@@ -7,4 +7,4 @@ shown:
 Change EXACTLY these styles; the others stay. Rules: REDESIGN.md 5 - "Cover the mark" and "A wordmark
 is a label" (new, 2026-11-23). How: docs/PLAYBOOK.md#owner-fix
 
-- [ ] disc: the packing-tape roll does not read (an orange ring with a white banner over the hole) - a real tape roll: the cardboard core and the hole visible, the tape end hanging down, the wordmark small on the tape; or another round object you can name
+- [x] disc: the packing-tape roll does not read (an orange ring with a white banner over the hole) - a real tape roll: the cardboard core and the hole visible, the tape end hanging down, the wordmark small on the tape; or another round object you can name -> now: another round shopping object you can name: a round hanging shop sign (white enamel disc, thick orange rim, two links and a steel bracket, the orange wordmark on the face, a soft shadow). A tape roll cannot carry this 103-unit wordmark at >=36 px without the label covering the hole again.

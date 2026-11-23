@@ -17,9 +17,12 @@ function object (what the app does, as a physical thing): a terminal session on 
 
 concepts (work/terminal_em_lat_r/concepts.png) - four different ideas:
   A: a software package box with the white mark on its label (Symbol)
-  B: the measured "> 1+ Term" mark itself as a thick white object (Faithful, the closest to the logo)
-  C: an install disc: green label with the mark, silver rim, a real spindle hole (Disc)
-  D: a server rack: slate cabinet, the white mark across the front, a lime power strip (Rimmed)
+  B: the measured "> 1+ Term" mark itself as a slate object standing on a wide lime plinth (Faithful)
+  C: an install disc: silver disc, rim and shine, spindle hole and hub, the mark on the lime label (Disc)
+  D: a rack server front: slate chassis, lime bezel, dark bay recess with two caddies, LEDs, mark on a small label (Rimmed)
+shape-ok: the Symbol is a software package box - a real box object you install from, not a plate with
+  the logo on it; the plain_shape WARN stays on purpose (2026-11-23).
+
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7), e.g.
 #   approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
