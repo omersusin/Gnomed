@@ -342,6 +342,23 @@ Times are from the commits; the model of a backfilled session is what the commit
 - Open problems: allowed WARNs only (plain_shape on real boxes/signs/sleeves); every FAIL and every
   fixable WARN (mark_fit, mark_size, visible, legibility32, same_object) is cleared.
 
+## 2026-11-23 — Claude via Claude Code (cloud session, takeover) — group 4 + the audit
+- What: group 4 drawn by Claude, every style carrying the app's MEASURED logo on a thing from its own
+  screens (design.md anchors with sources): duolingo (redrawn: streak flame, Duo's head, cafe cup,
+  lesson bubble), reddit (upvote, sticker, search lens, comments bubble), f_droid (GNOME-Software bag,
+  the logo, Nearby radar, phone), payload_dumper (dump truck, the logo, progress dial, zip pouch),
+  scene (SoC chip, the logo, cooling fan, gauge), iconrequest (envelope with stamp, the logo, Health
+  Status dial, Health Check shield). Audit 2026-11-23 fixed for 17 apps: anchors cited, empty
+  layers drawn (sun edge, ayarlar ticks), chatgpt knot mid grey, marks moved inside their parts
+  (anker badge, termux_boot CD + key, walpy roll + print), kamera/foto_raflar same_object.
+- Tools: gate empty_layer; rounded() never erases a part; mark: none needs the owner's words; only
+  SYSTEM_APPS skip the mark gate; geometry mark_keep order, mark_round, mark_split, mark_hole_fill;
+  put_mark(body=); same_object skips "the logo itself"; selftest 68/68. PLAYBOOK + MISTAKES rows.
+- Why: owner "Kalanların hepsini yap ... karşılaştığın sorunları gör ve gördüğün anda o sorunları da
+  düzelt ki DeepSeek o sorunlarda takılmasın" (2026-11-23); Reddit's eyes: "Logodaki gibi boya".
+- Open problems: Q2 for the group (overview), allowed WARNs only (mass on thin logos, plain_shape on
+  the envelope). Next for DeepSeek: group 5 (ROADMAP §1: today_weather, binance_tr, ...).
+
 ## 2026-11-23 — Claude via Claude Code (cloud session, takeover) — `kafa_topu_2` round 5, gate `empty_layer`
 - What: Kafa Topu 2 redrawn by Claude with the game's own anchors (design.md 1-6, sources cited):
   Symbol = the header (one big head on its red boot heading the black-and-white ball), Faithful =
