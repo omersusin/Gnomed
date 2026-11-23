@@ -20,6 +20,7 @@ concepts (work/telefon/concepts.png) - four different ideas:
   C: L1 round - a rotary dial: green plate, light dial with ten finger holes (Disc).
   D: L2 - a walkie-talkie: body, antenna, speaker grille, green PTT button (Rimmed).
 
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: B - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: A, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final:

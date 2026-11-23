@@ -22,6 +22,7 @@ concepts (work/telegram/concepts.png):
   E (L2): a blue volumetric cloud (cloud messenger), the white plane flying out in front
   F (L2): a blue envelope (like GNOME Mail), the paper plane is its stamp
 
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: F - "Defaultu o mektup yap" (2026-11-19); in his Symbol style too: "Varsayılan mektup değil ama. Düzelt lütfen" (2026-11-19)
 keep: D - "Select one and make others alt" (2026-11-19)   [D = ring -> Disc; his Q1 answer let me pick, I chose and he approved the board]
 final: "Tamam" (2026-11-19)   [answer to the final board before the envelope became the default]

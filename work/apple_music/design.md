@@ -24,6 +24,7 @@ concepts (work/apple_music/concepts-round2.png) - four ideas (owner's ara-2 fixe
   D: L2 - a vintage wooden radio: cream dial, the note on the dark grille, two knobs (Rimmed). (anchors 1, 2)
 
 anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final: "Tamam, pakete ekle" (2026-11-23)

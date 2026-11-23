@@ -21,6 +21,7 @@ concepts (work/hesap_makinesi/concepts.png) - four different ideas:
   C: L1 round - a circular slide rule: scales, ticks, red cursor, hub (Disc).
   D: L2 - an adding machine: keypad, paper roll with printed tape, red crank (Rimmed).
 
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: B - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: A, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final:

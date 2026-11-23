@@ -20,6 +20,7 @@ concepts (work/mesajlar/concepts.png) - four different ideas:
   C: L2 round - a round chat bubble with a red notification badge (Disc).
   D: L2 - a mailbox on a post with a letter and a red flag (Rimmed).
 
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: B - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: A, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final:

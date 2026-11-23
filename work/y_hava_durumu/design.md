@@ -21,6 +21,7 @@ concepts (work/y_hava_durumu/concepts.png) - four different ideas:
   C: L1 round - a red sun: disc, eight rays, a light ring (Disc).
   D: L2 - a thermometer: scale plate, glass tube, big red bulb, ticks (Rimmed).
 
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: B - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: A, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final: "Tamam, pakete ekle" (2026-11-23)
