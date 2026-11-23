@@ -28,7 +28,7 @@ concepts (Claude 2026-11-23, batch) - four different things, each carrying the m
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7)
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
-final:
+final: "Tamam, pakete ekle" (2026-11-23)
 styles: symbol=A faithful=B disc=C rimmed=D
 owner-takeover: "Kalanların hepsini yap" (2026-11-23) - drawn by Claude
 decisions I made myself (and why; mention them in Q2):

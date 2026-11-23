@@ -89,13 +89,11 @@ def D():
     """Rimmed - the performance gauge (frequency, FPS): a white dial with its arc from green to
     yellow to red, the needle up high, the logo under the needle (anchors 1, 2, 4)."""
     ic = gk.Icon("scene - rimmed")
-    cx, cy = 64, 58
-    body = unary_union([circ(cx, cy, 56).intersection(box(0, 0, 128, cy)), rounded(box(8, cy - 10, 120, 116), 12)])
-    solid(ic, rounded(body, 4), face=[(0, "#5e5c64"), (1, "#3d3846")], depth=5, side="#241f31", layer="case")
-    face = unary_union([circ(cx, cy, 49).intersection(box(0, 0, 128, cy)), rounded(box(15, cy - 10, 113, 109), 8)])
-    recess(ic, rounded(face, 3), [(0, "#ffffff"), (1, "#deddda")], wall=2, layer="dial")
+    cx, cy = 64, 62
+    body = unary_union([circ(cx, cy, 54).intersection(box(0, 0, 128, cy)), rounded(box(10, cy - 10, 118, 116), 12)])
+    solid(ic, rounded(body, 4), face=[(0, "#ffffff"), (0.6, "#f2f2f2"), (1, "#c0bfbc")], depth=6, side="#5e5c64", layer="dial")
     for k, col in enumerate((GREEN[1], "#f6d32d", "#e01b24")):
-        seg = LineString([(cx + 38 * math.cos(math.radians(a)), cy + 38 * math.sin(math.radians(a)))
+        seg = LineString([(cx + 41 * math.cos(math.radians(a)), cy + 41 * math.sin(math.radians(a)))
                           for a in range(186 + k * 56, 186 + (k + 1) * 56 + 1, 4)]).buffer(6, cap_style=2)
         ic.path(geom_d(seg), col, layer_id=f"arc-{k}")
     na = math.radians(-38)
@@ -104,7 +102,7 @@ def D():
                       (cx + 4.5 * math.cos(na - math.pi / 2), cy + 4.5 * math.sin(na - math.pi / 2))])
     ic.path(geom_d(needle), "#c01c28", layer_id="needle")
     solid(ic, circ(cx, cy, 6), face=[(0, "#5e5c64"), (1, "#241f31")], depth=1.5, side="#000000", layer="pivot")
-    put_mark(ic, SLUG, (38, 68, 90, 105))
+    put_mark(ic, SLUG, (37, 69, 91, 107))
     return ic
 
 

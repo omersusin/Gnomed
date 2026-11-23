@@ -343,6 +343,7 @@ Times are from the commits; the model of a backfilled session is what the commit
   fixable WARN (mark_fit, mark_size, visible, legibility32, same_object) is cleared.
 
 ## 2026-11-23 — Claude via Claude Code (cloud session, takeover) — group 4 + the audit
+- Apps: `duolingo` `reddit` `f_droid` `payload_dumper` `scene` `iconrequest` `anker_soundcore` `apple_music` `ayarlar` `chatgpt` `enpara` `foto_raflar` `hepsiburada` `kamera` `mt_manager` `qobuz` `terminal_em_lat_r` `termux_api` `termux_boot` `termux_widget` `trendyolmilla` `walpy` `y_hava_durumu`
 - What: group 4 drawn by Claude, every style carrying the app's MEASURED logo on a thing from its own
   screens (design.md anchors with sources): duolingo (redrawn: streak flame, Duo's head, cafe cup,
   lesson bubble), reddit (upvote, sticker, search lens, comments bubble), f_droid (GNOME-Software bag,
@@ -356,8 +357,12 @@ Times are from the commits; the model of a backfilled session is what the commit
   put_mark(body=); same_object skips "the logo itself"; selftest 68/68. PLAYBOOK + MISTAKES rows.
 - Why: owner "Kalanların hepsini yap ... karşılaştığın sorunları gör ve gördüğün anda o sorunları da
   düzelt ki DeepSeek o sorunlarda takılmasın" (2026-11-23); Reddit's eyes: "Logodaki gibi boya".
-- Open problems: Q2 for the group (overview), allowed WARNs only (mass on thin logos, plain_shape on
-  the envelope). Next for DeepSeek: group 5 (ROADMAP §1: today_weather, binance_tr, ...).
+- Q2: owner "Tamam, pakete ekle" (2026-11-23) for all 23 - in the pack (pack_add symbol for
+  anker_soundcore + trendyolmilla, pack_refresh for all); walpy's roller and scene's gauge were
+  pulled inside 8..120 after the approval (size_audit). size_audit now uses the gate's free-object
+  baseline (108-127): 0 icons outside.
+- Open problems: allowed WARNs only (mass on thin logos, plain_shape on the envelope). Next for
+  DeepSeek: group 5 (ROADMAP §1: today_weather, binance_tr, databackup, stride, bcr, midas, mornye, kadraj).
 
 ## 2026-11-23 — Claude via Claude Code (cloud session, takeover) — `kafa_topu_2` round 5, gate `empty_layer`
 - What: Kafa Topu 2 redrawn by Claude with the game's own anchors (design.md 1-6, sources cited):

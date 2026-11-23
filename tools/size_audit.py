@@ -8,7 +8,7 @@ Measures each app/src/main/res/drawable-nodpi PNG on the 128 grid (alpha > 40):
 bounds, bottom edge, coverage, and compares with the GNOME geometry of its style:
   faithful  (plate 104 + chin)   bottom 114-118, larger side 100-108
   disc / rimmed (disc 118 + chin) bottom 120-125, larger side 112-120
-  symbol / redesigned objects   bottom 112-121, larger side >= 96, nothing above y 4
+  symbol / redesigned objects   bottom 108-127, larger side >= 88, nothing above y 4 (as check_icon)
                                  (free objects stand on the baseline, ~118)
   any                           coverage >= 18 % (a thin outline alone looks lost)
 Redesigned apps (work/<slug>/redesign.py) are objects in every slot -> object rules.
@@ -35,7 +35,7 @@ def measure(p):
 
 
 RANGES = {"faithful": (114, 118, 100, 108), "disc": (120, 125, 112, 120), "rimmed": (120, 125, 112, 120),
-          "object": (112, 121, 96, 120)}
+          "object": (108, 127, 88, 120)}   # = check_icon's free-object baseline 108-126.5 (one rule for both, 2026-11-23)
 
 
 def problems(m, kind):

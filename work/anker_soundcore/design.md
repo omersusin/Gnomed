@@ -29,7 +29,7 @@ concepts (work/anker_soundcore/concepts.png) - four different ideas (owner's ara
 anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
-final:
+final: "Tamam, pakete ekle" (2026-11-23)
 styles: symbol=A faithful=B disc=C rimmed=D
 decisions I made myself (and why; mention them in Q2):
   - the owner's ara-2 fixes (work/anker_soundcore/fixes.md): the measured white wordmark (both

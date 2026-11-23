@@ -34,7 +34,7 @@
     <item component="ComponentInfo{com.openai.chatgpt/com.openai.chatgpt.MainActivity}" drawable="chatgpt_alt3" />
     <item component="ComponentInfo{idm.internet.download.manager.plus/idm.internet.download.manager.LauncherDefault}" drawable="onedm_alt3" />
     <item component="ComponentInfo{com.twofasapp/com.twofasapp.ui.main.StartActivity}" drawable="twofas_auth_alt3" />
-    <item component="ComponentInfo{com.oceanwing.soundcore/com.oceanwing.soundcore.activity.WelcomeActivity}" drawable="anker_soundcore" />
+    <item component="ComponentInfo{com.oceanwing.soundcore/com.oceanwing.soundcore.activity.WelcomeActivity}" drawable="anker_soundcore_alt3" />
     <item component="ComponentInfo{com.apple.android.music/com.apple.android.music.common.MainActivity}" drawable="apple_music_alt3" />
     <item component="ComponentInfo{in.hridayan.ashell/in.hridayan.ashell.activities.MainActivity}" drawable="ashell_you_alt3" />
     <item component="ComponentInfo{org.barebrowser/com.google.android.apps.chrome.Main}" drawable="bare_alt3" />
@@ -88,7 +88,7 @@
     <item component="ComponentInfo{net.thunderbird.android/net.thunderbird.app.common.MainActivity}" drawable="thunderbird_alt3" />
     <item component="ComponentInfo{com.zhiliaoapp.musically.go/com.zhiliaoapp.musically.go.mini.MainActivity}" drawable="tiktok_lite_alt3" />
     <item component="ComponentInfo{mobi.lockdown.weather/mobi.lockdown.weather.activity.SplashActivity}" drawable="today_weather_alt3" />
-    <item component="ComponentInfo{com.trendyol.milla.android/com.trendyol.common.splash.impl.ui.MillaSplashActivity}" drawable="trendyolmilla" />
+    <item component="ComponentInfo{com.trendyol.milla.android/com.trendyol.common.splash.impl.ui.MillaSplashActivity}" drawable="trendyolmilla_alt3" />
     <item component="ComponentInfo{com.browserrelay.app/com.browserrelay.app.MainActivity}" drawable="trestle_alt3" />
     <item component="ComponentInfo{com.tmob.AveaOIM/moim.android.DefaultMoimApplicationAlias}" drawable="t_rk_telekom_alt3" />
     <item component="ComponentInfo{com.example.vortex/com.example.vortex.MainActivity}" drawable="vortex_alt3" />

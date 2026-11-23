@@ -23,7 +23,7 @@ concepts (work/foto_raflar/concepts.png) - four different ideas:
 
 approved: B - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: A, C, D - "batch: hepsi kullanılsın" (2026-11-22)
-final:
+final: "Tamam, pakete ekle" (2026-11-23)
 styles: symbol=B faithful=A disc=C rimmed=D
 warn-ok: same_object - photo prints are the gallery's own thing (GNOME Loupe); walpy keeps its print by the owner's fix list (work/walpy/fixes.md), and walpy's navy + squiggle tell the two apart
 decisions I made myself (and why; mention them in Q2):

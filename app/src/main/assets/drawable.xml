@@ -108,6 +108,7 @@
     <item drawable="deezer_alt1" name="Deezer (Disc)" />
     <item drawable="deezer_alt2" name="Deezer (Rimmed)" />
     <item drawable="deezer_alt3" name="Deezer (Symbol)" />
+    <item drawable="anker_soundcore_alt3" name="Anker soundcore (Symbol)" />
 
     <category title="System" />
     <item drawable="telefon" name="Telefon" />
@@ -339,6 +340,7 @@
     <item drawable="quarry_alt2" name="Quarry (Rimmed)" />
     <item drawable="quarry_alt3" name="Quarry (Symbol)" />
     <item drawable="andvm" name="AndVM" />
+    <item drawable="trendyolmilla_alt3" name="Trendyolmilla (Symbol)" />
 
     <category title="Browsers" />
     <item drawable="bare" name="Bare" />
