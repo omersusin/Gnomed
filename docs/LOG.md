@@ -270,6 +270,16 @@ Times are from the commits; the model of a backfilled session is what the commit
   wordmarks); a free-standing mark half over another part (Enpara Faithful on its stripe) is not
   measured yet.
 
+## 2026-11-23 — Claude via Claude Code (cloud session) — fix round overview-3b (no icons changed)
+- What: `work/enpara/fixes-overview-3b.md` (Faithful letters sink into the stripe: the side of a
+  depth mark lies below its box) and `work/qobuz/fixes-overview-3b.md` (Faithful still a black
+  square: pull the inner sleeve half out); REDESIGN §5 + next.py mark_fit text: end the box `depth`
+  above the surface it stands on.
+- Why: overview-3-fixed - the two styles still wrong after the first round.
+- Owner: "Başla" (2026-11-23)
+- PR: opened after this commit
+- Open problems: a free mark sunk into a part is not measured (Enpara 6 u vs Terminal 4.5 u - too close).
+
 ## 2026-11-22 — Claude via Claude Code (cloud session) — rule "pairs read as eyes", fix rounds (no icons changed here)
 - What: REDESIGN §5 + BATCH step 6: two equal round things side by side read as eyes; next.py
   reads every `work/<slug>/fixes*.md` (one file per review round, no conflicts with the batch

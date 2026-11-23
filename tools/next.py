@@ -81,7 +81,8 @@ RECIPES = {
                 "  on the letters, an 'en' hung over its plate's edge). You compute coordinates without seeing\n"
                 "  the picture - so measure: the box you give put_mark() must lie INSIDE the face of the part with\n"
                 "  >= 1 unit of room on every side (shrink the box, or make the part bigger), and nothing may be\n"
-                "  drawn over the mark (draw holes, handles, straps BEFORE put_mark, or move them).",
+                "  drawn over the mark (draw holes, handles, straps BEFORE put_mark, or move them). A mark with\n"
+                "  depth and anchor='bottom' gets its side BELOW the box: end the box `depth` above the surface.",
     "same_object": "Another app of the same category already uses this object (design.md concept lines, all four\n"
                    "  styles). The owner wants different objects per app (BATCH.md 7): pick a FREE object of the\n"
                    "  family - python3 tools/next.py prints the family with USED/free - and redraw that style.",
