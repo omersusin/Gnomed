@@ -65,6 +65,11 @@ is not an anchor.
 > app (the slogan, the screen, the name) - not by the category. Only when no carrier fits an
 > anchor, draw it yourself (copy work/reddit, work/duolingo, work/scene, work/binance_tr).
 > `BRAND` is measured: the logo's or the screenshots' main colour (`print(describe(SLUG))`).
+> **No carrier fits the app's anchor** (a call recorder, a running shoe): copy the NEAREST carrier's
+> function from `work/_lib/carriers.py` into redesign.py and change its object, keeping its logo
+> placement (`logo()`, `label()`, `logo_free()`) - e.g. the phone with a red record dot and a
+> waveform for a call recorder. A carrier another app of the category already uses (Mesajlar's
+> bubble) is allowed only when nothing of THIS app fits - say so in `warn-ok: same_object`.
 > Two dark carriers at most (wallet, chip, radar, monitor are dark) - gate `dark_family`.
 
 The assignment that worked every time:

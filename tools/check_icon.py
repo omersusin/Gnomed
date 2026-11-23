@@ -704,7 +704,11 @@ def compute(slug):
                         "only the owner's words allow it: painted-holes: \"<his words>\" (YYYY-MM-DD)")
         # mark_size: the app's own colours (its mark) must read on the phone. A mark printed small
         # on a big object (Deezer's bars on a record label, 2026-11-22) is lost at 48 px.
-        if is_redesign:
+        has_layer = bool(re.search(r'id="mark', svg.read_text(encoding="utf-8"))) and (w / "geometry.json").exists() \
+            and mark_applies(w)
+        if is_redesign and has_layer:          # the measured mark is in a layer: gate `mark` measures its real
+            add(st, "mark_size", "PASS", "measured by gate mark (the layer)")   # size - a white logo has no colour
+        elif is_redesign:                      # to find (Haiku's BCR test, 2026-11-23: 0 px for a white handset)
             mm = mark_measure(slug, svg)
             if mm is not None:
                 side, share, _n = mm
