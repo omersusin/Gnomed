@@ -517,6 +517,22 @@ def plate_measure(svg, N=256):
     return float(big / max(1, whole.sum()))
 
 
+def design_block(text, header):
+    """the indented lines under a design.md header ('anchors', 'ideas'), up to the next line that is
+    not indented. Line by line: the regex it replaces backtracked exponentially when a blank line
+    followed a block of lines with many spaces - the gate hung for 15+ minutes (2026-11-23)."""
+    out, inside = [], False
+    for ln in text.splitlines():
+        if not inside:
+            inside = ln.lower().startswith(header)
+            continue
+        if ln[:1] in (" ", "\t"):
+            out.append(ln)
+        else:
+            break
+    return out
+
+
 def dark_share(a):
     """share of the painted pixels that are dark neutral (black/charcoal/dark grey: L < 38, chroma < 18)"""
     op = a[..., 3] > 0.5
@@ -831,8 +847,7 @@ def compute(slug):
     # progress (no final approval yet) - finished apps are not asked again.
     if is_redesign and (w / "design.md").exists() and slug not in SYSTEM_APPS and not is_quote(design_line(w, "final")):
         text_ = (w / "design.md").read_text(encoding="utf-8")
-        mi = re.search(r"^ideas[^\n]*\n((?:[ \t]+[^\n]*\n?)+?)(?=^\S|\Z)", text_, re.M)
-        lines_ = [ln.strip() for ln in (mi.group(1).splitlines() if mi else [])]
+        lines_ = [ln.strip() for ln in design_block(text_, "ideas")]
         srcs = []
         for ln in lines_:
             m_ = re.match(r"(slogan|screen|content|name|description|logo|colour|color)\s*:\s*\S.*->\s*\S", ln)
@@ -874,9 +889,8 @@ def compute(slug):
     # (source.png / refs/...), each style's concept line cites the anchors it carries.
     if is_redesign and (w / "design.md").exists() and slug not in SYSTEM_APPS:
         text = (w / "design.md").read_text(encoding="utf-8")
-        m = re.search(r"^anchors[^\n]*\n((?:[ \t]+[^\n]*\n?)+?)(?=^\S|\Z)", text, re.M)
         items = {}
-        for ln in (m.group(1).splitlines() if m else []):
+        for ln in design_block(text, "anchors"):
             mm = re.match(r"\s*(\d)\.\s*(\S.*)", ln)
             if mm:
                 items[mm.group(1)] = mm.group(2)
