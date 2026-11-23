@@ -20,7 +20,8 @@ git merge --no-edit origin/main     # the owner's newest rules, checks and fix l
 git config core.hooksPath tools/hooks
 python3 tools/gnome-android-icons/scripts/doctor.py      # "result: READY"; do NOT run selftest.py (too slow on a phone)
 mkdir -p ~/Downloads/gnomed        # on the phone: /sdcard/Download/gnomed
-python3 tools/next.py              # "0. The owner's FIXES" first, if it lists any
+python3 tools/audit.py             # today's gates on the icons already done -> fix lists for what they catch
+python3 tools/next.py              # "0. The owner's FIXES" first (the owner's reviews and the audit), if any
 ```
 A merge conflict: keep both sides (rules from main, your icons from the batch), never delete his work.
 
@@ -63,6 +64,8 @@ If it says OWNER_FIXES_FIRST, do the owner's fix lists first (§4).
      style carries the measured mark, `put_mark(ic, SLUG, box)`; gate `mark` measures it;
    - **two equal round things side by side look like eyes** (ara-2: Soundcore's earbuds = a face) -
      give them their real shape: stems and ear tips, spokes, pointers; mirrored and tilted;
+   - the mark runs off, touches the edge of, or is covered on its part (gate `mark_fit`); a pair
+     (buds, wheels, hinges) that is ALMOST equal or ALMOST on one line - make it exactly equal;
    - **cover the mark**: hide it - can you still name the object? A plain tile/box whose face is the
      wordmark is the logo on a plate, whatever it is called (overview-3: "server rack", "album sleeve",
      "safe"); a wordmark is a LABEL on the object;
