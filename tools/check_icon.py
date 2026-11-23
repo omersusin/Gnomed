@@ -3,6 +3,10 @@
 
     python3 tools/check_icon.py <slug>          # human-readable report
     python3 tools/check_icon.py <slug> --json   # machine-readable
+    python3 tools/check_icon.py <slug> --no-cache   # measure again even if nothing changed
+
+The result is cached in .cache/check/<slug>.json and reused while no input changed (the app's
+folder, every design.md, the gate's code) - next.py re-runs the gate right after make_icon.py.
 
 Every check prints PASS / WARN / FAIL, a number, and - when it is not PASS - the
 FIX to apply (a key from docs/course/04-recipes.md). Exit code: 0 = no FAIL,
@@ -253,6 +257,20 @@ def mark_measure(slug, svg, N=256, de=20.0):
     return float(side), float(keep.sum() / max(painted.sum(), 1)), len(cols)
 
 
+@__import__("functools").lru_cache(maxsize=None)
+def _skill_mod(name):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(name, SK / f"{name}.py")
+    mod = importlib.util.module_from_spec(spec)
+    sys.path.insert(0, str(SK))
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _legibility():
+    return _skill_mod("legibility_check")
+
+
 MARK_ID = re.compile(r"^mark(?:$|[-_0-9])", re.I)
 
 
@@ -304,12 +322,17 @@ def mark_layer_measure(slug, svg, N=256):
         if ch.get("fill") in (None,) and not list(ch):
             ch.set("fill", "#ff00ff")
 
-    def lab_on(b, bg=(0.5, 0.5, 0.5)):
-        a = np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(bytestring=b, output_width=N, output_height=N)))
-                       .convert("RGBA")).astype(np.float32) / 255
+    rendered = {}
+
+    def lab_on(b, bg=(0.5, 0.5, 0.5)):           # each variant is rendered once, composited per wallpaper
+        if b not in rendered:
+            rendered[b] = np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(
+                bytestring=b, output_width=N, output_height=N))).convert("RGBA")).astype(np.float32) / 255
+        a = rendered[b]
         al = a[..., 3:4]
         return rgb2lab(np.clip(a[..., :3] * al + np.array(bg, np.float32) * (1 - al), 0, 1))
-    base = lab_on(ET.tostring(without))
+    without = ET.tostring(without)
+    base = lab_on(without)
     foot = ndimage.binary_opening(np.linalg.norm(lab_on(ET.tostring(magenta)) - base, axis=-1) > 10, iterations=1)
     if foot.sum() < 20:
         return 0.0, 0.0, 0.0, 0.0
@@ -320,7 +343,7 @@ def mark_layer_measure(slug, svg, N=256):
     # Terminal Emulator's white mark on nothing vanished on the light wallpaper)
     contrast, seen = 999.0, 1.0
     for bg in ((246 / 255, 245 / 255, 244 / 255), (36 / 255, 31 / 255, 49 / 255)):
-        de = np.linalg.norm(lab_on(txt, bg) - lab_on(ET.tostring(without), bg), axis=-1)
+        de = np.linalg.norm(lab_on(txt, bg) - lab_on(without, bg), axis=-1)
         contrast = min(contrast, float(np.median(de[foot])))
         seen = min(seen, float(((de > 10) & foot).sum() / foot.sum()))
     try:                                   # the source's mark, fitted into the same box
@@ -346,9 +369,50 @@ def mark_layer_measure(slug, svg, N=256):
     return float(side), contrast, best, seen
 
 
+# The whole result is cached: next.py runs this gate again right after make_icon.py, on the
+# same files. The key is every input's path, size and change time - the app's folder, every
+# design.md (gate same_object reads the other apps), the code of the gate and its libraries.
+CACHE = ROOT / ".cache" / "check"
+
+
+def _cache_key(slug):
+    import hashlib
+    h = hashlib.sha1()
+    files = [p for p in (ROOT / "work" / slug).rglob("*") if p.is_file() and p.name != "build-stamp.txt"]
+    files += list((ROOT / "work").glob("*/design.md"))
+    files += [Path(__file__)] + [p for p in (ROOT / "work/_lib").glob("*") if p.is_file()] + list(SK.glob("*.py"))
+    for p in sorted(set(files)):
+        try:
+            st = p.stat()
+            h.update(f"{p.relative_to(ROOT)}|{st.st_size}|{st.st_mtime_ns}\n".encode())
+        except (OSError, ValueError):
+            pass
+    return h.hexdigest()
+
+
 def main():
     slug = sys.argv[1]
     as_json = "--json" in sys.argv
+    key, res = None, None
+    if "--no-cache" not in sys.argv:
+        try:
+            key = _cache_key(slug)
+            c = json.loads((CACHE / f"{slug}.json").read_text())
+            res = c["res"] if c.get("key") == key else None
+        except (OSError, ValueError, KeyError):
+            res = None
+    if res is None:
+        res = compute(slug)
+        if key:
+            try:                     # the key AFTER measuring: the gate itself may write caches
+                CACHE.mkdir(parents=True, exist_ok=True)   # (work/<slug>/gradients.json)
+                (CACHE / f"{slug}.json").write_text(json.dumps({"key": _cache_key(slug), "res": res}))
+            except OSError:
+                pass
+    report(res, as_json)
+
+
+def compute(slug):
     w = ROOT / "work" / slug
     res = []
 
@@ -415,8 +479,11 @@ def main():
     add("app", "faithful", "PASS" if "faithful" in svgs else "FAIL", "faithful" in svgs,
         "" if "faithful" in svgs else "build the app first: python3 tools/make_icon.py " + slug)
     for st, svg in svgs.items():
-        out = subprocess.run([sys.executable, str(SK / "lint_svg.py"), str(svg)], capture_output=True, text=True).stdout
-        fail = "[FAIL]" in out
+        try:                                    # in-process: no new Python per style
+            fail = bool(_skill_mod("lint_svg").lint(str(svg))["fails"])
+        except Exception:
+            out = subprocess.run([sys.executable, str(SK / "lint_svg.py"), str(svg)], capture_output=True, text=True).stdout
+            fail = "[FAIL]" in out
         add(st, "lint", "FAIL" if fail else "PASS", "FAIL" if fail else "ok",
             "read the lint message; edge contact -> make the object smaller (inside 8..120)" if fail else "")
         a = render(svg)
@@ -442,14 +509,18 @@ def main():
         if is_redesign:
             blo, bhi = 108, 126.5          # free objects: GNOME icons end anywhere from 108 to 126
         add(st, "baseline", "PASS" if blo <= bottom <= bhi else "WARN", round(bottom, 1), "" if blo <= bottom <= bhi else "R9 baseline")
-        leg = subprocess.run([sys.executable, str(SK / "legibility_check.py"), str(svg)], capture_output=True, text=True).stdout
         ssim = None
-        for line in leg.splitlines():
-            if "32px" in line and "ssim" in line:
-                try:
-                    ssim = float(line.split("ssim")[1].split()[0])
-                except ValueError:
-                    pass
+        try:                                    # in-process and cached (review.sh measured it already)
+            ssim = float(_legibility().cached_analyse(svg)["sizes"][32]["ssim"])
+        except Exception:                       # never crash the gate: fall back to the script
+            leg = subprocess.run([sys.executable, str(SK / "legibility_check.py"), str(svg)],
+                                 capture_output=True, text=True).stdout
+            for line in leg.splitlines():
+                if "32px" in line and "ssim" in line:
+                    try:
+                        ssim = float(line.split("ssim")[1].split()[0])
+                    except ValueError:
+                        pass
         if ssim is not None:
             stt = "PASS" if ssim >= 0.72 else ("WARN" if ssim >= 0.62 else "FAIL")
             add(st, "legibility32", stt, ssim, "" if stt == "PASS" else "details vanish at 32 px: bigger parts, drop tiny details, strokes >= 2 px")
@@ -618,6 +689,10 @@ def main():
             stt = "FAIL" if big else ("WARN" if low else "PASS")
             add("app", "trace_iou", stt, big or low or "all >= 0.90",
                 "" if stt == "PASS" else "R12: re-run with --remeasure; if still low the region is noise -> drop it")
+    return res
+
+
+def report(res, as_json):
     if as_json:
         print(json.dumps(res, indent=1))
     else:
