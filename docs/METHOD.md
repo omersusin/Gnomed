@@ -69,6 +69,13 @@ Binance TR      slogan: "Purchase in Turkish lira" + floating coins -> the lira 
                 screen: "Kolay Al/Sat" candles -> a trading screen             (Rimmed)
 ```
 
+**Keep the idea, change the object.** When the best idea collides with another app's object
+(gate `same_object`), find another object for the SAME idea - never drop the idea for a generic
+carrier. Haiku's Midas test (2026-11-23): name "Midas" -> gold was the strongest idea, but a gold
+coin is Binance's and Enpara's, so it fell back to a dial; a **gold bar** (or a gold nugget, the
+Midas touch) keeps the idea with a free object. Two screens (a monitor AND a phone) in one app are
+one idea twice.
+
 Rules: the **Symbol comes from a slogan, the name, the content or a screen** - never just "the
 logo" or "the colour" (worksheet `idea=`). A generic carrier (dial, bubble, coin, shield, phone)
 is right only when an idea line names it. Then the kit (§2) draws it.
