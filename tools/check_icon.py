@@ -304,21 +304,25 @@ def mark_layer_measure(slug, svg, N=256):
         if ch.get("fill") in (None,) and not list(ch):
             ch.set("fill", "#ff00ff")
 
-    def lab_on_grey(b):
+    def lab_on(b, bg=(0.5, 0.5, 0.5)):
         a = np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(bytestring=b, output_width=N, output_height=N)))
                        .convert("RGBA")).astype(np.float32) / 255
         al = a[..., 3:4]
-        return rgb2lab(np.clip(a[..., :3] * al + 0.5 * (1 - al), 0, 1))
-    base = lab_on_grey(ET.tostring(without))
-    de = np.linalg.norm(lab_on_grey(txt) - base, axis=-1)
-    foot = ndimage.binary_opening(np.linalg.norm(lab_on_grey(ET.tostring(magenta)) - base, axis=-1) > 10, iterations=1)
+        return rgb2lab(np.clip(a[..., :3] * al + np.array(bg, np.float32) * (1 - al), 0, 1))
+    base = lab_on(ET.tostring(without))
+    foot = ndimage.binary_opening(np.linalg.norm(lab_on(ET.tostring(magenta)) - base, axis=-1) > 10, iterations=1)
     if foot.sum() < 20:
         return 0.0, 0.0, 0.0, 0.0
     ys, xs = np.nonzero(foot)
     x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
     side = max(x1 - x0, y1 - y0) * 128 / N
-    contrast = float(np.median(de[foot]))
-    seen = float(((de > 10) & foot).sum() / foot.sum())
+    # contrast and visible share on BOTH wallpapers, the worse one counts (overview-3, 2026-11-23:
+    # Terminal Emulator's white mark on nothing vanished on the light wallpaper)
+    contrast, seen = 999.0, 1.0
+    for bg in ((246 / 255, 245 / 255, 244 / 255), (36 / 255, 31 / 255, 49 / 255)):
+        de = np.linalg.norm(lab_on(txt, bg) - lab_on(ET.tostring(without), bg), axis=-1)
+        contrast = min(contrast, float(np.median(de[foot])))
+        seen = min(seen, float(((de > 10) & foot).sum() / foot.sum()))
     try:                                   # the source's mark, fitted into the same box
         sys.path.insert(0, str(ROOT / "work/_lib"))
         import obj as _obj
@@ -509,8 +513,10 @@ def main():
                         "the MEASURED mark with put_mark(ic, SLUG, box) - never retype or redraw a logo")
                 elif con < 25 or seen < 0.6:
                     add(st, "mark", "WARN", val + " - does not stand out",
-                        "the mark melts into what is under it: a white/light mark on a dark part, a dark or "
-                        "strong-coloured mark on a light part (put_mark(..., face=\"#ffffff\") / a darker ramp step)")
+                        "the mark melts into what is under it (measured on the light AND the dark wallpaper): a "
+                        "white/light mark on a dark part, a dark or strong-coloured mark on a light part; a mark "
+                        "standing on nothing needs a colour that reads on both wallpapers, or a part behind it "
+                        "(put_mark(..., face=\"#ffffff\") / a darker ramp step)")
                 elif side < need:
                     add(st, "mark", "WARN", val + f" - smaller than {need} px",
                         f"make the part that carries the mark bigger and the mark >= {need} px of 128"

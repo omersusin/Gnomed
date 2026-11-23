@@ -63,6 +63,11 @@ If it says OWNER_FIXES_FIRST, do the owner's fix lists first (§4).
      style carries the measured mark, `put_mark(ic, SLUG, box)`; gate `mark` measures it;
    - **two equal round things side by side look like eyes** (ara-2: Soundcore's earbuds = a face) -
      give them their real shape: stems and ear tips, spokes, pointers; mirrored and tilted;
+   - **cover the mark**: hide it - can you still name the object? A plain tile/box whose face is the
+     wordmark is the logo on a plate, whatever it is called (overview-3: "server rack", "album sleeve",
+     "safe"); a wordmark is a LABEL on the object;
+   - two box-shaped containers in one app (cabinet + archive box) are twins; an object that reads as
+     another category's (a platter with an arm = a record player) is wrong;
    - **Faithful is not the closest to the logo** - the mark big, in the logo's colours, often the mark
      itself as the object (a turntable or a cardboard box is not);
    - another app of the category already has the object in any style (ara-2: Apple Music's cassette
