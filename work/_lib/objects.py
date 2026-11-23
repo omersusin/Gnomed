@@ -464,8 +464,8 @@ def crystal(ic, cx, base, size, name="crystal"):
     return d
 
 
-def football(ic, cx, base, size, name="ball"):
-    """Leather match ball: white panels, dark pentagons, gloss (sport games)."""
+def football(ic, cx, base, size, name="ball", pent=("#5e5c64", "#241f31")):
+    """Leather match ball: white panels, pentagons (dark by default, a team colour when given), gloss."""
     r = size / 2
     cy = base - 2.5 - r
     b = circ(cx, cy, r)
@@ -474,8 +474,8 @@ def football(ic, cx, base, size, name="ball"):
     for k in range(5):
         a = -math.pi / 2 + k * 2 * math.pi / 5
         pents.append(poly(_star(cx + math.cos(a) * r * 0.92, cy + math.sin(a) * r * 0.92, r * 0.27, r * 0.22, 5)[::2], 0.5))
-    pent = unary_union(pents).intersection(b)
-    ic.path(geom_d(pent), ic.linear([(0, "#5e5c64"), (1, "#241f31")], 0, cy - r, 0, cy + r), layer_id=f"{name}-pentagons")
+    pg = unary_union(pents).intersection(b)
+    ic.path(geom_d(pg), ic.linear([(0, pent[0]), (1, pent[1])], 0, cy - r, 0, cy + r), layer_id=f"{name}-pentagons")
     ic.path(geom_d(ellipse(cx - r * 0.38, cy - r * 0.42, r * 0.34, r * 0.22).intersection(b)), "#ffffff", opacity=0.7, layer_id=f"{name}-gloss")
     return b
 

@@ -1,0 +1,4 @@
+source: work/kafa_topu_2/ (the working copy)
+branch commit: a80f03b
+taken: 2026-11-23
+label: deepseek-objects

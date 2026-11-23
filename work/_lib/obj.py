@@ -341,6 +341,27 @@ def mark_parts(slug, de=25.0):
             t = float(np.clip((p - a) @ ab / max(float(ab @ ab), 1e-9), 0, 1))
             return float(np.linalg.norm(p - (a + t * ab)))
         keep = [r for r in R if dist(lab(r[2])) > de] or R
+    skip = {str(n) for n in (gr.get("mark_skip") or [])}
+    if skip:                                       # measured ground parts the heuristic missed
+        keep = [r for r in keep if not (set(r[0].split("+")) & skip)]
+    forced = {str(n) for n in (gr.get("mark_keep") or [])}
+    if forced:                                     # a mark the heuristic threw away as ground
+        have = {r[0] for r in keep}
+        keep += [r for r in R if (set(r[0].split("+")) & forced) and r[0] not in have]
+    mb = gr.get("mark_holes")                       # the mark lives in the measured holes (white
+    if isinstance(mb, (list, tuple)) and len(mb) == 4:   # letters on a dark object)
+        from shapely.geometry import box as _box
+        hl = P.get("holes")
+        if hl is not None and not hl.is_empty:
+            g = hl.intersection(_box(*[float(v) for v in mb]))
+            if not g.is_empty:
+                return [("holes", g, gr.get("mark_color") or "#ffffff")]
+    crop = gr.get("mark_crop")                      # a tile edge / shadow line merged into the mark
+    if isinstance(crop, (list, tuple)) and len(crop) == 4:
+        from shapely.geometry import box as _box
+        c = _box(*[float(v) for v in crop])
+        keep = [(n, g.intersection(c), f) for n, g, f in keep]
+        keep = [(n, g, f) for n, g, f in keep if not g.is_empty]
     holes = P.get("holes")
     if holes is not None and not holes.is_empty:
         keep = [(n, g.difference(holes), f) for n, g, f in keep]

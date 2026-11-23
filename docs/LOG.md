@@ -316,3 +316,54 @@ Times are from the commits; the model of a backfilled session is what the commit
   "Ya da sen yap o düzeltmeyi, sonra da o hatayı dokumana yaz ki sorun olmasın gelecekte" (2026-11-22)
 - PR: opened after this commit
 - Open problems: none.
+
+## 2026-11-23 — DeepSeek V4.1 Flash Free via OpenCode — `anker_soundcore`, `trendyolmilla`, `hepsiburada`, `qobuz`, `terminal_em_lat_r`, `mt_manager`, `enpara`
+- What: batch 3 (logo on a tile, wordmarks), all four styles built for every app.
+  trendyolmilla: bag / price tag / hat box / wicker basket. hepsiburada: delivery van / parcel /
+  tape roll / cart. qobuz: microphone / album sleeve / CD / mixing console. terminal_em_lat_r:
+  package box / the mark as an object / install disc / server rack. mt_manager: filing cabinet /
+  folder / HDD platter / archive box. enpara: bank card / wallet / coin / safe.
+- Why: the owner's batch order — every existing icon redone; group 3 was "logo on a plate".
+- Owner: "batch: Biz onayladıktan sonra hepsini yapsın" / "batch: hepsi kullanılsın" (2026-11-22)
+- PR: opened after this commit
+- Open problems: allowed WARNs only (plain_shape on real boxes/sleeves, baseline on the card,
+  mass on the faithful mark); `work/_lib/obj.py` gained `mark_holes`/`mark_crop`/`mark_keep`/
+  `mark_skip` so a mark that lives inside the source's ground parts or tile edge is measurable.
+
+## 2026-11-23 — DeepSeek V4.1 Flash Free via OpenCode — fixes `overview-3` (6 apps)
+- What: the owner's review round for group 3. enpara: the faithful is the measured en on the
+  four-colour stripe (no plate), the rimmed a steel safe door with hinges, dial, handle and the en
+  on a small plate. hepsiburada: the disc is now a round hanging shop sign. mt_manager: folder with
+  the coral sheet, round archive tin, USB stick. qobuz: a big broadcast microphone, an album sleeve
+  with its inner sleeve out (a vinyl is Deezer's object). terminal_em_lat_r: slate mark on a lime
+  plinth, install disc, rack server front. trendyolmilla: the disc is a real hat box.
+- Why: reviews in the repository (owner 2026-11-22), rules "cover the mark" and "a wordmark is a label".
+- Owner: "Bıktım bana prompt vermenden, yaz depoya" (2026-11-22)
+- Open problems: allowed WARNs only (plain_shape on real boxes/signs/sleeves); every FAIL and every
+  fixable WARN (mark_fit, mark_size, visible, legibility32, same_object) is cleared.
+
+## 2026-11-23 — Claude via Claude Code (cloud session, takeover) — `kafa_topu_2` round 5, gate `empty_layer`
+- What: Kafa Topu 2 redrawn by Claude with the game's own anchors (design.md 1-6, sources cited):
+  Symbol = the header (one big head on its red boot heading the black-and-white ball), Faithful =
+  the store icon (two busts facing, yellow VS, ball above), Disc = the banner's round green pitch
+  with both players on boots, Rimmed = the fireball shot into a goal on a turf strip
+  (refs/store/shot-2.jpg). DeepSeek's objects-only round archived as
+  `archive/kafa_topu_2/2026-11-23_1217_deepseek-objects`.
+- New gate `empty_layer` (FAIL): a layer that came out empty (`d=""`) - the turf had vanished
+  (`rounded()` with r = half the strip). The same silent loss is in ayarlar disc, chatgpt
+  faithful, y_hava_durumu disc + symbol: `tools/audit.py` lists them. selftest 62/62 (REDO and
+  NOT_STARTED now tested on a throw-away app).
+- Why: owner "Kabul edilemez ... Oyunlarda ve uygulamalarda hassas olmalı" (2026-11-23), "Oyuna
+  göre sen seç", "Şimdilik devral bakalım ama ben seni bırakıp deepseek ile devam edebileyim".
+- Q2: owner "Tamam, pakete ekle" (2026-11-23) - in the pack (pack_refresh; the shipped version is in
+  `archive/kafa_topu_2/2026-11-23_1150_pack`).
+- Open problems: symbol mass 0.33 (one head, allowed WARN).
+
+## 2026-11-23 — DeepSeek V4.1 Flash Free via OpenCode — fixes `overview-3b` (2 apps)
+- What: enpara faithful: put_mark box (20,34,108,88) depth 6 anchor bottom - the side ends on the
+  stripe top (y 94), the en stands on the stripe instead of sinking into it. qobuz faithful: the
+  white paper inner sleeve is pulled half out of the smaller dark cover, inset on both sides, with
+  its round die-cut window (r 13) and the fold shadow; the wordmark sits on the cover.
+- Why: round-2 review in the repository (`fixes-overview-3b.md`), owner "Başla" (2026-11-23).
+- Open problems: qobuz faithful keeps the allowed plain_shape WARN (a real sleeve); all FAIL and
+  fixable WARN clear (legibility 0.731, mark_fit 9 u, mark 70 px).
