@@ -33,7 +33,7 @@ concepts (Claude 2026-11-23, the owner's comparison with Sonnet) - four differen
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7)
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
-final:
+final: "Ekle bunları" (2026-11-23)
 styles: symbol=A faithful=B disc=C rimmed=D
 owner-takeover: "Önce sen yap binance için, compare edecem" (2026-11-23) - drawn by Claude on branch compare/binance_tr-claude
 warn-ok: same_object - the yellow coin is Binance's own (its logo coin floats in shots 1 and 4); enpara's coin is a gold coin with a magenta en - the logo and colours tell them apart
