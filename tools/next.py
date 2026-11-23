@@ -115,6 +115,9 @@ RECIPES = {
     "plate": "The style is the logo on a plate: a plain disc / tile / card whose face is one flat colour\n"
              "  around the logo (Haiku's Stride test: a white card with the logo). Use a carrier with real\n"
              "  parts from work/_lib/carriers.py (see docs/kit.png): one line, it places the logo itself.",
+    "round_twin": "The Symbol or the Rimmed is round like the Disc (Haiku's Stride test: a round dial as the\n"
+                  "  Symbol and a round coin as the Disc - two medallions). Only the Disc is round: pick a carrier\n"
+                  "  with another silhouette for that style (bag, arrow, envelope, phone, shield, book ...).",
     "dark_family": "Three or four styles are mostly black/charcoal: they look like one family and melt into the\n"
                    "  dark wallpaper (Sonnet's Binance test: a dark slab, kite, disc and wallet). Keep at most two\n"
                    "  dark; give the others the brand colour, steel, paper, wood. docs/METHOD.md §2.",
@@ -126,6 +129,7 @@ WARN_TR = {
     "mark": "uygulamanın kendi işareti bu stilde yok / okunmuyor",
     "faithful_logo": "Faithful logonun kendisi değil, bir plakanın üstünde logo",
     "plate": "bu stil düz bir plakanın üstünde logo, bir nesne değil",
+    "round_twin": "bu stil de Disc gibi yuvarlak: iki madalyon gibi duruyorlar",
     "dark_family": "stillerin çoğu siyah/koyu gri: birbirine benziyor, koyu duvar kâğıdında kayboluyor",
     "empty_layer": "çizilmesi gereken bir parça boş çıkmış, simgede eksik",
     "same_object": "aynı kategorideki başka bir uygulama bu nesneyi kullanıyor",
@@ -164,7 +168,7 @@ def line(text, key):
 
 # WARNs the owner would see on his phone: fixed before Q2 (state FIX_WARN), or explained
 MUST_TRY = ("anchors", "mark", "mark_fit", "mark_size", "visible_light", "visible_dark", "legibility32", "slots", "same_object",
-            "faithful_logo", "dark_family", "plate")
+            "faithful_logo", "dark_family", "plate", "round_twin")
 
 
 def warn_ok(text, check):

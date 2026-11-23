@@ -31,6 +31,7 @@ Checks (per style that exists):
                 style's concept line cites the anchors it carries ................. WARN
   empty_layer   a layer the code drew came out empty (d="") - the part is missing .......... FAIL
   faithful_logo the Faithful is the logo itself (stands free, or the logo is >= 45 % of it) .. WARN
+  round_twin    symbol/rimmed: round like a disc (circle match > 0.9) - only the Disc is round ... WARN
   plate         symbol/disc/rimmed: a plain disc/tile/box that is one flat face + the logo ...... WARN
   dark_family   at most two styles mostly black/charcoal ......................................... WARN
   mark_fit      the mark sits well on its part: nothing of it over the part's edge (<= 1 %),
@@ -781,6 +782,16 @@ def compute(slug):
                             "(work/_lib/carriers.py, docs/kit.png) - a lens, a fan, a radar, a bag, an envelope ...")
                     elif share_ is not None:
                         add(st, "plate", "PASS", f"{kind_} with parts (largest flat region {share_:.0%})")
+            # round_twin: only the Disc is round (Haiku's Stride test, 2026-11-23: a round dial as the
+            # Symbol AND a round coin as the Disc - two medallions with the runner inside)
+            if st in ("symbol", "rimmed") and is_redesign:
+                _k, _iou, _ = shape_kind(svg)
+                if _iou > 0.9:
+                    add(st, "round_twin", "WARN", f"round like a disc (circle match {_iou:.2f})",
+                        "only the Disc style is round (METHOD.md §2): give the Symbol / Rimmed a thing with another "
+                        "silhouette - the kit's round carriers (lens, dial, radar, fan, coin, cup) are for the Disc only")
+                else:
+                    add(st, "round_twin", "PASS", f"circle match {_iou:.2f}")
             # faithful_logo: the Faithful IS the logo (METHOD.md §2) - not the logo on a plate. Sonnet's
             # Binance test (2026-11-23): the logo on a dark kite and on a dark disc.
             if st == "faithful" and is_redesign:

@@ -33,10 +33,10 @@ anchors (2-4 things that make THIS app recognisable, seen in source.png and the 
 function object (what the app does, as a physical thing):
 
 worksheet (docs/METHOD.md §2 - fill it BEFORE drawing; one line per style):
-  A symbol:   thing=<a thing of THIS app, big>  logo=<on a light part | on a brand-colour part | in front>  silhouette=<one word>  main colour=<colour>
-  B faithful: thing=the logo itself (put_mark body=)  silhouette=the logo  main colour=<the logo's colour>
-  C disc:     thing=<a ROUND thing: lens, dial, fan, cup, coin, radar>  logo=<where>  silhouette=round + <what breaks the circle>  main colour=<colour>
-  D rimmed:   thing=<the fourth thing>  logo=<where>  silhouette=<one word>  main colour=<colour>
+  symbol (A):   thing=<a thing of THIS app, big>  logo=<on a light part | on a brand-colour part | in front>  silhouette=<one word>  main colour=<colour>
+  faithful (B): thing=the logo itself (put_mark body=)  silhouette=the logo  main colour=<the logo's colour>
+  disc (C):     thing=<a ROUND thing: lens, dial, fan, cup, coin, radar>  logo=<where>  silhouette=round + <what breaks the circle>  main colour=<colour>
+  rimmed (D):   thing=<the fourth thing>  logo=<where>  silhouette=<one word>  main colour=<colour>
   checks: four different silhouettes? at most two main colours black/charcoal? NO plain plate (disc, tile,
   kite, shield) behind the logo? every thing named by an anchor? no UI card / list / screen drawn small?
 

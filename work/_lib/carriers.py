@@ -146,9 +146,11 @@ def arrow(ic, slug, brand, direction="up"):
     return g
 
 
-def flame(ic, slug, brand="#ff9600"):
-    """a big flame (a streak, hot, fast, burn) with the logo standing in front of its lower right"""
-    r = ramp(brand)
+def flame(ic, slug, brand=None):
+    """a big flame (a streak, hot, fast, burn) with the logo standing in front of its lower right.
+    ALWAYS fire colours (yellow -> orange): a flame in the brand's mint or blue reads as a water drop
+    (Haiku's Stride test, 2026-11-23) - `brand` is ignored."""
+    r = ramp("#ff9600")
 
     def shape(cx, base, w, h, lean):
         rr_ = w / 2
@@ -448,12 +450,12 @@ KIT = [
     ("phone", "the app open on the phone: install, update, a big button", "rimmed"),
     ("shield", "protection, a health check, privacy, verified", "rimmed"),
     ("bubble", "comments, chat, conversation, support", "rimmed"),
-    ("lens", "search, find, look closer, inspect", "disc"),
-    ("dial", "progress, a score, health %, battery %", "disc"),
-    ("radar", "nearby, scan, discover, signal", "disc"),
-    ("fan", "cooling, temperature, speed, wind", "disc"),
-    ("coin", "money, tokens, rewards, points", "disc"),
-    ("cup", "coffee, cafés, breaks, mornings", "disc"),
+    ("lens", "search, find, look closer, inspect - ROUND: the Disc only", "disc"),
+    ("dial", "progress, a score, health %, battery % - ROUND: the Disc only", "disc"),
+    ("radar", "nearby, scan, discover, signal - ROUND: the Disc only", "disc"),
+    ("fan", "cooling, temperature, speed, wind - ROUND: the Disc only", "disc"),
+    ("coin", "money, tokens, rewards, points - ROUND: the Disc only", "disc"),
+    ("cup", "coffee, cafés, breaks, mornings - ROUND: the Disc only", "disc"),
     ("gauge", "performance, speed, FPS, a level", "rimmed"),
     ("monitor", "trading, charts, stats, dashboards", "rimmed"),
     ("pouch", "packages, archives, unpacking, files", "rimmed"),
