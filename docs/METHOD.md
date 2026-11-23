@@ -50,6 +50,23 @@ is not an anchor.
 
 ## 2. Choose four things — one per style
 
+> **Use the kit.** `docs/kit.png` shows every carrier of `work/_lib/carriers.py` with real logos
+> (white, coloured, black) on both wallpapers. Each is ONE line and places the logo itself, at a
+> size, contrast and position the gate accepts:
+> ```
+> from carriers import *
+> def A(): ic = gk.Icon("x - symbol");   bag(ic, SLUG, BRAND);              return ic   # a store
+> def B(): ic = gk.Icon("x - faithful"); logo_object(ic, SLUG, brand=BRAND); return ic   # always
+> def C(): ic = gk.Icon("x - disc");     radar(ic, SLUG, BRAND);            return ic   # "nearby"
+> def D(): ic = gk.Icon("x - rimmed");   phone(ic, SLUG, BRAND);            return ic   # "update all"
+> ```
+> Why: in the tests other models chose the right THING but could not draw it (Haiku's sneaker
+> became a block). The kit is the group-4 objects, tested. Pick each carrier by an ANCHOR of the
+> app (the slogan, the screen, the name) - not by the category. Only when no carrier fits an
+> anchor, draw it yourself (copy work/reddit, work/duolingo, work/scene, work/binance_tr).
+> `BRAND` is measured: the logo's or the screenshots' main colour (`print(describe(SLUG))`).
+> Two dark carriers at most (wallet, chip, radar, monitor are dark) - gate `dark_family`.
+
 The assignment that worked every time:
 
 | Style | What it is | Cases |

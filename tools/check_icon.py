@@ -31,6 +31,7 @@ Checks (per style that exists):
                 style's concept line cites the anchors it carries ................. WARN
   empty_layer   a layer the code drew came out empty (d="") - the part is missing .......... FAIL
   faithful_logo the Faithful is the logo itself (stands free, or the logo is >= 45 % of it) .. WARN
+  plate         symbol/disc/rimmed: a plain disc/tile/box that is one flat face + the logo ...... WARN
   dark_family   at most two styles mostly black/charcoal ......................................... WARN
   mark_fit      the mark sits well on its part: nothing of it over the part's edge (<= 1 %),
                 >= 1 unit of room to that edge, nothing drawn over it (<= 3 %) ........ WARN
@@ -475,6 +476,44 @@ def mark_fit_measure(svg, N=256):
     return {"cross": cross, "margin": margin, "covered": covered, "share": share}
 
 
+def plate_measure(svg, N=256):
+    """'logo on a plate' (Haiku's Stride test, 2026-11-23: the logo on a plain white card; Sonnet's:
+    on a dark disc). -> share of the icon covered by ONE smooth region once the logo is taken away
+    (a plate: one flat face; a fan, a radar, an envelope: several parts), or None without a mark."""
+    import xml.etree.ElementTree as ET
+    from scipy import ndimage
+    txt = Path(svg).read_bytes()
+    ET.register_namespace("", "http://www.w3.org/2000/svg")
+    ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
+    root = ET.fromstring(txt)
+    found = False
+    for par in list(root.iter()):
+        if par.tag.endswith("defs"):
+            continue
+        for c in list(par):
+            if MARK_ID.match(c.get("id") or "") and not c.tag.endswith(("Gradient", "clipPath", "mask")):
+                par.remove(c)
+                found = True
+    if not found:
+        return None
+
+    def rgba(b):
+        return np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(bytestring=b, output_width=N, output_height=N)))
+                          .convert("RGBA")).astype(np.float32) / 255
+    whole = rgba(txt)[..., 3] > 0.5
+    A = rgba(ET.tostring(root))
+    al = A[..., 3:4]
+    la = rgb2lab(np.clip(A[..., :3] * al + 0.5 * (1 - al), 0, 1))
+    g = np.zeros(la.shape[:2])
+    for ch in range(3):
+        g = np.maximum(g, np.hypot(ndimage.sobel(la[..., ch], 0), ndimage.sobel(la[..., ch], 1)) / 8)
+    lbl, n = ndimage.label((A[..., 3] > 0.5) & (g < 5))
+    if not n:
+        return 0.0
+    big = np.bincount(lbl.ravel())[1:].max()
+    return float(big / max(1, whole.sum()))
+
+
 def dark_share(a):
     """share of the painted pixels that are dark neutral (black/charcoal/dark grey: L < 38, chroma < 18)"""
     op = a[..., 3] > 0.5
@@ -728,6 +767,20 @@ def compute(slug):
                         "elsewhere). Check with: python3 tools/check_icon.py SLUG")
                 else:
                     add(st, "mark_fit", "PASS", val)
+            # plate: a plain silhouette (disc, tile, box) whose face is one flat region besides the logo
+            if st != "faithful" and is_redesign:
+                kind_, _, _ = shape_kind(svg)
+                if kind_ in ("disc", "tile", "box"):
+                    try:
+                        share_ = plate_measure(svg)
+                    except Exception:
+                        share_ = None
+                    if share_ is not None and share_ >= 0.75:
+                        add(st, "plate", "WARN", f"a plain {kind_} whose face is {share_:.0%} one flat region + the logo",
+                            "the logo on a plate is not an object (METHOD.md §2): pick a carrier with real parts "
+                            "(work/_lib/carriers.py, docs/kit.png) - a lens, a fan, a radar, a bag, an envelope ...")
+                    elif share_ is not None:
+                        add(st, "plate", "PASS", f"{kind_} with parts (largest flat region {share_:.0%})")
             # faithful_logo: the Faithful IS the logo (METHOD.md §2) - not the logo on a plate. Sonnet's
             # Binance test (2026-11-23): the logo on a dark kite and on a dark disc.
             if st == "faithful" and is_redesign:

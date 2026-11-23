@@ -368,5 +368,22 @@ expect(_f is not None and _f["share"] < 0.45, f"check_icon.faithful_logo: the lo
 expect(_d > 0.45, f"check_icon.dark_share: a dark kite counts as dark ({_d:.2f})")
 expect("faithful_logo" in NX.MUST_TRY and "dark_family" in NX.MUST_TRY, "next.py: faithful_logo and dark_family are fixed before Q2")
 
+
+# Haiku's Stride test (2026-11-23): the logo on a plain white card -> plate; the kit's carriers are not plates
+with tempfile.TemporaryDirectory() as tmp:
+    ic = O.gk.Icon("card")
+    O.solid(ic, O.rounded(O.box(14, 14, 114, 114), 12), face="#ffffff", depth=4, side="#c0bfbc", layer="card")
+    O.put_mark(ic, "f_droid", (34, 30, 94, 90))
+    ic.save(Path(tmp) / "c.svg")
+    _k, _s = ci.shape_kind(Path(tmp) / "c.svg")[0], ci.plate_measure(Path(tmp) / "c.svg")
+    sys.path.insert(0, str(ROOT / "work/_lib"))
+    import carriers as CA
+    ic2 = CA.gk.Icon("radar")
+    CA.radar(ic2, "f_droid", "#1976d2")
+    ic2.save(Path(tmp) / "r.svg")
+    _s2 = ci.plate_measure(Path(tmp) / "r.svg")
+expect(_k in ("tile", "box") and _s >= 0.75, f"check_icon.plate: the logo on a plain card is a plate ({_k}, {_s:.2f})")
+expect(_s2 < 0.75, f"check_icon.plate: the kit's radar is not a plate ({_s2:.2f})")
+
 print(f"selftest: {ok} passed, {bad} failed")
 sys.exit(1 if bad else 0)

@@ -112,6 +112,9 @@ RECIPES = {
                      "      put_mark(ic, SLUG, (14, 10, 114, 112), anchor=\"bottom\", body=7, side=\"<darker brand hex>\")\n"
                      "  and nothing else. Only a white or black logo gets a part behind it: a die-cut sticker margin\n"
                      "  in the brand colour (work/reddit/redesign.py B()). docs/METHOD.md §2.",
+    "plate": "The style is the logo on a plate: a plain disc / tile / card whose face is one flat colour\n"
+             "  around the logo (Haiku's Stride test: a white card with the logo). Use a carrier with real\n"
+             "  parts from work/_lib/carriers.py (see docs/kit.png): one line, it places the logo itself.",
     "dark_family": "Three or four styles are mostly black/charcoal: they look like one family and melt into the\n"
                    "  dark wallpaper (Sonnet's Binance test: a dark slab, kite, disc and wallet). Keep at most two\n"
                    "  dark; give the others the brand colour, steel, paper, wood. docs/METHOD.md §2.",
@@ -122,6 +125,7 @@ RECIPES = {
 WARN_TR = {
     "mark": "uygulamanın kendi işareti bu stilde yok / okunmuyor",
     "faithful_logo": "Faithful logonun kendisi değil, bir plakanın üstünde logo",
+    "plate": "bu stil düz bir plakanın üstünde logo, bir nesne değil",
     "dark_family": "stillerin çoğu siyah/koyu gri: birbirine benziyor, koyu duvar kâğıdında kayboluyor",
     "empty_layer": "çizilmesi gereken bir parça boş çıkmış, simgede eksik",
     "same_object": "aynı kategorideki başka bir uygulama bu nesneyi kullanıyor",
@@ -160,7 +164,7 @@ def line(text, key):
 
 # WARNs the owner would see on his phone: fixed before Q2 (state FIX_WARN), or explained
 MUST_TRY = ("anchors", "mark", "mark_fit", "mark_size", "visible_light", "visible_dark", "legibility32", "slots", "same_object",
-            "faithful_logo", "dark_family")
+            "faithful_logo", "dark_family", "plate")
 
 
 def warn_ok(text, check):
