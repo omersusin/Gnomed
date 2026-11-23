@@ -1,0 +1,3 @@
+source: git commit 40bd40254ca12461388b8bf3123aeaecb88509f6 (2026-11-19_1308)
+subject: Add Aurex Browser (styles)
+label: 40bd402

@@ -1,0 +1,3 @@
+source: git commit a19a546eafa97f4a8c9bc1bf28cedc163ede897f (2026-11-21_0629)
+subject: Symbol: real holes instead of painted counters (qobuz, discord, saat, trestle, swift_backup, obtainx, thunderbird, scene)
+label: a19a546

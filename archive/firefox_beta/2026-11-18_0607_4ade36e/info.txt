@@ -1,0 +1,3 @@
+source: git commit 4ade36edc02a36e328b447c25bc21884ede0e6bd (2026-11-18_0607)
+subject: Course for any AI model or person: lessons with real before/after figures, quality gate, one-command tools
+label: 4ade36e

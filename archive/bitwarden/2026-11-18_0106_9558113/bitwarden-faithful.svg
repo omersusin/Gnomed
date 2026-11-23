@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Bitwarden - Adwaita Faithful</title>
+  <desc>geometry: trace of user's IconRequest PNG (192 px), curves fitted to the trace (fit_shield.py)</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="12" y1="0" x2="116" y2="0"><stop offset="0" stop-color="#00287e"/><stop offset="0.038" stop-color="#1456cc"/><stop offset="0.077" stop-color="#013ba0"/><stop offset="0.923" stop-color="#013ba0"/><stop offset="0.962" stop-color="#1456cc"/><stop offset="1" stop-color="#00287e"/></linearGradient>
+  </defs>
+  <g id="plate">
+  <path id="plate-chin" d="M20 16H108A8 8 0 0 1 116 24V108A8 8 0 0 1 108 116H20A8 8 0 0 1 12 108V24A8 8 0 0 1 20 16Z" fill="url(#g1)"/>
+  <path id="plate-face" d="M20 12H108A8 8 0 0 1 116 20V104A8 8 0 0 1 108 112H20A8 8 0 0 1 12 104V20A8 8 0 0 1 20 12Z" fill="#175bd6"/>
+  </g>
+  <g id="shield">
+  <path id="shield-lift" d="M37.6 37.268C37.6 36.164 38.496 35.268 39.6 35.268L88.4 35.268C89.504 35.268 90.4 36.164 90.4 37.268L90.4 69.332C90.4 82.828 77.304 93.124 64 98.732C50.696 93.124 37.6 82.828 37.6 69.332L37.6 37.268M64 42.18L83.44 42.18L83.44 68.796C83.44 78.084 73.976 85.66 64 90.972L64 42.18" fill="#deddda" fill-rule="evenodd"/>
+  <path id="shield-face" d="M 37.6,35.268 C 37.6,34.164 38.496,33.268 39.6,33.268 L 88.4,33.268 C 89.504,33.268 90.4,34.164 90.4,35.268 L 90.4,67.332 C 90.4,80.828 77.304,91.124 64,96.732 C 50.696,91.124 37.6,80.828 37.6,67.332 L 37.6,35.268M 64,40.18 L 83.44,40.18 L 83.44,66.796 C 83.44,76.084 73.976,83.66 64,88.972 L 64,40.18" fill="#ffffff" fill-rule="evenodd"/>
+  </g>
+</svg>

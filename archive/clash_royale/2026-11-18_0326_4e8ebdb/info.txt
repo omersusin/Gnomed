@@ -1,0 +1,3 @@
+source: git commit 4e8ebdb92dbce6f77867339b7ebc5eaf949ae47b (2026-11-18_0326)
+subject: Clash Royale: two crowns (blue king / red king) on the blue/red split
+label: 4e8ebdb

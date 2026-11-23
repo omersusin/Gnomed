@@ -111,6 +111,14 @@ Then: for the approved apps `final: "<his words>" (<date>)` in design.md, `pack_
 `~/Downloads/gnomed/progress.md` is the truth: continue after its last `[x]` line. Re-read this file
 and do §1 again (it merges main and shows open fix lists).
 
+## 6b. The archive - nothing is lost
+
+Every version is kept as files in `archive/<slug>/` (archive/README.md). next.py stores the app's
+version before the owner's fixes and before a redo, pack_refresh.py the shipped icons before it
+overwrites them. The owner wants an old one back ("<app> eskisi daha iyiydi"): `python3
+tools/archive.py list <slug>`, then `restore` (one style: `--style <style>`, then port that style's
+function from the archived redesign.py). Never delete or edit anything in archive/.
+
 ## 7. Not allowed in a batch
 
 `pack_add` / `pack_refresh` before his approval · touching `main` · `selftest.py` (slow) · skipping

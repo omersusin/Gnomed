@@ -1,0 +1,3 @@
+source: git commit 90191a1d24c89db27630c039342d040ac4e52466 (2026-11-18_1056)
+subject: Add Hepsiburada and Quarry (4 styles each)
+label: 90191a1

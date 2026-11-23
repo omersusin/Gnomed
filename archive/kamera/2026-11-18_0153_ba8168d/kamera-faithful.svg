@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Kamera - Faithful</title>
+  <desc>geometry: kamera IconRequest PNG, colour-mask potrace (work/_lib/gtrace.py, IoU &gt;= 0.99 per part); GNOME construction: Gnomed</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="12" y1="0" x2="116" y2="0"><stop offset="0" stop-color="#c2c1c0"/><stop offset="0.038" stop-color="#dfdedd"/><stop offset="0.077" stop-color="#d2d1d0"/><stop offset="0.923" stop-color="#d2d1d0"/><stop offset="0.962" stop-color="#dfdedd"/><stop offset="1" stop-color="#c2c1c0"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="21.858" y1="0" x2="98.142" y2="0"><stop offset="0" stop-color="#120d1d"/><stop offset="0.225" stop-color="#585367"/><stop offset="0.45" stop-color="#181324"/><stop offset="0.55" stop-color="#181324"/><stop offset="0.775" stop-color="#585367"/><stop offset="1" stop-color="#120d1d"/></linearGradient>
+    <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="0" y1="27.858" x2="0" y2="104.142"><stop offset="0" stop-color="#3d3846"/><stop offset="0.55" stop-color="#241f31"/><stop offset="1" stop-color="#1a1625"/></linearGradient>
+    <linearGradient id="g4" gradientUnits="userSpaceOnUse" x1="82.872" y1="0" x2="94.181" y2="0"><stop offset="0" stop-color="#950828"/><stop offset="0.225" stop-color="#e33038"/><stop offset="0.45" stop-color="#b71834"/><stop offset="0.55" stop-color="#b71834"/><stop offset="0.775" stop-color="#e33038"/><stop offset="1" stop-color="#950828"/></linearGradient>
+  </defs>
+  <g id="plate">
+  <path id="plate-chin" d="M20 16H108A8 8 0 0 1 116 24V108A8 8 0 0 1 108 116H20A8 8 0 0 1 12 108V24A8 8 0 0 1 20 16Z" fill="url(#g1)"/>
+  <path id="plate-face" d="M20 12H108A8 8 0 0 1 116 20V104A8 8 0 0 1 108 112H20A8 8 0 0 1 12 104V20A8 8 0 0 1 20 12Z" fill="#f6f5f4"/>
+  </g>
+  <g id="lens">
+  <path id="lens-chin" d="M21.858 68A38.142 38.142 0 1 1 98.142 68A38.142 38.142 0 1 1 21.858 68Z" fill="url(#g2)"/>
+  <path id="lens-face" d="M21.858 66A38.142 38.142 0 1 1 98.142 66A38.142 38.142 0 1 1 21.858 66Z" fill="url(#g3)"/>
+  <path id="lens-ring1" d="M31.604 65.733A28.681 28.681 0 1 1 88.966 65.733A28.681 28.681 0 1 1 31.604 65.733ZM35.219 66.019A24.775 24.775 0 1 1 84.769 66.019A24.775 24.775 0 1 1 35.219 66.019Z" fill="#3d3846" fill-rule="evenodd"/>
+  <path id="lens-ring2" d="M40.005 65.758A20.249 20.249 0 1 1 80.503 65.758A20.249 20.249 0 1 1 40.005 65.758ZM46.918 65.448A13.652 13.652 0 1 1 74.223 65.448A13.652 13.652 0 1 1 46.918 65.448Z" fill="#5e5c64" fill-rule="evenodd"/>
+  </g>
+  <g id="dot">
+  <path id="dot-chin" d="M82.872 39.03A5.654 5.654 0 1 1 94.181 39.03A5.654 5.654 0 1 1 82.872 39.03Z" fill="url(#g4)"/>
+  <path id="dot-face" d="M82.872 37.53A5.654 5.654 0 1 1 94.181 37.53A5.654 5.654 0 1 1 82.872 37.53Z" fill="#ed333b"/>
+  </g>
+</svg>

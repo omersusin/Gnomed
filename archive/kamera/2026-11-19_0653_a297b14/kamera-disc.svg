@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Kamera - Sound Disc</title>
+  <desc>geometry: kamera IconRequest PNG, colour-mask potrace (work/_lib/gtrace.py, IoU &gt;= 0.99 per part); GNOME construction: Gnomed</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="123" y2="0"><stop offset="0" stop-color="#120d1d"/><stop offset="0.225" stop-color="#585367"/><stop offset="0.45" stop-color="#181324"/><stop offset="0.55" stop-color="#181324"/><stop offset="0.775" stop-color="#585367"/><stop offset="1" stop-color="#120d1d"/></linearGradient>
+    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="4" x2="0" y2="122"><stop offset="0" stop-color="#3d3846"/><stop offset="0.55" stop-color="#241f31"/><stop offset="1" stop-color="#1a1625"/></linearGradient>
+    <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="87.5" y1="0" x2="102.5" y2="0"><stop offset="0" stop-color="#950828"/><stop offset="0.225" stop-color="#e33038"/><stop offset="0.45" stop-color="#b71834"/><stop offset="0.55" stop-color="#b71834"/><stop offset="0.775" stop-color="#e33038"/><stop offset="1" stop-color="#950828"/></linearGradient>
+  </defs>
+  <g id="disc">
+  <path id="disc-chin" d="M5 65A59 59 0 1 1 123 65A59 59 0 1 1 5 65Z" fill="url(#g1)"/>
+  <path id="disc-edge" d="M5 63A59 59 0 1 1 123 63A59 59 0 1 1 5 63Z" fill="#77767b"/>
+  <path id="disc-face" d="M6.4 63.6A57.6 57.6 0 1 1 121.6 63.6A57.6 57.6 0 1 1 6.4 63.6Z" fill="url(#g2)"/>
+  <path id="disc-ring1" d="M20.076 62.588A44.365 44.365 0 1 1 108.806 62.588A44.365 44.365 0 1 1 20.076 62.588ZM25.667 63.029A38.323 38.323 0 1 1 102.314 63.029A38.323 38.323 0 1 1 25.667 63.029Z" fill="#3d3846" fill-rule="evenodd"/>
+  <path id="disc-ring2" d="M33.071 62.626A31.322 31.322 0 1 1 95.715 62.626A31.322 31.322 0 1 1 33.071 62.626ZM43.764 62.146A21.118 21.118 0 1 1 86 62.146A21.118 21.118 0 1 1 43.764 62.146Z" fill="#5e5c64" fill-rule="evenodd"/>
+  </g>
+  <g id="dot">
+  <path id="dot-chin" d="M87.5 33.5A7.5 7.5 0 1 1 102.5 33.5A7.5 7.5 0 1 1 87.5 33.5Z" fill="url(#g3)"/>
+  <path id="dot-face" d="M87.5 32A7.5 7.5 0 1 1 102.5 32A7.5 7.5 0 1 1 87.5 32Z" fill="#ed333b"/>
+  </g>
+</svg>

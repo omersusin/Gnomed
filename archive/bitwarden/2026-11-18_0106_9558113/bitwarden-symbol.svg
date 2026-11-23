@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Bitwarden - Free Symbol</title>
+  <desc>geometry: trace of user's IconRequest PNG (192 px), curves fitted to the trace (fit_shield.py)</desc>
+  <defs>
+    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="19.906" y1="0" x2="108.094" y2="0"><stop offset="0" stop-color="#00287e"/><stop offset="0.225" stop-color="#1456cc"/><stop offset="0.45" stop-color="#013ba0"/><stop offset="0.55" stop-color="#013ba0"/><stop offset="0.775" stop-color="#1456cc"/><stop offset="1" stop-color="#00287e"/></linearGradient>
+  </defs>
+  <g id="body">
+  <path id="body-chin" d="M19.906 16.34C19.906 14.497 21.402 13 23.246 13L104.754 13C106.598 13 108.094 14.497 108.094 16.34L108.094 69.895C108.094 92.437 86.221 109.633 64 119C41.779 109.633 19.906 92.437 19.906 69.895L19.906 16.34" fill="url(#g1)"/>
+  <path id="body-face" d="M 19.906,12.34 C 19.906,10.497 21.402,9 23.246,9 L 104.754,9 C 106.598,9 108.094,10.497 108.094,12.34 L 108.094,65.895 C 108.094,88.437 86.221,105.633 64,115 C 41.779,105.633 19.906,88.437 19.906,65.895 L 19.906,12.34" fill="#175bd6"/>
+  </g>
+  <g id="field">
+  <path id="field-face" d="M 64,20.545 L 96.469,20.545 L 96.469,65 C 96.469,80.513 80.662,93.167 64,102.039 L 64,20.545" fill="#ffffff"/>
+  <path id="field-recess" d="M 64,20.545 L 96.469,20.545 L 96.469,65 C 96.469,80.513 80.662,93.167 64,102.039 L 64,20.545M64 22.145L96.469 22.145L96.469 66.6C96.469 82.113 80.662 94.767 64 103.639L64 22.145" fill="#000000" opacity="0.12" fill-rule="evenodd"/>
+  </g>
+</svg>

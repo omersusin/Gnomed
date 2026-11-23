@@ -1,0 +1,3 @@
+source: git commit 3376fc7d928565b42a1c577b58b3efcc7c9b2813 (2026-11-18_0303)
+subject: Batch of 73 apps: reviewed designs (4 styles, overrides for broken drafts), PNG/boards, import script
+label: 3376fc7

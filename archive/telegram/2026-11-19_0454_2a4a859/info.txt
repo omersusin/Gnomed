@@ -1,0 +1,3 @@
+source: git commit 2a4a859ea01c01fc777a90bec01abc651355794c (2026-11-19_0454)
+subject: Add Telegram (redesign: cloud + paper plane; ring and envelope alternatives)
+label: 2a4a859
