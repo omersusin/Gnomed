@@ -21,6 +21,7 @@ concepts (work/foto_raflar/concepts.png) - four different ideas:
   C: L2 round - a loupe over a photo: dark ring, glass, handle (Disc).
   D: L2 - a stack of prints fanned, the top one a landscape, a red clip (Rimmed).
 
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: B - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: A, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final: "Tamam, pakete ekle" (2026-11-23)

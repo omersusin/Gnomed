@@ -22,6 +22,7 @@ concepts (work/ki_iler/concepts.png) - four different ideas:
   C: L2 round - a rolodex: fanned cards on a round wheel with a base (Disc).
   D: L2 - a card file box: green box with tabbed cards and a front label (Rimmed).
 
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: B - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: A, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final:

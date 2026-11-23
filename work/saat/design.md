@@ -20,6 +20,7 @@ concepts (work/saat/concepts.png) - four different ideas:
   C: L1 round - a stopwatch: silver case, green skeleton dial, push button on top (Disc).
   D: L2 - a digital clock: green cabinet with a dark screen and 7-segment digits (Rimmed).
 
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final:

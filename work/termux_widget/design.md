@@ -21,6 +21,7 @@ concepts (work/termux_widget/concepts.png) - four different ideas:
   D: L2 - a blue notebook with the prompt on its cover and a yellow ribbon (Rimmed). (anchors 1, 2)
 
 anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final: "Tamam, pakete ekle" (2026-11-23)

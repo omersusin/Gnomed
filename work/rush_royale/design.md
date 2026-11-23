@@ -25,6 +25,7 @@ concepts (work/rush_royale/concepts.png) - four different ideas, objects only:
   D: round: a round green tile with the hat and one crystal
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7)
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: C - "C" (2026-11-21)
 keep: D - "D,Şapkanın kenarını kaynaktaki gibi daha geniş ve kıvrık yap, ortadaki taş pembe/macenta olsun." (2026-11-21)
 final: "Tamam, pakete ekle" (2026-11-21)

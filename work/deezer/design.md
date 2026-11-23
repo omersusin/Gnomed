@@ -23,6 +23,7 @@ concepts (work/deezer/concepts.png) - four different ideas:
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7), e.g.
 #   approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: C - "Soru 1 cevabım: Ana tasarım C (plak)." (2026-11-22)
 keep: A, D - "Kalsın: A ve D. B kalmasın." (2026-11-22)
 final: "Tamam, pakete ekle" (2026-11-22)

@@ -20,6 +20,7 @@ concepts (work/kamera/concepts.png) - four different ideas:
   C: L2 round - a 35 mm film roll: canister, hub with a real hole, strip coming out (Disc).
   D: L2 - a 35 mm film strip with sprocket holes and three exposures (Rimmed).
 
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: B - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: A, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final: "Tamam, pakete ekle" (2026-11-23)

@@ -34,6 +34,7 @@ concepts (work/pokemon_unite/concepts.png) - four different ideas, objects only:
   D: the ring + the two team balls (orange / purple, from the UNITE logo)
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7)
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: B - "B" (2026-11-21)
 keep: A - "A,A'daki halkanın içindeki mavi hilali kaldır." (2026-11-21)
 final: "Tamam, pakete ekle" (2026-11-21)

@@ -342,6 +342,17 @@ Times are from the commits; the model of a backfilled session is what the commit
 - Open problems: allowed WARNs only (plain_shape on real boxes/signs/sleeves); every FAIL and every
   fixable WARN (mark_fit, mark_size, visible, legibility32, same_object) is cleared.
 
+## 2026-11-23 — Claude via Claude Code (cloud session, takeover) — redo list (26 apps)
+- What: `redo:` with the owner's words in the design.md of every icon Claude did not draw:
+  `ayarlar` `saat` `kamera` `telefon` `mesajlar` `ki_iler` `hesap_makinesi` `y_hava_durumu`
+  `foto_raflar` `apple_music` `chatgpt` `termux_api` `termux_boot` `termux_widget` `walpy`
+  `anker_soundcore` `trendyolmilla` `hepsiburada` `qobuz` `terminal_em_lat_r` `mt_manager` `enpara`
+  `telegram` `deezer` `pokemon_unite` `rush_royale` (next.py: REDO). andvm, aurex_browser, horus are
+  unfinished (BUILD) and come first. METHOD.md §6: games, the phone's own apps, a redo.
+- Why: owner "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden
+  yaptirayim", "Bunları aklında tut, deepseeke yaptıracam birazdan" (2026-11-23).
+- Open problems: none of them is redrawn yet; the pack keeps the current icons until each is approved.
+
 ## 2026-11-23 — Claude via Claude Code (cloud session, takeover) — `binance_tr`
 - What: Symbol = a black wallet with the yellow logo coin and the red Turkish-lira coin sticking
   out ("Cüzdan", the floating coins of shots 1, 4, 6); Faithful = the logo itself (diamond + TR) as a

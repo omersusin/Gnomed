@@ -151,7 +151,21 @@ Then the **owner's eye** — answer each with yes, or redraw:
 4. Is anything touching, crossing or covering the logo?
 5. At 48 px (the phone row of the overview), is every part still there?
 
-## 6. Without repository tools (a chat model)
+## 6. Special cases
+
+- **Games** (REDESIGN §3b): the same looking-first; characters only when they ARE the game (Kafa
+  Topu 2: the two big heads - Symbol a header, Faithful the store icon, Disc the round pitch,
+  Rimmed the fireball goal of a screenshot). Otherwise the game's own objects, from ITS screenshots.
+- **The phone's own apps** (Ayarlar, Saat, Kamera, Telefon, Mesajlar, Kişiler, Hesap Makinesi,
+  Hava Durumu, Fotoğraflar - `SYSTEM_APPS`): no logo to carry; GNOME's own app for the same job is
+  the model (Settings, Clocks, Snapshot, Calls, Chatty, Contacts, Calculator, Weather, Loupe), and
+  the phone app's screenshots give the anchors (its colours, its signature screen).
+- **A redo** (`redo:` line, next.py REDO): `--start-redo` archives the old design; read the old
+  concepts (`concepts-round*/`) and the archive only to NOT repeat them; start again at §1.
+  The owner (2026-11-23) wants every icon Claude did not draw redone this way: 26 apps carry his
+  `redo:` line (next.py lists them under "2. The owner asked for a redo").
+
+## 7. Without repository tools (a chat model)
 
 The owner can test a model in a chat (claude.ai, any app) with a bundle:
 `python3 tools/chat_bundle.py <slug>` → `~/Downloads/gnomed/<slug>-chat.zip`. It holds this file,

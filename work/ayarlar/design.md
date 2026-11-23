@@ -20,6 +20,7 @@ concepts (work/ayarlar/concepts.png) - four different ideas:
   C: L2 round - a brown control knob with tick marks and a pointer (Disc).
   D: L2 - a settings panel with two switches and a slider (Rimmed).
 
+redo: "Deepseekin yaptıkları daha doğrusu senin yapmadıkların simgeleri göster ki yeniden yaptirayim" (2026-11-23) - redo with docs/METHOD.md
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final: "Tamam, pakete ekle" (2026-11-23)
