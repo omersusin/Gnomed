@@ -293,6 +293,8 @@ def style_objects(slug, key):
     out = {}
     for st, letter in re.findall(r"\b(symbol|faithful|disc|rimmed)\s*=\s*([A-H])\b", _line(text, "styles")):
         m = re.search(rf"^\s+{letter}\b[^:\n]*:\s*(.+)$", text, re.M)
+        if m and re.match(r"\s*(L1\b|the logo itself)", m.group(1), re.I):
+            continue                     # the mark IS the object: its gear/wrench is the logo's, no family object
         o = _first_object(m.group(1), key) if m else ""
         if o:
             out[st] = o

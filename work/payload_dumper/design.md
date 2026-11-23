@@ -25,7 +25,7 @@ function object (what the app does, as a physical thing): it dumps a ROM's paylo
 
 concepts (Claude 2026-11-23, batch) - four different things, each carrying the measured logo:
   A: the dumper - a dump truck tipping the partition blocks out of its steel bed, the robot on the bed (anchors 1, 3, 4)
-  B: the logo as a solid object - the robot with its wrench and screwdriver (anchors 1, 2)
+  B: the logo itself as a solid object - the robot with its wrench and screwdriver (anchors 1, 2)
   C: "47% - Extracting" - a round progress dial, the green arc around the robot on navy (anchors 1, 3, 4)
   D: the payload - the ROM's zip as an opened navy zip pouch, the partition blocks coming out, the logo on it (anchors 1, 3, 4)
 
@@ -34,7 +34,6 @@ approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final:
 styles: symbol=A faithful=B disc=C rimmed=D
-warn-ok: same_object - the Faithful is the logo itself; the wrench the gate finds is part of the measured mark, not an object chosen
 owner-takeover: "Kalanların hepsini yap" (2026-11-23) - drawn by Claude
 decisions I made myself (and why; mention them in Q2):
   - a toolbox for Rimmed was termux_api's object (gate same_object): the zip pouch of the payload instead.
