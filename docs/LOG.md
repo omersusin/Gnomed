@@ -355,7 +355,9 @@ Times are from the commits; the model of a backfilled session is what the commit
   NOT_STARTED now tested on a throw-away app).
 - Why: owner "Kabul edilemez ... Oyunlarda ve uygulamalarda hassas olmalı" (2026-11-23), "Oyuna
   göre sen seç", "Şimdilik devral bakalım ama ben seni bırakıp deepseek ile devam edebileyim".
-- Open problems: Q2 for kafa_topu_2 (not in the pack); symbol mass 0.33 (one head, allowed WARN).
+- Q2: owner "Tamam, pakete ekle" (2026-11-23) - in the pack (pack_refresh; the shipped version is in
+  `archive/kafa_topu_2/2026-11-23_1150_pack`).
+- Open problems: symbol mass 0.33 (one head, allowed WARN).
 
 ## 2026-11-23 — DeepSeek V4.1 Flash Free via OpenCode — fixes `overview-3b` (2 apps)
 - What: enpara faithful: put_mark box (20,34,108,88) depth 6 anchor bottom - the side ends on the

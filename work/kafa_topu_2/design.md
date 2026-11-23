@@ -61,7 +61,7 @@ owner-takeover: "Şimdilik devral bakalım" (2026-11-23) - round 5 drawn by Clau
 history-keep: A, C, D - "A,B,C,D,Sen karar ver" (2026-11-21)   [before the redo, concepts-round3/]
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 history-final: "Tamam, pakete ekle" (2026-11-21)   [before the redo, concepts-round3/]
-final:
+final: "Tamam, pakete ekle" (2026-11-23)
 styles: symbol=A faithful=B disc=C rimmed=D
 decisions I made myself (and why; mention them in Q2):
   - round 5 (Claude): characters back (the game's identity); four different designs instead of the
