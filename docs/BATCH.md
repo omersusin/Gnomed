@@ -41,7 +41,7 @@ Before every app: read [START-HERE.md](../START-HERE.md) and run `python3 tools/
 If it says OWNER_FIXES_FIRST, do the owner's fix lists first (§4).
 
 1. `python3 tools/fetch_refs.py <slug>` — screenshots, category. Nothing found: do your best, note it.
-2. **First the app's own anchors**: open `source.png` and EVERY screenshot in `work/<slug>/refs/store/`;
+2. **First the app's own anchors** - the way [METHOD.md](METHOD.md) §1-3 shows: open `source.png` and EVERY screenshot in `work/<slug>/refs/store/`;
    write 2-4 anchors in design.md with their real colours and where you saw them (REDESIGN §5 "The
    app's own things"). Then four concepts, **four different objects**, EACH carrying anchors (concept
    line ends "(anchors 1, 3)"); the category's family only suggests carriers

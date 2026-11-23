@@ -342,6 +342,17 @@ Times are from the commits; the model of a backfilled session is what the commit
 - Open problems: allowed WARNs only (plain_shape on real boxes/signs/sleeves); every FAIL and every
   fixable WARN (mark_fit, mark_size, visible, legibility32, same_object) is cleared.
 
+## 2026-11-23 — Claude via Claude Code (cloud session, takeover) — docs/METHOD.md, tools/chat_bundle.py
+- What: docs/METHOD.md - how the group-4 icons were thought out (look first: logo, screenshots,
+  slogans, the name, the description; four different things each carrying the measured logo;
+  Faithful = the logo itself; the measured mark checked alone first; the loop and the owner's eye),
+  linked from START-HERE and BATCH step 2. tools/chat_bundle.py <slug>: a zip for a chat model
+  without the repository (CHAT.md + METHOD + the app + library + gate + 4 examples), tested
+  standalone. binance_tr and today_weather scaffolded (new_redesign.py) for the test.
+- Why: owner "Diğer modellerin tıpkı senin gibi yapmalarını sağlayabilir misin? ... Sen dokümanı
+  yaz. Ben Claude Sonnet'ten ekleyeyim bir tane. Böyle test amaçlı." (2026-11-23)
+- Open problems: the Sonnet test on binance_tr; then the owner decides who redoes DeepSeek's groups 1-3.
+
 ## 2026-11-23 — Claude via Claude Code (cloud session, takeover) — group 4 + the audit
 - Apps: `duolingo` `reddit` `f_droid` `payload_dumper` `scene` `iconrequest` `anker_soundcore` `apple_music` `ayarlar` `chatgpt` `enpara` `foto_raflar` `hepsiburada` `kamera` `mt_manager` `qobuz` `terminal_em_lat_r` `termux_api` `termux_boot` `termux_widget` `trendyolmilla` `walpy` `y_hava_durumu`
 - What: group 4 drawn by Claude, every style carrying the app's MEASURED logo on a thing from its own

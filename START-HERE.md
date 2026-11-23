@@ -9,6 +9,7 @@ you work on a branch and open a pull request; he merges.
 
 1. this file
 2. [REDESIGN.md](REDESIGN.md) — how an icon must look (§0 how to talk to the owner, §3b games, §5 rules)
+   and [docs/METHOD.md](docs/METHOD.md) — **what to draw and why**: how the group-4 icons the owner loved were thought out (read it before every app)
 3. [AGENTS.md](AGENTS.md) — git, ComponentInfo, pack files, what is forbidden
 4. [docs/MISTAKES.md](docs/MISTAKES.md) **§10 only** — the owner's decisions (the rest when a topic comes up)
 5. [docs/PLAYBOOK.md](docs/PLAYBOOK.md) — **only the section of the step you are on** (`tools/next.py` names it)
