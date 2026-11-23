@@ -77,6 +77,11 @@ RECIPES = {
             "      put_mark(ic, SLUG, (14, 12, 114, 112), depth=6, anchor=\"bottom\")   # L1: the mark IS the object\n"
             "  >= 36 px of 128 (Faithful >= 44: it is the style closest to the logo), white on dark parts, dark or\n"
             "  strong-coloured on light parts. Never a letter or a logo from memory. docs/PLAYBOOK.md#fix-warn",
+    "mark_fit": "The mark does not sit well on its part (2026-11-23: text ran off its label, a CD hole sat\n"
+                "  on the letters, an 'en' hung over its plate's edge). You compute coordinates without seeing\n"
+                "  the picture - so measure: the box you give put_mark() must lie INSIDE the face of the part with\n"
+                "  >= 1 unit of room on every side (shrink the box, or make the part bigger), and nothing may be\n"
+                "  drawn over the mark (draw holes, handles, straps BEFORE put_mark, or move them).",
     "same_object": "Another app of the same category already uses this object (design.md concept lines, all four\n"
                    "  styles). The owner wants different objects per app (BATCH.md 7): pick a FREE object of the\n"
                    "  family - python3 tools/next.py prints the family with USED/free - and redraw that style.",
@@ -97,6 +102,7 @@ RECIPES = {
 WARN_TR = {
     "mark": "uygulamanın kendi işareti bu stilde yok / okunmuyor",
     "same_object": "aynı kategorideki başka bir uygulama bu nesneyi kullanıyor",
+    "mark_fit": "işaret üstünde durduğu parçadan taşıyor, kenara değiyor ya da üstü kapanıyor",
     "mark_size": "uygulamanın kendi işareti telefonda çok küçük kalıyor",
     "slots": "bazı stiller aynı tasarımı tekrarlıyor",
     "bands": "renk geçişi (gradyan) bantlara bölünmüş, erimiş gibi görünüyor",
@@ -129,7 +135,7 @@ def line(text, key):
 
 
 # WARNs the owner would see on his phone: fixed before Q2 (state FIX_WARN), or explained
-MUST_TRY = ("mark", "mark_size", "visible_light", "visible_dark", "legibility32", "slots", "same_object")
+MUST_TRY = ("mark", "mark_fit", "mark_size", "visible_light", "visible_dark", "legibility32", "slots", "same_object")
 
 
 def warn_ok(text, check):

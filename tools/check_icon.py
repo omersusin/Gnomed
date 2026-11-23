@@ -27,6 +27,8 @@ Checks (per style that exists):
                 (put_mark()): present, >= 36 px of 128 (Faithful >= 44), contrast >= 25 against
                 what is under it, shape match with the source's mark >= 0.5 ............ WARN
   same_object   a style uses an object another app of its category already uses ........ WARN
+  mark_fit      the mark sits well on its part: nothing of it over the part's edge (<= 1 %),
+                >= 1 unit of room to that edge, nothing drawn over it (<= 3 %) ........ WARN
 Per app:
   redesign      the app is a GNOME redesign (REDESIGN.md): work/<slug>/redesign.py exists and
                 design.md has "approved:" = the owner's answer in quotes + (YYYY-MM-DD). The automatic
@@ -274,9 +276,18 @@ def _legibility():
 MARK_ID = re.compile(r"^mark(?:$|[-_0-9])", re.I)
 
 
+# The owner's "system apps" (ROADMAP.md 1): GNOME's own metaphor for the job, no brand mark
+# (approved in batch 1c, 2026-11-22). Any other app can opt out with 'mark: none - <why>' in design.md.
+SYSTEM_APPS = {"ayarlar", "saat", "kamera", "telefon", "mesajlar", "ki_iler", "hesap_makinesi",
+               "y_hava_durumu", "foto_raflar"}
+
+
 def mark_applies(w):
     """the mark gate measures apps, not games (objects only) or system apps (GNOME's metaphor)"""
     if design_line(w, "kind").lower().startswith("game"):
+        return False
+    if w.name in SYSTEM_APPS or design_line(w, "category").lower() == "system" \
+            or design_line(w, "mark").lower().startswith("none"):
         return False
     store = w / "refs" / "store" / "store.json"
     return not (store.exists() and '"source": "system app"' in store.read_text(encoding="utf-8"))
@@ -373,6 +384,84 @@ def mark_layer_measure(slug, svg, N=256):
 # same files. The key is every input's path, size and change time - the app's folder, every
 # design.md (gate same_object reads the other apps), the code of the gate and its libraries.
 CACHE = ROOT / ".cache" / "check"
+
+
+def mark_fit_measure(svg, N=256):
+    """Does the mark SIT WELL on its part? (2026-11-23: DeepSeek computes coordinates without seeing
+    the picture - text ran off its label, a CD hole sat on the letters, an "en" hung over its
+    plate's edge.) The mark's footprint (elements whose id starts with 'mark') is found as in
+    mark_layer_measure; the part under it is the smooth region (no edge steeper than 5 dE/px)
+    that covers most of the footprint.
+    -> None (no mark layer / the mark stands on nothing: L1), else dict
+       cross   share of the mark that spills over the edge of that part
+       margin  free space between the mark and that part's edge, in units of 128
+       covered share of the mark hidden by something drawn over it (a hole, a handle ...)"""
+    import xml.etree.ElementTree as ET
+    from scipy import ndimage
+    txt = Path(svg).read_bytes()
+    ET.register_namespace("", "http://www.w3.org/2000/svg")
+    ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
+
+    def is_mark(e):
+        return MARK_ID.match(e.get("id") or "") and not e.tag.endswith(("Gradient", "clipPath", "mask"))
+
+    def marks(root):
+        return [(p, c) for p in list(root.iter()) if not p.tag.endswith("defs") for c in list(p) if is_mark(c)]
+    without, magenta, alone = ET.fromstring(txt), ET.fromstring(txt), ET.fromstring(txt)
+    if not marks(without):
+        return None
+    for p, c in marks(without):
+        p.remove(c)
+    for _, c in marks(magenta):
+        for e in c.iter():
+            for k in ("opacity", "fill-opacity", "style"):
+                e.attrib.pop(k, None)
+            if e.get("fill") not in (None, "none"):
+                e.set("fill", "#ff00ff")
+
+    def keep_marks(e):                        # alone: only the marks (and what they need)
+        keep = False
+        for c in list(e):
+            if c.tag.endswith("defs") or is_mark(c):
+                keep = True
+            elif keep_marks(c):
+                keep = True
+            else:
+                e.remove(c)
+        return keep or any(True for c in e)
+    keep_marks(alone)
+
+    def rgba(b):
+        return np.asarray(Image.open(io.BytesIO(cairosvg.svg2png(bytestring=b, output_width=N, output_height=N)))
+                          .convert("RGBA")).astype(np.float32) / 255
+
+    def lab(a):
+        al = a[..., 3:4]
+        return rgb2lab(np.clip(a[..., :3] * al + 0.5 * (1 - al), 0, 1))
+    A = rgba(ET.tostring(without))
+    la = lab(A)
+    foot = ndimage.binary_opening(np.linalg.norm(lab(rgba(ET.tostring(magenta))) - la, axis=-1) > 10, iterations=1)
+    if foot.sum() < 30:
+        return None
+    if np.median(A[..., 3][foot]) < 0.5:
+        return None                           # the mark stands on nothing (L1): nothing to sit on
+    whole = rgba(ET.tostring(alone))[..., 3] > 0.5
+    covered = float((whole & ~ndimage.binary_dilation(foot, iterations=1)).sum() / max(1, whole.sum()))
+    g = np.zeros(la.shape[:2])
+    for ch in range(3):
+        g = np.maximum(g, np.hypot(ndimage.sobel(la[..., ch], 0), ndimage.sobel(la[..., ch], 1)) / 8)
+    smooth = (A[..., 3] > 0.5) & (g < 5)
+    lbl, _ = ndimage.label(smooth)
+    ids, cnt = np.unique(lbl[foot & smooth], return_counts=True)
+    ids, cnt = ids[ids > 0], cnt[ids > 0]
+    if not len(ids):
+        return {"cross": 0.0, "margin": 99.0, "covered": covered}
+    face = ndimage.binary_closing(ndimage.binary_fill_holes(lbl == ids[np.argmax(cnt)]), iterations=2)
+    cross = float((foot & ~ndimage.binary_dilation(face, iterations=1)).sum() / foot.sum())
+    inside = foot & face
+    dist = ndimage.distance_transform_edt(np.pad(face, 1))[1:-1, 1:-1]
+    margin = float(dist[inside].min()) * 128 / N if inside.any() else 0.0
+    return {"cross": cross, "margin": margin, "covered": covered}
 
 
 def _cache_key(slug):
@@ -594,6 +683,22 @@ def compute(slug):
                         + (" (Faithful is the style closest to the logo: the mark is big there)" if st == "faithful" else ""))
                 else:
                     add(st, "mark", "PASS", val)
+            # mark_fit: the mark sits WELL on its part - inside its edge with some room, nothing on top
+            try:
+                fit = mark_fit_measure(svg)
+            except Exception as e:                       # never crash the gate
+                fit = {"err": str(e)}
+            if fit and "err" not in fit:
+                val = (f"over the edge {fit['cross']:.0%}, room to the edge {fit['margin']:.1f} u, "
+                       f"covered {fit['covered']:.0%}")
+                if fit["cross"] > 0.01 or fit["margin"] < 1.0 or fit["covered"] > 0.03:
+                    add(st, "mark_fit", "WARN", val,
+                        "the mark runs off, touches the edge of, or is covered on the part it sits on (a label, "
+                        "lid, screen, disc): make the mark SMALLER or the part BIGGER so it keeps >= 1 unit of room "
+                        "on every side, and draw nothing over it (a CD hole, a handle, a strap goes under it or "
+                        "elsewhere). Check with: python3 tools/check_icon.py SLUG")
+                else:
+                    add(st, "mark_fit", "PASS", val)
         # bands: a gradient of the source painted as several flat colours looks melted/broken
         # (Deezer concepts, 2026-11-22). regions() knows which measured parts are bands of one
         # gradient; two or more of them as flat fills in one style = FAIL.
