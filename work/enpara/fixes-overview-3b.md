@@ -2,7 +2,7 @@
 group: overview-3b
 owner: "Başla" (2026-11-23) - after "Bekle ben başla diyince yaz"; standing rule: reviews go into the repository
 review: overview-3-fixed.png (2026-11-23)
-shown:
+shown: 2026-11-23
 
 Change EXACTLY this style; the others stay. How: docs/PLAYBOOK.md#owner-fix
 
