@@ -23,7 +23,8 @@
  "info": {
   "ground": {
    "kind": "flat",
-   "color": "#ff4600"
+   "color": "#ff4600",
+   "mark_hole_fill": "#ff4500"
   },
   "regions": [
    {

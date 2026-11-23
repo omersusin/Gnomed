@@ -376,6 +376,9 @@ def mark_parts(slug, de=25.0):
     holes = P.get("holes")
     if holes is not None and not holes.is_empty:
         keep = [(n, g.difference(holes), f) for n, g, f in keep]
+        hf = gr.get("mark_hole_fill")               # the holes are the logo's own coloured parts
+        if isinstance(hf, str):                     # (Snoo's orange eyes; owner 2026-11-23 "Logodaki
+            keep.append(("holes", holes, hf))       # gibi boya") - needs painted-holes: in design.md
     return keep
 
 
