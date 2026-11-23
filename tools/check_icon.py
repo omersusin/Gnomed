@@ -460,6 +460,10 @@ def mark_fit_measure(svg, N=256):
         return None                           # the mark stands on nothing (L1): nothing to sit on
     whole_icon = rgba(txt)[..., 3] > 0.5
     share = float(foot.sum() / max(1, whole_icon.sum()))    # how much of the icon IS the mark
+    diecut = 0.0                                            # the icon = the mark's own outline grown (a die-cut sticker)
+    for k in range(6, 27, 3):
+        grown = ndimage.binary_closing(ndimage.binary_dilation(foot, iterations=k), iterations=4)
+        diecut = max(diecut, float((grown & whole_icon).sum() / max(1, (grown | whole_icon).sum())))
     whole = rgba(ET.tostring(alone))[..., 3] > 0.5
     covered = float((whole & ~ndimage.binary_dilation(foot, iterations=1)).sum() / max(1, whole.sum()))
     g = np.zeros(la.shape[:2])
@@ -470,13 +474,13 @@ def mark_fit_measure(svg, N=256):
     ids, cnt = np.unique(lbl[foot & smooth], return_counts=True)
     ids, cnt = ids[ids > 0], cnt[ids > 0]
     if not len(ids):
-        return {"cross": 0.0, "margin": 99.0, "covered": covered, "share": share}
+        return {"cross": 0.0, "margin": 99.0, "covered": covered, "share": share, "diecut": diecut}
     face = ndimage.binary_closing(ndimage.binary_fill_holes(lbl == ids[np.argmax(cnt)]), iterations=2)
     cross = float((foot & ~ndimage.binary_dilation(face, iterations=1)).sum() / foot.sum())
     inside = foot & face
     dist = ndimage.distance_transform_edt(np.pad(face, 1))[1:-1, 1:-1]
     margin = float(dist[inside].min()) * 128 / N if inside.any() else 0.0
-    return {"cross": cross, "margin": margin, "covered": covered, "share": share}
+    return {"cross": cross, "margin": margin, "covered": covered, "share": share, "diecut": diecut}
 
 
 def plate_measure(svg, N=256):
@@ -817,8 +821,10 @@ def compute(slug):
             # faithful_logo: the Faithful IS the logo (METHOD.md §2) - not the logo on a plate. Sonnet's
             # Binance test (2026-11-23): the logo on a dark kite and on a dark disc.
             if st == "faithful" and is_redesign:
-                if fit is None or (fit and "err" not in fit and fit.get("share", 0) >= 0.45):
-                    add(st, "faithful_logo", "PASS", "the logo itself" if fit is None else f"the logo is {fit['share']:.0%} of it")
+                if fit is None or (fit and "err" not in fit and (fit.get("share", 0) >= 0.45 or fit.get("diecut", 0) >= 0.8)):
+                    add(st, "faithful_logo", "PASS", "the logo itself" if fit is None else
+                        (f"the logo is {fit['share']:.0%} of it" if fit.get("share", 0) >= 0.45 else
+                         f"a die-cut sticker: its outline follows the logo ({fit['diecut']:.0%})"))
                 elif fit and "err" not in fit:
                     add(st, "faithful_logo", "WARN", f"the logo is only {fit['share']:.0%} of the Faithful - it sits on a plate",
                         "METHOD.md §2: the Faithful is the logo ITSELF as a solid object: put_mark(ic, SLUG, box, "
