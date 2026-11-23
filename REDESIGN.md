@@ -171,6 +171,16 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   never a red sun (batch 1: Hava Durumu). Digits must read: `digital_display()` ("10:10", not "IO:IO").
 - **Another app's logo is not an object**: Telegram's paper plane, Apple Music's note … belong to
   those apps (`RESERVED` in work/_lib/categories.py).
+- **The app's own things, not the category's** (owner 2026-11-23, Kafa Topu 2: a stopwatch, a boot, a
+  trophy and a blue-white ball — *"İğrenç ... Otun ile alakası yok. Oyunlarda ve uygulamalarda hassas
+  olmalı. Biz ne için ona ekran görüntüleri logolar vesaire indirtiyoruz o zaman?"*). Before any
+  concept, open source.png AND every screenshot (`work/<slug>/refs/store/`) and write the 2–4 anchors
+  that make THIS app recognisable, with their real colours and where you saw them (Kafa Topu 2: the
+  black-and-white ball and the yellow VS of the logo, the one big boot under each player, the round
+  green pitch, the goal with its net, the fireball header). Every style carries anchors in those
+  colours; the category family only suggests a carrier. An object that could belong to any app of
+  the category is wrong. Gate `anchors` (each concept line cites them) and the overview shows the
+  source next to every row so the owner sees the link at once.
 - **The mark stays — on every style** (owner 2026-11-22, overview ara-2: Apple Music and Soundcore
   had lost it in all four; ChatGPT's bulb carried an "M"). The object says what the app DOES, the
   mark says WHICH app it is: draw the measured mark ON the object (label, screen, lid, stamp,

@@ -57,7 +57,7 @@ def main():
     slugs = [a for i, a in enumerate(argv) if not a.startswith("--") and (i == 0 or argv[i - 1] != "--out")]
     if not slugs:
         sys.exit(__doc__)
-    cell, lw, top = 150, 190, 54
+    cell, lw, top = 150, 330, 54          # left: name + the app's source logo and first screenshot
     half = cell * 4 + 12
     W, H = lw + 2 * half + 10, top + cell * len(slugs) + 10
     im = Image.new("RGB", (W, H), (246, 245, 244))
@@ -71,9 +71,19 @@ def main():
     for i, slug in enumerate(slugs):
         y = top + i * cell
         got, from_pack = icons(slug)
-        d.text((12, y + cell // 2 - 10), slug, font=fr, anchor="lm", fill=(36, 31, 49))
+        d.text((12, y + 18), slug, font=fr, anchor="lm", fill=(36, 31, 49))
+        # what the icons must be recognisable as (owner 2026-11-23: "Biz ne için ona ekran görüntüleri
+        # logolar vesaire indirtiyoruz o zaman?") - the source and a screenshot, next to the designs
+        refs = [ROOT / "work" / slug / "source.png"] + sorted((ROOT / "work" / slug / "refs" / "store").glob("shot-*.*"))[:1]
+        for k, rp in enumerate(r for r in refs if r.exists()):
+            try:
+                ref = Image.open(rp).convert("RGBA")
+                ref.thumbnail((100 if k == 0 else 190, 100))
+                im.paste(ref, (12 + k * 110, y + 36), ref)
+            except OSError:
+                pass
         if from_pack:
-            d.text((12, y + cell // 2 + 14), "(pack - not rebuilt)", font=fs, anchor="lm", fill=(192, 28, 40))
+            d.text((150, y + 18), "(pack - not rebuilt)", font=fs, anchor="lm", fill=(192, 28, 40))
         seen = {}
         for j, st in enumerate(STYLES):
             if st not in got:

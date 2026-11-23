@@ -41,7 +41,10 @@ Before every app: read [START-HERE.md](../START-HERE.md) and run `python3 tools/
 If it says OWNER_FIXES_FIRST, do the owner's fix lists first (§4).
 
 1. `python3 tools/fetch_refs.py <slug>` — screenshots, category. Nothing found: do your best, note it.
-2. Four concepts, **four different objects**, from the category's family
+2. **First the app's own anchors**: open `source.png` and EVERY screenshot in `work/<slug>/refs/store/`;
+   write 2-4 anchors in design.md with their real colours and where you saw them (REDESIGN §5 "The
+   app's own things"). Then four concepts, **four different objects**, EACH carrying anchors (concept
+   line ends "(anchors 1, 3)"); the category's family only suggests carriers
    ([redesign/CATEGORIES.md](redesign/CATEGORIES.md)); no object another app of the category already uses;
    no characters, faces or mascots.
 3. **All four are used** (REDESIGN.md §6): main → **Symbol**, closest to the original logo →
@@ -66,6 +69,8 @@ If it says OWNER_FIXES_FIRST, do the owner's fix lists first (§4).
      give them their real shape: stems and ear tips, spokes, pointers; mirrored and tilted;
    - the mark runs off, touches the edge of, or is covered on its part (gate `mark_fit`); a pair
      (buds, wheels, hinges) that is ALMOST equal or ALMOST on one line - make it exactly equal;
+   - **could it be ANY app of the category?** (a stopwatch, a trophy, a plain ball for a football
+     game) - then it lacks the app's anchors: redraw (gate `anchors`);
    - **cover the mark**: hide it - can you still name the object? A plain tile/box whose face is the
      wordmark is the logo on a plate, whatever it is called (overview-3: "server rack", "album sleeve",
      "safe"); a wordmark is a LABEL on the object;

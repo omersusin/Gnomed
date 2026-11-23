@@ -77,6 +77,12 @@ RECIPES = {
             "      put_mark(ic, SLUG, (14, 12, 114, 112), depth=6, anchor=\"bottom\")   # L1: the mark IS the object\n"
             "  >= 36 px of 128 (Faithful >= 44: it is the style closest to the logo), white on dark parts, dark or\n"
             "  strong-coloured on light parts. Never a letter or a logo from memory. docs/PLAYBOOK.md#fix-warn",
+    "anchors": "A style does not carry the app's OWN anchors (owner 2026-11-23, Kafa Topu 2: a stopwatch, a\n"
+               "  trophy and a blue ball - 'Otun ile alakası yok ... Biz ne için ona ekran görüntüleri logolar\n"
+               "  vesaire indirtiyoruz?'). Open source.png and EVERY screenshot in work/<slug>/refs/store/; write\n"
+               "  2-4 anchors in design.md with their real colour and where you saw them; every style carries at\n"
+               "  least one in that colour, and its concept line ends '(anchors 1, 3)'. The category family only\n"
+               "  suggests CARRIERS - never a generic object instead of the app's own things.",
     "mark_fit": "The mark does not sit well on its part (2026-11-23: text ran off its label, a CD hole sat\n"
                 "  on the letters, an 'en' hung over its plate's edge). You compute coordinates without seeing\n"
                 "  the picture - so measure: the box you give put_mark() must lie INSIDE the face of the part with\n"
@@ -104,6 +110,7 @@ WARN_TR = {
     "mark": "uygulamanın kendi işareti bu stilde yok / okunmuyor",
     "same_object": "aynı kategorideki başka bir uygulama bu nesneyi kullanıyor",
     "mark_fit": "işaret üstünde durduğu parçadan taşıyor, kenara değiyor ya da üstü kapanıyor",
+    "anchors": "bu stil uygulamanın kendi tanıdık öğelerini taşımıyor (herhangi bir uygulamanınki olabilir)",
     "mark_size": "uygulamanın kendi işareti telefonda çok küçük kalıyor",
     "slots": "bazı stiller aynı tasarımı tekrarlıyor",
     "bands": "renk geçişi (gradyan) bantlara bölünmüş, erimiş gibi görünüyor",
@@ -136,7 +143,7 @@ def line(text, key):
 
 
 # WARNs the owner would see on his phone: fixed before Q2 (state FIX_WARN), or explained
-MUST_TRY = ("mark", "mark_fit", "mark_size", "visible_light", "visible_dark", "legibility32", "slots", "same_object")
+MUST_TRY = ("anchors", "mark", "mark_fit", "mark_size", "visible_light", "visible_dark", "legibility32", "slots", "same_object")
 
 
 def warn_ok(text, check):
