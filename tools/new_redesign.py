@@ -26,16 +26,17 @@ ladder: <L1 mark as object | L2 object carries the mark | L3 material tile | gam
 characters: no
 references (games: store icon + >= 2 in-game screenshots; what they show: number of
   characters, how they face each other, signature gear, key object, colours):
-anchors (2-4 things that make the app recognisable; they must survive):
-  1.
-  2.
+anchors (2-4 things that make THIS app recognisable, seen in source.png and the screenshots in
+  work/{slug}/refs/store/ - each with its real colour and WHERE you saw it; they must survive):
+  1. <thing, colour> - <source.png | refs/store/shot-2.jpg | the owner's words>
+  2. <thing, colour> - <where>
 function object (what the app does, as a physical thing):
 
-concepts (work/{slug}/concepts.png) - four different ideas:
-  A:
-  B:
-  C:
-  D:
+concepts (work/{slug}/concepts.png) - four different ideas, EACH carrying anchors (cite them):
+  A: <the idea> (anchors 1, 2)
+  B: <the idea> (anchors ...)
+  C: <the idea> (anchors ...)
+  D: <the idea> (anchors ...)
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7), e.g.
 #   approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
