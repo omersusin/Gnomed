@@ -241,3 +241,16 @@ Times are from the commits; the model of a backfilled session is what the commit
   "Ya da sen yap o düzeltmeyi, sonra da o hatayı dokumana yaz ki sorun olmasın gelecekte" (2026-11-22)
 - PR: opened after this commit
 - Open problems: none.
+
+## 2026-11-23 — DeepSeek V4.1 Flash Free via OpenCode — `anker_soundcore`, `trendyolmilla`, `hepsiburada`, `qobuz`, `terminal_em_lat_r`, `mt_manager`, `enpara`
+- What: batch 3 (logo on a tile, wordmarks), all four styles built for every app.
+  trendyolmilla: bag / price tag / hat box / wicker basket. hepsiburada: delivery van / parcel /
+  tape roll / cart. qobuz: microphone / album sleeve / CD / mixing console. terminal_em_lat_r:
+  package box / the mark as an object / install disc / server rack. mt_manager: filing cabinet /
+  folder / HDD platter / archive box. enpara: bank card / wallet / coin / safe.
+- Why: the owner's batch order — every existing icon redone; group 3 was "logo on a plate".
+- Owner: "batch: Biz onayladıktan sonra hepsini yapsın" / "batch: hepsi kullanılsın" (2026-11-22)
+- PR: opened after this commit
+- Open problems: allowed WARNs only (plain_shape on real boxes/sleeves, baseline on the card,
+  mass on the faithful mark); `work/_lib/obj.py` gained `mark_holes`/`mark_crop`/`mark_keep`/
+  `mark_skip` so a mark that lives inside the source's ground parts or tile edge is measurable.
