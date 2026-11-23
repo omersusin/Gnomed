@@ -25,10 +25,10 @@ def rr(x0, y0, x1, y1, r):
 def A():
     """Symbol - an ignition key: dark round bow with the >_, steel blade and two teeth."""
     ic = gk.Icon("termux_boot - symbol")
-    bow = circ(64, 38, 26)
+    bow = circ(64, 39, 28)
     solid(ic, bow, face=[(0, DARK[1]), (0.5, DARK[2]), (1, DARK[3])], depth=6, side="#1b1a1f", layer="bow")
     toplight(ic, bow, width=1.6, opacity=0.45, layer="bow")
-    put_mark(ic, SLUG, (42, 16, 86, 60), face="#ffffff")
+    put_mark(ic, SLUG, (45, 24, 83, 54), face="#ffffff")  # inside the round bow with room (mark_fit)
     collar = rr(54, 60, 74, 70, 3)
     solid(ic, collar, face=[(0, LIGHT[1]), (1, LIGHT[3])], depth=3, side=LIGHT[4], layer="collar")
     blade = rr(58, 64, 70, 114, 3)
@@ -71,18 +71,18 @@ def D():
     """Rimmed - a boot CD with a white label: silver disc, iridescent rim, the prompt printed on
     the label, a real centre hole."""
     ic = gk.Icon("termux_boot - rimmed")
-    disc = circ(64, 62, 46).difference(circ(64, 62, 8))
+    disc = circ(64, 66, 52).difference(circ(64, 66, 6))
     solid(ic, disc, face=[(0, "#f2f0f7"), (0.5, "#c6d2ea"), (1, "#94a6cc")], depth=5, side=LIGHT[4], layer="disc")
     toplight(ic, disc, width=1.8, opacity=0.8, layer="disc")
-    for k, (r0, r1, ramp, op) in enumerate(((45, 40, BLUE, 0.55), (40, 36, PURPLE, 0.45))):
-        band = circ(64, 62, r0).difference(circ(64, 62, r1))
+    for k, (r0, r1, ramp, op) in enumerate(((52, 50, BLUE, 0.55), (50, 48.5, PURPLE, 0.45))):
+        band = circ(64, 66, r0).difference(circ(64, 66, r1))
         ic.path(geom_d(band), ramp[2], opacity=op, layer_id=f"sheen{k}", fill_rule="evenodd")
-    label = circ(64, 62, 38).difference(circ(64, 62, 8))
+    label = circ(64, 66, 48).difference(circ(64, 66, 6))
     solid(ic, label, face=[(0, LIGHT[0]), (1, LIGHT[2])], depth=1.5, side=LIGHT[4], top=False, layer="label")
-    put_mark(ic, SLUG, (44, 24, 88, 60), face=DARK[3])
-    hub = circ(64, 62, 12).difference(circ(64, 62, 8))
+    put_mark(ic, SLUG, (45, 25, 83, 55), face=DARK[3])  # above the hub: the hole never cuts the prompt
+    hub = circ(64, 66, 9).difference(circ(64, 66, 6))
     solid(ic, hub, face=[(0, LIGHT[1]), (1, LIGHT[3])], depth=2, side=LIGHT[4], top=False, layer="hub")
-    rim = circ(64, 62, 46).difference(circ(64, 62, 43))
+    rim = circ(64, 66, 52).difference(circ(64, 66, 50.5))
     ic.path(geom_d(rim), "#6d7fa6", opacity=0.55, layer_id="outer-rim", fill_rule="evenodd")
     return ic
 

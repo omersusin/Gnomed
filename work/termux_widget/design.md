@@ -8,21 +8,22 @@ ladder: L1 (a note/panel object) + L2 (the widget as a thing you stick on a surf
 characters: no
 references: GNOME Notes / Text Editor (a note object); the source's `>_` mark.
 anchors (2-4 things that make the app recognisable; they must survive):
-  1. the `>_` prompt (the family mark, written on every style)
-  2. black + white + terminal green
+  1. the `>_` prompt (the family mark, written on every style) - source.png
+  2. black + white + terminal green - source.png
   3. a small panel you stick on the home screen
 function object (what the app does, as a physical thing): a sticky note, a clipboard, a rubber
   stamp, a notebook.
 
 concepts (work/termux_widget/concepts.png) - four different ideas:
-  A: L2 - a yellow sticky note with a curled corner and the prompt written on it (main).
-  B: L2 - a clipboard: brown board, steel clip, white sheet with the prompt (Faithful).
-  C: L2 round - a round rubber stamp seen from above: light dial, wood knob, dark prompt (Disc).
-  D: L2 - a blue notebook with the prompt on its cover and a yellow ribbon (Rimmed).
+  A: L2 - a yellow sticky note with a curled corner and the prompt written on it (main). (anchors 1, 2)
+  B: L2 - a clipboard: brown board, steel clip, white sheet with the prompt (Faithful). (anchors 1, 2)
+  C: L2 round - a round rubber stamp seen from above: light dial, wood knob, dark prompt (Disc). (anchors 1, 2)
+  D: L2 - a blue notebook with the prompt on its cover and a yellow ribbon (Rimmed). (anchors 1, 2)
 
+anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
-final:
+final: "Tamam, pakete ekle" (2026-11-23)
 styles: symbol=A faithful=B disc=C rimmed=D
 decisions I made myself (and why; mention them in Q2):
   - the store calls this app PRODUCTIVITY, so it takes the note family (sticky note, clipboard,

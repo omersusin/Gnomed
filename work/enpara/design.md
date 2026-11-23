@@ -11,22 +11,23 @@ references (games: store icon + >= 2 in-game screenshots; what they show: number
   store screenshots (refs/store/): a white banking app with a magenta "en" and four colour bars;
   no characters, no mascot.
 anchors (2-4 things that make the app recognisable; they must survive):
-  1. the magenta "en" wordmark (measured, rounded geometric letters)
-  2. the four-colour palette: magenta #aa519e, orange #faa91a, green #9ec842, blue #26abe2
+  1. the magenta "en" wordmark (measured, rounded geometric letters) - source.png
+  2. the four-colour palette: magenta #aa519e, orange #faa91a, green #9ec842, blue #26abe2 - source.png
   3. a digital bank: a card, a wallet, money - not a branch building
 function object (what the app does, as a physical thing): a bank card you pay with
 
 concepts (work/enpara/concepts.png) - four different ideas:
-  A: a bank card: white card, magenta en, a chip and a four-colour edge stripe (Symbol)
-  B: the measured en as one solid magenta object standing on the source's four-colour stripe (Faithful)
-  C: a coin: golden rim, magenta en embossed, a milled edge (Disc)
-  D: a safe door: steel door, two dark hinges, a big round dial with ticks, a handle, the en on a small plate (Rimmed)
+  A: a bank card: white card, magenta en, a chip and a four-colour edge stripe (Symbol) (anchors 1, 2)
+  B: the measured en as one solid magenta object standing on the source's four-colour stripe (Faithful) (anchors 1, 2)
+  C: a coin: golden rim, magenta en embossed, a milled edge (Disc) (anchors 1, 2)
+  D: a safe door: steel door, two dark hinges, a big round dial with ticks, a handle, the en on a small plate (Rimmed) (anchors 1, 2)
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7), e.g.
-#   approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
+#   anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
+approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
-final:
+final: "Tamam, pakete ekle" (2026-11-23)
 styles: symbol=A faithful=B disc=C rimmed=D
 decisions I made myself (and why; mention them in Q2):
   - the card, wallet, coin and safe are all free in this category, so this app takes one of each

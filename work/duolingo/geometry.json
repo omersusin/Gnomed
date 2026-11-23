@@ -35,7 +35,11 @@
  "info": {
   "ground": {
    "kind": "flat",
-   "color": "#58cc02"
+   "color": "#58cc02",
+   "mark_keep": [
+    "r0"
+   ],
+   "mark_round": 10
   },
   "regions": [
    {

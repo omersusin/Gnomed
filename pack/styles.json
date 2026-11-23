@@ -74,7 +74,8 @@
     },
     "anker_soundcore": {
       "disc": "anker_soundcore_alt1",
-      "rimmed": "anker_soundcore_alt2"
+      "rimmed": "anker_soundcore_alt2",
+      "symbol": "anker_soundcore_alt3"
     },
     "apple_music": {
       "disc": "apple_music_alt1",
@@ -343,7 +344,8 @@
     },
     "trendyolmilla": {
       "disc": "trendyolmilla_alt1",
-      "rimmed": "trendyolmilla_alt2"
+      "rimmed": "trendyolmilla_alt2",
+      "symbol": "trendyolmilla_alt3"
     },
     "trestle": {
       "disc": "trestle_alt1",

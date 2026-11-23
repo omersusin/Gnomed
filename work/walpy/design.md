@@ -9,24 +9,25 @@ ladder: L1 (the squiggle) + L2 (wallpaper as a physical thing: a roller, a roll 
 characters: no
 references: GNOME Loupe / Snapshot (a photo object); the source's navy + white.
 anchors (2-4 things that make the app recognisable; they must survive):
-  1. the measured white squiggle on every style (put_mark)
-  2. the source's navy #1b242e
+  1. the measured white squiggle on every style (put_mark) - source.png
+  2. the source's navy #1b242e - source.png
   3. wallpaper as a physical thing: a paint roller, a roll of wallpaper, prints on a line
 function object (what the app does, as a physical thing): a paint roller, a roll of wallpaper,
   a photo print, prints drying on a line.
 
 concepts (work/walpy/concepts.png) - four different ideas (owner's ara-2 fixes applied,
 2026-11-22):
-  A: L2 - a paint roller: navy roller with the squiggle, steel arm, wooden handle (main).
-  B: L2 - a photo print: white border, navy image with the squiggle, a caption line (Faithful).
-  C: L2 round - the end of a wallpaper roll: yellow spiral, cardboard core with a real hole, the
+  A: L2 - a paint roller: navy roller with the squiggle, steel arm, wooden handle (main). (anchors 1, 2)
+  B: L2 - a photo print: white border, navy image with the squiggle, a caption line (Faithful). (anchors 1, 2)
+  C: L2 round - the end of a wallpaper roll: yellow spiral, cardboard core with a real hole, the (anchors 1, 2)
     squiggle on the wrap, a peeling flap (Disc).
-  D: L2 - prints drying on a line: brown rope, three kraft prints, the big centre print carries
+  D: L2 - prints drying on a line: brown rope, three kraft prints, the big centre print carries (anchors 1, 2)
     the squiggle (Rimmed).
 
+anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
-final:
+final: "Tamam, pakete ekle" (2026-11-23)
 styles: symbol=A faithful=B disc=C rimmed=D
 decisions I made myself (and why; mention them in Q2):
   - the store labels this app PERSONALIZATION; a wallpaper app is a photo app (Unsplash

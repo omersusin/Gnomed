@@ -8,21 +8,22 @@ ladder: L1 (the >_ prompt) + L2 (starting up: an ignition key, a power button, a
 characters: no
 references: GNOME Console / Builder (a dev object, never a robot).
 anchors (2-4 things that make the app recognisable; they must survive):
-  1. the `>_` prompt (the family mark; kept on the labels)
-  2. black + white + terminal green
+  1. the `>_` prompt (the family mark; kept on the labels) - source.png
+  2. black + white + terminal green - source.png
   3. starting the system: a drive, a power button, a boot disc
 function object (what the app does, as a physical thing): an ignition key, the shell prompt, a power
   button, a compact disc.
 
 concepts (work/termux_boot/concepts.png) - four different ideas:
-  A: L2 - an ignition key: a dark round bow with the prompt, a steel blade and two teeth (main).
-  B: L1 - the shell prompt itself: the measured mark, white on a thick Termux-black slab (Faithful).
-  C: L2 round - a round power button: steel bezel, dark cap with the prompt, a green LED ring (Disc).
-  D: L2 round - a boot CD with a white label: silver disc, iridescent rim, the prompt on the label, a real centre hole (Rimmed).
+  A: L2 - an ignition key: a dark round bow with the prompt, a steel blade and two teeth (main). (anchors 1, 2)
+  B: L1 - the shell prompt itself: the measured mark, white on a thick Termux-black slab (Faithful). (anchors 1, 2)
+  C: L2 round - a round power button: steel bezel, dark cap with the prompt, a green LED ring (Disc). (anchors 1, 2)
+  D: L2 round - a boot CD with a white label: silver disc, iridescent rim, the prompt on the label, a real centre hole (Rimmed). (anchors 1, 2)
 
+anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
-final:
+final: "Tamam, pakete ekle" (2026-11-23)
 styles: symbol=A faithful=B disc=C rimmed=D
 decisions I made myself (and why; mention them in Q2):
   - no terminal window here (Termux:API has it); booting is shown as the things you boot from

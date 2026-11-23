@@ -8,21 +8,22 @@ ladder: L1 (a dev object) + L2 (the terminal that carries the `>_`)
 characters: no
 references: GNOME Console / Builder / Sysprof (a dev object, never a robot).
 anchors (2-4 things that make the app recognisable; they must survive):
-  1. the `>_` prompt (the source mark, drawn as thick strokes)
-  2. black + white + terminal green
+  1. the `>_` prompt (the source mark, drawn as thick strokes) - source.png
+  2. black + white + terminal green - source.png
   3. the shell / the API to the device
 function object (what the app does, as a physical thing): a terminal window, a circuit chip,
   a power plug (the socket the API plugs into), a toolbox.
 
 concepts (work/termux_api/concepts.png) - four different ideas:
-  A: L2 - a terminal window: light case, title bar, green `>_` on a dark screen (main).
-  B: L2 - a circuit chip: green board, silver pins, dark die with `>_` (Faithful).
-  C: L2 round - a round power plug: ivory body, two brass prongs, a strain relief, the prompt on it (Disc).
-  D: L2 - a red toolbox with a steel handle and a green stripe (Rimmed).
+  A: L2 - a terminal window: light case, title bar, green `>_` on a dark screen (main). (anchors 1, 2)
+  B: L2 - a circuit chip: green board, silver pins, dark die with `>_` (Faithful). (anchors 1, 2)
+  C: L2 round - a round power plug: ivory body, two brass prongs, a strain relief, the prompt on it (Disc). (anchors 1, 2)
+  D: L2 - a red toolbox with a steel handle and a green stripe (Rimmed). (anchors 1, 2)
 
+anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
-final:
+final: "Tamam, pakete ekle" (2026-11-23)
 styles: symbol=A faithful=B disc=C rimmed=D
 decisions I made myself (and why; mention them in Q2):
   - Termux:API, Termux:Boot and Termux:Widget are three apps of one family, so they share the

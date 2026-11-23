@@ -18,11 +18,11 @@ concepts (work/kamera/concepts.png) - four different ideas:
   A: L1 - a telephoto lens with a tripod foot and the red dot (closest to the source).
   B: L2 - a compact camera: body, big lens, red shutter, flash, viewfinder (main).
   C: L2 round - a 35 mm film roll: canister, hub with a real hole, strip coming out (Disc).
-  D: L2 - a 35 mm film strip with sprocket holes and three photo frames (Rimmed).
+  D: L2 - a 35 mm film strip with sprocket holes and three exposures (Rimmed).
 
 approved: B - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: A, C, D - "batch: hepsi kullanılsın" (2026-11-22)
-final:
+final: "Tamam, pakete ekle" (2026-11-23)
 styles: symbol=B faithful=A disc=C rimmed=D
 decisions I made myself (and why; mention them in Q2):
   - the lens keeps the source's black barrel, metal ring and red dot

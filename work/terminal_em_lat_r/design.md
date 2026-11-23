@@ -10,25 +10,26 @@ references (games: store icon + >= 2 in-game screenshots; what they show: number
   characters, how they face each other, signature gear, key object, colours):
   store screenshots (refs/store/): a dark terminal with green prompt text; no characters.
 anchors (2-4 things that make the app recognisable; they must survive):
-  1. the white "> 1+" prompt line and the "Term" word under it (measured)
-  2. the slate #678390 and lime #a6c73d of the source tile
+  1. the white "> 1+" prompt line and the "Term" word under it (measured) - source.png
+  2. the slate #678390 and lime #a6c73d of the source tile - source.png
   3. a terminal app for Android: a package you install, a machine you log into
 function object (what the app does, as a physical thing): a terminal session on a machine - a box you open and a server you connect to
 
 concepts (work/terminal_em_lat_r/concepts.png) - four different ideas:
-  A: a software package box with the white mark on its label (Symbol)
-  B: the measured "> 1+ Term" mark itself as a slate object standing on a wide lime plinth (Faithful)
-  C: an install disc: silver disc, rim and shine, spindle hole and hub, the mark on the lime label (Disc)
-  D: a rack server front: slate chassis, lime bezel, dark bay recess with two caddies, LEDs, mark on a small label (Rimmed)
+  A: a software package box with the white mark on its label (Symbol) (anchors 1, 2)
+  B: the measured "> 1+ Term" mark itself as a slate object standing on a wide lime plinth (Faithful) (anchors 1, 2)
+  C: an install disc: silver disc, rim and shine, spindle hole and hub, the mark on the lime label (Disc) (anchors 1, 2)
+  D: a rack server front: slate chassis, lime bezel, dark bay recess with two caddies, LEDs, mark on a small label (Rimmed) (anchors 1, 2)
 shape-ok: the Symbol is a software package box - a real box object you install from, not a plate with
   the logo on it; the plain_shape WARN stays on purpose (2026-11-23).
 
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7), e.g.
-#   approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
+#   anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
+approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
-final:
+final: "Tamam, pakete ekle" (2026-11-23)
 styles: symbol=A faithful=B disc=C rimmed=D
 decisions I made myself (and why; mention them in Q2):
   - the terminal window, circuit chip and toolbox/wrench are all taken by termux_api; this app

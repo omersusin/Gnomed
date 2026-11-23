@@ -1,0 +1,4 @@
+source: work/duolingo/ (the working copy)
+branch commit: 45deeb0
+taken: 2026-11-23
+label: deepseek-objects

@@ -320,15 +320,40 @@ with tempfile.TemporaryDirectory() as tmp:
 expect("mark_fit" in NX.MUST_TRY, "next.py: gate mark_fit is fixed before Q2")
 
 # empty_layer (2026-11-23): rounded() on a strip thinner than 2r returns nothing - the part vanished silently
-expect(O.rounded(O.box(8, 102, 120, 114), 6).is_empty and not O.rounded(O.box(8, 102, 120, 114), 5).is_empty,
-       "obj.rounded: r >= half the height -> empty (why the gate empty_layer exists)")
+expect(not O.rounded(O.box(8, 102, 120, 114), 6).is_empty,
+       "obj.rounded: r = half the height used to erase the part (Kafa Topu's turf) - now it survives")
 with tempfile.TemporaryDirectory() as tmp:
     ic = O.gk.Icon("empty")
-    O.solid(ic, O.rounded(O.box(8, 102, 120, 114), 6), face="#57e389", depth=4, layer="turf")
+    O.solid(ic, O.circ(64, 60, 20).difference(O.circ(64, 60, 20)), face="#57e389", depth=4, layer="turf")  # sun()'s old edge
     ic.save(Path(tmp) / "e.svg")
     _empty = re.findall(r'<path id="([^"]+)" d=""', (Path(tmp) / "e.svg").read_text())
     expect("turf-face" in _empty, f"check_icon.empty_layer: the vanished turf is found: {_empty}")
 expect("empty_layer" in NX.RECIPES and "empty_layer" in NX.WARN_TR, "next.py: empty_layer has a recipe and a Turkish line")
+
+
+# 2026-11-23 takeover: what broke while Claude redid group 4 and the audit
+_mp = OB.mark_parts("duolingo")
+expect([n for n, _, _ in _mp][0] == "r0" and len(_mp) == 6,
+       "obj.mark_parts: mark_keep puts Duo's head FIRST (under the eyes), not on top of them")
+expect(any(n == "holes" and f == "#ff4500" for n, _, f in OB.mark_parts("reddit")),
+       "obj.mark_parts: mark_hole_fill paints Snoo's eyes orange (owner: \"Logodaki gibi boya\")")
+expect({f for _, _, f in OB.mark_parts("payload_dumper")} >= {"#9a9996", "#f08a24"},
+       "obj.mark_parts: mark_split gives the wrench and the screwdriver their real colours")
+expect(not O.rounded(O.box(38, 80, 90, 98), 9).is_empty, "obj.rounded: an 18-unit pill with r 9 survives (was empty)")
+_ic = O.gk.Icon("body")
+O.put_mark(_ic, "reddit", (10, 14, 118, 111), anchor="bottom", body=6, side="#c0bfbc")
+with tempfile.TemporaryDirectory() as tmp:
+    _ic.save(Path(tmp) / "b.svg")
+    _t = (Path(tmp) / "b.svg").read_text()
+expect('id="mark-side"' in _t and 'd=""' not in _t, "obj.put_mark(body=): one side under the mark, inside the mark layer")
+with tempfile.TemporaryDirectory() as tmp:
+    _w = Path(tmp) / "zz_mark"
+    _w.mkdir()
+    (_w / "design.md").write_text("kind: app\nmark: none - a mascot\n")
+    _a = ci.mark_applies(_w)
+    (_w / "design.md").write_text('kind: app\nmark: none - "Logo olmasın" (2026-11-23)\n')
+    _b = ci.mark_applies(_w)
+expect(_a and not _b, "check_icon.mark_applies: 'mark: none' counts only with the owner's words + date")
 
 print(f"selftest: {ok} passed, {bad} failed")
 sys.exit(1 if bad else 0)

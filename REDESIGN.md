@@ -196,7 +196,16 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   page) or as the object itself (L1) — `put_mark(ic, SLUG, box)`, which keeps it in a layer named
   `mark`. ≥ 36 px of 128 (Faithful ≥ 44), white on dark parts, dark or a strong colour on light
   parts, never a letter or a logo from memory. Gate `mark` (WARN, fixed before Q2). Games
-  (objects only) and system apps (GNOME's own metaphor) are not measured.
+  and system apps (GNOME's own metaphor) are not measured.
+  **A mascot logo is still the logo** (2026-11-23: Duolingo's owl was dropped as "a mascot", every
+  style became a generic school object): when the logo IS a face (Duolingo, Reddit's Snoo), the
+  measured face is the mark — `put_mark()` it like any other. `mark: none` counts only with the
+  owner's words + date. The measured mark lost a part (its colour is close to the ground: Duo's
+  light-green head)? Add the region to `"mark_keep"` in `geometry.json` → `info.ground`.
+  The face's EYES are holes in the source (the tile shows through: Snoo's orange eyes)? Paint them
+  in the logo's colour, never see-through (owner 2026-11-23: *"Logodaki gibi boya"*):
+  `"mark_hole_fill": "#hex"` in `info.ground` and `painted-holes: "Logodaki gibi boya" (2026-11-23)`
+  in design.md. Letter counters (Qobuz's Q, Discord's eyes in a wordmark) stay real holes.
 - **Two equal round things side by side read as EYES** (owner 2026-11-22, ara-2: Soundcore's
   earbuds case — two plain white circles under a lid looked like a face). A pair of buds, reels,
   knobs or lenses gets its real shape: earbuds have a stem and an ear tip and are mirrored and

@@ -1,0 +1,12 @@
+# foto_raflar - fixes from the audit (2026-11-23): today's gates on the finished icon
+group: audit-2026-11-23
+owner: "şu ana kadar yaptığı simgelerin üzerinden geçsin ve gelecekte hiç hata yapmasın" (2026-11-23)
+review: python3 tools/audit.py (2026-11-23)
+shown:
+
+Fix EXACTLY these styles (scope 'app' = the whole app). A gate that is wrong for this design:
+do not change the icon - write 'warn-ok: <check> - <why, one plain sentence>' in design.md and tick
+the line with '-> now: warn-ok'. How: docs/PLAYBOOK.md#owner-fix and #fix-warn
+
+- [ ] symbol: gate same_object WARN (picture frame - also used by kamera) - pick a FREE object of the category's family for this style (python3 tools/next.py foto_raflar lists USED/free) - BATCH.md 7: two apps of one category never share an object
+- [ ] rimmed: gate same_object WARN (photo print - also used by walpy) - pick a FREE object of the category's family for this style (python3 tools/next.py foto_raflar lists USED/free) - BATCH.md 7: two apps of one category never share an object

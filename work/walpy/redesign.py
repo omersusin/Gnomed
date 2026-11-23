@@ -36,13 +36,13 @@ def squiggle(box_):
 def A():
     """Symbol - a paint roller: navy roller with the squiggle, steel frame, wooden handle."""
     ic = gk.Icon("walpy - symbol")
-    roller = rr(12, 28, 108, 82, 20)
+    roller = rr(8, 28, 102, 82, 20)          # inside 8..120 (size_audit: the grip touched x 125)
     solid(ic, roller, face=[(0, NAVY2), (0.5, NAVY), (1, "#16202e")], depth=7, side="#141c29", layer="roller")
     toplight(ic, roller, width=2.0, opacity=0.45, layer="roller")
-    put_mark(ic, SLUG, (28, 36, 92, 76), face="#ffffff")
-    rod = LineString([(106, 55), (116, 55), (116, 86)]).buffer(3.4, cap_style=1, join_style=1)
+    put_mark(ic, SLUG, (24, 36, 86, 76), face="#ffffff")
+    rod = LineString([(100, 55), (110, 55), (110, 86)]).buffer(3.4, cap_style=1, join_style=1)
     solid(ic, rod, face=[(0, LIGHT[1]), (1, LIGHT[3])], depth=3, side=LIGHT[4], layer="rod")
-    grip = rr(104, 84, 126, 118, 8)
+    grip = rr(98, 84, 120, 118, 8)
     solid(ic, grip, face=[(0, BROWN[1]), (0.5, BROWN[2]), (1, BROWN[3])], depth=5, side=BROWN[4], layer="grip")
     toplight(ic, grip, width=1.4, opacity=0.6, layer="grip")
     return ic
@@ -66,15 +66,15 @@ def C():
     """Disc - the end of a wallpaper roll: yellow spiral, cardboard core with a real hole, the
     squiggle on the wrap, a peeling flap."""
     ic = gk.Icon("walpy - disc")
-    roll = circ(60, 60, 44).difference(circ(60, 60, 9))
+    roll = circ(60, 64, 50).difference(circ(60, 64, 7))
     solid(ic, roll, face=[(0, YELLOW[1]), (0.55, YELLOW[2]), (1, YELLOW[3])], depth=7, side=YELLOW[4], layer="roll")
     toplight(ic, roll, width=2.0, opacity=0.8, layer="roll")
-    for k, r in enumerate((39, 30, 21)):
-        ring = circ(60, 60, r).difference(circ(60, 60, r - 1.6))
+    for k, r in enumerate((44, 35, 26, 18)):           # the spiral stops where the squiggle is printed
+        ring = circ(60, 64, r).difference(circ(60, 64, r - 1.6)).difference(box(34, 17, 86, 52))
         ic.path(geom_d(ring), BROWN[3], opacity=0.35, layer_id=f"spiral{k}", fill_rule="evenodd")
-    core = circ(60, 60, 16).difference(circ(60, 60, 9))
+    core = circ(60, 64, 12).difference(circ(60, 64, 7))
     solid(ic, core, face=[(0, BROWN[0]), (1, BROWN[2])], depth=3, side=BROWN[4], layer="core")
-    put_mark(ic, SLUG, (40, 16, 84, 48), face=NAVY)
+    put_mark(ic, SLUG, (41, 19, 79, 51), face=NAVY)  # on the face above the core (mark_fit)
     flap = poly([(92, 86), (114, 94), (106, 110), (88, 100)], 3)
     solid(ic, flap, face=[(0, YELLOW[1]), (1, YELLOW[3])], depth=4, side=YELLOW[4], layer="flap")
     toplight(ic, flap, width=1.2, opacity=0.8, layer="flap")
@@ -94,7 +94,7 @@ def D():
         ic.path(geom_d(win), NAVY, opacity=0.95, layer_id=f"win{i}")
         peg = rr(cx - 3.5, top - 5, cx + 3.5, top + 7, 1.5)
         solid(ic, peg, face=[(0, BROWN[1]), (1, BROWN[3])], depth=2, side=BROWN[4], layer=f"peg{i}")
-    put_mark(ic, SLUG, (43, 56, 85, 94), face="#ffffff")
+    put_mark(ic, SLUG, (45, 57, 83, 101), face="#ffffff")  # inside the print window with room
     return ic
 
 
