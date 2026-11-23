@@ -23,7 +23,9 @@ tools; docs/MISTAKES.md is the history (read its §10 every session). `docs/cour
 7. Never publish (pack, release, main) icons he has not seen in Q2.
    "Batches, one approval at end" put broken icons on his phone.
 8. "Change X" means change exactly X (Telegram stamp: he said the plane, not the whole logo).
-9. Games: objects only, no characters/faces/animals (owner decision 2026-11-21).
+9. Games: characters only where they ARE the game's identity, otherwise the game's objects - chosen
+   per game, with the reason in design.md (owner 2026-11-23: "Oyuna göre sen seç"; it replaces
+   "objects only" of 2026-11-21, which made Kafa Topu 2 a generic football icon).
 10. **He is not the reviewer** (2026-11-22: *"ikide bir bana mesaj verip bunu, şunu, onu mu
     düzelteceksin?"*). Before Q2, look at your own result like a strict reviewer and fix what you
     can see — a mark too small to read, a dark object lost on a dark wallpaper, melted gradients,
@@ -85,13 +87,20 @@ if two must share one, the brand colours and the mark keep them apart (gate `mar
 **References first:** `python3 tools/fetch_refs.py <slug>` saves the store screenshots, the store
 icon, the category and the description (also as text for models that cannot see images).
 
-### 3b. Games — the game's objects, no characters
+### 3b. Games — the game's own identity: characters or objects, chosen per game
 
-Owner (2026-11-21): *"Karakter yok, oyunun nesnesi"* (replaces the earlier "draw the game's
-scene / keep the characters" rule).
+Owner (2026-11-23): *"Oyuna göre sen seç"* - after *"Otun ile alakası yok"* about an objects-only
+Kafa Topu 2 (a stopwatch, a trophy, a boot, a blue ball). History: 2026-11-19 "iki kafa karşı
+karşıya", 2026-11-21 "Karakter yok, oyunun nesnesi"; the objects-only rule made some games generic.
 
-1. **No characters**: never draw a character, face, animal or creature in a game icon.
-2. **1–3 objects of the game**: the things the game is played with, as GNOME objects
+1. **Decide per game, write why in design.md** (`characters: yes - <why>` / `characters: no - <why>`):
+   characters when the game IS its characters and nothing else identifies it (Kafa Topu 2: two big
+   heads facing each other; a mascot that is the logo), objects when the game has its own
+   recognisable things (Pokémon UNITE's goal ring, Rush Royale's ...). Never a generic object of the
+   genre (a stopwatch or trophy for a football game).
+   Characters are drawn as GNOME objects: simple shapes, real light and thickness, no cartoon
+   outlines, faces reduced to what identifies them (hair, beard, skin, expression in 2-3 strokes).
+2. **1–3 objects of the game** (when objects): the things the game is played with, as GNOME objects
    (Pokémon UNITE = the goal ring + the ball; Kafa Topu 2 = the ball + the football boot;
    Rush Royale = its distinctive object). Model: `docs/redesign/gnome-games.png`
    (Chess, Tali, Mahjongg — real objects, not people).

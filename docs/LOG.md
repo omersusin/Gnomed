@@ -296,10 +296,11 @@ Times are from the commits; the model of a backfilled session is what the commit
   and the screenshots BEFORE concepts, every concept carries them; gate `anchors` (MUST_TRY: >= 2
   anchors say where they were seen, each style's concept line cites the anchors it carries; system
   apps exempt); the design.md template asks for it; overview.py shows each app's source and first
-  screenshot next to its row; `work/kafa_topu_2/fixes-kafa-topu-redo.md` (all four styles).
+  screenshot next to its row; REDESIGN §3b: games get characters only where they ARE the game's
+  identity, otherwise its own objects - decided per game with the reason in design.md.
 - Why: Kafa Topu 2 came back as a stopwatch, a trophy, a boot and a blue ball - any football game.
 - Owner: "Oyunlarda ve uygulamalarda hassas olmalı ... Kabul edilemez" / "Genel olarak oyunlar ve
-  uygulama dedim ... Sadece kafa topunu ele alma" (2026-11-23)
+  uygulama dedim ... Sadece kafa topunu ele alma" / games: "Oyuna göre sen seç" (2026-11-23)
 - PR: opened after this commit
 - Open problems: the gate checks that styles CITE anchors, not that they draw them - the overview
   with the source beside it is where that shows. The audit will ask every finished batch app to cite
