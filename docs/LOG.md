@@ -243,6 +243,18 @@ Times are from the commits; the model of a backfilled session is what the commit
 - Open problems: chatgpt Faithful (black knot) now warns on the dark wallpaper under the stricter
   gate; "cover the mark" and twins are checked by eye, not measured.
 
+## 2026-11-23 — Claude via Claude Code (cloud session) — faster gate (same results; no icons changed)
+- What: legibility_check.py: disc morphology through distance transforms on the mask's own box
+  (the same pixels, 40 icons compared) and a result cache per SVG; check_icon.py: the whole result
+  cached on its inputs (`.cache/check/`, `--no-cache` to force), lint and legibility in-process,
+  each mark variant rendered once; export_png.py takes several SVGs (review.sh: one call).
+  Build + next.py for qobuz: 33.6 s -> 11.7 s; a cold gate on 14 apps 143 s -> 40 s, identical JSON.
+- Why: the owner: "hızlandırmak için ne yapılabilir?" (2026-11-23) - DeepSeek on the phone waits
+  on these steps, not on the model.
+- Owner: "Python'u hızlandır (Önerilen)" (2026-11-23)
+- PR: opened after this commit
+- Open problems: rendering (CairoSVG) and preview_sheet.py are now the slowest steps.
+
 ## 2026-11-22 — Claude via Claude Code (cloud session) — rule "pairs read as eyes", fix rounds (no icons changed here)
 - What: REDESIGN §5 + BATCH step 6: two equal round things side by side read as eyes; next.py
   reads every `work/<slug>/fixes*.md` (one file per review round, no conflicts with the batch

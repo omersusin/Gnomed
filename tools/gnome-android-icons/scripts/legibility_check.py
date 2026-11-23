@@ -42,6 +42,53 @@ def disk(r):
     return x * x + y * y <= r * r
 
 
+# Morphology with a disc through distance transforms: the same pixels as scipy's binary_* with
+# structure=disk(r) (x*x + y*y <= r*r, border = background), but O(pixels) instead of O(pixels * r^2)
+# - the old way was 60 % of the gate's time (2026-11-23, "hızlandırmak için ne yapılabilir?").
+def _r(r):
+    return max(1, int(round(r)))
+
+
+def _cropped(fn):
+    """run a disc operation only on the mask's bounding box + its reach (exact: nothing farther than
+    r + 1 from the mask can change), padded with background like scipy's border"""
+    def run(m, r):
+        out = np.zeros_like(m, dtype=bool)
+        ys, xs = np.nonzero(m)
+        if not len(ys):
+            return out
+        k = _r(r) + 2
+        y0, y1 = max(0, ys.min() - k), min(m.shape[0], ys.max() + 1 + k)
+        x0, x1 = max(0, xs.min() - k), min(m.shape[1], xs.max() + 1 + k)
+        out[y0:y1, x0:x1] = fn(m[y0:y1, x0:x1], _r(r))
+        return out
+    return run
+
+
+def _pad_edt(p, k):
+    return ndimage.distance_transform_edt(np.pad(p, k))[k:-k, k:-k]
+
+
+@_cropped
+def _dilate(m, r):
+    return ndimage.distance_transform_edt(~np.pad(m, r + 1))[r + 1:-r - 1, r + 1:-r - 1] <= r
+
+
+@_cropped
+def _erode(m, r):
+    return _pad_edt(m, r + 1) > r              # outside the image counts as background
+
+
+@_cropped
+def _close(m, r):
+    d = ndimage.distance_transform_edt(~np.pad(m, r + 1))[r + 1:-r - 1, r + 1:-r - 1] <= r
+    return _pad_edt(d, r + 1) > r
+
+
+def _open(m, r):
+    return _dilate(_erode(m, r), r)
+
+
 def colour_regions(img, painted, max_k=6):
     px = img[painted][:, :3].astype(float)
     if len(px) < 50:
@@ -82,16 +129,16 @@ def analyse(svg, sizes=(32, 48)):
         rgb = img[..., :3].astype(float)
         masks = [(painted, None)] + [(m, c) for m, _, c in regions]
         for m, centroid in masks:
-            closed = ndimage.binary_closing(m, structure=disk(gap_w / 2), iterations=1)
+            closed = _close(m, gap_w / 2)
             g = closed & ~m
             # ignore the outer background: only gaps enclosed by / between painted pixels of this mask
-            g &= ndimage.binary_dilation(m, structure=disk(gap_w / 2))
+            g &= _dilate(m, gap_w / 2)
             if centroid is not None:
                 # a "gap" filled with almost the same colour is gradient banding, not a gap
                 g &= ~painted | (np.sqrt(((rgb - centroid[None, None]) ** 2).sum(-1)) > 60)
             gaps |= g
         for m, share, _ in regions:
-            opened = ndimage.binary_opening(m, structure=disk(thin_w / 2))
+            opened = _open(m, thin_w / 2)
             thin |= m & ~opened
         # drop specks (anti-aliasing noise)
         gl, gn = ndimage.label(gaps)
@@ -130,6 +177,42 @@ def analyse(svg, sizes=(32, 48)):
                            "ssim": round(s, 3)}
         overlays[S] = (gaps, thin)
     return res, img, overlays
+
+
+# Results are cached per SVG content (and this script's code): review.sh, check_icon.py and next.py
+# measure the same files - the second and third time is free (2026-11-23).
+import hashlib  # noqa: E402
+import os  # noqa: E402
+
+CACHE = Path(os.environ.get("XDG_CACHE_HOME") or Path.home() / ".cache") / "gnome-android-icons" / "legibility"
+
+
+def _key(svg, sizes):
+    h = hashlib.sha1(Path(svg).read_bytes())
+    h.update(Path(__file__).read_bytes())
+    h.update(repr(tuple(sizes)).encode())
+    return h.hexdigest()
+
+
+def _store(res, sizes):
+    try:
+        CACHE.mkdir(parents=True, exist_ok=True)
+        (CACHE / f"{_key(res['file'], sizes)}.json").write_text(json.dumps(res))
+    except OSError:
+        pass
+
+
+def cached_analyse(svg, sizes=(32, 48)):
+    """-> the report dict of analyse() (no images), from the cache when this exact SVG was measured"""
+    try:
+        res = json.loads((CACHE / f"{_key(svg, sizes)}.json").read_text())
+        res["file"] = str(svg)
+        res["sizes"] = {int(k): v for k, v in res["sizes"].items()}
+        return res
+    except (OSError, ValueError, KeyError):
+        res, _, _ = analyse(svg, sizes)
+        _store(res, sizes)
+        return res
 
 
 def board(results, out, baseline):
@@ -208,7 +291,12 @@ def main():
         ap.error("give SVG files")
     baseline = json.loads(BASELINE_FILE.read_text()) if BASELINE_FILE.exists() else None
     sizes = tuple(int(s) for s in a.sizes.split(","))
-    results = [analyse(p, sizes) for p in a.svgs]
+    if a.out:                                   # the board needs the images: measure, and fill the cache
+        results = [analyse(p, sizes) for p in a.svgs]
+        for res, _, _ in results:
+            _store(res, sizes)
+    else:
+        results = [(cached_analyse(p, sizes), None, None) for p in a.svgs]
     for res, _, _ in results:
         print(Path(res["file"]).name)
         for S, r in res["sizes"].items():

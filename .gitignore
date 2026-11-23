@@ -167,3 +167,6 @@ __pycache__/
 *.pyc
 work/*/gradients.json
 work/*/refs/store/
+
+# local caches (check_icon.py results)
+/.cache/
