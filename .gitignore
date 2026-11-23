@@ -171,3 +171,4 @@ work/*/refs/store/
 # local caches (check_icon.py results)
 /.cache/
 /archive/INDEX.md
+.claude/worktrees/
