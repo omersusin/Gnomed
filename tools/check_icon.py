@@ -30,6 +30,8 @@ Checks (per style that exists):
   anchors       design.md: >= 2 anchors say where they were seen (source.png / refs/...); each
                 style's concept line cites the anchors it carries ................. WARN
   empty_layer   a layer the code drew came out empty (d="") - the part is missing .......... FAIL
+  faithful_logo the Faithful is the logo itself (stands free, or the logo is >= 45 % of it) .. WARN
+  dark_family   at most two styles mostly black/charcoal ......................................... WARN
   mark_fit      the mark sits well on its part: nothing of it over the part's edge (<= 1 %),
                 >= 1 unit of room to that edge, nothing drawn over it (<= 3 %) ........ WARN
 Per app:
@@ -452,6 +454,8 @@ def mark_fit_measure(svg, N=256):
         return None
     if np.median(A[..., 3][foot]) < 0.5:
         return None                           # the mark stands on nothing (L1): nothing to sit on
+    whole_icon = rgba(txt)[..., 3] > 0.5
+    share = float(foot.sum() / max(1, whole_icon.sum()))    # how much of the icon IS the mark
     whole = rgba(ET.tostring(alone))[..., 3] > 0.5
     covered = float((whole & ~ndimage.binary_dilation(foot, iterations=1)).sum() / max(1, whole.sum()))
     g = np.zeros(la.shape[:2])
@@ -462,13 +466,23 @@ def mark_fit_measure(svg, N=256):
     ids, cnt = np.unique(lbl[foot & smooth], return_counts=True)
     ids, cnt = ids[ids > 0], cnt[ids > 0]
     if not len(ids):
-        return {"cross": 0.0, "margin": 99.0, "covered": covered}
+        return {"cross": 0.0, "margin": 99.0, "covered": covered, "share": share}
     face = ndimage.binary_closing(ndimage.binary_fill_holes(lbl == ids[np.argmax(cnt)]), iterations=2)
     cross = float((foot & ~ndimage.binary_dilation(face, iterations=1)).sum() / foot.sum())
     inside = foot & face
     dist = ndimage.distance_transform_edt(np.pad(face, 1))[1:-1, 1:-1]
     margin = float(dist[inside].min()) * 128 / N if inside.any() else 0.0
-    return {"cross": cross, "margin": margin, "covered": covered}
+    return {"cross": cross, "margin": margin, "covered": covered, "share": share}
+
+
+def dark_share(a):
+    """share of the painted pixels that are dark neutral (black/charcoal/dark grey: L < 38, chroma < 18)"""
+    op = a[..., 3] > 0.5
+    if not op.any():
+        return 0.0
+    lab = rgb2lab(a[..., :3])
+    dark = (lab[..., 0] < 38) & (np.hypot(lab[..., 1], lab[..., 2]) < 18) & op
+    return float(dark.sum() / op.sum())
 
 
 def _cache_key(slug):
@@ -574,6 +588,7 @@ def compute(slug):
                 "main -> symbol, closest to the logo -> faithful, round -> disc, the rest -> rimmed")
     add("app", "faithful", "PASS" if "faithful" in svgs else "FAIL", "faithful" in svgs,
         "" if "faithful" in svgs else "build the app first: python3 tools/make_icon.py " + slug)
+    darks = {}
     for st, svg in svgs.items():
         try:                                    # in-process: no new Python per style
             fail = bool(_skill_mod("lint_svg").lint(str(svg))["fails"])
@@ -603,6 +618,7 @@ def compute(slug):
             stt = "PASS" if v >= 0.55 else "FAIL"
             add(st, "visible", stt, f"light {vl:.2f} / dark {vd:.2f}", "" if stt == "PASS" else "vanishes on both wallpapers: stronger colours (docs/PLAYBOOK.md#fix-fail)")
         m, bottom = mass_and_bottom(a)
+        darks[st] = dark_share(a)
         # a redesign is a free object in EVERY slot: one range for all (tools/describe_icon.py uses it too)
         lo, hi = (0.35, 0.75) if is_redesign else ((0.20, 0.75) if st == "symbol" else (0.40, 0.75))
         add(st, "mass", "PASS" if lo <= m <= hi else "WARN", round(m, 2), "" if lo <= m <= hi else
@@ -712,6 +728,16 @@ def compute(slug):
                         "elsewhere). Check with: python3 tools/check_icon.py SLUG")
                 else:
                     add(st, "mark_fit", "PASS", val)
+            # faithful_logo: the Faithful IS the logo (METHOD.md §2) - not the logo on a plate. Sonnet's
+            # Binance test (2026-11-23): the logo on a dark kite and on a dark disc.
+            if st == "faithful" and is_redesign:
+                if fit is None or (fit and "err" not in fit and fit.get("share", 0) >= 0.45):
+                    add(st, "faithful_logo", "PASS", "the logo itself" if fit is None else f"the logo is {fit['share']:.0%} of it")
+                elif fit and "err" not in fit:
+                    add(st, "faithful_logo", "WARN", f"the logo is only {fit['share']:.0%} of the Faithful - it sits on a plate",
+                        "METHOD.md §2: the Faithful is the logo ITSELF as a solid object: put_mark(ic, SLUG, box, "
+                        "anchor=\"bottom\", body=7, side=<darker brand colour>) - no disc, tile, kite or shield behind it. "
+                        "A white or black logo: a die-cut sticker margin in the brand colour (work/reddit)")
         # bands: a gradient of the source painted as several flat colours looks melted/broken
         # (Deezer concepts, 2026-11-22). regions() knows which measured parts are bands of one
         # gradient; two or more of them as flat fills in one style = FAIL.
@@ -730,6 +756,17 @@ def compute(slug):
                     "docs/PLAYBOOK.md#gradients")
             else:
                 add(st, "bands", "PASS", "no flat gradient bands")
+    # dark_family: three or four styles mostly black / charcoal look alike and melt into a dark
+    # wallpaper (Sonnet's Binance test, 2026-11-23: a dark slab, a dark kite, a dark disc, a dark wallet)
+    if is_redesign and len(darks) == 4:
+        dk = sorted(st_ for st_, v in darks.items() if v > 0.45)
+        val = ", ".join(f"{st_} {darks[st_]:.0%}" for st_ in darks)
+        if len(dk) >= 3:
+            add("app", "dark_family", "WARN", f"{len(dk)} styles mostly dark ({val})",
+                "METHOD.md §2: at most two styles may be mostly black/charcoal - give the others the brand "
+                "colour, steel, paper or wood; the logo on a dark slab is not an object")
+        else:
+            add("app", "dark_family", "PASS", val)
     # anchors: every style carries the app's OWN anchors (owner 2026-11-23, Kafa Topu 2: a stopwatch,
     # a boot, a trophy and a blue ball - "Otun ile alakası yok ... Biz ne için ona ekran görüntüleri
     # logolar vesaire indirtiyoruz o zaman?"). design.md: anchors cite where they were seen

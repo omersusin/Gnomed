@@ -107,12 +107,22 @@ RECIPES = {
                    "  usual causes: rounded(g, r) with r >= half the part's thinnest side (use a smaller r), an\n"
                    "  intersection()/difference() that leaves nothing, a box with x0 > x1. Fix the geometry, or\n"
                    "  delete the layer if the part is not wanted. Look at the icon again afterwards.",
+    "faithful_logo": "The Faithful is the logo on a plate (a disc, tile, kite or shield behind it). Sonnet did this\n"
+                     "  in the Binance test (2026-11-23). The Faithful is the logo ITSELF as a solid object:\n"
+                     "      put_mark(ic, SLUG, (14, 10, 114, 112), anchor=\"bottom\", body=7, side=\"<darker brand hex>\")\n"
+                     "  and nothing else. Only a white or black logo gets a part behind it: a die-cut sticker margin\n"
+                     "  in the brand colour (work/reddit/redesign.py B()). docs/METHOD.md §2.",
+    "dark_family": "Three or four styles are mostly black/charcoal: they look like one family and melt into the\n"
+                   "  dark wallpaper (Sonnet's Binance test: a dark slab, kite, disc and wallet). Keep at most two\n"
+                   "  dark; give the others the brand colour, steel, paper, wood. docs/METHOD.md §2.",
     "box_in_plate": "Old plate style only: the mark is a box inside the plate. A redesign does not have this.",
     "stripes": "Automatic draft only (bands of one gradient). A redesign does not draw the measured bands.",
     "trace_iou": "Automatic draft only (traced parts do not match). A redesign draws its own shapes.",
 }
 WARN_TR = {
     "mark": "uygulamanın kendi işareti bu stilde yok / okunmuyor",
+    "faithful_logo": "Faithful logonun kendisi değil, bir plakanın üstünde logo",
+    "dark_family": "stillerin çoğu siyah/koyu gri: birbirine benziyor, koyu duvar kâğıdında kayboluyor",
     "empty_layer": "çizilmesi gereken bir parça boş çıkmış, simgede eksik",
     "same_object": "aynı kategorideki başka bir uygulama bu nesneyi kullanıyor",
     "mark_fit": "işaret üstünde durduğu parçadan taşıyor, kenara değiyor ya da üstü kapanıyor",
@@ -149,7 +159,8 @@ def line(text, key):
 
 
 # WARNs the owner would see on his phone: fixed before Q2 (state FIX_WARN), or explained
-MUST_TRY = ("anchors", "mark", "mark_fit", "mark_size", "visible_light", "visible_dark", "legibility32", "slots", "same_object")
+MUST_TRY = ("anchors", "mark", "mark_fit", "mark_size", "visible_light", "visible_dark", "legibility32", "slots", "same_object",
+            "faithful_logo", "dark_family")
 
 
 def warn_ok(text, check):

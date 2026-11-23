@@ -72,6 +72,22 @@ Before you draw, test the four ideas:
 - **Round thing ≠ the logo on a plain disc.** A disc needs a reason to be round (a lens, a dial, a
   fan, a cup) and something that breaks the circle (a handle, a saucer, ticks).
 
+### Forbidden — seen in the tests of other models (the gate catches the first two)
+
+| Pattern | Seen | Gate |
+|---|---|---|
+| the Faithful is the logo on a plate (a disc, tile, kite, diamond, shield, hexagon behind it) | Sonnet, Binance 2026-11-23: a dark kite | `faithful_logo` |
+| three or four styles mostly black / charcoal - one family, gone on the dark wallpaper | Sonnet, Binance: dark slab, kite, disc, wallet | `dark_family` |
+| the Disc is the logo on a plain round plate, with small things scattered around it | Sonnet, Binance: a dark disc with six tiny coins | look: what is the round THING? |
+| any object of the category without an anchor (a globe, a book, a trophy) | DeepSeek, Duolingo / Kafa Topu 2 | `anchors` |
+| the app's screen drawn small (a card with lines, a list, buttons) | Claude's own first Reddit and IconRequest tries | `legibility32` |
+
+### The worksheet
+
+`design.md` has a `worksheet:` block (tools/new_redesign.py writes it): one line per style -
+the thing, where the logo sits, the silhouette in one word, the main colour - and the five checks.
+Fill it before drawing; if a line is hard to fill, the idea is weak - go back to §1.
+
 ## 3. The logo — measured, never drawn
 
 1. **First render the measured mark alone and LOOK at it** — before any design:
