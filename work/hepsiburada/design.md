@@ -11,22 +11,23 @@ references (games: store icon + >= 2 in-game screenshots; what they show: number
   store screenshots (refs/store/): a dark product grid and white product pages with orange
   price and buy buttons; no characters, no mascot.
 anchors (2-4 things that make the app recognisable; they must survive):
-  1. the white lowercase wordmark "hepsi burada" in two lines (measured, rounded letters)
-  2. the orange #fe5101 ground of the source tile
+  1. the white lowercase wordmark "hepsi burada" in two lines (measured, rounded letters) - source.png
+  2. the orange #fe5101 ground of the source tile - source.png
   3. a marketplace: parcels and a cart - everything for the home, not only clothes
 function object (what the app does, as a physical thing): a parcel you ordered, on its way to your door
 
 concepts (work/hepsiburada/concepts.png) - four different ideas:
-  A: an orange delivery van with the white wordmark on its side panel (Symbol)
-  B: a cardboard parcel with an orange label carrying the white wordmark (Faithful)
-  C: a round hanging shop sign: white enamel disc, orange rim, steel bracket and links, wordmark on the face (Disc)
-  D: a shopping cart with the wordmark on its basket (Rimmed)
+  A: an orange delivery van with the white wordmark on its side panel (Symbol) (anchors 1, 2)
+  B: a cardboard parcel with an orange label carrying the white wordmark (Faithful) (anchors 1, 2)
+  C: a round hanging shop sign: white enamel disc, orange rim, steel bracket and links, wordmark on the face (Disc) (anchors 1, 2)
+  D: a shopping cart with the wordmark on its basket (Rimmed) (anchors 1, 2)
 shape-note: the Faithful is a real shop awning sign (fascia under a striped canopy); its face is a
   square sign, not a logo plate - the gate's plain_shape WARN stays on purpose (2026-11-23).
 
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7), e.g.
-#   approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
+#   anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
+approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final:

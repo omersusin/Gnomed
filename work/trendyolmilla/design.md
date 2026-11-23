@@ -11,19 +11,20 @@ references (games: store icon + >= 2 in-game screenshots; what they show: number
   store screenshots (refs/store/): women's coats, dresses and knitwear on pale pink and white
   pages, the purple brand header; no characters, no mascot.
 anchors (2-4 things that make the app recognisable; they must survive):
-  1. the white uppercase wordmark in two lines: TRENDYOL / MILLA (measured, DotGothic-like M with a dot)
-  2. the brand gradient: magenta-purple -> blue-violet -> light lavender (source tile)
+  1. the white uppercase wordmark in two lines: TRENDYOL / MILLA (measured, DotGothic-like M with a dot) - source.png
+  2. the brand gradient: magenta-purple -> blue-violet -> light lavender (source tile) - source.png
   3. fashion: clothes, not groceries - a paper bag, a woven label, a hat box, a basket
 function object (what the app does, as a physical thing): a shopping bag with new clothes in it
 
 concepts (work/trendyolmilla/concepts.png) - four different ideas:
-  A: a purple paper shopping bag with the white wordmark on its front (Symbol)
-  B: a price tag - the wordmark itself, white on the brand gradient, a punched hole (Faithful)
-  C: a round millinery case, lid band carrying the wordmark (Disc)
-  D: a wicker willow carrier with a fabric tag carrying the wordmark (Rimmed)
+  A: a purple paper shopping bag with the white wordmark on its front (Symbol) (anchors 1, 2)
+  B: a price tag - the wordmark itself, white on the brand gradient, a punched hole (Faithful) (anchors 1, 2)
+  C: a round millinery case, lid band carrying the wordmark (Disc) (anchors 1, 2)
+  D: a wicker willow carrier with a fabric tag carrying the wordmark (Rimmed) (anchors 1, 2)
 
 # the next three lines are the owner's answers, quoted verbatim + date (REDESIGN.md 7), e.g.
-#   approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
+#   anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
+approved: B - "B" (2026-11-21)      keep: A, D - "A, D" (2026-11-21)      final: "Tamam, pakete ekle" (2026-11-21)
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final:

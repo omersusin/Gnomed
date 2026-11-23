@@ -764,10 +764,11 @@ def sun(ic, cx, base, size, ramp=RAMP["Yellow"], rays=10, name="sun"):
         ray_shapes.append(poly([l, tip, r], 1.2))
     rays_g = unary_union(ray_shapes)
     solid(ic, rays_g, face=[(0, ramp[1]), (1, RAMP["Orange"][1])], depth=d, side=RAMP["Orange"][2], top=False, layer=f"{name}-rays")
+    x0, _, x1, _ = core.bounds                 # the core's thickness (was core - core = nothing, 2026-11-23)
+    ic.path(geom_d(side_of(core, d)), ic.chin_gradient(RAMP["Orange"][3], x0, x1, min(12, (x1 - x0) / 4)),
+            layer_id=f"{name}-edge", fill_rule="evenodd")
     ic.path(geom_d(core), ic.radial([(0, ramp[0]), (0.55, ramp[2]), (1, RAMP["Orange"][2])], cx - R * 0.15, cy - R * 0.2, R * 0.75),
             layer_id=f"{name}-core")
-    solid(ic, core.difference(circ(cx, cy, R * 0.62)).buffer(0), face=ramp[2], depth=d, side=RAMP["Orange"][3], top=False,
-          layer=f"{name}-edge")
     ic.path(geom_d(core.difference(down(core, 1.4))), "#ffffff", opacity=0.55, layer_id=f"{name}-toplight", fill_rule="evenodd")
     return unary_union([core, rays_g])
 

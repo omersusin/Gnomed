@@ -9,23 +9,24 @@ ladder: L1 (the wordmark on every style) + L2 (the audio gear the app controls)
 characters: no
 references: GNOME Mousai / Amberol (an audio object); the brand's cyan #0dc4ed.
 anchors (2-4 things that make the app recognisable; they must survive):
-  1. the measured white "ANKER soundcore" wordmark on every style (put_mark)
-  2. the brand cyan #0dc4ed (the source's own colour, kept on every style)
+  1. the measured white "ANKER soundcore" wordmark on every style (put_mark) - source.png
+  2. the brand cyan #0dc4ed (the source's own colour, kept on every style) - source.png
   3. the audio gear itself: a speaker, an earbuds case, headphones, an amplifier
 function object (what the app does, as a physical thing): a speaker, an earbuds case, headphones,
   an amplifier.
 
 concepts (work/anker_soundcore/concepts.png) - four different ideas (owner's ara-2 fixes applied,
 2026-11-22):
-  A: L2 - a wooden bookshelf speaker: brown cabinet, the wordmark on the baffle, one cyan-ringed
+  A: L2 - a wooden bookshelf speaker: brown cabinet, the wordmark on the baffle, one cyan-ringed (anchors 1, 2)
     woofer (main).
-  B: L2 - an open earbuds case: the source's blue gradient on the lid with the wordmark, two white
+  B: L2 - an open earbuds case: the source's blue gradient on the lid with the wordmark, two white (anchors 1, 2)
     buds (Faithful).
-  C: L2 round - over-ear headphones: dark band with a padded headband carrying the wordmark, two
+  C: L2 round - over-ear headphones: dark band with a padded headband carrying the wordmark, two (anchors 1, 2)
     dark cups with cyan cushions (Disc).
-  D: L2 - a hi-fi amplifier: silver face, a dark badge with the wordmark, two knobs, a cyan VU
+  D: L2 - a hi-fi amplifier: silver face, a dark badge with the wordmark, two knobs, a cyan VU (anchors 1, 2)
     meter, feet (Rimmed).
 
+anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final:

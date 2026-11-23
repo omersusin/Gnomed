@@ -54,10 +54,8 @@ def B():
     ic = gk.Icon("chatgpt - faithful")
     g = knot((14, 14, 114, 112))
     with ic.group("mark"):
-        solid(ic, g, face=[(0, DARK[1]), (0.5, DARK[2]), (1, DARK[3])], depth=9, side="#1b1a1f", layer="knot")
+        solid(ic, g, face=[(0, LIGHT[3]), (0.5, LIGHT[4]), (1, DARK[0])], depth=7, side=DARK[1], layer="knot")  # mid grey: reads on both wallpapers
         toplight(ic, g, width=2.2, opacity=0.45, layer="knot")
-    inner = g.buffer(-5)
-    ic.path(geom_d(inner), LIGHT[2], opacity=0.16, layer_id="knot-inner", fill_rule="evenodd")
     return ic
 
 

@@ -1,0 +1,4 @@
+source: work/foto_raflar/ (the working copy)
+branch commit: 64548e1
+taken: 2026-11-23
+label: before-audit-2026-11-23

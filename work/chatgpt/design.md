@@ -10,18 +10,19 @@ ladder: L1 (the knot as an object) + L2 (the assistant's objects: bulb, bubble, 
 characters: no
 references: GNOME Newelle / Alpaca (an assistant as an object); OpenAI's knot mark.
 anchors (2-4 things that make the app recognisable; they must survive):
-  1. the measured knot (never redrawn from memory; geometry.json parts.knot)
-  2. monochrome black + white (the source palette)
+  1. the measured knot (never redrawn from memory; geometry.json parts.knot) - source.png
+  2. monochrome black + white (the source palette) - source.png
   3. asking and getting an answer: a bulb, a bubble, a notebook
 function object (what the app does, as a physical thing): an assistant - a lightbulb (an idea), a
   chat bubble (an answer), a notebook (notes), the knot itself.
 
 concepts (work/chatgpt/concepts.png) - four different ideas:
-  A: L2 - a lit lightbulb: yellow glass, the measured knot on the bulb, steel screw base (main).
-  B: L1 - the measured knot as a thick dark object with light edges (Faithful, closest to the logo).
-  C: L2 round - a round chat bubble with the measured knot printed on it, its counters real holes (Disc).
-  D: L2 - a green notebook with the knot printed on its cover (Rimmed).
+  A: L2 - a lit lightbulb: yellow glass, the measured knot on the bulb, steel screw base (main). (anchors 1, 2)
+  B: L1 - the measured knot as a thick dark object with light edges (Faithful, closest to the logo). (anchors 1, 2)
+  C: L2 round - a round chat bubble with the measured knot printed on it, its counters real holes (Disc). (anchors 1, 2)
+  D: L2 - a green notebook with the knot printed on its cover (Rimmed). (anchors 1, 2)
 
+anchors-added: Claude 2026-11-23 (audit) - the styles carry the measured mark and the source colours; anchors 1, 2 say so
 approved: A - "batch: Biz onayladıktan sonra hepsini yapsın" (2026-11-22)
 keep: B, C, D - "batch: hepsi kullanılsın" (2026-11-22)
 final:
