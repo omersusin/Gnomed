@@ -183,6 +183,19 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   knobs or lenses gets its real shape: earbuds have a stem and an ear tip and are mirrored and
   tilted in their cradles, reels have spokes, knobs have a pointer. Never two plain discs (or two
   discs with a dot in the middle) next to each other on one face. Checked by eye in the self-review.
+- **Cover the mark** (overview-3, 2026-11-23): hide the mark with your thumb — can you still name the
+  object? A slate tile with one slot is not a "server rack", a black square is not an "album sleeve",
+  a tile with a knob is not a "safe". The object needs its own parts (drive bays and LEDs, the record
+  sliding out, hinges and a big dial); the mark only says WHICH app.
+- **A wordmark is a label** (overview-3): for a wordmark brand (Trendyol Milla, hepsiburada, qobuz,
+  ">1+ Term", "en") the text goes on a label, tag, lid or screen of the object — never the whole face
+  of a plain box or tile. Only Faithful may be the mark itself as an object (L1).
+- **A mark standing on nothing must read on BOTH wallpapers** (overview-3: Terminal Emulator's white
+  letters vanished on the light one). Gate `mark` measures the light and the dark wallpaper.
+- **Two box-shaped containers in one app are twins** (overview-3: MT Manager's filing cabinet and
+  archive box — same salmon top, dark body, label, handle). The four styles need four silhouettes.
+- **No object that reads as another category's** (overview-3: a hard-disk platter with an arm reads as
+  a record player in a file manager).
 - **One object per app in a category**: an object another app of the category uses in ANY style
   is taken (Apple Music's cassette was Deezer's). Gate `same_object` (WARN, fixed before Q2).
 - **No strokes or outlines**: a line-art logo (an outlined note, `>_`, a knot) becomes a SOLID
