@@ -57,7 +57,7 @@ def B():
     for i, c in enumerate(cols):
         seg = box(14 + i * 25, 94, 14 + (i + 1) * 25, 116).intersection(stripe)
         ic.path(geom_d(seg), c, layer_id=f"stripe-{i}")
-    put_mark(ic, SLUG, (20, 40, 108, 94), depth=6, anchor="bottom", face=MAG, side=MAG_DD)
+    put_mark(ic, SLUG, (20, 34, 108, 88), depth=6, anchor="bottom", face=MAG, side=MAG_DD)
     return ic
 
 

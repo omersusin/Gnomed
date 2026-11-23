@@ -43,19 +43,17 @@ def A():
 
 
 def B():
-    """Faithful - an album sleeve: a dark cardboard cover with its open mouth at the top, the white
-    paper inner sleeve peeking out of it, and the white wordmark across the front. No record: a
-    vinyl is Deezer's object (same_object)."""
+    """Faithful - an album sleeve with its white paper inner sleeve pulled half out of the top: the
+    sleeve has a round die-cut window, the dark cardboard cover sits lower with the white wordmark
+    and the sleeve's fold shadow falls on it. No record: a vinyl is Deezer's object (same_object)."""
     ic = gk.Icon("qobuz - faithful")
-    inner = rr(24, 8, 104, 40, 2)
-    solid(ic, inner, face=[(0, "#ffffff"), (0.6, LIGHT[2]), (1, LIGHT[3])], depth=2, side=LIGHT[4], layer="inner-sleeve")
-    ic.path(geom_d(rr(28, 12, 100, 15, 1.5)), "#b5b3b0", opacity=0.45, layer_id="inner-fold")
-    cover = rr(12, 30, 116, 114, 3)
-    solid(ic, cover, face=[(0, "#3d3846"), (0.6, DARK[3]), (1, "#1b1a1f")], depth=6, side="#141317", layer="cover")
-    mouth = rr(12, 30, 116, 38, 2)
-    solid(ic, mouth, face=[(0, "#8a8986"), (1, "#5e5c64")], depth=1.5, side="#3d3846", top=False, layer="mouth")
-    ic.path(geom_d(rr(14, 38, 114, 41, 1.5)), "#000000", opacity=0.35, layer_id="mouth-shadow")
-    put_mark(ic, SLUG, (20, 52, 108, 92), face="#ffffff")
+    cover = rr(14, 34, 114, 118, 3)
+    solid(ic, cover, face=[(0, "#3d3846"), (0.6, DARK[3]), (1, "#1b1a1f")], depth=5, side="#141317", layer="cover")
+    inner = rr(20, 8, 108, 74, 2).difference(circ(64, 46, 13))
+    solid(ic, inner, face="#ffffff", depth=1, side="#e6e5e2", layer="inner-sleeve")
+    ic.path(geom_d(circ(64, 46, 13).difference(circ(64, 46, 11))), "#b5b3b0", opacity=0.55, layer_id="window-rim")
+    ic.path(geom_d(rr(18, 74, 110, 79, 2)), "#000000", opacity=0.26, layer_id="fold-shadow")
+    put_mark(ic, SLUG, (22, 86, 106, 114), face="#ffffff")
     return ic
 
 

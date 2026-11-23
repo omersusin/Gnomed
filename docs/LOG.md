@@ -315,3 +315,12 @@ Times are from the commits; the model of a backfilled session is what the commit
 - Owner: "Bıktım bana prompt vermenden, yaz depoya" (2026-11-22)
 - Open problems: allowed WARNs only (plain_shape on real boxes/signs/sleeves); every FAIL and every
   fixable WARN (mark_fit, mark_size, visible, legibility32, same_object) is cleared.
+
+## 2026-11-23 — DeepSeek V4.1 Flash Free via OpenCode — fixes `overview-3b` (2 apps)
+- What: enpara faithful: put_mark box (20,34,108,88) depth 6 anchor bottom - the side ends on the
+  stripe top (y 94), the en stands on the stripe instead of sinking into it. qobuz faithful: the
+  white paper inner sleeve is pulled half out of the smaller dark cover, inset on both sides, with
+  its round die-cut window (r 13) and the fold shadow; the wordmark sits on the cover.
+- Why: round-2 review in the repository (`fixes-overview-3b.md`), owner "Başla" (2026-11-23).
+- Open problems: qobuz faithful keeps the allowed plain_shape WARN (a real sleeve); all FAIL and
+  fixable WARN clear (legibility 0.731, mark_fit 9 u, mark 70 px).
