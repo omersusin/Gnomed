@@ -231,6 +231,18 @@ Times are from the commits; the model of a backfilled session is what the commit
   redesigned before this rule warn until they are redone; whether an object is nameable is still
   checked by eye (the overview).
 
+
+## 2026-11-23 — Claude via Claude Code (cloud session) — review of overview-3 as fix lists, rules (no icons changed)
+- What: `work/{trendyolmilla,hepsiburada,qobuz,terminal_em_lat_r,mt_manager,enpara}/fixes-overview-3.md`
+  (12 styles); REDESIGN §5 + BATCH step 6: cover the mark, a wordmark is a label, twins, objects of
+  another category; gate `mark` measures contrast and visibility on the light AND the dark wallpaper.
+- Why: overview-3 — wordmarks on plain tiles, a mark invisible on the light wallpaper, twin boxes,
+  a platter that reads as a record player, unnameable discs and a robot-like microphone.
+- Owner: "Bıktım bana prompt vermenden, yaz depoya" (2026-11-22) - his standing rule for reviews
+- PR: opened after this commit
+- Open problems: chatgpt Faithful (black knot) now warns on the dark wallpaper under the stricter
+  gate; "cover the mark" and twins are checked by eye, not measured.
+
 ## 2026-11-22 — Claude via Claude Code (cloud session) — rule "pairs read as eyes", fix rounds (no icons changed here)
 - What: REDESIGN §5 + BATCH step 6: two equal round things side by side read as eyes; next.py
   reads every `work/<slug>/fixes*.md` (one file per review round, no conflicts with the batch
