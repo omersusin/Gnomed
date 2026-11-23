@@ -200,7 +200,9 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   letters, an "en" hung over its plate's edge — DeepSeek computes coordinates without seeing the
   picture). The box given to `put_mark()` lies INSIDE the face of the part with ≥ 1 unit of room on
   every side; nothing is drawn over the mark (holes, handles, straps come first or go elsewhere).
-  Gate `mark_fit` (WARN, fixed before Q2).
+  Gate `mark_fit` (WARN, fixed before Q2). A free-standing mark with `depth` STANDS on its part: with
+  `anchor="bottom"` the side adds `depth` below the box, so the box ends `depth` above the surface
+  (stripe top 94, depth 6 -> box bottom 88). overview-3-fixed: Enpara's "en" sank into its stripe.
 - **Pairs are equal or clearly different**: two buds, wheels, hinges, knobs are the same size and on
   one line (mirror them in code: draw one, `affinity.scale(g, -1, 1, origin=(64, 64))` for the other);
   "almost equal" reads as a mistake. Checked by eye in the self-review.
