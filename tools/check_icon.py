@@ -27,6 +27,8 @@ Checks (per style that exists):
                 (put_mark()): present, >= 36 px of 128 (Faithful >= 44), contrast >= 25 against
                 what is under it, shape match with the source's mark >= 0.5 ............ WARN
   same_object   a style uses an object another app of its category already uses ........ WARN
+  anchors       design.md: >= 2 anchors say where they were seen (source.png / refs/...); each
+                style's concept line cites the anchors it carries ................. WARN
   mark_fit      the mark sits well on its part: nothing of it over the part's edge (<= 1 %),
                 >= 1 unit of room to that edge, nothing drawn over it (<= 3 %) ........ WARN
 Per app:
@@ -717,6 +719,35 @@ def compute(slug):
                     "docs/PLAYBOOK.md#gradients")
             else:
                 add(st, "bands", "PASS", "no flat gradient bands")
+    # anchors: every style carries the app's OWN anchors (owner 2026-11-23, Kafa Topu 2: a stopwatch,
+    # a boot, a trophy and a blue ball - "Otun ile alakası yok ... Biz ne için ona ekran görüntüleri
+    # logolar vesaire indirtiyoruz o zaman?"). design.md: anchors cite where they were seen
+    # (source.png / refs/...), each style's concept line cites the anchors it carries.
+    if is_redesign and (w / "design.md").exists() and slug not in SYSTEM_APPS:
+        text = (w / "design.md").read_text(encoding="utf-8")
+        m = re.search(r"^anchors[^\n]*\n((?:[ \t]+[^\n]*\n?)+?)(?=^\S|\Z)", text, re.M)
+        items = {}
+        for ln in (m.group(1).splitlines() if m else []):
+            mm = re.match(r"\s*(\d)\.\s*(\S.*)", ln)
+            if mm:
+                items[mm.group(1)] = mm.group(2)
+        sourced = [k for k, v in items.items() if re.search(r"source\.png|refs/|screenshot|shot-\d|owner", v, re.I)]
+        styles_line = next((ln for ln in text.splitlines() if ln.lower().startswith("styles:")), "")
+        for st_, letter in re.findall(r"\b(symbol|faithful|disc|rimmed)\s*=\s*([A-H])\b", styles_line):
+            cl = re.search(rf"^\s+{letter}\b[^:\n]*:\s*(.+)$", text, re.M)
+            cited = set(re.findall(r"\d", " ".join(re.findall(r"anchors?\s*([\d,\s+&and]+)", cl.group(1), re.I)))) if cl else set()
+            cited &= set(items)
+            if len(sourced) < 2:
+                add(st_, "anchors", "WARN", f"{len(sourced)} anchor(s) say where they were seen",
+                    "design.md anchors: 2-4 things that make THIS app recognisable, each '- <where>' (source.png, "
+                    "refs/store/shot-N.jpg): look at the logo AND the screenshots, not at the category")
+            elif not cited:
+                add(st_, "anchors", "WARN", f"concept {letter} cites no anchor",
+                    "this style must carry the app's own anchors in their real colours - a generic object of the "
+                    "category (a stopwatch or a trophy for a football game) could be ANY app. Redraw it with the "
+                    f"anchors and end concept line {letter} with '(anchors 1, 2)'")
+            else:
+                add(st_, "anchors", "PASS", "anchors " + ", ".join(sorted(cited)))
     # same_object: a style uses an object another app of the category already uses (owner
     # 2026-11-22, ara-2: Apple Music's cassette was Deezer's). Read from design.md 'styles:' and
     # the concept lines; work/_lib/categories.py knows the families.

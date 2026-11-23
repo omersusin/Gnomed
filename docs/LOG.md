@@ -291,6 +291,21 @@ Times are from the commits; the model of a backfilled session is what the commit
 - PR: opened after this commit
 - Open problems: versions that were never committed (DeepSeek's first ara-2 builds) cannot be recovered.
 
+## 2026-11-23 — Claude via Claude Code (cloud session) — the app's own things first (no icons changed)
+- What: REDESIGN §5 "The app's own things, not the category's"; BATCH step 2: anchors from source.png
+  and the screenshots BEFORE concepts, every concept carries them; gate `anchors` (MUST_TRY: >= 2
+  anchors say where they were seen, each style's concept line cites the anchors it carries; system
+  apps exempt); the design.md template asks for it; overview.py shows each app's source and first
+  screenshot next to its row; REDESIGN §3b: games get characters only where they ARE the game's
+  identity, otherwise its own objects - decided per game with the reason in design.md.
+- Why: Kafa Topu 2 came back as a stopwatch, a trophy, a boot and a blue ball - any football game.
+- Owner: "Oyunlarda ve uygulamalarda hassas olmalı ... Kabul edilemez" / "Genel olarak oyunlar ve
+  uygulama dedim ... Sadece kafa topunu ele alma" / games: "Oyuna göre sen seç" (2026-11-23)
+- PR: opened after this commit
+- Open problems: the gate checks that styles CITE anchors, not that they draw them - the overview
+  with the source beside it is where that shows. The audit will ask every finished batch app to cite
+  (and if needed redraw) its anchors.
+
 ## 2026-11-22 — Claude via Claude Code (cloud session) — rule "pairs read as eyes", fix rounds (no icons changed here)
 - What: REDESIGN §5 + BATCH step 6: two equal round things side by side read as eyes; next.py
   reads every `work/<slug>/fixes*.md` (one file per review round, no conflicts with the batch
