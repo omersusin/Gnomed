@@ -241,6 +241,9 @@ A later review round of the same app is a NEW file, `work/<slug>/fixes-<group>.m
 2. Done = ticked **and** what it is now: `- [x] disc: … -> now: a red speaker with the note`.
    A tick without `-> now:` is still open.
 3. While any app has open lines, `next.py <other app>` says OWNER_FIXES_FIRST.
+The audit writes lists the same way: `python3 tools/audit.py` runs TODAY's gates on the apps the
+batch already finished and writes `work/<slug>/fixes-audit-<date>.md` for what they catch (a gate
+that is wrong for a design: `warn-ok:` in design.md, tick the line `-> now: warn-ok`).
 4. When every app of the group is done, `next.py` (no slug) prints the overview command for
    only those apps; push, write `shown: <date>` in their fixes.md, send him the path, wait.
 
@@ -323,6 +326,7 @@ onu mu düzelteceksin?"*). `next.py` stops here for `mark`, `mark_size`, `visibl
 | WARN | Do |
 |---|---|
 | `mark` | the app's mark is missing / small / melts in / not the source's shape. Draw the MEASURED mark on the object: `put_mark(ic, SLUG, box, face="#ffffff")` (on a label, screen, lid, stamp, page), or the mark as the object: `put_mark(ic, SLUG, (14, 12, 114, 112), depth=6, anchor="bottom")`. ≥ 36 px (Faithful ≥ 44), white on dark parts, dark/strong colour on light parts. Hand-drawn? wrap it in `with ic.group("mark"):` — the gate only finds layers named `mark` |
+| `mark_fit` | the mark runs off its part, touches its edge or is covered. You place by coordinates without seeing: make the box you give `put_mark()` lie inside the part's FACE with ≥ 1 unit of room on every side (shrink the box or enlarge the part); draw holes, handles, straps before `put_mark()` or move them off the mark |
 | `same_object` | another app of the category has this object in some style: take a FREE one from the family (`next.py <slug>` in FILL_DESIGN/DRAW_CONCEPTS lists USED/free; or `python3 -c "import sys; sys.path.insert(0,'work/_lib'); import categories; print(categories.suggest('<slug>'))"`) |
 | `mark_size` | make the part that carries the mark bigger (record label, cassette label, stamp, screen, page) and `fit()` the mark into ≥ 36 px of 128; drop decoration that takes its room. Ready boxes keep it: `record_label()`, `cassette_label()`, `speaker_badge()`, `envelope_stamp()`, `bottle_label()` |
 | `visible_dark` | a dark object vanishes on a dark wallpaper: a light rim / top light, or lighter ramp steps (1–3) for its face |

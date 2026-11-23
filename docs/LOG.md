@@ -255,6 +255,21 @@ Times are from the commits; the model of a backfilled session is what the commit
 - PR: opened after this commit
 - Open problems: rendering (CairoSVG) and preview_sheet.py are now the slowest steps.
 
+## 2026-11-23 — Claude via Claude Code (cloud session) — gate mark_fit + audit of finished icons (no icons changed)
+- What: gate `mark_fit` (the mark over its part's edge, room to that edge, covered by something
+  drawn over it) in MUST_TRY; `tools/audit.py` runs today's gates on the batch's finished apps and
+  writes `work/<slug>/fixes-audit-<date>.md`; BATCH §1 runs it at every session start; the mark
+  gate skips the owner's system apps (ROADMAP §1) and 'mark: none'; narrower keywords for
+  "photo print" and "picture frame" (same_object no longer fires on "a loupe over a photo").
+  On the batch as of today (from the owner's zip): 11 of 89 styles flagged, all real on sight.
+- Why: the owner: "neyi nereye koyacağını biliyor ama asimetriler, hatalar yapıyor ... şu ana kadar
+  yaptığı simgelerin üzerinden geçsin ve gelecekte hiç hata yapmasın" (2026-11-23)
+- Owner: "Repoya atalım, onu okusun ve artık hata yapmasın" (2026-11-23)
+- PR: opened after this commit
+- Open problems: "almost equal pairs" is checked by eye (a measured version flagged letters of
+  wordmarks); a free-standing mark half over another part (Enpara Faithful on its stripe) is not
+  measured yet.
+
 ## 2026-11-22 — Claude via Claude Code (cloud session) — rule "pairs read as eyes", fix rounds (no icons changed here)
 - What: REDESIGN §5 + BATCH step 6: two equal round things side by side read as eyes; next.py
   reads every `work/<slug>/fixes*.md` (one file per review round, no conflicts with the batch

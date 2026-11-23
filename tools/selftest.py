@@ -280,5 +280,26 @@ with tempfile.TemporaryDirectory() as tmp:
     expect(len(_o) == 2 and len(_d) == 1 and _h.get("group") == "g1",
            "next.py: a fix line is done only when ticked AND '-> now: <what it is now>' (OWNER_FIX)")
 
+# mark_fit (2026-11-23): the mark must sit INSIDE its part with room, nothing drawn over it
+with tempfile.TemporaryDirectory() as tmp:
+    def _plate_with_mark(box_, hole=False):
+        ic = O.gk.Icon("fit")
+        O.solid(ic, O.rounded(O.box(20, 30, 108, 100), 10), face="#ffffff", depth=4)
+        O.put_mark(ic, "apple_music", box_, face="#e01b24")
+        if hole:
+            O.solid(ic, O.circ(64, 65, 9), face="#3d3846", depth=0, top=False)
+        return ic
+    _plate_with_mark((44, 45, 84, 85)).save(Path(tmp) / "in.svg")
+    _plate_with_mark((70, 45, 120, 95)).save(Path(tmp) / "off.svg")
+    _plate_with_mark((44, 45, 84, 85), hole=True).save(Path(tmp) / "hole.svg")
+    _fi = {k: ci.mark_fit_measure(Path(tmp) / f"{k}.svg") for k in ("in", "off", "hole")}
+
+    def _bad(r):
+        return r["cross"] > 0.01 or r["margin"] < 1.0 or r["covered"] > 0.03
+    expect(_fi["in"] and not _bad(_fi["in"]), f"check_icon.mark_fit: a mark inside its plate -> PASS {_fi['in']}")
+    expect(_fi["off"] and _bad(_fi["off"]), "check_icon.mark_fit: a mark running off its plate -> WARN (hepsiburada's cart)")
+    expect(_fi["hole"] and _fi["hole"]["covered"] > 0.03, "check_icon.mark_fit: a hole drawn over the mark -> WARN (the CD hole on '>_')")
+expect("mark_fit" in NX.MUST_TRY, "next.py: gate mark_fit is fixed before Q2")
+
 print(f"selftest: {ok} passed, {bad} failed")
 sys.exit(1 if bad else 0)

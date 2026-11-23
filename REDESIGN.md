@@ -196,6 +196,14 @@ commands and the owner's questions (START-HERE.md §3, docs/PLAYBOOK.md).
   archive box — same salmon top, dark body, label, handle). The four styles need four silhouettes.
 - **No object that reads as another category's** (overview-3: a hard-disk platter with an arm reads as
   a record player in a file manager).
+- **The mark sits well on its part** (2026-11-23: text ran off its label, a CD hole sat on the
+  letters, an "en" hung over its plate's edge — DeepSeek computes coordinates without seeing the
+  picture). The box given to `put_mark()` lies INSIDE the face of the part with ≥ 1 unit of room on
+  every side; nothing is drawn over the mark (holes, handles, straps come first or go elsewhere).
+  Gate `mark_fit` (WARN, fixed before Q2).
+- **Pairs are equal or clearly different**: two buds, wheels, hinges, knobs are the same size and on
+  one line (mirror them in code: draw one, `affinity.scale(g, -1, 1, origin=(64, 64))` for the other);
+  "almost equal" reads as a mistake. Checked by eye in the self-review.
 - **One object per app in a category**: an object another app of the category uses in ANY style
   is taken (Apple Music's cassette was Deezer's). Gate `same_object` (WARN, fixed before Q2).
 - **No strokes or outlines**: a line-art logo (an outlined note, `>_`, a knot) becomes a SOLID
